@@ -1,0 +1,48 @@
+
+.text{
+    color: white;
+    
+}
+
+#content{
+    text-align: justify;
+    padding: 0 10vw;
+    margin:0;
+}
+
+#content p{
+    color: white;
+}
+
+#top-spacing{
+    height: 24vw;
+}
+.signup-container{
+    color: white;
+    text-align: left;
+    padding-left: 3vw;
+}
+
+.signup-container h2{
+    width: 30vw;
+    font-family: 'Bitter', serif;
+    font-weight: 700;
+}
+
+.signup-container p{
+    font-size: 1.2em;
+    padding: 0;
+    margin: 0;
+    font-family: 'Merriweather', serif;
+    font-weight: 400;
+}
+
+.signup-container button{
+    display: flex;
+    align-items: center;
+}
+
+.signup-container button>span{
+    padding-left: 10px;
+    font-size: 1.3em;
+}

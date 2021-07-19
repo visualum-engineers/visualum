@@ -1,0 +1,345 @@
+/* text font */
+@import "https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap";
+@media (min-width: 992px) {
+  #nav-button, #nav-icon {
+    display: none;
+    visibility: hidden;
+    position: absolute;
+  }
+
+  #search-box {
+    margin-left: 1.7rem;
+  }
+
+  #search-bar.expand {
+    width: 150px;
+    transition: width ease 0.3s;
+  }
+
+  .signout-btn {
+    margin-left: 1.7rem;
+  }
+
+  .nav-item {
+    width: 8%;
+  }
+}
+@media (max-width: 992px) {
+  .navbar {
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+    background: rgba(107, 97, 144, 0.8);
+  }
+
+  #search-box {
+    margin-top: 0.7rem;
+  }
+
+  #search-btn {
+    height: 50px !important;
+  }
+
+  #search-bar {
+    height: 50px !important;
+  }
+
+  #search-bar.expand {
+    width: calc(100% - 60px);
+    height: 50px;
+  }
+
+  .nav-item {
+    width: 100%;
+    height: 100%;
+  }
+
+  .nav-link:hover {
+    background: white;
+    color: #271b53;
+    border-radius: 5px;
+  }
+}
+@media (max-width: 575px) {
+  .title {
+    font-size: 1.5em !important;
+  }
+}
+.navbar {
+  padding: 40px 30px 30px 30px;
+  margin: 0;
+  color: white;
+  border: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  border-radius: 0;
+  height: 100%;
+  width: 100%;
+  transition: all 0.25s;
+  z-index: 3;
+}
+
+/*
+    .navbar.move-navbar-right{
+        transform: translate(200px,0);
+        width: calc(100% - 200px);
+        transition: all 0.38s;
+    }
+*/
+.navbar-scroll {
+  background: rgba(107, 97, 144, 0.8);
+  padding: 6px 30px 6px 30px;
+}
+
+.navbar a {
+  color: white;
+}
+
+.title {
+  font-size: 1.6em;
+  font-family: "Merriweather", serif;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  width: 20vw;
+}
+
+.nav-item {
+  font-size: 1rem;
+  display: flex;
+  align-self: stretch;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.nav-link:hover {
+  background: white;
+  color: #271b53;
+}
+
+/*spacing around nav elements i.e links and search bar */
+#navbarSupportedContent {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#signOut-btn, #signIn-btn {
+  height: 100%;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.signout-btn {
+  align-self: stretch;
+}
+
+#search-box {
+  padding: 0;
+  align-self: stretch;
+}
+
+#search-bar {
+  padding: 0;
+  margin: 0 0.5rem 0 0;
+  align-self: stretch;
+  width: 0px;
+  border: 0;
+  transition: width ease 0.3s;
+}
+
+#search-bar.expand {
+  padding-left: 10px;
+  border: 0px;
+  transition: width ease 0.3s;
+}
+
+#search-icon {
+  font-size: 20px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  border-radius: 5px;
+}
+
+#search-icon:hover {
+  background: white;
+  color: #271b53;
+}
+
+/* Right arrow icon on search toggle */
+#search-icon.fa-arrow-left {
+  transform: rotate(180deg);
+  transition: ease 0.2s;
+  padding-bottom: 2px;
+}
+
+#search-btn {
+  height: 100%;
+  width: 50px;
+}
+
+#search-btn:hover {
+  background: white;
+  color: #271b53;
+}
+
+#search-btn.border {
+  box-shadow: 1px 1px 0 0 white, 0 0px 0 1px white;
+}
+
+#nav-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+}
+
+#nav-button, #search-btn {
+  margin: 0;
+  padding: 0;
+}
+
+#nav-icon, #search-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  transition: all 0.3s;
+  color: white;
+}
+
+#nav-icon:hover {
+  background: white;
+  color: #271b53;
+}
+
+#nav-icon.fa fa-arrow-down {
+  transform: rotate(180deg);
+  transition: ease 0.2s;
+}
+
+#nav-icon.fa-bars {
+  transform: rotate(180deg);
+  font-size: 28px;
+  transition: ease 0.2s;
+}
+
+/* this is to control the drop animation of navbar */
+.collapsing {
+  transition: height 0.15s ease !important;
+}
+
+.foot-link {
+  color: white;
+  text-align: center;
+  width: 60%;
+}
+
+.foot-link:hover {
+  background: white;
+  color: #271b53;
+  border-radius: 5px;
+}
+
+#footer > div > h5 {
+  color: white;
+}
+
+.text {
+  color: white;
+}
+
+#content {
+  text-align: justify;
+  padding: 0 10vw;
+  margin: 0;
+}
+
+#content p {
+  color: white;
+}
+
+#top-spacing {
+  height: 24vw;
+}
+
+.signup-container {
+  color: white;
+  text-align: left;
+  padding-left: 3vw;
+}
+
+.signup-container h2 {
+  width: 30vw;
+  font-family: "Bitter", serif;
+  font-weight: 700;
+}
+
+.signup-container p {
+  font-size: 1.2em;
+  padding: 0;
+  margin: 0;
+  font-family: "Merriweather", serif;
+  font-weight: 400;
+}
+
+.signup-container button {
+  display: flex;
+  align-items: center;
+}
+
+.signup-container button > span {
+  padding-left: 10px;
+  font-size: 1.3em;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  min-height: 800px;
+  overflow-x: hidden !important;
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  line-height: 1.7em;
+  color: #999;
+}
+
+a, a:hover, a:focus {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+#page-background {
+  height: 100%;
+  width: 100%;
+  background-color: #090322;
+  background-image: url("./images/eureka_1.jpg");
+  background-size: 100vw;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
+/*# sourceMappingURL=main.css.map */

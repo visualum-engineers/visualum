@@ -1,0 +1,209 @@
+    /* text font */
+    @import "https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap";
+    
+    @media (min-width: 992px) {
+        #nav-button, #nav-icon{
+            @include hidden;
+        }
+        #search-box{
+            margin-left: 1.7rem
+        }
+        #search-bar.expand{
+            width: 150px;
+            transition: width ease 0.3s;
+        }
+        .signout-btn{
+            margin-left: 1.7rem;
+        }
+        .nav-item{
+            width:8%;
+        }
+     }
+    
+    @media (max-width: 992px){
+        .navbar{
+            padding-left: 25px !important;
+            padding-right: 25px !important;
+            background: $main-color;
+        }
+        #search-box{
+            margin-top: 0.7rem;
+        }
+        #search-btn{
+            height: 50px !important ;
+        }
+        #search-bar{
+            height: 50px !important ;
+        }
+        #search-bar.expand{
+            width: calc(100% - 60px);
+            height: 50px;
+        }
+
+        .nav-item{
+            width: 100%;
+            height: 100%;
+        }
+        .nav-link:hover{
+            @include hover-color;
+            border-radius: 5px;
+        }
+    }
+
+    @media (max-width: 575px) { 
+        .title{
+            font-size: 1.5em !important;
+        }
+    }
+    
+    .navbar{
+        padding: 40px 30px 30px 30px;
+        margin: 0;
+        color: white;
+        border: none;
+        @include border-radius(0);
+        @include fill-container;
+        transition: all 0.25s;
+        z-index:3;
+    }
+/*
+    .navbar.move-navbar-right{
+        transform: translate(200px,0);
+        width: calc(100% - 200px);
+        transition: all 0.38s;
+    }
+*/
+    
+    .navbar-scroll{
+        background: $main-color;
+        padding: 6px 30px 6px 30px;
+    }
+    
+    .navbar a{
+        color: white;
+    }
+
+    .title{
+        font-size: 1.6em;
+        font-family: 'Merriweather', serif;
+        font-weight: 400;
+        letter-spacing: 0.1em;
+        width: 20vw;
+    }
+
+    .nav-item{ 
+        font-size: 1rem;    
+        display: flex;
+        align-self: stretch;
+    }
+    .nav-link{
+        @include center;
+        @include fill-container;
+        @include border-radius(5px);
+        text-align: center;
+    }
+    .nav-link:hover{
+        @include hover-color;
+    }
+    
+    /*spacing around nav elements i.e links and search bar */
+    #navbarSupportedContent{
+        @include no-space;
+    }
+    .navbar-nav{
+        @include center;
+    }
+
+    #signOut-btn{
+        @include fill-container;
+        font-size: 1rem;
+    }
+    .signout-btn{
+        align-self: stretch;
+    }
+    #signIn-btn{
+        @extend #signOut-btn ;
+    }
+
+    #search-box{
+        padding: 0;
+        align-self: stretch;
+    }
+    
+    #search-bar{
+        padding: 0;
+        margin: 0 0.5rem 0 0;
+        align-self: stretch;
+        width: 0px;
+        border: 0;
+        transition: width ease 0.3s;
+    }
+    
+    #search-bar.expand{
+        padding-left: 10px;
+        border: 0px;
+        transition: width ease 0.3s;
+    }
+    #search-icon{
+        font-size: 20px;
+        @include border-radius(5px);
+    }
+    #search-icon:hover{
+        @include hover-color
+    }
+    /* Right arrow icon on search toggle */
+    #search-icon.fa-arrow-left{
+        transform: rotate(180deg);
+        transition: ease 0.2s;
+        padding-bottom: 2px;
+    }
+    #search-btn{
+        height: 100%;
+        width: 50px;
+    }
+    #search-btn:hover{
+        @include hover-color
+    }
+    #search-btn.border{
+        box-shadow: 1px 1px 0 0 white, 
+        0 0px 0 1px white;
+    }
+    
+    #nav-button{
+        @include center;
+        height: 40px;
+        width: 40px;
+    }
+    
+    #nav-button, #search-btn{
+        @include no-space;
+    }
+    
+    #nav-icon, #search-icon{
+        @include center;
+        @include fill-container;
+        transition: all 0.3s;
+        color: white;
+    }
+    
+    #nav-icon:hover{
+        @include hover-color;
+    }
+    
+
+    #nav-icon.fa fa-arrow-down{
+        transform: rotate(180deg);
+        transition: ease 0.2s;
+    }
+
+    #nav-icon.fa-bars{
+        transform: rotate(180deg);
+        font-size: 28px;
+        transition: ease 0.2s;
+    }
+    
+
+    /* this is to control the drop animation of navbar */
+    .collapsing{
+        transition: height 0.15s ease !important;
+    }

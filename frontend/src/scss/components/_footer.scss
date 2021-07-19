@@ -1,0 +1,15 @@
+
+.foot-link{
+    color: white;
+    text-align: center;
+    width: 60%;
+}
+
+.foot-link:hover{
+    @include hover-color;
+    border-radius: 5px;
+}
+
+#footer>div>h5{
+    color: white
+}
