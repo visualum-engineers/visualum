@@ -48,25 +48,12 @@ class NavToggler extends Component {
 
 class SignIn extends Component {
     render() {
-        if (this.props.signedIn) {
-            return (
-                <button id="signOut-btn" className="btn btn-outline-light btn-lg justify-content-end">
-                    {//<?php if(is_user_logged_in()) { ?>
-                    }
-                    <span>Sign out</span>
-                </button>
-            )
-        } else {
-            return (
-                <button id="signIn-btn" className="btn btn-outline-light btn-lg justify-content-end">
-                    { //<?php } else { ?>
-                    }
-                    <span>Sign In</span>
-                    {//<?php } ?>
-                    }
-                </button>
-            )
-        }
+        const { signedIn } = this.props;
+        return (
+            <button id={`sign${signedIn ? "Out" : "In"}-btn`} className="btn btn-outline-light btn-lg justify-content-end">
+                {signedIn ? "Sign out" : "Sign in"}
+            </button>
+        )
     }
 }
 
