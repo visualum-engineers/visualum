@@ -27,20 +27,30 @@ class NavToggler extends Component {
     }
 
     handleClick() {
-        this.setState(state => ({
-            disabled: true,
-            toggled: !state.toggled,
-        }))
-        setTimeout(() => {
-            this.setState(() => ({
-                disabled: false,
-            }));
-        }, 160);
+        this.setState(state => (
+            { disabled: true, toggled: !state.toggled }
+        ), setTimeout(() => {
+            this.setState(() => (
+                { disabled: false, }
+            ))
+        }, 160));
     }
     render() {
+        const { disabled, toggled } = this.state;
         return (
-            <button disabled={this.state.disabled} id="nav-button" className="container-fluid navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation" onClick={this.handleClick}>
-                <NavIcon toggled={this.state.toggled} />
+            <button
+                disabled={disabled}
+                id="nav-button"
+                className="container-fluid navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="true"
+                aria-label="Toggle navigation"
+                onClick={this.handleClick}
+            >
+                <NavIcon toggled={toggled} />
             </button>
         )
     }
