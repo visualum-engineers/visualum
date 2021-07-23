@@ -29,7 +29,7 @@ class NavToggler extends Component {
     handleClick() {
         this.setState(state => ({
             disabled: true,
-            toggled: state.toggled ? false : true,
+            toggled: !state.toggled,
         }))
         setTimeout(() => {
             this.setState(() => ({
@@ -80,7 +80,7 @@ class SearchBar extends Component {
     }
     handleClick() {
         this.setState(state => ({
-            toggled: state.toggled ? false : true
+            toggled: !state.toggled
         }))
     }
     render() {
@@ -98,16 +98,6 @@ class SearchBar extends Component {
                 </button>
             </form>
         )
-
-        // return (
-        //     <form id="search-box" className="form-inline d-flex justify-content-center">
-        //         <input id="search-bar" className="form-control mr-sm-2 shadow-none" type="search" placeholder="Search" aria-label="Search" />
-        //         <button id="search-btn" className="btn shadow-none" type="button" onClick={this.handleClick}>
-        //             <span id="search-icon" className="fa fa-search"></span>
-        //         </button>
-        //     </form>
-        // )
-
     }
 }
 
