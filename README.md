@@ -14,7 +14,7 @@
         <li>Set up a virtual environment by using python -m venv, in the same directory as Visualum</li>
         <li>In the command prompt, start the virtual environment by typing folder-name/Scripts/activate.bat</li>
         <li>Install Django 3.2.2 by running python -m pip install Django</li>
-    <br>
+        <br>
 
     <h3> Sass Install </h3>
     <li>To install Sass for scss file, type npm install -g sass</li>
