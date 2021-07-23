@@ -81,7 +81,7 @@ class SearchBar extends Component {
                     placeholder="Search"
                     aria-label="Search" />
                 <button id="search-btn" className="btn shadow-none" type="button" onClick={this.handleClick}>
-                    <span id="search-icon" className={`fa ${toggled ? 'fa-search' : 'fa-arrow-left'}`} />
+                    <span id="search-icon" className={`fa ${toggled ? 'fa-arrow-left' : 'fa-search'}`} />
                 </button>
             </form>
         )
