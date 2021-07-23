@@ -14,18 +14,15 @@
         <li>Set up a virtual environment by using python -m venv, in the same directory as Visualum</li>
         <li>In the command prompt, start the virtual environment by typing folder-name/Scripts/activate.bat</li>
         <li>Install Django 3.2.2 by running python -m pip install Django</li>
-        <br>
-
-    <h3> Sass Install </h3>
-    <li>To install Sass for scss file, type npm install -g sass</li>
     <br>
-    
+    <h3> Sass Install </h3>
+        <li>To install Sass for scss file, type npm install -g sass</li>
+    <br>
     <h3> React and Redux Install </h3>
-    <li>Type npm install react-redux in command line</li>
-    
+        <li>Type npm install react-redux in command line</li>
     <br>
     <h3> Running Web Application </h3>
-    <li> To run the Django server, type py manage.py runserver</li>
-    <li> To run the frontend(React and Redux) type npm start</li>
-    <li> To compile SCSS, type sass --watch main.scss main.css (exact command varies on where you are in the directory)</li>
+        <li> To run the Django server, type py manage.py runserver</li>
+        <li> To run the frontend(React and Redux) type npm start</li>
+        <li> To compile SCSS, type sass --watch main.scss main.css (exact command varies on where you are in the directory)</li>
 </ol>
