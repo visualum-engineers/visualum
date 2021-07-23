@@ -6,7 +6,7 @@
     one serving the backend, and one serving the frontend</p>
 <h2>Running the Application</h2>
 <ol>   
-    <h3>Requisites</h3>
+    <h3>Prerequisites</h3>
         <li>Ensure you have Python 3.9.5</li>
         <li>Ensure you have installed Node.js 16.4.0</li>
     <br>
