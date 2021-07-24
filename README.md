@@ -16,7 +16,7 @@
         <li>Install Django 3.2.2 by running python -m pip install Django</li>
     <br>
     <h3> Sass Install </h3>
-        <li>To install Sass for scss file, type npm install -g sass</li>
+        <li>To install Sass for scss files, type npm install -g sass</li>
     <br>
     <h3> React and Redux Install </h3>
         <li>Type npm install react-redux in command line</li>
