@@ -3,15 +3,10 @@ import React, { Component } from 'react'
 //NavToggler Icon
 class NavIcon extends Component {
     render() {
-        if (this.props.toggled) {
-            return (
-                <span id="nav-icon" className="fa fa-arrow-down"></span>
-            )
-        } else {
-            return (
-                <span id="nav-icon" className="fa fa-bars"></span>
-            )
-        }
+        const { toggled } = this.props;
+        return (
+            <span id="nav-icon" className={`fa ${toggled ? 'fa-arrow-down' : 'fa-bars'}`} />
+        )
     }
 }
 
@@ -29,7 +24,7 @@ class NavToggler extends Component {
     handleClick() {
         this.setState(state => (
             { disabled: true, toggled: !state.toggled }
-        ), setTimeout(() => {
+        ), () => setTimeout(() => {
             this.setState(() => (
                 { disabled: false, }
             ))
