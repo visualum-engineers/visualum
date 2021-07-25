@@ -1,9 +1,5 @@
 <h1> Visualum</h1>
-<p>This is a Django 3.2.2 and React-Redux Stack. <br>
-    The backend and frontend of this webapp are <br>
-    independent of each other, and communicate through<br>
-    a Django Rest Api. This webapp must be run on 2 servers, 
-    one serving the backend, and one serving the frontend</p>
+<p>This is a Django 3.2.2 and React-Redux Stack.The backend and frontend of this webapp are independent of each other, and communicate through a Django Rest Api. This webapp must be run on 2 servers, one serving the backend, and one serving the frontend</p>
 <h2>Running the Application</h2>
 <ol>   
     <h3>Prerequisites</h3>
