@@ -46,6 +46,30 @@ export default function SettingsPanel(props) {
         <div>
             <TabPanel value={value} index={0} className={classes.tabPanel}>
                 Item One
+                {/*This is overflowing content, should be accessible through scrolling*/}
+                <p>Item two</p>
+                <p>Item two</p>
+                <p>Item two</p>
+                <p>Item two</p>
+                <p>Item two</p>
+                <p>Item two</p>
+                <p>Item two</p>
+                <p>Item two</p>
+                <p>Item two</p>
+                <p>Item two</p>
+                <p>Item two</p>
+                <p>Item two</p>
+                <p>Item two</p>
+                <p>Item two</p>
+                <p>Item two</p>
+                <p>Item two</p>
+                <p>Item two</p>
+                <p>Item two</p>
+                <p>Item two</p>
+                <p>Item two</p>
+                <p>Item two</p>
+                <p>Item two</p>
+                <p> Hello I'm overflowing</p>
             </TabPanel>
             <TabPanel value={value} index={1} className={classes.tabPanel}>
                 Item Two
