@@ -5,10 +5,19 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles((theme) => ({
+    tabContent: {
+        overflowY: "auto",
+        "&::-webkit-scrollbar": {
+            width: 0,
+            background: "transparent"
+        },
+        scrollbarWidth: "none",
+        msOverflowStyle: "none"
+    },
     tabPanel: {
         "& p": {
             fontSize: "1rem !important",
-            color: "rgba(240,240,240,1)"
+            color: "rgba(240,240,240,1)",
         },
     }
 }));
@@ -43,33 +52,9 @@ export default function SettingsPanel(props) {
     const classes = useStyles();
     const { value } = props;
     return (
-        <div>
+        <div className={classes.tabContent}>
             <TabPanel value={value} index={0} className={classes.tabPanel}>
                 Item One
-                {/*This is overflowing content, should be accessible through scrolling*/}
-                <p>Item two</p>
-                <p>Item two</p>
-                <p>Item two</p>
-                <p>Item two</p>
-                <p>Item two</p>
-                <p>Item two</p>
-                <p>Item two</p>
-                <p>Item two</p>
-                <p>Item two</p>
-                <p>Item two</p>
-                <p>Item two</p>
-                <p>Item two</p>
-                <p>Item two</p>
-                <p>Item two</p>
-                <p>Item two</p>
-                <p>Item two</p>
-                <p>Item two</p>
-                <p>Item two</p>
-                <p>Item two</p>
-                <p>Item two</p>
-                <p>Item two</p>
-                <p>Item two</p>
-                <p> Hello I'm overflowing</p>
             </TabPanel>
             <TabPanel value={value} index={1} className={classes.tabPanel}>
                 Item Two
