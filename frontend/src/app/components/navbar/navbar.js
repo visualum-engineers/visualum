@@ -13,7 +13,6 @@ class NavIcon extends Component {
 //Button Components
 class NavToggler extends Component {
     constructor(props) {
-        super(props);
         this.state = {
             toggled: false,
             disabled: false
@@ -93,7 +92,6 @@ class SearchBar extends Component {
     }
 }
 
-
 //Entire Navbar 
 export default class Navbar extends Component {
     constructor(props) {
@@ -119,9 +117,7 @@ export default class Navbar extends Component {
             <div id="filter-navbar-container" className="navbar-expand-lg fixed-top">
                 <nav className="navbar navbar-expand-lg" id="navbar">
                     <a href="#" className="title"> visualum </a>
-
                     <NavToggler />
-
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav flex-fill">
                             <li className="nav-item flex-fill">

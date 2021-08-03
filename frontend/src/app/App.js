@@ -3,14 +3,16 @@ import Navbar from './components/navbar/navbar';
 import Footer from "./components/footer/footer";
 import HomeContent from './components/homePage/home';
 import Settings from './components/settingsPage/Settings';
+import Form from './components/signUpform/form'
 function App() {
 
   return (
     <div className="wrapper" id="page-background">
-      {/* <Navbar/>
+      {/*<Navbar/>
       <HomeContent/>
-      <Footer/> */}
-      <Settings />
+      <Footer/>*/}
+      <Form/>
+      {/*<Settings />*/}
     </div>
 
   );

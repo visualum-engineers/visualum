@@ -1,9 +1,8 @@
 @import "./abstracts/variables";
 @import "./components/navbar";
-@import "./components/footer";
 @import "./components/home";
-
-
+@import "./components/form";
+@import "./components/footer";
 body{
     font-family: $main-font;
     min-height: 800px;

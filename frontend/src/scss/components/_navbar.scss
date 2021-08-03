@@ -62,7 +62,7 @@
         color: white;
         border: none;
         @include border-radius(0);
-        @include fill-container;
+        @include fillContainer;
         transition: all 0.25s;
         z-index:3;
     }
@@ -98,7 +98,7 @@
     }
     .nav-link{
         @include center;
-        @include fill-container;
+        @include fillContainer;
         @include border-radius(5px);
         text-align: center;
     }
@@ -115,7 +115,7 @@
     }
 
     #signOut-btn{
-        @include fill-container;
+        @include fillContainer;
         font-size: 1rem;
     }
     .signout-btn{
@@ -181,7 +181,7 @@
     
     #nav-icon, #search-icon{
         @include center;
-        @include fill-container;
+        @include fillContainer;
         transition: all 0.3s;
         color: white;
     }
