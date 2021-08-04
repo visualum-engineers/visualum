@@ -6,7 +6,6 @@
 body{
     font-family: $main-font;
     min-height: 800px;
-    overflow-x: hidden!important;
     @include no-space;
 }
 p{

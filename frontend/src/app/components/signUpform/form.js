@@ -12,61 +12,100 @@ const initialState = {
     schoolCode: "",
     subscriptionType:"",
 }
+
 class FormPage extends Component {
     render() {
         const page1 = <div>
                 <div className="mb-3">
-                    <label for="Email" className="form-label">Email address</label>
-                    <input type="email" className="form-control" id="Email" aria-describedby="emailHelp"/>
+                    <label for="email" className="form-label">Email address</label>
+                    <input 
+                        onChange={this.props.handleChange}
+                        type="email" 
+                        className="form-control" 
+                        id="email" 
+                        aria-describedby="emailHelp"/>
                     <div id="emailHelp">We'll never share your email with anyone else</div>
                 </div>
                 <div className="mb-3">
-                    <label for="inputPassword" className="form-label">Password</label>
-                    <input type="password" className="form-control" id="inputPassword"/>
+                    <label for="password" className="form-label">Password</label>
+                    <input
+                        onChange={this.props.handleChange} 
+                        type="password" 
+                        className="form-control" 
+                        id="password"/>
                 </div>
                 <div className="mb-3 form-check">
-                    <input type="checkbox" className="form-check-input" id="rememberPW"/>
-                    <label className="form-check-label" for="rememberPW">Remember Me</label>
+                    <input
+                        onChange={this.props.handleChange} 
+                        type="checkbox" 
+                        className="form-check-input" 
+                        id="rememberMe"/>
+                    <label className="form-check-label" for="rememberMe">Remember Me</label>
                 </div>
             </div>;
 
         const studentPage2 = <div>
                 <div className="mb-3">
-                    <label for="verfiy" className="form-label">Verify Email</label>
-                    <input type="number" className="form-control" id="verify" aria-describedby="verfiy"/>
-                    <div id="verify">Input 4-digit code sent to {this.props.email} </div>
+                    <label for="verifiedEmail" className="form-label">Verify Email</label>
+                    <input
+                        onChange={this.props.handleChange} 
+                        type="number" 
+                        className="form-control" 
+                        id="verifiedEmail" 
+                        aria-describedby="verifiedEmail"/>
+                    <div id="verifyLabel">Input 4-digit code sent to {this.props.email} </div>
                 </div>
             </div>;
 
         const studentPage3 = <div>
                 <div className="mb-3">
                     <label for="classCode" className="form-label">Enter Class Code</label>
-                    <input type="number" className="form-control" id="classCode" aria-describedby="classCode"/>
+                    <input 
+                        onChange={this.props.handleChange}
+                        type="number" 
+                        className="form-control" 
+                        id="classCode" 
+                        aria-describedby="classCode"/>
                 </div>
             </div>;
 
         const teacherPage2 = <div>
                 <div className="mb-3">
                     <label for="School" className="form-label">School</label>
-                    <input type="School" className="form-control" id="School" aria-describedby="School"/>
+                    <input
+                        onChange={this.props.handleChange} 
+                        type="School" 
+                        className="form-control" 
+                        id="School" 
+                        aria-describedby="School"/>
                 </div>
                 <div className="mb-3">
-                    <label for="exposureToUs" className="form-label">Password</label>
+                    <label for="exposureToUs" className="form-label">How did you hear about us?</label>
                     <input type="text" className="form-control" id="exposureToUs"/>
                 </div>
             </div>;
 
         const teacherPage3 = <div>
                 <div className="mb-3">
-                    <label for="Email" className="form-label">Choose Subscription</label>
-                    <input type="type" className="form-control" id="Email" aria-describedby="emailHelp"/>
+                    <label for="subscriptionType" className="form-label">Choose Subscription</label>
+                    <input
+                        onChange={this.props.handleChange} 
+                        type="type" 
+                        className="form-control" 
+                        id="subscriptionType" 
+                        aria-describedby="emailHelp"/>
                 </div>
             </div>;
     
         const teacherPage4 = <div>
                 <div className="mb-3">
-                    <label for="Email" className="form-label">Payment</label>
-                    <input type="email" className="form-control" id="Email" aria-describedby="emailHelp"/>
+                    <label for="payment" className="form-label">Payment</label>
+                    <input
+                        onChange={this.props.handleChange} 
+                        type="number" 
+                        className="form-control" 
+                        id="payment" 
+                        aria-describedby="payment"/>
                 </div>
             </div>;
         
@@ -74,7 +113,12 @@ class FormPage extends Component {
         const enterprise =  <div>
                 <div className="mb-3">
                     <label for="schoolCode" className="form-label">School Code</label>
-                    <input type="number" className="form-control" id="schoolCode" aria-describedby="schoolCodeHelp"/>
+                    <input 
+                        onChange={this.props.handleChange}
+                        type="number" 
+                        className="form-control" 
+                        id="schoolCode" 
+                        aria-describedby="schoolCodeHelp"/>
                 </div>
             </div>;
 
@@ -93,7 +137,7 @@ class FormPage extends Component {
                 final: teacherPage4,
             },
         };
-        
+
         return formType[this.props.accountType][this.props.formPage]
     }
 }
@@ -133,13 +177,16 @@ class Buttons extends Component{
         }
     }
 }
+
 export default class Form extends Component {
     constructor(props) {
         super(props);
         this.state = initialState
         this.handleClick = this.handleClick.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
+    //handles button clicks
     handleClick(e) {
         let targetBtnClasses = e.target.closest("button").classList;
         const clearState = () => {
@@ -170,13 +217,25 @@ export default class Form extends Component {
         }
     }
 
+    //handles all controlled inputs in form
+    handleChange(e){
+        let inputId = e.target.closest("input").id
+        let key = e.target.value
+        this.setState(()=>{
+            return {[inputId]: key}
+        })
+    }
+
     render() {
         return (
-            <form id="signUpForm">
-                <Buttons formType={true} handleClick={this.handleClick}/>
-                <FormPage formPage={this.state.formPage} accountType={this.state.accountType} email={this.state.email}/>
-                <Buttons formPage={this.state.formPage} handleClick={this.handleClick}/>
-            </form>
+            <div id="formContainer">
+                <form id="signUpForm">
+                        <h1 style={{textAlign: "center"}}>Join Our Community</h1>
+                        <Buttons formType={true} handleClick={this.handleClick}/>
+                        <FormPage {...this.state} handleChange={this.handleChange}/>
+                        <Buttons formPage={this.state.formPage} handleClick={this.handleClick}/>
+                </form>
+            </div>
         )
     }
 }

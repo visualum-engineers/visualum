@@ -1,14 +1,21 @@
-#signUpForm{
-    @include fullViewport;
+#formContainer{
     @include center;
-    color: white;
+    margin: 0;
+    padding: 10vh 15vw;
     align-items: stretch;
-    flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.466);
-    padding: 0 30%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.685);
 }
-#signUpForm>button, #signUpForm>div>button{
+#signUpForm{
+    @extend #formContainer;
+    @include border-radius(20px);
+    height: 100%;
+    flex-direction: column;
     color: white;
     background-color: $main-color;
+}
+
+#signUpForm>button, #signUpForm>div>button{
+    color: white;
     width: 45%;
 }

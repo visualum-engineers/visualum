@@ -41,8 +41,9 @@ $bg-color: rgb(9, 3, 34);
 }
 
 @mixin fullViewport{
-    height: 100vh;
     width: 100vw;
+    height: 100vh;
+    
 }
 
 @mixin hover-color{
