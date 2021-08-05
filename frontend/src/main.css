@@ -302,6 +302,7 @@
   margin: 0;
   padding: 10vh 15vw;
   align-items: stretch;
+  min-height: 600px;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.685);
 }
@@ -311,6 +312,7 @@
   -moz-border-radius: 20px;
   -ms-border-radius: 20px;
   border-radius: 20px;
+  min-height: 520px;
   padding: 0 10vw;
   width: 100%;
   height: 100%;
@@ -319,9 +321,72 @@
   background-color: rgba(107, 97, 144, 0.8);
 }
 
-#signUpForm > button, #signUpForm > div > button {
+#signUpForm > div > button {
+  width: 100%;
+}
+
+.formNavBtns > button {
   color: white;
-  width: 45%;
+}
+
+#signUpOptions > button {
+  align-items: center;
+  margin-top: 1vw;
+  border-radius: 5px;
+  height: 40px;
+}
+
+#google-btn {
+  background-color: #ececec;
+  border: thin solid white;
+}
+
+.google-icon {
+  background-image: url("images/Google.png");
+  background-size: 35px;
+  background-position: center;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  min-width: 35px;
+  height: 40px;
+  padding: 0;
+  margin: 0;
+}
+
+.google-text {
+  vertical-align: middle;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  padding: 0 10px;
+}
+
+#google-btn:hover {
+  background-color: #777777;
+  color: white;
+}
+
+/* Sign up with e-mail button */
+.email-btn {
+  color: white;
+  background: rgba(107, 97, 144, 0.8);
+  border: 1.5px solid white;
+}
+
+.email-btn:hover {
+  background-color: white;
+  color: #575757;
+}
+
+.email-text {
+  vertical-align: middle;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  padding: 0 40px;
+}
+
+input[type=text], input[type=password], input[type=email] {
+  height: 30px;
+  font-size: 15px;
 }
 
 .foot-link {
@@ -342,7 +407,9 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  min-height: 800px;
+  min-height: 600px;
+  height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
 }

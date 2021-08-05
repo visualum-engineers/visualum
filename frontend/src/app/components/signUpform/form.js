@@ -25,7 +25,7 @@ function passwordCheck(statePW, stateVerify, passwordRegexCollection, btnCheck=f
 
 const initialState = {
     accountType: "student",
-    formPage: 1,
+    formPage: "signup",
     email: "",
     password: "",
     verifiedPassword:"",
@@ -76,6 +76,7 @@ export default class Form extends Component {
                 }
             });
         }
+
         if(targetBtnClasses.contains("goBack")) {
             this.setState((state) => {
                 let lastPage = (state.accountType === "student" && state.formPage === "final") || (state.accountType ==="teacher" && (state.formPage ==="final" || state.formPage==="enterprise"))
@@ -91,12 +92,14 @@ export default class Form extends Component {
             });
         }
     }
+
     //handles all controlled inputs in form
     handleChange(e){
         let inputId = e.target.closest("input").dataset.state
         let value = e.target.value
         this.setState({[inputId]: value})
     }
+
     handleFocus(e){
         let inputId = e.target.closest("input").dataset.state
         this.setState({[inputId]:""})
@@ -105,17 +108,19 @@ export default class Form extends Component {
     handleResize=(e)=>{
         this.setState({windowWidth: window.innerWidth});
     }
+
     componentDidMount() {
         this.mounted = true
         if(this.mounted){
             window.addEventListener("resize", this.handleResize);
         }
     }
-    
+
     componentWillUnmount() {
         this.mounted = false
         window.addEventListener("resize", this.handleResize);
     } 
+
     render() {
         return (
             <div id="formContainer">
@@ -140,7 +145,7 @@ class Buttons extends Component{
         const formType = this.props.formType
         if(this.props.formPage<=1){
             return(
-                <div className="d-flex align-items-stretch justify-content-end"> 
+                <div className="formNavBtns d-flex align-items-stretch justify-content-end"> 
                     <button 
                         type="button" 
                         className="btn continue" 
@@ -150,7 +155,7 @@ class Buttons extends Component{
             ) 
         } else {
             return (
-                <div className={`d-flex align-items-stretch justify-content-between ${formType ? "mt-3": ""}`}> 
+                <div className={`formNavBtns d-flex align-items-stretch justify-content-between ${formType ? "mt-3": ""}`}> 
                     <button 
                         type="button" 
                         className= {`btn ${formType ? "student":"goBack"}`} 
@@ -169,9 +174,18 @@ class Buttons extends Component{
 
 class FormPage extends Component {
     render() {
-        //stored form pages
+    //stored form pages
+        const signUpOptions = <div style={{fontSize: this.props.windowWidth>768?"100%" : "75%"}} id="signUpOptions" class="d-flex-column align-items-center">
+            <button id="google-btn" class="d-flex justify-content-center">
+                <span class="google-icon"></span>
+                <span class="google-text">Sign up with Google</span>
+            </button>
+            <button id="email-btn" class="email-btn d-flex justify-content-center" type="button">
+                <span class="email-text">Sign up with email</span>
+            </button>
+        </div>
         const page1 = <div>
-            <div className="mt-4">
+            <div className="mt-3">
                 <label for="email" className="form-label">Email Address</label>
                 <input 
                     value ={this.props.email}
@@ -183,7 +197,7 @@ class FormPage extends Component {
                     aria-describedby="emailHelp"/>
             </div>
             <div className={`align-items-end ${this.props.windowWidth>768? "d-flex":""}`}>
-                <div className={`mb-4 mt-4 flex-fill ${this.props.windowWidth>768? "me-1":""}`}>
+                <div className={`mb-3 mt-3 flex-fill ${this.props.windowWidth>768? "me-1":""}`}>
                     <label for="password" className="form-label">Password</label>
                     <input
                         value ={this.props.password}
@@ -194,7 +208,7 @@ class FormPage extends Component {
                         className="form-control" 
                         id="password"/>
                 </div>
-                <div className={`mb-4 flex-fill ${this.props.windowWidth>768? "ms-1 mt-4":""}`}>
+                <div className={`mb-3 flex-fill ${this.props.windowWidth>768? "ms-1 mt-3":""}`}>
                     <label for="verifiedPassword" className="form-label">Re-enter Password</label>
                     <input
                         value ={this.props.verifiedPassword}
@@ -219,7 +233,7 @@ class FormPage extends Component {
         </div>;
 
         const studentPage2 = <div>
-            <div className="mb-4 mt-4">
+            <div className="mb-3 mt-3">
                 <label for="verifiedEmail" className="form-label">Verify Email</label>
                 <input
                     value={this.props.verifiedEmail}
@@ -235,7 +249,7 @@ class FormPage extends Component {
         </div>;
 
         const studentPage3 = <div>
-            <div className="mb-4 mt-4">
+            <div className="mb-3 mt-3">
                 <label for="classCode" className="form-label">Enter Class Code</label>
                 <input 
                     value={this.props.classCode}
@@ -250,7 +264,7 @@ class FormPage extends Component {
         </div>;
 
         const teacherPage2 = <div>
-            <div className="mt-4 mb-4">
+            <div className="mt-3 mb-3">
                 <label for="School" className="form-label">School</label>
                 <input
                     value={this.props.school}
@@ -274,7 +288,7 @@ class FormPage extends Component {
         </div>;
 
         const teacherPage3 = <div>
-            <div className="mb-4 mt-4 d-flex-column" style={{textAlign:"center"}}>
+            <div className="mb-3 mt-3 d-flex-column" style={{textAlign:"center"}}>
                 <label for="subscriptionType" className="form-label">Choose Subscription</label>
                 <div>
                     <input
@@ -349,6 +363,7 @@ class FormPage extends Component {
                 1: page1,
                 2: studentPage2,
                 final: studentPage3,
+                signup: signUpOptions,
             },
             "teacher": {
                 1: page1,
