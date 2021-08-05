@@ -104,7 +104,7 @@ export default class Form extends Component {
         let inputId = e.target.closest("input").dataset.state
         this.setState({[inputId]:""})
     }
-//Handles reshaping form components to be responsive
+    //Handles reshaping form components to be responsive
     handleResize=(e)=>{
         this.setState({windowWidth: window.innerWidth});
     }
@@ -175,8 +175,8 @@ class Buttons extends Component{
 class FormPage extends Component {
     render() {
     //stored form pages
-        const signUpOptions = <div style={{fontSize: this.props.windowWidth>768?"100%" : "75%"}} id="signUpOptions" class="d-flex-column align-items-center">
-            <button id="google-btn" class="d-flex justify-content-center">
+        const signUpOptions = <div style={{fontSize: this.props.windowWidth>575?"100%" : "75%"}} id="signUpOptions" class="d-flex-column mt-4 mb-4 align-items-center">
+            <button id="google-btn" class="d-flex justify-content-center mb-2">
                 <span class="google-icon"></span>
                 <span class="google-text">Sign up with Google</span>
             </button>

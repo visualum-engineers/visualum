@@ -1,69 +1,5 @@
 /* text font */
 @import "https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap";
-@media (min-width: 992px) {
-  #nav-button, #nav-icon {
-    display: none;
-    visibility: hidden;
-    position: absolute;
-  }
-
-  #search-box {
-    margin-left: 1.7rem;
-  }
-
-  #search-bar.expand {
-    width: 150px;
-    transition: width ease 0.3s;
-  }
-
-  .signout-btn {
-    margin-left: 1.7rem;
-  }
-
-  .nav-item {
-    width: 8%;
-  }
-}
-@media (max-width: 992px) {
-  .navbar {
-    padding-left: 25px !important;
-    padding-right: 25px !important;
-    background: rgba(107, 97, 144, 0.8);
-  }
-
-  #search-box {
-    margin-top: 0.7rem;
-  }
-
-  #search-btn {
-    height: 50px !important;
-  }
-
-  #search-bar {
-    height: 50px !important;
-  }
-
-  #search-bar.expand {
-    width: calc(100% - 60px);
-    height: 50px;
-  }
-
-  .nav-item {
-    width: 100%;
-    height: 100%;
-  }
-
-  .nav-link:hover {
-    background: white;
-    color: #271b53;
-    border-radius: 5px;
-  }
-}
-@media (max-width: 575px) {
-  .title {
-    font-size: 1.5em !important;
-  }
-}
 .navbar {
   padding: 40px 30px 30px 30px;
   margin: 0;
@@ -331,7 +267,6 @@
 
 #signUpOptions > button {
   align-items: center;
-  margin-top: 1vw;
   border-radius: 5px;
   height: 40px;
 }
@@ -374,7 +309,7 @@
 
 .email-btn:hover {
   background-color: white;
-  color: #575757;
+  color: #4c3d85;
 }
 
 .email-text {
@@ -405,6 +340,70 @@ input[type=text], input[type=password], input[type=email] {
   color: white;
 }
 
+@media (min-width: 992px) {
+  #nav-button, #nav-icon {
+    display: none;
+    visibility: hidden;
+    position: absolute;
+  }
+
+  #search-box {
+    margin-left: 1.7rem;
+  }
+
+  #search-bar.expand {
+    width: 150px;
+    transition: width ease 0.3s;
+  }
+
+  .signout-btn {
+    margin-left: 1.7rem;
+  }
+
+  .nav-item {
+    width: 8%;
+  }
+}
+@media (max-width: 992px) {
+  .navbar {
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+    background: rgba(107, 97, 144, 0.8);
+  }
+
+  #search-box {
+    margin-top: 0.7rem;
+  }
+
+  #search-btn {
+    height: 50px !important;
+  }
+
+  #search-bar {
+    height: 50px !important;
+  }
+
+  #search-bar.expand {
+    width: calc(100% - 60px);
+    height: 50px;
+  }
+
+  .nav-item {
+    width: 100%;
+    height: 100%;
+  }
+
+  .nav-link:hover {
+    background: white;
+    color: #271b53;
+    border-radius: 5px;
+  }
+}
+@media (max-width: 575px) {
+  .title {
+    font-size: 1.5em !important;
+  }
+}
 body {
   font-family: "Poppins", sans-serif;
   min-height: 600px;

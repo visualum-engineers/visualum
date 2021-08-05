@@ -1,0 +1,21 @@
+//responsive Styles
+@import "../../app/components/navbar/navbarBreakPoints";
+@import "../../app/components/homePage/homeBreakPoints";
+@import "../../app/components/signUpForm/formBreakPoints";
+@import "../../app/components/footer/footerBreakPoints";
+
+@media (min-width: 992px) {
+    @include navbar-lg
+}
+
+@media (max-width: 992px){
+    @include navbar-md
+}
+
+@media(max-width: 768px){
+    
+}
+
+@media (max-width: 575px) { 
+    @include navbar-sm
+}

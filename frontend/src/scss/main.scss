@@ -1,8 +1,13 @@
 @import "./abstracts/variables";
-@import "./components/navbar";
-@import "./components/home";
-@import "./components/form";
-@import "./components/footer";
+
+//General Styles
+@import "../app/components/navbar/navbar";
+@import "../app/components/homePage/home";
+@import "../app/components/signUpForm/form";
+@import "../app/components/footer/footer";
+
+@import "./abstracts/breakPoints"; 
+
 body{
     font-family: $main-font;
     min-height: 600px;
