@@ -20,5 +20,5 @@
     <h3> Running Web Application </h3>
         <li> To run the Django server, run py manage.py runserver</li>
         <li> To run the frontend(React and Redux) run npm start</li>
-        <li> To compile SCSS, run sass --watch main.scss main.css (exact command varies on where you are in the directory)</li>
+        <li> To compile SCSS in development, you can simply install the (vsCode extension, Live Sass Compiler). For production, webpack may have to be used.</li>
 </ol>

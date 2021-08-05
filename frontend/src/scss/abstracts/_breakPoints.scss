@@ -1,9 +1,3 @@
-//responsive Styles
-@import "../../app/components/navbar/navbarBreakPoints";
-@import "../../app/components/homePage/homeBreakPoints";
-@import "../../app/components/signUpForm/formBreakPoints";
-@import "../../app/components/footer/footerBreakPoints";
-
 @media (min-width: 992px) {
     @include navbar-lg
 }

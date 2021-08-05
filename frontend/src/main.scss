@@ -1,12 +1,19 @@
-@import "./abstracts/variables";
+@import "./scss/abstracts/variables";
 
 //General Styles
-@import "../app/components/navbar/navbar";
-@import "../app/components/homePage/home";
-@import "../app/components/signUpForm/form";
-@import "../app/components/footer/footer";
+@import "./app/components/navbar/navbar";
+@import "./app/components/homePage/home";
+@import "./app/components/signUpForm/form";
+@import "./app/components/footer/footer";
 
-@import "./abstracts/breakPoints"; 
+//responsive Styles
+@import "./app/components/navbar/navbarBreakPoints";
+@import "./app/components/homePage/homeBreakPoints";
+@import "./app/components/signUpForm/formBreakPoints";
+@import "./app/components/footer/footerBreakPoints";
+
+//responsive styling
+@import "./scss/abstracts/breakPoints"; 
 
 body{
     font-family: $main-font;
