@@ -24,8 +24,8 @@ function passwordCheck(statePW, stateVerify, passwordRegexCollection, btnCheck=f
 }
 
 const initialState = {
-    accountType:"teacher",
-    formPage: "signup",
+    accountType:"student",
+    formPage: "1",
     email: "",
     password: "",
     verifiedPassword:"",
@@ -129,9 +129,9 @@ export default class Form extends Component {
                         {/*passing a form type property into Buttons will render student and teacher btns. 
                         If not, it will render nav buttons*/}
                         <h1 style={{textAlign: "center"}}>Join Us</h1>
-                        <Buttons {...this.state} formType={true} handleClick={this.handleClick} handleKeyPressed={this.handleKeyPressed}/>
+                        <Buttons accountType={this.state.accountType} formType={true} handleClick={this.handleClick} handleKeyPressed={this.handleKeyPressed}/>
                         <FormPage {...this.state} handleChange={this.handleChange} handleFocus={this.handleFocus}/>
-                        <Buttons {...this.state} handleClick={this.handleClick} handleKeyPressed={this.handleKeyPressed}/>
+                        <Buttons formPage={this.state.formPage} handleClick={this.handleClick} handleKeyPressed={this.handleKeyPressed}/>
                 </form>
             </div>
         )
