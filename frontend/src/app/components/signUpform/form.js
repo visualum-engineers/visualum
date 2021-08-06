@@ -24,7 +24,7 @@ function passwordCheck(statePW, stateVerify, passwordRegexCollection, btnCheck=f
 }
 
 const initialState = {
-    accountType: "student",
+    accountType:"teacher",
     formPage: "signup",
     email: "",
     password: "",
@@ -39,6 +39,7 @@ const initialState = {
     school: "",
     error: false,
     payment: "",
+    googleSignUp: "",
     windowWidth: window.innerWidth,
 }
 
@@ -124,13 +125,13 @@ export default class Form extends Component {
     render() {
         return (
             <div id="formContainer">
-                <form id="signUpForm">
+                <form className={`${this.state.accountType==="student"? "studentSignUpForm":"teacherSignUpForm"}`} id="signUpForm">
                         {/*passing a form type property into Buttons will render student and teacher btns. 
                         If not, it will render nav buttons*/}
                         <h1 style={{textAlign: "center"}}>Join Us</h1>
-                        <Buttons formType={true} handleClick={this.handleClick} handleKeyPressed={this.handleKeyPressed}/>
+                        <Buttons {...this.state} formType={true} handleClick={this.handleClick} handleKeyPressed={this.handleKeyPressed}/>
                         <FormPage {...this.state} handleChange={this.handleChange} handleFocus={this.handleFocus}/>
-                        <Buttons formPage={this.state.formPage} handleClick={this.handleClick} handleKeyPressed={this.handleKeyPressed}/>
+                        <Buttons {...this.state} handleClick={this.handleClick} handleKeyPressed={this.handleKeyPressed}/>
                 </form>
             </div>
         )
@@ -145,7 +146,7 @@ class Buttons extends Component{
         const formType = this.props.formType
         if(this.props.formPage<=1){
             return(
-                <div className="formNavBtns d-flex align-items-stretch justify-content-end"> 
+                <div className="formNavBtns d-flex justify-content-between"> 
                     <button 
                         type="button" 
                         className="btn continue" 
@@ -155,15 +156,15 @@ class Buttons extends Component{
             ) 
         } else {
             return (
-                <div className={`formNavBtns d-flex align-items-stretch justify-content-between ${formType ? "mt-3": ""}`}> 
+                <div className={`d-flex ${formType ? "mt-3 formTypeBtns justify-content-center": "formNavBtns justify-content-between"}`}> 
                     <button 
                         type="button" 
-                        className= {`btn ${formType ? "student":"goBack"}`} 
+                        className= {`btn ${formType ? this.props.accountType === "student" ? "active student":"student":"goBack"}`} 
                         onClick={this.props.handleClick}>{`${formType ? "Student": "Back"}`}
                     </button>
                     <button 
                         type="button" 
-                        className={`btn ${formType ? "teacher": lastPage ? "submit":"continue"}`}
+                        className={`btn ${formType ? this.props.accountType ==="teacher" ? "active teacher":"teacher": lastPage ? "submit":"continue"}`}
                         onClick={this.props.handleClick}>{`${formType ? "Teacher": lastPage ? "Submit":"Continue"}`}
                     </button>
                 </div>
@@ -175,13 +176,26 @@ class Buttons extends Component{
 class FormPage extends Component {
     render() {
     //stored form pages
-        const signUpOptions = <div style={{fontSize: this.props.windowWidth>575?"100%" : "75%"}} id="signUpOptions" class="d-flex-column mt-4 mb-4 align-items-center">
-            <button id="google-btn" class="d-flex justify-content-center mb-2">
-                <span class="google-icon"></span>
-                <span class="google-text">Sign up with Google</span>
+        const signUpOptions = <div id="signUpOptions" className="d-flex-column mt-5 mb-5 ">
+            <button id="google-btn" className="mb-2">
+                <div id="g_id_onload"
+                    data-client_id="297543839155-cclc3bsf6m26pfaj1bmrfb1l4bgpcin7.apps.googleusercontent.com"
+                    data-context="signup"
+                    data-ux_mode="popup"
+                    data-login_uri="http://localhost:3001">
+                </div>
+
+                <div className="g_id_signin"
+                    data-type="standard"
+                    data-shape="rectangular"
+                    data-theme="outline"
+                    data-text="signin_with"
+                    data-size="large"
+                    data-logo_alignment="left">
+                </div>
             </button>
-            <button id="email-btn" class="email-btn d-flex justify-content-center" type="button">
-                <span class="email-text">Sign up with email</span>
+            <button id="email-btn" className="email-btn d-flex justify-content-center" type="button">
+                <span className="email-text">Sign up with email</span>
             </button>
         </div>
         const page1 = <div>
@@ -371,6 +385,7 @@ class FormPage extends Component {
                 3: teacherPage3,
                 enterprise: enterprise,
                 final: teacherPage4,
+                signup: signUpOptions,
             },
         };
     //returns appropiate form page

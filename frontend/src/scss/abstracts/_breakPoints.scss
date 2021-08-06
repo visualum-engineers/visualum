@@ -1,9 +1,11 @@
 @media (min-width: 992px) {
-    @include navbar-lg
+    @include navbar-lg;
+    @include form-lg;
 }
 
 @media (max-width: 992px){
-    @include navbar-md
+    @include navbar-md;
+    @include form-md;
 }
 
 @media(max-width: 768px){
@@ -11,5 +13,6 @@
 }
 
 @media (max-width: 575px) { 
-    @include navbar-sm
+    @include navbar-sm;
+    @include form-sm;
 }

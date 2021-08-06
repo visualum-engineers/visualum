@@ -287,7 +287,7 @@
           align-items: stretch;
   min-height: 600px;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.685);
+  background-color: rgba(0, 0, 0, 0.52);
 }
 
 #signUpForm {
@@ -301,72 +301,114 @@
       -ms-flex-direction: column;
           flex-direction: column;
   color: white;
-  background-color: rgba(107, 97, 144, 0.8);
 }
 
-#signUpForm > div > button {
-  width: 100%;
+#signUpForm.studentSignUpForm {
+  background-color: rgba(107, 97, 144, 0.8);
+  border: 1px solid rgba(107, 97, 144, 0.8);
+}
+
+#signUpForm.teacherSignUpForm {
+  background-color: rgba(0, 0, 0, 0.568);
+  border: 1px solid white;
 }
 
 .formNavBtns > button {
-  margin: 0 1vw;
+  background-color: #0e050f09;
+  border: 1px solid white;
   color: white;
 }
 
+.formTypeBtns > button {
+  color: white;
+}
+
+.formTypeBtns > button.active {
+  color: #592a80;
+  background-color: white;
+}
+
+.formTypeBtns > .student {
+  margin-right: 1vw;
+  border: 1px solid white;
+}
+
+.formTypeBtns > .teacher {
+  margin-left: 1vw;
+  background-color: black;
+}
+
+.formNavBtns > button:hover, .formTypeBtns > button:hover {
+  background-color: white;
+  border: 1px solid white;
+  color: #592a80;
+}
+
+#signUpOptions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
 #signUpOptions > button {
+  padding: 0;
+  margin: 0;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   border-radius: 5px;
   height: 40px;
+  width: 183px;
 }
 
 #google-btn {
-  background-color: #ececec;
-  border: thin solid white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
 }
 
-.google-icon {
-  background-image: url("images/Google.png");
-  background-size: 35px;
-  background-position: center;
-  background-repeat: no-repeat;
-  vertical-align: middle;
-  min-width: 35px;
-  height: 40px;
-  padding: 0;
-  margin: 0;
-}
-
-.google-text {
-  vertical-align: middle;
-  font-family: 'Roboto', sans-serif;
-  text-align: center;
-  padding: 0 10px;
-}
-
-#google-btn:hover {
-  background-color: #777777;
-  color: white;
+.g_id_signin {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 /* Sign up with e-mail button */
 .email-btn {
-  color: white;
-  background: rgba(107, 97, 144, 0.8);
+  background-color: #ececec;
   border: 1.5px solid white;
 }
 
 .email-btn:hover {
-  background-color: white;
-  color: #4c3d85;
+  background-color: #777777;
+  color: white;
 }
 
 .email-text {
   vertical-align: middle;
   font-family: 'Roboto', sans-serif;
   text-align: center;
-  padding: 0 40px;
 }
 
 input[type="text"], input[type="password"], input[type="email"] {
@@ -410,6 +452,13 @@ input[type="text"], input[type="password"], input[type="email"] {
   .nav-item {
     width: 8%;
   }
+  #formContainer, #signUpForm {
+    padding: 10vh 18vw;
+  }
+  .formNavBtns > button, .formTypeBtns > button {
+    font-size: 120%;
+    width: 35%;
+  }
 }
 
 @media (max-width: 992px) {
@@ -440,11 +489,25 @@ input[type="text"], input[type="password"], input[type="email"] {
     color: #271b53;
     border-radius: 5px;
   }
+  #formContainer, #signUpForm {
+    padding: 10vh 15vw;
+  }
+  .formNavBtns > button, .formTypeBtns > button {
+    font-size: 120%;
+    width: 40%;
+  }
 }
 
 @media (max-width: 575px) {
   .title {
     font-size: 1.5em !important;
+  }
+  #formContainer, #signUpForm {
+    padding: 10vh 10vw;
+  }
+  .formNavBtns > button, .formTypeBtns > button {
+    font-size: 95%;
+    width: 45%;
   }
 }
 

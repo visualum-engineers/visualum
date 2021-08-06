@@ -1,10 +1,30 @@
 @mixin form-lg{
+    #formContainer{
+        padding: 10vh 18vw;
+    }
 
+    .formNavBtns>button, .formTypeBtns>button {
+        font-size: 120%;
+        width: 35%;
+    }
 }
 
 @mixin form-md{
-
+    #formContainer{
+        padding: 10vh 15vw;
+    }
+    .formNavBtns>button, .formTypeBtns>button{
+        font-size: 120%;
+        width: 40%;
+    }
 }
 
 @mixin form-sm{
+    #formContainer{
+        padding: 10vh 10vw;
+    }
+    .formNavBtns>button,.formTypeBtns>button{
+        font-size: 95%;
+        width: 45%;
+    }
 }
