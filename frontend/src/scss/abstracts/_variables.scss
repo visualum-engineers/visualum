@@ -55,3 +55,11 @@ $bg-color: rgb(9, 3, 34);
     margin: 0;
     padding: 0;
 }
+
+@mixin transition ($str...) {
+    -webkit-transition: $str;
+    -ms-transition: $str;
+    -o-transition: $str;
+    -moz-transition: $str; 
+    transition: $str;
+}

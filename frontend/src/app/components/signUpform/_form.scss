@@ -7,16 +7,17 @@
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.52);
 }
+// 
 #signUpForm{
-    @extend #formContainer;
-    @include border-radius(20px);
     min-height: 520px;
-    padding: 0 10vw;
+    @extend #formContainer;padding: 0 10vw;
+    flex-direction: column;
     width:100%;
     height: 100%;
-    flex-direction: column;
+    @include border-radius(20px);
     color: white;
 }
+
 #signUpForm.studentSignUpForm{
     background-color: $main-color;
     border: 1px solid $main-color;
@@ -83,6 +84,7 @@
 }
 
 /* Sign up with e-mail button */
+
 .email-btn{
     background-color: rgb(236, 236, 236);
     border: 1.5px solid white;
@@ -97,7 +99,38 @@
     text-align: center;
     
 }
-input[type="text"], input[type="password"], input[type="email"]{
-    height: 30px;
-    font-size: 15px;
+//styling for all inputs
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
 }
+
+input[type="text"], input[type="password"], input[type="email"], input[type="number"]{
+    height: 40px !important;
+    font-size: 14px;
+    -moz-appearance: textfield;
+}
+//add .form-floating class and make sure label is below imput
+//this creates new form floating labels
+#signUpForm > div>.form-floating{
+    color: black;
+}
+
+.form-floating>label{
+    padding: 0.6rem;
+    color: black;
+    font-size: 13px; 
+    @include transition(opacity .1s ease-in-out, transform .1s ease-in-out);
+}
+.form-control:focus,
+.form-control:not(:placeholder-shown),
+.form-select {
+        ~ label{
+        opacity: 0.9;
+        transform: scale(.75) translateY(-.45rem) translateX(.2rem) !important;
+    }
+}
+

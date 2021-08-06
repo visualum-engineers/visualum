@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import InputCode from "./inputCode";
 
 //Regex Expressions to validate Form Inputs
 const emailRegex = /.+@.+[\.]{1}.+/;
@@ -25,9 +26,9 @@ function passwordCheck(statePW, stateVerify, passwordRegexCollection, btnCheck=f
 
 const initialState = {
     accountType:"student",
-    formPage: "1",
-    email: "",
-    password: "",
+    formPage: 1,
+    email:"",
+    password:"",
     verifiedPassword:"",
     existingAccount: "",
     rememberMe:"",
@@ -65,8 +66,6 @@ export default class Form extends Component {
                 const page1Input = emailRegex.test(state.email) && passwordCheck(state.password, state.verifiedPassword, passwordRegexCollection, true)
                 const studentPage2Input = numberRegex.test(state.verifiedEmail)
                 const teacherPage3Input = subscriptionTypeRegex.test(state.subscriptionType)
-                console.log(state.accountType);
-                console.log(state.formPage);
                 switch(true){
                     case state.formPage === ("1"|1):
                         return page1Input ? {formPage: parseInt(state.formPage) + 1}:{error: true}
@@ -98,6 +97,13 @@ export default class Form extends Component {
 
     //handles all controlled inputs in form
     handleChange(e){
+        //for verifying email
+        if(numberRegex.test(e)){
+            this.setState({verifiedEmail: e})
+        }
+
+        //for text inputs
+        if(e.target === undefined || e.target === false) return
         let inputId = e.target.closest("input").dataset.state
         let value = e.target.value
         this.setState({[inputId]: value})
@@ -174,7 +180,10 @@ class Buttons extends Component{
         }
     }
 }
-
+//for verification of code, prevents update of state.
+//make replace with react hooks 
+//for a cleaner verison in future
+let loading = false 
 class FormPage extends Component {
     render() {
     //stored form pages
@@ -201,9 +210,10 @@ class FormPage extends Component {
             </button>
         </div>
         const page1 = <div>
-            <div className="mt-3">
-                <label for="email" className="form-label">Email Address</label>
+             
+            <div className="form-floating mt-3">
                 <input 
+                    placeholder ="Email Address"
                     value ={this.props.email}
                     data-state="email"
                     onChange={this.props.handleChange}
@@ -211,11 +221,13 @@ class FormPage extends Component {
                     className="form-control" 
                     id="email" 
                     aria-describedby="emailHelp"/>
+                <label for="email" className="form-label">Email Address</label>
+                    
             </div>
             <div className={`align-items-end ${this.props.windowWidth>768? "d-flex":""}`}>
-                <div className={`mb-3 mt-3 flex-fill ${this.props.windowWidth>768? "me-1":""}`}>
-                    <label for="password" className="form-label">Password</label>
+                <div className={`mb-3 mt-3 form-floating ${this.props.windowWidth>768? "me-1":""}`}>
                     <input
+                        placeholder="Password"
                         value ={this.props.password}
                         onFocus={this.props.handleFocus}
                         data-state="password"
@@ -223,10 +235,11 @@ class FormPage extends Component {
                         type="password" 
                         className="form-control" 
                         id="password"/>
+                    <label style={{color:"black"}}for="password" className="form-label">Password</label>
                 </div>
-                <div className={`mb-3 flex-fill ${this.props.windowWidth>768? "ms-1 mt-3":""}`}>
-                    <label for="verifiedPassword" className="form-label">Re-enter Password</label>
+                <div className={`mb-3 form-floating ${this.props.windowWidth>768? "ms-1 mt-3":""}`}>
                     <input
+                        placeholder ="Re-enter Password"
                         value ={this.props.verifiedPassword}
                         onFocus={this.props.handleFocus}
                         data-state="verifiedPassword"
@@ -234,6 +247,7 @@ class FormPage extends Component {
                         type="password" 
                         className="form-control" 
                         id="verifiedPassword"/>
+                    <label for="verifiedPassword" className="form-label">Re-enter Password</label>
                 </div>
             </div>
             <div className="mb-3 form-check">
@@ -248,10 +262,26 @@ class FormPage extends Component {
             </div>
         </div>;
 
-        const studentPage2 = <div>
-            <div className="mb-3 mt-3">
-                <label for="verifiedEmail" className="form-label">Verify Email</label>
+        const studentPage2 =  
+            <InputCode
+                length={4}
+                label="Code Label"
+                onComplete={code => {
+                if(loading != true){
+                    loading = true
+                    this.props.handleChange(code)
+                }
+                //implent a way to also disable inputs... for future after 10 seconds
+                setTimeout(() => loading = false, 10000)
+                }}
+            />
+            
+        //useful code if above doesnt work
+        /*<div>
+            <div className="mt-4">
+            <label for="verifiedEmail" className="form-label">Verify Email</label>
                 <input
+                    placeholder="Verify Email"
                     value={this.props.verifiedEmail}
                     onFocus={this.props.handleFocus}
                     data-state="verifiedEmail"
@@ -260,9 +290,9 @@ class FormPage extends Component {
                     className="form-control" 
                     id="verifiedEmail" 
                     aria-describedby="verifiedEmail"/>
-                <div className="mt-2"id="verifyLabel">Input 4-digit code sent to {this.props.email} </div>
             </div>
-        </div>;
+            <div className="mt-2 mb-4"id="verifyLabel">Input 4-digit code sent to {this.props.email} </div>
+        </div>; */
 
         const studentPage3 = <div>
             <div className="mb-3 mt-3">
