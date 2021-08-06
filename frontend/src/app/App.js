@@ -3,7 +3,7 @@ import Navbar from './components/navbar/navbar';
 import Footer from "./components/footer/footer";
 import HomeContent from './components/homePage/home';
 import Settings from './components/settingsPage/Settings';
-import Form from './components/signUpform/form'
+import SignUpForm from './components/forms/signUpform'
 function App() {
 
   return (
@@ -11,7 +11,7 @@ function App() {
       {/*<Navbar/>
       <HomeContent/>
       <Footer/>*/}
-      <Form/>
+      <SignUpForm/>
       {/*<Settings />*/}
     </div>
 
