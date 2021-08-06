@@ -8,11 +8,11 @@ function App() {
 
   return (
     <div className="wrapper" id="page-background">
-      {/*<Navbar/>
-      <HomeContent/>
-      <Footer/>*/}
-      <Form/>
-      {/*<Settings />*/}
+      <Navbar />
+      {/* <HomeContent /> */}
+      {/* <Footer /> */}
+      {/* <Form /> */}
+      <Settings />
     </div>
 
   );
