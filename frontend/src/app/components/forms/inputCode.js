@@ -1,4 +1,4 @@
-import {useState, useRef} from 'react';
+import React, {useState, useRef} from 'react';
 const InputCode = ({ length, label, description, loading, onComplete }) => {
     const [code, setCode] = useState([...Array(length)].map(() => ""));
     const inputs = useRef([]);
@@ -53,4 +53,4 @@ const InputCode = ({ length, label, description, loading, onComplete }) => {
     );
   };
   
-  export default InputCode;
+export default InputCode;
