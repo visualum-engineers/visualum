@@ -113,6 +113,12 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
     font-size: 14px;
     -moz-appearance: textfield;
 }
+
+.form-select{
+    height: 40px;
+    font-size: 13px;
+}
+
 //add .form-floating class and make sure label is below imput
 //this creates new form floating labels
 #signUpForm > div>.form-floating{
@@ -134,3 +140,22 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
     }
 }
 
+//for number verification codes
+.code-input{
+    @include center;
+    flex-direction: column;
+}
+.code-inputs{
+    @include center;
+}
+.code-inputs>input{
+    @include border-radius(5px);
+    margin: 1vw 0.5vw;
+    border: 1px solid black ;
+    text-align:center;
+    font-size: 18px;
+    width: 40px;
+}
+.code-label{
+    text-align: center;
+}

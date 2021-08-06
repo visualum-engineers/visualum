@@ -1,5 +1,5 @@
 import {useState, useRef} from 'react';
-const InputCode = ({ length, label, loading, onComplete }) => {
+const InputCode = ({ length, label, description, loading, onComplete }) => {
     const [code, setCode] = useState([...Array(length)].map(() => ""));
     const inputs = useRef([]);
   
@@ -27,12 +27,13 @@ const InputCode = ({ length, label, loading, onComplete }) => {
     };
   
     return (
-      <div className="code-input">
+      <div className="code-input mt-4 mb-4">
         <label className="code-label">{label}</label>
-        <div className="code-inputs">
+        <div className="code-inputs mt-2">
           {code.map((num, index) => {
             return (
               <input
+                className="verifyCode"
                 key={index}
                 type="text"
                 inputMode="numeric"
@@ -47,6 +48,7 @@ const InputCode = ({ length, label, loading, onComplete }) => {
             );
           })}
         </div>
+        <label className ="code-label mt-2">{description}</label>
       </div>
     );
   };

@@ -425,6 +425,11 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   -moz-appearance: textfield;
 }
 
+.form-select {
+  height: 40px;
+  font-size: 13px;
+}
+
 #signUpForm > div > .form-floating {
   color: black;
 }
@@ -446,6 +451,47 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   opacity: 0.9;
   -webkit-transform: scale(0.75) translateY(-0.45rem) translateX(0.2rem) !important;
           transform: scale(0.75) translateY(-0.45rem) translateX(0.2rem) !important;
+}
+
+.code-input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.code-inputs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.code-inputs > input {
+  border-radius: 5px;
+  margin: 1vw 0.5vw;
+  border: 1px solid black;
+  text-align: center;
+  font-size: 18px;
+  width: 40px;
+}
+
+.code-label {
+  text-align: center;
 }
 
 .foot-link {

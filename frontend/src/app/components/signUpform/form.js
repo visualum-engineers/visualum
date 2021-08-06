@@ -1,9 +1,26 @@
+/* 
+Notes on whats missing:
+    1. Verifying email code on server side
+    2. Verifying class code on server side
+    3. Google Sign up server authentication 
+    4. Specific password user feedback requirements
+    5. Error message when button is clicked and user (Logic is already built though) 
+            - hasnt filled anything out, 
+            - has invalid information 
+    (Optional) 
+            - star twinkling animation on background on signup form. 
+            - Can be built with css 
+
+    //Build once, business model and os agreement are complete
+    6. Payment information and subscription type details
+*/
+
 import React, { Component } from 'react';
 import InputCode from "./inputCode";
 
 //Regex Expressions to validate Form Inputs
 const emailRegex = /.+@.+[\.]{1}.+/;
-const numberRegex =/[0-9]{4,}/;
+const numberRegex =/[0-9]{6,}/;
 const subscriptionTypeRegex = /[free]|[mid-tier]|[high-tier]|[enterprise]/
 //piece-wise regex expression for password
 const passwordLength = /.{8,20}/
@@ -33,7 +50,7 @@ const initialState = {
     existingAccount: "",
     rememberMe:"",
     exposureToUs: "",
-    verifiedEmail: "",
+    verifiedEmailCode: "",
     classCode: "",
     schoolCode: "",
     subscriptionType:"",
@@ -64,7 +81,7 @@ export default class Form extends Component {
         if(targetBtnClasses.contains("continue")) {
             this.setState((state) => {
                 const page1Input = emailRegex.test(state.email) && passwordCheck(state.password, state.verifiedPassword, passwordRegexCollection, true)
-                const studentPage2Input = numberRegex.test(state.verifiedEmail)
+                const studentPage2Input = numberRegex.test(state.verifiedEmailCode)
                 const teacherPage3Input = subscriptionTypeRegex.test(state.subscriptionType)
                 switch(true){
                     case state.formPage === ("1"|1):
@@ -97,14 +114,17 @@ export default class Form extends Component {
 
     //handles all controlled inputs in form
     handleChange(e){
-        //for verifying email
+        //for verifying email code
         if(numberRegex.test(e)){
-            this.setState({verifiedEmail: e})
+            this.setState({verifiedEmailCode: e})
         }
 
-        //for text inputs
+        //for text or select inputs
         if(e.target === undefined || e.target === false) return
-        let inputId = e.target.closest("input").dataset.state
+        let input = e.target.closest("input")
+        let select = e.target.closest("select")
+        let verifySelect = input === undefined || input === null
+        let inputId =  verifySelect ? select.dataset.state : input.dataset.state
         let value = e.target.value
         this.setState({[inputId]: value})
     }
@@ -137,6 +157,7 @@ export default class Form extends Component {
                         {/*passing a form type property into Buttons will render student and teacher btns. 
                         If not, it will render nav buttons*/}
                         <h1 style={{textAlign: "center"}}>Join Us</h1>
+                        <h6 style={{textAlign: "center"}}>{`As A ${this.state.accountType==="student"?"Student":"Teacher"}`}</h6>
                         <Buttons accountType={this.state.accountType} formType={true} handleClick={this.handleClick} handleKeyPressed={this.handleKeyPressed}/>
                         <FormPage {...this.state} handleChange={this.handleChange} handleFocus={this.handleFocus}/>
                         <Buttons formPage={this.state.formPage} handleClick={this.handleClick} handleKeyPressed={this.handleKeyPressed}/>
@@ -209,8 +230,8 @@ class FormPage extends Component {
                 <span className="email-text">Sign up with email</span>
             </button>
         </div>
+        
         const page1 = <div>
-             
             <div className="form-floating mt-3">
                 <input 
                     placeholder ="Email Address"
@@ -261,75 +282,94 @@ class FormPage extends Component {
                 <label className="form-check-label" for="rememberMe">Remember Me</label>
             </div>
         </div>;
-
-        const studentPage2 =  
-            <InputCode
-                length={4}
-                label="Code Label"
+        
+        const studentPage2 =  <InputCode length={6}
+                label="Verify Email"
+                description = {`Input 6-digit code sent to: ${this.props.email}`}
                 onComplete={code => {
                 if(loading != true){
                     loading = true
                     this.props.handleChange(code)
-                }
-                //implent a way to also disable inputs... for future after 10 seconds
-                setTimeout(() => loading = false, 10000)
+                    }
+                    //implent a way to also disable inputs... for future after 10 seconds
+                    setTimeout(() => loading = false, 10000)
                 }}
             />
             
         //useful code if above doesnt work
         /*<div>
             <div className="mt-4">
-            <label for="verifiedEmail" className="form-label">Verify Email</label>
+            <label for="verifiedEmailCode" className="form-label">Verify Email</label>
                 <input
                     placeholder="Verify Email"
-                    value={this.props.verifiedEmail}
+                    value={this.props.verifiedEmailCode}
                     onFocus={this.props.handleFocus}
-                    data-state="verifiedEmail"
+                    data-state="verifiedEmailCode"
                     onChange={this.props.handleChange} 
                     type="number" 
                     className="form-control" 
-                    id="verifiedEmail" 
-                    aria-describedby="verifiedEmail"/>
+                    id="verifiedEmailCode" 
+                    aria-describedby="verifiedEmailCode"/>
             </div>
             <div className="mt-2 mb-4"id="verifyLabel">Input 4-digit code sent to {this.props.email} </div>
         </div>; */
-
         const studentPage3 = <div>
-            <div className="mb-3 mt-3">
-                <label for="classCode" className="form-label">Enter Class Code</label>
+            <div className="form-floating mb-3 mt-3">
                 <input 
+                    placeholder="Enter Class Code"
                     value={this.props.classCode}
                     onFocus={this.props.handleFocus}
                     data-state="classCode"
                     onChange={this.props.handleChange}
-                    type="number" 
+                    type="text" 
                     className="form-control" 
                     id="classCode" 
                     aria-describedby="classCode"/>
+                <label for="classCode" className="form-label">Enter Class Code</label>
             </div>
         </div>;
 
         const teacherPage2 = <div>
-            <div className="mt-3 mb-3">
-                <label for="School" className="form-label">School</label>
+            <div className="form-floating mt-3 mb-3">
                 <input
+                    placeholder="School or Insitution"
                     value={this.props.school}
                     data-state="school"
                     onChange={this.props.handleChange} 
-                    type="school" 
+                    type="text" 
                     className="form-control" 
                     id="school" 
                     aria-describedby="school"/>
+                <label for="School" className="form-label">School or Insitution</label>
             </div>
             <div className="mb-3">
                 <label for="exposureToUs" className="form-label">How did you hear about us?</label>
-                <input 
+                <select 
+                    onChange={this.props.handleChange} 
+                    value={this.props.exposureToUs} 
+                    className="form-select" 
+                    size="1" 
+                    id="floatingSelect" 
+                    aria-label="select one"
+                    data-state="exposureToUs"
+                    >
+                    <option value="">Choose One</option>
+                    <option value="social media">Social Media</option>
+                    <option value="management">Management</option>
+                    <option value="co-worker">Co-worker</option>
+                    <option value="students">Students</option>
+                    <option value="friends or relative">Friend or Relative</option>
+                    <option value="other">Other</option>
+                </select>
+                {/*<input 
+                    placeholder = "How did you hear about us?"
                     value={this.props.exposureToUs}
                     data-state="exposureToUs"
                     onChange={this.props.handleChange}
                     type="text" 
                     className="form-control" 
                     id="exposureToUs"/>
+                */}
             </div>
         </div>;
 
