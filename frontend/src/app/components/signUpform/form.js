@@ -1,15 +1,17 @@
 /* 
 Notes on whats missing:
-    1. Verifying email code on server side
-    2. Verifying class code on server side
-    3. Google Sign up server authentication 
-    4. Specific password user feedback requirements
-    5. Error message when button is clicked and user (Logic is already built though) 
-            - hasnt filled anything out, 
-            - has invalid information 
-    (Optional) 
-            - star twinkling animation on background on signup form. 
-            - Can be built with css 
+    //Backend
+        1. Verifying email code on server side
+        2. Verifying class code on server side
+        3. Google Sign up server authentication 
+    //Frontend 
+        4. Specific password user feedback requirements
+        5. Error message when button is clicked and user (Logic is already built though) 
+                - hasnt filled anything out, 
+                - has invalid information 
+        (Optional) 
+                - star twinkling animation on background on signup form. 
+                - Can be built with css 
 
     //Build once, business model and os agreement are complete
     6. Payment information and subscription type details
@@ -62,13 +64,13 @@ const initialState = {
 }
 
 export default class Form extends Component {
-    mounted = false;
     constructor(props) {
         super(props);
         this.state = initialState
         this.handleClick = this.handleClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleFocus = this.handleFocus.bind(this);
+        this.mounted = true;
     }
     //handles form naviagation
     handleClick(e) {
@@ -107,7 +109,8 @@ export default class Form extends Component {
             clearState()
             return this.setState({
                 accountType: targetBtnClasses.contains("student")? "student":"teacher",
-                subscriptionType: targetBtnClasses.contains("teacher") ? "mid-tier":""
+                subscriptionType: targetBtnClasses.contains("teacher") ? "mid-tier":"",
+                windowWidth: window.innerWidth,
             });
         }
     }
@@ -139,7 +142,6 @@ export default class Form extends Component {
     }
 
     componentDidMount() {
-        this.mounted = true
         if(this.mounted){
             window.addEventListener("resize", this.handleResize);
         }
@@ -246,7 +248,7 @@ class FormPage extends Component {
                     
             </div>
             <div className={`align-items-end ${this.props.windowWidth>768? "d-flex":""}`}>
-                <div className={`mb-3 mt-3 form-floating ${this.props.windowWidth>768? "me-1":""}`}>
+                <div className={`mb-3 mt-3 flex-fill form-floating ${this.props.windowWidth>768? "me-1":""}`}>
                     <input
                         placeholder="Password"
                         value ={this.props.password}
@@ -258,7 +260,7 @@ class FormPage extends Component {
                         id="password"/>
                     <label style={{color:"black"}}for="password" className="form-label">Password</label>
                 </div>
-                <div className={`mb-3 form-floating ${this.props.windowWidth>768? "ms-1 mt-3":""}`}>
+                <div className={`mb-3 flex-fill form-floating ${this.props.windowWidth>768? "ms-1 mt-3":""}`}>
                     <input
                         placeholder ="Re-enter Password"
                         value ={this.props.verifiedPassword}
