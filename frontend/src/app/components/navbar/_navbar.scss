@@ -1,6 +1,7 @@
     /* text font */
     //@import "https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap";
-    
+    @use "sass:math";
+
     .navbar{
         padding: 40px 30px 30px 30px;
         margin: 0;
@@ -10,6 +11,7 @@
         @include fillContainer;
         transition: all 0.25s;
         z-index:3;
+        height: $nav-height;
     }
 /*
     .navbar.move-navbar-right{
@@ -40,6 +42,7 @@
         font-size: 1rem;    
         display: flex;
         align-self: stretch;
+        height: $nav-height / 2;
     }
     .nav-link{
         @include center;
@@ -151,4 +154,8 @@
     /* this is to control the drop animation of navbar */
     .collapsing{
         transition: height 0.15s ease !important;
+    }
+
+    .icon-button{
+        height: 100%;
     }

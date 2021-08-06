@@ -103,9 +103,11 @@ function NavItem(props) {
 
 function UserProfile(props) {
     return (
-        <nav>
-
-        </nav>
+        <li className="nav-item flex-fill">
+            <a href="#" className="icon-button">
+                {props.icon}
+            </a>
+        </li>
     );
 }
 
@@ -154,7 +156,7 @@ export default class Navbar extends Component {
                             </div>
 
                             <SearchBar />
-                            <UserProfile />
+                            {/* <UserProfile icon="😃" /> */}
                         </ul>
                     </div>
                 </nav>

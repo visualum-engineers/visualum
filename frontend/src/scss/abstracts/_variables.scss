@@ -4,6 +4,8 @@ $main-color: rgba(107, 97, 144, 0.8);
 
 $bg-color: rgb(9, 3, 34);
 
+$nav-height: 100px;
+
 @mixin box-shadow($x, $y, $blur, $color){
     -webkit-box-shadow: $x $y $blur $color;
     -moz-box-shadow: $x $y $blur $color;
