@@ -65,15 +65,17 @@ export default class Form extends Component {
                 const page1Input = emailRegex.test(state.email) && passwordCheck(state.password, state.verifiedPassword, passwordRegexCollection, true)
                 const studentPage2Input = numberRegex.test(state.verifiedEmail)
                 const teacherPage3Input = subscriptionTypeRegex.test(state.subscriptionType)
+                console.log(state.accountType);
+                console.log(state.formPage);
                 switch(true){
-                    case state.formPage === 1:
-                        return page1Input ? {formPage: state.formPage + 1}:{error: true}
-                    case state.formPage ===2 && state.accountType === "student": 
+                    case state.formPage === ("1"|1):
+                        return page1Input ? {formPage: parseInt(state.formPage) + 1}:{error: true}
+                    case state.formPage === ("2"|2) && state.accountType === "student": 
                         return studentPage2Input ? {formPage: "final"}:{error: true}
-                    case state.formPage ===3 && state.accountType === "teacher":
+                    case state.formPage === ("3"|3) && state.accountType === "teacher":
                         return teacherPage3Input ? {formPage: "final"}:{error: true}
                     default:
-                        return {formPage: state.formPage + 1}
+                        return {formPage: parseInt(state.formPage) + 1}
                 }
             });
         }
@@ -81,7 +83,7 @@ export default class Form extends Component {
         if(targetBtnClasses.contains("goBack")) {
             this.setState((state) => {
                 let lastPage = (state.accountType === "student" && state.formPage === "final") || (state.accountType ==="teacher" && (state.formPage ==="final" || state.formPage==="enterprise"))
-                return {formPage: lastPage != true ? state.formPage-1 : state.accountType ==="student" ? 2 : 3}
+                return {formPage: lastPage != true ? parseInt(state.formPage)-1 : state.accountType ==="student" ? 2 : 3}
             });
         }
         //type of form being filled out
@@ -146,7 +148,7 @@ class Buttons extends Component{
         const formType = this.props.formType
         if(this.props.formPage<=1){
             return(
-                <div className="formNavBtns d-flex justify-content-between"> 
+                <div className="formNavBtns d-flex justify-content-end"> 
                     <button 
                         type="button" 
                         className="btn continue" 
