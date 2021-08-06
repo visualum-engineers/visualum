@@ -3,13 +3,13 @@
 //General Styles
 @import "./app/components/navbar/navbar";
 @import "./app/components/homePage/home";
-@import "./app/components/signUpForm/form";
+@import "./app/components/forms/form";
 @import "./app/components/footer/footer";
 
 //responsive Styles
 @import "./app/components/navbar/navbarBreakPoints";
 @import "./app/components/homePage/homeBreakPoints";
-@import "./app/components/signUpForm/formBreakPoints";
+@import "./app/components/forms/formBreakPoints";
 @import "./app/components/footer/footerBreakPoints";
 
 //responsive styling
@@ -34,13 +34,9 @@ a, a:hover, a:focus{
     transition: all 0.2s;
 }
 
-#page-background{
-    height: 100%;
+.App{
+    background-color: blue;
+    height: 100vh;
     width: 100%;
-    background-color: $bg-color;
-    background-image: url("./images/eureka_1.jpg");
-    background-size: 100vw;
-    background-repeat: no-repeat;
-    background-position: center top;
 }
 

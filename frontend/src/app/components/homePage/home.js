@@ -4,8 +4,7 @@ export default class HomeContent extends Component {
     render() {
         return (
             <div id ="content">
-                <div id="top-spacing"/>
-                <div className="signup-container text">
+                <div className="signup-container text mt-5">
                     <h2>A world class education for anyone, anywhere.</h2>
                     <p className="text">Join Eureka to explore your educational journey</p>
                     <p className="text"> Learning never ends. </p> <br/>

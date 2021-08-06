@@ -37,7 +37,7 @@ export default class Footer extends Component {
                 </div>
             </div>
 
-            <div id="copyright" className="row p-2">
+            <div id="copyright" className="row">
                 <div className="text-center">
                     <p><i className="fa fa-copyright"></i> {time} Visualum All rights reserved </p>
                 </div>

@@ -154,8 +154,8 @@
 }
 
 #search-btn.border {
-  -webkit-box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
-          box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
+  -webkit-box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
+          box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
 }
 
 #nav-button {
@@ -232,10 +232,6 @@
 
 #content p {
   color: white;
-}
-
-#top-spacing {
-  height: 24vw;
 }
 
 .signup-container {
@@ -496,6 +492,11 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   text-align: center;
 }
 
+#copyright {
+  padding: 0;
+  margin: 0;
+}
+
 .foot-link {
   color: white;
   text-align: center;
@@ -614,13 +615,9 @@ a, a:hover, a:focus {
   transition: all 0.2s;
 }
 
-#page-background {
-  height: 100%;
+.App {
+  background-color: blue;
+  height: 100vh;
   width: 100%;
-  background-color: #090322;
-  background-image: url("./images/eureka_1.jpg");
-  background-size: 100vw;
-  background-repeat: no-repeat;
-  background-position: center top;
 }
 /*# sourceMappingURL=main.css.map */
