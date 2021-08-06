@@ -13,6 +13,7 @@ class NavIcon extends Component {
 //Button Components
 class NavToggler extends Component {
     constructor(props) {
+        super(props);
         this.state = {
             toggled: false,
             disabled: false
