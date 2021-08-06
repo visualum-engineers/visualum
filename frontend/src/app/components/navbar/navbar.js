@@ -93,6 +93,22 @@ class SearchBar extends Component {
     }
 }
 
+function NavItem(props) {
+    return (
+        <li className="nav-item flex-fill">
+            {props.children}
+        </li>
+    );
+}
+
+function UserProfile(props) {
+    return (
+        <nav>
+
+        </nav>
+    );
+}
+
 //Entire Navbar 
 export default class Navbar extends Component {
     constructor(props) {
@@ -121,26 +137,24 @@ export default class Navbar extends Component {
                     <NavToggler />
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav flex-fill">
-                            <li className="nav-item flex-fill">
+                            <NavItem>
                                 <a className="nav-link" href="#">Home</a>
-                            </li>
-
-                            <li className="nav-item flex-fill">
+                            </NavItem>
+                            <NavItem>
                                 <a className="nav-link" href="#">Teacher</a>
-                            </li>
-                            <li className="nav-item flex-fill">
+                            </NavItem>
+                            <NavItem>
                                 <a className="nav-link" href="#">Student</a>
-                            </li>
-                            <li className="nav-item flex-fill">
+                            </NavItem>
+                            <NavItem>
                                 <a className="nav-link" href="#">About Us</a>
-                            </li>
-
+                            </NavItem>
                             <div className="d-flex justify-content-end signout-btn">
                                 <SignIn />
                             </div>
 
                             <SearchBar />
-
+                            <UserProfile />
                         </ul>
                     </div>
                 </nav>
