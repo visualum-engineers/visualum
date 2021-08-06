@@ -11,7 +11,6 @@
   -webkit-transition: all 0.25s;
   transition: all 0.25s;
   z-index: 3;
-  height: 100px;
 }
 
 /*
@@ -219,10 +218,6 @@
 .collapsing {
   -webkit-transition: height 0.15s ease !important;
   transition: height 0.15s ease !important;
-}
-
-.icon-button {
-  height: 100%;
 }
 
 .text {

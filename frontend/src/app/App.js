@@ -9,9 +9,9 @@ function App() {
   return (
     <div className="wrapper" id="page-background">
       <Navbar />
-      {/* <HomeContent /> */}
-      {/* <Footer /> */}
-      {/* <Form /> */}
+      <HomeContent />
+      <Footer />
+      <Form />
       <Settings />
     </div>
 
