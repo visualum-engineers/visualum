@@ -21,14 +21,6 @@ function NavToggler() {
     const handleClick = () => {
         setToggled(currToggled => !currToggled);
         setDisabled(true);
-        // class Login extends Component {
-        //     render() {
-        //         const { signedIn } = this.props;
-        //         return (
-        //             <button id={`sign${signedIn ? "Out" : "In"}-btn`} className="btn btn-outline-light btn-lg">
-        //                 {signedIn ? "Log Out" : "Login"}
-        //             </button>
-        //         )
     }
     return (
         <button
@@ -51,11 +43,21 @@ function NavToggler() {
 function SignIn(props) {
     const { signedIn } = props;
     const render = signedIn ?
-        <UserProfile icon="😃" />
+        <UserProfile />
         : <button id={`sign${signedIn ? "Out" : "In"}-btn`} className="btn btn-outline-light btn-lg justify-content-end">
             {signedIn ? "Sign out" : "Sign in"}
         </button>
     return render;
+}
+
+function UserProfile(props) {
+    return (
+        <li className="nav-item flex-fill">
+            <div className="user-icon">
+
+            </div>
+        </li>
+    );
 }
 
 function SearchBar() {
@@ -81,16 +83,6 @@ function NavItem(props) {
     return (
         <li className="nav-item flex-fill">
             {props.children}
-        </li>
-    );
-}
-
-function UserProfile(props) {
-    return (
-        <li className="nav-item flex-fill">
-            <a href="#" className="icon-button">
-                {props.icon}
-            </a>
         </li>
     );
 }
