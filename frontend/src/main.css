@@ -217,7 +217,6 @@
   position: relative;
   text-align: justify;
   padding: 200px 10vw;
-  padding-top: 200px;
   margin: 0;
   height: 80%;
   width: 100%;
@@ -625,9 +624,7 @@ a, a:hover, a:focus {
 
 .App {
   position: relative;
-  height: 100vh;
+  height: 100%;
   background-color: #090322;
-  background-image: url("images/eureka_1.jpg");
-  background-size: cover;
 }
 /*# sourceMappingURL=main.css.map */
