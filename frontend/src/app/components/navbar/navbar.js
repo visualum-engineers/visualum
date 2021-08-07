@@ -48,12 +48,12 @@ function NavToggler() {
     )
 }
 
-function SignIn(props) {
+function Login(props) {
     const { signedIn } = props;
     const render = signedIn ?
         <UserProfile icon="😃" />
         : <button id={`sign${signedIn ? "Out" : "In"}-btn`} className="btn btn-outline-light btn-lg justify-content-end">
-            {signedIn ? "Sign out" : "Sign in"}
+            {signedIn ? "Log out" : "Login"}
         </button>
     return render;
 }
@@ -110,25 +110,25 @@ export default function Navbar() {
     return (
         <div id="filter-navbar-container" className="navbar-expand-lg fixed-top">
             <nav className="navbar navbar-expand-lg" id="navbar">
-                <a href="#" className="title"> visualum </a>
+                <a href="#" className="companyTitle"> visualum </a>
                 <NavToggler />
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav flex-fill">
                         <NavItem>
-                            <a className="nav-link" href="#">Home</a>
+                            <a className="nav-link mx-1" href="#">Home</a>
                         </NavItem>
                         <NavItem>
-                            <a className="nav-link" href="#">Teacher</a>
+                            <a className="nav-link mx-1" href="#">Teacher</a>
                         </NavItem>
                         <NavItem>
-                            <a className="nav-link" href="#">Student</a>
+                            <a className="nav-link mx-1" href="#">Student</a>
                         </NavItem>
                         <NavItem>
-                            <a className="nav-link" href="#">About Us</a>
+                            <a className="nav-link mx-1" href="#">About Us</a>
                         </NavItem>
                         <SearchBar />
-                        <div className="d-flex justify-content-end signout-btn">
-                            <SignIn signedIn={true} />
+                        <div className="d-flex justify-content-end signout-btn px-1 m-0">
+                            <Login signedIn={true} />
                         </div>
                     </ul>
                 </div>
