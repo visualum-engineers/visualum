@@ -11,11 +11,6 @@
         transition: all 0.25s;
         z-index:3;
     }
-    .navbar.move-navbar-right{
-        transform: translate(200px,0);
-        width: calc(100% - 200px);
-        transition: all 0.38s;
-    }
     //when scrolled, padding is reduced to make navbar smaller
     //vertical height when scrolled: vertical height when not scrolled:
     .navbarScrollActive{

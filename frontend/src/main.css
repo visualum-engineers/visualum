@@ -13,14 +13,6 @@
   z-index: 3;
 }
 
-.navbar.move-navbar-right {
-  -webkit-transform: translate(200px, 0);
-          transform: translate(200px, 0);
-  width: calc(100% - 200px);
-  -webkit-transition: all 0.38s;
-  transition: all 0.38s;
-}
-
 .navbarScrollActive {
   background: rgba(107, 97, 144, 0.8);
   padding: 6px 30px;
@@ -155,8 +147,8 @@
 }
 
 #search-btn.border {
-  -webkit-box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
-          box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
+  -webkit-box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
+          box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
 }
 
 #nav-button {
