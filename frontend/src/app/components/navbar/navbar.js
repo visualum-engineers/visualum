@@ -51,12 +51,12 @@ class NavToggler extends Component {
     }
 }
 
-class SignIn extends Component {
+class Login extends Component {
     render() {
         const { signedIn } = this.props;
         return (
-            <button id={`sign${signedIn ? "Out" : "In"}-btn`} className="btn btn-outline-light btn-lg justify-content-end">
-                {signedIn ? "Sign out" : "Sign in"}
+            <button id={`sign${signedIn ? "Out" : "In"}-btn`} className="btn btn-outline-light btn-lg">
+                {signedIn ? "Log Out" : "Login"}
             </button>
         )
     }
@@ -79,7 +79,7 @@ class SearchBar extends Component {
 
         const { toggled } = this.state;
         return (
-            <form id="search-box" className="form-inline d-flex justify-content-center">
+            <form id="search-box" className="form-inline d-flex justify-content-center p-0 mx-1">
                 <input id="search-bar"
                     className={`form-control mr-sm-2 shadow-none ${toggled && 'expand'}`}
                     type="search"
@@ -120,9 +120,9 @@ export default class Navbar extends Component {
     }
     handleScroll() {
         if (window.scrollY > 50) {
-            document.getElementById("navbar").classList.add("navbar-scroll")
+            document.getElementById("navbar").classList.add("navbarScrollActive")
         } else {
-            document.getElementById("navbar").classList.remove("navbar-scroll")
+            document.getElementById("navbar").classList.remove("navbarScrollActive")
         }
     }
     componentDidMount() {
@@ -135,29 +135,28 @@ export default class Navbar extends Component {
         return (
             <div id="filter-navbar-container" className="navbar-expand-lg fixed-top">
                 <nav className="navbar navbar-expand-lg" id="navbar">
-                    <a href="#" className="title"> visualum </a>
-                    <NavToggler />
+                    <a href="#" className="companyTitle"> visualum </a>
+                    <NavToggler/>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav flex-fill">
                             <NavItem>
-                                <a className="nav-link" href="#">Home</a>
+                                <a className="nav-link mx-1" href="#">Home</a>
                             </NavItem>
                             <NavItem>
-                                <a className="nav-link" href="#">Teacher</a>
+                                <a className="nav-link mx-1" href="#">Teacher</a>
                             </NavItem>
                             <NavItem>
-                                <a className="nav-link" href="#">Student</a>
+                                <a className="nav-link mx-1" href="#">Student</a>
                             </NavItem>
                             <NavItem>
-                                <a className="nav-link" href="#">About Us</a>
+                                <a className="nav-link mx-1" href="#">About Us</a>
                             </NavItem>
-                            <div className="d-flex justify-content-end signout-btn">
-                                <SignIn />
+                            <div className="d-flex justify-content-end signout-btn px-1 m-0">
+                                <Login />
                             </div>
-
                             <SearchBar />
-                            {/* <UserProfile icon="😃" /> */}
                         </ul>
+                        {/* <UserProfile icon="😃" /> */}
                     </div>
                 </nav>
             </div>
