@@ -8,20 +8,11 @@ function App() {
   return (
     <div className="wrapper" id="page-background">
       <Navbar />
-<<<<<<< HEAD
       <HomeContent />
       <Footer />
-      <Form />
-      <Settings />
-=======
-      {/* <HomeContent /> */}
-      {/* <Footer /> */}
-      <SignUpForm />
-      {/*<Settings />*/}
->>>>>>> 4493ac0f158da9e8c137fe588a628e875eec4459
+      {/* <SignUpForm /> */}
+      {/* <Settings /> */}
     </div>
-
   );
 }
-
 export default App;

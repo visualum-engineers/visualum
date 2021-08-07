@@ -1,6 +1,5 @@
     /* text font */
     //@import "https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap";
-    @use "sass:math";
 
     .navbar{
         padding: 40px 30px 30px 30px;
@@ -11,7 +10,6 @@
         @include fillContainer;
         transition: all 0.25s;
         z-index:3;
-        // height: $nav-height;
     }
 /*
     .navbar.move-navbar-right{
@@ -155,7 +153,3 @@
     .collapsing{
         transition: height 0.15s ease !important;
     }
-
-    // .icon-button{
-    //     height: 100%;
-    // }
