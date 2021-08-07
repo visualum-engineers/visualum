@@ -1,4 +1,5 @@
 /* text font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&display=swap");
 .navbar {
   border-radius: 0;
   height: 100%;
@@ -212,12 +213,13 @@
   transition: height 0.15s ease !important;
 }
 
-#homePage {
+.homePage {
   position: relative;
   text-align: justify;
   padding: 200px 10vw;
+  padding-top: 200px;
   margin: 0;
-  height: 100%;
+  height: 80%;
   width: 100%;
   z-index: 1;
 }
@@ -623,6 +625,9 @@ a, a:hover, a:focus {
 
 .App {
   position: relative;
+  height: 100vh;
   background-color: #090322;
+  background-image: url("images/eureka_1.jpg");
+  background-size: cover;
 }
 /*# sourceMappingURL=main.css.map */
