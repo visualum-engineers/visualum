@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 
 //NavToggler Icon
 function NavIcon(props) {
@@ -53,8 +55,11 @@ function SignIn(props) {
 function UserProfile(props) {
     return (
         <li className="nav-item flex-fill">
-            <div className="user-icon">
-
+            <div className="user">
+                <div className="user-profile">
+                    <FontAwesomeIcon icon={faUser} className="user-icon" />
+                </div>
+                <div className="user-username">Username</div>
             </div>
         </li>
     );

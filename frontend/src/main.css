@@ -4,7 +4,7 @@
   border-radius: 0;
   height: 100%;
   width: 100%;
-  padding: 30px;
+  padding: 30px 250px;
   margin: 0;
   color: white;
   border: none;
@@ -219,6 +219,57 @@
 .collapsing {
   -webkit-transition: height 0.15s ease !important;
   transition: height 0.15s ease !important;
+}
+
+.user {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 10px;
+  margin-left: 1.7rem;
+  height: 50px;
+  padding: 5px 10px;
+  -webkit-transition: background-color .25s ease-in-out;
+  transition: background-color .25s ease-in-out;
+}
+
+.user:hover {
+  background-color: rgba(255, 255, 255, 0.171);
+  cursor: pointer;
+}
+
+.user-profile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 40px;
+  width: 40px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 50%;
+}
+
+.user-icon {
+  color: rgba(88, 6, 143, 0.75);
+}
+
+.user-username {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-left: 1rem;
 }
 
 .homePage {
