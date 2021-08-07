@@ -1,34 +1,40 @@
+<<<<<<< HEAD
     /* text font */
     //@import "https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap";
+=======
+>>>>>>> 0f14622de3a41fd791ea7a144f61b924ffc61337
 
     .navbar{
-        padding: 40px 30px 30px 30px;
+        @include border-radius(0);
+        @include fillContainer;
+        padding: 30px;
         margin: 0;
         color: white;
         border: none;
-        @include border-radius(0);
-        @include fillContainer;
         transition: all 0.25s;
         z-index:3;
+<<<<<<< HEAD
     }
 /*
     .navbar.move-navbar-right{
         transform: translate(200px,0);
         width: calc(100% - 200px);
         transition: all 0.38s;
+=======
+>>>>>>> 0f14622de3a41fd791ea7a144f61b924ffc61337
     }
-*/
-    
-    .navbar-scroll{
+    //when scrolled, padding is reduced to make navbar smaller
+    //vertical height when scrolled: vertical height when not scrolled:
+    .navbarScrollActive{
         background: $main-color;
-        padding: 6px 30px 6px 30px;
+        padding: 6px 30px;
     }
     
     .navbar a{
         color: white;
     }
 
-    .title{
+    .companyTitle{
         font-size: 1.6em;
         font-family: 'Merriweather', serif;
         font-weight: 400;
@@ -40,13 +46,14 @@
         font-size: 1rem;    
         display: flex;
         align-self: stretch;
-        height: $nav-height / 2;
+       
     }
     .nav-link{
         @include center;
         @include fillContainer;
-        @include border-radius(5px);
+        @include border-radius(10px);
         text-align: center;
+        font-size: 17px;
     }
     .nav-link:hover{
         @include hover-color;
@@ -78,14 +85,14 @@
     
     #search-bar{
         padding: 0;
-        margin: 0 0.5rem 0 0;
         align-self: stretch;
         width: 0px;
         border: 0;
         transition: width ease 0.3s;
     }
-    
+
     #search-bar.expand{
+        margin: 0 0.5rem 0 0;
         padding-left: 10px;
         border: 0px;
         transition: width ease 0.3s;

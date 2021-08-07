@@ -34,13 +34,8 @@ a, a:hover, a:focus{
     transition: all 0.2s;
 }
 
-#page-background{
-    height: 100%;
-    width: 100%;
+.App{
+    position: relative;
     background-color: $bg-color;
-    background-image: url("./images/eureka_1.jpg");
-    background-size: 100vw;
-    background-repeat: no-repeat;
-    background-position: center top;
 }
 

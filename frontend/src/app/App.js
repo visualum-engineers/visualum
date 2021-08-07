@@ -6,7 +6,7 @@ import Settings from './components/settingsPage/Settings';
 import SignUpForm from './components/forms/signUpform';
 function App() {
   return (
-    <div className="wrapper" id="page-background">
+    <div className="App">
       <Navbar />
       <HomeContent />
       <Footer />

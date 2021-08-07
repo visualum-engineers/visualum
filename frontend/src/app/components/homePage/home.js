@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-
+import eureka_1 from '../../../images/eureka_1.jpg'
 export default class HomeContent extends Component {
     render() {
         return (
-            <div id ="content">
-                <div id="top-spacing"/>
-                <div className="signup-container text">
-                    <h2>A world class education for anyone, anywhere.</h2>
-                    <p className="text">Join Eureka to explore your educational journey</p>
-                    <p className="text"> Learning never ends. </p> <br/>
+            <div id = "homePage">
+                <img src={eureka_1} alt="Flag on Montain " className="homePageImage"/>
+                <div className="introContainer">
+                    <h2 className="homePageText">A world class education for anyone, anywhere.</h2>
+                    <p className="homePageText">Join Eureka to explore your educational journey</p>
+                    <p className="homePageText"> Learning never ends. </p> <br/>
                     <button id="signup-btn" className="btn btn-outline-light btn-lg">  Sign Up  
                         <span className="fa fa-caret-right"></span>
                     </button>

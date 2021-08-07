@@ -21,6 +21,14 @@ function NavToggler() {
     const handleClick = () => {
         setToggled(currToggled => !currToggled);
         setDisabled(true);
+        // class Login extends Component {
+        //     render() {
+        //         const { signedIn } = this.props;
+        //         return (
+        //             <button id={`sign${signedIn ? "Out" : "In"}-btn`} className="btn btn-outline-light btn-lg">
+        //                 {signedIn ? "Log Out" : "Login"}
+        //             </button>
+        //         )
     }
     return (
         <button
@@ -91,9 +99,9 @@ function UserProfile(props) {
 export default function Navbar() {
     const handleScroll = () => {
         if (window.scrollY > 50) {
-            document.getElementById("navbar").classList.add("navbar-scroll")
+            document.getElementById("navbar").classList.add("navbarScrollActive")
         } else {
-            document.getElementById("navbar").classList.remove("navbar-scroll")
+            document.getElementById("navbar").classList.remove("navbarScrollActive")
         }
     }
     useEffect(() => {

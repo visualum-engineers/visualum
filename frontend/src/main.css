@@ -1,34 +1,30 @@
+<<<<<<< HEAD
 /* text font */
+=======
+>>>>>>> 0f14622de3a41fd791ea7a144f61b924ffc61337
 .navbar {
-  padding: 40px 30px 30px 30px;
-  margin: 0;
-  color: white;
-  border: none;
   border-radius: 0;
   height: 100%;
   width: 100%;
+  padding: 30px;
+  margin: 0;
+  color: white;
+  border: none;
   -webkit-transition: all 0.25s;
   transition: all 0.25s;
   z-index: 3;
 }
 
-/*
-    .navbar.move-navbar-right{
-        transform: translate(200px,0);
-        width: calc(100% - 200px);
-        transition: all 0.38s;
-    }
-*/
-.navbar-scroll {
+.navbarScrollActive {
   background: rgba(107, 97, 144, 0.8);
-  padding: 6px 30px 6px 30px;
+  padding: 6px 30px;
 }
 
 .navbar a {
   color: white;
 }
 
-.title {
+.companyTitle {
   font-size: 1.6em;
   font-family: 'Merriweather', serif;
   font-weight: 400;
@@ -43,7 +39,6 @@
   display: flex;
   -ms-flex-item-align: stretch;
       align-self: stretch;
-  height: 50px;
 }
 
 .nav-link {
@@ -58,8 +53,9 @@
           justify-content: center;
   height: 100%;
   width: 100%;
-  border-radius: 5px;
+  border-radius: 10px;
   text-align: center;
+  font-size: 17px;
 }
 
 .nav-link:hover {
@@ -106,7 +102,6 @@
 
 #search-bar {
   padding: 0;
-  margin: 0 0.5rem 0 0;
   -ms-flex-item-align: stretch;
       -ms-grid-row-align: stretch;
       align-self: stretch;
@@ -117,6 +112,7 @@
 }
 
 #search-bar.expand {
+  margin: 0 0.5rem 0 0;
   padding-left: 10px;
   border: 0px;
   -webkit-transition: width ease 0.3s;
@@ -153,8 +149,8 @@
 }
 
 #search-btn.border {
-  -webkit-box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
-          box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
+  -webkit-box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
+          box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
 }
 
 #nav-button {
@@ -219,37 +215,47 @@
   transition: height 0.15s ease !important;
 }
 
-.text {
-  color: white;
-}
-
-#content {
+#homePage {
+  position: relative;
   text-align: justify;
-  padding: 0 10vw;
+  padding: 200px 10vw;
   margin: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
 }
 
-#content p {
+.homePageImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background-color: #090322;
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
+}
+
+.homePageText {
   color: white;
 }
 
-#top-spacing {
-  height: 24vw;
-}
-
-.signup-container {
+.introContainer {
   color: white;
   text-align: left;
   padding-left: 3vw;
 }
 
-.signup-container h2 {
+.introContainer h2 {
   width: 30vw;
   font-family: 'Bitter', serif;
   font-weight: 700;
 }
 
-.signup-container p {
+.introContainer p {
   font-size: 1.2em;
   padding: 0;
   margin: 0;
@@ -257,7 +263,7 @@
   font-weight: 400;
 }
 
-.signup-container button {
+.introContainer button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -266,7 +272,7 @@
           align-items: center;
 }
 
-.signup-container button > span {
+.introContainer button > span {
   padding-left: 10px;
   font-size: 1.3em;
 }
@@ -421,7 +427,7 @@ input::-webkit-inner-spin-button {
 }
 
 input[type="text"], input[type="password"], input[type="email"], input[type="number"] {
-  height: 50px !important;
+  height: 40px !important;
   font-size: 14px;
   -moz-appearance: textfield;
 }
@@ -493,6 +499,11 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 
 .code-label {
   text-align: center;
+}
+
+#copyright {
+  padding: 0;
+  margin: 0;
 }
 
 .foot-link {
@@ -613,13 +624,8 @@ a, a:hover, a:focus {
   transition: all 0.2s;
 }
 
-#page-background {
-  height: 100%;
-  width: 100%;
+.App {
+  position: relative;
   background-color: #090322;
-  background-image: url("./images/eureka_1.jpg");
-  background-size: 100vw;
-  background-repeat: no-repeat;
-  background-position: center top;
 }
 /*# sourceMappingURL=main.css.map */
