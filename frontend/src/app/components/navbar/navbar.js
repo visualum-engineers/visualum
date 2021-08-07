@@ -110,7 +110,7 @@ export default function Navbar() {
     return (
         <div id="filter-navbar-container" className="navbar-expand-lg fixed-top">
             <nav className="navbar navbar-expand-lg" id="navbar">
-                <a href="#" className="title"> visualum </a>
+                <a href="#" className="companyTitle"> visualum </a>
                 <NavToggler />
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav flex-fill">

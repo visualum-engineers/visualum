@@ -1,4 +1,5 @@
 /* text font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&display=swap");
 .navbar {
   border-radius: 0;
   height: 100%;
@@ -12,49 +13,63 @@
   z-index: 3;
 }
 
-/*
-    .navbar.move-navbar-right{
-        transform: translate(200px,0);
-        width: calc(100% - 200px);
-        transition: all 0.38s;
-    }
-    //when scrolled, padding is reduced to make navbar smaller
-    //vertical height when scrolled: vertical height when not scrolled:
-    .navbarScrollActive{
-        background: $main-color;
-        padding: 6px 30px;
-    }
-    
-    .navbar a{
-        color: white;
-    }
+.navbar.move-navbar-right {
+  -webkit-transform: translate(200px, 0);
+          transform: translate(200px, 0);
+  width: calc(100% - 200px);
+  -webkit-transition: all 0.38s;
+  transition: all 0.38s;
+}
 
-    .companyTitle{
-        font-size: 1.6em;
-        font-family: 'Merriweather', serif;
-        font-weight: 400;
-        letter-spacing: 0.1em;
-        width: 20vw;
-    }
+.navbarScrollActive {
+  background: rgba(107, 97, 144, 0.8);
+  padding: 6px 30px;
+}
 
-    .nav-item{ 
-        font-size: 1rem;    
-        display: flex;
-        align-self: stretch;
-       
-    }
-    .nav-link{
-        @include center;
-        @include fillContainer;
-        @include border-radius(10px);
-        text-align: center;
-        font-size: 17px;
-    }
-    .nav-link:hover{
-        @include hover-color;
-    }
-    
-    /*spacing around nav elements i.e links and search bar */
+.navbar a {
+  color: white;
+}
+
+.companyTitle {
+  font-size: 1.6em;
+  font-family: 'Merriweather', serif;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  width: 20vw;
+}
+
+.nav-item {
+  font-size: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-item-align: stretch;
+      align-self: stretch;
+}
+
+.nav-link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 17px;
+}
+
+.nav-link:hover {
+  background: white;
+  color: #271b53;
+}
+
+/*spacing around nav elements i.e links and search bar */
 #navbarSupportedContent {
   margin: 0;
   padding: 0;
@@ -206,12 +221,13 @@
   transition: height 0.15s ease !important;
 }
 
-#homePage {
+.homePage {
   position: relative;
   text-align: justify;
   padding: 200px 10vw;
+  padding-top: 200px;
   margin: 0;
-  height: 100%;
+  height: 80%;
   width: 100%;
   z-index: 1;
 }
@@ -617,6 +633,9 @@ a, a:hover, a:focus {
 
 .App {
   position: relative;
+  height: 100vh;
   background-color: #090322;
+  background-image: url("images/eureka_1.jpg");
+  background-size: cover;
 }
 /*# sourceMappingURL=main.css.map */
