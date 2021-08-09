@@ -4,7 +4,7 @@
     .navbar{
         @include border-radius(0);
         @include fillContainer;
-        padding: 30px 250px;
+        padding: 30px;
         margin: 0;
         color: white;
         border: none;
@@ -146,35 +146,4 @@
     /* this is to control the drop animation of navbar */
     .collapsing{
         transition: height 0.15s ease !important;
-    }
-
-    .user {
-        display: flex;
-        border-radius: 10px;
-        margin-left: 1.7rem;
-        height: 50px;
-        padding: 5px 10px;
-        transition: background-color .25s ease-in-out;
-    }
-    .user:hover {
-        background-color: rgba(255, 255, 255, 0.171);
-        cursor: pointer;
-    }
-
-    .user-profile {
-        @include center;
-        height: 40px;
-        width: 40px;
-        background-color: white;
-        padding: 20px;
-        border-radius: 50%;
-    }
-
-    .user-icon {
-        color: rgba(88, 6, 143, 0.75);
-    }
-
-    .user-username {
-        @include center;
-        margin-left: 1rem;
     }

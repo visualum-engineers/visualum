@@ -36,8 +36,6 @@ a, a:hover, a:focus{
 
 .App{
     position: relative;
-    height: 100vh;
+    height: 100%;
     background-color: $bg-color;
-    background-image: url('images/eureka_1.jpg');
-    background-size: cover;
 }
