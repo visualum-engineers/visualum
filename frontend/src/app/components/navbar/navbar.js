@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faStar } from '@fortawesome/free-solid-svg-icons'
+import { faInstagram, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { CSSTransition } from 'react-transition-group'
 
 //NavToggler Icon
 function NavIcon(props) {
@@ -45,7 +47,7 @@ function NavToggler() {
 function Login(props) {
     const { signedIn } = props;
     const render = signedIn ?
-        <UserProfile />
+        <UserProfile rewardNum={200} dropdownOpen={props.dropdownOpen} toggleDropdownOpen={props.toggleDropdownOpen} />
         : <button id={`sign${signedIn ? "Out" : "In"}-btn`} className="btn btn-outline-light btn-lg justify-content-end">
             {signedIn ? "Log out" : "Login"}
         </button>
@@ -53,16 +55,64 @@ function Login(props) {
 }
 
 function UserProfile(props) {
+    {
+        return (
+            <>
+                <li className="nav-item flex-fill">
+                    <div className={`user ${props.dropdownOpen ? "user-active" : ""}`} onClick={props.toggleDropdownOpen}>
+                        <div className="user-profile">
+                            <FontAwesomeIcon icon={faUser} className="user-icon" />
+                        </div>
+                        <div className="user-reward">
+                            <FontAwesomeIcon icon={faStar} className="user-reward-icon" />
+                            {props.rewardNum}
+                        </div>
+                    </div>
+                </li>
+                <UserDropdown dropdownOpen={props.dropdownOpen} />
+            </>
+        );
+
+    }
+}
+
+function UserDropdown(props) {
     return (
-        <li className="nav-item flex-fill">
-            <div className="user">
-                <div className="user-profile">
-                    <FontAwesomeIcon icon={faUser} className="user-icon" />
+        <CSSTransition
+            in={props.dropdownOpen}
+            timeout={250}
+            classNames="dropdown"
+            unmountOnExit
+        >
+            <div className="user-dropdown">
+                <div className="user-dropdown-panel">
+                    <div className="user-dropdown-assignment">
+                        <div className="user-dropdown-button">Current Assignment</div>
+                        <div className="user-dropdown-button">Completion History</div>
+                    </div>
+                    <div className="user-dropdown-connect">
+                        <div className="user-dropdown-panel-header">Connect</div>
+                        <div className="user-dropdown-button">
+                            <FontAwesomeIcon icon={faInstagram} className="user-dropdown-social-icon" /> Instagram
+                        </div>
+                        <div className="user-dropdown-button">
+                            <FontAwesomeIcon icon={faFacebook} className="user-dropdown-social-icon" /> Facebook
+                        </div>
+                        <div className="user-dropdown-button">
+                            <FontAwesomeIcon icon={faTwitter} className="user-dropdown-social-icon" /> Twitter
+                        </div>
+                    </div>
                 </div>
-                <div className="user-username">Username</div>
+                <div className="user-dropdown-panel">
+                    <div className="user-dropdown-button">Activity</div>
+                    <div className="user-dropdown-button">Redeem</div>
+                    <div className="user-dropdown-button">Store</div>
+                    <div className="user-dropdown-button">Settings</div>
+                    <div className="user-dropdown-button">Help</div>
+                </div>
             </div>
-        </li>
-    );
+        </CSSTransition>
+    )
 }
 
 function SearchBar() {
@@ -94,6 +144,7 @@ function NavItem(props) {
 
 //Entire Navbar 
 export default function Navbar() {
+    const [dropdownOpen, setDropdownOpen] = useState(false);
     const handleScroll = () => {
         if (window.scrollY > 50) {
             document.getElementById("navbar").classList.add("navbarScrollActive")
@@ -125,7 +176,7 @@ export default function Navbar() {
                         </NavItem>
                         <SearchBar />
                         <div className="d-flex justify-content-end signout-btn px-1 m-0">
-                            <Login signedIn={true} />
+                            <Login signedIn={true} dropdownOpen={dropdownOpen} toggleDropdownOpen={() => { setDropdownOpen(!dropdownOpen) }} />
                         </div>
                     </ul>
                 </div>

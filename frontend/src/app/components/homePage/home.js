@@ -4,7 +4,7 @@ export default class HomeContent extends Component {
     render() {
         return (
             <div className="homePage">
-                {/* <img src={eureka_1} alt="Flag on Montain" className="homePageImage" /> */}
+                <img src={eureka_1} alt="Flag on Montain" className="homePageImage" />
                 <div className="introContainer">
                     <h2 className="homePageText">A world class education for anyone, anywhere.</h2>
                     <p className="homePageText">Join Eureka to explore your educational journey</p>
