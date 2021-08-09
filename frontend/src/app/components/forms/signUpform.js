@@ -438,7 +438,7 @@ export default class SignUpForm extends Component {
 
     render() {
         return (
-            <div id="formContainer">
+            <div className="formContainer">
                 <form className={`${this.state.accountType==="student"? "studentSignUpForm":"teacherSignUpForm"}`} id="signUpForm">
                         {/*passing a form type property into Buttons will render student and teacher btns. 
                         If not, it will render nav buttons*/}
