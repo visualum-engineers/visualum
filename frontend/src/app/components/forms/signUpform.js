@@ -113,7 +113,7 @@ class ManualSignUp extends Component {
                     className="form-control" 
                     id="email" 
                     aria-describedby="emailHelp"/>
-                <label for="email" className="form-label">Email Address</label>
+                <label htmlFor="email" className="form-label">Email Address</label>
                     
             </div>
             <div className={`align-items-end ${this.props.windowWidth>768? "d-flex":""}`}>
@@ -127,7 +127,7 @@ class ManualSignUp extends Component {
                         type="password" 
                         className="form-control" 
                         id="password"/>
-                    <label style={{color:"black"}}for="password" className="form-label">Password</label>
+                    <label style={{color:"black"}}htmlFor="password" className="form-label">Password</label>
                 </div>
                 <div className={`mb-3 flex-fill form-floating ${this.props.windowWidth>768? "ms-1 mt-3":""}`}>
                     <input
@@ -139,7 +139,7 @@ class ManualSignUp extends Component {
                         type="password" 
                         className="form-control" 
                         id="verifiedPassword"/>
-                    <label for="verifiedPassword" className="form-label">Re-enter Password</label>
+                    <label htmlFor="verifiedPassword" className="form-label">Re-enter Password</label>
                 </div>
             </div>
             <div className="mb-3 form-check">
@@ -150,7 +150,7 @@ class ManualSignUp extends Component {
                     type="checkbox" 
                     className="form-check-input" 
                     id="rememberMe"/>
-                <label className="form-check-label" for="rememberMe">Remember Me</label>
+                <label className="form-check-label" htmlFor="rememberMe">Remember Me</label>
             </div>
         </div>
     )}
@@ -190,7 +190,7 @@ class StudentClassCode extends Component {
                         className="form-control" 
                         id="classCode" 
                         aria-describedby="classCode"/>
-                    <label for="classCode" className="form-label">Enter Class Code</label>
+                    <label htmlFor="classCode" className="form-label">Enter Class Code</label>
                 </div>
             </div>
         )}
@@ -210,10 +210,10 @@ class TeacherExposureToUs extends Component{
                     className="form-control" 
                     id="school" 
                     aria-describedby="school"/>
-                <label for="School" className="form-label">School or Insitution</label>
+                <label htmlFor="School" className="form-label">School or Insitution</label>
             </div>
             <div className="mb-3">
-                <label for="exposureToUs" className="form-label">How did you hear about us?</label>
+                <label htmlFor="exposureToUs" className="form-label">How did you hear about us?</label>
                 <select 
                     onChange={this.props.handleChange} 
                     value={this.props.exposureToUs} 
@@ -243,7 +243,7 @@ class SubscriptionType extends Component{
         return (
         <div>
                 <div className="mb-3 mt-3 d-flex-column" style={{textAlign:"center"}}>
-                    <label for="subscriptionType" className="form-label">Choose Subscription</label>
+                    <label htmlFor="subscriptionType" className="form-label">Choose Subscription</label>
                     <div>
                         <input
                             checked={this.props.subscriptionType === "free"}
@@ -293,7 +293,7 @@ class PaymentPage extends Component{
         return(
             <div>
                 <div className="mb-3">
-                    <label for="payment" className="form-label">Payment</label>
+                    <label htmlFor="payment" className="form-label">Payment</label>
                     <input
                         data-state="payment"
                         value={this.props.payment}
@@ -313,7 +313,7 @@ class Enterprise extends Component {
         return(
             <div>
                 <div className="mb-3">
-                    <label for="schoolCode" className="form-label">School Code</label>
+                    <label htmlFor="schoolCode" className="form-label">School Code</label>
                     <input 
                         data-state="schoolCode"
                         onChange={this.props.handleChange}
