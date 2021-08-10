@@ -12,7 +12,7 @@ class Stars extends Component {
          //twinkling star element
         for (let i = 0; i < 100; i++) {
             let randomTiming = ((Math.random()*4) + 1).toString() + "s"
-            //change *0.94, if padding on homePage ever causes overflow
+            //change 20, if scrollbar width changes
             let randomXPosition = (Math.random()*this.props.windowWidth-20).toString() + "px"
             let randomYPosition = (Math.random()*this.props.windowHeight/5).toString() + "px"
             let animationBehavior = "twinkle linear infinite " + randomTiming
@@ -24,7 +24,7 @@ class Stars extends Component {
             let star= <div key={i} className="star" style={starStyle}></div>
             stars.push(star)
         }
-         
+        
         return (
             <>
                 {stars}

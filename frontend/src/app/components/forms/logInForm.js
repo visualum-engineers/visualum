@@ -99,7 +99,7 @@ class ManualLogin extends Component {
                     className="form-control" 
                     id="email" 
                     aria-describedby="emailHelp"/>
-                <label for="email" className="form-label">Email Address</label>
+                <label htmlFor="email" className="form-label">Email Address</label>
             </div>
             <div className= "mb-3 mt-3 flex-fill form-floating">
                 <input
@@ -111,7 +111,7 @@ class ManualLogin extends Component {
                     type="password" 
                     className="form-control" 
                     id="password"/>
-                <label for="password" className="form-label">Password</label>
+                <label htmlFor="password" className="form-label">Password</label>
             </div>
             <div className="mb-3 form-check">
                 <input
@@ -120,7 +120,7 @@ class ManualLogin extends Component {
                     type="checkbox" 
                     className="form-check-input" 
                     id="rememberMe"/>
-                <label className="form-check-label" for="rememberMe">Remember Me</label>
+                <label className="form-check-label" htmlFor="rememberMe">Remember Me</label>
             </div>
         </div>
         )
