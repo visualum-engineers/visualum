@@ -4,6 +4,7 @@ import Footer from "./components/footer/footer";
 import HomeContent from './components/homePage/home';
 import Settings from './components/settingsPage/Settings';
 import SignUpForm from './components/forms/signUpform';
+import LoginForm from './components/forms/logInForm';
 function App() {
   return (
     <div className="App">
@@ -12,6 +13,7 @@ function App() {
       <Footer />
       {/* <SignUpForm /> */}
       {/* <Settings /> */}
+      <LoginForm/>
     </div>
   );
 }

@@ -121,7 +121,7 @@ function SearchBar() {
         setToggle(currState => !currState);
     }
     return (
-        <form id="search-box" className="form-inline d-flex justify-content-center">
+        <form id="search-box" className="form-inline d-flex justify-content-center mx-1">
             <input id="search-bar"
                 className={`form-control mr-sm-2 shadow-none ${toggled && 'expand'}`}
                 type="search"

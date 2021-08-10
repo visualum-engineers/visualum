@@ -24,3 +24,6 @@ yarn-error.log*
 
 main.css
 main.css.map
+#generated css styles from sass compiling
+src/main.css
+src/main.css.map

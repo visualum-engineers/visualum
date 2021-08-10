@@ -1,6 +1,8 @@
+//stylesheet
+import "./main.css";
+//react components
 import React from 'react';
 import ReactDOM from 'react-dom';
-import "./main.css";
 import App from './app/App';
 import { store } from './store';
 import { Provider } from 'react-redux';
