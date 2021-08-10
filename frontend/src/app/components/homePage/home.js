@@ -10,11 +10,11 @@ class Stars extends Component {
     render() {
         let stars = [];
          //twinkling star element
-        for (let i = 0; i < 70; i++) {
-            let randomTiming = ((Math.random()*5) + 3).toString() + "s"
+        for (let i = 0; i < 100; i++) {
+            let randomTiming = ((Math.random()*4) + 1).toString() + "s"
             //change *0.94, if padding on homePage ever causes overflow
-            let randomXPosition = (Math.random()*this.props.windowWidth*0.94).toString() + "px"
-            let randomYPosition = (Math.random()*this.props.windowHeight/6).toString() + "px"
+            let randomXPosition = (Math.random()*this.props.windowWidth-20).toString() + "px"
+            let randomYPosition = (Math.random()*this.props.windowHeight/5).toString() + "px"
             let animationBehavior = "twinkle linear infinite " + randomTiming
             let starStyle = {
                 animation: animationBehavior,
