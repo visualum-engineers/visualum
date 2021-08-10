@@ -393,12 +393,69 @@
   left: 0;
   z-index: -1;
   background-color: #090322;
-  height: 100%;
-  width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
   -o-object-position: top;
      object-position: top;
+  height: 100%;
+  width: 100%;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 1.5px;
+  background: rgba(255, 255, 255, 0);
+  border-radius: 5px;
+  z-index: 0;
+}
+
+@-webkit-keyframes twinkle {
+  0% {
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+    background: rgba(255, 255, 255, 0);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  60% {
+    -webkit-transform: scale(0.8, 0.8);
+            transform: scale(0.8, 0.8);
+    background: white;
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  100% {
+    background: rgba(255, 255, 255, 0);
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+}
+
+@keyframes twinkle {
+  0% {
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+    background: rgba(255, 255, 255, 0);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  60% {
+    -webkit-transform: scale(0.8, 0.8);
+            transform: scale(0.8, 0.8);
+    background: white;
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  100% {
+    background: rgba(255, 255, 255, 0);
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
 }
 
 .homePageText {
@@ -439,7 +496,7 @@
   font-size: 1.3em;
 }
 
-#formContainer, #signUpForm {
+.formContainer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -449,40 +506,46 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  margin: 0;
-  padding: 10vh 15vw;
   -webkit-box-align: stretch;
       -ms-flex-align: stretch;
           align-items: stretch;
+  margin: 0;
+  padding: 10vh 15vw;
   min-height: 600px;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.52);
 }
 
-#signUpForm {
-  min-height: 520px;
-  padding: 0 10vw;
+#signUpForm, #loginForm {
+  border-radius: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 0 10vw;
   width: 100%;
   height: 100%;
-  border-radius: 20px;
   color: white;
 }
 
-#signUpForm.studentSignUpForm {
+#signUpForm.studentSignUpForm, .studentSignUpForm#loginForm {
   background-color: rgba(107, 97, 144, 0.8);
   border: 1px solid rgba(107, 97, 144, 0.8);
 }
 
-#signUpForm.teacherSignUpForm {
+#signUpForm.teacherSignUpForm, .teacherSignUpForm#loginForm {
   background-color: rgba(0, 0, 0, 0.568);
   border: 1px solid white;
 }
 
 .formNavBtns > button {
+  width: 100%;
   background-color: #0e050f09;
   border: 1px solid white;
   color: white;
@@ -529,7 +592,7 @@
           flex-direction: column;
 }
 
-#signUpOptions > button {
+#signUpOptions > button, .email-btn {
   padding: 0;
   margin: 0;
   -webkit-box-align: center;
@@ -540,7 +603,7 @@
   width: 183px;
 }
 
-#google-btn {
+.google-btn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -565,6 +628,9 @@
 
 /* Sign up with e-mail button */
 .email-btn {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
   background-color: #ececec;
   border: 1.5px solid white;
 }
@@ -599,7 +665,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   font-size: 13px;
 }
 
-#signUpForm > div > .form-floating {
+#signUpForm > div > .form-floating, #loginForm > div > .form-floating {
   color: black;
 }
 
@@ -656,7 +722,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   border: 1px solid black;
   text-align: center;
   font-size: 18px;
-  width: 40px;
+  width: 30px;
 }
 
 .code-label {
@@ -704,7 +770,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   .nav-item {
     width: 8%;
   }
-  #formContainer, #signUpForm {
+  #formContainer, #signUpForm, #loginForm {
     padding: 10vh 18vw;
   }
   .formNavBtns > button, .formTypeBtns > button {
@@ -741,12 +807,14 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
     color: #271b53;
     border-radius: 5px;
   }
-  #formContainer, #signUpForm {
+  #formContainer, #signUpForm, #loginForm {
     padding: 10vh 15vw;
   }
   .formNavBtns > button, .formTypeBtns > button {
-    font-size: 120%;
+    font-size: 100%;
     width: 40%;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
@@ -754,12 +822,14 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   .title {
     font-size: 1.5em !important;
   }
-  #formContainer, #signUpForm {
+  #formContainer, #signUpForm, #loginForm {
     padding: 10vh 10vw;
   }
   .formNavBtns > button, .formTypeBtns > button {
-    font-size: 95%;
-    width: 45%;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 75%;
+    width: 49%;
   }
 }
 

@@ -5,16 +5,31 @@ import HomeContent from './components/homePage/home';
 import Settings from './components/settingsPage/Settings';
 import SignUpForm from './components/forms/signUpform';
 import LoginForm from './components/forms/logInForm';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <HomeContent />
-      <Footer />
-      {/* <SignUpForm /> */}
-      {/* <Settings /> */}
-      <LoginForm/>
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar />
+        <Switch>
+          <Route
+            exact path="/">
+            <HomeContent />
+          </Route>
+          <Route exact path="/signup">
+            <SignUpForm />
+          </Route>
+          <Route exact path="/login">
+            <LoginForm />
+          </Route>
+          <Route exact path="/settings">
+            <Settings />
+          </Route>
+        </Switch>
+        <Footer />
+      </div >
+    </Router >
   );
 }
 export default App;
