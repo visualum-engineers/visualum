@@ -1,23 +1,26 @@
-#formContainer{
+.formContainer{
     @include center;
+    align-items: stretch;
     margin: 0;
     padding: 10vh 15vw;
-    align-items: stretch;
     min-height: 600px;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.52);
 }
-// 
 #signUpForm{
-    min-height: 520px;
-    @extend #formContainer;padding: 0 10vw;
+    @extend #formContainer;
+    @include border-radius(20px);
+    display: flex;
     flex-direction: column;
+    justify-content: center;
+    padding: 0 10vw;
     width:100%;
     height: 100%;
-    @include border-radius(20px);
     color: white;
 }
-
+#loginForm{
+    @extend #signUpForm;
+}
 #signUpForm.studentSignUpForm{
     background-color: $main-color;
     border: 1px solid $main-color;
@@ -29,6 +32,7 @@
 }
 
 .formNavBtns>button{
+    width: 100%;
     background-color: #0e050f09;
     border: 1px solid white;
     color: white;
@@ -62,7 +66,7 @@
     flex-direction: column;
 }
 
-#signUpOptions>button{
+#signUpOptions>button, .email-btn{
     padding: 0;
     margin: 0;
     align-items: center;
@@ -72,7 +76,7 @@
 }
 
 
-#google-btn{
+.google-btn{
     @include center;
     background-color: rgba(0, 0, 0, 0);
     border: none;
@@ -86,6 +90,7 @@
 /* Sign up with e-mail button */
 
 .email-btn{
+    align-self: center;
     background-color: rgb(236, 236, 236);
     border: 1.5px solid white;
 }
@@ -154,7 +159,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
     border: 1px solid black ;
     text-align:center;
     font-size: 18px;
-    width: 40px;
+    width: 30px;
 }
 .code-label{
     text-align: center;

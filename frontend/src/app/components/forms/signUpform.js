@@ -51,28 +51,34 @@ function passwordCheck(statePW, stateVerify, passwordRegexCollection, btnCheck=f
 const initialState = {
     accountType:"student",
     formPage: 1,
+    googleSignUp: "",
     email:"",
     password:"",
     verifiedPassword:"",
     existingAccount: "",
-    rememberMe:"",
     exposureToUs: "",
     verifiedEmailCode: "",
     classCode: "",
     schoolCode: "",
     subscriptionType:"",
     school: "",
-    error: false,
     payment: "",
-    googleSignUp: "",
+    rememberMe:false,
+    error: false,
     windowWidth: window.innerWidth,
 }
 //stored form pages
 class SignUpOptions extends Component {
+    componentDidMount() {
+        const script = document.createElement("script");
+        script.src = "https://accounts.google.com/gsi/client";
+        script.async = true;
+        document.body.appendChild(script);
+    }
     render(){
         return (
-            <div id="signUpOptions" className="d-flex-column mt-5 mb-5 ">
-            <button id="google-btn" className="mb-2">
+            <div id="signUpOptions" className="d-flex-column mt-4 ">
+            <button className="google-btn mb-2">
                 <div id="g_id_onload"
                     data-client_id="297543839155-cclc3bsf6m26pfaj1bmrfb1l4bgpcin7.apps.googleusercontent.com"
                     data-context="signup"
@@ -89,15 +95,12 @@ class SignUpOptions extends Component {
                     data-logo_alignment="left">
                 </div>
             </button>
-            <button id="email-btn" className="email-btn d-flex justify-content-center" type="button">
-                <span className="email-text">Sign up with email</span>
-            </button>
         </div>
     )}
 }
 
 //email and password 
-class Page1 extends Component {
+class ManualSignUp extends Component {
     render(){
         return (<div>
             <div className="form-floating mt-3">
@@ -154,7 +157,7 @@ class Page1 extends Component {
 }
 
 //has email verification code
-class StudentPage2 extends Component{
+class StudentVerifyEmail extends Component{
     render(){
         return(
             <InputCode length={6}
@@ -172,7 +175,7 @@ class StudentPage2 extends Component{
         )}
 }
 //class verification code
-class StudentPage3 extends Component {
+class StudentClassCode extends Component {
     render(){
         return (
             <div>
@@ -193,7 +196,7 @@ class StudentPage3 extends Component {
         )}
 }
 //exposure to us and what school 
-class TeacherPage2 extends Component{
+class TeacherExposureToUs extends Component{
     render(){
         return (
         <div>
@@ -222,7 +225,7 @@ class TeacherPage2 extends Component{
                     >
                     <option value="">Choose One</option>
                     <option value="social media">Social Media</option>
-                    <option value="management">Management</option>
+                    <option value="school-management">School Management</option>
                     <option value="co-worker">Co-worker</option>
                     <option value="students">Students</option>
                     <option value="friends or relative">Friend or Relative</option>
@@ -235,7 +238,7 @@ class TeacherPage2 extends Component{
 }
 
 //subscription
-class TeacherPage3 extends Component{
+class SubscriptionType extends Component{
     render(){
         return (
         <div>
@@ -285,7 +288,7 @@ class TeacherPage3 extends Component{
     }
 }
 //payment page
-class TeacherPage4 extends Component{
+class PaymentPage extends Component{
     render(){
         return(
             <div>
@@ -328,18 +331,18 @@ class CurrentSignUpFormPage extends Component {
     //organizes pages to be easily searched through
         const formType = {
             "student":{
-                1: <Page1 {...this.props}/>,
-                2: <StudentPage2 {...this.props}/>,
-                final: <StudentPage3 {...this.props}/>,
-                signup: <SignUpOptions {...this.props}/>,
+                1: <SignUpOptions {...this.props}/>,
+                2: <ManualSignUp {...this.props}/>,
+                3: <StudentVerifyEmail {...this.props}/>,
+                final: <StudentClassCode {...this.props}/>,
             },
             "teacher": {
-                1: <Page1 {...this.props}/>,
-                2: <TeacherPage2 {...this.props}/>,
-                3: <TeacherPage3 {...this.props}/>,
+                1: <SignUpOptions {...this.props}/>,
+                2: <ManualSignUp {...this.props}/>,
+                3: <TeacherExposureToUs {...this.props}/>,
+                4: <SubscriptionType {...this.props}/>,
                 enterprise: <Enterprise {...this.props}/>,
-                final: <TeacherPage4 {...this.props}/>,
-                signup: <SignUpOptions {...this.props}/>,
+                final: <PaymentPage {...this.props}/>,
             },
         };
     //returns appropiate form page
@@ -356,6 +359,36 @@ export default class SignUpForm extends Component {
         this.handleFocus = this.handleFocus.bind(this);
         this.mounted = true;
     }
+    //form page navigation behavior
+    moveToNextPage(){
+        this.setState((state) => {
+            const manualSignUp = emailRegex.test(state.email) && passwordCheck(state.password, state.verifiedPassword, passwordRegexCollection, true)
+            const verifyEmail = numberRegex.test(state.verifiedEmailCode)
+            const subscriptionType = subscriptionTypeRegex.test(state.subscriptionType)
+            switch(true){
+                case state.formPage === ("2"|2):
+                    return manualSignUp ? {formPage: parseInt(state.formPage) + 1}:{error: true}
+                case state.formPage === ("3"|3) && state.accountType === "student": 
+                    return verifyEmail ? {formPage: "final"}:{error: true}
+                case state.formPage === ("4"|4) && state.accountType === "teacher":
+                    return subscriptionType ? {formPage: "final"}:{error: true}
+                default:
+                    return {formPage: parseInt(state.formPage) + 1}
+            }
+        });
+    }
+
+    moveToPreviousPage(){
+        this.setState((state) => {
+            let lastPage = (state.accountType === "student" && state.formPage === "final") || (state.accountType ==="teacher" && (state.formPage ==="final" || state.formPage==="enterprise"))
+            return {formPage: lastPage != true ? parseInt(state.formPage)-1 : state.accountType ==="student" ? 2 : 3}
+        });
+    }
+
+    clearInputValues(e){
+        let inputId = e.target.closest("input").dataset.state
+        this.setState({[inputId]:""})
+    }
     //handles form naviagation
     handleClick(e) {
         let targetBtnClasses = e.target.closest("button").classList;
@@ -363,32 +396,15 @@ export default class SignUpForm extends Component {
             this.setState(initialState);
         };
         
-        //form page navigation behavior
         if(targetBtnClasses.contains("continue")) {
-            this.setState((state) => {
-                const page1Input = emailRegex.test(state.email) && passwordCheck(state.password, state.verifiedPassword, passwordRegexCollection, true)
-                const studentPage2Input = numberRegex.test(state.verifiedEmailCode)
-                const teacherPage3Input = subscriptionTypeRegex.test(state.subscriptionType)
-                switch(true){
-                    case state.formPage === ("1"|1):
-                        return page1Input ? {formPage: parseInt(state.formPage) + 1}:{error: true}
-                    case state.formPage === ("2"|2) && state.accountType === "student": 
-                        return studentPage2Input ? {formPage: "final"}:{error: true}
-                    case state.formPage === ("3"|3) && state.accountType === "teacher":
-                        return teacherPage3Input ? {formPage: "final"}:{error: true}
-                    default:
-                        return {formPage: parseInt(state.formPage) + 1}
-                }
-            });
+            this.moveToNextPage();
         }
 
         if(targetBtnClasses.contains("goBack")) {
-            this.setState((state) => {
-                let lastPage = (state.accountType === "student" && state.formPage === "final") || (state.accountType ==="teacher" && (state.formPage ==="final" || state.formPage==="enterprise"))
-                return {formPage: lastPage != true ? parseInt(state.formPage)-1 : state.accountType ==="student" ? 2 : 3}
-            });
+           this.moveToPreviousPage();
         }
-        //type of form being filled out
+
+        //resets form and changes form type
         if(targetBtnClasses.contains("student")||targetBtnClasses.contains("teacher")){
             clearState()
             return this.setState({
@@ -405,20 +421,26 @@ export default class SignUpForm extends Component {
         if(numberRegex.test(e)){
             this.setState({verifiedEmailCode: e})
         }
-
-        //for text or select inputs
+        //for text, checkbox or select inputs
         if(e.target === undefined || e.target === false) return
         let input = e.target.closest("input")
         let select = e.target.closest("select")
+        //checks for input or select element
         let verifySelect = input === undefined || input === null
         let inputId =  verifySelect ? select.dataset.state : input.dataset.state
-        let value = e.target.value
-        this.setState({[inputId]: value})
+        //check for checkbox inputs
+        if(input.type==="checkbox"){
+            this.setState((state) => {
+                return {[inputId]: state[inputId] === false ? true : false}
+            })
+        } else {
+            let value = e.target.value;
+            this.setState({[inputId]: value})
+        }
     }
 
     handleFocus(e){
-        let inputId = e.target.closest("input").dataset.state
-        this.setState({[inputId]:""})
+        this.clearInputValues(e)
     }
     //Handles reshaping form components to be responsive
     handleResize=(e)=>{
@@ -437,16 +459,40 @@ export default class SignUpForm extends Component {
     } 
 
     render() {
+        const formType = <Buttons 
+                accountType={this.state.accountType} 
+                formType={true} 
+                handleClick={this.handleClick} 
+                handleKeyPressed={this.handleKeyPressed}
+            />
+        const navButtons = <Buttons 
+                formPage={this.state.formPage} 
+                handleClick={this.handleClick} 
+                handleKeyPressed={this.handleKeyPressed}
+            />
+        const manualLoginBtn = <button 
+                    onClick={this.handleClick} 
+                    className="continue mt-2 email-btn d-flex justify-content-center" 
+                    type="button"
+                >
+                    <span className="email-text">Sign up with email</span>
+                </button>
+        
         return (
-            <div id="formContainer">
+            <div className="formContainer">
                 <form className={`${this.state.accountType==="student"? "studentSignUpForm":"teacherSignUpForm"}`} id="signUpForm">
                         {/*passing a form type property into Buttons will render student and teacher btns. 
                         If not, it will render nav buttons*/}
                         <h1 style={{textAlign: "center"}}>Join Us</h1>
-                        <h6 style={{textAlign: "center"}}>{`As A ${this.state.accountType==="student"?"Student":"Teacher"}`}</h6>
-                        <Buttons accountType={this.state.accountType} formType={true} handleClick={this.handleClick} handleKeyPressed={this.handleKeyPressed}/>
-                        <CurrentSignUpFormPage {...this.state} handleChange={this.handleChange} handleFocus={this.handleFocus}/>
-                        <Buttons formPage={this.state.formPage} handleClick={this.handleClick} handleKeyPressed={this.handleKeyPressed}/>
+                        <h6 style={{textAlign: "center"}}>
+                            {`As A ${this.state.accountType==="student"?"Student":"Teacher"}`}
+                        </h6>
+                        {formType}
+                        <CurrentSignUpFormPage 
+                            {...this.state} 
+                            handleChange={this.handleChange} 
+                            handleFocus={this.handleFocus}/>
+                        {this.state.formPage===1? manualLoginBtn : navButtons}
                 </form>
             </div>
         )
