@@ -9,6 +9,7 @@ Notes on whats missing:
         5. Error message when button is clicked and user (Logic is already built though) 
                 - hasnt filled anything out, 
                 - has invalid information 
+        6. Reset Password Feature
         (Optional) 
                 - star twinkling animation on background on signup form. 
                 - Can be built with css 
