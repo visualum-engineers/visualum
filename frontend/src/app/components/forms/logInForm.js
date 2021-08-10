@@ -1,3 +1,19 @@
+/* 
+Notes on whats missing:
+    //Backend
+        1. Verifying email code on server side
+        2. Google Sign up server authentication 
+
+    //Frontend 
+        4. Specific password user feedback requirements
+        5. Error message when button is clicked and user (Logic is already built though) 
+                - hasnt filled anything out, 
+                - has invalid information 
+        (Optional) 
+                - star twinkling animation on background on signup form. 
+                - Can be built with css 
+*/
+
 import React, { Component } from 'react';
 import Buttons from './buttons';
 import InputCode from './inputCode';

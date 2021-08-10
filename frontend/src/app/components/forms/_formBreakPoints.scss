@@ -14,8 +14,10 @@
         padding: 10vh 15vw;
     }
     .formNavBtns>button, .formTypeBtns>button{
-        font-size: 95%;
+        font-size: 100%;
         width: 40%;
+        padding-left: 0;
+        padding-right: 0;
     }
 }
 
@@ -24,7 +26,9 @@
         padding: 10vh 10vw;
     }
     .formNavBtns>button,.formTypeBtns>button{
-        font-size: 60%;
-        width: 45%;
+        padding-left: 0;
+        padding-right: 0;
+        font-size: 75%;
+        width: 49%;
     }
 }
