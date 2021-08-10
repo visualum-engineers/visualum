@@ -10,6 +10,7 @@
 #signUpForm{
     @extend #formContainer;
     @include border-radius(20px);
+    display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 0 10vw;
@@ -65,7 +66,7 @@
     flex-direction: column;
 }
 
-#signUpOptions>button{
+#signUpOptions>button, .email-btn{
     padding: 0;
     margin: 0;
     align-items: center;
@@ -75,7 +76,7 @@
 }
 
 
-#google-btn{
+.google-btn{
     @include center;
     background-color: rgba(0, 0, 0, 0);
     border: none;
@@ -89,6 +90,7 @@
 /* Sign up with e-mail button */
 
 .email-btn{
+    align-self: center;
     background-color: rgb(236, 236, 236);
     border: 1.5px solid white;
 }
@@ -157,7 +159,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
     border: 1px solid black ;
     text-align:center;
     font-size: 18px;
-    width: 40px;
+    width: 30px;
 }
 .code-label{
     text-align: center;
