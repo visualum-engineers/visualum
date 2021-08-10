@@ -33,7 +33,7 @@
     .nav-item{ 
         font-size: 1rem;    
         display: flex;
-        align-self: stretch;
+        //align-self: stretch;
        
     }
     .nav-link{
@@ -154,7 +154,7 @@
         padding: 5px 10px;
         @include border-radius(25px);
         transition: background-color 250ms ease-in-out;
-        margin-left: 50px;
+        //margin-left: 50px;
     }
 
     .user:hover {

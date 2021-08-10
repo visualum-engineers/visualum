@@ -35,8 +35,6 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-item-align: stretch;
-      align-self: stretch;
 }
 
 .nav-link {
@@ -147,8 +145,8 @@
 }
 
 #search-btn.border {
-  -webkit-box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
-          box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
+  -webkit-box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
+          box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
 }
 
 #nav-button {
@@ -228,7 +226,6 @@
   border-radius: 25px;
   -webkit-transition: background-color 250ms ease-in-out;
   transition: background-color 250ms ease-in-out;
-  margin-left: 50px;
 }
 
 .user:hover {

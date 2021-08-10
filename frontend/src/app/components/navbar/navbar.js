@@ -58,7 +58,7 @@ function UserProfile(props) {
     {
         return (
             <>
-                <li className="nav-item flex-fill">
+                <li className="nav-item flex-fill justify-content-center ">
                     <div className={`user ${props.dropdownOpen ? "user-active" : ""}`} onClick={props.toggleDropdownOpen}>
                         <div className="user-profile">
                             <FontAwesomeIcon icon={faUser} className="user-icon" />
