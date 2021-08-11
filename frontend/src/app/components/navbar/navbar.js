@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faStar } from '@fortawesome/free-solid-svg-icons'
-import { faInstagram, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { CSSTransition } from 'react-transition-group'
+
+import UserProfile from './UserProfile';
+
 
 //NavToggler Icon
 function NavIcon(props) {
@@ -54,66 +53,9 @@ function Login(props) {
     return render;
 }
 
-function UserProfile(props) {
-    {
-        return (
-            <>
-                <li className="nav-item flex-fill justify-content-center ">
-                    <div className={`user ${props.dropdownOpen ? "user-active" : ""}`} onClick={props.toggleDropdownOpen}>
-                        <div className="user-profile">
-                            <FontAwesomeIcon icon={faUser} className="user-icon" />
-                        </div>
-                        <div className="user-reward">
-                            <FontAwesomeIcon icon={faStar} className="user-reward-icon" />
-                            {props.rewardNum}
-                        </div>
-                    </div>
-                </li>
-                <UserDropdown dropdownOpen={props.dropdownOpen} />
-            </>
-        );
 
-    }
-}
 
-function UserDropdown(props) {
-    return (
-        <CSSTransition
-            in={props.dropdownOpen}
-            timeout={250}
-            classNames="dropdown"
-            unmountOnExit
-        >
-            <div className="user-dropdown">
-                <div className="user-dropdown-panel">
-                    <div className="user-dropdown-assignment">
-                        <div className="user-dropdown-button">Current Assignment</div>
-                        <div className="user-dropdown-button">Completion History</div>
-                    </div>
-                    <div className="user-dropdown-connect">
-                        <div className="user-dropdown-panel-header">Connect</div>
-                        <div className="user-dropdown-button">
-                            <FontAwesomeIcon icon={faInstagram} className="user-dropdown-social-icon" /> Instagram
-                        </div>
-                        <div className="user-dropdown-button">
-                            <FontAwesomeIcon icon={faFacebook} className="user-dropdown-social-icon" /> Facebook
-                        </div>
-                        <div className="user-dropdown-button">
-                            <FontAwesomeIcon icon={faTwitter} className="user-dropdown-social-icon" /> Twitter
-                        </div>
-                    </div>
-                </div>
-                <div className="user-dropdown-panel">
-                    <div className="user-dropdown-button">Activity</div>
-                    <div className="user-dropdown-button">Redeem</div>
-                    <div className="user-dropdown-button">Store</div>
-                    <div className="user-dropdown-button">Settings</div>
-                    <div className="user-dropdown-button">Help</div>
-                </div>
-            </div>
-        </CSSTransition>
-    )
-}
+
 
 function SearchBar() {
     const [toggled, setToggle] = useState(false);
