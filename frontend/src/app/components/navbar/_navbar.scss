@@ -4,7 +4,7 @@
     .navbar{
         @include border-radius(0);
         @include fillContainer;
-        padding: 30px;
+        padding: 30px 10vw;
         margin: 0;
         color: white;
         border: none;
