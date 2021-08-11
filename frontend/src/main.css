@@ -334,10 +334,14 @@
   margin: 10px auto;
   border-radius: 15px;
   background-color: #0b042b;
+  -webkit-transition: all 250ms ease-in-out;
+  transition: all 250ms ease-in-out;
 }
 
 .user-dropdown-button:hover {
   cursor: pointer;
+  background-color: white;
+  color: #090322;
 }
 
 .user-dropdown-social-icon {

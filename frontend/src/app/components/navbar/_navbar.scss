@@ -237,10 +237,12 @@
         margin: 10px auto;
         @include border-radius(15px);
         background-color:lighten($color: $bg-color, $amount: 2);
-
+        transition: all 250ms ease-in-out;
     }
     .user-dropdown-button:hover {
         cursor: pointer;
+        background-color: white;
+        color: $bg-color;
     }
 
     .user-dropdown-social-icon {
