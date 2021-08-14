@@ -3,12 +3,7 @@ import InputCode from "./inputCode";
 
 export default function StudentVerifyEmail(props) {
     const onComplete = code => {
-        if (loading != true) {
-            loading = true
-            props.handleChange(code)
-        }
-        //implent a way to also disable inputs... for future after 10 seconds
-        setTimeout(() => loading = false, 10000)
+        props.handleChange(code);
     }
     return (
         <InputCode

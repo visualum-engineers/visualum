@@ -62,13 +62,13 @@ export default function ManualSignUp(props) {
             <div className="row mt-3 d-flex justify-content-around">
                 <button
                     className="col-5 btn btn-secondary"
-                    onClick={() => { props.setStage({ step: 1, type: 'student' }) }}
+                    onClick={() => { props.handleStageChange({ step: 1, type: 'student' }) }}
                 >
                     Back
                 </button>
                 <button
                     className="col-5 btn btn-primary"
-                    onClick={() => { props.setStage({ step: 3, type: 'student' }) }}
+                    onClick={() => { props.handleStageChange({ step: 3, type: 'student' }) }}
                 >
                     Continue
                 </button>

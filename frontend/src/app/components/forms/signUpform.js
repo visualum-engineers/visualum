@@ -21,35 +21,17 @@ import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 
 import Form from './Form'
+import { passwordCheck } from '../../helpers/passwordCheck'
 
 //Regex Expressions to validate Form Inputs
 const emailRegex = /.+@.+[\.]{1}.+/;
 const numberRegex = /[0-9]{6,}/;
 const subscriptionTypeRegex = /[free]|[mid-tier]|[high-tier]|[enterprise]/
-//piece-wise regex expression for password
-const passwordLength = /.{8,20}/
-const passwordUpperCase = /^(?=.*[A-Z]).*$/
-const passwordLowerCase = /^(?=.*[a-z]).*$/
-const passwordNumbers = /^(?=.*[0-9]).*$/
-const passwordSymbols = /^(?=.*[!@#$%^&*]).*$/
-const passwordRegexCollection = [passwordLength, passwordUpperCase, passwordLowerCase, passwordNumbers, passwordSymbols]
+
 //for verification of code, prevents update of state.
 //may replace with react hooks 
 //for a cleaner verison in future
 let loading = false;
-
-function passwordCheck(statePW, stateVerify, passwordRegexCollection, btnCheck = false) {
-    let passwordCheckArr = [...passwordRegexCollection]
-    let testSpecificPwRegex = []
-    if (btnCheck) {
-        return passwordCheckArr.every(regex => regex.test(statePW)) && stateVerify === statePW
-    }
-
-    for (let i in passwordCheckArr) {
-        testSpecificPwRegex.push(passwordCheckArr[i].test(statePW))
-    }
-    return testSpecificPwRegex
-}
 
 const initialState = {
     accountType: "student",
@@ -73,12 +55,59 @@ const initialState = {
 
 export default function SignUpForm() {
     const [stage, setStage] = useState({ step: 1, type: "student" });
-    let history = useHistory();
+    const [userInfo, setUserInfo] = useState({
+        accountType: "student",
+        email: "",
+        password: "",
+        verifiedPassword: "",
+        exposureToUs: "",
+        existingAccount: false,
+        verifiedEmailCode: "",
+        classCode: "",
+        schoolCode: "",
+        subscriptionType: "",
+        school: "",
+        payment: "",
+        rememberMe: false
+    })
+
+    const handleChange = e => {
+        // for verifying email code
+        if (numberRegex.test(e)) {
+            setUserInfo(currInfo => ({ ...currInfo, verifiedEmailCode: e }))
+        }
+        //for text, checkbox or select inputs
+        if (!e.target) return
+        let input = e.target.closest("input")
+        let select = e.target.closest("select")
+        //checks for input or select element
+        let verifySelect = input === undefined || input === null
+        let inputId = verifySelect ? select.dataset.state : input.dataset.state
+        //check for checkbox inputs
+        if (input.type === "checkbox") {
+            setUserInfo(currInfo => {
+                return { ...currInfo, [inputId]: currInfo[inputId] === false ? true : false }
+            })
+        } else {
+            let value = e.target.value;
+            setUserInfo(currInfo => ({ ...currInfo, [inputId]: value }))
+        }
+    }
+
+    const handleStageChange = newStage => {
+        const emailTest = emailRegex.test(userInfo.email);
+        const passwordTest = passwordCheck(userInfo.password, userInfo.verifiedPassword, true);
+        console.log(passwordTest)
+    }
 
     return (
         <div className="form-page">
             <div className="form-container">
-                <Form stage={stage} setStage={setStage} history={history} />
+                <Form
+                    stage={stage}
+                    handleStageChange={handleStageChange}
+                    handleChange={handleChange}
+                />
             </div>
         </div>
     )
