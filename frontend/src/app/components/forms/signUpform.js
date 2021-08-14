@@ -18,7 +18,6 @@ Notes on whats missing:
     6. Payment information and subscription type details
 */
 import React, { useState } from 'react';
-import { useHistory } from "react-router-dom";
 
 import Form from './Form'
 import { passwordCheck } from '../../helpers/passwordCheck'
