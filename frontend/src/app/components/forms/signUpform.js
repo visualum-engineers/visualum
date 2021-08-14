@@ -96,7 +96,20 @@ export default function SignUpForm() {
     const handleStageChange = newStage => {
         const emailTest = emailRegex.test(userInfo.email);
         const passwordTest = passwordCheck(userInfo.password, userInfo.verifiedPassword, true);
-        console.log(passwordTest)
+        // Checking if we are on manual form
+        if (stage.step === 2) {
+            // Check if email and password are good
+            if (emailTest && passwordTest) {
+                setStage(newStage);
+            }
+            // If not, there is an error, show an error.
+            else {
+                console.log("ERROR");
+                setStage({ step: 2, type: "student" })
+            }
+        } else {
+            setStage(newStage);
+        }
     }
 
     return (
