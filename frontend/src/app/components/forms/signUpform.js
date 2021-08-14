@@ -96,8 +96,8 @@ export default function SignUpForm() {
     const handleStageChange = newStage => {
         const emailTest = emailRegex.test(userInfo.email);
         const passwordTest = passwordCheck(userInfo.password, userInfo.verifiedPassword, true);
-        // Checking if we are on manual form
-        if (stage.step === 2) {
+        // Checking if we are on manual form and we are trying to go to the next step
+        if (stage.step === 2 && newStage.step === 3) {
             // Check if email and password are good
             if (emailTest && passwordTest) {
                 setStage(newStage);
