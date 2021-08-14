@@ -17,11 +17,10 @@ Notes on whats missing:
     //Build once, business model and os agreement are complete
     6. Payment information and subscription type details
 */
-import React, { useEffect, useState } from 'react';
-import InputCode from "./inputCode";
+import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 
-import SignUpOptions from './SignUpOptions';
+import Form from './Form'
 
 //Regex Expressions to validate Form Inputs
 const emailRegex = /.+@.+[\.]{1}.+/;
@@ -72,251 +71,18 @@ const initialState = {
     windowWidth: window.innerWidth,
 }
 
-//email and password 
-function ManualSignUp(props) {
+export default function SignUpForm() {
+    const [stage, setStage] = useState({ step: 1, type: "student" });
+    let history = useHistory();
+
     return (
-        <div>
-            <div className="row">
-                <div className="col-12">
-                    <div className="form-floating">
-                        <input
-                            placeholder="Email Address"
-                            value={props.email}
-                            data-state="email"
-                            onChange={props.handleChange}
-                            type="email"
-                            className="form-control"
-                            id="email"
-                            aria-describedby="emailHelp" />
-                        <label htmlFor="email" className="form-label">Email Address</label>
-                    </div>
-                </div>
-                <div className="col-lg-6 col-12">
-                    <div className="form-floating mt-3">
-                        <input
-                            placeholder="Password"
-                            value={props.password}
-                            onFocus={props.handleFocus}
-                            data-state="password"
-                            onChange={props.handleChange}
-                            type="password"
-                            className="form-control"
-                            id="password" />
-                        <label style={{ color: "black" }} htmlFor="password" className="form-label">Password</label>
-                    </div>
-                </div>
-                <div className="col-lg-6 col-12">
-                    <div className="form-floating mt-3">
-                        <input
-                            placeholder="Re-enter Password"
-                            value={props.verifiedPassword}
-                            onFocus={props.handleFocus}
-                            data-state="verifiedPassword"
-                            onChange={props.handleChange}
-                            type="password"
-                            className="form-control"
-                            id="verifiedPassword" />
-                        <label htmlFor="verifiedPassword" className="form-label">Re-enter Password</label>
-                    </div>
-                </div>
-                <div className="col-12 mt-3">
-                    <div className="form-check">
-                        <input
-                            value={props.rememberMe}
-                            data-state="rememberMe"
-                            onChange={props.handleChange}
-                            type="checkbox"
-                            className="form-check-input"
-                            id="rememberMe" />
-                        <label className="form-check-label" htmlFor="rememberMe">Remember Me</label>
-                    </div>
-                </div>
-            </div>
-            <div className="row mt-3 d-flex justify-content-around">
-                <button
-                    className="col-5 btn btn-secondary"
-                    onClick={() => { props.setStage({ step: 1, type: 'student' }) }}
-                >
-                    Back
-                </button>
-                <button
-                    className="col-5 btn btn-primary"
-                    onClick={() => { props.setStage({ step: 3, type: 'student' }) }}
-                >
-                    Continue
-                </button>
+        <div className="form-page">
+            <div className="form-container">
+                <Form stage={stage} setStage={setStage} history={history} />
             </div>
         </div>
     )
 }
-
-function StudentVerifyEmail(props) {
-    const onComplete = code => {
-        if (loading != true) {
-            loading = true
-            props.handleChange(code)
-        }
-        //implent a way to also disable inputs... for future after 10 seconds
-        setTimeout(() => loading = false, 10000)
-    }
-    return (
-        <InputCode
-            className="form-code"
-            length={6}
-            label="Verify Email"
-            description={`Input 6-digit code sent to: ${props.email}`}
-            onComplete={onComplete}
-        />
-    )
-}
-
-//class verification code
-function StudentClassCode(props) {
-    return (
-        <div>
-            <div className="form-floating mb-3 mt-3">
-                <input
-                    placeholder="Enter Class Code"
-                    value={props.classCode}
-                    onFocus={props.handleFocus}
-                    data-state="classCode"
-                    onChange={props.handleChange}
-                    type="text"
-                    className="form-control"
-                    id="classCode"
-                    aria-describedby="classCode" />
-                <label htmlFor="classCode" className="form-label">Enter Class Code</label>
-            </div>
-        </div>
-    )
-}
-
-
-
-
-//exposure to us and what school 
-function TeacherExposureToUs(props) {
-    return (
-        <div>
-            <div className="form-floating mt-3 mb-3">
-                <input
-                    placeholder="School or Insitution"
-                    value={props.school}
-                    data-state="school"
-                    onChange={props.handleChange}
-                    type="text"
-                    className="form-control"
-                    id="school"
-                    aria-describedby="school" />
-                <label htmlFor="School" className="form-label">School or Insitution</label>
-            </div>
-            <div className="mb-3">
-                <label htmlFor="exposureToUs" className="form-label">How did you hear about us?</label>
-                <select
-                    onChange={props.handleChange}
-                    value={props.exposureToUs}
-                    className="form-select"
-                    size="1"
-                    id="floatingSelect"
-                    aria-label="select one"
-                    data-state="exposureToUs"
-                >
-                    <option value="">Choose One</option>
-                    <option value="social media">Social Media</option>
-                    <option value="school-management">School Management</option>
-                    <option value="co-worker">Co-worker</option>
-                    <option value="students">Students</option>
-                    <option value="friends or relative">Friend or Relative</option>
-                    <option value="other">Other</option>
-                </select>
-            </div>
-        </div>
-    )
-}
-
-//subscription
-function SubscriptionType(props) {
-    return (
-        <div>
-            <div className="mb-3 mt-3 d-flex-column" style={{ textAlign: "center" }}>
-                <label htmlFor="subscriptionType" className="form-label">Choose Subscription</label>
-                <div>
-                    <input
-                        checked={props.subscriptionType === "free"}
-                        name="subscriptionType"
-                        value="free"
-                        data-state="subscriptionType"
-                        onChange={props.handleChange}
-                        type="radio"
-                        id="free"
-                        aria-describedby="subscriptionType" />
-                    <input
-                        checked={props.subscriptionType === "mid-tier"}
-                        name="subscriptionType"
-                        value="mid-tier"
-                        data-state="subscriptionType"
-                        onChange={props.handleChange}
-                        type="radio"
-                        id="mid-tier"
-                        aria-describedby="subscriptionType" />
-                    <input
-                        checked={props.subscriptionType === "high-tier"}
-                        name="subscriptionType"
-                        value="high-tier"
-                        data-state="subscriptionType"
-                        onChange={props.handleChange}
-                        type="radio"
-                        id="high-tier"
-                        aria-describedby="subscriptionType" />
-                    <input
-                        checked={props.subscriptionType === "enterprise"}
-                        name="subscriptionType"
-                        value="enterprise"
-                        data-state="subscriptionType"
-                        onChange={props.handleChange}
-                        type="radio"
-                        id="enterprise"
-                        aria-describedby="subscriptionType" />
-                </div>
-            </div>
-        </div>
-    )
-}
-
-function PaymentPage(props) {
-    return (
-        <div>
-            <div className="mb-3">
-                <label htmlFor="payment" className="form-label">Payment</label>
-                <input
-                    data-state="payment"
-                    value={props.payment}
-                    onChange={props.handleChange}
-                    type="number"
-                    id="payment"
-                    aria-describedby="payment" />
-            </div>
-        </div>
-    )
-}
-
-//form page when school has bought license for teacher
-function Enterprise(props) {
-    return (
-        <div>
-            <div className="mb-3">
-                <label htmlFor="schoolCode" className="form-label">School Code</label>
-                <input
-                    data-state="schoolCode"
-                    onChange={props.handleChange}
-                    type="number"
-                    id="schoolCode"
-                    aria-describedby="schoolCodeHelp" />
-            </div>
-        </div>
-    )
-}
-
 // class CurrentSignUpFormPage extends Component {
 //     render() {
 //         //organizes pages to be easily searched through
@@ -341,53 +107,7 @@ function Enterprise(props) {
 //     }
 // }
 
-function Form(props) {
-    const { stage } = props;
-    if (stage.type === 'student') {
-        switch (stage.step) {
-            case 1:
-                return <SignUpOptions {...props} />
-            case 2:
-                return <ManualSignUp {...props} />
-            case 3:
-                return <StudentVerifyEmail {...props} />
-            case 4:
-                return <StudentClassCode {...props} />
-            default:
-                return <SignUpOptions {...props} />
-        }
-    }
-    else if (stage.type === 'teacher') {
-        switch (stage.step) {
-            case 1:
-                return <SignUpOptions {...props} />
-            case 2:
-                return <ManualSignUp {...props} />
-            case 3:
-                return <TeacherExposureToUs {...props} />
-            case 4:
-                return <Enterprise {...props} />
-            case 5:
-                return <PaymentPage {...props} />
-            default:
-                return <SignUpOptions {...props} />
-        }
-    }
-    return <SignUpOptions />
-}
 
-export default function SignUpForm() {
-    const [stage, setStage] = useState({ step: 1, type: "student" });
-    let history = useHistory();
-
-    return (
-        <div className="form-page">
-            <div className="form-container">
-                <Form stage={stage} setStage={setStage} history={history} />
-            </div>
-        </div>
-    )
-}
 
 
 // class SignUpFormOLD extends Component {
