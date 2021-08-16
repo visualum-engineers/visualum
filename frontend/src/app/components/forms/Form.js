@@ -9,9 +9,9 @@ import PaymentPage from './PaymentPage';
 import Enterprise from './Enterprise';
 
 export default function Form(props) {
-    const { stage } = props;
-    if (stage.type === 'student') {
-        switch (stage.step) {
+    const { stage, type } = props;
+    if (type === 'student') {
+        switch (stage) {
             case 1:
                 return <SignUpOptions {...props} />
             case 2:
@@ -24,8 +24,8 @@ export default function Form(props) {
                 return <SignUpOptions {...props} />
         }
     }
-    else if (stage.type === 'teacher') {
-        switch (stage.step) {
+    else if (type === 'teacher') {
+        switch (stage) {
             case 1:
                 return <SignUpOptions {...props} />
             case 2:
@@ -40,5 +40,5 @@ export default function Form(props) {
                 return <SignUpOptions {...props} />
         }
     }
-    return <SignUpOptions />
+    return <SignUpOptions {...props} />
 }

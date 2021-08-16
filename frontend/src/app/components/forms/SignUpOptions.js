@@ -7,13 +7,17 @@ export default function SignUpOptions(props) {
         script.async = true;
         document.body.appendChild(script);
     }, [])
+    const handleClick = (type) => {
+        props.handleTypeChange(type);
+        props.handleStageChange(2);
+    }
     return (
         <div className="form-signUpOptions">
             <h1 className="text-center">Join Us</h1>
             <h6 className="text-center">As a</h6>
             <div className="form-type-buttons">
-                <button className="btn btn-primary m-3" onClick={() => { props.handleStageChange({ step: 2, type: 'student' }) }}>Student</button>
-                <button className="btn btn-primary m-3" onClick={() => { props.handleStageChange({ step: 2, type: 'teacher' }) }}>Teacher</button>
+                <button className="btn btn-primary m-3" onClick={() => { handleClick('student') }}>Student</button>
+                <button className="btn btn-primary m-3" onClick={() => { handleClick('teacher') }}>Teacher</button>
             </div>
             <h6 className="text-center">Or sign up with Google:</h6>
             <div id="signUpOptions" className="d-flex flex-column mt-4 ">

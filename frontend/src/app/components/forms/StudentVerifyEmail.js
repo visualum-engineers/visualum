@@ -3,7 +3,9 @@ import InputCode from "./inputCode";
 
 export default function StudentVerifyEmail(props) {
     const onComplete = code => {
-        props.handleChange(code);
+        if (props.verifyEmail(code)) {
+            props.handleStageChange(4)
+        }
     }
     return (
         <InputCode

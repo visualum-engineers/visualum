@@ -21,6 +21,7 @@ import React, { useState } from 'react';
 
 import Form from './Form'
 import { passwordCheck } from '../../helpers/passwordCheck'
+import { Redirect } from "react-router-dom"
 
 //Regex Expressions to validate Form Inputs
 const emailRegex = /.+@.+[\.]{1}.+/;
@@ -53,7 +54,9 @@ const initialState = {
 }
 
 export default function SignUpForm() {
-    const [stage, setStage] = useState({ step: 1, type: "student" });
+    const [stage, setStage] = useState(1);
+    const [type, setType] = useState('');
+    const [isFormComplete, setIsFormComplete] = useState(false);
     const [userInfo, setUserInfo] = useState({
         accountType: "student",
         email: "",
@@ -70,11 +73,27 @@ export default function SignUpForm() {
         rememberMe: false
     })
 
-    const handleChange = e => {
+    const verifyEmail = (e) => {
         // for verifying email code
         if (numberRegex.test(e)) {
+            // Check if code passes, if so
+            // Set code in state
             setUserInfo(currInfo => ({ ...currInfo, verifiedEmailCode: e }))
+            // Return validation that it passed
+            return true;
+        } else {
+            // Or return failure to validate
+            return false;
         }
+    }
+    const verifyClassCode = (e) => {
+        // Logic to verify class code and join student to class.
+        //Passes down boolean to send them to next page or tell them to retry.
+        return true;
+    }
+
+    const handleChange = e => {
+
         //for text, checkbox or select inputs
         if (!e.target) return
         let input = e.target.closest("input")
@@ -93,34 +112,60 @@ export default function SignUpForm() {
         }
     }
 
-    const handleStageChange = newStage => {
+    const testEmail = () => {
         const emailTest = emailRegex.test(userInfo.email);
+        console.log("Testing email: ", userInfo.email, " against regex. Result: ", emailTest)
         const passwordTest = passwordCheck(userInfo.password, userInfo.verifiedPassword, true);
+        console.log("Testing password: ", userInfo.passwprd, " against regex. Result: ", passwordTest)
+
+        return emailTest && passwordTest;
+    }
+
+    const handleStageChange = newStage => {
         // Checking if we are on manual form and we are trying to go to the next step
-        if (stage.step === 2 && newStage.step === 3) {
-            // Check if email and password are good
-            if (emailTest && passwordTest) {
+        if (stage === 2 && newStage === 3) {
+            if (testEmail()) {
                 setStage(newStage);
-            }
-            // If not, there is an error, show an error.
-            else {
+            } else {
                 console.log("ERROR");
-                setStage({ step: 2, type: "student" })
+                setStage(2)
             }
         } else {
             setStage(newStage);
         }
     }
 
+    const handleTypeChange = (type) => {
+        setType(type);
+    }
+
+    const handleSelect = (e) => {
+        const value = e.target[e.target.options.selectedIndex].value;
+        setUserInfo(currInfo => ({ ...currInfo, exposureToUs: value }))
+    }
+
+    const completeForm = () => {
+        setIsFormComplete(true);
+    }
+
     return (
         <div className="form-page">
             <div className="form-container">
                 <Form
+                    isFormComplete={isFormComplete}
+                    userInfo={userInfo}
                     stage={stage}
+                    type={type}
                     handleStageChange={handleStageChange}
+                    handleTypeChange={handleTypeChange}
+                    handleSelect={handleSelect}
                     handleChange={handleChange}
+                    verifyEmail={verifyEmail}
+                    verifyClassCode={verifyClassCode}
+                    completeForm={completeForm}
                 />
             </div>
+            {isFormComplete && <Redirect to="/" />}
         </div>
     )
 }
