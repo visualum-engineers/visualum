@@ -6,6 +6,7 @@ import Settings from './components/settingsPage/Settings';
 import SignUpForm from './components/forms/SignUpform';
 import LoginForm from './components/forms/logInForm';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import CreateGame from './components/createGame/CreateGame';
 
 function App() {
   return (
@@ -25,6 +26,9 @@ function App() {
           </Route>
           <Route exact path="/settings">
             <Settings />
+          </Route>
+          <Route exact path="/create-game">
+            <CreateGame />
           </Route>
         </Switch>
         <Footer />
