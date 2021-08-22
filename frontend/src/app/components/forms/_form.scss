@@ -114,7 +114,7 @@ input::-webkit-inner-spin-button {
 }
 
 input[type="text"], input[type="password"], input[type="email"], input[type="number"]{
-    height: 40px !important;
+    height: 50px !important;
     font-size: 14px;
     -moz-appearance: textfield;
 }
@@ -133,7 +133,8 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 .form-floating>label{
     padding: 0.6rem;
     color: black;
-    font-size: 13px; 
+    font-size: 14px;
+    padding-top: 14px;
     @include transition(opacity .1s ease-in-out, transform .1s ease-in-out);
 }
 .form-control:focus,
@@ -149,6 +150,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 .code-input{
     @include center;
     flex-direction: column;
+    color: white;
 }
 .code-inputs{
     @include center;
@@ -163,4 +165,31 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 }
 .code-label{
     text-align: center;
+}
+
+
+
+//Refactor
+
+.form-page {
+    height: 100vh;
+    @include center;
+}
+
+.form-container {
+    width: 70%;
+    height: 75%;
+    background-color: rgba(89, 42, 128, 0.65);
+    backdrop-filter: blur(5px);
+    @include border-radius(50px);
+    @include center;
+    padding: 50px;
+}
+
+.form-signUpOptions {
+    color: white;
+}
+
+.form-check {
+    color: white;
 }
