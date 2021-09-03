@@ -23,6 +23,10 @@ import Form from './Form'
 import { passwordCheck } from '../../helpers/passwordCheck'
 import { Redirect } from "react-router-dom"
 
+// IMPORTS FOR REDUX
+import { useSelector, useDispatch } from 'react-redux';
+import { updateFirst } from '../../../redux/features/userInfo/userInfoSlice';
+
 //Regex Expressions to validate Form Inputs
 const emailRegex = /.+@.+[\.]{1}.+/;
 const numberRegex = /[0-9]{6,}/;
@@ -72,6 +76,14 @@ export default function SignUpForm() {
         payment: "",
         rememberMe: false
     })
+
+    // ABOVE IS THE OLD STATE
+    // BELOW IS THE NEW REDUX IMPLEMENTATION
+
+    const userInfo = useSelector((state) => state.userInfo)
+    const dispatch = useDispatch();
+    
+    console.log(userInfo)
 
     const verifyEmail = (e) => {
         // for verifying email code
