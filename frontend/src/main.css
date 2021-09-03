@@ -793,7 +793,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   color: white;
 }
 
-.dragDropApp {
+.sortActivityApp {
   min-height: 1200px;
   height: 100vh;
   width: 100%;

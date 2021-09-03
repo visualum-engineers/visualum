@@ -25,7 +25,7 @@ const activityData = [
     },
 ]
 
-const DragDropApp = () => {
+const SortActivityApp = () => {
     //render data on a per question basis
     let currQuestion = 0;
     let groups = activityData[currQuestion]
@@ -73,7 +73,7 @@ const DragDropApp = () => {
     };
    
     return (
-        <div className = "dragDropApp d-flex align-items-center justify-content-center flex-column">
+        <div className = "sortActivityApp d-flex align-items-center justify-content-center flex-column">
             <p className="instructions">Sort the following:</p>
             <DragDropContext onDragEnd={onDragEnd}>
                 <div className ="draggableAreaContainer d-flex justify-content-center align-items-center">
@@ -93,20 +93,4 @@ const DragDropApp = () => {
         </div>
     )
 }
-export default DragDropApp
-
- //breaks out of function if draggable destintation 
-        //does not exist, and item will snap back
-        // if (!result.destination) return;
-        // const items = Array.from(answerArea);
-        // const [reorderedItem] = items.splice(result.source.index, 1);
-        // items.splice(result.destination.index, 0, reorderedItem);
-        // setAnswerArea(items);
-
-    // const answerAreaGroup =  <div key ={sortingGroups.length} className = "d-flex justify-content-center flex-column">
-    //          {answerAreaRows}
-    //     </div>
-
-    // sortingGroups.push(answerAreaGroup)
-
-        // let sortingGroups = []
+export default SortActivityApp
