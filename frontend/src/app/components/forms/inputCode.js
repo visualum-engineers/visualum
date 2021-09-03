@@ -18,7 +18,7 @@ const InputCode = ({ length, label, description, loading, onComplete }) => {
   };
 
   const onKeyUp = (e, slot) => {
-    if (e.keyCode === 8 && !code[slot] && slot !== 0) {
+    if (e.key === "Backspace" && !code[slot] && slot !== 0) {
       const newCode = [...code];
       newCode[slot - 1] = "";
       setCode(newCode);

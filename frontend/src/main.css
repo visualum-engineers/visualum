@@ -145,8 +145,8 @@
 }
 
 #search-btn.border {
-  -webkit-box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
-          box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
+  -webkit-box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
+          box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
 }
 
 #nav-button {
@@ -791,6 +791,74 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 
 #footer > div > h5 {
   color: white;
+}
+
+.dragDropApp {
+  min-height: 1200px;
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.instructions {
+  color: white;
+  font-size: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.draggableAreaContainer {
+  width: 100%;
+}
+
+.sortAreaGroups {
+  width: 41%;
+  margin: 0 5%;
+}
+
+.sortArea, .answerArea {
+  width: 100%;
+  border: 1px solid white;
+  font-size: 1.7rem;
+  margin: 10% 0;
+  list-style-type: none;
+  border-radius: 10px;
+}
+
+.sortArea > p, .answerArea > p {
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.sortDropContainer, .answerDropContainer {
+  min-height: 200px;
+  width: 100%;
+  border-top: 1px white solid;
+  list-style-type: none;
+}
+
+.answerArea {
+  width: 41%;
+  margin-right: 5%;
+}
+
+.answerDropContainer {
+  margin: 0;
+  padding: 0;
+}
+
+.dragItem {
+  text-align: center;
+  width: 90%;
+  font-size: 1.2rem;
+  color: white;
+  list-style-type: none;
+  margin: 1vw 1vw;
+  padding: 5px;
+  border: 1px solid white;
+  border-radius: 20px;
 }
 
 @media (min-width: 992px) {
