@@ -1,16 +1,16 @@
 import React, {useState, useRef} from 'react'
 import { Droppable} from 'react-beautiful-dnd';
-import DragItems from './DragDropItems';
+import SortItems from './SortItems';
 const SortArea = ({columnTitle, currAnswers, answerData}) =>{
     return (
-        <div className ="sortArea flex-column d-flex justify-content-center align-items-center ">
+        <div className ="sortArea flex-column d-flex justify-content-start align-items-center ">
             <p>{columnTitle}</p>
             
             <Droppable droppableId={columnTitle} direction ="vertical">
                 {(provided) => (
                     <div className="sortDropContainer d-flex flex-column align-items-center" {...provided.droppableProps} ref={provided.innerRef}>
                         {currAnswers.map((id, index) => {
-                            return <DragItems key={id} id={id} content={answerData[id].choice} index={index}/>
+                            return <SortItems key={id} id={id} content={answerData[id].choice} index={index}/>
                         })}
                         {provided.placeholder}
                     </div>

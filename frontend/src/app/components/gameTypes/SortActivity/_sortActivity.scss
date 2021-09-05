@@ -1,26 +1,29 @@
 .sortActivityApp{
-    min-height: 1200px;
-    height: 100vh;
+    height: 100%;
     width: 100%;
-    @include no-space;
+    padding-top: 150px;
+    padding-bottom: 75px;
 }
 .instructions{
     color: white;
     font-size: 2rem;
-    @include no-space;
+    margin-bottom: 2%;
+    padding: 0;
 }
 .draggableAreaContainer{
     width: 100%;
 }
 .sortAreaGroups{
-    width: 41%;
+    width: 65%;
     margin: 0 5%;
 }
 .sortArea{
-    width : 100%;
+    width : 45%;
+    height: 100%;
     border: 1px solid white;
     font-size: 1.7rem;
-    margin: 10% 0;
+    margin: 2.5%;
+    margin-top: 0;
     list-style-type: none;
     @include border-radius(10px);
 }
@@ -36,9 +39,9 @@
 }
 .answerArea{
     @extend .sortArea;
-    width: 41%;
-    margin-right: 5%;
-    
+    margin: 0 6.5% 0 0;
+    width: 30%;
+    height: auto;
 }
 .answerDropContainer{
     @extend .sortDropContainer;

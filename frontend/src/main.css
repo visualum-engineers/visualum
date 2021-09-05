@@ -794,17 +794,16 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 }
 
 .sortActivityApp {
-  min-height: 1200px;
-  height: 100vh;
+  height: 100%;
   width: 100%;
-  margin: 0;
-  padding: 0;
+  padding-top: 150px;
+  padding-bottom: 75px;
 }
 
 .instructions {
   color: white;
   font-size: 2rem;
-  margin: 0;
+  margin-bottom: 2%;
   padding: 0;
 }
 
@@ -813,15 +812,17 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 }
 
 .sortAreaGroups {
-  width: 41%;
+  width: 65%;
   margin: 0 5%;
 }
 
 .sortArea, .answerArea {
-  width: 100%;
+  width: 45%;
+  height: 100%;
   border: 1px solid white;
   font-size: 1.7rem;
-  margin: 10% 0;
+  margin: 2.5%;
+  margin-top: 0;
   list-style-type: none;
   border-radius: 10px;
 }
@@ -840,8 +841,9 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 }
 
 .answerArea {
-  width: 41%;
-  margin-right: 5%;
+  margin: 0 6.5% 0 0;
+  width: 30%;
+  height: auto;
 }
 
 .answerDropContainer {
@@ -859,6 +861,30 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   padding: 5px;
   border: 1px solid white;
   border-radius: 20px;
+}
+
+.matchActivityApp {
+  min-height: 800px;
+  padding-top: 150px;
+  height: 100vh;
+  width: 100%;
+}
+
+.gridLayout {
+  width: 100%;
+}
+
+.gridTiles {
+  padding: 0px 20px;
+  margin: 5px;
+  border: 1px white solid;
+  border-radius: 5px;
+}
+
+.gridTiles > p {
+  color: white;
+  margin: 0;
+  padding: 0;
 }
 
 @media (min-width: 992px) {

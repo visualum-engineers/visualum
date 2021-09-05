@@ -2,6 +2,19 @@ import React, { useState} from 'react'
 import AnswerArea from './AnswerArea'
 import SortArea from './SortArea'
 import { DragDropContext} from 'react-beautiful-dnd';
+/*Note Missing To-do
+Backend: 
+    1. Missing updating the backend with partial completion of assignment
+    2. Missing updating the backend with grade after completion
+
+Frontend: 
+    1. Fixing styling bugs that occurs during sorting
+        - add conditionals to change orientation of boxes depending on screen size
+        - breakpoint styling to make it work on phones and computers
+    2. Missing answer validation (check if their sorting is correct)
+    3. Missing re-rendering logic, when user answers question and moves on to the next one.
+    4. Missing progress saved on local storage/memory (if user exits out of page)
+*/
 
 //mock data of activity
 const activityData = [
@@ -20,7 +33,7 @@ const activityData = [
             "Good": [],
             "Medium":[],
             "Bad":[],
-            "answerChoices": ["1","2","3", "4", "5", "6", "7"],
+            "answerChoices": ["1","2","3","4", "5", "6", "7"],
         },
     },
 ]
@@ -29,6 +42,7 @@ const SortActivityApp = () => {
     //render data on a per question basis
     let currQuestion = 0;
     let groups = activityData[currQuestion]
+
     //state
     const [states, setStates] = useState(groups)
 
@@ -39,6 +53,7 @@ const SortActivityApp = () => {
         if(destination.droppableId === source.droppableId && destination.index === source.index) return
         const start = source.droppableId;
         const finish = destination.droppableId;
+
         //dictates behavior when droppable container is the same from end to start
         //therefore, will handle reording of elements on list
         if(start===finish){
@@ -55,6 +70,7 @@ const SortActivityApp = () => {
             setStates(newState)
             return
         } 
+
         //when list containers are different, we should 
         //be able to move elements into the new container, and remove them from old one
         const startAnswersList = Array.from(states.columns[start])
@@ -73,11 +89,13 @@ const SortActivityApp = () => {
     };
    
     return (
-        <div className = "sortActivityApp d-flex align-items-center justify-content-center flex-column">
+        <div className = "sortActivityApp d-flex align-items-center flex-column">
             <p className="instructions">Sort the following:</p>
             <DragDropContext onDragEnd={onDragEnd}>
-                <div className ="draggableAreaContainer d-flex justify-content-center align-items-center">
-                    <div className="sortAreaGroups">
+                <div className ="draggableAreaContainer d-flex justify-content-center align-items-start">
+
+                    {/* Renders sort categories */}
+                    <div className="sortAreaGroups d-flex flex-wrap">
                         {Object.keys(groups.columns).map((columnTitle, index)=> {
                             if(index === Object.keys(groups.columns).length-1) return
                             return <SortArea key={columnTitle} 
@@ -87,7 +105,11 @@ const SortActivityApp = () => {
                                         currAnswers={states.columns[columnTitle]}/>
                         })}
                     </div>
-                    <AnswerArea key={"answerChoices"} currAnswers={states.columns["answerChoices"]} answerData= {states.answerChoices}/>
+
+                    {/* Renders word/response bank */}
+                    <AnswerArea key={"answerChoices"} 
+                        currAnswers={states.columns["answerChoices"]} 
+                        answerData= {states.answerChoices}/>
                 </div>  
             </DragDropContext>
         </div>

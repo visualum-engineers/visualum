@@ -1,0 +1,19 @@
+.matchActivityApp{
+    min-height: 800px;
+    padding-top: 150px;
+    height: 100vh;
+    width: 100%;
+}
+.gridLayout{
+    width: 100%;
+}
+.gridTiles{
+    padding: 0px 20px;
+    margin: 5px;
+    border: 1px white solid;
+    @include border-radius(5px)
+}
+.gridTiles>p{
+    color: white;
+    @include no-space;
+}
