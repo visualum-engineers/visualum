@@ -866,8 +866,14 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 .matchActivityApp {
   min-height: 800px;
   padding-top: 150px;
-  height: 100vh;
+  height: 100%;
   width: 100%;
+}
+
+.matchInstruction {
+  color: white;
+  font-size: 1.7em;
+  margin-bottom: 50px;
 }
 
 .gridLayout {
@@ -875,6 +881,9 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 }
 
 .gridTiles {
+  cursor: -webkit-grab;
+  cursor: grab;
+  min-height: 150px;
   padding: 0px 20px;
   margin: 5px;
   border: 1px white solid;
