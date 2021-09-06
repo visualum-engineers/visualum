@@ -30,13 +30,30 @@ const activityData = {
         "Pair3-":"Pair3",
     },
 }
-const MatchActivityApp = () => {
-    const currQuestion = 1
-    const [state, setState] = useState(activityData)
-    
-    const nodeRef = useRef(null)
-    const gridSize = useGridSize();
+const currQuestion = 1
+const shuffleArray = shuffleItems(Object.keys(activityData[currQuestion]))
+//shuffles our given pairs order
+function shuffleItems(array){   
+    let currentIndex = array.length,  randomIndex;
 
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+    return array;
+}
+const MatchActivityApp = () => {
+    const [state, setState] = useState(activityData)
+    const [tileShuffle, setTileShuffle] = useState(shuffleArray)
+    const gridSize = useGridSize();
+    
     // Hook for resizing of Grid
     function useGridSize() {
         const [gridSize, setGridSize] = useState({width: undefined, height: undefined, rect: undefined});
@@ -57,11 +74,12 @@ const MatchActivityApp = () => {
         }, []); // Empty array ensures that effect is only run on mount
         return gridSize;
     }
-
+    
     let startEl
     let finalEl
 
     const onStart =(e) =>{
+        e.preventDefault()
         //updates selected element
         startEl = e.target.closest("div") 
         //disable events for selected elements
@@ -76,7 +94,7 @@ const MatchActivityApp = () => {
         const final = !finalEl ? null: finalEl.getAttribute("content")
         const start = startEl.getAttribute("content")
         const newMatchList = Object.assign({}, state[currQuestion])
-        
+        const newShuffleList = [...tileShuffle]
         //restore events for selected element
         startEl.style.pointerEvents = "all"
 
@@ -86,20 +104,27 @@ const MatchActivityApp = () => {
 
        //when elements are considered a matching pair
        //it will remove the element pair
+        newShuffleList.splice(newShuffleList.indexOf(start),1)
+        newShuffleList.splice(newShuffleList.indexOf(final),1)
+        
         delete newMatchList[start]
         delete newMatchList[final]
+        
         setState({
             ...state,
             [currQuestion]: newMatchList
         })
+        setTileShuffle(
+            newShuffleList
+        )
     }
 
-    
+
     return(
         <div className="matchActivityApp d-flex flex-column align-items-center">
             <p className="matchInstruction">Match the following</p>
             <div className = "gridLayout d-flex justify-content-center flex-wrap">
-                {Object.keys(state[currQuestion]).map((content, index)=>{
+                {tileShuffle.map((content, index)=>{
                     return <GridTiles 
                                 gridSize ={gridSize}
                                 onStop = {onStop}
@@ -109,7 +134,6 @@ const MatchActivityApp = () => {
                                 id={index} 
                                 index ={index}
                                 content = {content}
-                                nodeRef = {nodeRef}
                                 />
                 })}
             </div>
