@@ -20,26 +20,13 @@ export const userInfoSlice = createSlice({
         rememberMe: false
     },
     reducers: {
-        updatedFirst: (state, action) => {
-            state["firstName"] = action.paylod
-        },
-        updateLast: (state, action) => {
-            state.last = action.payload;
-        },
-        updateEmail: (state, action) => {
-            state.email = action.payload
-        },
-        updatePassword: (state, action) => {
-            state.password = action.payload
-        },
-        updateClassCode: (state, action) => {
-            state.classCode = action.payload
-        },
-        // One of these per field? Or a generic one for all string updates?
+        updated: (state, action) => {
+            state[action.payload[0]] = action.payload[1]
+        }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { updateFirst, updateLast, updateEmail, updatePassword, updateClassCode } = userInfoSlice.actions
+export const { updated } = userInfoSlice.actions
 
 export default userInfoSlice.reducer

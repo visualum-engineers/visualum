@@ -25,7 +25,7 @@ import { Redirect } from "react-router-dom"
 
 // IMPORTS FOR REDUX
 import { useSelector, useDispatch } from 'react-redux';
-import { updateFirst } from '../../../redux/features/userInfo/userInfoSlice';
+import { updated } from '../../../redux/features/userInfo/userInfoSlice';
 
 //Regex Expressions to validate Form Inputs
 const emailRegex = /.+@.+[\.]{1}.+/;
@@ -61,36 +61,36 @@ export default function SignUpForm() {
     const [stage, setStage] = useState(1);
     const [type, setType] = useState('');
     const [isFormComplete, setIsFormComplete] = useState(false);
-    const [userInfo, setUserInfo] = useState({
-        accountType: "student",
-        email: "",
-        password: "",
-        verifiedPassword: "",
-        exposureToUs: "",
-        existingAccount: false,
-        verifiedEmailCode: "",
-        classCode: "",
-        schoolCode: "",
-        subscriptionType: "",
-        school: "",
-        payment: "",
-        rememberMe: false
-    })
+    // const [userInfo, setUserInfo] = useState({
+    //     accountType: "student",
+    //     email: "",
+    //     password: "",
+    //     verifiedPassword: "",
+    //     exposureToUs: "",
+    //     existingAccount: false,
+    //     verifiedEmailCode: "",
+    //     classCode: "",
+    //     schoolCode: "",
+    //     subscriptionType: "",
+    //     school: "",
+    //     payment: "",
+    //     rememberMe: false
+    // })
 
     // ABOVE IS THE OLD STATE
     // BELOW IS THE NEW REDUX IMPLEMENTATION
 
     const userInfo = useSelector((state) => state.userInfo)
     const dispatch = useDispatch();
-    
-    console.log(userInfo)
+
+    // console.log(userInfo)
 
     const verifyEmail = (e) => {
         // for verifying email code
         if (numberRegex.test(e)) {
             // Check if code passes, if so
             // Set code in state
-            setUserInfo(currInfo => ({ ...currInfo, verifiedEmailCode: e }))
+            // setUserInfo(currInfo => ({ ...currInfo, verifiedEmailCode: e }))
             // Return validation that it passed
             return true;
         } else {
@@ -115,20 +115,22 @@ export default function SignUpForm() {
         let inputId = verifySelect ? select.dataset.state : input.dataset.state
         //check for checkbox inputs
         if (input.type === "checkbox") {
-            setUserInfo(currInfo => {
-                return { ...currInfo, [inputId]: currInfo[inputId] === false ? true : false }
-            })
+            // setUserInfo(currInfo => {
+            //     // return { ...currInfo, [inputId]: currInfo[inputId] === false ? true : false }
+
+            // })
+            dispatch(updated([inputId, userInfo[inputId]] === false ? true : false))
         } else {
             let value = e.target.value;
-            setUserInfo(currInfo => ({ ...currInfo, [inputId]: value }))
+            dispatch(updated([inputId, value]))
         }
     }
 
     const testEmail = () => {
         const emailTest = emailRegex.test(userInfo.email);
-        console.log("Testing email: ", userInfo.email, " against regex. Result: ", emailTest)
+        // console.log("Testing email: ", userInfo.email, " against regex. Result: ", emailTest)
         const passwordTest = passwordCheck(userInfo.password, userInfo.verifiedPassword, true);
-        console.log("Testing password: ", userInfo.passwprd, " against regex. Result: ", passwordTest)
+        // console.log("Testing password: ", userInfo.passwprd, " against regex. Result: ", passwordTest)
 
         return emailTest && passwordTest;
     }
@@ -153,7 +155,8 @@ export default function SignUpForm() {
 
     const handleSelect = (e) => {
         const value = e.target[e.target.options.selectedIndex].value;
-        setUserInfo(currInfo => ({ ...currInfo, exposureToUs: value }))
+        // setUserInfo(currInfo => ({ ...currInfo, exposureToUs: value }))
+        dispatch(updated(["exposureToUs", value]))
     }
 
     const completeForm = () => {
