@@ -6,7 +6,7 @@ Notes on whats missing:
 
     //Frontend 
         4. Specific password user feedback requirements
-        5. Error message when button is clicked and user (Logic is already built though) 
+        5. Error message when button is clicked and user
                 - hasnt filled anything out, 
                 - has invalid information 
         6. Reset Password Feature

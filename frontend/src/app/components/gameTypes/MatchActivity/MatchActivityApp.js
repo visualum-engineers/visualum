@@ -16,9 +16,8 @@ Frontend:
              The finalEl SHOULD be selecting the element underneath
              the one being dragged
     2. Add animation transition when elements are removed 
-    3. Missing answer validation (check if their sorting is correct)
-    4. Missing re-rendering logic, when user answers question and moves on to the next one.
-    5. Missing progress saved on local storage/memory (if user exits out of page)
+    3. Missing re-rendering logic, when user answers question and moves on to the next one.
+    4. Missing progress saved on local storage/memory (if user exits out of page)
 */
 const activityData = {
     1: {
@@ -32,6 +31,7 @@ const activityData = {
 }
 const currQuestion = 1
 const shuffleArray = shuffleItems(Object.keys(activityData[currQuestion]))
+
 //shuffles our given pairs order
 function shuffleItems(array){   
     let currentIndex = array.length,  randomIndex;
@@ -49,6 +49,7 @@ function shuffleItems(array){
     }
     return array;
 }
+
 const MatchActivityApp = () => {
     const [state, setState] = useState(activityData)
     const [tileShuffle, setTileShuffle] = useState(shuffleArray)
@@ -118,7 +119,6 @@ const MatchActivityApp = () => {
             newShuffleList
         )
     }
-
 
     return(
         <div className="matchActivityApp d-flex flex-column align-items-center">
