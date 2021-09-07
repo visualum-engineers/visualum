@@ -145,8 +145,8 @@
 }
 
 #search-btn.border {
-  -webkit-box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
-          box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
+  -webkit-box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
+          box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
 }
 
 #nav-button {
@@ -791,6 +791,109 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 
 #footer > div > h5 {
   color: white;
+}
+
+.sortActivityApp {
+  height: 100%;
+  width: 100%;
+  padding-top: 150px;
+  padding-bottom: 75px;
+}
+
+.instructions {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 2%;
+  padding: 0;
+}
+
+.draggableAreaContainer {
+  width: 100%;
+}
+
+.sortAreaGroups {
+  width: 65%;
+  margin: 0 5%;
+}
+
+.sortArea, .answerArea {
+  width: 45%;
+  height: 100%;
+  border: 1px solid white;
+  font-size: 1.7rem;
+  margin: 2.5%;
+  margin-top: 0;
+  list-style-type: none;
+  border-radius: 10px;
+}
+
+.sortArea > p, .answerArea > p {
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.sortDropContainer, .answerDropContainer {
+  min-height: 200px;
+  width: 100%;
+  border-top: 1px white solid;
+  list-style-type: none;
+}
+
+.answerArea {
+  margin: 0 6.5% 0 0;
+  width: 30%;
+  height: auto;
+}
+
+.answerDropContainer {
+  margin: 0;
+  padding: 0;
+}
+
+.dragItem {
+  text-align: center;
+  width: 90%;
+  font-size: 1.2rem;
+  color: white;
+  list-style-type: none;
+  margin: 1vw 1vw;
+  padding: 5px;
+  border: 1px solid white;
+  border-radius: 20px;
+}
+
+.matchActivityApp {
+  min-height: 800px;
+  padding-top: 150px;
+  height: 100%;
+  width: 100%;
+}
+
+.matchInstruction {
+  color: white;
+  font-size: 1.7em;
+  margin-bottom: 50px;
+}
+
+.gridLayout {
+  width: 100%;
+}
+
+.gridTiles {
+  cursor: -webkit-grab;
+  cursor: grab;
+  min-height: 150px;
+  padding: 0px 20px;
+  margin: 5px;
+  border: 1px white solid;
+  border-radius: 5px;
+}
+
+.gridTiles > p {
+  color: white;
+  margin: 0;
+  padding: 0;
 }
 
 @media (min-width: 992px) {

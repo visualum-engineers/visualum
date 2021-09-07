@@ -1,0 +1,61 @@
+.sortActivityApp{
+    height: 100%;
+    width: 100%;
+    padding-top: 150px;
+    padding-bottom: 75px;
+}
+.instructions{
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 2%;
+    padding: 0;
+}
+.draggableAreaContainer{
+    width: 100%;
+}
+.sortAreaGroups{
+    width: 65%;
+    margin: 0 5%;
+}
+.sortArea{
+    width : 45%;
+    height: 100%;
+    border: 1px solid white;
+    font-size: 1.7rem;
+    margin: 2.5%;
+    margin-top: 0;
+    list-style-type: none;
+    @include border-radius(10px);
+}
+.sortArea>p{
+    color: white;
+    @include no-space;
+}
+.sortDropContainer{
+    min-height: 200px;
+    width: 100%;
+    border-top: 1px white solid;
+    list-style-type: none;
+}
+.answerArea{
+    @extend .sortArea;
+    margin: 0 6.5% 0 0;
+    width: 30%;
+    height: auto;
+}
+.answerDropContainer{
+    @extend .sortDropContainer;
+    @include no-space;
+}
+
+.dragItem{
+    text-align: center;
+    width: 90%;
+    font-size: 1.2rem;
+    color: white;
+    list-style-type: none;
+    margin: 1vw 1vw;
+    padding: 5px;
+    border: 1px solid white;
+    @include border-radius(20px)
+}

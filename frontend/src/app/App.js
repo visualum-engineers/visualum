@@ -7,6 +7,8 @@ import SignUpForm from './components/forms/SignUpForm';
 import LoginForm from './components/forms/logInForm';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import CreateGame from './components/createGame/CreateGame';
+import SortActivity from './components/gameTypes/SortActivity/SortActivityApp'
+import MatchActivity from './components/gameTypes/MatchActivity/MatchActivityApp'
 
 function App() {
   return (
@@ -29,6 +31,12 @@ function App() {
           </Route>
           <Route exact path="/create-game">
             <CreateGame />
+          </Route>
+          <Route exact path="/sortActivity">
+            <SortActivity />
+          </Route>
+          <Route exact path="/matchActivity">
+            <MatchActivity />
           </Route>
         </Switch>
         <Footer />

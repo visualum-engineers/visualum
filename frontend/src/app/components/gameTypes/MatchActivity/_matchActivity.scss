@@ -1,0 +1,27 @@
+.matchActivityApp{
+    min-height: 800px;
+    padding-top: 150px;
+    height: 100%;
+    width: 100%;
+}
+.matchInstruction{
+    color: white;
+    font-size: 1.7em;
+    margin-bottom: 50px;
+}
+.gridLayout{
+    width: 100%;
+}
+.gridTiles{
+    cursor: grab;
+    min-height: 150px;
+    padding: 0px 20px;
+    margin: 5px;
+    border: 1px white solid;
+    @include border-radius(5px)
+}
+.gridTiles>p{
+    color: white;
+    
+    @include no-space;
+}
