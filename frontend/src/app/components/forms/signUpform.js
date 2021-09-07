@@ -35,62 +35,22 @@ const subscriptionTypeRegex = /[free]|[mid-tier]|[high-tier]|[enterprise]/
 //for verification of code, prevents update of state.
 //may replace with react hooks 
 //for a cleaner verison in future
-let loading = false;
-
-const initialState = {
-    accountType: "student",
-    formPage: 1,
-    googleSignUp: "",
-    email: "",
-    password: "",
-    verifiedPassword: "",
-    existingAccount: "",
-    exposureToUs: "",
-    verifiedEmailCode: "",
-    classCode: "",
-    schoolCode: "",
-    subscriptionType: "",
-    school: "",
-    payment: "",
-    rememberMe: false,
-    error: false,
-    windowWidth: window.innerWidth,
-}
 
 export default function SignUpForm() {
     const [stage, setStage] = useState(1);
     const [type, setType] = useState('');
     const [isFormComplete, setIsFormComplete] = useState(false);
-    // const [userInfo, setUserInfo] = useState({
-    //     accountType: "student",
-    //     email: "",
-    //     password: "",
-    //     verifiedPassword: "",
-    //     exposureToUs: "",
-    //     existingAccount: false,
-    //     verifiedEmailCode: "",
-    //     classCode: "",
-    //     schoolCode: "",
-    //     subscriptionType: "",
-    //     school: "",
-    //     payment: "",
-    //     rememberMe: false
-    // })
-
-    // ABOVE IS THE OLD STATE
-    // BELOW IS THE NEW REDUX IMPLEMENTATION
 
     const userInfo = useSelector((state) => state.userInfo)
     const dispatch = useDispatch();
 
-    // console.log(userInfo)
 
     const verifyEmail = (e) => {
         // for verifying email code
         if (numberRegex.test(e)) {
             // Check if code passes, if so
             // Set code in state
-            // setUserInfo(currInfo => ({ ...currInfo, verifiedEmailCode: e }))
+            dispatch(updated(["verifiedEmailCode", e]))
             // Return validation that it passed
             return true;
         } else {
@@ -115,10 +75,6 @@ export default function SignUpForm() {
         let inputId = verifySelect ? select.dataset.state : input.dataset.state
         //check for checkbox inputs
         if (input.type === "checkbox") {
-            // setUserInfo(currInfo => {
-            //     // return { ...currInfo, [inputId]: currInfo[inputId] === false ? true : false }
-
-            // })
             dispatch(updated([inputId, userInfo[inputId]] === false ? true : false))
         } else {
             let value = e.target.value;
@@ -128,10 +84,7 @@ export default function SignUpForm() {
 
     const testEmail = () => {
         const emailTest = emailRegex.test(userInfo.email);
-        // console.log("Testing email: ", userInfo.email, " against regex. Result: ", emailTest)
         const passwordTest = passwordCheck(userInfo.password, userInfo.verifiedPassword, true);
-        // console.log("Testing password: ", userInfo.passwprd, " against regex. Result: ", passwordTest)
-
         return emailTest && passwordTest;
     }
 
@@ -155,7 +108,6 @@ export default function SignUpForm() {
 
     const handleSelect = (e) => {
         const value = e.target[e.target.options.selectedIndex].value;
-        // setUserInfo(currInfo => ({ ...currInfo, exposureToUs: value }))
         dispatch(updated(["exposureToUs", value]))
     }
 
@@ -184,195 +136,3 @@ export default function SignUpForm() {
         </div>
     )
 }
-// class CurrentSignUpFormPage extends Component {
-//     render() {
-//         //organizes pages to be easily searched through
-//         const formType = {
-//             "student": {
-//                 1: <SignUpOptions {...this.props} />,
-//                 2: <ManualSignUp {...this.props} />,
-//                 3: <StudentVerifyEmail {...this.props} />,
-//                 final: <StudentClassCode {...this.props} />,
-//             },
-//             "teacher": {
-//                 1: <SignUpOptions {...this.props} />,
-//                 2: <ManualSignUp {...this.props} />,
-//                 3: <TeacherExposureToUs {...this.props} />,
-//                 4: <SubscriptionType {...this.props} />,
-//                 enterprise: <Enterprise {...this.props} />,
-//                 final: <PaymentPage {...this.props} />,
-//             },
-//         };
-//         //returns appropiate form page
-//         return formType[this.props.accountType][this.props.formPage]
-//     }
-// }
-
-
-
-
-// class SignUpFormOLD extends Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = initialState
-//         this.handleClick = this.handleClick.bind(this);
-//         this.handleChange = this.handleChange.bind(this);
-//         this.handleFocus = this.handleFocus.bind(this);
-//         this.mounted = true;
-//     }
-//     //form page navigation behavior
-//     moveToNextPage() {
-//         this.setState((state) => {
-//             const manualSignUp = emailRegex.test(state.email) && passwordCheck(state.password, state.verifiedPassword, passwordRegexCollection, true)
-//             const verifyEmail = numberRegex.test(state.verifiedEmailCode)
-//             const subscriptionType = subscriptionTypeRegex.test(state.subscriptionType)
-//             switch (true) {
-//                 case state.formPage === ("2" | 2):
-//                     return manualSignUp ? { formPage: parseInt(state.formPage) + 1 } : { error: true }
-//                 case state.formPage === ("3" | 3) && state.accountType === "student":
-//                     return verifyEmail ? { formPage: "final" } : { error: true }
-//                 case state.formPage === ("4" | 4) && state.accountType === "teacher":
-//                     return subscriptionType ? { formPage: "final" } : { error: true }
-//                 default:
-//                     return { formPage: parseInt(state.formPage) + 1 }
-//             }
-//         });
-//     }
-
-//     moveToPreviousPage() {
-//         this.setState((state) => {
-//             let lastPage = (state.accountType === "student" && state.formPage === "final") || (state.accountType === "teacher" && (state.formPage === "final" || state.formPage === "enterprise"))
-//             return { formPage: lastPage != true ? parseInt(state.formPage) - 1 : state.accountType === "student" ? 2 : 3 }
-//         });
-//     }
-
-//     clearInputValues(e) {
-//         let inputId = e.target.closest("input").dataset.state
-//         this.setState({ [inputId]: "" })
-//     }
-//     //handles form naviagation
-//     handleClick(e) {
-//         let targetBtnClasses = e.target.closest("button").classList;
-//         const clearState = () => {
-//             this.setState(initialState);
-//         };
-
-//         if (targetBtnClasses.contains("continue")) {
-//             this.moveToNextPage();
-//         }
-
-//         if (targetBtnClasses.contains("goBack")) {
-//             this.moveToPreviousPage();
-//         }
-
-//         //resets form and changes form type
-//         if (targetBtnClasses.contains("student") || targetBtnClasses.contains("teacher")) {
-//             clearState()
-//             return this.setState({
-//                 accountType: targetBtnClasses.contains("student") ? "student" : "teacher",
-//                 subscriptionType: targetBtnClasses.contains("teacher") ? "mid-tier" : "",
-//                 windowWidth: window.innerWidth,
-//             });
-//         }
-//     }
-
-//     //handles all controlled inputs in form
-//     handleChange(e) {
-//         //for verifying email code
-//         if (numberRegex.test(e)) {
-//             this.setState({ verifiedEmailCode: e })
-//         }
-//         //for text, checkbox or select inputs
-//         if (e.target === undefined || e.target === false) return
-//         let input = e.target.closest("input")
-//         let select = e.target.closest("select")
-//         //checks for input or select element
-//         let verifySelect = input === undefined || input === null
-//         let inputId = verifySelect ? select.dataset.state : input.dataset.state
-//         //check for checkbox inputs
-//         if (input.type === "checkbox") {
-//             this.setState((state) => {
-//                 return { [inputId]: state[inputId] === false ? true : false }
-//             })
-//         } else {
-//             let value = e.target.value;
-//             this.setState({ [inputId]: value })
-//         }
-//     }
-
-//     handleFocus(e) {
-//         this.clearInputValues(e)
-//     }
-//     //Handles reshaping form components to be responsive
-//     handleResize = (e) => {
-//         this.setState({ windowWidth: window.innerWidth });
-//     }
-
-//     componentDidMount() {
-//         if (this.mounted) {
-//             window.addEventListener("resize", this.handleResize);
-//         }
-//     }
-
-//     componentWillUnmount() {
-//         this.mounted = false
-//         window.addEventListener("resize", this.handleResize);
-//     }
-
-//     render() {
-//         const formType = <Buttons
-//             accountType={this.state.accountType}
-//             formType={true}
-//             handleClick={this.handleClick}
-//             handleKeyPressed={this.handleKeyPressed}
-//         />
-//         const navButtons = <Buttons
-//             formPage={this.state.formPage}
-//             handleClick={this.handleClick}
-//             handleKeyPressed={this.handleKeyPressed}
-//         />
-//         const manualLoginBtn = <button
-//             onClick={this.handleClick}
-//             className="continue mt-2 email-btn d-flex justify-content-center"
-//             type="button"
-//         >
-//             <span className="email-text">Sign up with email</span>
-//         </button>
-
-//         return (
-//             <div className="formContainer">
-//                 <form className={`${this.state.accountType === "student" ? "studentSignUpForm" : "teacherSignUpForm"}`} id="signUpForm">
-//                     {/*passing a form type property into Buttons will render student and teacher btns. 
-//                         If not, it will render nav buttons*/}
-//                     <h1 style={{ textAlign: "center" }}>Join Us</h1>
-//                     <h6 style={{ textAlign: "center" }}>
-//                         {`As A ${this.state.accountType === "student" ? "Student" : "Teacher"}`}
-//                     </h6>
-//                     {formType}
-//                     <CurrentSignUpFormPage
-//                         {...this.state}
-//                         handleChange={this.handleChange}
-//                         handleFocus={this.handleFocus} />
-//                     {this.state.formPage === 1 ? manualLoginBtn : navButtons}
-//                 </form>
-//             </div>
-//         )
-//     }
-// }
-//useful code if email verification
-/*<div>
-    <div className="mt-4">
-    <label for="verifiedEmailCode" className="form-label">Verify Email</label>
-        <input
-            placeholder="Verify Email"
-            value={this.props.verifiedEmailCode}
-            onFocus={this.props.handleFocus}
-            data-state="verifiedEmailCode"
-            onChange={this.props.handleChange}
-            type="number"
-            className="form-control"
-            id="verifiedEmailCode"
-            aria-describedby="verifiedEmailCode"/>
-    </div>
-    <div className="mt-2 mb-4"id="verifyLabel">Input 4-digit code sent to {this.props.email} </div>
-</div>; */
