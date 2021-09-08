@@ -29,28 +29,26 @@ export default function UserProfile(props) {
     }
 
     const open = isMouseOverButton || isMouseOverMenu;
-    {
-        return (
-            <>
-                <li className="nav-item flex-fill justify-content-center ">
-                    <div
-                        className={`user ${open ? "user-active" : ""}`}
-                        onMouseEnter={enterButton}
-                        onMouseLeave={exitButton}
-                    >
-                        <div className="user-profile">
-                            <FontAwesomeIcon icon={faUser} className="user-icon" />
-                        </div>
-                        <div className="user-reward">
-                            <FontAwesomeIcon icon={faStar} className="user-reward-icon" />
-                            {props.rewardNum}
-                        </div>
+    return (
+        <>
+            <li className="nav-item flex-fill justify-content-center ">
+                <div
+                    className={`user ${open ? "user-active" : ""}`}
+                    onMouseEnter={enterButton}
+                    onMouseLeave={exitButton}
+                >
+                    <div className="user-profile">
+                        <FontAwesomeIcon icon={faUser} className="user-icon" />
                     </div>
-                </li>
-                <UserDropdown open={open} enterMenu={enterMenu} exitMenu={exitMenu} />
-            </>
-        );
-    }
+                    <div className="user-reward">
+                        <FontAwesomeIcon icon={faStar} className="user-reward-icon" />
+                        {props.rewardNum}
+                    </div>
+                </div>
+            </li>
+            <UserDropdown open={open} enterMenu={enterMenu} exitMenu={exitMenu} />
+        </>
+    );
 }
 
 function UserDropdown(props) {

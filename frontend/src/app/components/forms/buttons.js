@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 export default class Buttons extends Component{
     render(){
         //make sure the form is not on first page or final page
-        const lastPage = this.props.formPage == "final"
+        const lastPage = this.props.formPage === "final"
         const formType = this.props.formType
         if(this.props.formPage<=1){
             return(

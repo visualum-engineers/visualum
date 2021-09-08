@@ -28,9 +28,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updated } from '../../../redux/features/userInfo/userInfoSlice';
 
 //Regex Expressions to validate Form Inputs
-const emailRegex = /.+@.+[\.]{1}.+/;
+const emailRegex = /.+@.+[.]{1}.+/;
 const numberRegex = /[0-9]{6,}/;
-const subscriptionTypeRegex = /[free]|[mid-tier]|[high-tier]|[enterprise]/
+//const subscriptionTypeRegex = /[free]|[mid-tier]|[high-tier]|[enterprise]/
 
 //for verification of code, prevents update of state.
 //may replace with react hooks 

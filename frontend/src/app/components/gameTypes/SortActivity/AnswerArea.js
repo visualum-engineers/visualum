@@ -1,4 +1,3 @@
-import React, {useState, useRef} from 'react'
 import {Droppable} from 'react-beautiful-dnd';
 import SortItems from './SortItems';
 const AnswerArea = ({currAnswers, answerData}) => {

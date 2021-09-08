@@ -48,19 +48,19 @@ const useStyles = makeStyles((theme) => ({
 export default function VerticalTabs() {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
-    const [accType, setAccType] = React.useState("student");
+    const [accType] = React.useState("student");
 
     // THIS WILL INCLUDE AN AXIOS CALL TO THE BACKEND TO GRAB USER SETTINGS
-    const [userSettings, updateUserSettings] = React.useState({});
+//    const [userSettings, updateUserSettings] = React.useState({});
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
-    const changeSettings = (newSettings) => {
-        // Update settings in state.
-        // Save settings to db.
-    }
+    // const changeSettings = (newSettings) => {
+    //     // Update settings in state.
+    //     // Save settings to db.
+    // }
 
     return (
         <div className={classes.settings}>

@@ -12,27 +12,27 @@ export default class Footer extends Component {
                     <div className="col-sm-4 col-12 text-center py-3">
                         <h5>Visualum</h5>
                         <div className="d-flex flex-column align-items-center">
-                            <a className="foot-link" href="#">For Teachers</a>
-                            <a className="foot-link" href="#">For Students</a>
-                            <a className="foot-link" href="#">For Enterprise</a>
+                            <a className="foot-link" href="#footer">For Teachers</a>
+                            <a className="foot-link" href="#footer">For Students</a>
+                            <a className="foot-link" href="#footer">For Enterprise</a>
                         </div>
                     </div>
 
                     <div className="col-sm-4 col-12 text-center py-3">
                         <h5>Social</h5>
                         <div className="d-flex flex-column align-items-center">
-                            <a className="foot-link" href="#">LinkedIn</a>
-                            <a className="foot-link" href="#">Instagram</a>
-                            <a className="foot-link" href="#">Facebook</a>
+                            <a className="foot-link" href="#footer">LinkedIn</a>
+                            <a className="foot-link" href="#footer">Instagram</a>
+                            <a className="foot-link" href="#footer">Facebook</a>
                         </div>
                     </div>
 
                     <div className="col-sm-4 col-12 text-center py-3">
                         <h5>About</h5>
                         <div className="d-flex flex-column align-items-center">
-                            <a className="foot-link" href="#">Terms</a>
-                            <a className="foot-link" href="#">Contact Us</a>
-                            <a className="foot-link" href="#">Meet the Team</a>
+                            <a className="foot-link" href="#footer">Terms</a>
+                            <a className="foot-link" href="#footer">Contact Us</a>
+                            <a className="foot-link" href="#footer">Meet the Team</a>
                         </div>
                     </div>
                 </div>

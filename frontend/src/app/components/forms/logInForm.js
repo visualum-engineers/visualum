@@ -19,7 +19,7 @@ import React, { Component } from 'react';
 import Buttons from './buttons';
 import InputCode from './inputCode';
 
-const emailRegex = /.+@.+[\.]{1}.+/;
+const emailRegex = /.+@.+[.]{1}.+/;
 const numberRegex =/[0-9]{6,}/;
 
 //piece-wise regex expression for password
@@ -137,7 +137,7 @@ class TwoFactorLogin extends Component {
             label="Verify your Identity"
             description = {`Input 6-digit code sent to: ${this.props.email}`}
             onComplete={code => {
-            if(loading != true){
+            if(loading !== true){
                 loading = true
                 this.props.handleChange(code)
                 }
@@ -185,6 +185,8 @@ export default class LogInForm extends Component {
                     return {formPage: parseInt(state.formPage) + 1}
                 case state.formPage === ("2"|2) : 
                     return page2Input ? {formPage: "final"}:{error: true}
+                default:
+                    break;
             }
         });
     }

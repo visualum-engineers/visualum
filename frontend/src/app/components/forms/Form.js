@@ -4,7 +4,7 @@ import ManualSignUp from './ManualSignUp';
 import StudentVerifyEmail from './StudentVerifyEmail';
 import StudentClassCode from './StudentClassCode';
 import TeacherExposureToUs from './TeacherExposureToUs';
-import SubscriptionType from './SubscriptionType';
+//import SubscriptionType from './SubscriptionType';
 import PaymentPage from './PaymentPage';
 import Enterprise from './Enterprise';
 

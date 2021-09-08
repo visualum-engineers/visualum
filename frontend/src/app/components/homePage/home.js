@@ -6,33 +6,6 @@ const initialState = {
     windowHeight: window.innerHeight,
 }
 
-class Stars extends Component {
-    render() {
-        let stars = [];
-        //twinkling star element
-        for (let i = 0; i < 100; i++) {
-            let randomTiming = ((Math.random() * 4) + 1).toString() + "s"
-            //change 20, if scrollbar width changes
-            let randomXPosition = (Math.random() * this.props.windowWidth - 20).toString() + "px"
-            let randomYPosition = (Math.random() * this.props.windowHeight / 5).toString() + "px"
-            let animationBehavior = "twinkle linear infinite " + randomTiming
-            let starStyle = {
-                animation: animationBehavior,
-                top: randomYPosition,
-                left: randomXPosition,
-            }
-            let star = <div key={i} className="star" style={starStyle}></div>
-            stars.push(star)
-        }
-
-        return (
-            <>
-                {stars}
-            </>
-        )
-    }
-}
-
 export default class HomeContent extends Component {
     constructor(props) {
         super(props);
@@ -57,7 +30,6 @@ export default class HomeContent extends Component {
     render() {
         return (
             <div className="homePage">
-                {/* <Stars {...this.state}/> */}
                 <img src={eureka_1} alt="Flag on Montain" className="homePageImage" />
                 <div className="introContainer">
                     <h2 className="homePageText">A world class education for anyone, anywhere.</h2>

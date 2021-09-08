@@ -17,10 +17,10 @@ export default function CreateGame() {
     const handleToggleCompetitive = evt => {
         setIsCompetitive(evt.target.value);
     }
-    const handleSubmit = () => {
-        // Logic to send info to backend in a JSON obj.
-    }
-
+    // const handleSubmit = () => {
+    //     // Logic to send info to backend in a JSON obj.
+    // }
+    console.log(isCompetitive)
     let page;
     switch (stage) {
         case 1:
@@ -36,6 +36,7 @@ export default function CreateGame() {
         <div className="form-page">
             <div className="form-container">
                 {page}
+                
             </div>
         </div>
     )

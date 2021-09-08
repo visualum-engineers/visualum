@@ -97,7 +97,7 @@ const SortActivityApp = () => {
                     {/* Renders sort categories */}
                     <div className="sortAreaGroups d-flex flex-wrap">
                         {Object.keys(groups.columns).map((columnTitle, index)=> {
-                            if(index === Object.keys(groups.columns).length-1) return
+                            if(index === Object.keys(groups.columns).length-1) return null
                             return <SortArea key={columnTitle} 
                                         id={columnTitle} 
                                         columnTitle={columnTitle} 
