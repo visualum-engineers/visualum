@@ -6,7 +6,7 @@ import App from './App';
 
 describe("<App />", () => {
   it("Renders <App /> component correctly", () => {
-    const { getAllByText } = render(<App />);
-    expect(getAllByText(/visualum/i)).toBeInTheDocument();
+    const { getByText } = render(<App />);
+    expect(getByText(/Join Eureka to explore your educational journey/i)).toBeInTheDocument();
   });
 });
