@@ -6,7 +6,7 @@ import App from './App';
 
 describe("<App />", () => {
   it("Renders <App /> component correctly", () => {
-    const { getByText } = render(<App />);
-    expect(getByText(/visualum/i)).toBeInTheDocument();
+    const { getAllByText } = render(<App />);
+    expect(getAllByText(/visualum/i)).toBeInTheDocument();
   });
 });
