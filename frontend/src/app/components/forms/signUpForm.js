@@ -27,6 +27,10 @@ import { Redirect } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux';
 import { updated } from '../../../redux/features/userInfo/userInfoSlice';
 
+// IMPORTS FOR TOASTS
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 //Regex Expressions to validate Form Inputs
 const emailRegex = /.+@.+[.]{1}.+/;
 const numberRegex = /[0-9]{6,}/;
@@ -85,7 +89,29 @@ export default function SignUpForm() {
     const testEmail = () => {
         const emailTest = emailRegex.test(userInfo.email);
         const passwordTest = passwordCheck(userInfo.password, userInfo.verifiedPassword, true);
+        if (!emailTest) {
+            toast.warn('Please enter a valid email', {
+                position: "bottom-left",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        } else if (!passwordTest) {
+            toast.warn('Please enter a valid password', {
+                position: "bottom-left",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
         return emailTest && passwordTest;
+        // return true;
     }
 
     const handleStageChange = newStage => {
@@ -93,9 +119,6 @@ export default function SignUpForm() {
         if (stage === 2 && newStage === 3) {
             if (testEmail()) {
                 setStage(newStage);
-            } else {
-                console.log("ERROR");
-                setStage(2)
             }
         } else {
             setStage(newStage);
@@ -133,6 +156,17 @@ export default function SignUpForm() {
                 />
             </div>
             {isFormComplete && <Redirect to="/" />}
+            <ToastContainer
+                position="bottom-left"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </div>
     )
 }
