@@ -1,10 +1,10 @@
 import React from "react"
 import { useSelector, useDispatch } from 'react-redux';
-import { updated } from '../../../redux/features/userInfo/userInfoSlice';
+//import { updated } from '../../../redux/features/userInfo/userInfoSlice';
 
 export default function ManualSignUp(props) {
     const userInfo = useSelector((state) => state.userInfo)
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
 
     return (
         <div>
