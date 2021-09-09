@@ -849,6 +849,20 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   padding: 0;
 }
 
+.shortAnswerApp {
+  min-height: 800px;
+  padding-top: 150px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 @media (min-width: 992px) {
   #nav-button, #nav-icon {
     display: none;

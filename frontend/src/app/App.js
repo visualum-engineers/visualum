@@ -9,7 +9,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import CreateGame from './components/createGame/CreateGame';
 import SortActivity from './components/gameTypes/SortActivity/SortActivityApp'
 import MatchActivity from './components/gameTypes/MatchActivity/MatchActivityApp'
-
+import MultipleChoice from "./components/gameTypes/MultipleChoice/MultipleChoiceApp"
+import ShortAnswer from "./components/gameTypes/ShortAnswer/ShortAnswerApp"
 function App() {
   return (
     <Router>
@@ -37,6 +38,12 @@ function App() {
           </Route>
           <Route exact path="/matchActivity">
             <MatchActivity />
+          </Route>
+          <Route exact path="/multipleChoice">
+            <MultipleChoice />
+          </Route>
+          <Route exact path="/shortAnswer">
+            <ShortAnswer />
           </Route>
         </Switch>
         <Footer />
