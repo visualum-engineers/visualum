@@ -1,6 +1,11 @@
 import React from "react"
+import { useSelector, useDispatch } from 'react-redux';
+import { updated } from '../../../redux/features/userInfo/userInfoSlice';
 
 export default function ManualSignUp(props) {
+    const userInfo = useSelector((state) => state.userInfo)
+    const dispatch = useDispatch();
+
     return (
         <div>
             <div className="row">
@@ -8,7 +13,7 @@ export default function ManualSignUp(props) {
                     <div className="form-floating">
                         <input
                             placeholder="Email Address"
-                            value={props.email}
+                            value={userInfo.email}
                             data-state="email"
                             onChange={props.handleChange}
                             type="email"
@@ -22,7 +27,7 @@ export default function ManualSignUp(props) {
                     <div className="form-floating mt-3">
                         <input
                             placeholder="Password"
-                            value={props.password}
+                            value={userInfo.password}
                             onFocus={props.handleFocus}
                             data-state="password"
                             onChange={props.handleChange}
@@ -36,7 +41,7 @@ export default function ManualSignUp(props) {
                     <div className="form-floating mt-3">
                         <input
                             placeholder="Re-enter Password"
-                            value={props.verifiedPassword}
+                            value={userInfo.verifiedPassword}
                             onFocus={props.handleFocus}
                             data-state="verifiedPassword"
                             onChange={props.handleChange}
@@ -49,7 +54,7 @@ export default function ManualSignUp(props) {
                 <div className="col-12 mt-3">
                     <div className="form-check">
                         <input
-                            value={props.rememberMe}
+                            value={userInfo.rememberMe}
                             data-state="rememberMe"
                             onChange={props.handleChange}
                             type="checkbox"

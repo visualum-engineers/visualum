@@ -18,6 +18,10 @@
 //responsive styling
 @import "./scss/abstracts/breakPoints"; 
 
+html {
+    background-color: rgb(20, 28, 62);
+}
+
 body{
     font-family: $main-font;
     min-height: 600px;
