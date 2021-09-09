@@ -145,8 +145,8 @@
 }
 
 #search-btn.border {
-  -webkit-box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
-          box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
+  -webkit-box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
+          box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
 }
 
 #nav-button {
@@ -977,6 +977,10 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
     font-size: 75%;
     width: 49%;
   }
+}
+
+html {
+  background-color: #141c3e;
 }
 
 body {
