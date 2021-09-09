@@ -1,5 +1,5 @@
 import React from "react"
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector} from 'react-redux';
 //import { updated } from '../../../redux/features/userInfo/userInfoSlice';
 
 export default function ManualSignUp(props) {
