@@ -378,6 +378,16 @@
   transition: opacity 300ms, transform 300ms, -webkit-transform 300ms;
 }
 
+.stars {
+  min-height: 200px;
+  position: absolute;
+  width: 100%;
+  height: 27vh;
+  z-index: 2;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .homePage {
   position: relative;
   text-align: justify;
@@ -400,63 +410,6 @@
      object-position: top;
   height: 100%;
   width: 100%;
-}
-
-.star {
-  position: absolute;
-  width: 2px;
-  height: 1.5px;
-  background: rgba(255, 255, 255, 0);
-  border-radius: 5px;
-  z-index: 0;
-}
-
-@-webkit-keyframes twinkle {
-  0% {
-    -webkit-transform: scale(1, 1);
-            transform: scale(1, 1);
-    background: rgba(255, 255, 255, 0);
-    -webkit-animation-timing-function: ease-in;
-            animation-timing-function: ease-in;
-  }
-  60% {
-    -webkit-transform: scale(0.8, 0.8);
-            transform: scale(0.8, 0.8);
-    background: white;
-    -webkit-animation-timing-function: ease-out;
-            animation-timing-function: ease-out;
-  }
-  100% {
-    background: rgba(255, 255, 255, 0);
-    -webkit-transform: scale(1, 1);
-            transform: scale(1, 1);
-    -webkit-animation-timing-function: ease-in;
-            animation-timing-function: ease-in;
-  }
-}
-
-@keyframes twinkle {
-  0% {
-    -webkit-transform: scale(1, 1);
-            transform: scale(1, 1);
-    background: rgba(255, 255, 255, 0);
-    -webkit-animation-timing-function: ease-in;
-            animation-timing-function: ease-in;
-  }
-  60% {
-    -webkit-transform: scale(0.8, 0.8);
-            transform: scale(0.8, 0.8);
-    background: white;
-    -webkit-animation-timing-function: ease-out;
-            animation-timing-function: ease-out;
-  }
-  100% {
-    background: rgba(255, 255, 255, 0);
-    -webkit-transform: scale(1, 1);
-            transform: scale(1, 1);
-    -webkit-animation-timing-function: ease-in;
-            animation-timing-function: ease-in;
-  }
 }
 
 .homePageText {
