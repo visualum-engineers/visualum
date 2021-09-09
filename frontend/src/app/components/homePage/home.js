@@ -20,7 +20,7 @@ export default class HomeContent extends Component {
     componentDidMount() {
         if (this.mounted) {
             window.addEventListener("resize", this.handleResize.bind(this));
-            document.querySelector(".stars").playbackRate = 0.3;
+            document.querySelector(".stars").playbackRate = 0.4;
         }
     }
 
