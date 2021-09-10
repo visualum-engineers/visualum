@@ -1,6 +1,7 @@
 import React, { useState} from 'react'
 import AnswerArea from './AnswerArea'
 import SortArea from './SortArea'
+import ActivityBtns from '../NavActivityBtn/ActivityBtns';
 import { DragDropContext} from 'react-beautiful-dnd';
 /*Note Missing To-do
 Backend: 
@@ -17,9 +18,8 @@ Frontend:
 */
 
 //mock data of activity
-const activityData = [
-    {
-        id: "q1",
+const activityData = {
+    1: {
         answerChoices: {
             "1": {id: "1", choice:"Okay"}, 
             "2": {id: "2", choice:"Good"},
@@ -36,16 +36,18 @@ const activityData = [
             "answerChoices": ["1","2","3","4", "5", "6", "7"],
         },
     },
-]
+}
 
-const SortActivityApp = () => {
+const SortActivityApp = ({last=false, onClick}) => {
+    
     //render data on a per question basis
-    let currQuestion = 0;
-    let groups = activityData[currQuestion]
-
+   
+    // let groups = activityData[currQuestion]
     //state
-    const [states, setStates] = useState(groups)
-
+    const [state, setState] = useState(activityData)
+    const prevQuestion = Object.keys(activityData)[0] === "1" ? false : true
+    const lastQuestion = last
+    const currQuestion = Object.keys(state)[0];
     //handle state update when object is moved
     const onDragEnd = (result) => {
         const {destination, source, draggableId} = result
@@ -57,35 +59,39 @@ const SortActivityApp = () => {
         //dictates behavior when droppable container is the same from end to start
         //therefore, will handle reording of elements on list
         if(start===finish){
-            const newAnswerChoices = Array.from(states.columns[start])
+            const newAnswerChoices = Array.from(state[currQuestion].columns[start])
             newAnswerChoices.splice(source.index, 1);
             newAnswerChoices.splice(destination.index, 0, draggableId);
             const newState = {
-                ...states,
-                columns: {
-                    ...states.columns,
-                    [start]: newAnswerChoices
+                [currQuestion]: {
+                    ...state[currQuestion],
+                    columns: {
+                        ...state[currQuestion].columns,
+                        [start]:newAnswerChoices
+                    }
                 }
             }
-            setStates(newState)
+            setState(newState)
             return
         } 
 
         //when list containers are different, we should 
         //be able to move elements into the new container, and remove them from old one
-        const startAnswersList = Array.from(states.columns[start])
-        const finishAnswersList = Array.from(states.columns[finish])
+        const startAnswersList = Array.from(state[currQuestion].columns[start])
+        const finishAnswersList = Array.from(state[currQuestion].columns[finish])
         startAnswersList.splice(source.index, 1)
         finishAnswersList.splice(destination.index, 0, draggableId);
         const newState = {
-            ...states,
-            columns: {
-                ...states.columns,
-                [start] : startAnswersList,
-                [finish] : finishAnswersList,
+            [currQuestion]:{
+                ...state[currQuestion],
+                columns:{
+                    ...state[currQuestion].columns,
+                    [start] : startAnswersList,
+                    [finish] : finishAnswersList,
+                }
             }
         }
-        setStates(newState)
+        setState(newState)
     };
    
     return (
@@ -96,22 +102,29 @@ const SortActivityApp = () => {
 
                     {/* Renders sort categories */}
                     <div className="sortAreaGroups d-flex flex-wrap">
-                        {Object.keys(groups.columns).map((columnTitle, index)=> {
-                            if(index === Object.keys(groups.columns).length-1) return null
+                        {Object.keys(state[currQuestion].columns).map((columnTitle, index)=> {
+                            if(index === Object.keys(state[currQuestion].columns).length-1) return null
                             return <SortArea key={columnTitle} 
                                         id={columnTitle} 
                                         columnTitle={columnTitle} 
-                                        answerData= {states.answerChoices} 
-                                        currAnswers={states.columns[columnTitle]}/>
+                                        answerData= {state[currQuestion].answerChoices} 
+                                        currAnswers={state[currQuestion].columns[columnTitle]}/>
                         })}
                     </div>
-
+                    
                     {/* Renders word/response bank */}
                     <AnswerArea key={"answerChoices"} 
-                        currAnswers={states.columns["answerChoices"]} 
-                        answerData= {states.answerChoices}/>
+                        currAnswers={state[currQuestion].columns["answerChoices"]} 
+                        answerData= {state[currQuestion].answerChoices}/>
                 </div>  
             </DragDropContext>
+            <div className="sortNavBtns">
+                <ActivityBtns 
+                    prevQuestion = {prevQuestion} 
+                    lastQuestion = {lastQuestion}
+                    onClick = {onClick}
+                    />
+            </div>
         </div>
     )
 }

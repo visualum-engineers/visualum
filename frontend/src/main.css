@@ -816,11 +816,15 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   border-radius: 20px;
 }
 
+.sortNavBtns {
+  margin-top: 7vw;
+  width: 86vw;
+}
+
 .matchActivityApp {
   min-height: 800px;
   padding-top: 150px;
   height: 100%;
-  width: 100%;
 }
 
 .matchInstruction {
@@ -831,6 +835,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 
 .gridLayout {
   width: 100%;
+  margin-bottom: 50px;
 }
 
 .gridTiles {

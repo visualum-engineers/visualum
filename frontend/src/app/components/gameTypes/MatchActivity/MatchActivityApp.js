@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import GridTiles from './GridTiles'
+import ActivityBtns from '../NavActivityBtn/ActivityBtns'
 /*
 To-dos
 Backend: 
@@ -50,11 +51,12 @@ function shuffleItems(array){
     return array;
 }
 
-const MatchActivityApp = () => {
+const MatchActivityApp = ({last=false, onClick}) => {
     const [state, setState] = useState(activityData)
     const [tileShuffle, setTileShuffle] = useState(shuffleArray)
     const gridSize = useGridSize();
-    
+    const prevQuestion = Object.keys(activityData)[0] === "1" ? false : true
+    const lastQuestion = last
     // Hook for resizing of Grid
     function useGridSize() {
         const [gridSize, setGridSize] = useState({width: undefined, height: undefined, rect: undefined});
@@ -121,21 +123,32 @@ const MatchActivityApp = () => {
     }
 
     return(
-        <div className="matchActivityApp d-flex flex-column align-items-center">
-            <p className="matchInstruction">Match the following</p>
-            <div className = "gridLayout d-flex justify-content-center flex-wrap">
-                {tileShuffle.map((content, index)=>{
-                    return <GridTiles 
-                                gridSize ={gridSize}
-                                onStop = {onStop}
-                                onDrag = {onDrag}
-                                onStart = {onStart}
-                                key={index} 
-                                id={index} 
-                                index ={index}
-                                content = {content}
+        <div className = "d-flex justify-content-center">
+            <div className="matchActivityApp d-flex flex-column align-items-center col-11 col-md-9 col-xl-8">
+                <p className="matchInstruction">Match the following</p>
+                <div className = "gridLayout d-flex justify-content-center flex-wrap">
+                    {tileShuffle.map((content, index)=>{
+                        return <GridTiles 
+                                    gridSize ={gridSize}
+                                    onStop = {onStop}
+                                    onDrag = {onDrag}
+                                    onStart = {onStart}
+                                    key={index} 
+                                    id={index} 
+                                    index ={index}
+                                    content = {content}
+                                    />
+                    })}
+                </div>
+                
+                <div className = {`d-flex col-10 col-sm-9 col-lg-10 ${!prevQuestion ? "justify-content-end":"justify-content-between"}`}>
+                    <ActivityBtns 
+                                prevQuestion = {prevQuestion} 
+                                lastQuestion = {lastQuestion}
+                                onClick = {onClick}
                                 />
-                })}
+                </div>
+                
             </div>
         </div>
     )

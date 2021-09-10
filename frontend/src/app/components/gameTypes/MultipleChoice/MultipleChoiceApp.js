@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import NavActivityBtn from '../NavActivityBtn/NavActivityBtn'
+import ActivityBtns from '../NavActivityBtn/ActivityBtns'
 const activityData = {
     "1": "What faces this world?"
 }
@@ -19,10 +19,11 @@ const MultipleChoiceApp = ({last=false, onClick}) => {
                 {/*loads appropriate btns depending if 
                         1. There are prev questions
                         2. This is the last questions */}
-                <div className = {`w-100 d-flex ${!prevQuestion ? "justify-content-end":"justify-content-between"}`}>
-                    {prevQuestion ? <NavActivityBtn onClick = {onClick} prev={prevQuestion}/>: null}
-                    <NavActivityBtn onClick = {onClick} last={lastQuestion}/>
-                </div>
+                <ActivityBtns 
+                    prevQuestion = {prevQuestion} 
+                    lastQuestion = {lastQuestion}
+                    onClick = {onClick}
+                    />
             </div>
         </div>
     )
