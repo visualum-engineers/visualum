@@ -875,6 +875,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   transition: all 0.3s;
   color: white;
   border: 1px white solid;
+  border-radius: 5px;
 }
 
 .ansOptionItem {
