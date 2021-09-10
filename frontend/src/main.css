@@ -849,6 +849,23 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   padding: 0;
 }
 
+.multipleChoiceApp {
+  min-height: 550px;
+  height: 100%;
+  padding-top: calc(20vh + 100px);
+  padding-bottom: 20vh;
+}
+
+.MCInputContainer {
+  margin-top: 15px;
+  margin-bottom: 40px;
+  font-size: 0.9em;
+}
+
+.MCInputContainer > textarea {
+  min-height: 200px;
+}
+
 .shortAnswerApp {
   min-height: 550px;
   height: 100%;
