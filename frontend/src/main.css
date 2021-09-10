@@ -835,10 +835,10 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 
 .gridLayout {
   width: 100%;
-  margin-bottom: 50px;
 }
 
 .gridTiles {
+  color: white;
   cursor: -webkit-grab;
   cursor: grab;
   min-height: 150px;
@@ -848,8 +848,18 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   border-radius: 5px;
 }
 
-.gridTiles > p {
-  color: white;
+.gridTiles:hover {
+  background-color: white;
+  color: black;
+}
+
+.gridTiles:active {
+  background-color: rgba(255, 255, 255, 0.6);
+  color: black;
+  z-index: 2;
+}
+
+.gridTiles p {
   margin: 0;
   padding: 0;
 }
@@ -913,6 +923,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   color: white;
   background-color: rgba(0, 0, 0, 0);
   padding: 5px 20px;
+  margin: 50px 0;
   border: 1px white solid;
   border-radius: 5px;
 }
@@ -1022,7 +1033,6 @@ p {
   font-family: "Poppins", sans-serif;
   font-weight: 300;
   line-height: 1.7em;
-  color: #999;
 }
 
 a, a:hover, a:focus {

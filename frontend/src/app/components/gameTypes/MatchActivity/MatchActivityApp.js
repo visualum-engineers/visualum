@@ -30,9 +30,7 @@ const activityData = {
         "Pair3-":"Pair3",
     },
 }
-const currQuestion = 1
-const shuffleArray = shuffleItems(Object.keys(activityData[currQuestion]))
-
+//Fisher-Yates shuffling algo
 //shuffles our given pairs order
 function shuffleItems(array){   
     let currentIndex = array.length,  randomIndex;
@@ -52,21 +50,30 @@ function shuffleItems(array){
 }
 
 const MatchActivityApp = ({last=false, onClick}) => {
+    //for shuffling tile positions
+    const currQuestion = Object.keys(activityData)[0]
+    const shuffleArray = shuffleItems(Object.keys(activityData[currQuestion]))
+
+    //for state
     const [state, setState] = useState(activityData)
     const [tileShuffle, setTileShuffle] = useState(shuffleArray)
-    const gridSize = useGridSize();
+    
+    //for determining question order. 
+    //Important to determine navBtns continue, prev, or submit
     const prevQuestion = Object.keys(activityData)[0] === "1" ? false : true
     const lastQuestion = last
-    // Hook for resizing of Grid
+
+    // Hook for resizing of Grid. 
+    //Necessary for drag and drop bounds to work
+    const gridSize = useGridSize();
     function useGridSize() {
         const [gridSize, setGridSize] = useState({width: undefined, height: undefined, rect: undefined});
         useEffect(() => {
-     
-        function handleResize() {
-            // Set gridLayout width/height to state
-            setGridSize({
-                rect: document.querySelector(".matchActivityApp").getBoundingClientRect(),
-            });
+            function handleResize() {
+                // Set gridLayout width/height to state
+                setGridSize({
+                    rect: document.querySelector(".matchActivityApp").getBoundingClientRect(),
+                });
         }
 
         // Add event listener
@@ -77,7 +84,10 @@ const MatchActivityApp = ({last=false, onClick}) => {
         }, []); // Empty array ensures that effect is only run on mount
         return gridSize;
     }
-    
+
+    //for comparing the starting (current dragging element)
+    //and final element (current element being overlapped) 
+    // and see if a match exists
     let startEl
     let finalEl
 
@@ -85,17 +95,19 @@ const MatchActivityApp = ({last=false, onClick}) => {
         e.preventDefault()
         //updates selected element
         startEl = e.target.closest("div") 
-        //disable events for selected elements
+        //disable events for selected element
         startEl.style.pointerEvents = "none"
     }
     const onDrag = (e) =>{
         //updates the overlapping element
         finalEl = e.target.closest("div")
+        
     }
     
     const onStop = () => {
         const final = !finalEl ? null: finalEl.getAttribute("content")
         const start = startEl.getAttribute("content")
+        //copy object
         const newMatchList = Object.assign({}, state[currQuestion])
         const newShuffleList = [...tileShuffle]
         //restore events for selected element
@@ -114,7 +126,6 @@ const MatchActivityApp = ({last=false, onClick}) => {
         delete newMatchList[final]
         
         setState({
-            ...state,
             [currQuestion]: newMatchList
         })
         setTileShuffle(

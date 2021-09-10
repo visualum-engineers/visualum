@@ -1,6 +1,11 @@
 import React, {useState} from 'react'
 import ActivityBtns from '../NavActivityBtn/ActivityBtns'
-
+/*
+    Frontend:
+    1. Missing re-rendering logic, when user answers question and moves on to the next one.
+        - Included here is also rendering animation
+    2. Missing progress saved on local storage/memory (if user exits out of page)
+*/
 const activityData = {
     "1":{
             question: "What faces this world?",

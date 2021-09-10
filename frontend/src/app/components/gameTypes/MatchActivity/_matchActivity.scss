@@ -10,9 +10,9 @@
 }
 .gridLayout{
     width: 100%;
-    margin-bottom: 50px;
 }
 .gridTiles{
+    color: white;
     cursor: grab;
     min-height: 150px;
     padding: 0px 20px;
@@ -20,7 +20,15 @@
     border: 1px white solid;
     @include border-radius(5px)
 }
-.gridTiles>p{
-    color: white;
+.gridTiles:hover{
+    background-color: white;
+    color: black;
+}
+.gridTiles:active{
+    background-color: rgba(255,255,255,0.60);
+    color: black;
+    z-index:2;
+}
+.gridTiles p{
     @include no-space;
 }

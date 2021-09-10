@@ -6,7 +6,6 @@ const GridTiles = ({id, content, index, onStop, onDrag, onStart, gridSize})=>{
     
     //this will set bounds so element is limited to gridLayout area
     const [bounds, setBounds] = useState(null)
-    
     //gets four corners of tile element
     const tileRect = useTilePosition()
     
@@ -40,6 +39,7 @@ const GridTiles = ({id, content, index, onStop, onDrag, onStart, gridSize})=>{
                 right: gridRect.right - tileRect.rect.right
             })
     }
+
     //gets coordinates of all four corners of the grid layout that all tiles will reside in
     const gridRect = gridSize.rect 
  
@@ -56,7 +56,8 @@ const GridTiles = ({id, content, index, onStop, onDrag, onStart, gridSize})=>{
             bounds = {bounds}
             nodeRef={nodeRef}
            >
-                <div id={id} 
+                <div 
+                    id={id}
                     className="gridTiles d-flex align-items-center justify-content-center col-5 col-sm-3 col-lg-2" 
                     content={content} 
                     ref={nodeRef} >
