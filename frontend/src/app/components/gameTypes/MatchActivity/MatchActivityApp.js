@@ -140,7 +140,7 @@ const MatchActivityApp = ({last=false, onClick}) => {
                                     />
                     })}
                 </div>
-                
+
                 <div className = {`d-flex col-10 col-sm-9 col-lg-10 ${!prevQuestion ? "justify-content-end":"justify-content-between"}`}>
                     <ActivityBtns 
                                 prevQuestion = {prevQuestion} 
@@ -148,7 +148,6 @@ const MatchActivityApp = ({last=false, onClick}) => {
                                 onClick = {onClick}
                                 />
                 </div>
-                
             </div>
         </div>
     )

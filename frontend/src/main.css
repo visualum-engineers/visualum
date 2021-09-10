@@ -867,8 +867,28 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   font-size: 0.9em;
 }
 
-.MCInputContainer > textarea {
-  min-height: 200px;
+.MCInputContainer label {
+  cursor: pointer;
+  height: 100%;
+  padding: 10px 20px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  color: white;
+  border: 1px white solid;
+}
+
+.ansOptionItem {
+  width: 48%;
+  margin: 1%;
+}
+
+.MCInputContainer input[type="radio"] {
+  display: none;
+}
+
+.MCInputContainer input[type="radio"]:checked + label {
+  background-color: white;
+  color: black;
 }
 
 .shortAnswerApp {
