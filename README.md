@@ -20,7 +20,8 @@
     <h2>Compiling Sass files</h2>
     <ul> 
             <h3> Development </h3>
-              <li> For development, you can install the (vsCode extension, Live Sass Compiler).</li>
+              <li> If you use vscode, you can install the extension, Live Sass Compiler.</li>
+              <li> If you don't use vscode, webpack may have to be used</li>
             <h3> Production </h3> 
               <li> For production, webpack may have to be used.</li>
     </ul>
