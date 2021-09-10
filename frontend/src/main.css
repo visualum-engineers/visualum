@@ -145,8 +145,8 @@
 }
 
 #search-btn.border {
-  -webkit-box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
-          box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
+  -webkit-box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
+          box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
 }
 
 #nav-button {
@@ -614,7 +614,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   -moz-appearance: textfield;
 }
 
-.form-select {
+.logSignForm.form-select {
   height: 40px;
   font-size: 13px;
 }
@@ -623,7 +623,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   color: black;
 }
 
-.form-floating > label {
+.logSignForm.form-floating > label {
   padding: 0.6rem;
   color: black;
   font-size: 14px;
@@ -635,9 +635,9 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
 }
 
-.form-control:focus ~ label,
-.form-control:not(:placeholder-shown) ~ label,
-.form-select ~ label {
+.logSignForm.form-control:focus ~ label,
+.logSignForm.form-control:not(:placeholder-shown) ~ label,
+.logSignForm.form-select ~ label {
   opacity: 0.9;
   -webkit-transform: scale(0.75) translateY(-0.45rem) translateX(0.2rem) !important;
           transform: scale(0.75) translateY(-0.45rem) translateX(0.2rem) !important;
@@ -850,17 +850,33 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 }
 
 .shortAnswerApp {
-  min-height: 800px;
-  padding-top: 150px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  min-height: 550px;
+  height: 100%;
+  padding-top: calc(20vh + 100px);
+  padding-bottom: 20vh;
+}
+
+.SAInputContainer {
+  margin-top: 15px;
+  margin-bottom: 40px;
+  font-size: 0.9em;
+}
+
+.SAInputContainer > textarea {
+  min-height: 200px;
+}
+
+.navActivityBtn {
+  color: white;
+  background-color: rgba(0, 0, 0, 0);
+  padding: 5px 20px;
+  border: 1px white solid;
+  border-radius: 5px;
+}
+
+.navActivityBtn:hover {
+  background: white;
+  color: #271b53;
 }
 
 @media (min-width: 992px) {

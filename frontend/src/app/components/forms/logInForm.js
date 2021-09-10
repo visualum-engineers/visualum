@@ -89,19 +89,19 @@ class GoogleLogin extends Component {
 class ManualLogin extends Component {
     render() {
         return (<div>
-            <div className="form-floating mt-3">
+            <div className="logSignForm form-floating mt-3">
                 <input 
                     placeholder ="Email Address"
                     value ={this.props.email}
                     data-state="email"
                     onChange={this.props.handleChange}
                     type="email" 
-                    className="form-control" 
+                    className="logSignForm  form-control" 
                     id="email" 
                     aria-describedby="emailHelp"/>
-                <label htmlFor="email" className="form-label">Email Address</label>
+                <label htmlFor="email" className="logSignForm  form-label">Email Address</label>
             </div>
-            <div className= "mb-3 mt-3 flex-fill form-floating">
+            <div className= "mb-3 mt-3 flex-fill logSignForm  form-floating">
                 <input
                     placeholder="Password"
                     value ={this.props.password}
@@ -109,9 +109,9 @@ class ManualLogin extends Component {
                     data-state="password"
                     onChange={this.props.handleChange} 
                     type="password" 
-                    className="form-control" 
+                    className="logSignForm  form-control" 
                     id="password"/>
-                <label htmlFor="password" className="form-label">Password</label>
+                <label htmlFor="password" className="logSignForm  form-label">Password</label>
             </div>
             <div className="mb-3 form-check">
                 <input

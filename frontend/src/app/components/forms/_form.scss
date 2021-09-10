@@ -119,7 +119,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
     -moz-appearance: textfield;
 }
 
-.form-select{
+.logSignForm.form-select{
     height: 40px;
     font-size: 13px;
 }
@@ -130,16 +130,16 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
     color: black;
 }
 
-.form-floating>label{
+.logSignForm.form-floating>label{
     padding: 0.6rem;
     color: black;
     font-size: 14px;
     padding-top: 14px;
     @include transition(opacity .1s ease-in-out, transform .1s ease-in-out);
 }
-.form-control:focus,
-.form-control:not(:placeholder-shown),
-.form-select {
+.logSignForm.form-control:focus,
+.logSignForm.form-control:not(:placeholder-shown),
+.logSignForm.form-select {
         ~ label{
         opacity: 0.9;
         transform: scale(.75) translateY(-.45rem) translateX(.2rem) !important;

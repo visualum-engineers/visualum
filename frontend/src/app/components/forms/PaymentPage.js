@@ -3,7 +3,7 @@ export default function PaymentPage(props) {
     return (
         <div>
             <div className="mb-3">
-                <label htmlFor="payment" className="form-label">Payment</label>
+                <label htmlFor="payment" className="logSignForm form-label">Payment</label>
                 <input
                     data-state="payment"
                     value={props.payment}

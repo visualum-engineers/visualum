@@ -1,0 +1,16 @@
+.shortAnswerApp{
+    min-height: 550px;
+    height: 100%;
+    padding-top: calc(20vh + 100px);
+    padding-bottom: 20vh;
+}
+
+.SAInputContainer{
+    margin-top: 15px;
+    margin-bottom: 40px;
+    font-size: 0.9em;
+}
+.SAInputContainer>textarea{
+    min-height: 200px;
+}
+

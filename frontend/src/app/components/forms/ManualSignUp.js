@@ -10,21 +10,21 @@ export default function ManualSignUp(props) {
         <div>
             <div className="row">
                 <div className="col-12">
-                    <div className="form-floating">
+                    <div className="logSignForm  form-floating">
                         <input
                             placeholder="Email Address"
                             value={userInfo.email}
                             data-state="email"
                             onChange={props.handleChange}
                             type="email"
-                            className="form-control"
+                            className="logSignForm form-control"
                             id="email"
                             aria-describedby="emailHelp" />
-                        <label htmlFor="email" className="form-label">Email Address</label>
+                        <label htmlFor="email" className="logSignForm  form-label">Email Address</label>
                     </div>
                 </div>
                 <div className="col-lg-6 col-12">
-                    <div className="form-floating mt-3">
+                    <div className="logSignForm  form-floating mt-3">
                         <input
                             placeholder="Password"
                             value={userInfo.password}
@@ -32,13 +32,13 @@ export default function ManualSignUp(props) {
                             data-state="password"
                             onChange={props.handleChange}
                             type="password"
-                            className="form-control"
+                            className="logSignForm  form-control"
                             id="password" />
-                        <label style={{ color: "black" }} htmlFor="password" className="form-label">Password</label>
+                        <label style={{ color: "black" }} htmlFor="password" className="logSignForm form-label">Password</label>
                     </div>
                 </div>
                 <div className="col-lg-6 col-12">
-                    <div className="form-floating mt-3">
+                    <div className="logSignForm form-floating mt-3">
                         <input
                             placeholder="Re-enter Password"
                             value={userInfo.verifiedPassword}
@@ -46,9 +46,9 @@ export default function ManualSignUp(props) {
                             data-state="verifiedPassword"
                             onChange={props.handleChange}
                             type="password"
-                            className="form-control"
+                            className="logSignForm  form-control"
                             id="verifiedPassword" />
-                        <label htmlFor="verifiedPassword" className="form-label">Re-enter Password</label>
+                        <label htmlFor="verifiedPassword" className="logSignForm  form-label">Re-enter Password</label>
                     </div>
                 </div>
                 <div className="col-12 mt-3">

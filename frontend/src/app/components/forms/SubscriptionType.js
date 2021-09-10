@@ -3,7 +3,7 @@ export default function SubscriptionType(props) {
     return (
         <div>
             <div className="mb-3 mt-3 d-flex-column" style={{ textAlign: "center" }}>
-                <label htmlFor="subscriptionType" className="form-label">Choose Subscription</label>
+                <label htmlFor="subscriptionType" className="logSignForm  form-label">Choose Subscription</label>
                 <div>
                     <input
                         checked={props.subscriptionType === "free"}

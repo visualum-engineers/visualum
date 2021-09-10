@@ -14,7 +14,7 @@ const MultipleChoiceApp = () => {
                 <p>{state[question]}</p>  
             </div>
             <div className = "MCInputContainer">
-
+                
             </div>
             <button onClick ={onClick}>Submit</button>
         </div>
