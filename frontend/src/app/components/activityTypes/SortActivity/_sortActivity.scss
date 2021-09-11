@@ -1,8 +1,6 @@
 .sortActivityApp{
-    height: 100%;
-    width: 100%;
+    min-height: 100vh;
     padding-top: 150px;
-    padding-bottom: 75px;
 }
 .instructions{
     color: white;
@@ -15,14 +13,15 @@
 }
 .sortAreaGroups{
     width: 65%;
-    margin: 0 5%;
+    
 }
 .sortArea{
     width : 45%;
     height: 100%;
     border: 1px solid white;
     font-size: 1.7rem;
-    margin: 2.5%;
+    margin-right: 2.5%;
+    margin-bottom: 2.5%;
     margin-top: 0;
     list-style-type: none;
     @include border-radius(10px);
@@ -39,7 +38,8 @@
 }
 .answerArea{
     @extend .sortArea;
-    margin: 0 6.5% 0 0;
+    @include no-space;
+    margin-left: 2.5%;
     width: 30%;
     height: auto;
 }
@@ -59,6 +59,6 @@
     border: 1px solid white;
     @include border-radius(20px)
 }
-.sortNavBtns{
-    width: 86vw;
-}
+// .sortNavBtns{
+//     width: 86vw;
+// }

@@ -15,8 +15,8 @@ const MultipleChoiceApp = ({last, prev, onNavBtnClick, activityData}) => {
     const lastQuestion = last
     
     return(
-        <div className = "multipleChoiceApp d-flex justify-content-center">
-            <div className = "d-flex flex-column align-items-center col-9 col-md-6 col-xl-4">
+        <div className = "multipleChoiceApp d-flex justify-content-center ">
+            <div className = "d-flex flex-column align-items-center col-9 col-md-7 col-xl-6">
                 <div className = "MCQuestion">
                     <p>{state.question}</p>  
                 </div>

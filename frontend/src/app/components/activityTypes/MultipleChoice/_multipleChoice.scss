@@ -1,13 +1,11 @@
 .multipleChoiceApp{
-    min-height: 550px;
-    height: 100%;
-    padding-top: calc(20vh + 100px);
-    padding-bottom: 20vh;
+    min-height: 100vh;
+    //height: 100%;
+    padding-top:  150px;
 }
 
 .MCInputContainer{
     margin-top: 15px;
-    margin-bottom: 40px;
     font-size: 0.9em;
 }
 .MCInputContainer label{

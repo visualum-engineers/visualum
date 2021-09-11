@@ -69,35 +69,36 @@ const SortActivityApp = ({last, prev, onNavBtnClick,activityData}) => {
     };
    
     return (
-        <div className = "sortActivityApp d-flex align-items-center flex-column">
-            <p className="instructions">Sort the following:</p>
-            <DragDropContext onDragEnd={onDragEnd}>
-                <div className ="draggableAreaContainer d-flex justify-content-center align-items-start">
-
-                    {/* Renders sort categories */}
-                    <div className="sortAreaGroups d-flex flex-wrap">
-                        {Object.keys(state.columns).map((columnTitle, index)=> {
-                            if(index === Object.keys(state.columns).length-1) return null
-                            return <SortArea key={columnTitle} 
-                                        id={columnTitle} 
-                                        columnTitle={columnTitle} 
-                                        answerData= {state.answerChoices} 
-                                        currAnswers={state.columns[columnTitle]}/>
-                        })}
-                    </div>
-                    
-                    {/* Renders word/response bank */}
-                    <AnswerArea key={"answerChoices"} 
-                        currAnswers={state.columns["answerChoices"]} 
-                        answerData= {state.answerChoices}/>
-                </div>  
-            </DragDropContext>
-            <div className="sortNavBtns">
-                <ActivityBtns 
-                    prevQuestion = {prevQuestion} 
-                    lastQuestion = {lastQuestion}
-                    onNavBtnClick = {onNavBtnClick}
-                    />
+        <div className="d-flex justify-content-center">
+            <div className = "sortActivityApp d-flex flex-column align-items-center col-9 col-md-7 col-xl-6">
+                <p className="instructions">Sort the following:</p>
+                <DragDropContext onDragEnd={onDragEnd}>
+                    <div className ="draggableAreaContainer d-flex justify-content-center align-items-start">
+                        {/* Renders sort categories */}
+                        <div className="sortAreaGroups d-flex flex-wrap">
+                            {Object.keys(state.columns).map((columnTitle, index)=> {
+                                if(index === Object.keys(state.columns).length-1) return null
+                                return <SortArea key={columnTitle} 
+                                            id={columnTitle} 
+                                            columnTitle={columnTitle} 
+                                            answerData= {state.answerChoices} 
+                                            currAnswers={state.columns[columnTitle]}/>
+                            })}
+                        </div>
+                        
+                        {/* Renders word/response bank */}
+                        <AnswerArea key={"answerChoices"} 
+                            currAnswers={state.columns["answerChoices"]} 
+                            answerData= {state.answerChoices}/>
+                    </div>  
+                </DragDropContext>
+                <div className="sortNavBtns w-100">
+                    <ActivityBtns 
+                        prevQuestion = {prevQuestion} 
+                        lastQuestion = {lastQuestion}
+                        onNavBtnClick = {onNavBtnClick}
+                        />
+                </div>
             </div>
         </div>
     )

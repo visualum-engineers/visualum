@@ -14,7 +14,7 @@ const ShortAnswerApp = ({last, prev, onNavBtnClick, activityData }) => {
     
     return(
         <div className="shortAnswerApp d-flex justify-content-center">
-            <div className = "d-flex flex-column align-items-center col-9 col-md-6 col-xl-4 ">
+            <div className = "d-flex flex-column align-items-center col-9 col-md-7 col-xl-6 ">
                 <div className = "SAQuestion ">
                     <p>{state.question}</p>  
                 </div>
