@@ -817,12 +817,11 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 }
 
 .sortNavBtns {
-  margin-top: 7vw;
   width: 86vw;
 }
 
 .matchActivityApp {
-  min-height: 800px;
+  min-height: 700px;
   padding-top: 150px;
   height: 100%;
 }

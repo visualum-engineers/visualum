@@ -20,16 +20,6 @@ Frontend:
     3. Missing re-rendering logic, when user answers question and moves on to the next one.
     4. Missing progress saved on local storage/memory (if user exits out of page)
 */
-const activityData = {
-    1: {
-        "Pair1":"Pair1-", 
-        "Pair2":"Pair2-", 
-        "Pair3":"Pair3-", 
-        "Pair1-":"Pair1",
-        "Pair2-":"Pair2", 
-        "Pair3-":"Pair3",
-    },
-}
 //Fisher-Yates shuffling algo
 //shuffles our given pairs order
 function shuffleItems(array){   
@@ -49,18 +39,17 @@ function shuffleItems(array){
     return array;
 }
 
-const MatchActivityApp = ({last=false, onClick}) => {
+const MatchActivityApp = ({last, prev, onNavBtnClick, activityData}) => {
     //for shuffling tile positions
-    const currQuestion = Object.keys(activityData)[0]
-    const shuffleArray = shuffleItems(Object.keys(activityData[currQuestion]))
+    const shuffleArray = shuffleItems(Object.keys(activityData.matchPair))
 
     //for state
-    const [state, setState] = useState(activityData)
+    const [state, setState] = useState(activityData.matchPair)
     const [tileShuffle, setTileShuffle] = useState(shuffleArray)
     
     //for determining question order. 
     //Important to determine navBtns continue, prev, or submit
-    const prevQuestion = Object.keys(activityData)[0] === "1" ? false : true
+    const prevQuestion = prev
     const lastQuestion = last
 
     // Hook for resizing of Grid. 
@@ -108,14 +97,14 @@ const MatchActivityApp = ({last=false, onClick}) => {
         const final = !finalEl ? null: finalEl.getAttribute("content")
         const start = startEl.getAttribute("content")
         //copy object
-        const newMatchList = Object.assign({}, state[currQuestion])
+        const newMatchList = Object.assign({}, state)
         const newShuffleList = [...tileShuffle]
         //restore events for selected element
         startEl.style.pointerEvents = "all"
 
         //when elements are not considered a matching pair
         //it will simply return item to original position
-        if(state[currQuestion][start] !== final) return
+        if(state[start] !== final) return
 
        //when elements are considered a matching pair
        //it will remove the element pair
@@ -125,9 +114,7 @@ const MatchActivityApp = ({last=false, onClick}) => {
         delete newMatchList[start]
         delete newMatchList[final]
         
-        setState({
-            [currQuestion]: newMatchList
-        })
+        setState(newMatchList)
         setTileShuffle(
             newShuffleList
         )
@@ -156,7 +143,7 @@ const MatchActivityApp = ({last=false, onClick}) => {
                     <ActivityBtns 
                                 prevQuestion = {prevQuestion} 
                                 lastQuestion = {lastQuestion}
-                                onClick = {onClick}
+                                onNavBtnClick = {onNavBtnClick}
                                 />
                 </div>
             </div>

@@ -6,25 +6,21 @@ import ActivityBtns from '../NavActivityBtn/ActivityBtns'
         - Included here is also rendering animation
     2. Missing progress saved on local storage/memory (if user exits out of page)
 */
-const activityData = {
-    "1":{
-            question: "What faces this world?",
-            answerChoices: ["Good What faces this world", "Bad", "No"]
-        }
-}
-const MultipleChoiceApp = ({last=false, onClick}) => {    
+
+const MultipleChoiceApp = ({last, prev, onNavBtnClick, activityData}) => {    
     const [state] = useState(activityData)
-    const prevQuestion = Object.keys(activityData)[0] === "1" ? false : true
+    //checks if previous question exists
+    const prevQuestion = prev
     const lastQuestion = last
-    const currQuestion = Object.keys(state)[0]
+    
     return(
         <div className = "multipleChoiceApp d-flex justify-content-center">
-            <div className = "d-flex flex-column align-items-center col-9 col-md-6 col-xl-4 flex-column">
+            <div className = "d-flex flex-column align-items-center col-9 col-md-6 col-xl-4">
                 <div className = "MCQuestion">
-                    <p>{state[currQuestion].question}</p>  
+                    <p>{state.question}</p>  
                 </div>
                 <form className = "MCInputContainer d-flex flex-wrap w-100">
-                    {state[currQuestion].answerChoices.map((choice, index)=>{
+                    {state.answerChoices.map((choice, index)=>{
                         return(
                             <div key={index} className="ansOptionItem">
                                 <input 
@@ -46,7 +42,7 @@ const MultipleChoiceApp = ({last=false, onClick}) => {
                 <ActivityBtns 
                     prevQuestion = {prevQuestion} 
                     lastQuestion = {lastQuestion}
-                    onClick = {onClick}
+                    onNavBtnClick = {onNavBtnClick}
                     />
             </div>
         </div>
