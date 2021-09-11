@@ -9,7 +9,8 @@ import ActivityBtns from '../NavActivityBtn/ActivityBtns'
 
 const MultipleChoiceApp = ({last, prev, onNavBtnClick, activityData}) => {    
     const [state] = useState(activityData)
-    //checks if previous question exists
+    //checks position of question, 
+    //i.e is it the first or last question
     const prevQuestion = prev
     const lastQuestion = last
     
@@ -20,6 +21,7 @@ const MultipleChoiceApp = ({last, prev, onNavBtnClick, activityData}) => {
                     <p>{state.question}</p>  
                 </div>
                 <form className = "MCInputContainer d-flex flex-wrap w-100">
+                    {/*renders different answer choices*/}
                     {state.answerChoices.map((choice, index)=>{
                         return(
                             <div key={index} className="ansOptionItem">

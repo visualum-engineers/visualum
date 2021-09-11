@@ -20,6 +20,7 @@ Frontend:
     3. Missing re-rendering logic, when user answers question and moves on to the next one.
     4. Missing progress saved on local storage/memory (if user exits out of page)
 */
+
 //Fisher-Yates shuffling algo
 //shuffles our given pairs order
 function shuffleItems(array){   
@@ -125,6 +126,7 @@ const MatchActivityApp = ({last, prev, onNavBtnClick, activityData}) => {
             <div className="matchActivityApp d-flex flex-column align-items-center col-11 col-md-9 col-xl-8">
                 <p className="matchInstruction">Match the following</p>
                 <div className = "gridLayout d-flex justify-content-center flex-wrap">
+                    {/*renders tiles to match*/}
                     {tileShuffle.map((content, index)=>{
                         return <GridTiles 
                                     gridSize ={gridSize}

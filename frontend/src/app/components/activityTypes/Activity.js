@@ -53,14 +53,16 @@ const Activity = () =>{
     const [state, setState] = useState(activityData[currQuestion])
     const onNavBtnClick = (e) =>{
         const btnType = e.target.closest("button").getAttribute("btntype")
+
+        //different btn actions
         if(btnType === "prev") currQuestion = question - 1
         if(btnType === "continue") currQuestion = question + 1
         if(btnType === "submit") return null
-        //if btn type is submit
+        
         setState(activityData[currQuestion])
         setQuestion(currQuestion)
     }
-    
+    //render activity based off data provided
     switch(state.type){
         case "matching":
             return <MatchActivityApp 

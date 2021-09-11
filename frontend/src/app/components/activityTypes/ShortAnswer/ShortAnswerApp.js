@@ -18,6 +18,7 @@ const ShortAnswerApp = ({last, prev, onNavBtnClick, activityData }) => {
                 <div className = "SAQuestion ">
                     <p>{state.question}</p>  
                 </div>
+                {/*renders text area that students can respond in*/}
                 <div className="SAInputContainer form-floating w-100">
                     <textarea 
                         className="form-control" 
