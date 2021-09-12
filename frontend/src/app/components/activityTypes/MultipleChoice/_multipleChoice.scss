@@ -1,6 +1,5 @@
 .multipleChoiceApp{
     min-height: 100vh;
-    //height: 100%;
     padding-top:  150px;
 }
 
@@ -17,6 +16,11 @@
     border: 1px white solid;
     @include border-radius(5px)
 }
+.MCInputContainer label:hover{
+    background-color: white;
+    color: black;
+}
+
 .ansOptionItem{
     width: 48%;
     margin: 1%;

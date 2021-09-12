@@ -35,14 +35,14 @@ const GridTiles = ({id, content, index, onStop, onDrag, onStart, gridSize})=>{
             setBounds({
                 top: gridRect.top - tileRect.rect.top+100,
                 bottom: gridRect.bottom - tileRect.rect.bottom,
-                left:  -tileRect.rect.left,
-                right: gridRect.right - tileRect.rect.right
+                left:  gridRect.left-tileRect.rect.left,
+                right:  gridRect.right- tileRect.rect.right
             })
     }
 
     //gets coordinates of all four corners of the grid layout that all tiles will reside in
     const gridRect = gridSize.rect 
- 
+    
     return(
         <DraggableCore 
             key={id} 

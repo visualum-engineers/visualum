@@ -17,7 +17,6 @@ Frontend:
              The finalEl SHOULD be selecting the element underneath
              the one being dragged
     2. Add animation transition when elements are removed 
-    3. Missing re-rendering logic, when user answers question and moves on to the next one.
     4. Missing progress saved on local storage/memory (if user exits out of page)
 */
 
@@ -86,31 +85,45 @@ const MatchActivityApp = ({last, prev, onNavBtnClick, activityData}) => {
         //updates selected element
         startEl = e.target.closest("div") 
         //disable events for selected element
-        startEl.style.pointerEvents = "none"
+        startEl.style.pointerEvents = "none";
+        //change cursor to grabbing
+        document.querySelector("body").style.cursor = "grabbing"
     }
     const onDrag = (e) =>{
+        //scrolls page down automatically in 100px increments 
+        //when element being dragged is outside of viewport
+        if(startEl.getBoundingClientRect().top <= 0) {
+            window.scrollBy({top: -50, behavior:"smooth"})
+            // startEl.style.top = 0
+        }
+        if(startEl.getBoundingClientRect().bottom >= window.innerHeight) {
+            window.scrollBy({top: 50})
+            // startEl.style.bottom = window.innerHeight
+        }
+        
         //updates the overlapping element
         finalEl = e.target.closest("div")
-        
     }
     
     const onStop = () => {
         const final = !finalEl ? null: finalEl.getAttribute("content")
         const start = startEl.getAttribute("content")
-        //copy object
+
         const newMatchList = Object.assign({}, state)
         const newShuffleList = [...tileShuffle]
         //restore events for selected element
         startEl.style.pointerEvents = "all"
-
+        //change cursor to default
+        document.querySelector("body").style.cursor = "auto"
         //when elements are not considered a matching pair
         //it will simply return item to original position
         if(state[start] !== final) return
 
        //when elements are considered a matching pair
        //it will remove the element pair
-        newShuffleList.splice(newShuffleList.indexOf(start),1)
-        newShuffleList.splice(newShuffleList.indexOf(final),1)
+       //and replace it with an empty grid tile
+        newShuffleList.splice(newShuffleList.indexOf(start),1, null)
+        newShuffleList.splice(newShuffleList.indexOf(final),1, null)
         
         delete newMatchList[start]
         delete newMatchList[final]
@@ -128,6 +141,7 @@ const MatchActivityApp = ({last, prev, onNavBtnClick, activityData}) => {
                 <div className = "gridLayout d-flex justify-content-center flex-wrap">
                     {/*renders tiles to match*/}
                     {tileShuffle.map((content, index)=>{
+                        if(content === null) return <div key={index} className="emptyTile col-5 col-sm-3 col-lg-2"></div>
                         return <GridTiles 
                                     gridSize ={gridSize}
                                     onStop = {onStop}

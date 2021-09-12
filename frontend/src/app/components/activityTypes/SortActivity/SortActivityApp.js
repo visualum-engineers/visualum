@@ -20,7 +20,6 @@ Frontend:
 const SortActivityApp = ({last, prev, onNavBtnClick,activityData}) => {
     
     //render data on a per question basis
-   
     // let groups = activityData
     //state
     const [state, setState] = useState(activityData)
@@ -73,9 +72,14 @@ const SortActivityApp = ({last, prev, onNavBtnClick,activityData}) => {
             <div className = "sortActivityApp d-flex flex-column align-items-center col-9 col-md-7 col-xl-6">
                 <p className="instructions">Sort the following:</p>
                 <DragDropContext onDragEnd={onDragEnd}>
-                    <div className ="draggableAreaContainer d-flex justify-content-center align-items-start">
+                    <div className ="draggableAreaContainer d-flex  ">
+                        {/* Renders word/response bank */}
+                        <AnswerArea key={"answerChoices"} 
+                            currAnswers={state.columns["answerChoices"]} 
+                            answerData= {state.answerChoices}/>
+
                         {/* Renders sort categories */}
-                        <div className="sortAreaGroups d-flex flex-wrap">
+                        <div className="sortAreaGroups  d-flex">
                             {Object.keys(state.columns).map((columnTitle, index)=> {
                                 if(index === Object.keys(state.columns).length-1) return null
                                 return <SortArea key={columnTitle} 
@@ -85,11 +89,6 @@ const SortActivityApp = ({last, prev, onNavBtnClick,activityData}) => {
                                             currAnswers={state.columns[columnTitle]}/>
                             })}
                         </div>
-                        
-                        {/* Renders word/response bank */}
-                        <AnswerArea key={"answerChoices"} 
-                            currAnswers={state.columns["answerChoices"]} 
-                            answerData= {state.answerChoices}/>
                     </div>  
                 </DragDropContext>
                 <div className="sortNavBtns w-100">

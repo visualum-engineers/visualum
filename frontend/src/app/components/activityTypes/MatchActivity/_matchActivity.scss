@@ -32,3 +32,8 @@
 .gridTiles p{
     @include no-space;
 }
+.emptyTile{
+    min-height: 150px;
+    padding: 0px 20px;
+    margin: 5px;
+}
