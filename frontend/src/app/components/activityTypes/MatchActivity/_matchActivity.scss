@@ -2,6 +2,9 @@
     min-height: 100vh;
     padding-top: 150px;
 }
+.tilesMatchedMessage{
+    color: white;
+}
 .matchInstruction{
     color: white;
     font-size: 1.7em;
@@ -11,8 +14,8 @@
     width: 100%;
 }
 .gridTiles{
-    color: white;
     cursor: grab;
+    color: white;
     min-height: 150px;
     padding: 0px 20px;
     margin: 5px;

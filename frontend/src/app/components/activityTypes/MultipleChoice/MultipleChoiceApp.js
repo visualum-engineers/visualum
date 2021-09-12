@@ -8,9 +8,10 @@ import ActivityBtns from '../NavActivityBtn/ActivityBtns'
 */
 
 const MultipleChoiceApp = ({last, prev, onNavBtnClick, activityData}) => {    
+    //for updating redux store(data to be sent to backend)
     const [state] = useState(activityData)
-    //checks position of question, 
-    //i.e is it the first or last question
+
+    //determines navigation button rendering
     const prevQuestion = prev
     const lastQuestion = last
     

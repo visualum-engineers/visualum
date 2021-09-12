@@ -4,7 +4,7 @@
   border-radius: 0;
   height: 100%;
   width: 100%;
-  padding: 30px 10vw;
+  padding: 30px 30px;
   margin: 0;
   color: white;
   border: none;
@@ -15,7 +15,7 @@
 
 .navbarScrollActive {
   background: rgba(107, 97, 144, 0.8);
-  padding: 6px 30px;
+  padding: 5px 30px;
 }
 
 .navbar a {
@@ -784,7 +784,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   border-radius: 10px;
 }
 
-.sortArea > p, .answerArea > p {
+.sortArea p, .answerArea p {
   color: white;
   margin: 0;
   padding: 0;
@@ -837,6 +837,10 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   padding-top: 150px;
 }
 
+.tilesMatchedMessage {
+  color: white;
+}
+
 .matchInstruction {
   color: white;
   font-size: 1.7em;
@@ -848,9 +852,9 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 }
 
 .gridTiles {
-  color: white;
   cursor: -webkit-grab;
   cursor: grab;
+  color: white;
   min-height: 150px;
   padding: 0px 20px;
   margin: 5px;
@@ -934,6 +938,48 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 
 .SAInputContainer > textarea {
   min-height: 200px;
+}
+
+.labelPicApp {
+  padding-top: 150px;
+  color: white;
+}
+
+.labelPicAppContainer {
+  position: relative;
+  height: 200px;
+  color: white;
+}
+
+.labelPicApp img {
+  min-width: 200px;
+  width: 100%;
+  height: 100%;
+}
+
+.labelPicBox {
+  position: absolute;
+}
+
+.labelWordColumn {
+  min-height: 100px;
+  margin: 5px;
+  padding: 2.5px;
+}
+
+.labelPicAns {
+  cursor: pointer;
+  margin: 5px 0;
+  width: 100%;
+  min-height: 30px;
+  border: 1px white solid;
+  border-radius: 5px;
+}
+
+.labelPicAns p {
+  margin: 0;
+  padding: 0;
+  color: white;
 }
 
 .navActivityBtn {

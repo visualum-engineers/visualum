@@ -4,7 +4,7 @@
     .navbar{
         @include border-radius(0);
         @include fillContainer;
-        padding: 30px 10vw;
+        padding: 30px 30px;
         margin: 0;
         color: white;
         border: none;
@@ -15,7 +15,7 @@
     //vertical height when scrolled: vertical height when not scrolled:
     .navbarScrollActive{
         background: $main-color;
-        padding: 6px 30px;
+        padding: 5px 30px;
     }
     
     .navbar a{

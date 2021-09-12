@@ -22,7 +22,7 @@ const GridTiles = ({id, content, index, onStop, onDrag, onStart, gridSize})=>{
         }
         // Add event listener
         window.addEventListener("resize", handleResize);
-        handleResize();
+        
 
         // Remove event listener on cleanup
         return () => window.removeEventListener("resize", handleResize);

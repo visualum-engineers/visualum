@@ -8,7 +8,7 @@ import LoginForm from './components/forms/logInForm';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import CreateGame from './components/createGame/CreateGame';
 import Activity from './components/activityTypes/Activity'
-
+import LabelPictures from "./components/activityTypes/labelPictures/labelPicturesApp"
 function App() {
   return (
     <Router>
@@ -33,6 +33,9 @@ function App() {
           </Route>
           <Route exact path="/activity">
             <Activity />
+          </Route>
+          <Route exact path="/labelPictures">
+            <LabelPictures />
           </Route>
         </Switch>
         <Footer />

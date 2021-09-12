@@ -18,11 +18,10 @@ Frontend:
 */
 
 const SortActivityApp = ({last, prev, onNavBtnClick,activityData}) => {
-    
-    //render data on a per question basis
-    // let groups = activityData
-    //state
+    //for updating redux store(data to be sent to backend)
     const [state, setState] = useState(activityData)
+
+    //determine navigation button positions
     const prevQuestion = prev
     const lastQuestion = last
     //handle state update when object is moved
@@ -72,14 +71,14 @@ const SortActivityApp = ({last, prev, onNavBtnClick,activityData}) => {
             <div className = "sortActivityApp d-flex flex-column align-items-center col-9 col-md-7 col-xl-6">
                 <p className="instructions">Sort the following:</p>
                 <DragDropContext onDragEnd={onDragEnd}>
-                    <div className ="draggableAreaContainer d-flex  ">
+                    <div className ="draggableAreaContainer d-flex align-items-start ">
                         {/* Renders word/response bank */}
                         <AnswerArea key={"answerChoices"} 
                             currAnswers={state.columns["answerChoices"]} 
                             answerData= {state.answerChoices}/>
 
                         {/* Renders sort categories */}
-                        <div className="sortAreaGroups  d-flex">
+                        <div className="sortAreaGroups d-flex">
                             {Object.keys(state.columns).map((columnTitle, index)=> {
                                 if(index === Object.keys(state.columns).length-1) return null
                                 return <SortArea key={columnTitle} 

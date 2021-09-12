@@ -8,10 +8,12 @@ import ActivityBtns from '../NavActivityBtn/ActivityBtns';
 */
 
 const ShortAnswerApp = ({last, prev, onNavBtnClick, activityData }) => {
+    //for updating redux store(data to be sent to backend)
     const [state] = useState(activityData)
+    
+    //determine navigation buttons
     const prevQuestion = prev
     const lastQuestion = last
-    
     return(
         <div className="shortAnswerApp d-flex justify-content-center">
             <div className = "d-flex flex-column align-items-center col-9 col-md-7 col-xl-6 ">
