@@ -96,7 +96,8 @@ export default function Navbar() {
     }
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
-    });
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
     return (
         <div id="filter-navbar-container" className="navbar-expand-lg fixed-top">
             <nav className="navbar navbar-expand-lg" id="navbar">
