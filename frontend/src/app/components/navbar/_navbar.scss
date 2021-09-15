@@ -154,7 +154,6 @@
         padding: 5px 10px;
         @include border-radius(25px);
         transition: background-color 250ms ease-in-out;
-        //margin-left: 50px;
     }
 
     .user:hover {
@@ -189,8 +188,9 @@
     }
 
     .user-dropdown {
-        height: 400px;
-        width: 600px;
+        height: 300px;
+        width: 300px;
+        font-size: 0.9em;
         position: absolute;
         background-color:lighten($color: $bg-color, $amount: 5);
         @include border-radius(15px);
@@ -208,9 +208,9 @@
     }
 
     .user-dropdown-panel-header {
-        height: 1.5rem;
+        height: 1.2rem;
         width: 100%;
-        margin: 10px 0;
+        margin: 5px 0;
         text-align: center;
     }
 
@@ -230,11 +230,12 @@
     }
 
     .user-dropdown-button {
+        text-align: center;
         width: 90%;
-        height: 50px;
+        height: 38px;
         @include center;
-        padding: 10px;
-        margin: 10px auto;
+        margin: 7.5px auto;
+        padding: 5px;
         @include border-radius(15px);
         background-color:lighten($color: $bg-color, $amount: 2);
         transition: all 250ms ease-in-out;

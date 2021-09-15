@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
-import test from '../../../../images/eureka_1.jpg'
 import {DragDropContext} from "react-beautiful-dnd"
+import test from '../../../../images/eureka_1.jpg'
 import WordBank from "./wordBank"
 import ImageLabels from "./imageLabels.js"
 
@@ -64,7 +64,7 @@ const LabelPicturesApp = () => {
     //check if component is mounted to generated label indicators
     useEffect(() =>{
         if(!imageIsMounted.isMounted) setMount((s)=>{
-            const container = document.querySelector(".imageContainer").getBoundingClientRect()
+            const container = document.querySelector(".imgIndicatorContainer").getBoundingClientRect()
             return {
                 isMounted: true, 
                 indicatorPos:{
@@ -82,9 +82,15 @@ const LabelPicturesApp = () => {
         const resize = () => {
              //1. indicator postion
             setMount((s)=>{
+                const container = document.querySelector(".imgIndicatorContainer").getBoundingClientRect()
                 return {
                     ...imageIsMounted,
-                    indicatorPos: document.querySelector(".imageContainer").getBoundingClientRect()
+                    indicatorPos: {
+                        x : container.x + window.scrollX, 
+                        y: container.y + window.scrollY,
+                        width: container.width,
+                        height: container.height,
+                    }
                 }
             })
             
@@ -212,7 +218,7 @@ const LabelPicturesApp = () => {
                 <DragDropContext onDragEnd={onDragEnd}>
                     <div className = "d-flex align-items-start justify-content-center">
                         <ImageLabels state={state} />
-                        <div className="imageContainer">
+                        <div className="imgIndicatorContainer">
                             <img src={state.imageSource} alt="hello"/>
                             {imageIsMounted.isMounted ? Object.keys(state.teacherLabels).map((content)=>{
                                 const oldX = state.teacherLabels[content].x
@@ -224,14 +230,12 @@ const LabelPicturesApp = () => {
                                 const imgSizeHeight = state.teacherLabels[content].imgSize.height
 
                                 //current image size
-                                const imgX = imageIsMounted["indicatorPos"].x 
-                                const imgY = imageIsMounted["indicatorPos"].y 
                                 const imgWidth = imageIsMounted["indicatorPos"].width
                                 const imgHeight = imageIsMounted["indicatorPos"].height 
 
                                 const style = {
-                                    top: `${(imgHeight*oldY/imgSizeWidth)+imgY}px`,
-                                    left: `${(imgWidth*oldX/imgSizeHeight)+imgX}px`,
+                                    top: `${(imgHeight*oldY/imgSizeWidth)}px`,
+                                    left: `${(imgWidth*oldX/imgSizeHeight)}px`,
                                     width:`${(oldWidth)}px`,
                                     height: `${(oldHeight)}px`,
                                 }
@@ -240,7 +244,7 @@ const LabelPicturesApp = () => {
                                             key ={content}
                                             className="labelIndicators">
                                             {content}
-                                        </div>
+                                    </div>
                             }) : null}
                         </div>
                     </div>

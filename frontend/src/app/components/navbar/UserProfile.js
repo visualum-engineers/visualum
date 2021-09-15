@@ -4,20 +4,24 @@ import { faInstagram, faFacebook, faTwitter } from '@fortawesome/free-brands-svg
 import { faUser, faStar } from '@fortawesome/free-solid-svg-icons'
 import { CSSTransition } from 'react-transition-group'
 
+
 export default function UserProfile(props) {
     const [isMouseOverButton, setIsMouseOverButton] = useState(false);
     const [isMouseOverMenu, setIsMouseOverMenu] = useState(false);
-
     const enterButton = () => {
-        setIsMouseOverButton(true);
+        return setIsMouseOverButton(true);
     }
 
     const exitButton = () => {
-        setTimeout(() => {
+        return setTimeout(() => {
             setIsMouseOverButton(false)
         }, 300)
     }
-
+    const onClick = () =>{
+        if(!isMouseOverButton) enterButton()
+        else  exitButton()
+    }
+    
     const enterMenu = () => {
         setIsMouseOverMenu(true);
     }
@@ -34,7 +38,7 @@ export default function UserProfile(props) {
             <li className="nav-item flex-fill justify-content-center ">
                 <div
                     className={`user ${open ? "user-active" : ""}`}
-                    onMouseEnter={enterButton}
+                    onClick={onClick}
                     onMouseLeave={exitButton}
                 >
                     <div className="user-profile">
@@ -55,15 +59,15 @@ function UserDropdown(props) {
     return (
         <CSSTransition
             in={props.open}
-            timeout={250}
+            timeout={400}
             classNames="dropdown"
             unmountOnExit
         >
             <div className="user-dropdown" onMouseEnter={props.enterMenu} onMouseLeave={props.exitMenu}>
                 <div className="user-dropdown-panel">
                     <div className="user-dropdown-assignment">
-                        <div className="user-dropdown-button">Current Assignment</div>
-                        <div className="user-dropdown-button">Completion History</div>
+                        <div style={{"fontSize":"0.85em"}}className="user-dropdown-button">Current Assignment</div>
+                        <div style={{"fontSize":"0.85em"}}className="user-dropdown-button">Completion History</div>
                     </div>
                     <div className="user-dropdown-connect">
                         <div className="user-dropdown-panel-header">Connect</div>

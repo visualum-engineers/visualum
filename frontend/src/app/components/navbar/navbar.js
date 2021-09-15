@@ -45,17 +45,28 @@ function NavToggler() {
 
 function Login(props) {
     const { signedIn } = props;
-    const render = signedIn ?
-        <UserProfile rewardNum={200} dropdownOpen={props.dropdownOpen} toggleDropdownOpen={props.toggleDropdownOpen} />
+    const [width,setWidth] = useState(window.innerWidth>=992)
+
+    //handles resizing events that change
+    useEffect(() => {
+        const resize = () => {
+            if(width && window.innerWidth<=991)setWidth(false)
+            else if(!width && window.innerWidth>=992)setWidth(true)
+        }
+        window.addEventListener('resize', resize);
+
+        // Remove event listener on cleanup
+        return () => window.removeEventListener("resize", resize)
+    }, [width]); 
+
+    return (
+        signedIn ? width ?
+        <UserProfile rewardNum={200} dropdownOpen={props.dropdownOpen} toggleDropdownOpen={props.toggleDropdownOpen} /> : null
         : <button id={`sign${signedIn ? "Out" : "In"}-btn`} className="btn btn-outline-light btn-lg justify-content-end">
             {signedIn ? "Log out" : "Login"}
         </button>
-    return render;
+    );
 }
-
-
-
-
 
 function SearchBar() {
     const [toggled, setToggle] = useState(false);
@@ -98,6 +109,7 @@ export default function Navbar() {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+    
     return (
         <div id="filter-navbar-container" className="navbar-expand-lg fixed-top">
             <nav className="navbar navbar-expand-lg" id="navbar">
@@ -119,7 +131,11 @@ export default function Navbar() {
                         </NavItem>
                         <SearchBar />
                         <div className="d-flex justify-content-end signout-btn px-1 m-0">
-                            <Login signedIn={true} dropdownOpen={dropdownOpen} toggleDropdownOpen={() => { setDropdownOpen(!dropdownOpen) }} />
+                            <Login 
+                                signedIn={true} 
+                                dropdownOpen={dropdownOpen} 
+                                toggleDropdownOpen={() => { setDropdownOpen(!dropdownOpen) }} 
+                                />
                         </div>
                     </ul>
                 </div>
