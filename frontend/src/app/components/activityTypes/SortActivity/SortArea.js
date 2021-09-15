@@ -7,9 +7,14 @@ const SortArea = ({columnTitle, currAnswers, answerData}) =>{
             
             <Droppable droppableId={columnTitle} direction ="vertical">
                 {(provided) => (
-                    <div className="sortDropContainer d-flex flex-column align-items-center" {...provided.droppableProps} ref={provided.innerRef}>
+                    <div className="sortDropContainer d-flex flex-column align-items-center" 
+                        {...provided.droppableProps} 
+                        ref={provided.innerRef}>
                         {currAnswers.map((id, index) => {
-                            return <SortItems key={id} id={id} content={answerData[id].choice} index={index}/>
+                            return <SortItems 
+                                key={id} id={id} 
+                                content={answerData[id].choice} 
+                                index={index}/>
                         })}
                         {provided.placeholder}
                     </div>

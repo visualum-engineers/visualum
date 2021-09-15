@@ -65,7 +65,7 @@ const MatchActivityApp = ({last, prev, onNavBtnClick, activityData}) => {
                 setGridSize({
                     rect: document.querySelector(".matchActivityApp").getBoundingClientRect(),
                 });
-        }
+            }
 
         // Add event listener
         window.addEventListener("resize", handleResize);

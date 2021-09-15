@@ -23,8 +23,10 @@
     "react-scripts": "4.0.3",
     "react-toastify": "^8.0.2",
     "react-transition-group": "^4.4.2",
+    "react-uuid": "^1.0.2",
     "redux": "^4.1.1",
-    "redux-devtools-extension": "^2.13.9"
+    "redux-devtools-extension": "^2.13.9",
+    "uuid": "^8.3.2"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,11 +1,12 @@
 import { Draggable } from "react-beautiful-dnd"
-
-const Choices = ({index, label}) =>{
+const Choices = ({id, index, label}) =>{
     return (
-        <Draggable key={index} draggableId={index.toString()} index={index}>
+        <Draggable 
+            draggableId={id.toString()} 
+            index={index}>
             {(provided) => (
                 <div 
-                    className="labelPicAns d-flex align-items-center justify-content-center"
+                    className="labelChoices d-flex align-items-center justify-content-center"
                     {...provided.draggableProps} 
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}>
