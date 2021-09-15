@@ -17,11 +17,11 @@ export default function UserProfile(props) {
             setIsMouseOverButton(false)
         }, 300)
     }
-    const onClick = () =>{
-        if(!isMouseOverButton) enterButton()
-        else  exitButton()
+    const onClick = () => {
+        if (!isMouseOverButton) enterButton()
+        else exitButton()
     }
-    
+
     const enterMenu = () => {
         setIsMouseOverMenu(true);
     }
@@ -64,14 +64,14 @@ function UserDropdown(props) {
             unmountOnExit
         >
             <div className="user-dropdown" onMouseEnter={props.enterMenu} onMouseLeave={props.exitMenu}>
-                <div className="user-dropdown-panel">
+                <div className="user-dropdown-panel pe-0">
                     <div className="user-dropdown-assignment">
-                        <button 
-                            style={{"fontSize":"0.85em"}}
+                        <button
+                            style={{ "fontSize": "0.85em" }}
                             className="user-dropdown-button">Current Assignment
                         </button>
-                        <button 
-                            style={{"fontSize":"0.85em"}}
+                        <button
+                            style={{ "fontSize": "0.85em" }}
                             className="user-dropdown-button">Completion History
                         </button>
                     </div>
@@ -88,7 +88,7 @@ function UserDropdown(props) {
                         </button>
                     </div>
                 </div>
-                <div className="user-dropdown-panel">
+                <div className="user-dropdown-panel ps-0">
                     <button className="user-dropdown-button">Activity</button>
                     <button className="user-dropdown-button">Redeem</button>
                     <button className="user-dropdown-button">Store</button>
