@@ -1022,6 +1022,61 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   color: #271b53;
 }
 
+.dashboard-container {
+  background-color: ghostwhite;
+  margin-top: 120px;
+  margin-bottom: 50px;
+  height: 90%;
+  width: 100%;
+  border-radius: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+}
+
+.dashboard-container .sidebar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 20%;
+  border-right: 3px solid #8a00ca;
+}
+
+.dashboard-container .sidebar .sidebar-item {
+  width: 100%;
+  height: 75px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 25px;
+  cursor: pointer;
+}
+
+.dashboard-container .sidebar .sidebar-item p {
+  margin: 0;
+}
+
+.dashboard-container .sidebar .item-selected {
+  background-color: blueviolet;
+  color: white;
+}
+
+.dashboard-container .main-content {
+  width: 80%;
+  height: 100%;
+}
+
 @media (min-width: 992px) {
   #nav-button, #nav-icon {
     display: none;

@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import CreateGame from './components/createGame/CreateGame';
 import Activity from './components/activityTypes/Activity'
 import LabelPictures from "./components/activityTypes/labelPictures/labelPicturesApp"
+import Dashboard from './components/dashboard/dashboard'
 function App() {
   return (
     <Router>
@@ -36,6 +37,9 @@ function App() {
           </Route>
           <Route exact path="/labelPictures">
             <LabelPictures />
+          </Route>
+          <Route exact path="/dashboard">
+            <Dashboard />
           </Route>
         </Switch>
         <Footer />
