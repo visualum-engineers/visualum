@@ -66,6 +66,7 @@ const LabelPicturesApp = () => {
         if(!imageIsMounted.isMounted) setMount((s)=>{
             const container = document.querySelector(".imgIndicatorContainer").getBoundingClientRect()
             return {
+                ...s,
                 isMounted: true, 
                 indicatorPos:{
                     x : container.x + window.scrollX, 
@@ -81,7 +82,7 @@ const LabelPicturesApp = () => {
     useEffect(() => {
         const resize = () => {
              //1. indicator postion
-            setMount((s)=>{
+            setMount((imageIsMounted)=>{
                 const container = document.querySelector(".imgIndicatorContainer").getBoundingClientRect()
                 return {
                     ...imageIsMounted,
@@ -228,16 +229,14 @@ const LabelPicturesApp = () => {
                                 //actual image size
                                 const imgSizeWidth = state.teacherLabels[content].imgSize.width
                                 const imgSizeHeight = state.teacherLabels[content].imgSize.height
-
                                 //current image size
                                 const imgWidth = imageIsMounted["indicatorPos"].width
                                 const imgHeight = imageIsMounted["indicatorPos"].height 
-
                                 const style = {
                                     top: `${(imgHeight*oldY/imgSizeWidth)}px`,
                                     left: `${(imgWidth*oldX/imgSizeHeight)}px`,
-                                    width:`${(oldWidth)}px`,
-                                    height: `${(oldHeight)}px`,
+                                    width:`${(oldWidth)/imgSizeWidth}px`,
+                                    height: `${(oldHeight)/imgSizeHeight}px`,
                                 }
                                 return <div 
                                             style={style}   

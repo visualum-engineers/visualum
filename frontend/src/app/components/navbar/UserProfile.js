@@ -36,7 +36,7 @@ export default function UserProfile(props) {
     return (
         <>
             <li className="nav-item flex-fill justify-content-center ">
-                <div
+                <button
                     className={`user ${open ? "user-active" : ""}`}
                     onClick={onClick}
                     onMouseLeave={exitButton}
@@ -48,7 +48,7 @@ export default function UserProfile(props) {
                         <FontAwesomeIcon icon={faStar} className="user-reward-icon" />
                         {props.rewardNum}
                     </div>
-                </div>
+                </button>
             </li>
             <UserDropdown open={open} enterMenu={enterMenu} exitMenu={exitMenu} />
         </>
@@ -59,35 +59,41 @@ function UserDropdown(props) {
     return (
         <CSSTransition
             in={props.open}
-            timeout={400}
+            timeout={300}
             classNames="dropdown"
             unmountOnExit
         >
             <div className="user-dropdown" onMouseEnter={props.enterMenu} onMouseLeave={props.exitMenu}>
                 <div className="user-dropdown-panel">
                     <div className="user-dropdown-assignment">
-                        <div style={{"fontSize":"0.85em"}}className="user-dropdown-button">Current Assignment</div>
-                        <div style={{"fontSize":"0.85em"}}className="user-dropdown-button">Completion History</div>
+                        <button 
+                            style={{"fontSize":"0.85em"}}
+                            className="user-dropdown-button">Current Assignment
+                        </button>
+                        <button 
+                            style={{"fontSize":"0.85em"}}
+                            className="user-dropdown-button">Completion History
+                        </button>
                     </div>
                     <div className="user-dropdown-connect">
                         <div className="user-dropdown-panel-header">Connect</div>
-                        <div className="user-dropdown-button">
+                        <button className="user-dropdown-button">
                             <FontAwesomeIcon icon={faInstagram} className="user-dropdown-social-icon" /> Instagram
-                        </div>
-                        <div className="user-dropdown-button">
+                        </button>
+                        <button className="user-dropdown-button">
                             <FontAwesomeIcon icon={faFacebook} className="user-dropdown-social-icon" /> Facebook
-                        </div>
-                        <div className="user-dropdown-button">
+                        </button>
+                        <button className="user-dropdown-button">
                             <FontAwesomeIcon icon={faTwitter} className="user-dropdown-social-icon" /> Twitter
-                        </div>
+                        </button>
                     </div>
                 </div>
                 <div className="user-dropdown-panel">
-                    <div className="user-dropdown-button">Activity</div>
-                    <div className="user-dropdown-button">Redeem</div>
-                    <div className="user-dropdown-button">Store</div>
-                    <div className="user-dropdown-button">Settings</div>
-                    <div className="user-dropdown-button">Help</div>
+                    <button className="user-dropdown-button">Activity</button>
+                    <button className="user-dropdown-button">Redeem</button>
+                    <button className="user-dropdown-button">Store</button>
+                    <button className="user-dropdown-button">Settings</button>
+                    <button className="user-dropdown-button">Help</button>
                 </div>
             </div>
         </CSSTransition>

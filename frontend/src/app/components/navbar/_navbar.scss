@@ -33,8 +33,6 @@
     .nav-item{ 
         font-size: 1rem;    
         display: flex;
-        //align-self: stretch;
-       
     }
     .nav-link{
         @include center;
@@ -77,6 +75,7 @@
         width: 0px;
         border: 0;
         transition: width ease 0.3s;
+        height: 70%;
     }
 
     #search-bar.expand{
@@ -99,8 +98,11 @@
         padding-bottom: 2px;
     }
     #search-btn{
-        height: 100%;
+        background-color: rgba(255, 255, 255, 0);
+        border: none;
+        height: 70%;
         width: 50px;
+        @include border-radius(5px);
     }
     #search-btn:hover{
         @include hover-color
@@ -149,6 +151,9 @@
     }
 
     .user {
+        background-color: rgba(255, 255, 255, 0);
+        border: none;
+        color: white;
         @include center;
         height: 100%;
         padding: 5px 10px;
@@ -230,6 +235,8 @@
     }
 
     .user-dropdown-button {
+        border: none;
+        color: white;
         text-align: center;
         width: 90%;
         height: 38px;

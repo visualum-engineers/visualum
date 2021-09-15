@@ -58,7 +58,7 @@ function Login(props) {
         // Remove event listener on cleanup
         return () => window.removeEventListener("resize", resize)
     }, [width]); 
-
+    
     return (
         signedIn ? width ?
         <UserProfile rewardNum={200} dropdownOpen={props.dropdownOpen} toggleDropdownOpen={props.toggleDropdownOpen} /> : null
@@ -74,13 +74,15 @@ function SearchBar() {
         setToggle(currState => !currState);
     }
     return (
-        <form id="search-box" className="form-inline d-flex justify-content-center mx-1">
+        <form 
+            id="search-box" 
+            className="d-flex justify-content-center align-items-center mx-1">
             <input id="search-bar"
-                className={`form-control mr-sm-2 shadow-none ${toggled && 'expand'}`}
+                className={`form-control mr-sm-2 shadow-none align-self-center ${toggled && 'expand'}`}
                 type="search"
                 placeholder="Search"
                 aria-label="Search" />
-            <button id="search-btn" className="btn shadow-none" type="button" onClick={handleClick}>
+            <button id="search-btn"  type="button" onClick={handleClick}>
                 <span id="search-icon" className={`fa ${toggled ? 'fa-arrow-left' : 'fa-search'}`} />
             </button>
         </form>
