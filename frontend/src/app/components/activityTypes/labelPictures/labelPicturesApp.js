@@ -7,12 +7,24 @@ import ImageLabels from "./imageLabels.js"
 const activityData = {
     imageSource: test,
     teacherLabels:{
-        1: {key:1, x:200, y:200, width:10, content:"Hello", height: 5,imgSize:{width:1169.3, height: 826.7}},
-        2: {key:2, x:400, y:400, width:10, content:"Hi", height: 5,imgSize:{width:1169.3, height: 826.7}},
-        3: {key:3, x:600, y:600, width:10, content:"But", height: 5,imgSize:{width:1169.3, height: 826.7}},
-        4: {key:4, x:800, y:800, width:10, content:"Nah", height: 5,imgSize:{width:1169.3, height: 826.7}},
-        5: {key:5, x:700, y:500, width:10, content:"hi", height: 5,imgSize:{width:1169.3, height: 826.7}},
-        6: {key:6, x:500, y:1000, width:10, content:"oops", height: 5,imgSize:{width:1169.3, height: 826.7}}
+        1: {
+            key:1, 
+            x:200, 
+            y:200, 
+            width:10, 
+            height: 5,
+            content:"Hello", 
+            imgSize:{width:1169.3, height: 826.7}
+        },
+        2: {
+            key:2, 
+            x:400, 
+            y:400, 
+            width:10, 
+            content:"Hi", 
+            height: 5,
+            imgSize:{width:1169.3, height: 826.7}
+        },
     },
     imageLabels:[],
     wordBankLabels:[],
@@ -52,9 +64,15 @@ const LabelPicturesApp = () => {
     //check if component is mounted to generated label indicators
     useEffect(() =>{
         if(!imageIsMounted.isMounted) setMount((s)=>{
+            const container = document.querySelector(".imageContainer").getBoundingClientRect()
             return {
                 isMounted: true, 
-                indicatorPos: document.querySelector(".imageContainer").getBoundingClientRect()
+                indicatorPos:{
+                    x : container.x + window.scrollX, 
+                    y: container.y + window.scrollY,
+                    width: container.width,
+                    height: container.height,
+                }
             }
         })
     }, [imageIsMounted])// Empty array ensures that effect is only run on mount
@@ -192,7 +210,7 @@ const LabelPicturesApp = () => {
             <div className = "d-flex flex-column align-items-center col-9 col-md-7 col-xl-6">
                 <p>Label the following image</p>
                 <DragDropContext onDragEnd={onDragEnd}>
-                    <div className = "d-flex align-items-center justify-content-center">
+                    <div className = "d-flex align-items-start justify-content-center">
                         <ImageLabels state={state} />
                         <div className="imageContainer">
                             <img src={state.imageSource} alt="hello"/>
@@ -207,7 +225,7 @@ const LabelPicturesApp = () => {
 
                                 //current image size
                                 const imgX = imageIsMounted["indicatorPos"].x 
-                                const imgY = imageIsMounted["indicatorPos"].y + window.scrollY
+                                const imgY = imageIsMounted["indicatorPos"].y 
                                 const imgWidth = imageIsMounted["indicatorPos"].width
                                 const imgHeight = imageIsMounted["indicatorPos"].height 
 
