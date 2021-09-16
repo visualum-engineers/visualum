@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import DashboardNav from './DashboardNav';
 
 export default function Dashboard() {
     const [selected, setSelected] = useState("my-class");
     return (
-        <div className="container vh-100 d-flex flex-column justify-content-center">
+        <div className="h-100">
+            <DashboardNav />
             <div className="dashboard-container">
                 <div className="sidebar">
                     <Item name="My Class" value="my-class" handleSelect={setSelected} selected={selected} />

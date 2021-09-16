@@ -1024,11 +1024,8 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 
 .dashboard-container {
   background-color: ghostwhite;
-  margin-top: 120px;
-  margin-bottom: 50px;
-  height: 90%;
+  height: 93%;
   width: 100%;
-  border-radius: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1043,8 +1040,8 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 20%;
-  border-right: 3px solid #8a00ca;
+  width: 15%;
+  border-right: 1px solid #b3b3b3;
 }
 
 .dashboard-container .sidebar .sidebar-item {
@@ -1061,20 +1058,48 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
           justify-content: center;
   padding: 25px;
   cursor: pointer;
+  border-bottom: 1px solid #b3b3b3;
 }
 
 .dashboard-container .sidebar .sidebar-item p {
   margin: 0;
+  -webkit-transition: .25s;
+  transition: .25s;
+}
+
+.dashboard-container .sidebar .sidebar-item:hover p {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
 }
 
 .dashboard-container .sidebar .item-selected {
-  background-color: blueviolet;
-  color: white;
+  background-color: #e7e7e7;
+  border-right: 5px solid #8a00ca;
 }
 
 .dashboard-container .main-content {
-  width: 80%;
+  width: 90%;
   height: 100%;
+}
+
+.dashboard-nav {
+  height: 7%;
+  padding: 1rem;
+  background-color: #480069 !important;
+}
+
+.dashboard-nav .back-button-container {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+}
+
+.dashboard-nav .back-button-container .back-button {
+  color: #f6f6f6;
+  background-color: rgba(255, 255, 255, 0.219);
+}
+
+.dashboard-nav .back-button-container .back-button:hover {
+  background-color: rgba(255, 255, 255, 0.45);
 }
 
 @media (min-width: 992px) {
@@ -1188,7 +1213,7 @@ a, a:hover, a:focus {
 
 .App {
   position: relative;
-  height: 100%;
+  height: 100vh;
   background-color: #090322;
 }
 /*# sourceMappingURL=main.css.map */
