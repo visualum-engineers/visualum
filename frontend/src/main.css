@@ -1080,6 +1080,10 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 .dashboard-container .main-content {
   width: 90%;
   height: 100%;
+  padding: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .dashboard-nav {
@@ -1100,6 +1104,19 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 
 .dashboard-nav .back-button-container .back-button:hover {
   background-color: rgba(255, 255, 255, 0.45);
+}
+
+.overview-card {
+  cursor: pointer;
+  -webkit-transition: all .25s ease-in-out;
+  transition: all .25s ease-in-out;
+}
+
+.overview-card:hover {
+  -webkit-transform: translateY(-5px);
+          transform: translateY(-5px);
+  -webkit-box-shadow: 0 4px 11px rgba(33, 33, 33, 0.2);
+          box-shadow: 0 4px 11px rgba(33, 33, 33, 0.2);
 }
 
 @media (min-width: 992px) {
