@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import DashboardNav from './DashboardNav';
-import OverviewCard from './OverviewCard';
+import HomeContent from './HomeContent';
+import SidebarItem from './SidebarItem';
 
 export default function Dashboard() {
     const [selected, setSelected] = useState("home");
@@ -9,37 +10,16 @@ export default function Dashboard() {
             <DashboardNav />
             <div className="dashboard-container">
                 <div className="sidebar">
-                    <Item name="Home" value="home" handleSelect={setSelected} selected={selected} />
-                    <Item name="My Class" value="my-class" handleSelect={setSelected} selected={selected} />
-                    <Item name="Statistics" value="statistics" selected={selected} handleSelect={setSelected} />
-                    <Item name="Grades" value="grades" selected={selected} handleSelect={setSelected} />
-                    <Item name="Settings" value="settings" selected={selected} handleSelect={setSelected} />
-                    <Item name="Help" value="help" selected={selected} handleSelect={setSelected} />
+                    <SidebarItem name="Home" value="home" handleSelect={setSelected} selected={selected} />
+                    <SidebarItem name="My Class" value="my-class" handleSelect={setSelected} selected={selected} />
+                    <SidebarItem name="Statistics" value="statistics" selected={selected} handleSelect={setSelected} />
+                    <SidebarItem name="Grades" value="grades" selected={selected} handleSelect={setSelected} />
+                    <SidebarItem name="Settings" value="settings" selected={selected} handleSelect={setSelected} />
+                    <SidebarItem name="Help" value="help" selected={selected} handleSelect={setSelected} />
                 </div>
                 <div className="main-content">
-                    <div className="row">
-                        <div className="col">
-                            <OverviewCard title="Grades" subtitle="Manage Class Grades" text="Input, edit and delete class grades.">
-                                {/* {content here} */}
-                            </OverviewCard>
-                        </div>
-                        <div className="col">
-                            <OverviewCard title="Metrics" subtitle="View Grade Metrics" text="View detailed metrics about your students.">
-                                {/* {content here} */}
-                            </OverviewCard>
-                        </div>
-                    </div>
+                    <HomeContent />
                 </div>
-            </div>
-        </div>
-    )
-}
-
-function Item(props) {
-    return (
-        <div className="sidebar-item">
-            <div className={`tab-button ${props.selected === props.value ? 'selected' : ''}`} onClick={() => props.handleSelect(props.value)}>
-                <p>{props.name}</p>
             </div>
         </div>
     )

@@ -46,7 +46,10 @@
         width: 88%;
         height: 100%;
         padding: 1.7rem;
-        display: flex;
+        .card-container {
+            display: flex;
+            width: 100%;
+        }
     }
 }
 
@@ -74,6 +77,7 @@
     cursor: pointer;
     transition: all .2s ease-in-out;
     height: 8rem;
+    margin-right: 1rem;
     border: none;
     box-shadow: 0 4px 11px rgba(33,33,33,.1); 
     h5 {
