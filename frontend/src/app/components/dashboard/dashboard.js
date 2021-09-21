@@ -37,8 +37,10 @@ export default function Dashboard() {
 
 function Item(props) {
     return (
-        <div className={`sidebar-item ${props.selected === props.value ? 'item-selected' : ''}`} onClick={() => props.handleSelect(props.value)}>
-            <p>{props.name}</p>
+        <div className="sidebar-item">
+            <div className={`tab-button ${props.selected === props.value ? 'selected' : ''}`} onClick={() => props.handleSelect(props.value)}>
+                <p>{props.name}</p>
+            </div>
         </div>
     )
 }

@@ -1040,8 +1040,9 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 15%;
-  border-right: 1px solid #b3b3b3;
+  width: 12%;
+  border-right: 1px solid rgba(179, 179, 179, 0.5);
+  background-color: white;
 }
 
 .dashboard-container .sidebar .sidebar-item {
@@ -1056,29 +1057,43 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  padding: 25px;
+  padding: 20px 25px;
   cursor: pointer;
-  border-bottom: 1px solid #b3b3b3;
+}
+
+.dashboard-container .sidebar .sidebar-item .tab-button {
+  padding: 5px 10px;
+  width: 80%;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transition: -webkit-transform .25s ease-in-out;
+  transition: -webkit-transform .25s ease-in-out;
+  transition: transform .25s ease-in-out;
+  transition: transform .25s ease-in-out, -webkit-transform .25s ease-in-out;
+}
+
+.dashboard-container .sidebar .sidebar-item .tab-button:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+.dashboard-container .sidebar .sidebar-item .selected {
+  background-color: #8a00ca;
+  color: white;
+  font-weight: bold;
 }
 
 .dashboard-container .sidebar .sidebar-item p {
   margin: 0;
-  -webkit-transition: .25s;
-  transition: .25s;
-}
-
-.dashboard-container .sidebar .sidebar-item:hover p {
-  -webkit-transform: scale(1.1);
-          transform: scale(1.1);
-}
-
-.dashboard-container .sidebar .item-selected {
-  background-color: #e7e7e7;
-  border-right: 5px solid #8a00ca;
 }
 
 .dashboard-container .main-content {
-  width: 90%;
+  width: 88%;
   height: 100%;
   padding: 30px;
   display: -webkit-box;
