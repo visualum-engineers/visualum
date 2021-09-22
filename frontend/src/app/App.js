@@ -1,14 +1,14 @@
 import React from 'react';
-import Navbar from './components/navbar/navbar';
-import Footer from "./components/footer/footer";
-import HomeContent from './components/homePage/home';
+import Navbar from './components/navbar/Navbar';
+import Footer from "./components/footer/Footer";
+import HomeContent from './components/homePage/Home';
 import Settings from './components/settingsPage/Settings';
 import SignUpForm from './components/forms/signUpForm';
 import LoginForm from './components/forms/logInForm';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import CreateGame from './components/createGame/CreateGame';
 import Activity from './components/activityTypes/Activity'
-import LabelPictures from "./components/activityTypes/labelPictures/labelPicturesApp"
+import LabelPictures from "./components/activityTypes/LabelPictures/LabelPicturesApp"
 function App() {
   return (
     <Router>

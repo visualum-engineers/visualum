@@ -1,5 +1,5 @@
 import {Droppable} from "react-beautiful-dnd"
-import Choices from "./labelChoices"
+import Choices from "./LabelChoices"
 
 const WordBank = ({state}) =>{
     return(

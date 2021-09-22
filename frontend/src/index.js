@@ -1,5 +1,4 @@
-//stylesheet
-import "./main.css";
+
 //react components
 import React from 'react';
 import ReactDOM from 'react-dom';
