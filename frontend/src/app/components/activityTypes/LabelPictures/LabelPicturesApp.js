@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react"
 import {DragDropContext} from "react-beautiful-dnd"
-import test from '../../../../images/eureka_1.jpg'
-import WordBank from "./wordBank"
-import ImageLabels from "./imageLabels.js"
+//import test from '../../../../../public/images/eureka_1.jpg'
+import WordBank from "./WordBank"
+import ImageLabels from "./ImageLabels.js"
 
 const activityData = {
-    imageSource: test,
+    imageSource: "images/eureka_1.jpg",
     teacherLabels:{
         1: {
             key:1, 

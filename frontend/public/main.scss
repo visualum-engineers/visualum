@@ -1,0 +1,45 @@
+@import "./scss_abstracts/variables";
+
+//General Styles
+@import "../src/app/components/navbar/navbar";
+@import "../src/app/components/homePage/home";
+@import "../src/app/components/forms/form";
+@import "../src/app/components/footer/footer";
+@import "../src/app/components/activityTypes/activity";
+
+//responsive Styles
+@import "../src/app/components/navbar/navbarBreakPoints";
+@import "../src/app/components/homePage/homeBreakPoints";
+@import "../src/app/components/forms/formBreakPoints";
+@import "../src/app/components/footer/footerBreakPoints";
+
+//responsive styling
+@import "./scss_abstracts/breakPoints"; 
+
+html {
+    background-color: rgb(20, 28, 62);
+}
+
+body{
+    font-family: $main-font;
+    min-height: 600px;
+    height: 100%;
+    width: 100%;
+    @include no-space;
+}
+p{
+    font-family:  $main-font;
+    font-weight: 300;
+    line-height: 1.7em;
+}
+a, a:hover, a:focus{
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.App{
+    position: relative;
+    height: 100%;
+    background-color: $bg-color;
+}

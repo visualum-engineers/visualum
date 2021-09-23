@@ -6,14 +6,12 @@ const GridTiles = ({id, content, index, onStop, onDrag, onStart, gridSize})=>{
     
     //this will set bounds so element is limited to gridLayout area
     const [bounds, setBounds] = useState(null)
+
     //gets four corners of tile element
-    const tileRect = useTilePosition()
+    const [tilePosition, setTilePosition] = useState({rect: undefined});
     
     // Hook for resizing of window changing tile position
-    function useTilePosition() {
-        const [tilePosition, setTilePosition] = useState({rect: undefined});
-        useEffect(() => {
-    
+    useEffect(() => {
         function handleResize() {
             // Set gridLayout width/height to state
             setTilePosition({
@@ -23,20 +21,23 @@ const GridTiles = ({id, content, index, onStop, onDrag, onStart, gridSize})=>{
         // Add event listener
         window.addEventListener("resize", handleResize);
         
-
         // Remove event listener on cleanup
         return () => window.removeEventListener("resize", handleResize);
-        }, []); // Empty array ensures that effect is only run on mount
-        return tilePosition;
-    }
+    }, [id]); // Empty array ensures that effect is only run on mount
+    
+    useEffect(() =>{
+        if(!tilePosition.rect) setTilePosition({
+           rect: document.getElementById(id).getBoundingClientRect()
+        })
+    }, [tilePosition.rect, id])// Empty array ensures that effect is only run on mount
 
     const onMouseDown = () =>{
         //will update draggable bounds of element
             setBounds({
-                top: gridRect.top - tileRect.rect.top+100,
-                bottom: gridRect.bottom - tileRect.rect.bottom,
-                left:  gridRect.left-tileRect.rect.left,
-                right:  gridRect.right- tileRect.rect.right
+                top: gridRect.top - tilePosition.rect.top+100,
+                bottom: gridRect.bottom - tilePosition.rect.bottom,
+                left:  gridRect.left-tilePosition.rect.left,
+                right:  gridRect.right- tilePosition.rect.right
             })
     }
 

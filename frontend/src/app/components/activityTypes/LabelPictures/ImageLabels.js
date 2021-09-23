@@ -1,5 +1,5 @@
 import { Droppable } from "react-beautiful-dnd"
-import Choices from "./labelChoices"
+import Choices from "./LabelChoices"
 const ImageLabels = ({state}) =>{
     return (
         <div className="d-flex flex-column col-6 col-sm-4">

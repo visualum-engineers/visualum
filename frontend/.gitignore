@@ -22,7 +22,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-main.css*
 main.css.map*
 #generated css styles from sass compiling
 /src/main.css

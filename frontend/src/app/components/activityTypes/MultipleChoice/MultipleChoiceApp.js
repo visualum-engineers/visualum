@@ -52,3 +52,4 @@ const MultipleChoiceApp = ({last, prev, onNavBtnClick, activityData}) => {
     )
 } 
 export default MultipleChoiceApp
+

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import eureka_1 from '../../../images/eureka_1.jpg'
-import stars from "../../../images/stars.webm"
+const eureka_1 = "images/eureka_1.jpg"
+const stars = "images/stars.webm"
 const initialState = {
     windowWidth: window.innerWidth,
     windowHeight: window.innerHeight,
@@ -52,3 +52,4 @@ export default class HomeContent extends Component {
         )
     }
 }
+
