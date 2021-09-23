@@ -6,7 +6,7 @@ import SidebarItem from './SidebarItem';
 export default function Dashboard() {
     const [selected, setSelected] = useState("home");
     return (
-        <div className="h-100">
+        <div className="vh-100">
             <DashboardNav />
             <div className="dashboard-container">
                 <div className="sidebar">
