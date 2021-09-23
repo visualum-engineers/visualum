@@ -1025,7 +1025,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 .dashboard-container {
   font-size: 1rem;
   background-color: ghostwhite;
-  height: 93%;
+  height: 94%;
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1111,7 +1111,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 }
 
 .dashboard-nav {
-  height: 3rem;
+  height: 6%;
   padding: .3rem;
   background-color: #480069 !important;
 }
