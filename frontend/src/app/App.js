@@ -1,24 +1,16 @@
 import React from 'react';
-<<<<<<< HEAD
-import NavWrapper from './components/navbar/NavWrapper';
-import HomeContent from './components/homePage/home';
-=======
 import Navbar from './components/navbar/Navbar';
 import Footer from "./components/footer/Footer";
+import NavWrapper from './components/navbar/NavWrapper';
+import Dashboard from './components/dashboard/Dashboard'
 import HomeContent from './components/homePage/Home';
->>>>>>> 064b167a3e4c8be379b8eaca7ee5fe8019aaeeda
 import Settings from './components/settingsPage/Settings';
 import SignUpForm from './components/forms/signUpForm';
 import LoginForm from './components/forms/logInForm';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import CreateGame from './components/createGame/CreateGame';
 import Activity from './components/activityTypes/Activity'
-<<<<<<< HEAD
-import LabelPictures from "./components/activityTypes/labelPictures/labelPicturesApp"
-import Dashboard from './components/dashboard/Dashboard'
-=======
 import LabelPictures from "./components/activityTypes/LabelPictures/LabelPicturesApp"
->>>>>>> 064b167a3e4c8be379b8eaca7ee5fe8019aaeeda
 function App() {
   return (
     <Router>

@@ -20,7 +20,7 @@ Notes on whats missing:
 import React, { useState } from 'react';
 
 import Form from './Form'
-import { passwordCheck } from '../../helpers/PasswordCheck'
+import { passwordCheck } from '../../helpers/passwordCheck'
 import { Redirect } from "react-router-dom"
 
 // IMPORTS FOR REDUX
