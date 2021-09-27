@@ -12,9 +12,9 @@ export default function ActivitiesContent() {
                     </button>
                 </div>
                 <div className="search">
-                    <div class="input-group">
-                        <span class="input-group-text" id="basic-addon1">search</span>
-                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
+                    <div className="input-group">
+                        <span className="input-group-text" id="basic-addon1">search</span>
+                        <input type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
                     </div>
                 </div>
             </div>

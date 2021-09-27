@@ -6,10 +6,9 @@ import { useSelector } from 'react-redux';
 import ActivitiesContent from './ActivitiesContent';
 
 export default function Dashboard() {
-    const state = useSelector((state) => state.dashboard)
+    const dashboardState = useSelector((state) => state.dashboard)
     let content;
-
-    switch (state.selected) {
+    switch (dashboardState.selected) {
         case "home":
             content = <HomeContent />
             break;
