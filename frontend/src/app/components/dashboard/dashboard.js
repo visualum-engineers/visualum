@@ -2,23 +2,48 @@ import React, { useState } from 'react'
 import DashboardNav from './DashboardNav';
 import HomeContent from './HomeContent';
 import SidebarItem from './SidebarItem';
+import { useSelector } from 'react-redux';
 
 export default function Dashboard() {
-    const [selected, setSelected] = useState("home");
+    const state = useSelector((state) => state.dashboard)
+    let content = <HomeContent />
+
+    switch (state.selected) {
+        case "home":
+            content = <HomeContent />
+            break;
+        case "my-class":
+            content = <div />
+            break;
+        case "statistics":
+            content = <div />
+            break;
+        case "grades":
+            content = <div />
+            break;
+        case "settings":
+            content = <div />
+            break;
+        case "help":
+            content = <div />
+            break;
+        default:
+            <div />
+    }
     return (
         <div className="vh-100">
             <DashboardNav />
             <div className="dashboard-container">
                 <div className="sidebar">
-                    <SidebarItem name="Home" value="home" handleSelect={setSelected} selected={selected} />
-                    <SidebarItem name="My Class" value="my-class" handleSelect={setSelected} selected={selected} />
-                    <SidebarItem name="Statistics" value="statistics" selected={selected} handleSelect={setSelected} />
-                    <SidebarItem name="Grades" value="grades" selected={selected} handleSelect={setSelected} />
-                    <SidebarItem name="Settings" value="settings" selected={selected} handleSelect={setSelected} />
-                    <SidebarItem name="Help" value="help" selected={selected} handleSelect={setSelected} />
+                    <SidebarItem name="Home" value="home" />
+                    <SidebarItem name="My Class" value="my-class" />
+                    <SidebarItem name="Statistics" value="statistics" />
+                    <SidebarItem name="Grades" value="grades" />
+                    <SidebarItem name="Settings" value="settings" />
+                    <SidebarItem name="Help" value="help" />
                 </div>
                 <div className="main-content">
-                    <HomeContent />
+                    {content}
                 </div>
             </div>
         </div>
