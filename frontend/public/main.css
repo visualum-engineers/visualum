@@ -1041,7 +1041,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 12%;
+  width: 15%;
   border-right: 1px solid rgba(179, 179, 179, 0.5);
   background-color: white;
   padding: .9rem 0;
@@ -1098,7 +1098,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 }
 
 .dashboard-container .main-content {
-  width: 88%;
+  width: 85%;
   height: 100%;
   padding: 1.7rem;
 }
@@ -1169,6 +1169,64 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 
 .overview-card:hover h6 {
   color: #8a28da !important;
+}
+
+.activities-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.activities-container .control-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 100%;
+  height: 3rem;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+}
+
+.activities-container .control-bar .buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.activities-container .control-bar .buttons .button {
+  width: 5rem;
+  margin-right: 10px;
+  height: 40px;
+  font-size: .8rem;
+}
+
+.activities-container .control-bar .search {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  height: 40px;
+}
+
+.activities-container .control-bar .search .input-group {
+  height: 40px !important;
+}
+
+.activities-container .control-bar .search .input-group .input-group-text {
+  height: inherit;
+  font-size: .8rem;
+}
+
+.activities-container .control-bar .search .input-group .form-control {
+  height: inherit !important;
 }
 
 @media (min-width: 992px) {

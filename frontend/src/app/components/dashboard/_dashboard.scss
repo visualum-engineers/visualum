@@ -8,7 +8,7 @@
     .sidebar {
         display: flex;
         flex-direction: column;
-        width: 12%;
+        width: 15%;
         border-right: 1px solid rgba(179, 179, 179 ,.5);
         background-color: white;
         padding: .9rem 0;
@@ -43,7 +43,7 @@
         }
     }
     .main-content {
-        width: 88%;
+        width: 85%;
         height: 100%;
         padding: 1.7rem;
         .card-container {
@@ -95,6 +95,43 @@
         box-shadow: 0 4px 11px  rgba(33,33,33,.2); 
         h6 {
             color: rgb(138, 40, 218) !important;
+        }
+    }
+}
+
+.activities-container {
+    display: flex;
+    flex-direction: column;
+    .control-bar {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        height: 3rem;
+        flex-shrink: 0;
+        .buttons {
+            display: flex;
+            .button {
+                width: 5rem;
+                margin-right: 10px;
+                height: 40px;
+                font-size: .8rem;
+            }
+        }
+        .search {
+            display: flex;
+            // flex-shrink: 0;
+            flex-grow: 1;
+            height: 40px;
+            .input-group {
+                height: 40px !important;
+                .input-group-text {
+                    height: inherit;
+                    font-size: .8rem;
+                }
+                .form-control {
+                    height: inherit !important;
+                }
+            }
         }
     }
 }

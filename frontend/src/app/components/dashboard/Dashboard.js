@@ -3,6 +3,7 @@ import DashboardNav from './DashboardNav';
 import HomeContent from './HomeContent';
 import SidebarItem from './SidebarItem';
 import { useSelector } from 'react-redux';
+import ActivitiesContent from './ActivitiesContent';
 
 export default function Dashboard() {
     const state = useSelector((state) => state.dashboard)
@@ -14,6 +15,9 @@ export default function Dashboard() {
             break;
         case "my-class":
             content = <div />
+            break;
+        case "activities":
+            content = <ActivitiesContent />
             break;
         case "statistics":
             content = <div />
@@ -37,6 +41,7 @@ export default function Dashboard() {
                 <div className="sidebar">
                     <SidebarItem name="Home" value="home" />
                     <SidebarItem name="My Class" value="my-class" />
+                    <SidebarItem name="My Activities" value="activities" />
                     <SidebarItem name="Statistics" value="statistics" />
                     <SidebarItem name="Grades" value="grades" />
                     <SidebarItem name="Settings" value="settings" />
