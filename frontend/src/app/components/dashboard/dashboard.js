@@ -7,7 +7,7 @@ import ActivitiesContent from './ActivitiesContent';
 
 export default function Dashboard() {
     const state = useSelector((state) => state.dashboard)
-    let content = <HomeContent />
+    let content;
 
     switch (state.selected) {
         case "home":
