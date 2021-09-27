@@ -149,8 +149,8 @@
 }
 
 #search-btn.border {
-  -webkit-box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
-          box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
+  -webkit-box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
+          box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
 }
 
 #nav-button {
@@ -1111,7 +1111,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 }
 
 .dashboard-nav {
-  height: 6%;
+  height: 3rem;
   padding: .3rem;
   background-color: #480069 !important;
 }
@@ -1282,7 +1282,7 @@ a, a:hover, a:focus {
 
 .App {
   position: relative;
-  height: 100vh;
+  height: 100%;
   background-color: #090322;
 }
 /*# sourceMappingURL=main.css.map */
