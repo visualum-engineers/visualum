@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faUser, faStar } from '@fortawesome/free-solid-svg-icons'
 import { CSSTransition } from 'react-transition-group'
-
+import { useHistory } from 'react-router-dom';
 
 export default function UserProfile(props) {
     const [isMouseOverButton, setIsMouseOverButton] = useState(false);
@@ -56,6 +56,11 @@ export default function UserProfile(props) {
 }
 
 function UserDropdown(props) {
+    let history = useHistory();
+
+    const handleButtonClick = (val) => {
+        history.push(`/${val}`)
+    }
     return (
         <CSSTransition
             in={props.open}
@@ -89,9 +94,9 @@ function UserDropdown(props) {
                     </div>
                 </div>
                 <div className="user-dropdown-panel ps-0">
+                    <button className="user-dropdown-button" onClick={() => handleButtonClick("dashboard")}>Dashboard</button>
                     <button className="user-dropdown-button">Activity</button>
                     <button className="user-dropdown-button">Redeem</button>
-                    <button className="user-dropdown-button">Store</button>
                     <button className="user-dropdown-button">Settings</button>
                     <button className="user-dropdown-button">Help</button>
                 </div>
