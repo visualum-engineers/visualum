@@ -59,12 +59,14 @@ function App() {
             </NavWrapper>
           </Route>
 
-          <Route exact path="/dashboard">
+          <Route exact path="/dashboard/home">
             <DashboardHome />
           </Route>
-
           <Route exact path="/dashboard/activities">
             <DashboardActivities />
+          </Route>
+          <Route path="/dashboard">
+            <DashboardHome />
           </Route>
 
         </Switch>
