@@ -1077,15 +1077,17 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-transition: -webkit-transform .25s ease-in-out;
-  transition: -webkit-transform .25s ease-in-out;
-  transition: transform .25s ease-in-out;
-  transition: transform .25s ease-in-out, -webkit-transform .25s ease-in-out;
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
 }
 
 .dashboard-container .dashboard-sidebar .sidebar-item .tab-button:hover {
   -webkit-transform: scale(1.05);
           transform: scale(1.05);
+}
+
+.dashboard-container .dashboard-sidebar .sidebar-item .tab-button:hover:not(.selected) {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .dashboard-container .dashboard-sidebar .sidebar-item .selected {
@@ -1096,6 +1098,8 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 
 .dashboard-container .dashboard-sidebar .sidebar-item p {
   margin: 0;
+  -webkit-transition: all .25s ease-in-out;
+  transition: all .25s ease-in-out;
 }
 
 .dashboard-container .main-content {

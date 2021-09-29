@@ -31,7 +31,10 @@
                 &:hover {
                     transform: scale(1.05);
                 }
-                transition: transform .25s ease-in-out;
+                &:hover:not(.selected){
+                    background-color: rgba(0,0,0,0.05);
+                }
+                transition: all .2s ease-in-out;
             }
             .selected {
                 background-color: rgb(138, 0, 202);
@@ -40,6 +43,7 @@
             }
             p {
                 margin: 0;
+                transition: all .25s ease-in-out;
             }
         }
     }
