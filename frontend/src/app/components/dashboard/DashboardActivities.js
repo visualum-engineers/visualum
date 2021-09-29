@@ -16,7 +16,7 @@ export default function DashboardActivities() {
                     <div className="search">
                         <div className="input-group">
                             <span className="input-group-text" id="basic-addon1">search</span>
-                            <input type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
+                            <input type="text" className="form-control" placeholder="search activities" aria-label="activity" aria-describedby="basic-addon1" />
                         </div>
                     </div>
                 </div>
