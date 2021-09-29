@@ -1,6 +1,7 @@
 import React from 'react';
 import NavWrapper from './components/navbar/NavWrapper';
-import Dashboard from './components/dashboard/Dashboard'
+import DashboardHome from './components/dashboard/DashboardHome'
+import DashboardActivities from './components/dashboard/DashboardActivities';
 import HomeContent from './components/homePage/Home';
 import Settings from './components/settingsPage/Settings';
 import SignUpForm from './components/forms/signUpForm';
@@ -59,7 +60,11 @@ function App() {
           </Route>
 
           <Route exact path="/dashboard">
-            <Dashboard />
+            <DashboardHome />
+          </Route>
+
+          <Route exact path="/dashboard/activities">
+            <DashboardActivities />
           </Route>
 
         </Switch>

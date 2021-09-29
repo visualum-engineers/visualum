@@ -5,10 +5,11 @@
     width: 100%;
     display: flex;
     overflow: hidden;
-    .sidebar {
+    .dashboard-sidebar {
         display: flex;
         flex-direction: column;
         width: 15%;
+        min-width: 180px;
         border-right: 1px solid rgba(179, 179, 179 ,.5);
         background-color: white;
         padding: .9rem 0;
@@ -98,6 +99,8 @@
         }
     }
 }
+
+
 
 .activities-container {
     display: flex;

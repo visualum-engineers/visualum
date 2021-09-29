@@ -1,54 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import DashboardNav from './DashboardNav';
-import HomeContent from './HomeContent';
-import SidebarItem from './SidebarItem';
-import { useSelector } from 'react-redux';
-import ActivitiesContent from './ActivitiesContent';
+import DashboardSidebar from './DashboardSidebar';
 
-export default function Dashboard() {
-    const dashboardState = useSelector((state) => state.dashboard)
-    let content;
-    switch (dashboardState.selected) {
-        case "home":
-            content = <HomeContent />
-            break;
-        case "my-class":
-            content = <div />
-            break;
-        case "activities":
-            content = <ActivitiesContent />
-            break;
-        case "statistics":
-            content = <div />
-            break;
-        case "grades":
-            content = <div />
-            break;
-        case "settings":
-            content = <div />
-            break;
-        case "help":
-            content = <div />
-            break;
-        default:
-            <div />
-    }
-    //test
+export default function Dashboard(props) {
     return (
         <div className="vh-100">
-            <DashboardNav />
+            <DashboardNav page={props.page} />
             <div className="dashboard-container">
-                <div className="sidebar">
-                    <SidebarItem name="Home" value="home" />
-                    <SidebarItem name="My Class" value="my-class" />
-                    <SidebarItem name="My Activities" value="activities" />
-                    <SidebarItem name="Statistics" value="statistics" />
-                    <SidebarItem name="Grades" value="grades" />
-                    <SidebarItem name="Settings" value="settings" />
-                    <SidebarItem name="Help" value="help" />
-                </div>
+                <DashboardSidebar />
                 <div className="main-content">
-                    {content}
+                    {props.children}
                 </div>
             </div>
         </div>

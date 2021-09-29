@@ -1033,7 +1033,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   overflow: hidden;
 }
 
-.dashboard-container .sidebar {
+.dashboard-container .dashboard-sidebar {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1042,6 +1042,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
       -ms-flex-direction: column;
           flex-direction: column;
   width: 15%;
+  min-width: 180px;
   border-right: 1px solid rgba(179, 179, 179, 0.5);
   background-color: white;
   padding: .9rem 0;
@@ -1049,7 +1050,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   box-shadow: 3px 1px 10px 7px rgba(0, 0, 0, 0.1);
 }
 
-.dashboard-container .sidebar .sidebar-item {
+.dashboard-container .dashboard-sidebar .sidebar-item {
   font-size: .9rem;
   width: 100%;
   height: 75px;
@@ -1066,7 +1067,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   cursor: pointer;
 }
 
-.dashboard-container .sidebar .sidebar-item .tab-button {
+.dashboard-container .dashboard-sidebar .sidebar-item .tab-button {
   padding: 5px 10px;
   width: 95%;
   border-radius: 10px;
@@ -1082,18 +1083,18 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   transition: transform .25s ease-in-out, -webkit-transform .25s ease-in-out;
 }
 
-.dashboard-container .sidebar .sidebar-item .tab-button:hover {
+.dashboard-container .dashboard-sidebar .sidebar-item .tab-button:hover {
   -webkit-transform: scale(1.05);
           transform: scale(1.05);
 }
 
-.dashboard-container .sidebar .sidebar-item .selected {
+.dashboard-container .dashboard-sidebar .sidebar-item .selected {
   background-color: #8a00ca;
   color: white;
   font-weight: bold;
 }
 
-.dashboard-container .sidebar .sidebar-item p {
+.dashboard-container .dashboard-sidebar .sidebar-item p {
   margin: 0;
 }
 
