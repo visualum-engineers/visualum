@@ -4,7 +4,7 @@ import OverviewCard from './OverviewCard';
 
 export default function DashboardHome() {
     return (
-        <Dashboard>
+        <Dashboard page="home">
             <div className="card-container">
                 <OverviewCard value="grades" title="Grades" subtitle="Manage Class Grades" text="Input, edit and delete class grades.">
                     {/* {content here (example charts, minified displays, etc.)} */}
