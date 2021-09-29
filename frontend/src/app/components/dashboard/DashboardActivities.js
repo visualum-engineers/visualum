@@ -2,8 +2,15 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import Dashboard from './Dashboard'
+import ActivityCard from './ActivityCard';
 
-export default function DashboardActivities() {
+export default function DashboardActivities(props) {
+
+    let activities = [];
+    props.data.forEach(activity => {
+        activities.push(<ActivityCard data={activity} />)
+    });
+
     return (
         <Dashboard page="activities">
             <div className="activities-container">
@@ -20,7 +27,10 @@ export default function DashboardActivities() {
                         </div>
                     </div>
                 </div>
+                <div className="activityList">
+                    {activities}
+                </div>
             </div>
-        </Dashboard>
+        </Dashboard >
     )
 }

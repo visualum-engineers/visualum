@@ -109,6 +109,7 @@
 .activities-container {
     display: flex;
     flex-direction: column;
+    height: 100%;
     .control-bar {
         display: flex;
         flex-wrap: wrap;
@@ -139,6 +140,44 @@
                     height: inherit !important;
                 }
             }
+        }
+    }
+}
+
+.activityList {
+    overflow-y: scroll;
+    height: 100%;
+    width: 100%;
+}
+
+.activity {
+    // display: flex;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: rgb(255, 255, 255);
+    margin-bottom: .8rem;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 5px 5px 2px rgba(0,0,0,0.2); 
+    box-shadow: 0px 5px 5px -2px rgba(0,0,0,0.2);
+    .title {
+        display: flex;
+        align-items: center;
+        height: 100%
+    }
+    .num-questions {
+        display: flex;
+        align-items: center;
+        height: 100%
+    }
+    .btns {
+        display: flex;
+        justify-content: flex-end;
+        .btn {
+            height: 2rem;
+            padding: 5px 10px;
+            font-size: .8rem;
+            @include center;
+            margin: 0 5px;
         }
     }
 }

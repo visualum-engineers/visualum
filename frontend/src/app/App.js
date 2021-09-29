@@ -10,6 +10,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import CreateGame from './components/createGame/CreateGame';
 import Activity from './components/activityTypes/Activity'
 import LabelPictures from "./components/activityTypes/LabelPictures/LabelPicturesApp"
+
+import sampleActivityData from './helpers/sampleActivityData'
+
 function App() {
   return (
     <Router>
@@ -63,7 +66,7 @@ function App() {
             <DashboardHome />
           </Route>
           <Route exact path="/dashboard/activities">
-            <DashboardActivities />
+            <DashboardActivities data={sampleActivityData} />
           </Route>
           <Route path="/dashboard">
             <DashboardHome />
