@@ -1,8 +1,7 @@
-
+#!/usr/bin/env
 SECRET=$(doppler secrets get MONGO_DB_URI --plain)
-npm install
+#clone database
 mongodump --uri "$SECRET" --out ./cloneDB
 mongorestore --port 27017 ./cloneDB
-nodemon 
-app.js
-echo $SECRET
+#makes env variables available to authenticated members
+doppler run -- nodemon app.js
