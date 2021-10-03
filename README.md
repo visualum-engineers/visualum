@@ -2,7 +2,8 @@
 This project was built using the MERN stack
 ## Prerequisites
 1. Install Node.js 16.4.0
-2. Install Doppler: https://docs.doppler.com/docs/enclave-installation
+2. Install MongoDB Database Tools: https://docs.mongodb.com/database-tools/installation/installation-windows/ 
+3. Install Doppler: https://docs.doppler.com/docs/enclave-installation
     * Ensure you have setup your account, and have accepted the invite to join the doppler visualum team
     * Doppler is in charge of hosting all enviroment variables. 
         * If you do not have access, you will be unable to run our Node API.
@@ -17,7 +18,11 @@ This project was built using the MERN stack
 2. Navigate to backend directory by running `cd backend` from root
 3. Run `npm install` to install all dependencies 
 4. Launching API Server
-    1. If in development : Run `doppler run -- npm run dev`
+    1. If in development : 
+        * On Windows:
+            * Run `npm run win_dev`
+        * On MacOS:
+            * Run `npm run mac_dev`
     2. If in production : Run `npm start`
 
 ## Compiling Sass Files 

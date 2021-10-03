@@ -5,7 +5,8 @@
   "main": "connection.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js",
+    "win_dev": "cloneDB.bat",
+    "mac_dev": "cloneDB.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -13,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "mongodb": "^4.1.2",
     "mongoose": "^6.0.8",
     "passport": "^0.5.0"
   },
