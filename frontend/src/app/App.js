@@ -1,7 +1,10 @@
 import React from 'react';
 import NavWrapper from './components/navbar/NavWrapper';
+
 import DashboardHome from './components/dashboard/DashboardHome'
 import DashboardActivities from './components/dashboard/DashboardActivities';
+import DashboardClass from './components/dashboard/DashboardClass';
+
 import HomeContent from './components/homePage/Home';
 import Settings from './components/settingsPage/Settings';
 import SignUpForm from './components/forms/signUpForm';
@@ -67,6 +70,9 @@ function App() {
           </Route>
           <Route exact path="/dashboard/activities">
             <DashboardActivities data={sampleActivityData} />
+          </Route>
+          <Route exact path="/dashboard/classes">
+            <DashboardClass />
           </Route>
           <Route path="/dashboard">
             <DashboardHome />

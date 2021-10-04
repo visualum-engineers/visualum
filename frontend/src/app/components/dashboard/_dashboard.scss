@@ -104,6 +104,31 @@
     }
 }
 
+.class-card {
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    margin-right: 1rem;
+    border: none;
+    box-shadow: 0 4px 11px rgba(33,33,33,.1); 
+    h5 {
+        font-size: 1.1rem;
+    }
+    h6 {
+        font-size: .9rem;
+        transition: color .25s ease-in-out;
+    }
+    p {
+        font-size: .8rem;
+    }
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 11px  rgba(33,33,33,.2); 
+        h6 {
+            color: rgb(138, 40, 218) !important;
+        }
+    }
+}
+
 
 
 .activities-container {
