@@ -13,7 +13,7 @@ export default function DashboardNav(props) {
                 <a className="navbar-brand" href="#navbar">visualum</a>
                 <div className="back-button-container">
                     <button className="btn back-button" onClick={handleClick}>
-                        Go Back
+                        Back to Homepage
                     </button>
                 </div>
             </div>

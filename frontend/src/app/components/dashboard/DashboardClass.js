@@ -3,6 +3,8 @@ import Dashboard from './Dashboard'
 import StudentCard from './StudentCard'
 
 export default function DashboardClass() {
+    // let { class_id } = useParams();
+    // USE CLASS_ID TO RETRIEVE CLASS DATA
     const studentData = [
         {
             name: "Derek Widmer",
