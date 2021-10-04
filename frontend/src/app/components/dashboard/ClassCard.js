@@ -1,15 +1,13 @@
 import React from 'react'
 
-export default function ClassCard() {
+export default function ClassCard(props) {
     return (
-        <div className="d-flex">
-            <div class="card class-card" style={{ width: "18rem" }}>
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
+        <div class="card class-card" style={{ width: "18rem" }}>
+            <div class="card-body">
+                <h5 class="card-title">{props.title}</h5>
+                <h6 className="card-subtitle mb-2 text-muted">{props.subtitle}</h6>
+                <p class="card-text">{props.text}</p>
             </div>
-        </div >
+        </div>
     )
 }
