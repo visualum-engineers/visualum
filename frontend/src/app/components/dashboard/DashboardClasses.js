@@ -1,5 +1,4 @@
 import React from 'react'
-import { useParams } from 'react-router'
 import ClassCard from './ClassCard'
 import Dashboard from './Dashboard'
 
