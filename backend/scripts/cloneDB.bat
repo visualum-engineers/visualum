@@ -6,7 +6,8 @@ node local_DB.js
 cd ../
 :: clones database
 :: change the DB uri after 'doppler secrets get', but BEFORE --plain
-:: to the uri of the database you want to work on 
+:: to the uri of the database you want to work on
+:: NOTE: Database URIs on stored on doppler 
 :: DO NOT CHANGE ANYTHING ELSE!
 echo off
 for /f "delims=" %%i in ('doppler secrets get MONGO_TESTING_DB_URI --plain') do set MONGO_TESTING_DB_URI=%%i
