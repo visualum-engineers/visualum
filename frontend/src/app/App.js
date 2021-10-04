@@ -3,7 +3,7 @@ import NavWrapper from './components/navbar/NavWrapper';
 
 import DashboardHome from './components/dashboard/DashboardHome'
 import DashboardActivities from './components/dashboard/DashboardActivities';
-import DashboardClass from './components/dashboard/DashboardClass';
+import DashboardClass from './components/dashboard/DashboardClasses';
 
 import HomeContent from './components/homePage/Home';
 import Settings from './components/settingsPage/Settings';
@@ -70,6 +70,9 @@ function App() {
           </Route>
           <Route exact path="/dashboard/activities">
             <DashboardActivities data={sampleActivityData} />
+          </Route>
+          <Route exact path="/dashboard/classes/:class_id">
+            <DashboardClass />
           </Route>
           <Route exact path="/dashboard/classes">
             <DashboardClass />
