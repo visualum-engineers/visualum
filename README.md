@@ -33,7 +33,7 @@ This project was built using the MERN stack
 1. Development
     * If you use VSCode, install the extension, Live Sass Compiler.
     * If you decide not to use VSCode:
-        1. Find another simple software that will automatically compile all scss files, into the main.css file. 
+        1. Find another simple software that will automatically compile all scss files, into the main.scss file. 
         2. Ensure sass files are compiled into the main.css file
 2. Production
     * We may use webpack
