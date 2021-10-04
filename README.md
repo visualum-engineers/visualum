@@ -25,7 +25,7 @@ This project was built using the MERN stack
         * On MacOS:
             * Run `npm run mac_dev`
         * Cloud database will be cloned, and will launch a local database on local host:27017. 
-            * local database will be used for manipulating and testing datasets. This minimizes bug proliferation in a production database
+            * local database will be used for manipulating and testing datasets. This minimizes bug proliferation in production(cloud) database
             * Only when code has no severe breaking changes, should it be adopted for the cloud database
     2. If in production : Run `npm start`
 
