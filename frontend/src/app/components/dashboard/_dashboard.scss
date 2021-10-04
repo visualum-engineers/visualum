@@ -54,6 +54,7 @@
         .card-container {
             display: flex;
             width: 100%;
+            flex-wrap: wrap;
         }
     }
 }
@@ -130,6 +131,40 @@
 }
 
 
+.student-card {
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    margin: .5rem;
+    border: none;
+    box-shadow: 0 4px 11px rgba(33,33,33,.1); 
+    flex-direction: row;
+    .icon {
+        background-color: red;
+        display: flex;
+        flex: 0 0 auto;
+        margin: auto 1rem;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+    h5 {
+        font-size: 1.1rem;
+    }
+    h6 {
+        font-size: .9rem;
+        transition: color .25s ease-in-out;
+    }
+    p {
+        font-size: .8rem;
+    }
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 11px  rgba(33,33,33,.2); 
+        h6 {
+            color: rgb(138, 40, 218) !important;
+        }
+    }
+}
 
 .activities-container {
     display: flex;

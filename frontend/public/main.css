@@ -1113,6 +1113,8 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   display: -ms-flexbox;
   display: flex;
   width: 100%;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .dashboard-nav {
@@ -1208,6 +1210,59 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 }
 
 .class-card:hover h6 {
+  color: #8a28da !important;
+}
+
+.student-card {
+  cursor: pointer;
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+  margin: .5rem;
+  border: none;
+  -webkit-box-shadow: 0 4px 11px rgba(33, 33, 33, 0.1);
+          box-shadow: 0 4px 11px rgba(33, 33, 33, 0.1);
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.student-card .icon {
+  background-color: red;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+  margin: auto 1rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.student-card h5 {
+  font-size: 1.1rem;
+}
+
+.student-card h6 {
+  font-size: .9rem;
+  -webkit-transition: color .25s ease-in-out;
+  transition: color .25s ease-in-out;
+}
+
+.student-card p {
+  font-size: .8rem;
+}
+
+.student-card:hover {
+  -webkit-transform: translateY(-5px);
+          transform: translateY(-5px);
+  -webkit-box-shadow: 0 4px 11px rgba(33, 33, 33, 0.2);
+          box-shadow: 0 4px 11px rgba(33, 33, 33, 0.2);
+}
+
+.student-card:hover h6 {
   color: #8a28da !important;
 }
 

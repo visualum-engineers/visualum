@@ -3,7 +3,8 @@ import NavWrapper from './components/navbar/NavWrapper';
 
 import DashboardHome from './components/dashboard/DashboardHome'
 import DashboardActivities from './components/dashboard/DashboardActivities';
-import DashboardClass from './components/dashboard/DashboardClasses';
+import DashboardClasses from './components/dashboard/DashboardClasses';
+import DashboardClass from './components/dashboard/DashboardClass';
 
 import HomeContent from './components/homePage/Home';
 import Settings from './components/settingsPage/Settings';
@@ -75,7 +76,7 @@ function App() {
             <DashboardClass />
           </Route>
           <Route exact path="/dashboard/classes">
-            <DashboardClass />
+            <DashboardClasses />
           </Route>
           <Route path="/dashboard">
             <DashboardHome />
