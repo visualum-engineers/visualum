@@ -12,6 +12,7 @@ This project was built using the MERN stack
 2. Navigate to the frontend directory by running `cd frontend` from root
 3. Run `npm install` to install all dependencies
 4. Run `npm start`
+    * Will launch frontend server on https://localhost:3000
 
 ## Run Node API
 1. Open up command line
@@ -23,6 +24,7 @@ This project was built using the MERN stack
             * Run `npm run win_dev`
         * On MacOS:
             * Run `npm run mac_dev`
+        * Cloned copy will launch on https://localhost:27017
     2. If in production : Run `npm start`
 
 ## Compiling Sass Files 

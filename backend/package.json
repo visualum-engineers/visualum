@@ -10,7 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "visualum",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
