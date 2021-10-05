@@ -17,4 +17,4 @@ echo on
 
 rmdir /s /q dump
 :: makes env variable available to authenticated members
-doppler run -- nodemon app.js
+doppler run -- nodemon server.js

@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import CreateGame from './components/createGame/CreateGame';
 import Activity from './components/activityTypes/Activity'
 import LabelPictures from "./components/activityTypes/LabelPictures/LabelPicturesApp"
+import TestBackend from "./components/testBackend/test"
 function App() {
   return (
     <Router>
@@ -62,6 +63,9 @@ function App() {
             <Dashboard />
           </Route>
 
+          <Route exact path = "/testBackend">
+            <TestBackend/>
+          </Route>
         </Switch>
       </div >
     </Router >

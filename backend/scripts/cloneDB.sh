@@ -17,4 +17,4 @@ mongorestore --port 27017
 #removes unnecessary files
 rm -r dump
 #makes env variables available to authenticated members
-doppler run -- nodemon app.js
+doppler run -- nodemon server.js

@@ -13,7 +13,7 @@ mongoose.connect(url, {
     // Deletes the database
     return new Promise((resolve, reject)=>{
         resolve(mongoose.connection.db.dropDatabase(
-            console.log("connection dropped")
+            console.log("Database refreshed")
         ));
     })
 }).finally(()=>{
