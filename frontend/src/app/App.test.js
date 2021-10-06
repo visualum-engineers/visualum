@@ -7,6 +7,6 @@ import App from './App';
 describe("<App />", () => {
   it("Renders <App /> component correctly", () => {
     const { getByText } = render(<App />);
-    expect(getByText(/Join Eureka to explore your educational journey/i)).toBeInTheDocument();
+    expect(getByText(/A world class education for anyone, anywhere./i)).toBeInTheDocument();
   });
 });
