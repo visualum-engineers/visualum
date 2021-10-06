@@ -44,14 +44,6 @@
     .nav-link:hover{
         @include hover-color;
     }
-    
-    /*spacing around nav elements i.e links and search bar */
-    #navbarSupportedContent{
-        @include no-space;
-    }
-    .navbar-nav{
-        @include center;
-    }
 
     #signOut-btn{
         @include fillContainer;

@@ -115,21 +115,18 @@ export default function Navbar() {
     return (
         <div id="filter-navbar-container" className="navbar-expand-lg fixed-top">
             <nav className="navbar navbar-expand-lg" id="navbar">
-                <a href="#navbar" className="companyTitle"> visualum </a>
+                <a href="/" className="companyTitle"> visualum </a>
                 <NavToggler />
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav flex-fill">
                         <NavItem>
-                            <a className="nav-link mx-1" href="#navbar">Home</a>
+                            <button className="nav-link mx-1" href="#navbar">Discover</button>
                         </NavItem>
                         <NavItem>
-                            <a className="nav-link mx-1" href="#navbar">Teacher</a>
+                            <button className="nav-link mx-1" href="#navbar">Teacher</button>
                         </NavItem>
                         <NavItem>
-                            <a className="nav-link mx-1" href="#navbar">Student</a>
-                        </NavItem>
-                        <NavItem>
-                            <a className="nav-link mx-1" href="#navbar">About Us</a>
+                            <button className="nav-link mx-1" href="#navbar">Help</button>
                         </NavItem>
                         <SearchBar />
                         <div className="d-flex justify-content-end signout-btn px-1 m-0">
