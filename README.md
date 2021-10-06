@@ -6,7 +6,7 @@ This project was built using the MERN stack
 3. Install Doppler: https://docs.doppler.com/docs/enclave-installation
     * Ensure you have setup your account, and have accepted the invite to join the doppler visualum team
     * Doppler is in charge of hosting all enviroment variables. 
-        * If you do not have access, you will be unable to run our Node API.
+        * If you do not have access, you will be unable to run/access our Node API.
 ## Run Frontend Server
 1. Open up command line
 2. Navigate to the frontend directory by running `cd frontend` from root
@@ -18,15 +18,9 @@ This project was built using the MERN stack
 1. Open up command line
 2. Navigate to backend directory by running `cd backend` from root
 3. Run `npm install` to install all dependencies 
-4. Launching API Server
-    1. If in development : 
-        * On Windows:
-            * Run `npm run win_dev`
-        * On MacOS:
-            * Run `npm run mac_dev`
-        * Cloud database will be cloned, and will launch a local database on local host:27017. 
-            * local database will be used for manipulating and testing datasets. This minimizes bug proliferation in production(cloud) database
-            * Only when code has no severe breaking changes, should it be adopted for the cloud database
+4. Launching API
+    1. If in development : Run `npm run dev`
+        * Will launch API server on https://localhost:8000
     2. If in production : Run `npm start`
 
 ## Compiling Sass Files 

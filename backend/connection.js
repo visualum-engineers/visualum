@@ -2,6 +2,8 @@ const mongoose = require("mongoose")
 const express = require("express");
 const app = express();
 const routes = require("./routes/test_router")
+//database uri. Change this depending on 
+//what database you want to work on 
 const db_server = process.env["MONGO_DEV_DB_URI"]
 //for logging database name
 let db_name = db_server.match(/\/[A-Za-z]+\?/).toString()
