@@ -31,7 +31,7 @@
   color: white;
   background: none;
   border: none;
-  padding: 7px;
+  padding: 8px;
   text-align: center;
   font-size: 17px;
   display: -webkit-box;
@@ -47,8 +47,8 @@
 }
 
 .nav-btn:hover {
-  background: white;
-  color: #271b53;
+  background: rgba(255, 255, 255, 0.267);
+  color: white;
 }
 
 .nav-btn:active {
@@ -100,39 +100,24 @@
   border-radius: 5px;
 }
 
-#search-icon:hover {
-  background: white;
-  color: #271b53;
-}
-
 /* Right arrow icon on search toggle */
 #search-icon.fa-arrow-left {
+  padding-bottom: 2px;
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
   -webkit-transition: all ease 0.2s;
   transition: all ease 0.2s;
-  padding-bottom: 2px;
 }
 
 #search-btn {
-  background-color: rgba(255, 255, 255, 0);
+  background: none;
   border: none;
   height: 70%;
   width: 50px;
   border-radius: 5px;
 }
 
-#search-btn:hover {
-  background: white;
-  color: #271b53;
-}
-
-#search-btn.border {
-  -webkit-box-shadow: 1px 1px 0 0 white, 0 0px 0 1px white;
-          box-shadow: 1px 1px 0 0 white, 0 0px 0 1px white;
-}
-
-#nav-button {
+#nav-toggler {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -146,12 +131,13 @@
   width: 40px;
 }
 
-#nav-button, #search-btn {
+#nav-toggler, #search-btn {
   margin: 0;
   padding: 0;
 }
 
 #nav-icon, #search-icon {
+  color: white;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -165,12 +151,11 @@
   width: 100%;
   -webkit-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
-  color: white;
 }
 
-#nav-icon:hover {
-  background: white;
-  color: #271b53;
+#nav-icon:hover, #search-icon:hover {
+  background: rgba(255, 255, 255, 0.267);
+  color: white;
 }
 
 #nav-icon.fa-arrow-down {
@@ -241,7 +226,6 @@
 }
 
 .user-icon {
-  background: white;
   color: #271b53;
 }
 
@@ -310,6 +294,11 @@
   width: 100%;
 }
 
+.user-dropdown-connect > .user-dropdown-button {
+  margin-top: 9.5px;
+  margin-bottom: 9.5px;
+}
+
 .user-dropdown-buttons {
   height: 50%;
   width: 100%;
@@ -340,8 +329,8 @@
 
 .user-dropdown-button:hover {
   cursor: pointer;
-  background-color: white;
-  color: #090322;
+  background: rgba(255, 255, 255, 0.267);
+  color: white;
 }
 
 .user-dropdown-social-icon {
@@ -383,7 +372,7 @@
 .sidebar-nav {
   z-index: 4;
   height: 100vh;
-  width: 520px;
+  width: 560px;
   background: rgba(1, 14, 99, 0.582);
 }
 
@@ -784,8 +773,8 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 }
 
 .foot-link:hover {
-  background: white;
-  color: #271b53;
+  background: rgba(255, 255, 255, 0.267);
+  color: white;
   border-radius: 5px;
 }
 
@@ -1044,8 +1033,8 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 }
 
 .navActivityBtn:hover {
-  background: white;
-  color: #271b53;
+  background: rgba(255, 255, 255, 0.267);
+  color: white;
 }
 
 @media (min-width: 992px) {
@@ -1111,8 +1100,8 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
   }
 
   .nav-link:hover {
-    background: white;
-    color: #271b53;
+    background: rgba(255, 255, 255, 0.267);
+    color: white;
     border-radius: 5px;
   }
 

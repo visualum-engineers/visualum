@@ -30,7 +30,7 @@
     color: white;
     background: none;
     border: none;
-    padding: 7px;
+    padding: 8px;
     text-align: center;
     font-size: 17px;
     @include center;
@@ -81,51 +81,40 @@
     font-size: 20px;
     @include border-radius(5px);
 }
-#search-icon:hover{
-    @include hover-color
-}
 /* Right arrow icon on search toggle */
 #search-icon.fa-arrow-left{
+    padding-bottom: 2px;
     transform: rotate(180deg);
     @include transition(all ease 0.2s);
-    padding-bottom: 2px;
 }
 #search-btn{
-    background-color: rgba(255, 255, 255, 0);
+    background: none;
     border: none;
     height: 70%;
     width: 50px;
     @include border-radius(5px);
 }
-#search-btn:hover{
-    @include hover-color
-}
-#search-btn.border{
-    box-shadow: 1px 1px 0 0 white, 
-    0 0px 0 1px white;
-}
 
-#nav-button{
+#nav-toggler{
     @include center;
     height: 40px;
     width: 40px;
 }
 
-#nav-button, #search-btn{
+#nav-toggler, #search-btn{
     @include no-space;
 }
 
 #nav-icon, #search-icon{
+    color: white;
     @include center;
     @include fillContainer;
     @include transition(all 0.3s ease-out);
-    color: white;
 }
 
-#nav-icon:hover{
+#nav-icon:hover, #search-icon:hover{
     @include hover-color;
 }
-
 
 #nav-icon.fa-arrow-down{
     transform: rotate(180deg);
@@ -173,7 +162,7 @@
 }
 
 .user-icon {
-    @include hover-color;
+    color: #271b53;
 }
 
 .user-reward {
@@ -225,6 +214,10 @@
     width: 100%;
 }
 
+.user-dropdown-connect>.user-dropdown-button{
+    margin-top: 9.5px;
+    margin-bottom: 9.5px;
+}
 .user-dropdown-buttons {
     height: 50%;
     width: 100%;
@@ -245,8 +238,7 @@
 }
 .user-dropdown-button:hover {
     cursor: pointer;
-    background-color: white;
-    color: $bg-color;
+    @include hover-color;
 }
 
 .user-dropdown-social-icon {
@@ -274,7 +266,7 @@
 .sidebar-nav{
     z-index: 4;
     height: 100vh;
-    width: 520px;
+    width: 560px;
     background: rgba(1, 14, 99, 0.582);
 }
 .sidebar-dark-bg{

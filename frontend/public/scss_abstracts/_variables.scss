@@ -49,8 +49,8 @@ $nav-height: 100px;
 }
 
 @mixin hover-color{
-    background: white;
-    color:  #271b53;
+    background: rgba(255, 255, 255, 0.267);
+    color:  white;
 }
 
 @mixin no-space {

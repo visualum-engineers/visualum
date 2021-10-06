@@ -35,12 +35,12 @@ export default function Navbar(props) {
                         <div className="navbar-nav w-100 justify-content-start">
                             <NavItem 
                                 textContent={"Discover"} 
-                                openSideBar={props.openSideBar}/>
+                                handleSideBar={props.handleSideBar}/>
                             <NavItem 
                                 textContent={"Subjects"} 
-                                openSideBar={props.openSideBar}/>
+                                handleSideBar={props.handleSideBar}/>
                             <NavItem textContent={"Help"} 
-                                openSideBar={props.openSideBar}/>
+                                handleSideBar={props.handleSideBar}/>
                         </div>
                         <div className="navbar-nav w-100 justify-content-end">
                             <SearchBar />

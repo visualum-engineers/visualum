@@ -1,25 +1,47 @@
-import React, { useState} from 'react'
+import React, { useState, useEffect} from 'react'
 import SideBar from './Sidebar';
 import Navbar from './Navbar'
 import Footer from '../footer/Footer'
 
 export default function NavWrapper(props) {
     const [sidebarToggle, setSidebarToggle] = useState(false)
+    const [windowWidth, setWidth] = useState(window.innerWidth>=992)
+    //handles resizing events
+    useEffect(() => {
+        const resize = () => {
+            if(windowWidth && window.innerWidth<=991)setWidth(false)
+            else if(!windowWidth && window.innerWidth>=992)setWidth(true)
+        }
+        window.addEventListener('resize', resize);
+
+        // Remove event listener on cleanup
+        return () => window.removeEventListener("resize", resize)
+    }, [windowWidth]); 
+
     const exitSideBar = () =>{
         setSidebarToggle(false)
     }
     const openSideBar = () =>{
         setSidebarToggle(true)
     }
-
+    const handleSideBar = () =>{
+        if (sidebarToggle) return exitSideBar()
+        if (!sidebarToggle && windowWidth) return openSideBar()
+        else {
+            //insert logic for mobile devices.
+            //where sidebar will not be present
+        }
+    }
     return (
         <>
             <SideBar
                 sidebarToggle = {sidebarToggle} 
-                exitSideBar={exitSideBar}/>
+                handleSideBar = {handleSideBar}
+            />
             <Navbar 
                 sidebarToggle ={sidebarToggle}
-                openSideBar={openSideBar}/>
+                handleSideBar = {handleSideBar}
+            />
             {props.children}
             <Footer />
         </>

@@ -24,7 +24,7 @@ const NavToggler = () => {
     return (
         <button
             disabled={disabled}
-            id="nav-button"
+            id="nav-toggler"
             className="container-fluid navbar-toggler"
             type="button"
             data-bs-toggle="collapse"

@@ -7,7 +7,7 @@ const SideBar = (props) =>{
         <button 
             className={`sidebar-dark-bg fixed-top ${props.sidebarToggle ?"sidebar-bg-show":"sidebar-bg-hide"}`}
             aria-label="exit-sidebar"
-            onClick={props.exitSideBar}
+            onClick={props.handleSideBar}
             >
         </button>
         </>
