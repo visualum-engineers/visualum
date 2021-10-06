@@ -24,8 +24,9 @@ export default function NavWrapper(props) {
     const openSideBar = () =>{
         setSidebarToggle(true)
     }
-    const handleSideBar = () =>{
-        if (sidebarToggle) return exitSideBar()
+    const handleSideBar = (e) =>{
+        console.log()
+        if (sidebarToggle && e.target.ariaLabel === "exit-sidebar") return exitSideBar()
         if (!sidebarToggle && windowWidth) return openSideBar()
         else {
             //insert logic for mobile devices.

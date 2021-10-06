@@ -10,9 +10,12 @@
 .homePage{
     position: relative;
     text-align: justify;
-    padding: 200px 10vw;
+    padding: 0 10vw;
+    padding-top: 100px;
+    padding-bottom: 20px;
     margin: 0;
-    height: 80%;
+    height: 100vh;
+    min-height: 550px;
     width: 100%;
     z-index: 1;
 }
@@ -33,9 +36,29 @@
 }
 
 .introContainer{
+    position: relative;
     color: white;
-    text-align: left;
+    text-align: center;
     padding-left: 3vw;
+    padding: 30px;
+    min-width: 250px;
+    width: 35vw;
+    border-radius: 5px;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.342); 
+    z-index: 1;
+    background: rgba(6, 29, 80, 0.383);
+    overflow: hidden;
+}
+.introContainer:before{
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: inset 0 0 2000px rgb(6, 29, 80);
+    filter: blur(4px);
 }
 
 .introContainer h2{
@@ -45,7 +68,7 @@
 }
 
 .introContainer p{
-    font-size: 1.2em;
+    font-size: 1em;
     padding: 0;
     margin: 0;
     font-family: 'Merriweather', serif;
@@ -55,9 +78,42 @@
 .introContainer button{
     display: flex;
     align-items: center;
+    width: 120px;
+    height: 50px;
 }
 
 .introContainer button>span{
     padding-left: 10px;
-    font-size: 1.3em;
+    font-size: 1.2em;
+}
+.introContainer button>p{
+    font-size: 0.8em;
+}
+#home-enter-code>input[type="number"]{
+    width: 110px;
+}
+#home-enter-code>label{
+    border: none !important;
+    font-size: 14px;
+    @include transition(opacity .1s ease-in-out, transform .1s ease-in-out);
+}
+#home-enter-code>.form-control:focus,
+#home-enter-code>.form-control:not(:placeholder-shown),
+#home-enter-code>.form-select {
+        ~ label{
+        opacity: 0.9;
+        transform: scale(.7) translateY(-10px) translateX(2px) !important;
+    }
+}
+
+.home-explore-link{
+    color: white;
+    justify-self: end;
+}
+.home-explore-link:hover{
+    color: rgb(170, 169, 169);
+}
+.home-explore-link>p{
+    display: inline;
+    margin: 0;
 }
