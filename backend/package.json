@@ -5,8 +5,7 @@
   "main": "connection.js",
   "scripts": {
     "start": "node app.js",
-    "win_dev": "scripts\\cloneDB.bat",
-    "mac_dev": "scripts\\cloneDB.sh",
+    "dev": "doppler run -- nodemon connection.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
