@@ -1,272 +1,300 @@
-    /* text font */
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&display=swap');
+.navbar{
+    @include border-radius(0);
+    @include fillContainer;
+    padding: 30px 30px;
+    margin: 0;
+    color: white;
+    border: none;
+    @include transition(all 0.25s ease-out);
+    z-index:3;
+}
+//when scrolled, padding is reduced to make navbar smaller
+//vertical height when scrolled: vertical height when not scrolled:
+.navbarScrollActive{
+    padding: 5px 30px;
+}
+.navbarScrollActive.sidebar-close{
+    background: $main-color;
+}
 
-    .navbar{
-        @include border-radius(0);
-        @include fillContainer;
-        padding: 30px 30px;
-        margin: 0;
-        color: white;
-        border: none;
-        transition: all 0.25s;
-        z-index:3;
-    }
-    //when scrolled, padding is reduced to make navbar smaller
-    //vertical height when scrolled: vertical height when not scrolled:
-    .navbarScrollActive{
-        background: $main-color;
-        padding: 5px 30px;
-    }
-    
-    .navbar a{
-        color: white;
-    }
+.companyTitle{
+    font-size: 1.6em;
+    font-family: 'Merriweather', serif;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    padding-right: 30px;
+}
 
-    .companyTitle{
-        font-size: 1.6em;
-        font-family: 'Merriweather', serif;
-        font-weight: 400;
-        letter-spacing: 0.1em;
-        width: 20vw;
-    }
 
-    .nav-item{ 
-        font-size: 1rem;    
-        display: flex;
-    }
-    .nav-link{
-        @include center;
-        @include fillContainer;
-        @include border-radius(10px);
-        text-align: center;
-        font-size: 17px;
-    }
-    .nav-link:hover{
-        @include hover-color;
-    }
+.nav-btn{
+    color: white;
+    background: none;
+    border: none;
+    padding: 7px;
+    text-align: center;
+    font-size: 17px;
+    @include center;
+    @include border-radius(10px);
+}
+.nav-btn:hover{
+    @include hover-color;
+}
 
-    #signOut-btn{
-        @include fillContainer;
-        font-size: 1rem;
-    }
-    .signout-btn{
-        align-self: stretch;
-    }
-    #signIn-btn{
-        @extend #signOut-btn ;
-    }
+.nav-btn:active{
+    color: white;
+}
+.nav-btn:visited{
+    color: white;
+}
+#signOut-btn{
+    @include fillContainer;
+    font-size: 1rem;
+}
+.signout-btn{
+    align-self: stretch;
+}
+#signIn-btn{
+    @extend #signOut-btn;
+}
 
-    #search-box{
-        padding: 0;
-        align-self: stretch;
-    }
-    
-    #search-bar{
-        padding: 0;
-        align-self: stretch;
-        width: 0px;
-        border: 0;
-        transition: width ease 0.3s;
-        height: 70%;
-    }
+#search-box{
+    padding: 0;
+    align-self: stretch;
+}
 
-    #search-bar.expand{
-        margin: 0 0.5rem 0 0;
-        padding-left: 10px;
-        border: 0px;
-        transition: width ease 0.3s;
-    }
-    #search-icon{
-        font-size: 20px;
-        @include border-radius(5px);
-    }
-    #search-icon:hover{
-        @include hover-color
-    }
-    /* Right arrow icon on search toggle */
-    #search-icon.fa-arrow-left{
-        transform: rotate(180deg);
-        transition: ease 0.2s;
-        padding-bottom: 2px;
-    }
-    #search-btn{
-        background-color: rgba(255, 255, 255, 0);
-        border: none;
-        height: 70%;
-        width: 50px;
-        @include border-radius(5px);
-    }
-    #search-btn:hover{
-        @include hover-color
-    }
-    #search-btn.border{
-        box-shadow: 1px 1px 0 0 white, 
-        0 0px 0 1px white;
-    }
-    
-    #nav-button{
-        @include center;
-        height: 40px;
-        width: 40px;
-    }
-    
-    #nav-button, #search-btn{
-        @include no-space;
-    }
-    
-    #nav-icon, #search-icon{
-        @include center;
-        @include fillContainer;
-        transition: all 0.3s;
-        color: white;
-    }
-    
-    #nav-icon:hover{
-        @include hover-color;
-    }
-    
+#search-bar{
+    padding: 0;
+    align-self: stretch;
+    width: 0px;
+    border: 0;
+    @include transition(width ease 0.3s);
+    height: 70%;
+}
 
-    #nav-icon.fa-arrow-down{
-        transform: rotate(180deg);
-        transition: ease 0.2s;
-    }
+#search-bar.expand{
+    margin: 0 0.5rem 0 0;
+    padding-left: 10px;
+    border: 0px;
+    @include transition(all width ease 0.3s);
+}
+#search-icon{
+    font-size: 20px;
+    @include border-radius(5px);
+}
+#search-icon:hover{
+    @include hover-color
+}
+/* Right arrow icon on search toggle */
+#search-icon.fa-arrow-left{
+    transform: rotate(180deg);
+    @include transition(all ease 0.2s);
+    padding-bottom: 2px;
+}
+#search-btn{
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    height: 70%;
+    width: 50px;
+    @include border-radius(5px);
+}
+#search-btn:hover{
+    @include hover-color
+}
+#search-btn.border{
+    box-shadow: 1px 1px 0 0 white, 
+    0 0px 0 1px white;
+}
 
-    #nav-icon.fa-bars{
-        transform: rotate(180deg);
-        font-size: 28px;
-        transition: ease 0.2s;
-    }
-    
-    /* this is to control the drop animation of navbar */
-    .collapsing{
-        transition: height 0.15s ease !important;
-    }
+#nav-button{
+    @include center;
+    height: 40px;
+    width: 40px;
+}
 
-    .user {
-        background-color: rgba(255, 255, 255, 0);
-        border: none;
-        color: white;
-        @include center;
-        height: 100%;
-        padding: 5px 10px;
-        @include border-radius(25px);
-        transition: background-color 250ms ease-in-out;
-    }
+#nav-button, #search-btn{
+    @include no-space;
+}
 
-    .user:hover {
-        background-color: rgba(255, 255, 255, 0.267);
-        cursor: pointer;
-    }
+#nav-icon, #search-icon{
+    @include center;
+    @include fillContainer;
+    @include transition(all 0.3s ease-out);
+    color: white;
+}
 
-    .user-active {
-        background-color: rgba(255, 255, 255, 0.267);
-    }
+#nav-icon:hover{
+    @include hover-color;
+}
 
-    .user-profile {
-        width: 40px;
-        height: 40px;
-        margin: 5px;
-        border-radius: 50%;
-        background-color: white;
-        @include center;
-    }
 
-    .user-icon {
-        @include hover-color;
-    }
+#nav-icon.fa-arrow-down{
+    transform: rotate(180deg);
+    @include transition(all ease 0.2s);
+}
 
-    .user-reward {
-        margin: 0 10px;
-    }
+#nav-icon.fa-bars{
+    transform: rotate(180deg);
+    font-size: 28px;
+    @include transition(all ease 0.2s);
+}
 
-    .user-reward-icon {
-        margin-right: 5px;
-        font-size: 1rem;
-    }
+/* this is to control the drop animation of navbar */
+.collapsing{
+    @include transition(height 0.15s ease !important);
+}
 
-    .user-dropdown {
-        height: 310px;
-        width: 440px;
-        font-size: 0.9em;
-        position: absolute;
-        background-color:lighten($color: $bg-color, $amount: 10);
-        @include border-radius(15px);
-        top: 100px;
-        display: flex;
-    }
+.user {
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    color: white;
+    @include center;
+    height: 100%;
+    padding: 5px 10px;
+    @include border-radius(25px);
+    @include transition(background-color 250ms ease-in-out);
+}
 
-    .user-dropdown-panel {
-        height: 100%;
-        width: 50%;
-        padding: 10px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
+.user:hover {
+    background-color: rgba(255, 255, 255, 0.267);
+    cursor: pointer;
+}
 
-    .user-dropdown-panel-header {
-        height: 1.2rem;
-        width: 100%;
-        margin: 5px 0;
-        text-align: center;
-    }
+.user-active {
+    background-color: rgba(255, 255, 255, 0.267);
+}
 
-    .user-dropdown-assignment {
-        height: 40%;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
+.user-profile {
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    border-radius: 50%;
+    background-color: white;
+    @include center;
+}
 
-    .user-dropdown-connect {
-        height: 60%;
-        width: 100%;
-    }
+.user-icon {
+    @include hover-color;
+}
 
-    .user-dropdown-buttons {
-        height: 50%;
-        width: 100%;
-    }
+.user-reward {
+    margin: 0 10px;
+}
 
-    .user-dropdown-button {
-        border: none;
-        color: white;
-        text-align: center;
-        width: 90%;
-        height: 38px;
-        @include center;
-        margin: 7.5px auto;
-        padding: 10px;
-        @include border-radius(15px);
-        background-color:lighten($color: $bg-color, $amount: 2);
-        transition: all 250ms ease-in-out;
-    }
-    .user-dropdown-button:hover {
-        cursor: pointer;
-        background-color: white;
-        color: $bg-color;
-    }
+.user-reward-icon {
+    margin-right: 5px;
+    font-size: 1rem;
+}
 
-    .user-dropdown-social-icon {
-        margin-right: 10px;
-    }
+.user-dropdown {
+    height: 310px;
+    width: 440px;
+    font-size: 0.9em;
+    position: absolute;
+    background-color:lighten($color: $bg-color, $amount: 10);
+    @include border-radius(15px);
+    top: 100px;
+    display: flex;
+}
 
-    .dropdown-enter {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    .dropdown-enter-active {
-        opacity: 1;
-        transform: translateX(0);
-        transition: opacity 300ms, transform 300ms;
-    }
-    .dropdown-exit {
-        opacity: 1; 
-    }
-    .dropdown-exit-active {
-        opacity: 0;
-        transform: scale(0.9);
-        transition: opacity 300ms, transform 300ms;
-    }
-      
+.user-dropdown-panel {
+    height: 100%;
+    width: 50%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.user-dropdown-panel-header {
+    height: 1.2rem;
+    width: 100%;
+    margin: 5px 0;
+    text-align: center;
+}
+
+.user-dropdown-assignment {
+    height: 40%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.user-dropdown-connect {
+    height: 60%;
+    width: 100%;
+}
+
+.user-dropdown-buttons {
+    height: 50%;
+    width: 100%;
+}
+
+.user-dropdown-button {
+    border: none;
+    color: white;
+    text-align: center;
+    width: 90%;
+    height: 38px;
+    @include center;
+    margin: 7.5px auto;
+    padding: 10px;
+    @include border-radius(15px);
+    background-color:lighten($color: $bg-color, $amount: 2);
+    @include transition(all 250ms ease-in-out);
+}
+.user-dropdown-button:hover {
+    cursor: pointer;
+    background-color: white;
+    color: $bg-color;
+}
+
+.user-dropdown-social-icon {
+    margin-right: 10px;
+}
+
+.dropdown-enter {
+    opacity: 0;
+    transform: scale(0.9);
+}
+.dropdown-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    @include transition(opacity 300ms, transform 300ms);
+}
+.dropdown-exit {
+    opacity: 1; 
+}
+.dropdown-exit-active {
+    opacity: 0;
+    transform: scale(0.9);
+    @include transition(opacity 300ms, transform 300ms);
+}
+
+.sidebar-nav{
+    z-index: 4;
+    height: 100vh;
+    width: 520px;
+    background: rgba(1, 14, 99, 0.582);
+}
+.sidebar-dark-bg{
+    border: none;
+    z-index: 3;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(22, 22, 22, 0.685);
+}
+.sidebar-right{
+    left: 0px;
+    @include transition(all 0.3s ease-out)
+}
+.sidebar-left{
+    transform: translate(-100%);
+    @include transition(all 0.3s ease-out)
+}
+.sidebar-bg-show{
+    display: inline;
+}
+.sidebar-bg-hide{
+    display: none;
+}
