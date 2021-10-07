@@ -30,7 +30,9 @@ export default function Navbar(props) {
                             ${window.scrollY > 50 ? "navbarScrollActive": null}
                         `}>
                     <a href="/" className="companyTitle"> visualum </a>
-                    <NavToggler />
+
+                    {props.windowWidth ? null: <NavToggler />}
+                    
                     <div id="navbarSupportedContent" className="collapse navbar-collapse">
                         <div className="navbar-nav w-100 justify-content-start">
                             <NavItem 
