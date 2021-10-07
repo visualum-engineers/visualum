@@ -1,11 +1,12 @@
 .navbar{
     @include border-radius(0);
     @include fillContainer;
+    @include transition(all 0.25s ease-out);
     padding: 30px 30px;
+    padding-bottom: 10px;
     margin: 0;
     color: white;
     border: none;
-    @include transition(all 0.25s ease-out);
     z-index:3;
 }
 //when scrolled, padding is reduced to make navbar smaller
@@ -27,24 +28,37 @@
 
 
 .nav-btn{
+    @include center;
+    @include border-radius(10px);
+    position: relative;
     color: white;
     background: none;
     border: none;
     padding: 8px;
     text-align: center;
-    font-size: 17px;
-    @include center;
-    @include border-radius(10px);
+    font-size: 1em;
 }
-.nav-btn:hover{
-    @include hover-color;
+.nav-btn{
+    &:hover,
+    &:active{
+        @include hover-color;
+    }
 }
-
-.nav-btn:active{
-    color: white;
+.nav-btn>p{
+    @include no-space;
+    position: relative;
 }
-.nav-btn:visited{
-    color: white;
+.nav-btn{
+    &:focus p::after,
+    &:active p::after{
+        position: absolute;
+        content: "";
+        width: calc(100% - 2px);
+        left: 1px;
+        bottom: -1.5px;
+        height: 2px;
+        background-color: white;
+    }
 }
 #signOut-btn{
     @include fillContainer;
@@ -63,36 +77,36 @@
 }
 
 #search-bar{
+    @include transition(width ease 0.3s);
     padding: 0;
     align-self: stretch;
     width: 0px;
     border: 0;
-    @include transition(width ease 0.3s);
     height: 70%;
 }
 
 #search-bar.expand{
+    @include transition(all width ease 0.3s);
     margin: 0 0.5rem 0 0;
     padding-left: 10px;
     border: 0px;
-    @include transition(all width ease 0.3s);
 }
 #search-icon{
-    font-size: 20px;
     @include border-radius(5px);
+    font-size: 20px;
 }
 /* Right arrow icon on search toggle */
 #search-icon.fa-arrow-left{
+    @include transition(all ease 0.2s);
     padding-bottom: 2px;
     transform: rotate(180deg);
-    @include transition(all ease 0.2s);
 }
 #search-btn{
+    @include border-radius(5px);
     background: none;
     border: none;
     height: 70%;
     width: 50px;
-    @include border-radius(5px);
 }
 
 #nav-toggler{
@@ -106,10 +120,10 @@
 }
 
 #nav-icon, #search-icon{
-    color: white;
     @include center;
     @include fillContainer;
     @include transition(all 0.3s ease-out);
+    color: white;
 }
 
 #nav-icon:hover, #search-icon:hover{
@@ -117,14 +131,14 @@
 }
 
 #nav-icon.fa-arrow-down{
-    transform: rotate(180deg);
     @include transition(all ease 0.2s);
+    transform: rotate(180deg);
 }
 
 #nav-icon.fa-bars{
+    @include transition(all ease 0.2s);
     transform: rotate(180deg);
     font-size: 28px;
-    @include transition(all ease 0.2s);
 }
 
 /* this is to control the drop animation of navbar */
@@ -133,14 +147,14 @@
 }
 
 .user {
+    @include center;
+    @include border-radius(25px);
+    @include transition(background-color 250ms ease-in-out);
     background-color: rgba(255, 255, 255, 0);
     border: none;
     color: white;
-    @include center;
     height: 100%;
     padding: 5px 10px;
-    @include border-radius(25px);
-    @include transition(background-color 250ms ease-in-out);
 }
 
 .user:hover {
@@ -153,12 +167,12 @@
 }
 
 .user-profile {
+    @include center;
     width: 40px;
     height: 40px;
     margin: 5px;
     border-radius: 50%;
     background-color: white;
-    @include center;
 }
 
 .user-icon {
@@ -175,12 +189,12 @@
 }
 
 .user-dropdown {
+    @include border-radius(15px);
     height: 310px;
     width: 440px;
     font-size: 0.9em;
     position: absolute;
     background-color:lighten($color: $bg-color, $amount: 10);
-    @include border-radius(15px);
     top: 100px;
     display: flex;
 }
@@ -222,23 +236,22 @@
     height: 50%;
     width: 100%;
 }
-
 .user-dropdown-button {
+    @include border-radius(15px);
+    @include center;
+    @include transition(all 250ms ease-in-out);
     border: none;
     color: white;
     text-align: center;
     width: 90%;
     height: 38px;
-    @include center;
     margin: 7.5px auto;
     padding: 10px;
-    @include border-radius(15px);
     background-color:lighten($color: $bg-color, $amount: 2);
-    @include transition(all 250ms ease-in-out);
 }
 .user-dropdown-button:hover {
-    cursor: pointer;
     @include hover-color;
+    cursor: pointer;
 }
 
 .user-dropdown-social-icon {
@@ -250,24 +263,25 @@
     transform: scale(0.9);
 }
 .dropdown-enter-active {
+    @include transition(opacity 300ms, transform 300ms);
     opacity: 1;
     transform: translateX(0);
-    @include transition(opacity 300ms, transform 300ms);
 }
 .dropdown-exit {
     opacity: 1; 
 }
 .dropdown-exit-active {
+    @include transition(opacity 300ms, transform 300ms);
     opacity: 0;
     transform: scale(0.9);
-    @include transition(opacity 300ms, transform 300ms);
 }
 
 .sidebar-nav{
     z-index: 4;
     height: 100vh;
-    width: 560px;
-    background: rgba(20, 33, 73, 0.582);
+    min-width: 560px;
+    width: 40vw;
+    background: rgba(31, 49, 110, 0.582);
 }
 .sidebar-dark-bg{
     border: none;
@@ -277,16 +291,48 @@
     background: rgba(22, 22, 22, 0.685);
 }
 .sidebar-right{
+    @include transition(all 0.3s ease-out);
     left: 0px;
-    @include transition(all 0.3s ease-out)
 }
 .sidebar-left{
+    @include transition(all 0.3s ease-out);
     transform: translate(-100%);
-    @include transition(all 0.3s ease-out)
 }
 .sidebar-bg-show{
     display: inline;
 }
 .sidebar-bg-hide{
     display: none;
+}
+.sidebar-link-container{
+    margin-top: 100px;
+    margin-left: 248px;
+    width: 150px;
+    color: white;
+    font-size: 0.85em;
+}
+.sidebar-link{
+    width: 1px;
+    margin-bottom: 5px;
+}
+
+.sidebar-link>p{
+    width: fit-content;
+    @include no-space;
+}
+
+.exit-sidebar-btn{
+    @include border-radius(5px);
+    position: absolute;
+    top:0;
+    right: 15px;
+    margin-top: 110px;
+    padding: 0 7px;
+    color: white;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+}
+.exit-sidebar-btn:hover{
+    @include hover-color;
 }

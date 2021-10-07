@@ -6,6 +6,8 @@ import Footer from '../footer/Footer'
 export default function NavWrapper(props) {
     const [sidebarToggle, setSidebarToggle] = useState(false)
     const [windowWidth, setWidth] = useState(window.innerWidth>=992)
+    const [sidebarBtnType, setBtnType] = useState("")
+    
     //handles resizing events
     useEffect(() => {
         const resize = () => {
@@ -25,8 +27,11 @@ export default function NavWrapper(props) {
         setSidebarToggle(true)
     }
     const handleSideBar = (e) =>{
-        if (sidebarToggle && e.target.ariaLabel === "exit-sidebar") return exitSideBar()
-        if (!sidebarToggle && windowWidth) return openSideBar()
+        if (sidebarToggle && e.target.closest("button").ariaLabel === "exit-sidebar") return exitSideBar()
+        if (windowWidth) {
+            setBtnType(e.target.closest("button").ariaLabel)
+            return openSideBar()
+        }
         else {
             //insert logic for mobile devices.
             //where sidebar will not be present
@@ -37,9 +42,11 @@ export default function NavWrapper(props) {
             {!windowWidth? null: <SideBar
                     sidebarToggle = {sidebarToggle} 
                     handleSideBar = {handleSideBar}
+                    btnType = {sidebarBtnType}
                 />
             }
             <Navbar 
+                windowWidth = {windowWidth}
                 sidebarToggle ={sidebarToggle}
                 handleSideBar = {handleSideBar}
             />

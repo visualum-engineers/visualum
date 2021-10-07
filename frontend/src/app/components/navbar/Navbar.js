@@ -7,14 +7,14 @@ import SearchBar from './SearchBar';
 //Navbar 
 export default function Navbar(props) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const handleScroll = () => {
-        if (window.scrollY > 50) {
-            document.getElementById("navbar").classList.add("navbarScrollActive")
-        } else {
-            document.getElementById("navbar").classList.remove("navbarScrollActive")
-        }
-    }
     useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                document.getElementById("navbar").classList.add("navbarScrollActive")
+            } else {
+                document.getElementById("navbar").classList.remove("navbarScrollActive")
+            }
+        }
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
@@ -46,6 +46,7 @@ export default function Navbar(props) {
                             <SearchBar />
                             <div className="d-flex justify-content-end signout-btn px-1 m-0">
                                 <Login 
+                                    windowWidth ={props.windowWidth}
                                     signedIn={true} 
                                     dropdownOpen={dropdownOpen} 
                                     toggleDropdownOpen={() => { setDropdownOpen(!dropdownOpen) }} 

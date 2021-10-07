@@ -2,12 +2,13 @@
   border-radius: 0;
   height: 100%;
   width: 100%;
+  -webkit-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
   padding: 30px 30px;
+  padding-bottom: 10px;
   margin: 0;
   color: white;
   border: none;
-  -webkit-transition: all 0.25s ease-out;
-  transition: all 0.25s ease-out;
   z-index: 3;
 }
 
@@ -28,12 +29,6 @@
 }
 
 .nav-btn {
-  color: white;
-  background: none;
-  border: none;
-  padding: 8px;
-  text-align: center;
-  font-size: 17px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -44,19 +39,34 @@
       -ms-flex-pack: center;
           justify-content: center;
   border-radius: 10px;
+  position: relative;
+  color: white;
+  background: none;
+  border: none;
+  padding: 8px;
+  text-align: center;
+  font-size: 1em;
 }
 
-.nav-btn:hover {
+.nav-btn:hover, .nav-btn:active {
   background: rgba(255, 255, 255, 0.267);
   color: white;
 }
 
-.nav-btn:active {
-  color: white;
+.nav-btn > p {
+  margin: 0;
+  padding: 0;
+  position: relative;
 }
 
-.nav-btn:visited {
-  color: white;
+.nav-btn:focus p::after, .nav-btn:active p::after {
+  position: absolute;
+  content: "";
+  width: calc(100% - 2px);
+  left: 1px;
+  bottom: -1.5px;
+  height: 2px;
+  background-color: white;
 }
 
 #signOut-btn, #signIn-btn {
@@ -77,44 +87,44 @@
 }
 
 #search-bar {
+  -webkit-transition: width ease 0.3s;
+  transition: width ease 0.3s;
   padding: 0;
   -ms-flex-item-align: stretch;
       align-self: stretch;
   width: 0px;
   border: 0;
-  -webkit-transition: width ease 0.3s;
-  transition: width ease 0.3s;
   height: 70%;
 }
 
 #search-bar.expand {
+  -webkit-transition: all width ease 0.3s;
+  transition: all width ease 0.3s;
   margin: 0 0.5rem 0 0;
   padding-left: 10px;
   border: 0px;
-  -webkit-transition: all width ease 0.3s;
-  transition: all width ease 0.3s;
 }
 
 #search-icon {
-  font-size: 20px;
   border-radius: 5px;
+  font-size: 20px;
 }
 
 /* Right arrow icon on search toggle */
 #search-icon.fa-arrow-left {
+  -webkit-transition: all ease 0.2s;
+  transition: all ease 0.2s;
   padding-bottom: 2px;
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
-  -webkit-transition: all ease 0.2s;
-  transition: all ease 0.2s;
 }
 
 #search-btn {
+  border-radius: 5px;
   background: none;
   border: none;
   height: 70%;
   width: 50px;
-  border-radius: 5px;
 }
 
 #nav-toggler {
@@ -137,7 +147,6 @@
 }
 
 #nav-icon, #search-icon {
-  color: white;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -151,6 +160,7 @@
   width: 100%;
   -webkit-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
+  color: white;
 }
 
 #nav-icon:hover, #search-icon:hover {
@@ -159,18 +169,18 @@
 }
 
 #nav-icon.fa-arrow-down {
-  -webkit-transform: rotate(180deg);
-          transform: rotate(180deg);
   -webkit-transition: all ease 0.2s;
   transition: all ease 0.2s;
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
 }
 
 #nav-icon.fa-bars {
+  -webkit-transition: all ease 0.2s;
+  transition: all ease 0.2s;
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
   font-size: 28px;
-  -webkit-transition: all ease 0.2s;
-  transition: all ease 0.2s;
 }
 
 /* this is to control the drop animation of navbar */
@@ -180,9 +190,6 @@
 }
 
 .user {
-  background-color: rgba(255, 255, 255, 0);
-  border: none;
-  color: white;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -192,11 +199,14 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: 100%;
-  padding: 5px 10px;
   border-radius: 25px;
   -webkit-transition: background-color 250ms ease-in-out;
   transition: background-color 250ms ease-in-out;
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  color: white;
+  height: 100%;
+  padding: 5px 10px;
 }
 
 .user:hover {
@@ -209,11 +219,6 @@
 }
 
 .user-profile {
-  width: 40px;
-  height: 40px;
-  margin: 5px;
-  border-radius: 50%;
-  background-color: white;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -223,6 +228,11 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  border-radius: 50%;
+  background-color: white;
 }
 
 .user-icon {
@@ -239,12 +249,12 @@
 }
 
 .user-dropdown {
+  border-radius: 15px;
   height: 310px;
   width: 440px;
   font-size: 0.9em;
   position: absolute;
   background-color: #150751;
-  border-radius: 15px;
   top: 100px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -305,11 +315,7 @@
 }
 
 .user-dropdown-button {
-  border: none;
-  color: white;
-  text-align: center;
-  width: 90%;
-  height: 38px;
+  border-radius: 15px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -319,18 +325,22 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  margin: 7.5px auto;
-  padding: 10px;
-  border-radius: 15px;
-  background-color: #0b042b;
   -webkit-transition: all 250ms ease-in-out;
   transition: all 250ms ease-in-out;
+  border: none;
+  color: white;
+  text-align: center;
+  width: 90%;
+  height: 38px;
+  margin: 7.5px auto;
+  padding: 10px;
+  background-color: #0b042b;
 }
 
 .user-dropdown-button:hover {
-  cursor: pointer;
   background: rgba(255, 255, 255, 0.267);
   color: white;
+  cursor: pointer;
 }
 
 .user-dropdown-social-icon {
@@ -344,14 +354,14 @@
 }
 
 .dropdown-enter-active {
-  opacity: 1;
-  -webkit-transform: translateX(0);
-          transform: translateX(0);
   -webkit-transition: opacity 300ms, transform 300ms;
   -webkit-transition: opacity 300ms, -webkit-transform 300ms;
   transition: opacity 300ms, -webkit-transform 300ms;
   transition: opacity 300ms, transform 300ms;
   transition: opacity 300ms, transform 300ms, -webkit-transform 300ms;
+  opacity: 1;
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
 }
 
 .dropdown-exit {
@@ -359,21 +369,22 @@
 }
 
 .dropdown-exit-active {
-  opacity: 0;
-  -webkit-transform: scale(0.9);
-          transform: scale(0.9);
   -webkit-transition: opacity 300ms, transform 300ms;
   -webkit-transition: opacity 300ms, -webkit-transform 300ms;
   transition: opacity 300ms, -webkit-transform 300ms;
   transition: opacity 300ms, transform 300ms;
   transition: opacity 300ms, transform 300ms, -webkit-transform 300ms;
+  opacity: 0;
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
 }
 
 .sidebar-nav {
   z-index: 4;
   height: 100vh;
-  width: 560px;
-  background: rgba(20, 33, 73, 0.582);
+  min-width: 560px;
+  width: 40vw;
+  background: rgba(31, 49, 110, 0.582);
 }
 
 .sidebar-dark-bg {
@@ -385,16 +396,16 @@
 }
 
 .sidebar-right {
-  left: 0px;
   -webkit-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
+  left: 0px;
 }
 
 .sidebar-left {
-  -webkit-transform: translate(-100%);
-          transform: translate(-100%);
   -webkit-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
+  -webkit-transform: translate(-100%);
+          transform: translate(-100%);
 }
 
 .sidebar-bg-show {
@@ -403,6 +414,45 @@
 
 .sidebar-bg-hide {
   display: none;
+}
+
+.sidebar-link-container {
+  margin-top: 100px;
+  margin-left: 248px;
+  width: 150px;
+  color: white;
+  font-size: 0.85em;
+}
+
+.sidebar-link {
+  width: 1px;
+  margin-bottom: 5px;
+}
+
+.sidebar-link > p {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0;
+  padding: 0;
+}
+
+.exit-sidebar-btn {
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  right: 15px;
+  margin-top: 110px;
+  padding: 0 7px;
+  color: white;
+  background: none;
+  border: none;
+  font-size: 1.5em;
+}
+
+.exit-sidebar-btn:hover {
+  background: rgba(255, 255, 255, 0.267);
+  color: white;
 }
 
 .stars {

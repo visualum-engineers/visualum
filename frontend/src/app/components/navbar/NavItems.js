@@ -1,10 +1,22 @@
-const NavItem = (props) =>{  
+const NavItem = ({sidebar=false, url=false, handleSideBar=false, textContent}) =>{  
     return (
-    <button 
-        className="nav-btn mx-2" 
-        aria-label={props.textContent}
-        onClick={props.handleSideBar}>
-            {props.textContent}
-    </button>)
+        <>
+            {sidebar ?
+                <a
+                    className="sidebar-link" 
+                    aria-label={textContent}
+                    href={url}>
+                        <p>{textContent}</p>
+                </a>      
+                :
+                <button 
+                    className="nav-btn mx-1" 
+                    aria-label={textContent}
+                    onClick={handleSideBar}>
+                        <p>{textContent}</p>
+                </button>
+            }
+        </>
+    )
 }
 export default NavItem
