@@ -9,7 +9,7 @@ export default function NavWrapper(props) {
     //handles resizing events
     useEffect(() => {
         const resize = () => {
-            if(windowWidth && window.innerWidth<=991)setWidth(false)
+            if(windowWidth && window.innerWidth<=991){setWidth(false); setSidebarToggle(false)}
             else if(!windowWidth && window.innerWidth>=992)setWidth(true)
         }
         window.addEventListener('resize', resize);
@@ -25,7 +25,6 @@ export default function NavWrapper(props) {
         setSidebarToggle(true)
     }
     const handleSideBar = (e) =>{
-        console.log()
         if (sidebarToggle && e.target.ariaLabel === "exit-sidebar") return exitSideBar()
         if (!sidebarToggle && windowWidth) return openSideBar()
         else {
@@ -35,10 +34,11 @@ export default function NavWrapper(props) {
     }
     return (
         <>
-            <SideBar
-                sidebarToggle = {sidebarToggle} 
-                handleSideBar = {handleSideBar}
-            />
+            {!windowWidth? null: <SideBar
+                    sidebarToggle = {sidebarToggle} 
+                    handleSideBar = {handleSideBar}
+                />
+            }
             <Navbar 
                 sidebarToggle ={sidebarToggle}
                 handleSideBar = {handleSideBar}
