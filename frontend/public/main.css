@@ -5,7 +5,7 @@
   -webkit-transition: all 0.25s ease-out;
   transition: all 0.25s ease-out;
   padding: 30px 30px;
-  padding-bottom: 10px;
+  padding-bottom: 0px;
   margin: 0;
   color: white;
   border: none;
@@ -417,7 +417,7 @@
 }
 
 .sidebar-link-container {
-  margin-top: 100px;
+  margin-top: 90px;
   margin-left: 248px;
   width: 150px;
   color: white;
@@ -430,11 +430,12 @@
 }
 
 .sidebar-link > p {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
   margin: 0;
   padding: 0;
+}
+
+.sidebar-link:hover {
+  color: #a1a0a0;
 }
 
 .exit-sidebar-btn {
@@ -442,7 +443,7 @@
   position: absolute;
   top: 0;
   right: 15px;
-  margin-top: 100px;
+  margin-top: 90px;
   padding: 0 7px;
   color: white;
   background: none;

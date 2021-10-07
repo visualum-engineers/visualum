@@ -3,7 +3,7 @@
     @include fillContainer;
     @include transition(all 0.25s ease-out);
     padding: 30px 30px;
-    padding-bottom: 10px;
+    padding-bottom: 0px;
     margin: 0;
     color: white;
     border: none;
@@ -305,7 +305,7 @@
     display: none;
 }
 .sidebar-link-container{
-    margin-top: 100px;
+    margin-top: 90px;
     margin-left: 248px;
     width: 150px;
     color: white;
@@ -317,16 +317,17 @@
 }
 
 .sidebar-link>p{
-    width: fit-content;
     @include no-space;
 }
-
+.sidebar-link:hover{
+    color: rgb(161, 160, 160)
+}
 .exit-sidebar-btn{
     @include border-radius(5px);
     position: absolute;
     top:0;
     right: 15px;
-    margin-top: 100px;
+    margin-top: 90px;
     padding: 0 7px;
     color: white;
     background: none;
