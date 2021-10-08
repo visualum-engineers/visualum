@@ -110,40 +110,50 @@ const MatchActivityApp = ({activityData}) => {
         //change cursor to grabbing
         document.querySelector("body").style.cursor = "grabbing"
     }
+
+    let isDisabled = false
     const onDrag = (e) =>{
-        //scrolls page down automatically in 100px increments 
-        //when element being dragged is outside of viewport
-        if(startEl.getBoundingClientRect().top <= 0) {
-            window.scrollBy({top: -50, behavior:"smooth"})
-        }
-        if(startEl.getBoundingClientRect().bottom >= window.innerHeight) {
-            window.scrollBy({top: 50})
-        }
-        //for touch events
-        //if performance blows, move this if-else to onStop 
-        //function and replace touches with changedTouches
-        if(e.type==="touchmove"){
-            //touches for move, changedtouches for touchend
-            const startXPos = e.touches[0].clientX
-            const startYPos = e.touches[0].clientY
-            let overlapEl
-            //find which element touch input currently overlaps with
-            for(let tile of newTilesPos){
-                if(!tile || !tile[0]) continue;
-                //check width parameters and exits if not in width bounds
-                if(!(startXPos>=tile[0].x && startXPos<tile[0].right)) continue;
-                //check height parameters
-                //update final el for touch move
-                if(startYPos>=tile[0].y && startYPos<tile[0].bottom){
-                    overlapEl = document.getElementById(tile[1])
-                    if(finalEl && finalEl!==overlapEl)finalEl.classList.remove("hover")
-                    finalEl = overlapEl
-                    finalEl.classList.add("hover")
-                }
+        if(!isDisabled){
+            isDisabled = true
+            //scrolls page down automatically in 100px increments 
+            //when element being dragged is outside of viewport
+            if(startEl.getBoundingClientRect().top <= 0) {
+                window.scrollBy({top: -50, behavior:"smooth"})
             }
-        }else{
-            //for click events 
-            finalEl = e.target.closest("div")
+            if(startEl.getBoundingClientRect().bottom >= window.innerHeight) {
+                window.scrollBy({top: 50})
+            }
+            //for touch events
+            //if performance becomes issue, 
+            //move this if-else to onStop 
+            //function and replace touches with changedTouches
+            if(e.type==="touchmove"){
+                //touches for move, changedtouches for touchend
+                const startXPos = e.touches[0].clientX
+                const startYPos = e.touches[0].clientY
+                let overlapEl
+                //find which element touch input currently overlaps with
+                for(let tile of newTilesPos){
+                    if(!tile || !tile[0]) continue;
+                    //check width parameters and exits if not in width bounds
+                    if(!(startXPos>=tile[0].x && startXPos<tile[0].right)) continue;
+                    //check height parameters
+                    //update final el for touch move
+                    if(startYPos>=tile[0].y && startYPos<tile[0].bottom){
+                        overlapEl = document.getElementById(tile[1])
+                        if(finalEl && finalEl!==overlapEl)finalEl.classList.remove("hover")
+                        finalEl = overlapEl
+                        finalEl.classList.add("hover")
+                    }
+                }
+            }else{
+                //for click events 
+                finalEl = e.target.closest("div")
+            }
+            //restore function
+            setTimeout(()=>{
+                isDisabled = false
+            }, 150)
         }
     } 
     const onStop = () => {
