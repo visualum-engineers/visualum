@@ -21,12 +21,11 @@ Frontend:
 
 //Fisher-Yates shuffling algo
 //shuffles our given pairs order
-function shuffleItems(array){   
+const shuffleItems = (array) => {   
     let currentIndex = array.length,  randomIndex;
 
     // While there remain elements to shuffle...
     while (currentIndex !== 0) {
-
         // Pick a remaining element...
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
@@ -37,6 +36,18 @@ function shuffleItems(array){
     }
     return array;
 }
+//to render the closest square looking shape that exists for these tiles
+//will return an array. 1st value is row, 2nd value, is columns
+const nearestSquare = (array) =>{
+    //check if a square exists
+    //round up if no perfect square
+    const sqrt = (array.length**0.5) % 1 === 0 ? array.length**0.5 : Math.floor(array.length**0.5 + 1) 
+    //if no square, decrement column by 1
+    //and check if its too small to fit all tiles.
+    if (sqrt**2 === array.length) return [sqrt, sqrt]
+    if (sqrt * (sqrt-1) < array.length) return  [sqrt, sqrt]
+    else return [sqrt, sqrt-1]
+}
 
 const MatchActivityApp = ({activityData}) => {
     //for updating redux store(data to be sent to backend)
@@ -46,11 +57,12 @@ const MatchActivityApp = ({activityData}) => {
     const shuffleArray = shuffleItems(Object.keys(activityData.matchPair))
     
     //for internal component rendering
+    //since we only shuffle once, not every time someone matches
     const [tileShuffle, setTileShuffle] = useState(shuffleArray)
-        // Hook for resizing of Grid. 
-    //Necessary for drag and drop bounds to work
-    const gridSize = useGridSize();
-    function useGridSize() {
+   
+    //Necessary for drag and drop bounds to work and not cause overflow on drag
+    // Hook for resizing of Grid. 
+    const useGridSize = () => {
         const [gridSize, setGridSize] = useState({width: undefined, height: undefined, rect: undefined});
         useEffect(() => {
             function handleResize() {
@@ -59,7 +71,6 @@ const MatchActivityApp = ({activityData}) => {
                     rect: document.querySelector(".activity-type-container").getBoundingClientRect(),
                 });
             }
-
         // Add event listener
         window.addEventListener("resize", handleResize);
         handleResize();
@@ -68,6 +79,15 @@ const MatchActivityApp = ({activityData}) => {
         }, []); // Empty array ensures that effect is only run on mount
         return gridSize;
     }
+    const gridSize = useGridSize();
+    //determine column and rows of grid
+    const gridShape = nearestSquare(Object.keys(activityData.matchPair))
+    const rows = Array(gridShape[1]).fill(0)
+    const columns=gridShape[0]
+
+    //check if all tiles have been matched or not
+    const allTilesMatched = tileShuffle.every(tile => tile === null)
+   
     //for comparing the starting (current dragging element)
     //and final element (current element being overlapped) 
     // and see if a match exists
@@ -94,8 +114,7 @@ const MatchActivityApp = ({activityData}) => {
         
         //updates the overlapping element
         finalEl = e.target.closest("div")
-    }
-    
+    } 
     const onStop = () => {
         const final = !finalEl ? null: finalEl.getAttribute("content")
         const start = startEl.getAttribute("content")
@@ -124,26 +143,31 @@ const MatchActivityApp = ({activityData}) => {
             newShuffleList
         )
     }
-    const allTilesMatched = tileShuffle.every(tile => tile === null)
+
     return(
         <>
         <p className="matchInstruction">Match the following</p>
-        <div className = "gridLayout d-flex justify-content-center flex-wrap">
-            {/*renders tiles to match*/}
-            { allTilesMatched ? 
-                <p className="tilesMatchedMessage">You Matched Everything!</p>
-                : tileShuffle.map((content, index)=>{
-                    if(content === null) return <div key={index} className="emptyTile col-5 col-sm-3 col-lg-2"></div>
-                    return <GridTiles 
-                                gridSize ={gridSize}
-                                onStop = {onStop}
-                                onDrag = {onDrag}
-                                onStart = {onStart}
-                                key={index} 
-                                id={index} 
-                                index ={index}
-                                content = {content}
-                                />
+        {/*renders tile grid*/}
+        <div className = "gridLayout d-flex justify-content-center">
+            { allTilesMatched ? <p className="tilesMatchedMessage">You Matched Everything!</p>
+                : rows.map((content,rowIndex)=>{
+                return(
+                    <div key={rowIndex} className="d-flex flex-column w-100">
+                        {tileShuffle.slice((rowIndex)*columns, (rowIndex+1)*columns).map((content, index)=>{
+                            if(content === null) return <div key={index} className="emptyTile"></div>
+                            return <GridTiles 
+                                        gridSize ={gridSize}
+                                        onStop = {onStop}
+                                        onDrag = {onDrag}
+                                        onStart = {onStart}
+                                        key={index+columns*rowIndex} 
+                                        id={index+columns*rowIndex} 
+                                        index ={index}
+                                        content = {content}
+                                    />
+                        })}
+                    </div>
+                )
             })}
         </div>
         </>

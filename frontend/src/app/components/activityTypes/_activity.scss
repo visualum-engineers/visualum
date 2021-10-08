@@ -6,8 +6,7 @@
 @import "./NavActivityBtn/navActivityBtn";
 .activity-body{
     @include no-space;
-    height: 100vh;
-    min-height: 650px;
+    min-height: 100vh;
     
 }
 .activity-type-container{

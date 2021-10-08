@@ -1003,10 +1003,6 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
   margin-bottom: 20px;
 }
 
-.gridLayout {
-  width: 100%;
-}
-
 .gridTiles {
   cursor: -webkit-grab;
   cursor: grab;
@@ -1150,8 +1146,7 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 .activity-body {
   margin: 0;
   padding: 0;
-  height: 100vh;
-  min-height: 650px;
+  min-height: 100vh;
 }
 
 .activity-type-container {

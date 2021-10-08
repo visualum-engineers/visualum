@@ -59,7 +59,7 @@ const GridTiles = ({id, content, index, onStop, onDrag, onStart, gridSize})=>{
            >
                 <div 
                     id={id}
-                    className="gridTiles d-flex align-items-center justify-content-center col-5 col-sm-3 col-lg-2" 
+                    className="gridTiles d-flex align-items-center justify-content-center" 
                     content={content} 
                     ref={nodeRef} >
                         <p>{content}</p>
