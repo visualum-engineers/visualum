@@ -93,12 +93,20 @@ const MatchActivityApp = ({activityData}) => {
     // and see if a match exists
     let startEl
     let finalEl
+    let newTilesPos
+    const onTouchStart = () =>{
+        startEl.classList.add("active")
+        //grab positions of all other tiles. Necessary for touch inputs
+        const allTiles = document.querySelectorAll(".gridTiles");
+        newTilesPos = Object.keys(allTiles).map((content)=>{
+            if(allTiles[content]===startEl) return null
+            return [allTiles[content].getBoundingClientRect(), allTiles[content].id]
+        })
+    }
     const onStart =(e) =>{
         e.preventDefault()
         //updates selected element
         startEl = e.target.closest("div") 
-        //disable events for selected element
-        startEl.style.pointerEvents = "none";
         //change cursor to grabbing
         document.querySelector("body").style.cursor = "grabbing"
     }
@@ -111,18 +119,41 @@ const MatchActivityApp = ({activityData}) => {
         if(startEl.getBoundingClientRect().bottom >= window.innerHeight) {
             window.scrollBy({top: 50})
         }
-        
-        //updates the overlapping element
-        finalEl = e.target.closest("div")
+        //for touch events
+        //if performance blows, move this if-else to onStop 
+        //function and replace touches with changedTouches
+        if(e.type==="touchmove"){
+            //touches for move, changedtouches for touchend
+            const startXPos = e.touches[0].clientX
+            const startYPos = e.touches[0].clientY
+            let overlapEl
+            //find which element touch input currently overlaps with
+            for(let tile of newTilesPos){
+                if(!tile || !tile[0]) continue;
+                //check width parameters and exits if not in width bounds
+                if(!(startXPos>=tile[0].x && startXPos<tile[0].right)) continue;
+                //check height parameters
+                //update final el for touch move
+                if(startYPos>=tile[0].y && startYPos<tile[0].bottom){
+                    overlapEl = document.getElementById(tile[1])
+                    if(finalEl && finalEl!==overlapEl)finalEl.classList.remove("hover")
+                    finalEl = overlapEl
+                    finalEl.classList.add("hover")
+                }
+            }
+        }else{
+            //for click events 
+            finalEl = e.target.closest("div")
+        }
     } 
     const onStop = () => {
+        //removes hover indicator on tiles
+        if(finalEl)finalEl.classList.remove("hover")
+        //updates the overlapping element
         const final = !finalEl ? null: finalEl.getAttribute("content")
         const start = startEl.getAttribute("content")
-
         const newMatchList = Object.assign({}, state)
         const newShuffleList = [...tileShuffle]
-        //restore events for selected element
-        startEl.style.pointerEvents = "all"
         //change cursor to default
         document.querySelector("body").style.cursor = "auto"
         //when elements are not considered a matching pair
@@ -139,9 +170,7 @@ const MatchActivityApp = ({activityData}) => {
         delete newMatchList[final]
         
         setState(newMatchList)
-        setTileShuffle(
-            newShuffleList
-        )
+        setTileShuffle(newShuffleList)
     }
 
     return(
@@ -156,12 +185,13 @@ const MatchActivityApp = ({activityData}) => {
                         {tileShuffle.slice((rowIndex)*columns, (rowIndex+1)*columns).map((content, index)=>{
                             if(content === null) return <div key={index} className="emptyTile"></div>
                             return <GridTiles 
+                                        onTouchStart={onTouchStart}
                                         gridSize ={gridSize}
                                         onStop = {onStop}
                                         onDrag = {onDrag}
                                         onStart = {onStart}
                                         key={index+columns*rowIndex} 
-                                        id={index+columns*rowIndex} 
+                                        id={"gridTile-"+(index+columns*rowIndex)} 
                                         index ={index}
                                         content = {content}
                                     />

@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect} from 'react'
 import DraggableCore from 'react-draggable';
 
-const GridTiles = ({id, content, index, onStop, onDrag, onStart, gridSize})=>{
+const GridTiles = ({id, content, index, onStop, onDrag, onStart,onTouchStart, gridSize})=>{
     const nodeRef = useRef(null)
     
     //this will set bounds so element is limited to gridLayout area
@@ -51,6 +51,7 @@ const GridTiles = ({id, content, index, onStop, onDrag, onStart, gridSize})=>{
             defaultPosition={{x: 0, y: 0}}
             position={{x:0, y:0}}
             onMouseDown ={onMouseDown}
+            
             onStart = {onStart}
             onStop = {onStop}
             onDrag = {onDrag}
@@ -58,6 +59,8 @@ const GridTiles = ({id, content, index, onStop, onDrag, onStart, gridSize})=>{
             nodeRef={nodeRef}
            >
                 <div 
+                    onTouchStart={onTouchStart}
+                    tabIndex="0"
                     id={id}
                     className="gridTiles d-flex align-items-center justify-content-center" 
                     content={content} 

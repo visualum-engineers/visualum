@@ -14,18 +14,21 @@
     padding: 0px 5px;
     margin: 5px;
     border: 1px white solid;
-    @include border-radius(5px)
+    @include border-radius(5px);
 }
-.gridTiles:hover{
+.gridTiles:hover, .gridTiles.hover{
     background-color: white;
     color: black;
 }
-.gridTiles:active{
+
+.gridTiles.active, .gridTiles:active{
+    pointer-events: none;
     background-color: rgba(255,255,255,0.60);
     color: black;
     z-index:2;
-    border: 1px rgb(39, 39, 39) solid
+    border: 1px rgb(39, 39, 39) solid;
 }
+
 .gridTiles p{
     @include no-space;
 }
