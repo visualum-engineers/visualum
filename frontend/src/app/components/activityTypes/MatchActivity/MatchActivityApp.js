@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState,useEffect} from 'react'
 import GridTiles from './GridTiles'
-import ActivityBtns from '../NavActivityBtn/ActivityBtns'
 /*
 To-dos
 Backend: 
@@ -39,7 +38,7 @@ function shuffleItems(array){
     return array;
 }
 
-const MatchActivityApp = ({last, prev, onNavBtnClick, activityData}) => {
+const MatchActivityApp = ({activityData}) => {
     //for updating redux store(data to be sent to backend)
     const [state, setState] = useState(activityData.matchPair)
 
@@ -48,13 +47,7 @@ const MatchActivityApp = ({last, prev, onNavBtnClick, activityData}) => {
     
     //for internal component rendering
     const [tileShuffle, setTileShuffle] = useState(shuffleArray)
-    
-    //for determining question order. 
-    //Important to determine navBtns continue, prev, or submit
-    const prevQuestion = prev
-    const lastQuestion = last
-
-    // Hook for resizing of Grid. 
+        // Hook for resizing of Grid. 
     //Necessary for drag and drop bounds to work
     const gridSize = useGridSize();
     function useGridSize() {
@@ -63,7 +56,7 @@ const MatchActivityApp = ({last, prev, onNavBtnClick, activityData}) => {
             function handleResize() {
                 // Set gridLayout width/height to state
                 setGridSize({
-                    rect: document.querySelector(".matchActivityApp").getBoundingClientRect(),
+                    rect: document.querySelector(".activity-type-container").getBoundingClientRect(),
                 });
             }
 
@@ -75,13 +68,11 @@ const MatchActivityApp = ({last, prev, onNavBtnClick, activityData}) => {
         }, []); // Empty array ensures that effect is only run on mount
         return gridSize;
     }
-
     //for comparing the starting (current dragging element)
     //and final element (current element being overlapped) 
     // and see if a match exists
     let startEl
     let finalEl
-
     const onStart =(e) =>{
         e.preventDefault()
         //updates selected element
@@ -135,37 +126,27 @@ const MatchActivityApp = ({last, prev, onNavBtnClick, activityData}) => {
     }
     const allTilesMatched = tileShuffle.every(tile => tile === null)
     return(
-        <div className = "d-flex justify-content-center">
-            <div className="matchActivityApp d-flex flex-column align-items-center col-11 col-md-9 col-xl-8">
-                <p className="matchInstruction">Match the following</p>
-                <div className = "gridLayout d-flex justify-content-center flex-wrap">
-                    {/*renders tiles to match*/}
-                    { allTilesMatched ? 
-                        <p className="tilesMatchedMessage">You Matched Everything!</p>
-                        : tileShuffle.map((content, index)=>{
-                            if(content === null) return <div key={index} className="emptyTile col-5 col-sm-3 col-lg-2"></div>
-                            return <GridTiles 
-                                        gridSize ={gridSize}
-                                        onStop = {onStop}
-                                        onDrag = {onDrag}
-                                        onStart = {onStart}
-                                        key={index} 
-                                        id={index} 
-                                        index ={index}
-                                        content = {content}
-                                        />
-                    })}
-                </div>
-
-                <div className = {`d-flex col-10 col-sm-9 col-lg-10 ${!prevQuestion ? "justify-content-end":"justify-content-between"}`}>
-                    <ActivityBtns 
-                                prevQuestion = {prevQuestion} 
-                                lastQuestion = {lastQuestion}
-                                onNavBtnClick = {onNavBtnClick}
+        <>
+        <p className="matchInstruction">Match the following</p>
+        <div className = "gridLayout d-flex justify-content-center flex-wrap">
+            {/*renders tiles to match*/}
+            { allTilesMatched ? 
+                <p className="tilesMatchedMessage">You Matched Everything!</p>
+                : tileShuffle.map((content, index)=>{
+                    if(content === null) return <div key={index} className="emptyTile col-5 col-sm-3 col-lg-2"></div>
+                    return <GridTiles 
+                                gridSize ={gridSize}
+                                onStop = {onStop}
+                                onDrag = {onDrag}
+                                onStart = {onStart}
+                                key={index} 
+                                id={index} 
+                                index ={index}
+                                content = {content}
                                 />
-                </div>
-            </div>
+            })}
         </div>
+        </>
     )
 }
 

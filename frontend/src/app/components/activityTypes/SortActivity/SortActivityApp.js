@@ -1,7 +1,6 @@
 import React, { useState} from 'react'
 import AnswerArea from './AnswerArea'
 import SortArea from './SortArea'
-import ActivityBtns from '../NavActivityBtn/ActivityBtns';
 import { DragDropContext} from 'react-beautiful-dnd';
 /*Note Missing To-do
 Backend: 
@@ -21,9 +20,6 @@ const SortActivityApp = ({last, prev, onNavBtnClick,activityData}) => {
     //for updating redux store(data to be sent to backend)
     const [state, setState] = useState(activityData)
 
-    //determine navigation button positions
-    const prevQuestion = prev
-    const lastQuestion = last
     //handle state update when object is moved
     const onDragEnd = (result) => {
         const {destination, source, draggableId} = result
@@ -67,38 +63,29 @@ const SortActivityApp = ({last, prev, onNavBtnClick,activityData}) => {
     };
    
     return (
-        <div className="d-flex justify-content-center">
-            <div className = "sortActivityApp d-flex flex-column align-items-center col-9 col-md-7 col-xl-6">
-                <p className="instructions">Sort the following:</p>
-                <DragDropContext onDragEnd={onDragEnd}>
-                    <div className ="draggableAreaContainer d-flex align-items-start ">
-                        {/* Renders word/response bank */}
-                        <AnswerArea key={"answerChoices"} 
-                            currAnswers={state.columns["answerChoices"]} 
-                            answerData= {state.answerChoices}/>
+       <>
+        <p className="instructions">Sort the following:</p>
+        <DragDropContext onDragEnd={onDragEnd}>
+            <div className ="draggableAreaContainer d-flex align-items-start ">
+                {/* Renders word/response bank */}
+                <AnswerArea key={"answerChoices"} 
+                    currAnswers={state.columns["answerChoices"]} 
+                    answerData= {state.answerChoices}/>
 
-                        {/* Renders sort categories */}
-                        <div className="sortAreaGroups d-flex">
-                            {Object.keys(state.columns).map((columnTitle, index)=> {
-                                if(index === Object.keys(state.columns).length-1) return null
-                                return <SortArea key={columnTitle} 
-                                            id={columnTitle} 
-                                            columnTitle={columnTitle} 
-                                            answerData= {state.answerChoices} 
-                                            currAnswers={state.columns[columnTitle]}/>
-                            })}
-                        </div>
-                    </div>  
-                </DragDropContext>
-                <div className="sortNavBtns w-100">
-                    <ActivityBtns 
-                        prevQuestion = {prevQuestion} 
-                        lastQuestion = {lastQuestion}
-                        onNavBtnClick = {onNavBtnClick}
-                        />
+                {/* Renders sort categories */}
+                <div className="sortAreaGroups d-flex">
+                    {Object.keys(state.columns).map((columnTitle, index)=> {
+                        if(index === Object.keys(state.columns).length-1) return null
+                        return <SortArea key={columnTitle} 
+                                    id={columnTitle} 
+                                    columnTitle={columnTitle} 
+                                    answerData= {state.answerChoices} 
+                                    currAnswers={state.columns[columnTitle]}/>
+                    })}
                 </div>
-            </div>
-        </div>
+            </div>  
+        </DragDropContext>
+        </>
     )
 }
 export default SortActivityApp

@@ -34,7 +34,7 @@ const GridTiles = ({id, content, index, onStop, onDrag, onStart, gridSize})=>{
     const onMouseDown = () =>{
         //will update draggable bounds of element
             setBounds({
-                top: gridRect.top - tilePosition.rect.top+100,
+                top: gridRect.top - tilePosition.rect.top+70,
                 bottom: gridRect.bottom - tilePosition.rect.bottom,
                 left:  gridRect.left-tilePosition.rect.left,
                 right:  gridRect.right- tilePosition.rect.right

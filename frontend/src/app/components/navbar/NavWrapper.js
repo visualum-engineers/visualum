@@ -39,17 +39,17 @@ export default function NavWrapper(props) {
     }
     return (
         <>
+            <Navbar 
+                windowWidth = {windowWidth}
+                sidebarToggle ={sidebarToggle}
+                handleSideBar = {handleSideBar}
+            />
             {!windowWidth? null: <SideBar
                     sidebarToggle = {sidebarToggle} 
                     handleSideBar = {handleSideBar}
                     btnType = {sidebarBtnType}
                 />
             }
-            <Navbar 
-                windowWidth = {windowWidth}
-                sidebarToggle ={sidebarToggle}
-                handleSideBar = {handleSideBar}
-            />
             {props.children}
             <Footer />
         </>

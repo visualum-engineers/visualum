@@ -4,3 +4,13 @@
 @import "./ShortAnswer/shortAnswer";
 @import "./labelPictures/labelPictures";
 @import "./NavActivityBtn/navActivityBtn";
+.activity-body{
+    @include no-space;
+    height: 100vh;
+    min-height: 650px;
+    
+}
+.activity-type-container{
+    margin-top: 75px;
+    text-align: center;
+}

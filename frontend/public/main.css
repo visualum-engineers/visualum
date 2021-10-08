@@ -912,11 +912,6 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
   color: white;
 }
 
-.sortActivityApp {
-  min-height: 100vh;
-  padding-top: 150px;
-}
-
 .instructions {
   color: white;
   font-size: 1.7rem;
@@ -998,11 +993,6 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
   color: black;
 }
 
-.matchActivityApp {
-  min-height: 100vh;
-  padding-top: 150px;
-}
-
 .tilesMatchedMessage {
   color: white;
 }
@@ -1010,7 +1000,7 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 .matchInstruction {
   color: white;
   font-size: 1.7em;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 
 .gridLayout {
@@ -1022,7 +1012,7 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
   cursor: grab;
   color: white;
   min-height: 150px;
-  padding: 0px 20px;
+  padding: 0px 5px;
   margin: 5px;
   border: 1px white solid;
   border-radius: 5px;
@@ -1047,13 +1037,8 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 
 .emptyTile {
   min-height: 150px;
-  padding: 0px 20px;
+  padding: 0px 5px;
   margin: 5px;
-}
-
-.multipleChoiceApp {
-  min-height: 100vh;
-  padding-top: 150px;
 }
 
 .MCInputContainer {
@@ -1078,8 +1063,8 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 }
 
 .ansOptionItem {
-  width: 48%;
-  margin: 1%;
+  width: calc(50% - 10px);
+  margin: 5px;
 }
 
 .MCInputContainer input[type=radio] {
@@ -1089,11 +1074,6 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 .MCInputContainer input[type=radio]:checked + label {
   background-color: white;
   color: black;
-}
-
-.shortAnswerApp {
-  min-height: 100vh;
-  padding-top: 150px;
 }
 
 .SAInputContainer {
@@ -1165,6 +1145,18 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 .navActivityBtn:hover {
   background: rgba(255, 255, 255, 0.267);
   color: white;
+}
+
+.activity-body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  min-height: 650px;
+}
+
+.activity-type-container {
+  margin-top: 75px;
+  text-align: center;
 }
 
 @media (min-width: 992px) {

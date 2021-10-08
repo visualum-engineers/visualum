@@ -1,14 +1,10 @@
-.matchActivityApp{
-    min-height: 100vh;
-    padding-top: 150px;
-}
 .tilesMatchedMessage{
     color: white;
 }
 .matchInstruction{
     color: white;
     font-size: 1.7em;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 .gridLayout{
     width: 100%;
@@ -17,7 +13,7 @@
     cursor: grab;
     color: white;
     min-height: 150px;
-    padding: 0px 20px;
+    padding: 0px 5px;
     margin: 5px;
     border: 1px white solid;
     @include border-radius(5px)
@@ -37,6 +33,6 @@
 }
 .emptyTile{
     min-height: 150px;
-    padding: 0px 20px;
+    padding: 0px 5px;
     margin: 5px;
 }
