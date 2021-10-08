@@ -6,20 +6,10 @@ Backend:
     1. Missing updating the backend with partial completion of assignment
     2. Missing updating the backend with grade after completion
 Frontend:
-    1. Adding selecting logic for activity to work on mobile device
-        - Relevant code affecting this, is located in onStart 
-          and onDrag function and nowhere else. 
-          onStop function logic does not need to be changed
-            -The issue arises because on mobile, startEl and
-             finalEl will be selecting the element being dragged
-             when only the startEl should be selecting it.
-             The finalEl SHOULD be selecting the element underneath
-             the one being dragged
-    2. Add animation transition when elements are removed 
-    4. Missing progress saved on local storage/memory (if user exits out of page)
+    1. Add animation transition when elements are removed 
+    2. Missing progress saved on local storage/memory (if user exits out of page)
 */
 
-//Fisher-Yates shuffling algo
 //shuffles our given pairs order
 const shuffleItems = (array) => {   
     let currentIndex = array.length,  randomIndex;
@@ -57,11 +47,10 @@ const MatchActivityApp = ({activityData}) => {
     const shuffleArray = shuffleItems(Object.keys(activityData.matchPair))
     
     //for internal component rendering
-    //since we only shuffle once, not every time someone matches
+    //since we only shuffle once at the start
     const [tileShuffle, setTileShuffle] = useState(shuffleArray)
    
     //Necessary for drag and drop bounds to work and not cause overflow on drag
-    // Hook for resizing of Grid. 
     const useGridSize = () => {
         const [gridSize, setGridSize] = useState({width: undefined, height: undefined, rect: undefined});
         useEffect(() => {
@@ -80,6 +69,7 @@ const MatchActivityApp = ({activityData}) => {
         return gridSize;
     }
     const gridSize = useGridSize();
+
     //determine column and rows of grid
     const gridShape = nearestSquare(Object.keys(activityData.matchPair))
     const rows = Array(gridShape[1]).fill(0)
@@ -88,15 +78,14 @@ const MatchActivityApp = ({activityData}) => {
     //check if all tiles have been matched or not
     const allTilesMatched = tileShuffle.every(tile => tile === null)
    
-    //for comparing the starting (current dragging element)
-    //and final element (current element being overlapped) 
-    // and see if a match exists
+    //starting (current dragging element) 
+    // and final element (current element being overlapped) 
     let startEl
     let finalEl
     let newTilesPos
     const onTouchStart = () =>{
         startEl.classList.add("active")
-        //grab positions of all other tiles. Necessary for touch inputs
+        //grab positions of all other tiles. Necessary for detect overlay on touch inputs
         const allTiles = document.querySelectorAll(".gridTiles");
         newTilesPos = Object.keys(allTiles).map((content)=>{
             if(allTiles[content]===startEl) return null
@@ -107,7 +96,6 @@ const MatchActivityApp = ({activityData}) => {
         e.preventDefault()
         //updates selected element
         startEl = e.target.closest("div") 
-        //change cursor to grabbing
         document.querySelector("body").style.cursor = "grabbing"
     }
 
@@ -115,8 +103,7 @@ const MatchActivityApp = ({activityData}) => {
     const onDrag = (e) =>{
         if(!isDisabled){
             isDisabled = true
-            //scrolls page down automatically in 100px increments 
-            //when element being dragged is outside of viewport
+            //scrolls page automatically in 50px increments 
             if(startEl.getBoundingClientRect().top <= 0) {
                 window.scrollBy({top: -50, behavior:"smooth"})
             }
@@ -124,8 +111,7 @@ const MatchActivityApp = ({activityData}) => {
                 window.scrollBy({top: 50})
             }
             //for touch events
-            //if performance becomes issue, 
-            //move this if-else to onStop 
+            //if performance becomes issue,move this if-else to onStop 
             //function and replace touches with changedTouches
             if(e.type==="touchmove"){
                 //touches for move, changedtouches for touchend
@@ -135,10 +121,9 @@ const MatchActivityApp = ({activityData}) => {
                 //find which element touch input currently overlaps with
                 for(let tile of newTilesPos){
                     if(!tile || !tile[0]) continue;
-                    //check width parameters and exits if not in width bounds
+                    //check width parameters
                     if(!(startXPos>=tile[0].x && startXPos<tile[0].right)) continue;
-                    //check height parameters
-                    //update final el for touch move
+                    //check height parameters and update final el
                     if(startYPos>=tile[0].y && startYPos<tile[0].bottom){
                         overlapEl = document.getElementById(tile[1])
                         if(finalEl && finalEl!==overlapEl)finalEl.classList.remove("hover")
@@ -157,22 +142,23 @@ const MatchActivityApp = ({activityData}) => {
         }
     } 
     const onStop = () => {
-        //removes hover indicator on tiles
+        //return default styling
+        document.querySelector("body").style.cursor = "auto"
         if(finalEl)finalEl.classList.remove("hover")
+
         //updates the overlapping element
         const final = !finalEl ? null: finalEl.getAttribute("content")
         const start = startEl.getAttribute("content")
         const newMatchList = Object.assign({}, state)
         const newShuffleList = [...tileShuffle]
-        //change cursor to default
-        document.querySelector("body").style.cursor = "auto"
+        
         //when elements are not considered a matching pair
         //it will simply return item to original position
         if(state[start] !== final) return
 
-       //when elements are considered a matching pair
-       //it will remove the element pair
-       //and replace it with an empty grid tile
+        //when elements are considered a matching pair
+        //it will remove the element pair
+        //and replace it with an empty grid tile
         newShuffleList.splice(newShuffleList.indexOf(start),1, null)
         newShuffleList.splice(newShuffleList.indexOf(final),1, null)
         
@@ -189,22 +175,22 @@ const MatchActivityApp = ({activityData}) => {
         {/*renders tile grid*/}
         <div className = "gridLayout d-flex justify-content-center">
             { allTilesMatched ? <p className="tilesMatchedMessage">You Matched Everything!</p>
-                : rows.map((content,rowIndex)=>{
+              : rows.map((content,rowIndex)=>{
                 return(
                     <div key={rowIndex} className="d-flex flex-column w-100">
                         {tileShuffle.slice((rowIndex)*columns, (rowIndex+1)*columns).map((content, index)=>{
                             if(content === null) return <div key={index} className="emptyTile"></div>
                             return <GridTiles 
-                                        onTouchStart={onTouchStart}
-                                        gridSize ={gridSize}
-                                        onStop = {onStop}
-                                        onDrag = {onDrag}
-                                        onStart = {onStart}
-                                        key={index+columns*rowIndex} 
-                                        id={"gridTile-"+(index+columns*rowIndex)} 
-                                        index ={index}
-                                        content = {content}
-                                    />
+                                onTouchStart={onTouchStart}
+                                gridSize ={gridSize}
+                                onStop = {onStop}
+                                onDrag = {onDrag}
+                                onStart = {onStart}
+                                key={index+columns*rowIndex} 
+                                id={"gridTile-"+(index+columns*rowIndex)} 
+                                index ={index}
+                                content = {content}
+                            />
                         })}
                     </div>
                 )
