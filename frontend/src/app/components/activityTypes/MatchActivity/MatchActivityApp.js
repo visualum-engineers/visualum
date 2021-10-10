@@ -14,7 +14,6 @@ Frontend:
 //shuffles our given pairs order
 const shuffleItems = (array) => {   
     let currentIndex = array.length,  randomIndex;
-
     // While there remain elements to shuffle...
     while (currentIndex !== 0) {
         // Pick a remaining element...
@@ -99,7 +98,6 @@ const MatchActivityApp = ({activityData}) => {
         startEl = e.target.closest("div") 
         document.querySelector("body").style.cursor = "grabbing"
     }
-
     let isDisabled = false
     const onDrag = (e) =>{
         if(!isDisabled){
@@ -173,9 +171,16 @@ const MatchActivityApp = ({activityData}) => {
     return(
         <>
         <p className="matchInstruction">Match the following</p>
-        <div className="match-activity-timer">
-            <Timer/>
-        </div>
+        { !allTilesMatched ?
+            <div className="match-activity-timer">
+                <Timer
+                timer={{hours: 1, minutes: 1, seconds: 1}}
+                autoStart={false}
+                />
+            </div>
+            : null
+        }
+        
         {/*renders tile grid*/}
         <div className = "gridLayout d-flex justify-content-center">
             { allTilesMatched ? <p className="tilesMatchedMessage">You Matched Everything!</p>

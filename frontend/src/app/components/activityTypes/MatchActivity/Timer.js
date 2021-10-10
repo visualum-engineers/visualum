@@ -1,5 +1,5 @@
 import React, {useEffect,useState} from "react"
-const CountDownTimer = ({timer={hours:1, minutes:1, seconds:1}}) =>{
+const CountDownTimer = ({timer={hours:0, minutes:0, seconds:0}, autoStart=true, pauseBtn=false, resetBtn=false}) =>{
     const calculateTimeLeft = (endTime) => {
         const difference = +endTime - +new Date();
         let timeLeft = {};
@@ -11,42 +11,63 @@ const CountDownTimer = ({timer={hours:1, minutes:1, seconds:1}}) =>{
           };
         }
         return timeLeft;
-      };
+    };
 
     //state to keep track of time remaining
     const [endTime, setEndTime] = useState(+new Date() + (1000 * timer.seconds) + (1000*60*timer.minutes) + (1000*60*60*timer.hours))
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(endTime));
-    const [timerStarted, setTimerStarted] = useState(false)
-    
+    const [timerStarted, setTimerStarted] = useState(autoStart)
+
     const startTimer = () =>{
-        setEndTime(+new Date() + (1000 * timer.seconds) + (1000*60*timer.minutes) + (1000*60*60*timer.hours))
+        setEndTime(+new Date() + (1000 * timeLeft.seconds) + (1000*60*timeLeft.minutes) + (1000*60*60*timeLeft.hours))
         setTimerStarted(true)
     }
-    
-    //updates timer every second
+    const stopTimer = () =>{
+        setTimerStarted(false)
+    }
+    const resetTimer = () =>{
+        setEndTime(+new Date() + (1000 * timer.seconds) + (1000*60*timer.minutes) + (1000*60*60*timer.hours))
+    }
+    //updates timer every second, once timer is started
     useEffect(() => {
-        
         const setTime = setTimeout(() => {
-            if(timerStarted)setTimeLeft(calculateTimeLeft(endTime));
+            if(timerStarted) setTimeLeft(calculateTimeLeft(endTime));
         }, 1000);
 
         return () => clearTimeout(setTime);
     });
 
-
     //generate timer format (H:M:S)
     let timerComponents = []
     Object.keys(timeLeft).forEach((interval) => {
         if (timeLeft[interval]>=10) timerComponents.push(<span key={interval}>{interval==="seconds"? timeLeft[interval]:timeLeft[interval]+":"}</span>);
-        else if(timeLeft[interval] === 0) timerComponents.push(<span key={interval}>{`00:`}</span>);
+        else if(timeLeft[interval] === 0) timerComponents.push(<span key={interval}>{interval==="seconds"?"00":"00:"}</span>);
         else timerComponents.push(<span key={interval}>{`0${interval==="seconds"? timeLeft[interval]:timeLeft[interval]+":"}`}</span>);
     });
     
     return (
         <>
             {timerComponents}
-            <button onClick={startTimer}><span>Start Activity</span></button>
+            { timerStarted ? null
+            : <button onClick={startTimer} aria-label="start-timer">
+                <span aria-label="start-timer">Start Activity</span>
+            </button>}
+            {pauseBtn ? 
+                timerStarted ?
+                    <button onClick={stopTimer} aria-label="pause-timer">
+                        <span aria-label="pause-timer">Pause</span>
+                    </button>
+                : null
+            : null}
+            {resetBtn ?
+                !timerStarted ?
+                    <button onClick={resetTimer} aria-label="reset-timer">
+                            <span aria-label="reset-timer">Reset</span>
+                    </button>
+                :null
+            :null}
         </>
     );
 }
+
 export default CountDownTimer

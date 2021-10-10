@@ -51,7 +51,6 @@ const GridTiles = ({id, content, index, onStop, onDrag, onStart,onTouchStart, gr
             defaultPosition={{x: 0, y: 0}}
             position={{x:0, y:0}}
             onMouseDown ={onMouseDown}
-            
             onStart = {onStart}
             onStop = {onStop}
             onDrag = {onDrag}
