@@ -173,7 +173,9 @@ const MatchActivityApp = ({activityData}) => {
     return(
         <>
         <p className="matchInstruction">Match the following</p>
-        <Timer/>
+        <div className="match-activity-timer">
+            <Timer/>
+        </div>
         {/*renders tile grid*/}
         <div className = "gridLayout d-flex justify-content-center">
             { allTilesMatched ? <p className="tilesMatchedMessage">You Matched Everything!</p>
