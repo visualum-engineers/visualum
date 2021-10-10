@@ -36,14 +36,13 @@
 }
 
 .introContainer{
+    @include border-radius(5px);
     position: relative;
     color: white;
     text-align: center;
-    padding-left: 3vw;
     padding: 30px;
     min-width: 250px;
     width: 35vw;
-    border-radius: 5px;
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.342); 
     z-index: 1;
     background: rgba(6, 29, 80, 0.383);

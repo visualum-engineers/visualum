@@ -80,14 +80,14 @@ const Activity = () =>{
     return(
     <>
         <div className = "activity-body row flex-column align-items-center justify-content-center">
-            <div className = "activity-type-container col-11 col-md-8">
+            <div className = "activity-type-container col-11 col-md-8 col-lg-6 col-xl-5">
                 {state.type ? activityType[state.type]
                 :  <p>You've Submitted!</p>}
             </div>
             {/*loads appropriate btns depending if 
                     1. There are prev questions
                     2. This is the last questions */}
-            <div className="col-11 col-md-8">
+            <div className="col-11 col-md-8 col-lg-6 col-xl-5">
                 <ActivityBtns 
                     prevQuestion = {question !== 1} 
                     lastQuestion = {Object.keys(activityData).length === question}

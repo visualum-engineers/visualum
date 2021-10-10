@@ -47,22 +47,30 @@ const CountDownTimer = ({timer={hours:0, minutes:0, seconds:0}, autoStart=true, 
     
     return (
         <>
-            {timerComponents}
+            <div className="timer-counter">
+                {timerComponents}
+            </div>
             { timerStarted ? null
             : <button onClick={startTimer} aria-label="start-timer">
-                <span aria-label="start-timer">Start Activity</span>
+                <span aria-label="start-timer">
+                    <i className="fa fa-play" aria-hidden="true"></i>
+                </span>
             </button>}
             {pauseBtn ? 
                 timerStarted ?
                     <button onClick={stopTimer} aria-label="pause-timer">
-                        <span aria-label="pause-timer">Pause</span>
+                        <span aria-label="pause-timer">
+                            <i className="fa fa-pause" aria-hidden="true"></i>
+                        </span>
                     </button>
                 : null
             : null}
             {resetBtn ?
                 !timerStarted ?
                     <button onClick={resetTimer} aria-label="reset-timer">
-                            <span aria-label="reset-timer">Reset</span>
+                            <span aria-label="reset-timer">
+                                <i className="fa fa-repeat" aria-hidden="true"></i>
+                            </span>
                     </button>
                 :null
             :null}

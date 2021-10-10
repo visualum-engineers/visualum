@@ -172,13 +172,14 @@ const MatchActivityApp = ({activityData}) => {
         <>
         <p className="matchInstruction">Match the following</p>
         { !allTilesMatched ?
-            <div className="match-activity-timer">
+            <div className="match-activity-timer d-flex justify-content-center align-items-center">
+                <span>Your Time: </span>
                 <Timer
-                timer={{hours: 1, minutes: 1, seconds: 1}}
-                autoStart={false}
+                    timer={{hours: 1, minutes: 1, seconds: 1}}
+                    autoStart={false}
                 />
             </div>
-            : null
+        : null
         }
         
         {/*renders tile grid*/}
