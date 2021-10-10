@@ -1,5 +1,6 @@
 import React, {useState,useEffect} from 'react'
 import GridTiles from './GridTiles'
+import Timer from "./Timer"
 /*
 To-dos
 Backend: 
@@ -172,6 +173,7 @@ const MatchActivityApp = ({activityData}) => {
     return(
         <>
         <p className="matchInstruction">Match the following</p>
+        <Timer/>
         {/*renders tile grid*/}
         <div className = "gridLayout d-flex justify-content-center">
             { allTilesMatched ? <p className="tilesMatchedMessage">You Matched Everything!</p>
