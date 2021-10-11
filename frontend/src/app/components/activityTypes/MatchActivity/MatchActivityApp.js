@@ -198,10 +198,10 @@ const MatchActivityApp = ({activityData}) => {
 
     return(
         <>
-        <p className="matchInstruction">Match the following</p>
+        <p className="matchInstruction flex-grow-1">Find the Match!</p>
         { !allTilesMatched ?
             <div className="match-activity-timer d-flex justify-content-center align-items-center">
-                <span>Your Time: </span>
+                <span>Time Left: </span>
                 <Timer
                     timer={{hours: 1, minutes: 1, seconds: 1}}
                     autoStart={false}
@@ -209,7 +209,6 @@ const MatchActivityApp = ({activityData}) => {
             </div>
         : null
         }
-        
         {/*renders tile grid*/}
         <div className = "gridLayout">
             { allTilesMatched ? <p className="tilesMatchedMessage">You Matched Everything!</p>
@@ -217,9 +216,9 @@ const MatchActivityApp = ({activityData}) => {
                 return(
                     <div key={rowIndex} className="row g-0">
                         {tileShuffle.slice((rowIndex)*columns, (rowIndex+1)*columns).map((content, index)=>{
-                            if(content === null) return <div key={index+columns*rowIndex} className="col m-2"><div className="emptyTile"></div></div>
+                            if(content === null) return <div key={index+columns*rowIndex} className="col m-2 tile"><div className="emptyTile"></div></div>
                             return (
-                                <div key={index+columns*rowIndex}  className="col m-2">
+                                <div key={index+columns*rowIndex}  className="col m-2 tile">
                                     <GridTiles 
                                         onTouchStart={onTouchStart}
                                         gridSize ={gridSize}

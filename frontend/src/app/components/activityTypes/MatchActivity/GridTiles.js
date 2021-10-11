@@ -43,7 +43,7 @@ const GridTiles = ({id, content, index, onStop, onDrag, onStart,onTouchStart, gr
 
     //gets coordinates of all four corners of the grid layout that all tiles will reside in
     const gridRect = gridSize.rect 
-    
+ 
     return(
         <DraggableCore 
             key={id} 

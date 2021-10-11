@@ -9,8 +9,8 @@ const activityData = {
     1: {
         type: "matching",
         matchPair:{
-            "Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1":"Pair1-", 
-            "Pair1-":"Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1",
+            "Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1":"Pair1-Pair1-Pair1-Pair1-Pair1-", 
+            "Pair1-Pair1-Pair1-Pair1-Pair1-":"Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1",
             "Pair2":"Pair2-", 
             "Pair2-":"Pair2", 
             "Pair3":"Pair3-", 
@@ -102,7 +102,7 @@ const Activity = () =>{
     return(
     <>
         <div className = "activity-body row flex-column align-items-center justify-content-center">
-            <div className = "activity-type-container col-11 col-md-8 col-lg-6 col-xl-5">
+            <div className = "activity-type-container col-11 col-md-8 col-lg-6 col-xl-5 d-flex flex-column justify-content-center">
                 {state.type ? activityType[state.type]
                 :  <p>You've Submitted!</p>}
             </div>

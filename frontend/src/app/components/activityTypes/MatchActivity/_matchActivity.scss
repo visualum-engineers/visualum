@@ -3,7 +3,7 @@
 }
 .matchInstruction{
     color: $main-font-color;
-    font-size: 1.7em;
+    font-size: 1.1em;
     margin: 0;
 }
 .match-activity-timer{
@@ -40,15 +40,38 @@
 .gridLayout{
     margin-top: 10px;
 }
-
+.tile{
+    display: inline-block;
+    position: relative;
+}
+.tile::after{
+    padding: 50%;
+    display: block;
+    content: ""; 
+}
 .gridTiles{
+    @include anchor-top-left;
     @include border-radius(15px);
+    @include no-space;
+    position: absolute;
     cursor: grab;
     color: $main-font-color;
-    font-size: 80%;
+    font-size: 71%;
     border: 1px $main-font-color solid;
-    padding: 30% 0;
-    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.gridTiles::-webkit-scrollbar{
+    width: 14px;
+    margin-right: 10px;
+}
+
+.gridTiles::-webkit-scrollbar-thumb{
+    border: 5px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+    background-color: white;
+    @include border-radius(10px)
 }
 .gridTiles:hover, .gridTiles.hover{
     background-color: $main-font-color;
@@ -64,10 +87,10 @@
 .gridTiles p{
     @include no-space;
     overflow-wrap: break-word;
-    width: 60px;
+    width: 50px;
 }
 .emptyTile{
-    @include fillContainer;
-    min-width: 60px;
-    padding: 30% 0;
+    @include anchor-top-left;
+    @include border-radius(15px);
+    position: absolute;
 }
