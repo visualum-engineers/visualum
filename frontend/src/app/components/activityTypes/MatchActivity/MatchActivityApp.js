@@ -198,7 +198,7 @@ const MatchActivityApp = ({activityData}) => {
 
     return(
         <>
-        <p className="matchInstruction flex-grow-1">Find the Match!</p>
+        <p className="matchInstruction">Find the Match!</p>
         { !allTilesMatched ?
             <div className="match-activity-timer d-flex justify-content-center align-items-center">
                 <span>Time Left: </span>
