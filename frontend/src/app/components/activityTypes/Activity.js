@@ -9,8 +9,8 @@ const activityData = {
     1: {
         type: "matching",
         matchPair:{
-            "Pair1Pair1Pair1Pair1Pair1":"Pair1-", 
-            "Pair1-":"Pair1Pair1Pair1Pair1Pair1",
+            "Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1":"Pair1-", 
+            "Pair1-":"Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1",
             "Pair2":"Pair2-", 
             "Pair2-":"Pair2", 
             "Pair3":"Pair3-", 
@@ -23,7 +23,20 @@ const activityData = {
             "Pair6-":"Pair6",
             "Pair7-":"Pair7",
             "Pair7":"Pair7-", 
-
+            "Pair8":"Pair8-",
+            "Pair8-":"Pair8",
+            "Pair9":"Pair9-", 
+            "Pair9-":"Pair9",
+            "Pair10-":"Pair10",
+            "Pair10":"Pair10-", 
+            "Pair11":"Pair11-",
+            "Pair11-":"Pair11",
+            "Pair12":"Pair12", 
+            "Pair12-":"Pair12",
+            "Pair13-":"Pair13",
+            "Pair13":"Pair13-", 
+            "Pair14":"Pair14-",
+            "Pair14-":"Pair14",
         },
     },
     //multiple choice
