@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect} from 'react'
 import DraggableCore from 'react-draggable';
 
-const GridTiles = ({id, content, index, onStop, onDrag, onStart,onTouchStart, gridSize})=>{
+const GridTiles = ({id, content, index, onStop, onDrag, onStart,onTouchStart, gridSize, positionOffset={x:0, y:0}})=>{
     const nodeRef = useRef(null)
     
     //this will set bounds so element is limited to gridLayout area
@@ -34,7 +34,7 @@ const GridTiles = ({id, content, index, onStop, onDrag, onStart,onTouchStart, gr
     const onMouseDown = () =>{
         //will update draggable bounds of element
             setBounds({
-                top: gridRect.top - tilePosition.rect.top+70,
+                top: gridRect.top - tilePosition.rect.top+90,
                 bottom: gridRect.bottom - tilePosition.rect.bottom,
                 left:  gridRect.left-tilePosition.rect.left,
                 right:  gridRect.right- tilePosition.rect.right
@@ -50,6 +50,7 @@ const GridTiles = ({id, content, index, onStop, onDrag, onStart,onTouchStart, gr
             index={index}
             defaultPosition={{x: 0, y: 0}}
             position={{x:0, y:0}}
+            positionOffset={positionOffset}
             onMouseDown ={onMouseDown}
             onStart = {onStart}
             onStop = {onStop}

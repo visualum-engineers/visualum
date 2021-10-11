@@ -43,26 +43,11 @@ const MatchActivityApp = ({activityData}) => {
     //for updating redux store(data to be sent to backend)
     const [state, setState] = useState(activityData.matchPair)
 
-    //for shuffling tile positions
-    const shuffleArray = shuffleItems(Object.keys(activityData.matchPair))
+    //we only shuffle tiles once at the start
+    const [tileShuffle, setTileShuffle] = useState(shuffleItems(Object.keys(activityData.matchPair)))
     
-    //for internal component rendering
-    //since we only shuffle once at the start
-    const [tileShuffle, setTileShuffle] = useState(shuffleArray)
-   //for rearranging grid layout to 2 columns
+    //for rearranging grid layout to 2 columns
     const [windowWidth, setWidth] = useState(window.innerWidth>=575)
-    
-    //determine if we are on mobile, for grid layout
-    useEffect(() => {
-        const resize = () => {
-            if(windowWidth && window.innerWidth<575){setWidth(false)}
-            else if(!windowWidth && window.innerWidth>=575)setWidth(true)
-        }
-        window.addEventListener('resize', resize);
-
-        // Remove event listener on cleanup
-        return () => window.removeEventListener("resize", resize)
-    }, [windowWidth]); 
 
     //Necessary for drag and drop bounds to work and not cause overflow on drag
     const useGridSize = () => {
@@ -88,7 +73,6 @@ const MatchActivityApp = ({activityData}) => {
     const gridShape = nearestSquare(Object.keys(tileShuffle))
     const rows = !windowWidth? Array(tileShuffle.length/2).fill(0): Array(gridShape[1]).fill(0)
     const columns= !windowWidth? 2: gridShape[0] 
-
     if(rows.length*columns !== tileShuffle.length){
         let newTiles = [...tileShuffle]
         for (let i=0; i<rows.length*columns-tileShuffle.length; i++){
@@ -96,16 +80,27 @@ const MatchActivityApp = ({activityData}) => {
         }
         setTileShuffle(newTiles)
     }
-
-    //check if all tiles have been matched or not
-    const allTilesMatched = tileShuffle.every(tile => tile === null)
-   
     //starting (current dragging element) 
     // and final element (current element being overlapped) 
     let startEl
     let finalEl
     let newTilesPos
     let allTiles
+    //handles autoscrolling
+    const autoScroll =() =>{
+        if(!startEl) return
+        const startTilePos = startEl.getBoundingClientRect()
+        // const startXTransform = parseInt(startEl.style.transform.match(/\(-*[0-9]+\.*[0-9]*/)[0].slice(1))
+        // const startYTransform = parseInt(startEl.style.transform.match(/, -*[0-9]+\.*[0-9]*/)[0].slice(2))
+        if(startTilePos.top <= 30) {
+            window.scrollBy({top:-startTilePos.height})
+            //startEl.style.transform = `translate(${startXTransform}px,${startYTransform -startTilePos.height}px)`
+        }
+        if(startTilePos.bottom >= window.innerHeight-30) {
+            window.scrollBy({top: startTilePos.height})
+            //startEl.style.transform = `translate(${startXTransform}px,${startYTransform + startTilePos.height}px)`
+        }
+    }
     //grab positions of all other tiles. Necessary for detect overlay on touch inputs
     const grabTilePos = () =>{
         allTiles = document.querySelectorAll(".gridTiles");
@@ -124,23 +119,17 @@ const MatchActivityApp = ({activityData}) => {
         startEl = e.target.closest("div") 
         document.querySelector("body").style.cursor = "grabbing"
     }
+    
     let isDisabled = false
     const onDrag = (e) =>{
-        //scrolls page automatically in 50px increments 
-        if(startEl.getBoundingClientRect().top <= 0) {
-            window.scrollBy({top: -50, behavior:"smooth"})
-            grabTilePos();
-        }
-        if(startEl.getBoundingClientRect().bottom >= window.innerHeight) {
-            window.scrollBy({top: 50})
-            grabTilePos();
-        }
+        autoScroll();
         if(!isDisabled){
             isDisabled = true
             //for touch events
             //if performance becomes issue,move this if-else to onStop 
             //function and replace touches with changedTouches
             if(e.type==="touchmove"){
+                grabTilePos();
                 //touches for move, changedtouches for touchend
                 const startXPos = e.touches[0].clientX
                 const startYPos = e.touches[0].clientY
@@ -195,7 +184,21 @@ const MatchActivityApp = ({activityData}) => {
         setState(newMatchList)
         setTileShuffle(newShuffleList)
     }
+    
+    //check if all tiles have been matched or not
+    const allTilesMatched = tileShuffle.every(tile => tile === null)
+   
+    //determine if we are on mobile, for grid layout
+    useEffect(() => {
+        const resize = () => {
+            if(windowWidth && window.innerWidth<575){setWidth(false)}
+            else if(!windowWidth && window.innerWidth>=575)setWidth(true)
+        }
+        window.addEventListener('resize', resize);
 
+        // Remove event listener on cleanup
+        return () => window.removeEventListener("resize", resize)
+    }, [windowWidth]); 
     return(
         <>
         <p className="matchInstruction">Find the Match!</p>
