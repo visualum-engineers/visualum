@@ -7,13 +7,13 @@
     height: 100%;
     padding: 10px 20px;
     transition: all 0.3s;
-    color: white;
-    border: 1px white solid;
+    color: $main-font-color;
+    border: 1px $main-font-color solid;
     @include border-radius(5px)
 }
 .MCInputContainer label:hover{
-    background-color: white;
-    color: black;
+    background-color: $main-font-color;
+    color: $label-font-color;
 }
 
 .ansOptionItem{
@@ -21,9 +21,9 @@
     margin: 5px;
 }
 .MCInputContainer input[type="radio"]{
-    display: none;
+    @include hidden;
 }
 .MCInputContainer input[type="radio"]:checked + label{
-    background-color: white;
-    color: black;
+    background-color: $main-font-color;
+    color: $label-font-color;
 }

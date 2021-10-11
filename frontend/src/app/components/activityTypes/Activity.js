@@ -15,6 +15,10 @@ const activityData = {
             "Pair1-":"Pair1",
             "Pair2-":"Pair2", 
             "Pair3-":"Pair3",
+            "Pair4-":"Pair4",
+            "Pair4":"Pair4-", 
+            "Pair5":"Pair5-",
+            "Pair5-":"Pair5"
         },
     },
     //multiple choice

@@ -32,10 +32,10 @@
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  position: relative;
-  color: white;
   background: none;
   border: none;
+  position: relative;
+  color: white;
   padding: 8px;
   text-align: center;
   font-size: 1em;
@@ -332,6 +332,8 @@
 
 .sidebar-bg-hide {
   display: none;
+  visibility: hidden;
+  position: absolute;
 }
 
 .sidebar-link-container {
@@ -339,7 +341,7 @@
   margin-left: 209px;
   width: 150px;
   color: white;
-  font-size: 0.85em;
+  font-size: 0.9em;
 }
 
 .sidebar-link {
@@ -358,14 +360,14 @@
 
 .exit-sidebar-btn {
   border-radius: 5px;
+  background: none;
+  border: none;
   position: absolute;
   top: 0;
   right: 15px;
   margin-top: 90px;
   padding: 0 7px;
   color: white;
-  background: none;
-  border: none;
   font-size: 1.5em;
 }
 
@@ -391,24 +393,26 @@
   padding-top: 100px;
   padding-bottom: 20px;
   margin: 0;
-  height: 100vh;
   min-height: 550px;
+  height: 100vh;
   width: 100%;
   z-index: 1;
 }
 
 .homePageImage {
-  position: absolute;
   top: 0;
   left: 0;
-  z-index: -1;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
   background-color: #090322;
   -o-object-fit: cover;
      object-fit: cover;
   -o-object-position: top;
      object-position: top;
-  height: 100%;
-  width: 100%;
+  z-index: -1;
 }
 
 .homePageText {
@@ -430,13 +434,13 @@
 }
 
 .introContainer:before {
-  content: "";
-  position: absolute;
-  z-index: -1;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  position: absolute;
+  content: "";
+  z-index: -1;
   box-shadow: inset 0 0 2000px #142149;
   filter: blur(4px);
 }
@@ -526,12 +530,12 @@
 
 #signUpForm, #loginForm {
   border-radius: 20px;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 0 10vw;
-  width: 100%;
-  height: 100%;
   color: white;
 }
 
@@ -585,10 +589,10 @@
 }
 
 #signUpOptions > button, .email-btn {
-  padding: 0;
   margin: 0;
-  align-items: center;
+  padding: 0;
   border-radius: 5px;
+  align-items: center;
   height: 40px;
   width: 183px;
 }
@@ -609,7 +613,7 @@
 /* Sign up with e-mail button */
 .email-btn {
   align-self: center;
-  background-color: #ececec;
+  background-color: white;
   border: 1.5px solid white;
 }
 
@@ -700,22 +704,22 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 }
 
 .form-page {
-  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100vh;
 }
 
 .form-container {
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 70%;
   height: 75%;
   background-color: rgba(89, 42, 128, 0.65);
   -webkit-backdrop-filter: blur(5px);
           backdrop-filter: blur(5px);
-  border-radius: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 50px;
 }
 
@@ -728,8 +732,8 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 }
 
 #copyright {
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
 .foot-link {
@@ -839,19 +843,61 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
   margin: 0;
 }
 
+.match-activity-timer {
+  position: relative;
+  color: white;
+}
+
+.match-activity-timer .timer-counter {
+  border-radius: 10px;
+  text-align: center;
+  position: relative;
+  color: black;
+  margin-left: 7px;
+  margin-right: 2px;
+  padding: 3px 0px;
+  font-size: 12px;
+  overflow: hidden;
+  min-width: 70px;
+  z-index: 1;
+}
+
+.match-activity-timer .timer-counter:before {
+  border-radius: 10px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: "";
+  position: absolute;
+  z-index: -1;
+  box-shadow: inset 0 0 2000px white;
+  filter: blur(3.5px);
+}
+
+.match-activity-timer button {
+  background: none;
+  border: none;
+  font-size: 12px;
+  color: white;
+}
+
 .gridLayout {
   margin-top: 10px;
 }
 
 .gridTiles {
+  border-radius: 5px;
+  min-width: 80px;
+  min-height: 80px;
+  width: 100%;
+  height: 100%;
   cursor: -webkit-grab;
   cursor: grab;
   color: white;
-  min-height: 150px;
   padding: 0px 5px;
   margin: 5px;
   border: 1px white solid;
-  border-radius: 5px;
 }
 
 .gridTiles:hover, .gridTiles.hover {
@@ -873,48 +919,8 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 }
 
 .emptyTile {
-  min-height: 150px;
-  padding: 0px 5px;
-  margin: 5px;
-}
-
-.match-activity-timer {
-  position: relative;
-  color: white;
-}
-
-.match-activity-timer .timer-counter {
-  border-radius: 10px;
-  text-align: center;
-  position: relative;
-  color: black;
-  margin-left: 7px;
-  margin-right: 2px;
-  padding: 3px 0px;
-  font-size: 12px;
-  overflow: hidden;
-  z-index: 1;
-  min-width: 70px;
-}
-
-.match-activity-timer .timer-counter:before {
-  border-radius: 10px;
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  box-shadow: inset 0 0 2000px white;
-  filter: blur(3.5px);
-}
-
-.match-activity-timer button {
-  font-size: 12px;
-  color: white;
-  background: none;
-  border: none;
+  min-width: 80px;
+  min-height: 80px;
 }
 
 .MCInputContainer {
@@ -944,6 +950,8 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 
 .MCInputContainer input[type=radio] {
   display: none;
+  visibility: hidden;
+  position: absolute;
 }
 
 .MCInputContainer input[type=radio]:checked + label {
@@ -968,8 +976,8 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 
 .labelPicApp img {
   min-width: 175px;
-  width: 100%;
   height: 100%;
+  width: 100%;
 }
 
 .imgIndicatorContainer {

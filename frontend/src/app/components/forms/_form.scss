@@ -10,13 +10,12 @@
 #signUpForm{
     @extend #formContainer;
     @include border-radius(20px);
+    @include fillContainer;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 0 10vw;
-    width:100%;
-    height: 100%;
-    color: white;
+    color: $main-font-color;
 }
 #loginForm{
     @extend #signUpForm;
@@ -28,26 +27,26 @@
 
 #signUpForm.teacherSignUpForm{
     background-color: rgba(0, 0, 0, 0.568);
-    border: 1px solid white;
+    border: 1px solid $main-font-color;
 }
 
 .formNavBtns>button{
     width: 100%;
     background-color: #0e050f09;
-    border: 1px solid white;
-    color: white;
+    border: 1px solid $main-font-color;
+    color: $main-font-color;
 }
 
 .formTypeBtns>button{
-    color: white;
+    color: $main-font-color;
 }
 .formTypeBtns>button.active{
     color: #592a80;
-    background-color: white;
+    background-color: $main-font-color;
 }
 .formTypeBtns>.student{
     margin-right: 1vw;
-    border: 1px solid white;
+    border: 1px solid $main-font-color;
 }
 
 .formTypeBtns>.teacher{
@@ -56,8 +55,8 @@
 }
 
 .formNavBtns>button:hover, .formTypeBtns>button:hover{
-    background-color: white;
-    border: 1px solid white;
+    background-color: $main-font-color;
+    border: 1px solid $main-font-color;
     color: #592a80;
 }
 
@@ -67,10 +66,9 @@
 }
 
 #signUpOptions>button, .email-btn{
-    padding: 0;
-    margin: 0;
+    @include no-space;
+    @include border-radius(5px);
     align-items: center;
-    border-radius: 5px;
     height: 40px;
     width: 183px;
 }
@@ -88,11 +86,10 @@
 }
 
 /* Sign up with e-mail button */
-
 .email-btn{
     align-self: center;
-    background-color: rgb(236, 236, 236);
-    border: 1.5px solid white;
+    background-color: $main-font-color;
+    border: 1.5px solid $main-font-color;
 }
 .email-btn:hover{
     background-color: rgb(119, 119, 119);
@@ -101,8 +98,7 @@
 .email-text {
     vertical-align: middle;
     font-family: 'Roboto', sans-serif;
-    text-align: center;
-    
+    text-align: center;    
 }
 //styling for all inputs
 input::-webkit-outer-spin-button,
@@ -127,12 +123,12 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 //add .form-floating class and make sure label is below imput
 //this creates new form floating labels
 #signUpForm > div>.form-floating{
-    color: black;
+    color: $label-font-color;
 }
 
 .logSignForm.form-floating>label{
     padding: 0.6rem;
-    color: black;
+    color: $label-font-color;
     font-size: 14px;
     padding-top: 14px;
     @include transition(opacity .1s ease-in-out, transform .1s ease-in-out);
@@ -150,7 +146,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 .code-input{
     @include center;
     flex-direction: column;
-    color: white;
+    color: $main-font-color;
 }
 .code-inputs{
     @include center;
@@ -169,24 +165,24 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 
 //Refactor
 .form-page {
-    height: 100vh;
     @include center;
+    height: 100vh;
 }
 
 .form-container {
+    @include border-radius(50px);
+    @include center;
     width: 70%;
     height: 75%;
     background-color: rgba(89, 42, 128, 0.65);
     backdrop-filter: blur(5px);
-    @include border-radius(50px);
-    @include center;
     padding: 50px;
 }
 
 .form-signUpOptions {
-    color: white;
+    color: $main-font-color;
 }
 
 .form-check {
-    color: white;
+    color: $main-font-color
 }

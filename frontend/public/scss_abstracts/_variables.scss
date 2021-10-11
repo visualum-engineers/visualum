@@ -4,7 +4,22 @@ $main-color: rgba(107, 97, 144, 0.8);
 
 $bg-color: rgb(9, 3, 34);
 
-$nav-height: 100px;
+$main-font-color: white; 
+
+$label-font-color: black;
+
+$main-font-size: 14px;
+
+@mixin remove-btn-default {
+    background: none;
+    border: none;
+}
+@mixin anchor-top-left {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
 
 @mixin box-shadow($x, $y, $blur, $color){
     -webkit-box-shadow: $x $y $blur $color;
@@ -50,7 +65,7 @@ $nav-height: 100px;
 
 @mixin hover-color{
     background: rgba(255, 255, 255, 0.267);
-    color:  white;
+    color:  $main-font-color;
 }
 
 @mixin no-space {

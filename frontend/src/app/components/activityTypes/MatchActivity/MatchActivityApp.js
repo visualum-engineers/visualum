@@ -71,10 +71,17 @@ const MatchActivityApp = ({activityData}) => {
     const gridSize = useGridSize();
 
     //determine column and rows of grid
-    const gridShape = nearestSquare(Object.keys(activityData.matchPair))
-    const rows = Array(gridShape[1]).fill(0)
-    const columns=gridShape[0]
+    const gridShape = nearestSquare(Object.keys(tileShuffle))
+    const rows = Array(gridShape[0]).fill(0)
+    const columns=gridShape[1]
 
+    if(rows.length*columns !== tileShuffle.length){
+        let newTiles = [...tileShuffle]
+        for (let i=0; i<rows.length*columns-tileShuffle.length; i++){
+            newTiles.push(null)
+        }
+        setTileShuffle(newTiles)
+    }
     //check if all tiles have been matched or not
     const allTilesMatched = tileShuffle.every(tile => tile === null)
    
@@ -183,24 +190,28 @@ const MatchActivityApp = ({activityData}) => {
         }
         
         {/*renders tile grid*/}
-        <div className = "gridLayout d-flex justify-content-center">
+        <div className = "gridLayout container g-1">
             { allTilesMatched ? <p className="tilesMatchedMessage">You Matched Everything!</p>
               : rows.map((content,rowIndex)=>{
                 return(
-                    <div key={rowIndex} className="d-flex flex-column w-100">
+                    <div key={rowIndex} className="row g-0">
                         {tileShuffle.slice((rowIndex)*columns, (rowIndex+1)*columns).map((content, index)=>{
-                            if(content === null) return <div key={index} className="emptyTile"></div>
-                            return <GridTiles 
-                                onTouchStart={onTouchStart}
-                                gridSize ={gridSize}
-                                onStop = {onStop}
-                                onDrag = {onDrag}
-                                onStart = {onStart}
-                                key={index+columns*rowIndex} 
-                                id={"gridTile-"+(index+columns*rowIndex)} 
-                                index ={index}
-                                content = {content}
-                            />
+                            if(content === null) return <div key={index} className="emptyTile col m-1"></div>
+                            return (
+                                <div className="col m-1">
+                                    <GridTiles 
+                                        onTouchStart={onTouchStart}
+                                        gridSize ={gridSize}
+                                        onStop = {onStop}
+                                        onDrag = {onDrag}
+                                        onStart = {onStart}
+                                        key={index+columns*rowIndex} 
+                                        id={"gridTile-"+(index+columns*rowIndex)} 
+                                        index ={index}
+                                        content = {content}
+                                    />
+                                </div>
+                            )
                         })}
                     </div>
                 )

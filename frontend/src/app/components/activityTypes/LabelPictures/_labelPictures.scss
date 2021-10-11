@@ -1,19 +1,18 @@
 .labelPicApp{
     padding-top: 150px;
-    color: white;
+    color: $main-font-color;
 }
 
 .labelPicApp img{
     min-width: 175px;
-    width: 100%;
-    height: 100%;
+    @include fillContainer;
 }
 .imgIndicatorContainer{
     position: relative;
 }
 .labelIndicators{
     position: absolute;
-    border: 1px white solid;
+    border: 1px $main-font-color solid;
 }
 .labelWordBankColumn{
     min-height: 100px;
@@ -24,17 +23,17 @@
 .imgLabelContainer{
     @extend .labelWordBankColumn;
     min-height: 47px;
-    border: 1px white solid;
+    border: 1px $main-font-color solid;
 }
 .labelChoices{
     cursor: pointer;
     margin: 5px 0;
     width: 100%;
     min-height: 30px;
-    border: 1px white solid;
+    border: 1px $main-font-color solid;
     @include border-radius(5px)
 }
 .labelChoices p{
     @include no-space;
-    color: white;
+    color: $main-font-color;
 }

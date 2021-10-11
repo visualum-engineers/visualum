@@ -1,32 +1,68 @@
 .tilesMatchedMessage{
-    color: white;
+    color: $main-font-color;
 }
 .matchInstruction{
-    color: white;
+    color: $main-font-color;
     font-size: 1.7em;
     margin: 0;
 }
+.match-activity-timer{
+    position: relative;
+    color: $main-font-color;
+}
+.match-activity-timer .timer-counter{
+    @include border-radius(10px);
+    text-align: center;
+    position: relative;
+    color: $label-font-color;
+    margin-left: 7px;
+    margin-right: 2px;
+    padding: 3px 0px;
+    font-size: 12px;
+    overflow: hidden;
+    min-width: 70px;
+    z-index: 1;
+}
+.match-activity-timer .timer-counter:before{
+    @include border-radius(10px);
+    @include anchor-top-left;
+    content: "";
+    position: absolute;
+    z-index: -1;
+    box-shadow: inset 0 0 2000px $main-font-color;
+    filter: blur(3.5px);
+}
+.match-activity-timer button{
+    @include remove-btn-default;
+    font-size: 12px;
+    color: $main-font-color;
+}
+
 .gridLayout{
     margin-top: 10px;
 }
+
 .gridTiles{
+    @include border-radius(5px);
+    min-width: 80px;
+    min-height: 80px;
+    width: 100%;
+    height: 100%;
     cursor: grab;
-    color: white;
-    min-height: 150px;
+    color: $main-font-color;
     padding: 0px 5px;
     margin: 5px;
-    border: 1px white solid;
-    @include border-radius(5px);
+    border: 1px $main-font-color solid;
 }
 .gridTiles:hover, .gridTiles.hover{
-    background-color: white;
-    color: black;
+    background-color: $main-font-color;
+    color: $label-font-color;
 }
 
 .gridTiles.active, .gridTiles:active{
     pointer-events: none;
     background-color: rgba(255,255,255,0.60);
-    color: black;
+    color: $label-font-color;
     z-index:2;
     border: 1px rgb(39, 39, 39) solid;
 }
@@ -35,42 +71,6 @@
     @include no-space;
 }
 .emptyTile{
-    min-height: 150px;
-    padding: 0px 5px;
-    margin: 5px;
-}
-.match-activity-timer{
-    position: relative;
-    color: white;
-}
-.match-activity-timer .timer-counter{
-    @include border-radius(10px);
-    text-align: center;
-    position: relative;
-    color: black;
-    margin-left: 7px;
-    margin-right: 2px;
-    padding: 3px 0px;
-    font-size: 12px;
-    overflow: hidden;
-    z-index: 1;
-    min-width: 70px;
-}
-.match-activity-timer .timer-counter:before{
-    @include border-radius(10px);
-    content: "";
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    box-shadow: inset 0 0 2000px white;
-    filter: blur(3.5px);
-}
-.match-activity-timer button{
-    font-size: 12px;
-    color: white;
-    background: none;
-    border: none;
+    min-width: 80px;
+    min-height: 80px;
 }
