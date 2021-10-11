@@ -196,16 +196,15 @@ const MatchActivityApp = ({activityData}) => {
                 return(
                     <div key={rowIndex} className="row g-0">
                         {tileShuffle.slice((rowIndex)*columns, (rowIndex+1)*columns).map((content, index)=>{
-                            if(content === null) return <div key={index} className="emptyTile col m-1"></div>
+                            if(content === null) return <div  key={index+columns*rowIndex} className="emptyTile col m-1"></div>
                             return (
-                                <div className="col m-1">
+                                <div key={index+columns*rowIndex}  className="col m-1">
                                     <GridTiles 
                                         onTouchStart={onTouchStart}
                                         gridSize ={gridSize}
                                         onStop = {onStop}
                                         onDrag = {onDrag}
                                         onStart = {onStart}
-                                        key={index+columns*rowIndex} 
                                         id={"gridTile-"+(index+columns*rowIndex)} 
                                         index ={index}
                                         content = {content}
