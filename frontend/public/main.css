@@ -850,9 +850,9 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 
 .match-activity-timer .timer-counter {
   border-radius: 10px;
+  color: black;
   text-align: center;
   position: relative;
-  color: black;
   margin-left: 7px;
   margin-right: 2px;
   padding: 3px 0px;
@@ -887,17 +887,14 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 }
 
 .gridTiles {
-  border-radius: 5px;
-  min-width: 80px;
-  min-height: 80px;
-  width: 100%;
-  height: 100%;
+  border-radius: 15px;
   cursor: -webkit-grab;
   cursor: grab;
   color: white;
-  padding: 0px 5px;
-  margin: 5px;
+  font-size: 80%;
   border: 1px white solid;
+  padding: 30% 0;
+  height: 100%;
 }
 
 .gridTiles:hover, .gridTiles.hover {
@@ -916,11 +913,15 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 .gridTiles p {
   margin: 0;
   padding: 0;
+  overflow-wrap: break-word;
+  width: 60px;
 }
 
 .emptyTile {
-  min-width: 80px;
-  min-height: 80px;
+  height: 100%;
+  width: 100%;
+  min-width: 60px;
+  padding: 30% 0;
 }
 
 .MCInputContainer {

@@ -49,7 +49,21 @@ const MatchActivityApp = ({activityData}) => {
     //for internal component rendering
     //since we only shuffle once at the start
     const [tileShuffle, setTileShuffle] = useState(shuffleArray)
-   
+   //for rearranging grid layout to 2 columns
+    const [windowWidth, setWidth] = useState(window.innerWidth>=575)
+    
+    //determine if we are on mobile, for grid layout
+    useEffect(() => {
+        const resize = () => {
+            if(windowWidth && window.innerWidth<575){setWidth(false)}
+            else if(!windowWidth && window.innerWidth>=575)setWidth(true)
+        }
+        window.addEventListener('resize', resize);
+
+        // Remove event listener on cleanup
+        return () => window.removeEventListener("resize", resize)
+    }, [windowWidth]); 
+
     //Necessary for drag and drop bounds to work and not cause overflow on drag
     const useGridSize = () => {
         const [gridSize, setGridSize] = useState({width: undefined, height: undefined, rect: undefined});
@@ -70,10 +84,10 @@ const MatchActivityApp = ({activityData}) => {
     }
     const gridSize = useGridSize();
 
-    //determine column and rows of grid
+    //determine column and rows of grid (for mobile and desktop)
     const gridShape = nearestSquare(Object.keys(tileShuffle))
-    const rows = Array(gridShape[0]).fill(0)
-    const columns=gridShape[1]
+    const rows = !windowWidth? Array(tileShuffle.length/2).fill(0): Array(gridShape[1]).fill(0)
+    const columns= !windowWidth? 2: gridShape[0] 
 
     if(rows.length*columns !== tileShuffle.length){
         let newTiles = [...tileShuffle]
@@ -82,6 +96,7 @@ const MatchActivityApp = ({activityData}) => {
         }
         setTileShuffle(newTiles)
     }
+
     //check if all tiles have been matched or not
     const allTilesMatched = tileShuffle.every(tile => tile === null)
    
@@ -90,14 +105,18 @@ const MatchActivityApp = ({activityData}) => {
     let startEl
     let finalEl
     let newTilesPos
-    const onTouchStart = () =>{
-        startEl.classList.add("active")
-        //grab positions of all other tiles. Necessary for detect overlay on touch inputs
-        const allTiles = document.querySelectorAll(".gridTiles");
+    let allTiles
+    //grab positions of all other tiles. Necessary for detect overlay on touch inputs
+    const grabTilePos = () =>{
+        allTiles = document.querySelectorAll(".gridTiles");
         newTilesPos = Object.keys(allTiles).map((content)=>{
             if(allTiles[content]===startEl) return null
             return [allTiles[content].getBoundingClientRect(), allTiles[content].id]
         })
+    }
+    const onTouchStart = () =>{
+        startEl.classList.add("active")
+        grabTilePos();
     }
     const onStart =(e) =>{
         e.preventDefault()
@@ -107,15 +126,17 @@ const MatchActivityApp = ({activityData}) => {
     }
     let isDisabled = false
     const onDrag = (e) =>{
+        //scrolls page automatically in 50px increments 
+        if(startEl.getBoundingClientRect().top <= 0) {
+            window.scrollBy({top: -50, behavior:"smooth"})
+            grabTilePos();
+        }
+        if(startEl.getBoundingClientRect().bottom >= window.innerHeight) {
+            window.scrollBy({top: 50})
+            grabTilePos();
+        }
         if(!isDisabled){
             isDisabled = true
-            //scrolls page automatically in 50px increments 
-            if(startEl.getBoundingClientRect().top <= 0) {
-                window.scrollBy({top: -50, behavior:"smooth"})
-            }
-            if(startEl.getBoundingClientRect().bottom >= window.innerHeight) {
-                window.scrollBy({top: 50})
-            }
             //for touch events
             //if performance becomes issue,move this if-else to onStop 
             //function and replace touches with changedTouches
@@ -190,13 +211,13 @@ const MatchActivityApp = ({activityData}) => {
         }
         
         {/*renders tile grid*/}
-        <div className = "gridLayout container g-1">
+        <div className = "gridLayout">
             { allTilesMatched ? <p className="tilesMatchedMessage">You Matched Everything!</p>
               : rows.map((content,rowIndex)=>{
                 return(
                     <div key={rowIndex} className="row g-0">
                         {tileShuffle.slice((rowIndex)*columns, (rowIndex+1)*columns).map((content, index)=>{
-                            if(content === null) return <div  key={index+columns*rowIndex} className="emptyTile col m-1"></div>
+                            if(content === null) return <div key={index+columns*rowIndex} className="col m-1"><div className="emptyTile"></div></div>
                             return (
                                 <div key={index+columns*rowIndex}  className="col m-1">
                                     <GridTiles 

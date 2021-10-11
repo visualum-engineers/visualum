@@ -56,7 +56,7 @@ const CountDownTimer = ({timer={hours:0, minutes:0, seconds:0}, autoStart=true, 
                     <i className="fa fa-play" aria-hidden="true"></i>
                 </span>
             </button>}
-            {pauseBtn ? 
+            {pauseBtn ?
                 timerStarted ?
                     <button onClick={stopTimer} aria-label="pause-timer">
                         <span aria-label="pause-timer">

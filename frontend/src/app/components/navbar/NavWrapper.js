@@ -5,8 +5,8 @@ import Footer from '../footer/Footer'
 
 export default function NavWrapper(props) {
     const [sidebarToggle, setSidebarToggle] = useState(false)
-    const [windowWidth, setWidth] = useState(window.innerWidth>=992)
     const [sidebarBtnType, setBtnType] = useState("")
+    const [windowWidth, setWidth] = useState(window.innerWidth>=992)
     
     //handles resizing events
     useEffect(() => {
