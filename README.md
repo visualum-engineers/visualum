@@ -2,8 +2,7 @@
 This project was built using the MERN stack
 ## Prerequisites
 1. Install Node.js 16.4.0
-2. Install MongoDB Database Tools: https://docs.mongodb.com/database-tools/installation/installation-windows/ 
-3. Install Doppler: https://docs.doppler.com/docs/enclave-installation
+2. Install Doppler: https://docs.doppler.com/docs/enclave-installation
     * Ensure you have setup your account, and have accepted the invite to join the doppler visualum team
     * Doppler is in charge of hosting all enviroment variables. 
         * If you do not have access, you will be unable to run/access our Node API.
