@@ -42,8 +42,9 @@ const nearestSquare = (array) =>{
 
 const MatchActivityApp = ({activityData}) => {
     //store starting and final elements
-    const startEl = useRef(null)
+    const [startEl, setStartEl] = useState(null)
     const finalEl = useRef(null)
+
     //for updating redux store(data to be sent to backend)
     const [matchPair, setMatchPair] = useState(activityData.matchPair)
     //we only shuffle tiles once at the start
@@ -87,14 +88,14 @@ const MatchActivityApp = ({activityData}) => {
     const grabTilePos = () =>{
         const allTiles = document.querySelectorAll(".gridTiles");
         newTilesPos.current = Object.keys(allTiles).map((content)=>{
-                if(allTiles[content]===startEl.current) return null
+                if(allTiles[content]===startEl) return null
                 return [allTiles[content].getBoundingClientRect(), allTiles[content].id]
             })
     }
     //handles autoscrolling,
     const autoScroll = () =>{
-        if(!startEl.current) return
-        const startTilePos = startEl.current.getBoundingClientRect()
+        if(!startEl) return
+        const startTilePos = startEl.getBoundingClientRect()
         // const startXTransform = parseInt(startEl.style.transform.match(/\(-*[0-9]+\.*[0-9]*/)[0].slice(1))
         // const startYTransform = parseInt(startEl.style.transform.match(/, -*[0-9]+\.*[0-9]*/)[0].slice(2))
         if(startTilePos.top <= 30) {
@@ -107,12 +108,12 @@ const MatchActivityApp = ({activityData}) => {
         }
     }
     const onTouchStart = () =>{
-        startEl.current.classList.add("active")
+        startEl.classList.add("active")
         grabTilePos();
     }
     const onStart = (e) =>{
         e.preventDefault()
-        startEl.current = e.target.closest("div")
+        setStartEl(e.target.closest("div"))
         document.querySelector("body").style.cursor = "grabbing"
     }
 
@@ -156,11 +157,11 @@ const MatchActivityApp = ({activityData}) => {
         if(finalEl.current)finalEl.current.classList.remove("hover")
         //setup
         const final = !finalEl.current ? null: finalEl.current.getAttribute("content")
-        const start = startEl.current.getAttribute("content")
+        const start = startEl.getAttribute("content")
         const newMatchList = Object.assign({}, matchPair)
         const newShuffleList = [...tileShuffle]
         //reset startEl 
-        startEl.current = null
+        setStartEl(null)
         finalEl.current = null
         //when elements are not considered a matching pair
         //it will simply return item to original position
@@ -210,7 +211,7 @@ const MatchActivityApp = ({activityData}) => {
                                         onStart = {onStart}
                                         id={"gridTile-"+(index+columns*rowIndex)} 
                                         content = {content} 
-                                        startEl = {startEl.current? startEl.current.id === "gridTile-"+(index+columns*rowIndex): false}
+                                        startEl = {startEl}
                                         finalEl = {finalEl.current? finalEl.current.id === "gridTile-"+(index+columns*rowIndex): false}
                                     />
                                 </div>

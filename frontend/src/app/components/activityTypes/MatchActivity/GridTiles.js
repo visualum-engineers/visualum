@@ -4,7 +4,7 @@ import DraggableCore from 'react-draggable';
 const GridTiles = ({id, content, onStop, onDrag, onStart, onTouchStart, gridSize, startEl=false, finalEl=false})=>{
     // console.log(startTile)
     // console.log(overlapTile)
-    console.log(startEl, finalEl)
+    console.log(id)
     const nodeRef = useRef(null)
     //this will set bounds so element is limited to gridLayout area
     const [bounds, setBounds] = useState(false)
@@ -57,6 +57,7 @@ const GridTiles = ({id, content, onStop, onDrag, onStart, onTouchStart, gridSize
             onDrag = {onDrag}
             bounds = {bounds}
             nodeRef={nodeRef}
+            disabled={startEl ? !(startEl.id===id): startEl}
            >
             <div 
                 onTouchStart={onTouchStart}
