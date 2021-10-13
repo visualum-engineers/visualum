@@ -59,16 +59,6 @@
         background-color: $main-font-color;
     }
 }
-#signOut-btn{
-    @include fillContainer;
-    font-size: 1rem;
-}
-.signout-btn{
-    align-self: stretch;
-}
-#signIn-btn{
-    @extend #signOut-btn;
-}
 
 #search-box{
     padding: 0;
@@ -277,8 +267,8 @@
 .sidebar-nav{
     z-index: 4;
     height: 100vh;
-    min-width: 560px;
-    width: 40vw;
+    width: 570px;
+    // width: 40vw;
     background: rgba(31, 49, 110, 0.582);
 }
 .sidebar-dark-bg{
@@ -304,7 +294,7 @@
 }
 .sidebar-link-container{
     margin-top: 90px;
-    margin-left: 209px;
+    margin-left: 36.8%;
     width: 150px;
     color: $main-font-color;
     font-size: 0.9em;

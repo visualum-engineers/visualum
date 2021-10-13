@@ -46,8 +46,9 @@ export default class HomeContent extends Component {
                                 <button 
                                     id="signup-btn" 
                                     className="btn btn-outline-light btn-lg mx-1">  
-                                    <p>Sign Up</p>
-                                    <span className="fa fa-caret-right"></span>
+                                    <span>Sign Up
+                                        <i className="fa fa-caret-right"></i>
+                                    </span>
                                 </button>
                                 <form id="home-enter-code" className="mx-1 form-floating">
                                     <input
