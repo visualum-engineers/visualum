@@ -2,7 +2,6 @@ import React, {useState, useRef, useEffect, memo} from 'react'
 import DraggableCore from 'react-draggable';
 
 const GridTiles = ({id, content, onStop, onDrag, onStart, onTouchStart, gridSize, startEl=false})=>{
-    console.log(id)
     const nodeRef = useRef(null)
     //this will set bounds so element is limited to gridLayout area
     const [bounds, setBounds] = useState(false)
