@@ -1,9 +1,7 @@
 import React, {useState, useRef, useEffect, memo} from 'react'
 import DraggableCore from 'react-draggable';
 
-const GridTiles = ({id, content, onStop, onDrag, onStart, onTouchStart, gridSize, startEl=false, finalEl=false})=>{
-    // console.log(startTile)
-    // console.log(overlapTile)
+const GridTiles = ({id, content, onStop, onDrag, onStart, onTouchStart, gridSize, startEl=false})=>{
     console.log(id)
     const nodeRef = useRef(null)
     //this will set bounds so element is limited to gridLayout area
@@ -20,31 +18,26 @@ const GridTiles = ({id, content, onStop, onDrag, onStart, onTouchStart, gridSize
                 rect: document.getElementById(id).getBoundingClientRect(),
             });
         }
+        if(!tilePosition.rect) setTilePosition({
+            rect: document.getElementById(id).getBoundingClientRect()
+        })
         // Add event listener
         window.addEventListener("resize", handleResize);
-        
+
         // Remove event listener on cleanup
         return () => window.removeEventListener("resize", handleResize);
-    }, [id]); // Empty array ensures that effect is only run on mount
+    }, [id, tilePosition.rect]); // Empty array ensures that effect is only run on mount
     
-    useEffect(() =>{
-        if(!tilePosition.rect) setTilePosition({
-           rect: document.getElementById(id).getBoundingClientRect()
-        })
-    }, [tilePosition.rect, id])// Empty array ensures that effect is only run on mount
-
     const onMouseDown = () =>{
         //will update draggable bounds of element
+        //gets coordinates of all four corners of the grid layout that all tiles will reside in
             setBounds({
-                top: gridRect.top - tilePosition.rect.top+90,
-                bottom: gridRect.bottom - tilePosition.rect.bottom,
-                left:  gridRect.left-tilePosition.rect.left,
-                right:  gridRect.right- tilePosition.rect.right
+                top: gridSize.rect.top - tilePosition.rect.top+90,
+                bottom: gridSize.rect.bottom - tilePosition.rect.bottom,
+                left:  gridSize.rect.left-tilePosition.rect.left,
+                right:  gridSize.rect.right- tilePosition.rect.right
             })
     }
-
-    //gets coordinates of all four corners of the grid layout that all tiles will reside in
-    const gridRect = gridSize.rect 
  
     return(
         <DraggableCore 
@@ -73,8 +66,7 @@ const GridTiles = ({id, content, onStop, onDrag, onStart, onTouchStart, gridSize
 }
 function arePropsEqual(prevProps, nextProps) {
     const startEl = prevProps.startEl===nextProps.startEl
-    const finalEl = prevProps.finalEl === nextProps.finalEl
     const gridSize = prevProps.gridSize === nextProps.gridSize
-    return startEl && finalEl && gridSize; 
+    return startEl && gridSize; 
 }
 export default memo(GridTiles, arePropsEqual)
