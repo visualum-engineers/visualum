@@ -1,24 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Login from './LoginBtn';
 import NavToggler from './NavTogglerBtn';
 import NavItem from './NavItems';
 import SearchBar from './SearchBar';
-
+import useScrollPos from '../../hooks/use-scroll-pos';
 //Navbar 
 export default function Navbar(props) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY > 50) {
-                document.getElementById("navbar").classList.add("navbarScrollActive")
-            } else {
-                document.getElementById("navbar").classList.remove("navbarScrollActive")
-            }
-        }
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-    
+    const windowScrollY = useScrollPos()
     return (
         <>
             <div id="filter-navbar-container" className="navbar-expand-lg fixed-top">
@@ -27,7 +16,7 @@ export default function Navbar(props) {
                     className={
                             `navbar navbar-expand-lg 
                             ${props.sidebarToggle ? null: "sidebar-close"}
-                            ${window.scrollY > 50 ? "navbarScrollActive": null}
+                            ${windowScrollY ? "navbarScrollActive": null}
                         `}>
                     <a href="/" className="companyTitle"> visualum </a>
 

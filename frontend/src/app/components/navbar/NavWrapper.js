@@ -1,25 +1,13 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState } from 'react'
 import SideBar from './Sidebar';
 import Navbar from './Navbar'
 import Footer from '../footer/Footer'
+import useWindowWidth from '../../hooks/use-window-width';
 
 export default function NavWrapper(props) {
     const [sidebarToggle, setSidebarToggle] = useState(false)
     const [sidebarBtnType, setBtnType] = useState("")
-    const [windowWidth, setWidth] = useState(window.innerWidth>=992)
-    
-    //handles resizing events
-    useEffect(() => {
-        const resize = () => {
-            if(windowWidth && window.innerWidth<=991){setWidth(false); setSidebarToggle(false)}
-            else if(!windowWidth && window.innerWidth>=992)setWidth(true)
-        }
-        window.addEventListener('resize', resize);
-
-        // Remove event listener on cleanup
-        return () => window.removeEventListener("resize", resize)
-    }, [windowWidth]); 
-
+    const windowWidth = useWindowWidth(992)
     const exitSideBar = () =>{
         setSidebarToggle(false)
     }

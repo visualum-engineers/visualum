@@ -1,11 +1,13 @@
-import React, {useState, useRef, useEffect} from 'react'
+import React, {useState, useRef, useEffect, memo} from 'react'
 import DraggableCore from 'react-draggable';
 
-const GridTiles = ({id, content, index, onStop, onDrag, onStart,onTouchStart, gridSize, positionOffset={x:0, y:0}})=>{
+const GridTiles = ({id, content, onStop, onDrag, onStart, onTouchStart, gridSize, startEl=false, finalEl=false})=>{
+    // console.log(startTile)
+    // console.log(overlapTile)
+    console.log(startEl, finalEl)
     const nodeRef = useRef(null)
-    
     //this will set bounds so element is limited to gridLayout area
-    const [bounds, setBounds] = useState(null)
+    const [bounds, setBounds] = useState(false)
 
     //gets four corners of tile element
     const [tilePosition, setTilePosition] = useState({rect: undefined});
@@ -47,10 +49,8 @@ const GridTiles = ({id, content, index, onStop, onDrag, onStart,onTouchStart, gr
     return(
         <DraggableCore 
             key={id} 
-            index={index}
             defaultPosition={{x: 0, y: 0}}
             position={{x:0, y:0}}
-            positionOffset={positionOffset}
             onMouseDown ={onMouseDown}
             onStart = {onStart}
             onStop = {onStop}
@@ -58,16 +58,22 @@ const GridTiles = ({id, content, index, onStop, onDrag, onStart,onTouchStart, gr
             bounds = {bounds}
             nodeRef={nodeRef}
            >
-                <div 
-                    onTouchStart={onTouchStart}
-                    tabIndex="0"
-                    id={id}
-                    className="gridTiles d-flex align-items-center justify-content-center" 
-                    content={content} 
-                    ref={nodeRef} >
-                        <p>{content}</p>
-                </div>          
+            <div 
+                onTouchStart={onTouchStart}
+                tabIndex="0"
+                id={id}
+                className={`gridTiles d-flex align-items-center justify-content-center`}
+                content={content} 
+                ref={nodeRef} >
+                    <p>{content}</p>
+            </div>          
         </DraggableCore>
     )
 }
-export default GridTiles
+function arePropsEqual(prevProps, nextProps) {
+    const startEl = prevProps.startEl===nextProps.startEl
+    const finalEl = prevProps.finalEl === nextProps.finalEl
+    const gridSize = prevProps.gridSize === nextProps.gridSize
+    return startEl && finalEl && gridSize; 
+}
+export default memo(GridTiles, arePropsEqual)

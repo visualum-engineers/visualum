@@ -31,7 +31,7 @@ const activityData = {
             "Pair10":"Pair10-", 
             "Pair11":"Pair11-",
             "Pair11-":"Pair11",
-            "Pair12":"Pair12", 
+            "Pair12":"Pair12-", 
             "Pair12-":"Pair12",
             "Pair13-":"Pair13",
             "Pair13":"Pair13-", 

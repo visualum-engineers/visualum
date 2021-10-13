@@ -1,6 +1,7 @@
-import React, {useState,useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import GridTiles from './GridTiles'
 import Timer from "./Timer"
+import useWindowWidth from '../../../hooks/use-window-width'
 /*
 To-dos
 Backend: 
@@ -40,16 +41,18 @@ const nearestSquare = (array) =>{
 }
 
 const MatchActivityApp = ({activityData}) => {
+    //store starting and final elements
+    const startEl = useRef(null)
+    const finalEl = useRef(null)
     //for updating redux store(data to be sent to backend)
-    const [state, setState] = useState(activityData.matchPair)
-
+    const [matchPair, setMatchPair] = useState(activityData.matchPair)
     //we only shuffle tiles once at the start
     const [tileShuffle, setTileShuffle] = useState(shuffleItems(Object.keys(activityData.matchPair)))
-    
-    //for rearranging grid layout to 2 columns
-    const [windowWidth, setWidth] = useState(window.innerWidth>=575)
-
-    //Necessary for drag and drop bounds to work and not cause overflow on drag
+    //determine if we are on mobile, for grid layout of 2 colums
+    const windowWidth = useWindowWidth()
+    //determine column and rows of grid (for mobile and desktop)
+    const gridShape = nearestSquare(Object.keys(tileShuffle))
+   
     const useGridSize = () => {
         const [gridSize, setGridSize] = useState({width: undefined, height: undefined, rect: undefined});
         useEffect(() => {
@@ -68,9 +71,6 @@ const MatchActivityApp = ({activityData}) => {
         return gridSize;
     }
     const gridSize = useGridSize();
-
-    //determine column and rows of grid (for mobile and desktop)
-    const gridShape = nearestSquare(Object.keys(tileShuffle))
     const rows = !windowWidth? Array(tileShuffle.length/2).fill(0): Array(gridShape[1]).fill(0)
     const columns= !windowWidth? 2: gridShape[0] 
     if(rows.length*columns !== tileShuffle.length){
@@ -79,17 +79,22 @@ const MatchActivityApp = ({activityData}) => {
             newTiles.push(null)
         }
         setTileShuffle(newTiles)
+    }    
+   
+    //for touch input, we search through this
+    const newTilesPos = useRef(null)
+    //grab positions of all other tiles. Necessary for detect overlay on touch inputs
+    const grabTilePos = () =>{
+        const allTiles = document.querySelectorAll(".gridTiles");
+        newTilesPos.current = Object.keys(allTiles).map((content)=>{
+                if(allTiles[content]===startEl.current) return null
+                return [allTiles[content].getBoundingClientRect(), allTiles[content].id]
+            })
     }
-    //starting (current dragging element) 
-    // and final element (current element being overlapped) 
-    let startEl
-    let finalEl
-    let newTilesPos
-    let allTiles
-    //handles autoscrolling
-    const autoScroll =() =>{
-        if(!startEl) return
-        const startTilePos = startEl.getBoundingClientRect()
+    //handles autoscrolling,
+    const autoScroll = () =>{
+        if(!startEl.current) return
+        const startTilePos = startEl.current.getBoundingClientRect()
         // const startXTransform = parseInt(startEl.style.transform.match(/\(-*[0-9]+\.*[0-9]*/)[0].slice(1))
         // const startYTransform = parseInt(startEl.style.transform.match(/, -*[0-9]+\.*[0-9]*/)[0].slice(2))
         if(startTilePos.top <= 30) {
@@ -101,104 +106,79 @@ const MatchActivityApp = ({activityData}) => {
             //startEl.style.transform = `translate(${startXTransform}px,${startYTransform + startTilePos.height}px)`
         }
     }
-    //grab positions of all other tiles. Necessary for detect overlay on touch inputs
-    const grabTilePos = () =>{
-        allTiles = document.querySelectorAll(".gridTiles");
-        newTilesPos = Object.keys(allTiles).map((content)=>{
-            if(allTiles[content]===startEl) return null
-            return [allTiles[content].getBoundingClientRect(), allTiles[content].id]
-        })
-    }
     const onTouchStart = () =>{
-        startEl.classList.add("active")
+        startEl.current.classList.add("active")
         grabTilePos();
     }
-    const onStart =(e) =>{
+    const onStart = (e) =>{
         e.preventDefault()
-        //updates selected element
-        startEl = e.target.closest("div") 
+        startEl.current = e.target.closest("div")
         document.querySelector("body").style.cursor = "grabbing"
     }
-    
-    let isDisabled = false
+
+    let dragEvtDisabled = false
     const onDrag = (e) =>{
         autoScroll();
-        if(!isDisabled){
-            isDisabled = true
-            //for touch events
-            //if performance becomes issue,move this if-else to onStop 
-            //function and replace touches with changedTouches
+        if(!dragEvtDisabled){
+            dragEvtDisabled = true
+            // for touch events
             if(e.type==="touchmove"){
                 grabTilePos();
-                //touches for move, changedtouches for touchend
                 const startXPos = e.touches[0].clientX
                 const startYPos = e.touches[0].clientY
                 let overlapEl
-                //find which element touch input currently overlaps with
-                for(let tile of newTilesPos){
+                for(let tile of newTilesPos.current){
                     if(!tile || !tile[0]) continue;
                     //check width parameters
                     if(!(startXPos>=tile[0].x && startXPos<tile[0].right)) continue;
                     //check height parameters and update final el
                     if(startYPos>=tile[0].y && startYPos<tile[0].bottom){
                         overlapEl = document.getElementById(tile[1])
-                        if(finalEl && finalEl!==overlapEl)finalEl.classList.remove("hover")
-                        finalEl = overlapEl
-                        finalEl.classList.add("hover")
+                        if(finalEl.current && finalEl.current!==overlapEl)finalEl.current.classList.remove("hover")
+                        finalEl.current = overlapEl
+                        finalEl.current.classList.add("hover")
                     }
                 }
             }else{
                 //for click events 
-                finalEl = e.target.closest("div")
+                finalEl.current = e.target.closest("div")
             }
             //restore function
             setTimeout(()=>{
-                isDisabled = false
+                dragEvtDisabled = false
             }, 150)
         }
-    } 
-    const onStop = () => {
+    }
+
+    const onStop = (e) => {
         //return default styling
         document.querySelector("body").style.cursor = "auto"
-        if(finalEl)finalEl.classList.remove("hover")
-
-        //updates the overlapping element
-        const final = !finalEl ? null: finalEl.getAttribute("content")
-        const start = startEl.getAttribute("content")
-        const newMatchList = Object.assign({}, state)
+        if(finalEl.current)finalEl.current.classList.remove("hover")
+        //setup
+        const final = !finalEl.current ? null: finalEl.current.getAttribute("content")
+        const start = startEl.current.getAttribute("content")
+        const newMatchList = Object.assign({}, matchPair)
         const newShuffleList = [...tileShuffle]
-        
+        //reset startEl 
+        startEl.current = null
+        finalEl.current = null
         //when elements are not considered a matching pair
         //it will simply return item to original position
-        if(state[start] !== final) return
+        if(matchPair[start] !== final) return
 
-        //when elements are considered a matching pair
-        //it will remove the element pair
-        //and replace it with an empty grid tile
+        //when elements are a matching pair
+        //it will remove it and replace it with an empty grid tile
         newShuffleList.splice(newShuffleList.indexOf(start),1, null)
         newShuffleList.splice(newShuffleList.indexOf(final),1, null)
         
         delete newMatchList[start]
         delete newMatchList[final]
         
-        setState(newMatchList)
+        setMatchPair(newMatchList)
         setTileShuffle(newShuffleList)
     }
-    
     //check if all tiles have been matched or not
     const allTilesMatched = tileShuffle.every(tile => tile === null)
-   
-    //determine if we are on mobile, for grid layout
-    useEffect(() => {
-        const resize = () => {
-            if(windowWidth && window.innerWidth<575){setWidth(false)}
-            else if(!windowWidth && window.innerWidth>=575)setWidth(true)
-        }
-        window.addEventListener('resize', resize);
-
-        // Remove event listener on cleanup
-        return () => window.removeEventListener("resize", resize)
-    }, [windowWidth]); 
     return(
         <>
         <p className="matchInstruction">Find the Match!</p>
@@ -214,7 +194,7 @@ const MatchActivityApp = ({activityData}) => {
         }
         {/*renders tile grid*/}
         <div className = "gridLayout">
-            { allTilesMatched ? <p className="tilesMatchedMessage">You Matched Everything!</p>
+            {allTilesMatched ? <p className="tilesMatchedMessage">You Matched Everything!</p>
               : rows.map((content,rowIndex)=>{
                 return(
                     <div key={rowIndex} className="row g-0">
@@ -223,14 +203,15 @@ const MatchActivityApp = ({activityData}) => {
                             return (
                                 <div key={index+columns*rowIndex}  className="col m-2 tile">
                                     <GridTiles 
-                                        onTouchStart={onTouchStart}
                                         gridSize ={gridSize}
+                                        onTouchStart={onTouchStart}
                                         onStop = {onStop}
                                         onDrag = {onDrag}
                                         onStart = {onStart}
                                         id={"gridTile-"+(index+columns*rowIndex)} 
-                                        index ={index}
-                                        content = {content}
+                                        content = {content} 
+                                        startEl = {startEl.current? startEl.current.id === "gridTile-"+(index+columns*rowIndex): false}
+                                        finalEl = {finalEl.current? finalEl.current.id === "gridTile-"+(index+columns*rowIndex): false}
                                     />
                                 </div>
                             )
@@ -242,5 +223,4 @@ const MatchActivityApp = ({activityData}) => {
         </>
     )
 }
-
 export default MatchActivityApp
