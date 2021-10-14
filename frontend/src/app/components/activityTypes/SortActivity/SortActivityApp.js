@@ -129,4 +129,3 @@ const SortActivityApp = ({activityData}) => {
     )
 }
 export default SortActivityApp
-// state.columns["answerChoices"].length%columns.length === 0? state.columns["answerChoices"].length/columns.length :
