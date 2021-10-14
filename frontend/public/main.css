@@ -750,9 +750,8 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 }
 
 .draggableAreaContainer {
-  padding: 10px 10px 10px 0;
+  padding: 10px;
   width: 100%;
-  overflow-x: auto;
 }
 
 .draggableAreaContainer::-webkit-scrollbar {
@@ -768,9 +767,7 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
   height: 100%;
   border: 1px solid white;
   font-size: 1.2rem;
-  margin-right: 2.5%;
-  margin-bottom: 2.5%;
-  margin-top: 0;
+  margin: 1.2%;
   list-style-type: none;
   border-radius: 10px;
 }
@@ -781,24 +778,26 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
   padding: 0;
 }
 
-.sortDropContainer, .answerDropContainer {
-  width: 20vw;
+.dropContainer {
+  margin: 0;
+  padding: 0;
   min-width: 150px;
   min-height: 200px;
-  border-top: 1px white solid;
   list-style-type: none;
 }
 
-.answerArea {
-  margin: 0;
-  padding: 0;
-  margin-right: 2.5%;
-  height: auto;
+.sortArea .dropContainer, .answerArea .dropContainer {
+  border-top: 1px white solid;
 }
 
-.answerDropContainer {
-  margin: 0;
-  padding: 0;
+.answerArea {
+  border: none;
+  margin-bottom: 5%;
+}
+
+.answerArea .dropContainer {
+  border: none;
+  min-height: 150px;
 }
 
 .dragItem {
@@ -807,7 +806,7 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
   font-size: 0.9rem;
   color: white;
   list-style-type: none;
-  margin: 5px 1vw;
+  margin: 5px;
   padding: 5px;
   border: 1px solid white;
   border-radius: 20px;

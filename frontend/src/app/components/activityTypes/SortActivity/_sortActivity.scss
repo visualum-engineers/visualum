@@ -5,9 +5,8 @@
     padding: 0;
 }
 .draggableAreaContainer{
-    padding: 10px 10px 10px 0;
+    padding: 10px;
     width: 100%;
-    overflow-x: auto;
 }
 .draggableAreaContainer::-webkit-scrollbar{
     height: 9px;
@@ -22,9 +21,7 @@
     height: 100%;
     border: 1px solid white;
     font-size: 1.2rem;
-    margin-right: 2.5%;
-    margin-bottom: 2.5%;
-    margin-top: 0;
+    margin: 1.2%;
     list-style-type: none;
     @include border-radius(10px);
 }
@@ -32,23 +29,24 @@
     color: white;
     @include no-space;
 }
-.sortDropContainer{
-    width: 20vw;
+.dropContainer{
+    @include no-space;
     min-width: 150px;
     min-height: 200px;
-    border-top: 1px white solid;
     list-style-type: none;
-    
 }
+.sortArea .dropContainer {
+    border-top: 1px white solid;
+}
+
 .answerArea{
     @extend .sortArea;
-    @include no-space;
-    margin-right: 2.5%;
-    height: auto;
+    border: none;
+    margin-bottom: 5%;
 }
-.answerDropContainer{
-    @extend .sortDropContainer;
-    @include no-space;
+.answerArea .dropContainer{
+    border: none;
+    min-height: 150px;
 }
 
 .dragItem{
@@ -57,7 +55,7 @@
     font-size: 0.9rem;
     color: white;
     list-style-type: none;
-    margin: 5px 1vw;
+    margin: 5px;
     padding: 5px;
     border: 1px solid white;
     @include border-radius(20px)

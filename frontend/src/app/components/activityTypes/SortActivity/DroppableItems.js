@@ -5,7 +5,7 @@ const DragItems = ({id, content, index}) => {
     return (
         <Draggable
             key={id} 
-            draggableId={id} 
+            draggableId={id.toString()} 
             index={index}>
             {(provided) => (
                 <li className="dragItem" 
