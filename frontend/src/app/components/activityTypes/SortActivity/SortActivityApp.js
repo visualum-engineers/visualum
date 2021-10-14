@@ -16,71 +16,59 @@ Frontend:
     3. Missing re-rendering logic, when user answers question and moves on to the next one.
     4. Missing progress saved on local storage/memory (if user exits out of page)
 */
-
 const SortActivityApp = ({activityData}) => {
     //for updating redux store(data to be sent to backend)
     const [state, setState] = useState(activityData)
     const windowWidth = useWindowWidth()
-    const columns = windowWidth? Array(3).fill(0) : Array(2).fill(0) 
+    const columns = windowWidth? Array(3).fill(0) : Array(2).fill(0)
+
     //handle state update when object stops
     const onDragEnd = (result) => {
         const {destination, source, draggableId} = result
         if(!destination) return
         if(destination.droppableId === source.droppableId && destination.index === source.index) return
+        //start and end containers
         const start = source.droppableId;
         const finish = destination.droppableId;
+
+        //setup for index calculations to add and remove dropped items
         const answerChoiceTestEl = (el) => /answerChoices.*/.test(el)
+        const startAnswersList = Array.from( answerChoiceTestEl(start) ? state.columns["answerChoices"] :state.columns[start])
+        const finishAnswersList = Array.from( answerChoiceTestEl(finish) ? state.columns["answerChoices"] : state.columns[finish])
+        const startElCounted = startAnswersList.length%columns.length ===0 ? startAnswersList.length/columns.length : Math.floor(startAnswersList.length/columns.length + 1)
+        const finishElCounted = finishAnswersList.length%columns.length === 0 ? finishAnswersList.length/columns.length : Math.floor(finishAnswersList.length/columns.length + 1)
+        const startElIdx =  answerChoiceTestEl(start) ? parseInt(start.match(/[0-9]+/)) * startElCounted +  source.index : null
+        const endElIdx = answerChoiceTestEl(finish) ? parseInt(finish.match(/[0-9]+/)) * finishElCounted + destination.index : null
+        const sameContainer = start===finish || (answerChoiceTestEl(start) && answerChoiceTestEl(finish))
         let newState
-        let startAnswersList
-        let finishAnswersList
-        let newAnswerChoices
-        let startElIdx
-        let endElIdx
-        let startElCounted
-        let finishElCounted
-        //dictates behavior when droppable container is the same from end to start
-        //therefore, will handle reording of elements on list
-        if (start===finish || (answerChoiceTestEl(start) && answerChoiceTestEl(finish))){
-            newAnswerChoices = Array.from( answerChoiceTestEl(start) ? state.columns["answerChoices"] : state.columns[start])
-            //roundup number of elements counted
-            startElCounted = newAnswerChoices.length%columns.length ===0 ? newAnswerChoices.length/columns.length : Math.floor(newAnswerChoices.length/columns.length + 1)
-            startElIdx = answerChoiceTestEl(start) ? parseInt(start.match(/[0-9]+/))*startElCounted + source.index : null
-            endElIdx = answerChoiceTestEl(finish) ? parseInt(finish.match(/[0-9]+/))*startElCounted + destination.index : null
-            newAnswerChoices.splice(answerChoiceTestEl(start) ? startElIdx : source.index, 1);
-            newAnswerChoices.splice(answerChoiceTestEl(finish) ? endElIdx : destination.index, 0, draggableId);
+
+        //list container are same - remove el from old idx, add to new idx
+        startAnswersList.splice(answerChoiceTestEl(start) ? startElIdx : source.index, 1)
+        if(sameContainer){
+            startAnswersList.splice(answerChoiceTestEl(finish) ? endElIdx : destination.index, 0, draggableId);
             newState = {
                 ...state,
                 columns: {
                     ...state.columns,
-                    [answerChoiceTestEl(start)?"answerChoices": start]: newAnswerChoices
+                    [answerChoiceTestEl(start)?"answerChoices": start]: startAnswersList,
                 }
             }
-            setState(newState)
-            return
-        }
-        //when list containers are different, we should 
-        //be able to move elements into the new container, and remove them from old one
-        startAnswersList = Array.from( answerChoiceTestEl(start) ? state.columns["answerChoices"] :state.columns[start])
-        finishAnswersList = Array.from( answerChoiceTestEl(finish) ? state.columns["answerChoices"] : state.columns[finish])
-        //roundup number of elements counted
-        startElCounted = startAnswersList.length%columns.length ===0 ? startAnswersList.length/columns.length : Math.floor(startAnswersList.length/columns.length + 1)
-        finishElCounted = finishAnswersList.length%columns.length ? finishAnswersList.length/columns.length : Math.floor(finishAnswersList.length/columns.length + 1)
-        startElIdx = answerChoiceTestEl(start) ? parseInt(start.match(/[0-9]+/)) * startElCounted +  source.index : null
-        endElIdx = answerChoiceTestEl(finish) ? parseInt(finish.match(/[0-9]+/)) * finishElCounted + destination.index : null
-        startAnswersList.splice(answerChoiceTestEl(start) ? startElIdx : source.index, 1)
-        finishAnswersList.splice(answerChoiceTestEl(finish) ? endElIdx : destination.index, 0, draggableId);
-        newState = {
-            ...state,
-            columns:{
-                ...state.columns,
-                [answerChoiceTestEl(start) ?"answerChoices":start] : startAnswersList,
-                [answerChoiceTestEl(finish) ?"answerChoices":finish] : finishAnswersList,
+        } 
+        //list containers are different - move elements into the new container, and remove them from old one
+        else {
+            finishAnswersList.splice(answerChoiceTestEl(finish) ? endElIdx : destination.index, 0, draggableId);
+            newState = {
+                ...state,
+                columns:{
+                    ...state.columns,
+                    [answerChoiceTestEl(start) ?"answerChoices":start] : startAnswersList,
+                    [answerChoiceTestEl(finish) ?"answerChoices":finish] : finishAnswersList,
+                }
             }
-        }
+        } 
+        //update state
         setState(newState)
-        return
     };
-   
     return (
        <>
         <p className="instructions">Sort the following:</p>
@@ -89,6 +77,7 @@ const SortActivityApp = ({activityData}) => {
                 {/* Renders sort categories */}
                 <div className={`d-flex ${!windowWidth ? "flex-column":""}`}>
                     {columns.map((content, index) =>{
+                        //roundup number of elements counted
                         const elementsPresent = (Object.keys(state.columns).length-1)%columns.length === 0 ? (Object.keys(state.columns).length-1)/columns.length : Math.floor((Object.keys(state.columns).length-1)/columns.length+1)
                         const startSlice = index * elementsPresent 
                         const endSlice = (index+1) * elementsPresent
