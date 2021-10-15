@@ -132,7 +132,7 @@
 
 .student-card {
     @include card();
-    margin: .5rem;
+    margin: 0 .5rem .5rem 0;
     flex-direction: row;
     .icon {
         background-color: red;

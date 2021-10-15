@@ -1231,7 +1231,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   border: none;
   -webkit-box-shadow: 0 4px 11px rgba(33, 33, 33, 0.1);
           box-shadow: 0 4px 11px rgba(33, 33, 33, 0.1);
-  margin: .5rem;
+  margin: 0 .5rem .5rem 0;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
