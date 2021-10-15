@@ -4,7 +4,6 @@ import NavToggler from './NavTogglerBtn';
 import NavItem from './NavItems';
 import SearchBar from './SearchBar';
 import useScrollPos from '../../hooks/use-scroll-pos';
-//Navbar 
 export default function Navbar(props) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const windowScrollY = useScrollPos()
@@ -16,7 +15,7 @@ export default function Navbar(props) {
                     className={
                             `navbar navbar-expand-lg 
                             ${props.sidebarToggle ? null: "sidebar-close"}
-                            ${windowScrollY ? "navbarScrollActive": null}
+                            ${windowScrollY ? "navbarScrollActive": ""}
                         `}>
                     <a href="/" className="companyTitle"> visualum </a>
 

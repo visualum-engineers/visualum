@@ -43,6 +43,7 @@ const activityData = {
     2:{
         type: "multipleChoice",
         question: "What faces this world?",
+        imageURL : "",
         answerChoices: ["Good What faces this world", "Bad", "No"]
     },
     //sorting

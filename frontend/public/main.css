@@ -20,11 +20,11 @@
 }
 
 .companyTitle {
-  font-size: 1.6em;
+  font-size: 1.6rem;
   font-family: "Merriweather", serif;
   font-weight: 400;
   letter-spacing: 0.1em;
-  padding-right: 30px;
+  padding-right: 2rem;
 }
 
 .nav-btn {
@@ -293,7 +293,7 @@
 .sidebar-nav {
   z-index: 4;
   height: 100vh;
-  width: 570px;
+  width: 35.9rem;
   background: rgba(31, 49, 110, 0.582);
 }
 
@@ -326,11 +326,16 @@
 }
 
 .sidebar-link-container {
+  transition: all 0.25s ease-out;
   margin-top: 90px;
   margin-left: 36.8%;
   width: 150px;
   color: white;
-  font-size: 0.9em;
+  font-size: 0.9rem;
+}
+
+.sidebar-link-container.sidebarScrollActive {
+  margin-top: 65px;
 }
 
 .sidebar-link {
@@ -457,12 +462,12 @@
 }
 
 #signup-btn span {
-  font-size: 0.85em;
+  font-size: 0.95rem;
 }
 
 #signup-btn span i {
-  padding-left: 4px;
-  font-size: 1.2em;
+  padding-left: 0.5rem;
+  font-size: 1.2rem;
 }
 
 #home-enter-code > input[type=number] {
@@ -471,25 +476,25 @@
 
 #home-enter-code > label {
   border: none !important;
-  font-size: 0.8em;
+  font-size: 0.8rem;
   transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
 }
 
 #home-enter-code > .form-control:not(:-moz-placeholder-shown) ~ label {
   opacity: 0.9;
-  transform: scale(0.7) translateY(-10px) translateX(2px) !important;
+  transform: scale(0.7) translateY(-0.7rem) translateX(0.2rem) !important;
 }
 
 #home-enter-code > .form-control:not(:-ms-input-placeholder) ~ label {
   opacity: 0.9;
-  transform: scale(0.7) translateY(-10px) translateX(2px) !important;
+  transform: scale(0.7) translateY(-0.7rem) translateX(0.2rem) !important;
 }
 
 #home-enter-code > .form-control:focus ~ label,
 #home-enter-code > .form-control:not(:placeholder-shown) ~ label,
 #home-enter-code > .form-select ~ label {
   opacity: 0.9;
-  transform: scale(0.7) translateY(-10px) translateX(2px) !important;
+  transform: scale(0.7) translateY(-0.7rem) translateX(0.2rem) !important;
 }
 
 .home-explore-link {

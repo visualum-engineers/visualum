@@ -76,18 +76,18 @@
 }
 
 #signup-btn span{
-    font-size: 0.85em;
+    font-size: 0.95rem;
 }
 #signup-btn span i{
-    padding-left: 4px;
-    font-size: 1.2em;
+    padding-left: 0.5rem;
+    font-size: 1.2rem;
 }
 #home-enter-code>input[type="number"]{
     width: 110px;
 }
 #home-enter-code>label{
     border: none !important;
-    font-size: 0.8em;
+    font-size: 0.8rem;
     @include transition(opacity .1s ease-in-out, transform .1s ease-in-out);
 }
 #home-enter-code>.form-control:focus,
@@ -95,7 +95,7 @@
 #home-enter-code>.form-select {
         ~ label{
         opacity: 0.9;
-        transform: scale(.7) translateY(-10px) translateX(2px) !important;
+        transform: scale(.7) translateY(-0.7rem) translateX(0.2rem) !important;
     }
 }
 

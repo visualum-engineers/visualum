@@ -19,11 +19,11 @@
 }
 
 .companyTitle{
-    font-size: 1.6em;
+    font-size: 1.6rem;
     font-family: 'Merriweather', serif;
     font-weight: 400;
     letter-spacing: 0.1em;
-    padding-right: 30px;
+    padding-right: 2rem;
 }
 
 
@@ -267,8 +267,7 @@
 .sidebar-nav{
     z-index: 4;
     height: 100vh;
-    width: 570px;
-    // width: 40vw;
+    width: 35.9rem;
     background: rgba(31, 49, 110, 0.582);
 }
 .sidebar-dark-bg{
@@ -293,11 +292,15 @@
     @include hidden;
 }
 .sidebar-link-container{
+    @include transition(all 0.25s ease-out);
     margin-top: 90px;
     margin-left: 36.8%;
     width: 150px;
     color: $main-font-color;
-    font-size: 0.9em;
+    font-size: 0.9rem;
+}
+.sidebar-link-container.sidebarScrollActive{
+    margin-top: 65px;
 }
 .sidebar-link{
     width: 1px;

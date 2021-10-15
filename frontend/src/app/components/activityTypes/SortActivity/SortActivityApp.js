@@ -43,7 +43,9 @@ const SortActivityApp = ({activityData}) => {
         let newState
 
         //list container are same - remove el from old idx, add to new idx
-        startAnswersList.splice(answerChoiceTestEl(start) ? startElIdx : source.index, 1)
+        if (answerChoiceTestEl(start)) startAnswersList.splice(startElIdx, 1, "empty"+draggableId)
+        else startAnswersList.splice(source.index, 1)
+
         if(sameContainer){
             startAnswersList.splice(answerChoiceTestEl(finish) ? endElIdx : destination.index, 0, draggableId);
             newState = {

@@ -1,9 +1,11 @@
 import NavItem from "./NavItems"
+import useScrollPos from "../../hooks/use-scroll-pos"
 const SideBar = (props) =>{
+    const windowScrollY = useScrollPos()
     return (
     <>
         <div className={`sidebar-nav fixed-top ${props.sidebarToggle ?"sidebar-right":"sidebar-left"}`}>
-            <div className="sidebar-link-container">
+            <div className={`sidebar-link-container ${windowScrollY? "sidebarScrollActive":""}`}>
                 {props.btnType=== "Discover"?
                     <>
                         <NavItem textContent={"Get Started"} sidebar={true} url={"/"}/>

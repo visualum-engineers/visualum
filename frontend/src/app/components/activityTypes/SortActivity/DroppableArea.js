@@ -11,7 +11,7 @@ const SortArea = ({id, currAnswers, answerData, wordBank=false}) =>{
                         ref={provided.innerRef}
                     >
                         {currAnswers.map((key, index) => {
-                                
+                            if (/empty.*/.test(key)) return <div key={key} className="empty"></div>
                             return <DroppableItems
                                 key={key} 
                                 id={key} 
