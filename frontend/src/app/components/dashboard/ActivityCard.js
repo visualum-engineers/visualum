@@ -3,7 +3,7 @@ import React from 'react'
 export default function ActivityCard(props) {
     console.log(props.data)
     return (
-        <div className="activity">
+        <div className="activity-row">
             <div className="row">
                 <div className="col-5">
                     <div className="title">{props.data.name}</div>

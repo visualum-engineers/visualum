@@ -1108,15 +1108,6 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   padding: 1.7rem;
 }
 
-.dashboard-container .main-content .card-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-}
-
 .dashboard-nav {
   height: 3rem;
   padding: .3rem;
@@ -1142,15 +1133,35 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   font-size: 1rem !important;
 }
 
+.card-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.row-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100%;
+}
+
 .overview-card {
   cursor: pointer;
   -webkit-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
-  height: 8rem;
-  margin-right: 1rem;
   border: none;
   -webkit-box-shadow: 0 4px 11px rgba(33, 33, 33, 0.1);
           box-shadow: 0 4px 11px rgba(33, 33, 33, 0.1);
+  height: 8rem;
+  margin-right: 1rem;
 }
 
 .overview-card h5 {
@@ -1182,10 +1193,10 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   cursor: pointer;
   -webkit-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
-  margin-right: 1rem;
   border: none;
   -webkit-box-shadow: 0 4px 11px rgba(33, 33, 33, 0.1);
           box-shadow: 0 4px 11px rgba(33, 33, 33, 0.1);
+  margin-right: 1rem;
 }
 
 .class-card h5 {
@@ -1217,28 +1228,14 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   cursor: pointer;
   -webkit-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
-  margin: .5rem;
   border: none;
   -webkit-box-shadow: 0 4px 11px rgba(33, 33, 33, 0.1);
           box-shadow: 0 4px 11px rgba(33, 33, 33, 0.1);
+  margin: .5rem;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-}
-
-.student-card .icon {
-  background-color: red;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-flex: 0;
-      -ms-flex: 0 0 auto;
-          flex: 0 0 auto;
-  margin: auto 1rem;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
 }
 
 .student-card h5 {
@@ -1266,18 +1263,55 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   color: #8a28da !important;
 }
 
-.activities-container {
+.student-card .icon {
+  background-color: red;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  height: 100%;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+  margin: auto 1rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
 
-.activities-container .control-bar {
+.assignment-card {
+  cursor: pointer;
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+  border: none;
+  -webkit-box-shadow: 0 4px 11px rgba(33, 33, 33, 0.1);
+          box-shadow: 0 4px 11px rgba(33, 33, 33, 0.1);
+}
+
+.assignment-card h5 {
+  font-size: 1.1rem;
+}
+
+.assignment-card h6 {
+  font-size: .9rem;
+  -webkit-transition: color .25s ease-in-out;
+  transition: color .25s ease-in-out;
+}
+
+.assignment-card p {
+  font-size: .8rem;
+}
+
+.assignment-card:hover {
+  -webkit-transform: translateY(-5px);
+          transform: translateY(-5px);
+  -webkit-box-shadow: 0 4px 11px rgba(33, 33, 33, 0.2);
+          box-shadow: 0 4px 11px rgba(33, 33, 33, 0.2);
+}
+
+.assignment-card:hover h6 {
+  color: #8a28da !important;
+}
+
+.control-bar {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1289,20 +1323,19 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
       flex-shrink: 0;
 }
 
-.activities-container .control-bar .buttons {
+.control-bar .buttons {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.activities-container .control-bar .buttons .button {
-  width: 5rem;
+.control-bar .buttons .button {
   margin-right: 10px;
   height: 40px;
   font-size: .8rem;
 }
 
-.activities-container .control-bar .search {
+.control-bar .search {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1312,16 +1345,16 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   height: 40px;
 }
 
-.activities-container .control-bar .search .input-group {
+.control-bar .search .input-group {
   height: 40px !important;
 }
 
-.activities-container .control-bar .search .input-group .input-group-text {
+.control-bar .search .input-group .input-group-text {
   height: inherit;
   font-size: .8rem;
 }
 
-.activities-container .control-bar .search .input-group .form-control {
+.control-bar .search .input-group .form-control {
   height: inherit !important;
 }
 
@@ -1331,7 +1364,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   width: 100%;
 }
 
-.activity {
+.activity-row {
   width: 100%;
   padding: 10px 20px;
   background-color: white;
@@ -1341,7 +1374,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   box-shadow: 0px 5px 5px -2px rgba(0, 0, 0, 0.2);
 }
 
-.activity .title {
+.activity-row .title {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1351,7 +1384,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   height: 100%;
 }
 
-.activity .num-questions {
+.activity-row .num-questions {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1361,7 +1394,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   height: 100%;
 }
 
-.activity .btns {
+.activity-row .btns {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1370,7 +1403,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
           justify-content: flex-end;
 }
 
-.activity .btns .btn {
+.activity-row .btns .btn {
   height: 2rem;
   padding: 5px 10px;
   font-size: .8rem;

@@ -1,3 +1,36 @@
+@mixin box-shadow {
+    box-shadow: 0 4px 11px rgba(33,33,33,.1);
+}
+
+@mixin card-hover {
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 11px  rgba(33,33,33,.2); 
+        h6 {
+            color: rgb(138, 40, 218) !important;
+        }
+    }
+}
+
+@mixin card {
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    border: none;
+    h5 {
+        font-size: 1.1rem;
+    }
+    h6 {
+        font-size: .9rem;
+        transition: color .25s ease-in-out;
+    }
+    p {
+        font-size: .8rem;
+    }
+    @include box-shadow();
+    @include card-hover();
+}
+
+
 .dashboard-container {
     font-size: 1rem;
     background-color: rgb(248,248,255);
@@ -51,11 +84,6 @@
         width: 85%;
         height: 100%;
         padding: 1.7rem;
-        .card-container {
-            display: flex;
-            width: 100%;
-            flex-wrap: wrap;
-        }
     }
 }
 
@@ -79,64 +107,32 @@
     }
 }
 
+.card-container {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.row-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
 .overview-card {
-    cursor: pointer;
-    transition: all .2s ease-in-out;
+    @include card();
     height: 8rem;
     margin-right: 1rem;
-    border: none;
-    box-shadow: 0 4px 11px rgba(33,33,33,.1); 
-    h5 {
-        font-size: 1.1rem;
-    }
-    h6 {
-        font-size: .9rem;
-        transition: color .25s ease-in-out;
-    }
-    p {
-        font-size: .8rem;
-    }
-    &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 11px  rgba(33,33,33,.2); 
-        h6 {
-            color: rgb(138, 40, 218) !important;
-        }
-    }
 }
 
 .class-card {
-    cursor: pointer;
-    transition: all .2s ease-in-out;
+    @include card();
     margin-right: 1rem;
-    border: none;
-    box-shadow: 0 4px 11px rgba(33,33,33,.1); 
-    h5 {
-        font-size: 1.1rem;
-    }
-    h6 {
-        font-size: .9rem;
-        transition: color .25s ease-in-out;
-    }
-    p {
-        font-size: .8rem;
-    }
-    &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 11px  rgba(33,33,33,.2); 
-        h6 {
-            color: rgb(138, 40, 218) !important;
-        }
-    }
 }
 
-
 .student-card {
-    cursor: pointer;
-    transition: all .2s ease-in-out;
+    @include card();
     margin: .5rem;
-    border: none;
-    box-shadow: 0 4px 11px rgba(33,33,33,.1); 
     flex-direction: row;
     .icon {
         background-color: red;
@@ -147,58 +143,40 @@
         height: 50px;
         border-radius: 50%;
     }
-    h5 {
-        font-size: 1.1rem;
-    }
-    h6 {
-        font-size: .9rem;
-        transition: color .25s ease-in-out;
-    }
-    p {
-        font-size: .8rem;
-    }
-    &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 11px  rgba(33,33,33,.2); 
-        h6 {
-            color: rgb(138, 40, 218) !important;
-        }
-    }
 }
 
-.activities-container {
+.assignment-card {
+    @include card();
+}
+
+.control-bar {
     display: flex;
-    flex-direction: column;
-    height: 100%;
-    .control-bar {
+    flex-wrap: wrap;
+    width: 100%;
+    height: 3rem;
+    flex-shrink: 0;
+    .buttons {
         display: flex;
-        flex-wrap: wrap;
-        width: 100%;
-        height: 3rem;
-        flex-shrink: 0;
-        .buttons {
-            display: flex;
-            .button {
-                width: 5rem;
-                margin-right: 10px;
-                height: 40px;
+        .button {
+            // width: 5rem;
+            margin-right: 10px;
+            height: 40px;
+            font-size: .8rem;
+        }
+    }
+    .search {
+        display: flex;
+        // flex-shrink: 0;
+        flex-grow: 1;
+        height: 40px;
+        .input-group {
+            height: 40px !important;
+            .input-group-text {
+                height: inherit;
                 font-size: .8rem;
             }
-        }
-        .search {
-            display: flex;
-            // flex-shrink: 0;
-            flex-grow: 1;
-            height: 40px;
-            .input-group {
-                height: 40px !important;
-                .input-group-text {
-                    height: inherit;
-                    font-size: .8rem;
-                }
-                .form-control {
-                    height: inherit !important;
-                }
+            .form-control {
+                height: inherit !important;
             }
         }
     }
@@ -210,8 +188,7 @@
     width: 100%;
 }
 
-.activity {
-    // display: flex;
+.activity-row {
     width: 100%;
     padding: 10px 20px;
     background-color: rgb(255, 255, 255);
@@ -241,3 +218,4 @@
         }
     }
 }
+

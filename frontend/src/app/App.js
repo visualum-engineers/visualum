@@ -16,6 +16,7 @@ import Activity from './components/activityTypes/Activity'
 import LabelPictures from "./components/activityTypes/LabelPictures/LabelPicturesApp"
 
 import sampleActivityData from './helpers/sampleActivityData'
+import DashboardAssignments from './components/dashboard/DashboardAssignments';
 
 function App() {
   return (
@@ -71,6 +72,9 @@ function App() {
           </Route>
           <Route exact path="/dashboard/activities">
             <DashboardActivities data={sampleActivityData} />
+          </Route>
+          <Route exact path="/dashboard/assignments">
+            <DashboardAssignments />
           </Route>
           <Route exact path="/dashboard/classes/:class_id">
             <DashboardClass />
