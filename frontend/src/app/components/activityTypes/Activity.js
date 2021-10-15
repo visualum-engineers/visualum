@@ -49,21 +49,21 @@ const activityData = {
     //sorting
     1: {
         type: "sort",
-        answerChoices: {
-            "1": {id: "1", choice:"Okay"}, 
-            "2": {id: "2", choice:"Good"},
-            "3": {id: "3", choice:"Nice" },
-            "4": {id: "4", choice:"Duh" },
-            "5": {id: "5", choice:"Bruh"},
-            "6": {id: "6", choice:"Yuh" },
-            "7": {id: "7", choice:"Fuh" },
-        },
-        columns: {
-            "Good": [],
-            "Medium":[],
-            "Bad":[],
-            "answerChoices": ["1","2","3","4","5", "6", "7"],
-        },
+        categories: [
+            {categoryId: 1, name: "Good"},
+            {categoryId: 2, name: "Medium"},
+            {categoryId: 3, name: "Bad"}
+        ],
+
+        answers: [
+            {categoryId: "1", content:"Okay"}, 
+            {categoryId: "2", content:"Good"},
+            {categoryId: "3", content:"Nice" },
+            {categoryId: "4", content:"Duh" },
+            {categoryId: "5", content:"Bruh"},
+            {categoryId: "6", content:"Yuh" },
+            {categoryId: "7", content:"Fuh" },
+        ]
     },
     //short answer
     4: {
