@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState, useRef} from 'react'
 import GridTiles from './GridTiles'
 import Timer from "./Timer"
 import useWindowWidth from '../../../hooks/use-window-width'
@@ -41,39 +41,25 @@ const nearestSquare = (array) =>{
 }
 
 const MatchActivityApp = ({activityData}) => {
-    //store starting and final elements
-    const [startEl, setStartEl] = useState(null)
-    const finalEl = useRef(null)
-
     //for updating redux store(data to be sent to backend)
     const [matchPair, setMatchPair] = useState(activityData.matchPair)
     //we only shuffle tiles once at the start
     const [tileShuffle, setTileShuffle] = useState(shuffleItems(Object.keys(activityData.matchPair)))
+    //store starting and final elements
+    const [startEl, setStartEl] = useState(null)
+    const finalEl = useRef(null)
     //determine if we are on mobile, for grid layout of 2 colums
-    const windowWidth = useWindowWidth()
+    const windowWidth = useWindowWidth() 
     //determine column and rows of grid (for mobile and desktop)
     const gridShape = nearestSquare(Object.keys(tileShuffle))
-   
-    const useGridSize = () => {
-        const [gridSize, setGridSize] = useState({width: undefined, height: undefined, rect: undefined});
-        useEffect(() => {
-            function handleResize() {
-                // Set gridLayout width/height to state
-                setGridSize({
-                    rect: document.querySelector(".activity-type-container").getBoundingClientRect(),
-                });
-            }
-        // Add event listener
-        window.addEventListener("resize", handleResize);
-        handleResize();
-        // Remove event listener on cleanup
-        return () => window.removeEventListener("resize", handleResize);
-        }, []); // Empty array ensures that effect is only run on mount
-        return gridSize;
-    }
-    const gridSize = useGridSize();
     const rows = !windowWidth? Array(tileShuffle.length/2).fill(0): Array(gridShape[1]).fill(0)
     const columns= !windowWidth? 2: gridShape[0] 
+    //for touch input, we search through this to determine an if an overlay exists
+    const newTilesPos = useRef(null)
+    //to disable drag event so it doesnt fire all the time
+    let dragEvtDisabled = false
+
+    //handle adding tiles to end of activity to fill last row if needed.
     if(rows.length*columns !== tileShuffle.length){
         let newTiles = [...tileShuffle]
         for (let i=0; i<rows.length*columns-tileShuffle.length; i++){
@@ -81,9 +67,6 @@ const MatchActivityApp = ({activityData}) => {
         }
         setTileShuffle(newTiles)
     }    
-   
-    //for touch input, we search through this
-    const newTilesPos = useRef(null)
     //grab positions of all other tiles. Necessary for detect overlay on touch inputs
     const grabTilePos = () =>{
         const allTiles = document.querySelectorAll(".gridTiles");
@@ -115,9 +98,8 @@ const MatchActivityApp = ({activityData}) => {
         e.preventDefault()
         setStartEl(e.target.closest("div"))
         document.querySelector("body").style.cursor = "grabbing"
-    }
 
-    let dragEvtDisabled = false
+    }
     const onDrag = (e) =>{
         if(!dragEvtDisabled){
             dragEvtDisabled = true
@@ -150,7 +132,6 @@ const MatchActivityApp = ({activityData}) => {
             }, 150)
         }
     }
-
     const onStop = (e) => {
         //return default styling
         document.querySelector("body").style.cursor = "auto"
@@ -191,7 +172,7 @@ const MatchActivityApp = ({activityData}) => {
                     autoStart={false}
                 />
             </div>
-        : null
+          : null 
         }
         {/*renders tile grid*/}
         <div className = "gridLayout">
@@ -204,7 +185,6 @@ const MatchActivityApp = ({activityData}) => {
                             return (
                                 <div key={index+columns*rowIndex}  className="col m-2 tile">
                                     <GridTiles 
-                                        gridSize ={gridSize}
                                         onTouchStart={onTouchStart}
                                         onStop = {onStop}
                                         onDrag = {onDrag}

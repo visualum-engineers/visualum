@@ -6,7 +6,7 @@ import ActivityBtns from "./NavActivityBtn/ActivityBtns"
 import { useState } from "react"
 const activityData = {
     //matching
-    3: {
+    1: {
         type: "matching",
         matchPair:{
             "Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1":"Pair1-Pair1-Pair1-Pair1-Pair1-", 
@@ -47,7 +47,7 @@ const activityData = {
         answerChoices: ["Good What faces this world", "Bad", "No"]
     },
     //sorting
-    1: {
+    3: {
         type: "sort",
         categories: [
             {categoryId: 1, name: "Good"},

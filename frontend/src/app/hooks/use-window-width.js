@@ -7,7 +7,7 @@ const useWindowWidth= (width = 575) =>{
             if(windowWidth && window.innerWidth<width)setWidth((prevWidth)=>!prevWidth)
             else if(!windowWidth && window.innerWidth>=width)setWidth((prevWidth)=>!prevWidth)
         }
-        const debouncedHandleResize = debounce(resize, 150);
+        const debouncedHandleResize = debounce(resize, 50);
 
         window.addEventListener('resize', debouncedHandleResize);
 
