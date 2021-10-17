@@ -21,9 +21,11 @@ const GridTiles = ({id, content, onStop, onDrag, onStart, onTouchStart, startEl=
                     rect: document.getElementById(id).getBoundingClientRect(),
                 }
             }
-            gridSize.current = {
-                rect: document.querySelector(".gridLayout").getBoundingClientRect(),
-            };
+            if(document.querySelector(".gridLayout")){
+                gridSize.current = {
+                    rect: document.querySelector(".gridLayout").getBoundingClientRect(),
+                };
+            }
         }
         const debouncedHandleResize = debounce(handleResize, 100)
         
@@ -37,7 +39,7 @@ const GridTiles = ({id, content, onStop, onDrag, onStart, onTouchStart, startEl=
         // Add event listener
         window.addEventListener("resize", debouncedHandleResize);
         // Remove event listener on cleanup
-        return () => window.removeEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", debouncedHandleResize);
     }, [id]); // Empty array ensures that effect is only run on mount
 
     const onMouseDown = () =>{
