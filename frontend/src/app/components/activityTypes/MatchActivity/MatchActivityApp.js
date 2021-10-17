@@ -96,14 +96,14 @@ const MatchActivityApp = ({activityData}) => {
     const autoScroll = () =>{
         if(!startEl) return
         const startTilePos = startEl.getBoundingClientRect()
-        // const startXTransform = parseInt(startEl.style.transform.match(/\(-*[0-9]+\.*[0-9]*/)[0].slice(1))
-        // const startYTransform = parseInt(startEl.style.transform.match(/, -*[0-9]+\.*[0-9]*/)[0].slice(2))
         if(startTilePos.top <= 30) {
-            window.scrollBy({top:-startTilePos.height})
+            window.scrollBy({top:-startTilePos.height, behavior: 'smooth'
+        })
             //startEl.style.transform = `translate(${startXTransform}px,${startYTransform -startTilePos.height}px)`
         }
         if(startTilePos.bottom >= window.innerHeight-30) {
-            window.scrollBy({top: startTilePos.height})
+            window.scrollBy({top: startTilePos.height, behavior: 'smooth'
+        })
             //startEl.style.transform = `translate(${startXTransform}px,${startYTransform + startTilePos.height}px)`
         }
     }
@@ -119,9 +119,9 @@ const MatchActivityApp = ({activityData}) => {
 
     let dragEvtDisabled = false
     const onDrag = (e) =>{
-        autoScroll();
         if(!dragEvtDisabled){
             dragEvtDisabled = true
+            autoScroll();
             // for touch events
             if(e.type==="touchmove"){
                 grabTilePos();
