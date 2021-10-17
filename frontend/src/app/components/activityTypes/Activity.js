@@ -52,17 +52,20 @@ const activityData = {
         categories: [
             {categoryId: 1, name: "Good"},
             {categoryId: 2, name: "Medium"},
-            {categoryId: 3, name: "Bad"}
+            {categoryId: 3, name: "Bad"},
+            {categoryId: 4, name: "Nice"},
+            {categoryId: 5, name: "Bye"}
+
         ],
 
         answers: [
-            {categoryId: "1", content:"Okay"}, 
-            {categoryId: "2", content:"Good"},
-            {categoryId: "3", content:"Nice" },
-            {categoryId: "4", content:"Duh" },
-            {categoryId: "5", content:"Bruh"},
-            {categoryId: "6", content:"Yuh" },
-            {categoryId: "7", content:"Fuh" },
+            {categoryId: "1", id:"1", content:"Okay"}, 
+            {categoryId: "1", id:"2", content:"Good"},
+            {categoryId: "1", id:"3", content:"Nice" },
+            {categoryId: "2", id:"4", content:"Duh" },
+            {categoryId: "2", id:"5",content:"Bruh"},
+            {categoryId: "2", id:"6",content:"Yuh" },
+            {categoryId: "3", id:"7",content:"Fuh" },
         ]
     },
     //short answer
@@ -103,14 +106,14 @@ const Activity = () =>{
     return(
     <>
         <div className = "activity-body row flex-column align-items-center justify-content-center">
-            <div className = "activity-type-container col-11 col-md-8 col-lg-6 col-xl-5 d-flex flex-column justify-content-center">
+            <div className = "activity-type-container col-11 col-md-9 col-lg-7 col-xl-6 d-flex flex-column justify-content-center">
                 {state.type ? activityType[state.type]
                 :  <p>You've Submitted!</p>}
             </div>
             {/*loads appropriate btns depending if 
                     1. There are prev questions
                     2. This is the last questions */}
-            <div className="col-11 col-md-8 col-lg-6 col-xl-5">
+            <div className="col-11 col-md-9 col-lg-7 col-xl-6">
                 <ActivityBtns 
                     prevQuestion = {question !== 1} 
                     lastQuestion = {Object.keys(activityData).length === question}

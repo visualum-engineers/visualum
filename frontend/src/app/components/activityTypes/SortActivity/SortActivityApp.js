@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useState, useEffect} from 'react'
 import DroppableArea from './DroppableArea'
 import { DragDropContext} from 'react-beautiful-dnd';
 import useWindowWidth from '../../../hooks/use-window-width';
@@ -19,125 +19,161 @@ Frontend:
 //transform data to workable model
 const transformData = (data, wordBankColumns) =>{
     let newData = {}
-    if(data.categories){
+    //on mount (initial data loaded)
+    newData["categories"] = {}
+    newData["wordBank"] = {}
+    newData["answerChoices"] = {}
+    newData["allWordBankItems"] ={}
+    if(!data.wordBank){
         for(let i of data.categories){
-            newData[i.name] = []
+            newData["categories"][i.name] = []
+        }
+        for(let i=0; i<wordBankColumns; i++){
+            const elementsPresent = (data.answers.length)%wordBankColumns === 0 ? (data.answers.length)/wordBankColumns : Math.floor((data.answers.length)/wordBankColumns+1)
+            const startSlice = i * elementsPresent 
+            const endSlice = (i+1) * elementsPresent
+            newData.wordBank["answerChoices-" + i] = data.answers.slice(startSlice, endSlice).map((answer) =>{
+                return {id:answer.id, content: answer.content}
+            })
+        }
+        //keep a record of all items in word bank. 
+        // Needed to create 2 or 3 columns based on screen size
+        for(let i of data.answers){
+            newData.allWordBankItems[i.id] = {id: i.id, content: i.content}
+            newData.answerChoices[i.id] = {id: i.id, content: i.content}
         }
     }
-    for(let i=0; i<wordBankColumns; i++){
-        const elementsPresent = (data.answers.length)%wordBankColumns === 0 ? (data.answers.length)/wordBankColumns : Math.floor((data.answers.length)/wordBankColumns+1)
-        const startSlice = i * elementsPresent 
-        const endSlice = (i+1) * elementsPresent
-        newData["answerChoices-" + i] = data.answers.slice(startSlice, endSlice).map((answer) =>{
-            return answer.content
-        })
+    //when data was already transformed on mount 
+    else {
+        for(let i of Object.keys(data.categories)){
+            newData["categories"][i] = [...data.categories[i]]
+        }
+        for(let i=0; i<wordBankColumns; i++){
+            const keys = Object.keys(data.allWordBankItems)
+            const elementsPresent = (keys.length)%wordBankColumns === 0 ? (keys.length)/wordBankColumns : Math.floor((keys.length)/wordBankColumns+1)
+            const startSlice = i * elementsPresent 
+            const endSlice = (i+1) * elementsPresent
+            newData["wordBank"]["answerChoices-" + i] = keys.slice(startSlice, endSlice).map((answer) =>{
+                return data.answerChoices[answer]
+            })
+        }
+        newData["allWordBankItems"] = {...data.allWordBankItems}
+        newData["answerChoices"] = {...data.answerChoices}
     }
     return newData
 }
 const SortActivityApp = ({activityData}) => {
     //for updating redux store(data to be sent to backend)
     const windowWidth = useWindowWidth()
-    const columns = windowWidth? Array(3).fill(0) : Array(2).fill(0)
-    const [state, setState] = useState(transformData(activityData,columns.length))
-    console.log(state)
-    //handle state update when object stops
-    const onResize = () =>{
+    const columns = windowWidth ? Array(3).fill(0) : Array(1).fill(0)
+    const [state, setState] = useState(transformData(activityData, columns.length))
+    //handle width resizing
+    useEffect(() => {
+        setState((state) => transformData(state, columns.length))
+    }, [windowWidth, columns.length])
 
-    }
+    //roundup number of elements counted
+    const numCategories = Object.keys(state.categories)
+    const rows = Array(numCategories.length%columns.length === 0 ? numCategories.length/columns.length : Math.floor(numCategories.length/columns.length+1)).fill(0)
+    
+    //handle state update when object stops
     const onDragEnd = (result) => {
         const {destination, source, draggableId} = result
         if(!destination) return
         if(destination.droppableId === source.droppableId && destination.index === source.index) return
         //start and end containers
-        const start = source.droppableId;
-        const finish = destination.droppableId;
-
-        //setup for index calculations, to add and remove dropped items
         const answerChoiceTestEl = (el) => /answerChoices.*/.test(el)
-        const startAnswersList = Array.from( answerChoiceTestEl(start) ? state.columns["answerChoices"] :state.columns[start])
-        const finishAnswersList = Array.from( answerChoiceTestEl(finish) ? state.columns["answerChoices"] : state.columns[finish])
-        const startElCounted = startAnswersList.length%columns.length ===0 ? startAnswersList.length/columns.length : Math.floor(startAnswersList.length/columns.length + 1)
-        const finishElCounted = finishAnswersList.length%columns.length === 0 ? finishAnswersList.length/columns.length : Math.floor(finishAnswersList.length/columns.length + 1)
-        const startElIdx =  answerChoiceTestEl(start) ? parseInt(start.match(/[0-9]+/)) * startElCounted +  source.index : null
-        const endElIdx = answerChoiceTestEl(finish) ? parseInt(finish.match(/[0-9]+/)) * finishElCounted + destination.index : null
-        const sameContainer = start===finish || (answerChoiceTestEl(start) && answerChoiceTestEl(finish))
-        let newState
+        const start = source.droppableId;
+        const startContainerType = answerChoiceTestEl(start) ? "wordBank" : "categories"
+        const finish = destination.droppableId;
+        const finishContainerType = answerChoiceTestEl(finish) ? "wordBank" : "categories"
 
-        if (answerChoiceTestEl(start)) startAnswersList.splice(startElIdx, 1, "empty"+draggableId)
-        else startAnswersList.splice(source.index, 1)
+        //setup
+        const startAnswersList = Array.from(answerChoiceTestEl(start) ? state.wordBank[start] : state.categories[start])
+        const finishAnswersList = Array.from(answerChoiceTestEl(finish) ? state.wordBank[finish] : state.categories[finish])
+        const sameContainer = start===finish
+        let newState
+    
+        startAnswersList.splice(source.index, 1)
         //list container are same - remove el from old idx, add to new idx
         if(sameContainer){
-            startAnswersList.splice(answerChoiceTestEl(finish) ? endElIdx : destination.index, 0, draggableId);
+            startAnswersList.splice(destination.index, 0, state.answerChoices[draggableId]);
             newState = {
                 ...state,
-                columns: {
-                    ...state.columns,
-                    [answerChoiceTestEl(start)?"answerChoices": start]: startAnswersList,
+                [startContainerType]: {
+                    ...state[startContainerType],
+                    [start]: startAnswersList,
                 }
             }
         } 
         //list containers are different - move elements into the new container, and remove them from old one
         else {
-            finishAnswersList.splice(answerChoiceTestEl(finish) ? endElIdx : destination.index, 0, draggableId);
-            newState = {
+            finishAnswersList.splice(destination.index, 0, state.answerChoices[draggableId]);
+            newState = startContainerType===finishContainerType ? {
                 ...state,
-                columns:{
-                    ...state.columns,
-                    [answerChoiceTestEl(start) ?"answerChoices":start] : startAnswersList,
-                    [answerChoiceTestEl(finish) ?"answerChoices":finish] : finishAnswersList,
+                [startContainerType]:{
+                    ...state[startContainerType],
+                    [start] : startAnswersList,
+                    [finish] : finishAnswersList,
+                },
+            }
+            : {
+                ...state,
+                [startContainerType]:{
+                    ...state[startContainerType],
+                    [start] : startAnswersList,
+                },
+                [finishContainerType] : {
+                    ...state[finishContainerType],
+                    [finish] : finishAnswersList,
                 }
             }
         } 
+        //maintain wordbank across resize, so we update allWordBankItems
+        if(startContainerType==="wordBank") delete newState.allWordBankItems[draggableId]
+        if(finishContainerType==="wordBank") newState.allWordBankItems[draggableId] = state.answerChoices[draggableId]
+        
         //update state
         setState(newState)
     };
-    return (<div></div>)
-    // return (
-    //    <>
-    //     <p className="instructions">Sort the following:</p>
-    //     <DragDropContext onDragEnd={onDragEnd}>
-    //         <div className ="draggableAreaContainer d-flex flex-column align-items-center">
-    //             {/* Renders sort categories */}
-    //             <div className={`d-flex ${!windowWidth ? "flex-column":""}`}>
-    //                 {columns.map((content, index) =>{
-    //                     //roundup number of elements counted
-    //                     const elementsPresent = (Object.keys(state.columns).length-1)%columns.length === 0 ? (Object.keys(state.columns).length-1)/columns.length : Math.floor((Object.keys(state.columns).length-1)/columns.length+1)
-    //                     const startSlice = index * elementsPresent 
-    //                     const endSlice = (index+1) * elementsPresent
-    //                     return (
-    //                         <div className="d-flex" key={index}>
-    //                             {Object.keys(state.columns).slice(startSlice, endSlice).map((columnTitle)=> {
-    //                                     if(columnTitle === "answerChoices") return null
-    //                                     return <DroppableArea 
-    //                                                 key={columnTitle} 
-    //                                                 id={columnTitle}
-    //                                                 answerData= {state.answerChoices} 
-    //                                                 currAnswers={state.columns[columnTitle]}
-    //                                             />
-    //                                 })}
-    //                         </div>
-    //                 )})}
-    //             </div>
-    //              {/* Renders word/response bank */}
-    //             <div className="d-flex w-100 justify-content-center">
-    //                 {columns.map((content, index) =>{
-    //                     const elementsPresent = state.columns["answerChoices"].length%columns.length === 0? state.columns["answerChoices"].length/columns.length : Math.floor(state.columns["answerChoices"].length/columns.length + 1)
-    //                     const startSlice = index*elementsPresent
-    //                     const endSlice = (index+1)*elementsPresent
-    //                     return (
-    //                         <DroppableArea 
-    //                             key={"answerChoices-"+index}
-    //                             id={"answerChoices-"+index} 
-    //                             wordBank = {true}
-    //                             currAnswers={state.columns["answerChoices"].slice(startSlice, endSlice)} 
-    //                             answerData= {state.answerChoices}
-    //                         />
-    //                     )
-    //                 })}
-    //             </div>
-    //         </div>  
-    //     </DragDropContext>
-    //     </>
-    // )
+    return (
+       <>
+        <p className="instructions">Sort the following:</p>
+        <DragDropContext onDragEnd={onDragEnd}>
+            <div className ="draggableAreaContainer d-flex flex-column">
+                {/* Renders sort categories */}
+                {rows.map((content, index) =>{
+                    const startSlice = index * columns.length
+                    const endSlice = (index+1) * columns.length
+                    return (
+                        <div className="d-flex w-100 justify-content-center" key={index}> 
+                            {numCategories.slice(startSlice, endSlice).map((columnTitle)=> {
+                                return <DroppableArea 
+                                            windowWidth = {windowWidth}
+                                            key={columnTitle} 
+                                            id={columnTitle}
+                                            currAnswers={state.categories[columnTitle]}
+                                        />
+                            })} 
+                        </div>
+                )})}
+                 {/* Renders word/response bank */}
+                <div className="d-flex w-100 justify-content-center">
+                    {Object.keys(state.wordBank).map((key) =>{
+                        return (
+                            <DroppableArea 
+                                windowWidth = {windowWidth}
+                                key={key}
+                                id={key} 
+                                wordBank = {true}
+                                currAnswers={state.wordBank[key]} 
+                            />
+                        )
+                    })}
+                </div>
+            </div>  
+        </DragDropContext>
+        </>
+    )
 }
 export default SortActivityApp

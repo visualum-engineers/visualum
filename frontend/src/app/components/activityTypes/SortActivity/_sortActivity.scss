@@ -6,24 +6,22 @@
 }
 .draggableAreaContainer{
     padding: 10px;
-    width: 100%;
 }
 .draggableAreaContainer::-webkit-scrollbar{
     height: 9px;
 }
-
 .draggableAreaContainer::-webkit-scrollbar-thumb{
     background-color: white;
     @include border-radius(10px)
 }
-
 .sortArea{
+    @include border-radius(10px);
     height: 100%;
     border: 1px solid white;
     font-size: 1.2rem;
     margin: 1.2%;
     list-style-type: none;
-    @include border-radius(10px);
+    width: 100%;
 }
 .sortArea p{
     color: white;
@@ -32,23 +30,20 @@
 .dropContainer{
     @include no-space;
     min-width: 150px;
-    min-height: 200px;
+    min-height: 150px;
     list-style-type: none;
 }
 .sortArea .dropContainer {
     border-top: 1px white solid;
 }
-
 .answerArea{
     @extend .sortArea;
     border: none;
     margin-bottom: 5%;
 }
 .answerArea .dropContainer{
-    border: none;
-    min-height: 150px;
+    border: 1px rgba(0,0,0,0) solid;
 }
-
 .dragItem{
     text-align: center;
     width: 90%;
