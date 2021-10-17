@@ -2,7 +2,6 @@ import React, { useState, useEffect} from 'react'
 import DroppableArea from './DroppableArea'
 import { DragDropContext} from 'react-beautiful-dnd';
 import useWindowWidth from '../../../hooks/use-window-width';
-
 /*Note Missing To-do
 Backend: 
     1. Missing updating the backend with partial completion of assignment
