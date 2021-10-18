@@ -15,10 +15,10 @@
     border: 1px $main-font-color solid;
 }
 .labelWordBankColumn{
+    @include border-radius(6px);
     min-height: 100px;
     margin: 5px;
     padding: 2.5px;
-    @include border-radius(6px)
 }
 .imgLabelContainer{
     @extend .labelWordBankColumn;
@@ -26,12 +26,12 @@
     border: 1px $main-font-color solid;
 }
 .labelChoices{
+    @include border-radius(5px);
     cursor: pointer;
     margin: 5px 0;
     width: 100%;
     min-height: 30px;
     border: 1px $main-font-color solid;
-    @include border-radius(5px)
 }
 .labelChoices p{
     @include no-space;

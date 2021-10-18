@@ -68,10 +68,10 @@
 }
 
 .gridTiles::-webkit-scrollbar-thumb{
+    @include border-radius(10px);
     border: 5px solid rgba(0, 0, 0, 0);
     background-clip: padding-box;
     background-color: white;
-    @include border-radius(10px)
 }
 .gridTiles:hover, .gridTiles.hover{
     background-color: $main-font-color;

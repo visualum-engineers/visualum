@@ -3,13 +3,13 @@
     font-size: 0.9em;
 }
 .MCInputContainer label{
+    @include border-radius(5px);
     cursor: pointer;
     height: 100%;
     padding: 10px 20px;
     transition: all 0.3s;
     color: $main-font-color;
     border: 1px $main-font-color solid;
-    @include border-radius(5px)
 }
 .MCInputContainer label:hover{
     background-color: $main-font-color;
