@@ -1,18 +1,17 @@
 
 #copyright{
-    padding: 0;
-    margin: 0;
+    @include no-space
 }
 
 .foot-link{
-    color: white;
+    color: $main-font-color;
     text-align: center;
     width: 60%;
 }
 
 .foot-link:hover{
     @include hover-color;
-    border-radius: 5px;
+    @include border-radius(5px);
 }
 
 #footer>div>h5{

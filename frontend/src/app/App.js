@@ -10,13 +10,13 @@ import HomeContent from './components/homePage/Home';
 import Settings from './components/settingsPage/Settings';
 import SignUpForm from './components/forms/signUpForm';
 import LoginForm from './components/forms/logInForm';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import CreateGame from './components/createGame/CreateGame';
 import Activity from './components/activityTypes/Activity'
 import LabelPictures from "./components/activityTypes/LabelPictures/LabelPicturesApp"
-
 import sampleActivityData from './helpers/sampleActivityData'
 import DashboardAssignments from './components/dashboard/DashboardAssignments';
+import TestBackend from "./components/testBackend/test"
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 function App() {
   return (
@@ -86,6 +86,9 @@ function App() {
             <DashboardHome />
           </Route>
 
+          <Route exact path = "/testBackend">
+            <TestBackend/>
+          </Route>
         </Switch>
       </div >
     </Router >

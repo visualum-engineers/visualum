@@ -1,10 +1,9 @@
 import {Draggable} from 'react-beautiful-dnd';
 
 //generates draggable list items
-const DragItems = ({id, content, index}) => {
+const DragItems = ({id, index, content}) => {
     return (
         <Draggable
-            key={id} 
             draggableId={id} 
             index={index}>
             {(provided) => (

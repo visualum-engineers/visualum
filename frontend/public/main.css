@@ -1,43 +1,34 @@
-/* text font */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&display=swap");
 .navbar {
   border-radius: 0;
   height: 100%;
   width: 100%;
+  -webkit-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
   padding: 30px 30px;
+  padding-bottom: 0px;
   margin: 0;
   color: white;
   border: none;
-  -webkit-transition: all 0.25s;
-  transition: all 0.25s;
   z-index: 3;
 }
 
 .navbarScrollActive {
-  background: rgba(107, 97, 144, 0.8);
   padding: 5px 30px;
 }
 
-.navbar a {
-  color: white;
+.navbarScrollActive.sidebar-close {
+  background: rgba(107, 97, 144, 0.8);
 }
 
 .companyTitle {
-  font-size: 1.6em;
+  font-size: 1.6rem;
   font-family: 'Merriweather', serif;
   font-weight: 400;
   letter-spacing: 0.1em;
-  width: 20vw;
+  padding-right: 2rem;
 }
 
-.nav-item {
-  font-size: 1rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.nav-link {
+.nav-btn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -47,46 +38,36 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: 100%;
-  width: 100%;
   border-radius: 10px;
+  background: none;
+  border: none;
+  position: relative;
+  color: white;
+  padding: 8px;
   text-align: center;
-  font-size: 17px;
+  font-size: 1em;
 }
 
-.nav-link:hover {
-  background: white;
-  color: #271b53;
+.nav-btn:hover, .nav-btn:active {
+  background: rgba(255, 255, 255, 0.267);
+  color: white;
 }
 
-/*spacing around nav elements i.e links and search bar */
-#navbarSupportedContent {
+.nav-btn > p {
   margin: 0;
   padding: 0;
+  position: relative;
 }
 
-.navbar-nav {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-#signOut-btn, #signIn-btn {
-  height: 100%;
-  width: 100%;
-  font-size: 1rem;
-}
-
-.signout-btn {
-  -ms-flex-item-align: stretch;
-      -ms-grid-row-align: stretch;
-      align-self: stretch;
+.nav-btn:focus p::after,
+.nav-btn:active p::after {
+  position: absolute;
+  content: "";
+  width: calc(100% - 2px);
+  left: 1px;
+  bottom: -1.5px;
+  height: 2px;
+  background-color: white;
 }
 
 #search-box {
@@ -97,63 +78,48 @@
 }
 
 #search-bar {
+  -webkit-transition: width ease 0.3s;
+  transition: width ease 0.3s;
   padding: 0;
   -ms-flex-item-align: stretch;
       -ms-grid-row-align: stretch;
       align-self: stretch;
   width: 0px;
   border: 0;
-  -webkit-transition: width ease 0.3s;
-  transition: width ease 0.3s;
   height: 70%;
 }
 
 #search-bar.expand {
+  -webkit-transition: all width ease 0.3s;
+  transition: all width ease 0.3s;
   margin: 0 0.5rem 0 0;
   padding-left: 10px;
   border: 0px;
-  -webkit-transition: width ease 0.3s;
-  transition: width ease 0.3s;
 }
 
 #search-icon {
-  font-size: 20px;
   border-radius: 5px;
-}
-
-#search-icon:hover {
-  background: white;
-  color: #271b53;
+  font-size: 20px;
 }
 
 /* Right arrow icon on search toggle */
 #search-icon.fa-arrow-left {
+  -webkit-transition: all ease 0.2s;
+  transition: all ease 0.2s;
+  padding-bottom: 2px;
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
-  -webkit-transition: ease 0.2s;
-  transition: ease 0.2s;
-  padding-bottom: 2px;
 }
 
 #search-btn {
-  background-color: rgba(255, 255, 255, 0);
+  border-radius: 5px;
+  background: none;
   border: none;
   height: 70%;
   width: 50px;
-  border-radius: 5px;
 }
 
-#search-btn:hover {
-  background: white;
-  color: #271b53;
-}
-
-#search-btn.border {
-  -webkit-box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
-          box-shadow: 1px 1px 0 0 white,  0 0px 0 1px white;
-}
-
-#nav-button {
+#nav-toggler {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -167,7 +133,7 @@
   width: 40px;
 }
 
-#nav-button, #search-btn {
+#nav-toggler, #search-btn {
   margin: 0;
   padding: 0;
 }
@@ -184,29 +150,29 @@
           justify-content: center;
   height: 100%;
   width: 100%;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
   color: white;
 }
 
-#nav-icon:hover {
-  background: white;
-  color: #271b53;
+#nav-icon:hover, #search-icon:hover {
+  background: rgba(255, 255, 255, 0.267);
+  color: white;
 }
 
 #nav-icon.fa-arrow-down {
+  -webkit-transition: all ease 0.2s;
+  transition: all ease 0.2s;
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
-  -webkit-transition: ease 0.2s;
-  transition: ease 0.2s;
 }
 
 #nav-icon.fa-bars {
+  -webkit-transition: all ease 0.2s;
+  transition: all ease 0.2s;
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
   font-size: 28px;
-  -webkit-transition: ease 0.2s;
-  transition: ease 0.2s;
 }
 
 /* this is to control the drop animation of navbar */
@@ -216,9 +182,6 @@
 }
 
 .user {
-  background-color: rgba(255, 255, 255, 0);
-  border: none;
-  color: white;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -228,11 +191,14 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: 100%;
-  padding: 5px 10px;
   border-radius: 25px;
   -webkit-transition: background-color 250ms ease-in-out;
   transition: background-color 250ms ease-in-out;
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+  color: white;
+  height: 100%;
+  padding: 5px 10px;
 }
 
 .user:hover {
@@ -245,11 +211,6 @@
 }
 
 .user-profile {
-  width: 40px;
-  height: 40px;
-  margin: 5px;
-  border-radius: 50%;
-  background-color: white;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -259,10 +220,14 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  border-radius: 50%;
+  background-color: white;
 }
 
 .user-icon {
-  background: white;
   color: #271b53;
 }
 
@@ -276,12 +241,12 @@
 }
 
 .user-dropdown {
+  border-radius: 15px;
   height: 310px;
   width: 440px;
   font-size: 0.9em;
   position: absolute;
   background-color: #150751;
-  border-radius: 15px;
   top: 100px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -331,17 +296,18 @@
   width: 100%;
 }
 
+.user-dropdown-connect > .user-dropdown-button {
+  margin-top: 9.5px;
+  margin-bottom: 9.5px;
+}
+
 .user-dropdown-buttons {
   height: 50%;
   width: 100%;
 }
 
 .user-dropdown-button {
-  border: none;
-  color: white;
-  text-align: center;
-  width: 90%;
-  height: 38px;
+  border-radius: 15px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -351,18 +317,22 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  margin: 7.5px auto;
-  padding: 10px;
-  border-radius: 15px;
-  background-color: #0b042b;
   -webkit-transition: all 250ms ease-in-out;
   transition: all 250ms ease-in-out;
+  border: none;
+  color: white;
+  text-align: center;
+  width: 90%;
+  height: 38px;
+  margin: 7.5px auto;
+  padding: 10px;
+  background-color: #0b042b;
 }
 
 .user-dropdown-button:hover {
+  background: rgba(255, 255, 255, 0.267);
+  color: white;
   cursor: pointer;
-  background-color: white;
-  color: #090322;
 }
 
 .user-dropdown-social-icon {
@@ -376,13 +346,14 @@
 }
 
 .dropdown-enter-active {
-  opacity: 1;
-  -webkit-transform: translateX(0);
-          transform: translateX(0);
+  -webkit-transition: opacity 300ms, transform 300ms;
   -webkit-transition: opacity 300ms, -webkit-transform 300ms;
   transition: opacity 300ms, -webkit-transform 300ms;
   transition: opacity 300ms, transform 300ms;
   transition: opacity 300ms, transform 300ms, -webkit-transform 300ms;
+  opacity: 1;
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
 }
 
 .dropdown-exit {
@@ -390,13 +361,98 @@
 }
 
 .dropdown-exit-active {
-  opacity: 0;
-  -webkit-transform: scale(0.9);
-          transform: scale(0.9);
+  -webkit-transition: opacity 300ms, transform 300ms;
   -webkit-transition: opacity 300ms, -webkit-transform 300ms;
   transition: opacity 300ms, -webkit-transform 300ms;
   transition: opacity 300ms, transform 300ms;
   transition: opacity 300ms, transform 300ms, -webkit-transform 300ms;
+  opacity: 0;
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+}
+
+.sidebar-nav {
+  z-index: 4;
+  height: 100vh;
+  width: 35.9rem;
+  background: rgba(31, 49, 110, 0.582);
+}
+
+.sidebar-dark-bg {
+  border: none;
+  z-index: 3;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(22, 22, 22, 0.685);
+}
+
+.sidebar-right {
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  left: 0px;
+}
+
+.sidebar-left {
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  -webkit-transform: translate(-100%);
+          transform: translate(-100%);
+}
+
+.sidebar-bg-show {
+  display: inline;
+}
+
+.sidebar-bg-hide {
+  display: none;
+  visibility: hidden;
+  position: absolute;
+}
+
+.sidebar-link-container {
+  -webkit-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
+  margin-top: 90px;
+  margin-left: 36.8%;
+  width: 150px;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.sidebar-link-container.sidebarScrollActive {
+  margin-top: 65px;
+}
+
+.sidebar-link {
+  width: 1px;
+  margin-bottom: 5px;
+}
+
+.sidebar-link > p {
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-link:hover {
+  color: #a1a0a0;
+}
+
+.exit-sidebar-btn {
+  border-radius: 5px;
+  background: none;
+  border: none;
+  position: absolute;
+  top: 0;
+  right: 15px;
+  margin-top: 90px;
+  padding: 0 7px;
+  color: white;
+  font-size: 1.5em;
+}
+
+.exit-sidebar-btn:hover {
+  background: rgba(255, 255, 255, 0.267);
+  color: white;
 }
 
 .stars {
@@ -412,25 +468,30 @@
 .homePage {
   position: relative;
   text-align: justify;
-  padding: 200px 10vw;
+  padding: 0 10vw;
+  padding-top: 100px;
+  padding-bottom: 20px;
   margin: 0;
-  height: 80%;
+  min-height: 550px;
+  height: 100vh;
   width: 100%;
   z-index: 1;
 }
 
 .homePageImage {
-  position: absolute;
   top: 0;
   left: 0;
-  z-index: -1;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
   background-color: #090322;
   -o-object-fit: cover;
      object-fit: cover;
   -o-object-position: top;
      object-position: top;
-  height: 100%;
-  width: 100%;
+  z-index: -1;
 }
 
 .homePageText {
@@ -438,9 +499,32 @@
 }
 
 .introContainer {
+  border-radius: 5px;
+  position: relative;
   color: white;
-  text-align: left;
-  padding-left: 3vw;
+  text-align: center;
+  padding: 30px;
+  min-width: 250px;
+  width: 35vw;
+  -webkit-box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.342);
+          box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.342);
+  z-index: 1;
+  background: rgba(6, 29, 80, 0.383);
+  overflow: hidden;
+}
+
+.introContainer:before {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  content: "";
+  z-index: -1;
+  -webkit-box-shadow: inset 0 0 2000px #142149;
+          box-shadow: inset 0 0 2000px #142149;
+  -webkit-filter: blur(4px);
+          filter: blur(4px);
 }
 
 .introContainer h2 {
@@ -450,25 +534,70 @@
 }
 
 .introContainer p {
-  font-size: 1.2em;
+  font-size: 1em;
   padding: 0;
   margin: 0;
   font-family: 'Merriweather', serif;
   font-weight: 400;
 }
 
-.introContainer button {
+#signup-btn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 50px;
 }
 
-.introContainer button > span {
-  padding-left: 10px;
-  font-size: 1.3em;
+#signup-btn span {
+  font-size: 0.95rem;
+}
+
+#signup-btn span i {
+  padding-left: 0.5rem;
+  font-size: 1.2rem;
+}
+
+#home-enter-code > input[type="number"] {
+  width: 110px;
+}
+
+#home-enter-code > label {
+  border: none !important;
+  font-size: 0.8rem;
+  -webkit-transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
+  -webkit-transition: opacity 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
+  transition: opacity 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
+  transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
+  transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
+}
+
+#home-enter-code > .form-control:focus ~ label,
+#home-enter-code > .form-control:not(:placeholder-shown) ~ label,
+#home-enter-code > .form-select ~ label {
+  opacity: 0.9;
+  -webkit-transform: scale(0.7) translateY(-0.7rem) translateX(0.2rem) !important;
+          transform: scale(0.7) translateY(-0.7rem) translateX(0.2rem) !important;
+}
+
+.home-explore-link {
+  color: white;
+  -ms-grid-column-align: end;
+      justify-self: end;
+}
+
+.home-explore-link:hover {
+  color: #aaa9a9;
+}
+
+.home-explore-link > p {
+  display: inline;
+  margin: 0;
 }
 
 .formContainer {
@@ -493,6 +622,8 @@
 
 #signUpForm, #loginForm {
   border-radius: 20px;
+  height: 100%;
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -504,8 +635,6 @@
       -ms-flex-pack: center;
           justify-content: center;
   padding: 0 10vw;
-  width: 100%;
-  height: 100%;
   color: white;
 }
 
@@ -568,12 +697,12 @@
 }
 
 #signUpOptions > button, .email-btn {
-  padding: 0;
   margin: 0;
+  padding: 0;
+  border-radius: 5px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  border-radius: 5px;
   height: 40px;
   width: 183px;
 }
@@ -606,7 +735,7 @@
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
-  background-color: #ececec;
+  background-color: white;
   border: 1.5px solid white;
 }
 
@@ -707,7 +836,6 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 }
 
 .form-page {
-  height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -717,14 +845,10 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  height: 100vh;
 }
 
 .form-container {
-  width: 70%;
-  height: 75%;
-  background-color: rgba(89, 42, 128, 0.65);
-  -webkit-backdrop-filter: blur(5px);
-          backdrop-filter: blur(5px);
   border-radius: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -735,6 +859,11 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  width: 70%;
+  height: 75%;
+  background-color: rgba(89, 42, 128, 0.65);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
   padding: 50px;
 }
 
@@ -747,8 +876,8 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 }
 
 #copyright {
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
 .foot-link {
@@ -758,18 +887,13 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 }
 
 .foot-link:hover {
-  background: white;
-  color: #271b53;
+  background: rgba(255, 255, 255, 0.267);
+  color: white;
   border-radius: 5px;
 }
 
 #footer > div > h5 {
   color: white;
-}
-
-.sortActivityApp {
-  min-height: 100vh;
-  padding-top: 150px;
 }
 
 .instructions {
@@ -780,9 +904,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 }
 
 .draggableAreaContainer {
-  padding: 10px 10px 10px 0;
-  width: 100%;
-  overflow-x: auto;
+  padding: 10px;
 }
 
 .draggableAreaContainer::-webkit-scrollbar {
@@ -795,14 +917,13 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 }
 
 .sortArea, .answerArea {
+  border-radius: 10px;
   height: 100%;
   border: 1px solid white;
   font-size: 1.2rem;
-  margin-right: 2.5%;
-  margin-bottom: 2.5%;
-  margin-top: 0;
+  margin: 1.2%;
   list-style-type: none;
-  border-radius: 10px;
+  width: 100%;
 }
 
 .sortArea p, .answerArea p {
@@ -811,24 +932,25 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   padding: 0;
 }
 
-.sortDropContainer, .answerDropContainer {
-  width: 20vw;
+.dropContainer {
+  margin: 0;
+  padding: 0;
   min-width: 150px;
-  min-height: 200px;
-  border-top: 1px white solid;
+  min-height: 150px;
   list-style-type: none;
 }
 
-.answerArea {
-  margin: 0;
-  padding: 0;
-  margin-right: 2.5%;
-  height: auto;
+.sortArea .dropContainer, .answerArea .dropContainer {
+  border-top: 1px white solid;
 }
 
-.answerDropContainer {
-  margin: 0;
-  padding: 0;
+.answerArea {
+  border: none;
+  margin-bottom: 5%;
+}
+
+.answerArea .dropContainer {
+  border: 1px rgba(0, 0, 0, 0) solid;
 }
 
 .dragItem {
@@ -837,7 +959,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   font-size: 0.9rem;
   color: white;
   list-style-type: none;
-  margin: 5px 1vw;
+  margin: 5px;
   padding: 5px;
   border: 1px solid white;
   border-radius: 20px;
@@ -853,42 +975,109 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   color: black;
 }
 
-.matchActivityApp {
-  min-height: 100vh;
-  padding-top: 150px;
-}
-
 .tilesMatchedMessage {
   color: white;
 }
 
 .matchInstruction {
   color: white;
-  font-size: 1.7em;
-  margin-bottom: 50px;
+  font-size: 1.1em;
+  margin: 0;
+}
+
+.match-activity-timer {
+  position: relative;
+  color: white;
+}
+
+.match-activity-timer .timer-counter {
+  border-radius: 10px;
+  color: black;
+  text-align: center;
+  position: relative;
+  margin-left: 7px;
+  margin-right: 2px;
+  padding: 3px 0px;
+  font-size: 12px;
+  overflow: hidden;
+  min-width: 70px;
+  z-index: 1;
+}
+
+.match-activity-timer .timer-counter:before {
+  border-radius: 10px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: "";
+  position: absolute;
+  z-index: -1;
+  -webkit-box-shadow: inset 0 0 2000px white;
+          box-shadow: inset 0 0 2000px white;
+  -webkit-filter: blur(3.5px);
+          filter: blur(3.5px);
+}
+
+.match-activity-timer button {
+  background: none;
+  border: none;
+  font-size: 12px;
+  color: white;
 }
 
 .gridLayout {
-  width: 100%;
+  margin-top: 10px;
+}
+
+.tile {
+  display: inline-block;
+  position: relative;
+}
+
+.tile::after {
+  padding: 50%;
+  display: block;
+  content: "";
 }
 
 .gridTiles {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 15px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
   cursor: -webkit-grab;
   cursor: grab;
   color: white;
-  min-height: 150px;
-  padding: 0px 20px;
-  margin: 5px;
+  font-size: 71%;
   border: 1px white solid;
-  border-radius: 5px;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
-.gridTiles:hover {
+.gridTiles::-webkit-scrollbar {
+  width: 14px;
+  margin-right: 10px;
+}
+
+.gridTiles::-webkit-scrollbar-thumb {
+  border: 5px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.gridTiles:hover, .gridTiles.hover {
   background-color: white;
   color: black;
 }
 
-.gridTiles:active {
+.gridTiles.active, .gridTiles:active {
+  pointer-events: none;
   background-color: rgba(255, 255, 255, 0.6);
   color: black;
   z-index: 2;
@@ -898,17 +1087,17 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 .gridTiles p {
   margin: 0;
   padding: 0;
+  overflow-wrap: break-word;
+  width: 50px;
 }
 
 .emptyTile {
-  min-height: 150px;
-  padding: 0px 20px;
-  margin: 5px;
-}
-
-.multipleChoiceApp {
-  min-height: 100vh;
-  padding-top: 150px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 15px;
+  position: absolute;
 }
 
 .MCInputContainer {
@@ -933,12 +1122,14 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 }
 
 .ansOptionItem {
-  width: 48%;
-  margin: 1%;
+  width: calc(50% - 10px);
+  margin: 5px;
 }
 
 .MCInputContainer input[type="radio"] {
   display: none;
+  visibility: hidden;
+  position: absolute;
 }
 
 .MCInputContainer input[type="radio"]:checked + label {
@@ -946,19 +1137,14 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   color: black;
 }
 
-.shortAnswerApp {
-  min-height: 100vh;
-  padding-top: 150px;
-}
-
 .SAInputContainer {
   margin-top: 15px;
-  margin-bottom: 40px;
   font-size: 0.9em;
 }
 
 .SAInputContainer > textarea {
   min-height: 200px;
+  height: 100%;
 }
 
 .labelPicApp {
@@ -968,8 +1154,8 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 
 .labelPicApp img {
   min-width: 175px;
-  width: 100%;
   height: 100%;
+  width: 100%;
 }
 
 .imgIndicatorContainer {
@@ -1012,14 +1198,29 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
   color: white;
   background-color: rgba(0, 0, 0, 0);
   padding: 5px 20px;
-  margin: 50px 0;
+  margin: 20px 0;
   border: 1px white solid;
   border-radius: 5px;
 }
 
 .navActivityBtn:hover {
-  background: white;
-  color: #271b53;
+  background: rgba(255, 255, 255, 0.267);
+  color: white;
+}
+
+.activity-body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.activity-type-container {
+  border-radius: 25px;
+  margin-top: 100px;
+  text-align: center;
+  border: solid white 1px;
+  min-height: calc(100vh - 200px);
+  padding: 20px;
 }
 
 .dashboard-container {
@@ -1450,8 +1651,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 
 @media (max-width: 992px) {
   .navbar {
-    padding-left: 25px !important;
-    padding-right: 25px !important;
+    padding: 15px 25px !important;
     background: rgba(107, 97, 144, 0.8);
   }
   #search-box {
@@ -1468,12 +1668,12 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
     height: 50px;
   }
   .nav-item {
-    width: 100%;
     height: 100%;
+    width: 100%;
   }
   .nav-link:hover {
-    background: white;
-    color: #271b53;
+    background: rgba(255, 255, 255, 0.267);
+    color: white;
     border-radius: 5px;
   }
   #formContainer, #signUpForm, #loginForm {
@@ -1504,6 +1704,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 
 html {
   background-color: #141c3e;
+  scroll-behavior: smooth;
 }
 
 body {

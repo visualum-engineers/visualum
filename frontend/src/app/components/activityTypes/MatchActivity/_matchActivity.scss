@@ -1,42 +1,96 @@
-.matchActivityApp{
-    min-height: 100vh;
-    padding-top: 150px;
-}
 .tilesMatchedMessage{
-    color: white;
+    color: $main-font-color;
 }
 .matchInstruction{
-    color: white;
-    font-size: 1.7em;
-    margin-bottom: 50px;
+    color: $main-font-color;
+    font-size: 1.1em;
+    margin: 0;
+}
+.match-activity-timer{
+    position: relative;
+    color: $main-font-color;
+}
+.match-activity-timer .timer-counter{
+    @include border-radius(10px);
+    color: $label-font-color;
+    text-align: center;
+    position: relative;
+    margin-left: 7px;
+    margin-right: 2px;
+    padding: 3px 0px;
+    font-size: 12px;
+    overflow: hidden;
+    min-width: 70px;
+    z-index: 1;
+}
+.match-activity-timer .timer-counter:before{
+    @include border-radius(10px);
+    @include anchor-top-left;
+    content: "";
+    position: absolute;
+    z-index: -1;
+    box-shadow: inset 0 0 2000px $main-font-color;
+    filter: blur(3.5px);
+}
+.match-activity-timer button{
+    @include remove-btn-default;
+    font-size: 12px;
+    color: $main-font-color;
 }
 .gridLayout{
-    width: 100%;
+    margin-top: 10px;
+}
+.tile{
+    display: inline-block;
+    position: relative;
+}
+.tile::after{
+    padding: 50%;
+    display: block;
+    content: ""; 
 }
 .gridTiles{
+    @include anchor-top-left;
+    @include border-radius(15px);
+    @include no-space;
+    position: absolute;
     cursor: grab;
-    color: white;
-    min-height: 150px;
-    padding: 0px 20px;
-    margin: 5px;
-    border: 1px white solid;
-    @include border-radius(5px)
+    color: $main-font-color;
+    font-size: 71%;
+    border: 1px $main-font-color solid;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
-.gridTiles:hover{
+
+.gridTiles::-webkit-scrollbar{
+    width: 14px;
+    margin-right: 10px;
+}
+
+.gridTiles::-webkit-scrollbar-thumb{
+    border: 5px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
     background-color: white;
-    color: black;
+    @include border-radius(10px)
 }
-.gridTiles:active{
+.gridTiles:hover, .gridTiles.hover{
+    background-color: $main-font-color;
+    color: $label-font-color;
+}
+.gridTiles.active, .gridTiles:active{
+    pointer-events: none;
     background-color: rgba(255,255,255,0.60);
-    color: black;
+    color: $label-font-color;
     z-index:2;
-    border: 1px rgb(39, 39, 39) solid
+    border: 1px rgb(39, 39, 39) solid;
 }
 .gridTiles p{
     @include no-space;
+    overflow-wrap: break-word;
+    width: 50px;
 }
 .emptyTile{
-    min-height: 150px;
-    padding: 0px 20px;
-    margin: 5px;
+    @include anchor-top-left;
+    @include border-radius(15px);
+    position: absolute;
 }

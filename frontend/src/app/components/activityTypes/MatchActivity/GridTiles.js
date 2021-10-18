@@ -1,53 +1,60 @@
-import React, {useState, useRef, useEffect} from 'react'
+import React, {useState, useRef, useEffect, memo} from 'react'
 import DraggableCore from 'react-draggable';
+import debounce from 'lodash/debounce'
 
-const GridTiles = ({id, content, index, onStop, onDrag, onStart, gridSize})=>{
-    const nodeRef = useRef(null)
-    
+const GridTiles = ({id, content, onStop, onDrag, onStart, onTouchStart, startEl=false})=>{
     //this will set bounds so element is limited to gridLayout area
-    const [bounds, setBounds] = useState(null)
+    const [bounds, setBounds] = useState(false)
 
+    const nodeRef = useRef(null)
     //gets four corners of tile element
-    const [tilePosition, setTilePosition] = useState({rect: undefined});
-    
+    const tilePosition = useRef(null)
+     //store current container size. Necessary for updating tile bounds
+    const gridSize = useRef(null);
+
     // Hook for resizing of window changing tile position
     useEffect(() => {
         function handleResize() {
             // Set gridLayout width/height to state
-            setTilePosition({
-                rect: document.getElementById(id).getBoundingClientRect(),
-            });
+            if(document.getElementById(id)){
+                tilePosition.current = {
+                    rect: document.getElementById(id).getBoundingClientRect(),
+                }
+            }
+            if(document.querySelector(".gridLayout")){
+                gridSize.current = {
+                    rect: document.querySelector(".gridLayout").getBoundingClientRect(),
+                };
+            }
         }
-        // Add event listener
-        window.addEventListener("resize", handleResize);
+        const debouncedHandleResize = debounce(handleResize, 100)
         
+        if(!tilePosition.current) tilePosition.current =  {
+            rect: document.getElementById(id).getBoundingClientRect()
+        }
+        if(!gridSize.current) gridSize.current ={
+            rect: document.querySelector(".gridLayout").getBoundingClientRect(),
+        }
+        
+        // Add event listener
+        window.addEventListener("resize", debouncedHandleResize);
         // Remove event listener on cleanup
-        return () => window.removeEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", debouncedHandleResize);
     }, [id]); // Empty array ensures that effect is only run on mount
-    
-    useEffect(() =>{
-        if(!tilePosition.rect) setTilePosition({
-           rect: document.getElementById(id).getBoundingClientRect()
-        })
-    }, [tilePosition.rect, id])// Empty array ensures that effect is only run on mount
 
     const onMouseDown = () =>{
         //will update draggable bounds of element
-            setBounds({
-                top: gridRect.top - tilePosition.rect.top+100,
-                bottom: gridRect.bottom - tilePosition.rect.bottom,
-                left:  gridRect.left-tilePosition.rect.left,
-                right:  gridRect.right- tilePosition.rect.right
-            })
+        //gets coordinates of all four corners of the grid layout that all tiles will reside in
+        setBounds({
+            top: gridSize.current.rect.top - tilePosition.current.rect.top,
+            bottom: gridSize.current.rect.bottom - tilePosition.current.rect.bottom,
+            left:  gridSize.current.rect.left-tilePosition.current.rect.left,
+            right:  gridSize.current.rect.right- tilePosition.current.rect.right
+        })
     }
-
-    //gets coordinates of all four corners of the grid layout that all tiles will reside in
-    const gridRect = gridSize.rect 
-    
     return(
         <DraggableCore 
             key={id} 
-            index={index}
             defaultPosition={{x: 0, y: 0}}
             position={{x:0, y:0}}
             onMouseDown ={onMouseDown}
@@ -56,15 +63,22 @@ const GridTiles = ({id, content, index, onStop, onDrag, onStart, gridSize})=>{
             onDrag = {onDrag}
             bounds = {bounds}
             nodeRef={nodeRef}
-           >
-                <div 
-                    id={id}
-                    className="gridTiles d-flex align-items-center justify-content-center col-5 col-sm-3 col-lg-2" 
-                    content={content} 
-                    ref={nodeRef} >
-                        <p>{content}</p>
-                </div>          
+            disabled={startEl ? !(startEl.id===id): startEl}
+        >
+            <div 
+                onTouchStart={onTouchStart}
+                tabIndex="0"
+                id={id}
+                className={`gridTiles d-flex align-items-center justify-content-center`}
+                content={content} 
+                ref={nodeRef} >
+                    <p>{content}</p>
+            </div>          
         </DraggableCore>
     )
 }
-export default GridTiles
+function arePropsEqual(prevProps, nextProps) {
+    const startEl = prevProps.startEl===nextProps.startEl
+    return startEl; 
+}
+export default memo(GridTiles, arePropsEqual)

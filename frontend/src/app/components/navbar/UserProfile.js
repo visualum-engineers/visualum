@@ -50,7 +50,11 @@ export default function UserProfile(props) {
                     </div>
                 </button>
             </li>
-            <UserDropdown open={open} enterMenu={enterMenu} exitMenu={exitMenu} />
+            <UserDropdown 
+                open={open} 
+                enterMenu={enterMenu} 
+                exitMenu={exitMenu} 
+                />
         </>
     );
 }
