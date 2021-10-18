@@ -45,6 +45,8 @@ const MatchActivityApp = ({activityData}) => {
     const [matchPair, setMatchPair] = useState(activityData.matchPair)
     //we only shuffle tiles once at the start
     const [tileShuffle, setTileShuffle] = useState(shuffleItems(Object.keys(activityData.matchPair)))
+    //check if all tiles have been matched or not
+    const allTilesMatched = tileShuffle.every(tile => tile === null)
     //store starting and final elements
     const [startEl, setStartEl] = useState(null)
     const finalEl = useRef(null)
@@ -54,11 +56,10 @@ const MatchActivityApp = ({activityData}) => {
     const gridShape = nearestSquare(Object.keys(tileShuffle))
     const rows = !windowWidth? Array(tileShuffle.length/2).fill(0): Array(gridShape[1]).fill(0)
     const columns= !windowWidth? 2: gridShape[0] 
-    //for touch input, we search through this to determine an if an overlay exists
+    //for touch input, we search through this to determine if an overlay exists
     const newTilesPos = useRef(null)
     //to disable drag event so it doesnt fire all the time
     let dragEvtDisabled = false
-
     //handle adding tiles to end of activity to fill last row if needed.
     if(rows.length*columns !== tileShuffle.length){
         let newTiles = [...tileShuffle]
@@ -159,8 +160,6 @@ const MatchActivityApp = ({activityData}) => {
         setMatchPair(newMatchList)
         setTileShuffle(newShuffleList)
     }
-    //check if all tiles have been matched or not
-    const allTilesMatched = tileShuffle.every(tile => tile === null)
     return(
         <>
         <p className="matchInstruction">Find the Match!</p>
