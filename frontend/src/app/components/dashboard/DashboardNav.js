@@ -10,7 +10,7 @@ export default function DashboardNav(props) {
     return (
         <nav className="navbar navbar-dark bg-light dashboard-nav">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#navbar">visualum</a>
+                <div className="navbar-brand" onClick={handleClick}>visualum</div>
                 <div className="back-button-container">
                     <button className="btn back-button" onClick={handleClick}>
                         Back to Homepage
