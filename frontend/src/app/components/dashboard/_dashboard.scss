@@ -1,3 +1,36 @@
+@mixin box-shadow {
+    box-shadow: 0 4px 11px rgba(33,33,33,.1);
+}
+
+@mixin card-hover {
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 11px  rgba(33,33,33,.2); 
+        h6 {
+            color: rgb(138, 40, 218) !important;
+        }
+    }
+}
+
+@mixin card {
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    border: none;
+    h5 {
+        font-size: 1.1rem;
+    }
+    h6 {
+        font-size: .9rem;
+        transition: color .25s ease-in-out;
+    }
+    p {
+        font-size: .8rem;
+    }
+    @include box-shadow();
+    @include card-hover();
+}
+
+
 .dashboard-container {
     font-size: 1rem;
     background-color: rgb(248,248,255);
@@ -5,10 +38,11 @@
     width: 100%;
     display: flex;
     overflow: hidden;
-    .sidebar {
+    .dashboard-sidebar {
         display: flex;
         flex-direction: column;
-        width: 12%;
+        width: 15%;
+        min-width: 180px;
         border-right: 1px solid rgba(179, 179, 179 ,.5);
         background-color: white;
         padding: .9rem 0;
@@ -30,7 +64,10 @@
                 &:hover {
                     transform: scale(1.05);
                 }
-                transition: transform .25s ease-in-out;
+                &:hover:not(.selected){
+                    background-color: rgba(0,0,0,0.05);
+                }
+                transition: all .2s ease-in-out;
             }
             .selected {
                 background-color: rgb(138, 0, 202);
@@ -39,22 +76,19 @@
             }
             p {
                 margin: 0;
+                transition: all .25s ease-in-out;
             }
         }
     }
     .main-content {
-        width: 88%;
+        width: 85%;
         height: 100%;
         padding: 1.7rem;
-        .card-container {
-            display: flex;
-            width: 100%;
-        }
     }
 }
 
 .dashboard-nav {
-    height: 6%;
+    height: 3rem;
     padding: .3rem;
     background-color: rgb(72, 0, 105) !important;
     .back-button-container {
@@ -73,28 +107,115 @@
     }
 }
 
+.card-container {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.row-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
 .overview-card {
-    cursor: pointer;
-    transition: all .2s ease-in-out;
+    @include card();
     height: 8rem;
     margin-right: 1rem;
-    border: none;
-    box-shadow: 0 4px 11px rgba(33,33,33,.1); 
-    h5 {
-        font-size: 1.1rem;
+}
+
+.class-card {
+    @include card();
+    margin-right: 1rem;
+}
+
+.student-card {
+    @include card();
+    margin: 0 .5rem .5rem 0;
+    flex-direction: row;
+    .icon {
+        background-color: red;
+        display: flex;
+        flex: 0 0 auto;
+        margin: auto 1rem;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
     }
-    h6 {
-        font-size: .9rem;
-        transition: color .25s ease-in-out;
+}
+
+.assignment-card {
+    @include card();
+}
+
+.control-bar {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 3rem;
+    flex-shrink: 0;
+    .buttons {
+        display: flex;
+        .button {
+            // width: 5rem;
+            margin-right: 10px;
+            height: 40px;
+            font-size: .8rem;
+        }
     }
-    p {
-        font-size: .8rem;
-    }
-    &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 11px  rgba(33,33,33,.2); 
-        h6 {
-            color: rgb(138, 40, 218) !important;
+    .search {
+        display: flex;
+        // flex-shrink: 0;
+        flex-grow: 1;
+        height: 40px;
+        .input-group {
+            height: 40px !important;
+            .input-group-text {
+                height: inherit;
+                font-size: .8rem;
+            }
+            .form-control {
+                height: inherit !important;
+            }
         }
     }
 }
+
+.activityList {
+    overflow-y: scroll;
+    height: 100%;
+    width: 100%;
+}
+
+.activity-row {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: rgb(255, 255, 255);
+    margin-bottom: .8rem;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 5px 5px 2px rgba(0,0,0,0.2); 
+    box-shadow: 0px 5px 5px -2px rgba(0,0,0,0.2);
+    .title {
+        display: flex;
+        align-items: center;
+        height: 100%
+    }
+    .num-questions {
+        display: flex;
+        align-items: center;
+        height: 100%
+    }
+    .btns {
+        display: flex;
+        justify-content: flex-end;
+        .btn {
+            height: 2rem;
+            padding: 5px 10px;
+            font-size: .8rem;
+            @include center;
+            margin: 0 5px;
+        }
+    }
+}
+

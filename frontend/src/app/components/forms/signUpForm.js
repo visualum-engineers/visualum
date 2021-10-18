@@ -20,7 +20,7 @@ Notes on whats missing:
 import React, { useState } from 'react';
 
 import Form from './Form'
-import { passwordCheck } from '../../helpers/PasswordCheck'
+// import { passwordCheck } from '../../helpers/PasswordCheck'
 import { Redirect } from "react-router-dom"
 
 // IMPORTS FOR REDUX
@@ -88,7 +88,8 @@ export default function SignUpForm() {
 
     const testEmail = () => {
         const emailTest = emailRegex.test(userInfo.email);
-        const passwordTest = passwordCheck(userInfo.password, userInfo.verifiedPassword, true);
+        // const passwordTest = passwordCheck(userInfo.password, userInfo.verifiedPassword, true);
+        const passwordTest = true;
         if (!emailTest) {
             toast.warn('Please enter a valid email', {
                 position: "bottom-left",
