@@ -74,9 +74,15 @@ const SortActivityApp = ({activityData}) => {
     //roundup number of elements counted
     const numCategories = Object.keys(state.categories)
     const rows = Array(numCategories.length%columns.length === 0 ? numCategories.length/columns.length : Math.floor(numCategories.length/columns.length+1)).fill(0)
-    
+    const onDragStart = () =>{
+        //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
+        document.querySelector("html").classList.add("sortActivityActive")
+    }
     //handle state update when object stops
     const onDragEnd = (result) => {
+        //to re-enable smooth scrolling for the remainder of the pages
+        document.querySelector("html").classList.remove("sortActivityActive")
+        //setup
         const {destination, source, draggableId} = result
         if(!destination) return
         if(destination.droppableId === source.droppableId && destination.index === source.index) return
@@ -136,12 +142,10 @@ const SortActivityApp = ({activityData}) => {
         setState(newState)
     };
     
-
-
     return (
        <>
         <p className="instructions">Sort the following:</p>
-        <DragDropContext onDragEnd={onDragEnd}>
+        <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
                 {/* Renders sort categories */}
                 {/* {numCategories.map((columnTitle)=> {
                     return <DroppableArea 

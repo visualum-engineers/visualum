@@ -19,7 +19,6 @@
 
 html {
     background-color: rgb(20, 28, 62);
-    scroll-behavior: smooth;
 }
 
 body{
@@ -29,6 +28,12 @@ body{
     @include no-space;
     overflow-y: scroll;
 }
+
+.App{
+    position: relative;
+    background-color: $bg-color;
+}
+
 p{
     font-family:  $main-font;
     font-weight: 300;
@@ -40,8 +45,3 @@ a, a:hover, a:focus{
     transition: all 0.2s;
 }
 
-.App{
-    position: relative;
-    height: 100%;
-    background-color: $bg-color;
-}

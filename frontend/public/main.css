@@ -745,6 +745,10 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
   color: white;
 }
 
+html.sortActivityActive {
+  scroll-behavior: unset !important;
+}
+
 .instructions {
   margin: 3%;
   color: white;
@@ -1462,7 +1466,6 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 }
 html {
   background-color: #141c3e;
-  scroll-behavior: smooth;
 }
 
 body {
@@ -1475,6 +1478,11 @@ body {
   overflow-y: scroll;
 }
 
+.App {
+  position: relative;
+  background-color: #090322;
+}
+
 p {
   font-family: "Poppins", sans-serif;
   font-weight: 300;
@@ -1485,10 +1493,4 @@ a, a:hover, a:focus {
   color: inherit;
   text-decoration: none;
   transition: all 0.2s;
-}
-
-.App {
-  position: relative;
-  height: 100%;
-  background-color: #090322;
 }/*# sourceMappingURL=main.css.map */

@@ -56,9 +56,7 @@ function App() {
           </Route>
 
           <Route exact path="/activity">
-
               <Activity />
-
           </Route>
 
           <Route exact path="/label-pictures">
