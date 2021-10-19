@@ -23,44 +23,42 @@ const MultipleChoiceApp = ({activityData}) => {
     }
     console.log(state.imageURL ? state.imageURL : null)
     return(
-        <>
-            <form className = "MCInputContainer">
-                <p>{state.question}</p>
-                {state.imageURL ? 
-                    <img 
-                        className = "mc-activity-image"
-                        src={state.imageURL}
-                        alt={state.imageDescription? state.imgDescription : null}
-                    /> 
-                : null
-                } 
-                {/*renders different answer choices*/}
-                {Array(rows).fill(0).map((content, rowIndex) => {
-                    const startSlice = rowIndex*columns
-                    const endSlice = (rowIndex+1)*columns
-                    return (
-                        <div className="row g-0 justify-content-center" key={rowIndex}>
-                            {state.answerChoices.slice(startSlice, endSlice).map((choice, index)=>{
-                                if(!choice) return <div key="index" className="col-5 col-md-4 empty-mc-item"></div>
-                                return(
-                                    <div key={index} className="mc-answer-choice col-5 col-md-4">
-                                        <input 
-                                            id={"mc-answer-choice"+(rowIndex*columns+index)} 
-                                            type="radio" 
-                                            name="MCOptions"/>
-                                        <label 
-                                            htmlFor={"mc-answer-choice"+(rowIndex*columns+index)} 
-                                            className="w-100 d-flex align-items-center justify-content-center">
-                                                {choice}
-                                        </label>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    )})
-                }
-            </form>
-        </>
+        <form className = "MCInputContainer">
+            <p>{state.question}</p>
+            {state.imageURL ? 
+                <img 
+                    className = "mc-activity-image"
+                    src={state.imageURL}
+                    alt={state.imageDescription? state.imgDescription : null}
+                /> 
+            : null
+            } 
+            {/*renders different answer choices*/}
+            {Array(rows).fill(0).map((content, rowIndex) => {
+                const startSlice = rowIndex*columns
+                const endSlice = (rowIndex+1)*columns
+                return (
+                    <div className="row g-0 justify-content-center" key={rowIndex}>
+                        {state.answerChoices.slice(startSlice, endSlice).map((choice, index)=>{
+                            if(!choice) return <div key="index" className="col-5 col-md-4 empty-mc-item"></div>
+                            return(
+                                <div key={index} className="mc-answer-choice col-5 col-md-4">
+                                    <input 
+                                        id={"mc-answer-choice"+(rowIndex*columns+index)} 
+                                        type="radio" 
+                                        name="MCOptions"/>
+                                    <label 
+                                        htmlFor={"mc-answer-choice"+(rowIndex*columns+index)} 
+                                        className="w-100 d-flex align-items-center justify-content-center">
+                                            {choice}
+                                    </label>
+                                </div>
+                            )
+                        })}
+                    </div>
+                )})
+            }
+        </form>
     )
 } 
 export default MultipleChoiceApp
