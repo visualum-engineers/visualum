@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-const eureka_1 = "images/eureka_1.jpg"
+const mountainHomebg = "images/mountain-home-bg.jpg"
 const stars = "images/stars.webm"
 const initialState = {
     windowWidth: window.innerWidth,
@@ -36,7 +36,7 @@ export default class HomeContent extends Component {
                     <source src={stars} type="video/webm" />
                 </video>
                 <div className="homePage d-flex flex-column align-items-center">
-                    <img src={eureka_1} alt="Flag on Montain" className="homePageImage" />
+                    <img src={mountainHomebg} alt="Flag on Montain" className="homePageImage" />
                     <div className="d-flex justify-content-center align-items-center h-100">
                         <div className="introContainer d-flex flex-column align-items-center">
                             <h2 className="homePageText">A world class education for anyone, anywhere.</h2>

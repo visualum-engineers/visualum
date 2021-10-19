@@ -56,9 +56,9 @@ function App() {
           </Route>
 
           <Route exact path="/activity">
-            <NavWrapper>
+
               <Activity />
-            </NavWrapper>
+
           </Route>
 
           <Route exact path="/label-pictures">

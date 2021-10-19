@@ -139,7 +139,7 @@ const SortActivityApp = ({activityData}) => {
        <>
         <p className="instructions">Sort the following:</p>
         <DragDropContext onDragEnd={onDragEnd}>
-            <div className ="draggableAreaContainer d-flex flex-column">
+            <div className ="draggableAreaContainer d-flex flex-column flex-grow-1">
                 {/* Renders sort categories */}
                 {rows.map((content, index) =>{
                     const startSlice = index * columns.length

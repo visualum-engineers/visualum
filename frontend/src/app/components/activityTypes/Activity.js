@@ -4,6 +4,8 @@ import SortActivityApp from "./SortActivity/SortActivityApp"
 import MatchActivityApp from "./MatchActivity/MatchActivityApp"
 import ActivityBtns from "./NavActivityBtn/ActivityBtns"
 import { useState } from "react"
+
+const activeActivityBg = "images/active-activity-bg.jpg"
 const activityData = {
     //matching
     3: {
@@ -105,7 +107,8 @@ const Activity = () =>{
     }
     return(
     <>
-        <div className = "activity-body row flex-column align-items-center justify-content-center">
+        <div className = "activity-body row flex-column align-items-center ">
+            <img src = {activeActivityBg} className="active-activity-bg" alt="planet and stars background"/>
             <div className = "activity-type-container col-11 col-md-9 col-lg-7 col-xl-6 d-flex flex-column justify-content-center">
                 {state.type ? activityType[state.type]
                 :  <p>You've Submitted!</p>}
@@ -113,7 +116,7 @@ const Activity = () =>{
             {/*loads appropriate btns depending if 
                     1. There are prev questions
                     2. This is the last questions */}
-            <div className="col-11 col-md-9 col-lg-7 col-xl-6">
+            <div className="col-11 col-md-9 col-lg-7 col-xl-6 nav-activity-btns">
                 <ActivityBtns 
                     prevQuestion = {question !== 1} 
                     lastQuestion = {Object.keys(activityData).length === question}

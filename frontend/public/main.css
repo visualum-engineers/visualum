@@ -747,9 +747,9 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 }
 
 .instructions {
+  margin: 3%;
   color: white;
   font-size: 1.7rem;
-  margin-bottom: 2%;
   padding: 0;
 }
 
@@ -785,7 +785,6 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 .dropContainer {
   margin: 0;
   padding: 0;
-  min-width: 150px;
   min-height: 150px;
   list-style-type: none;
 }
@@ -1059,15 +1058,37 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  position: relative;
+}
+
+.active-activity-bg {
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  z-index: 0;
 }
 
 .activity-type-container {
   border-radius: 25px;
   margin-top: 100px;
-  text-align: center;
-  border: solid white 1px;
-  min-height: calc(100vh - 200px);
   padding: 20px;
+  text-align: center;
+  min-height: 75vh;
+  z-index: 1;
+}
+
+.nav-activity-btns {
+  z-index: 1;
 }
 
 .dashboard-container {

@@ -1,7 +1,7 @@
 .instructions{
+    margin: 3%;
     color: white;
     font-size: 1.7rem;
-    margin-bottom: 2%;
     padding: 0;
 }
 .draggableAreaContainer{
@@ -29,7 +29,6 @@
 }
 .dropContainer{
     @include no-space;
-    min-width: 150px;
     min-height: 150px;
     list-style-type: none;
 }
