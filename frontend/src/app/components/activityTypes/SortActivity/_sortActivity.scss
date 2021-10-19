@@ -5,15 +5,9 @@
     padding: 0;
 }
 .draggableAreaContainer{
-    padding: 10px;
+    padding: 20px;
 }
-.draggableAreaContainer::-webkit-scrollbar{
-    height: 9px;
-}
-.draggableAreaContainer::-webkit-scrollbar-thumb{
-    background-color: white;
-    @include border-radius(10px)
-}
+
 .sortArea{
     @include border-radius(10px);
     height: 100%;
@@ -21,7 +15,6 @@
     font-size: 1.2rem;
     margin: 1.2%;
     list-style-type: none;
-    width: 100%;
 }
 .sortArea p{
     color: white;
@@ -29,11 +22,13 @@
 }
 .dropContainer{
     @include no-space;
-    min-height: 150px;
     list-style-type: none;
 }
 .sortArea .dropContainer {
+    @include border-radius(0px 0px 10px 10px);
+    height: 150px;
     border-top: 1px white solid;
+    overflow-y: auto;
 }
 .answerArea{
     @extend .sortArea;
@@ -41,9 +36,15 @@
     margin-bottom: 5%;
 }
 .answerArea .dropContainer{
+    @include border-radius(10px);
+    height: 100%;
+    min-height: 150px;
+    overflow-y: hidden;
     border: 1px rgba(0,0,0,0) solid;
 }
 .dragItem{
+    @include border-radius(20px);
+    @include center;
     text-align: center;
     width: 90%;
     font-size: 0.9rem;
@@ -52,7 +53,6 @@
     margin: 5px;
     padding: 5px;
     border: 1px solid white;
-    @include border-radius(20px)
 }
 .dragItem:hover{
     background-color: white;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import DroppableArea from './DroppableArea'
-import { DragDropContext} from 'react-beautiful-dnd';
+import {DragDropContext} from 'react-beautiful-dnd';
 import useWindowWidth from '../../../hooks/use-window-width';
 /*Note Missing To-do
 Backend: 
@@ -135,12 +135,22 @@ const SortActivityApp = ({activityData}) => {
         //update state
         setState(newState)
     };
+    
+
+
     return (
        <>
         <p className="instructions">Sort the following:</p>
         <DragDropContext onDragEnd={onDragEnd}>
-            <div className ="draggableAreaContainer d-flex flex-column flex-grow-1">
                 {/* Renders sort categories */}
+                {/* {numCategories.map((columnTitle)=> {
+                    return <DroppableArea 
+                                windowWidth = {windowWidth}
+                                key={columnTitle} 
+                                id={columnTitle}
+                                currAnswers={state.categories[columnTitle]}
+                            />
+                })}  */}
                 {rows.map((content, index) =>{
                     const startSlice = index * columns.length
                     const endSlice = (index+1) * columns.length
@@ -170,7 +180,6 @@ const SortActivityApp = ({activityData}) => {
                         )
                     })}
                 </div>
-            </div>  
         </DragDropContext>
         </>
     )

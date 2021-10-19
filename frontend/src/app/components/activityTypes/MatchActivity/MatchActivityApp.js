@@ -80,16 +80,11 @@ const MatchActivityApp = ({activityData}) => {
     const autoScroll = () =>{
         if(!startEl) return
         const startTilePos = startEl.getBoundingClientRect()
-        if(startTilePos.top <= 30) {
-            window.scrollBy({top:-startTilePos.height, behavior: 'smooth'
-        })
+        if(startTilePos.top <= 30) window.scrollBy({top:-startTilePos.height, behavior: 'smooth'})
             //startEl.style.transform = `translate(${startXTransform}px,${startYTransform -startTilePos.height}px)`
-        }
-        if(startTilePos.bottom >= window.innerHeight-30) {
-            window.scrollBy({top: startTilePos.height, behavior: 'smooth'
-        })
+            
+        if(startTilePos.bottom >= window.innerHeight-30) window.scrollBy({top: startTilePos.height, behavior: 'smooth'})
             //startEl.style.transform = `translate(${startXTransform}px,${startYTransform + startTilePos.height}px)`
-        }
     }
     const onTouchStart = () =>{
         startEl.classList.add("active")

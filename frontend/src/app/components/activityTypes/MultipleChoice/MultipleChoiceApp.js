@@ -21,7 +21,6 @@ const MultipleChoiceApp = ({activityData}) => {
             answerChoices: newAnsList
         }))
     }
-    console.log(state.imageURL ? state.imageURL : null)
     return(
         <form className = "MCInputContainer">
             <p>{state.question}</p>

@@ -25,9 +25,9 @@ html {
 body{
     font-family: $main-font;
     min-height: 600px;
-    height: 100%;
-    width: 100%;
+    @include fillContainer;
     @include no-space;
+    overflow-y: scroll;
 }
 p{
     font-family:  $main-font;

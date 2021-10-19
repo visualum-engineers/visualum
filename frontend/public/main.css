@@ -753,16 +753,7 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 }
 
 .draggableAreaContainer {
-  padding: 10px;
-}
-
-.draggableAreaContainer::-webkit-scrollbar {
-  height: 9px;
-}
-
-.draggableAreaContainer::-webkit-scrollbar-thumb {
-  background-color: white;
-  border-radius: 10px;
+  padding: 20px;
 }
 
 .sortArea, .answerArea {
@@ -772,7 +763,6 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
   font-size: 1.2rem;
   margin: 1.2%;
   list-style-type: none;
-  width: 100%;
 }
 
 .sortArea p, .answerArea p {
@@ -784,12 +774,14 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 .dropContainer {
   margin: 0;
   padding: 0;
-  min-height: 150px;
   list-style-type: none;
 }
 
 .sortArea .dropContainer, .answerArea .dropContainer {
+  border-radius: 0px 0px 10px 10px;
+  height: 150px;
   border-top: 1px white solid;
+  overflow-y: auto;
 }
 
 .answerArea {
@@ -798,10 +790,18 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 }
 
 .answerArea .dropContainer {
+  border-radius: 10px;
+  height: 100%;
+  min-height: 150px;
+  overflow-y: hidden;
   border: 1px rgba(0, 0, 0, 0) solid;
 }
 
 .dragItem {
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   width: 90%;
   font-size: 0.9rem;
@@ -810,7 +810,6 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
   margin: 5px;
   padding: 5px;
   border: 1px solid white;
-  border-radius: 20px;
 }
 
 .dragItem:hover {
@@ -1473,6 +1472,7 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
+  overflow-y: scroll;
 }
 
 p {

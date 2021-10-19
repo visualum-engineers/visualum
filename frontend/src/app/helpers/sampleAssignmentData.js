@@ -34,7 +34,7 @@ const assignmentData = {
         },
     },
     //multiple choice
-    1:{
+    2:{
         type: "multipleChoice",
         question: "What faces this world?",
         imageURL : "images/mountain-home-bg.jpg",
@@ -42,7 +42,7 @@ const assignmentData = {
         answerChoices: ["Good What faces this world", "Bad", "No"]
     },
     //sorting
-    2: {
+    1: {
         type: "sort",
         categories: [
             {categoryId: 1, name: "Good"},
