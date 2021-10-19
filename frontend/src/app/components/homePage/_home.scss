@@ -23,7 +23,6 @@
     @include anchor-top-left;
     @include fillContainer;
     position: absolute;
-    background-color: $bg-color;
     object-fit: cover;
     object-position: top;
     z-index: -1;

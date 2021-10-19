@@ -16,16 +16,23 @@
     color: $label-font-color;
 }
 
-.mc-answer-choice{
-    margin: 5px;
-}
-.empty-mc-item{
-    @extend .mc-answer-choice
-}
 .MCInputContainer input[type="radio"]{
     @include hidden;
 }
 .MCInputContainer input[type="radio"]:checked + label{
     background-color: $main-font-color;
     color: $label-font-color;
+}
+.mc-answer-choice{
+    margin: 5px;
+}
+.empty-mc-item{
+    @extend .mc-answer-choice
+}
+
+.mc-activity-image{
+    max-width: 70%;
+    max-height: 50%;
+    object-fit: contain;
+    object-position: center;
 }

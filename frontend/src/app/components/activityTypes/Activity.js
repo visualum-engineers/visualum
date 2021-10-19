@@ -45,7 +45,7 @@ const activityData = {
     1:{
         type: "multipleChoice",
         question: "What faces this world?",
-        imageURL : "",
+        imageURL : "images/mountain-home-bg.jpg",
         answerChoices: ["Good What faces this world", "Bad", "No"]
     },
     //sorting

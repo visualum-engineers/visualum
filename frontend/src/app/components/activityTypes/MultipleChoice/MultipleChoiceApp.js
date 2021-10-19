@@ -9,7 +9,6 @@ import React, {useState} from 'react'
 const MultipleChoiceApp = ({activityData}) => {    
     //for updating redux store(data to be sent to backend)
     const [state, setState] = useState(activityData)
-    console.log(state)
     const rows = state.answerChoices.length % 2 ===0 ? state.answerChoices.length/2 : Math.floor(state.answerChoices.length/2 + 1)
     const columns = 2
     if(rows*columns !== state.answerChoices.length){
@@ -22,17 +21,19 @@ const MultipleChoiceApp = ({activityData}) => {
             answerChoices: newAnsList
         }))
     }
+    console.log(state.imageURL ? state.imageURL : null)
     return(
         <>
-            <p>{state.question}</p>
-            {state.imageURL ? 
-                <img 
-                    src={state.imageURL}
-                    alt={state.imageDescription? state.imgDescription : null}
-                /> 
-            : null
-            } 
             <form className = "MCInputContainer">
+                <p>{state.question}</p>
+                {state.imageURL ? 
+                    <img 
+                        className = "mc-activity-image"
+                        src={state.imageURL}
+                        alt={state.imageDescription? state.imgDescription : null}
+                    /> 
+                : null
+                } 
                 {/*renders different answer choices*/}
                 {Array(rows).fill(0).map((content, rowIndex) => {
                     const startSlice = rowIndex*columns
