@@ -8,28 +8,56 @@ import React, {useState} from 'react'
 
 const MultipleChoiceApp = ({activityData}) => {    
     //for updating redux store(data to be sent to backend)
-    const [state] = useState(activityData)
-    
+    const [state, setState] = useState(activityData)
+    console.log(state)
+    const rows = state.answerChoices.length % 2 ===0 ? state.answerChoices.length/2 : Math.floor(state.answerChoices.length/2 + 1)
+    const columns = 2
+    if(rows*columns !== state.answerChoices.length){
+        let newAnsList = [...state.answerChoices]
+        for (let i=0; i<rows*columns-state.answerChoices.length; i++){
+            newAnsList.push(null)
+        }
+        setState(state => ({
+            ...state,
+            answerChoices: newAnsList
+        }))
+    }
     return(
         <>
-            <p>{state.question}</p>  
-            <form className = "MCInputContainer d-flex flex-wrap w-100">
+            <p>{state.question}</p>
+            {state.imageURL ? 
+                <img 
+                    src={state.imageURL}
+                    alt={state.imageDescription? state.imgDescription : null}
+                /> 
+            : null
+            } 
+            <form className = "MCInputContainer">
                 {/*renders different answer choices*/}
-                {state.answerChoices.map((choice, index)=>{
-                    return(
-                        <div key={index} className="ansOptionItem">
-                            <input 
-                                id={"ansOption"+index} 
-                                type="radio" 
-                                name="MCOptions"/>
-                            <label 
-                                htmlFor={"ansOption"+index} 
-                                className="w-100  d-flex align-items-center justify-content-center">
-                                    {choice}
-                            </label>
+                {Array(rows).fill(0).map((content, rowIndex) => {
+                    const startSlice = rowIndex*columns
+                    const endSlice = (rowIndex+1)*columns
+                    return (
+                        <div className="row g-0 justify-content-center" key={rowIndex}>
+                            {state.answerChoices.slice(startSlice, endSlice).map((choice, index)=>{
+                                if(!choice) return <div key="index" className="col-5 col-md-4 empty-mc-item"></div>
+                                return(
+                                    <div key={index} className="mc-answer-choice col-5 col-md-4">
+                                        <input 
+                                            id={"mc-answer-choice"+(rowIndex*columns+index)} 
+                                            type="radio" 
+                                            name="MCOptions"/>
+                                        <label 
+                                            htmlFor={"mc-answer-choice"+(rowIndex*columns+index)} 
+                                            className="w-100 d-flex align-items-center justify-content-center">
+                                                {choice}
+                                        </label>
+                                    </div>
+                                )
+                            })}
                         </div>
-                    )
-                })}
+                    )})
+                }
             </form>
         </>
     )

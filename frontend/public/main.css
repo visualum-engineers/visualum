@@ -967,8 +967,7 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
   color: black;
 }
 
-.ansOptionItem {
-  width: calc(50% - 10px);
+.mc-answer-choice, .empty-mc-item {
   margin: 5px;
 }
 
@@ -989,7 +988,8 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 }
 
 .SAInputContainer > textarea {
-  min-height: 200px;
+  min-height: 300px;
+  max-height: 600px;
   height: 100%;
 }
 

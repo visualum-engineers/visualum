@@ -42,14 +42,14 @@ const activityData = {
         },
     },
     //multiple choice
-    2:{
+    1:{
         type: "multipleChoice",
         question: "What faces this world?",
         imageURL : "",
         answerChoices: ["Good What faces this world", "Bad", "No"]
     },
     //sorting
-    1: {
+    2: {
         type: "sort",
         categories: [
             {categoryId: 1, name: "Good"},

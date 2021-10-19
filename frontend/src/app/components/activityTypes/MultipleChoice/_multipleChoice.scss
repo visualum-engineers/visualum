@@ -16,9 +16,11 @@
     color: $label-font-color;
 }
 
-.ansOptionItem{
-    width: calc(50% - 10px);
+.mc-answer-choice{
     margin: 5px;
+}
+.empty-mc-item{
+    @extend .mc-answer-choice
 }
 .MCInputContainer input[type="radio"]{
     @include hidden;
