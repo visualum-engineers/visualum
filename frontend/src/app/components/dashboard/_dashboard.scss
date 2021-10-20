@@ -88,12 +88,12 @@
 }
 
 .dashboard-nav {
+    padding: 0 2rem;
     height: 3rem;
-    padding: .3rem;
     background-color: rgb(72, 0, 105) !important;
     .back-button-container {
-        align-self: flex-end;
         .back-button {
+            height: 100%;
             font-size: .8rem;
             color: rgb(246, 246, 246);
             background-color:rgba(255, 255, 255, 0.219);

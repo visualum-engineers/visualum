@@ -42,7 +42,7 @@
 }
 
 .nav-btn:hover, .nav-btn:active {
-  background: rgba(255, 255, 255, 0.267);
+  background: rgba(255, 255, 255, 0.185);
   color: white;
 }
 
@@ -127,7 +127,7 @@
 }
 
 #nav-icon:hover, #search-icon:hover {
-  background: rgba(255, 255, 255, 0.267);
+  background: rgba(255, 255, 255, 0.185);
   color: white;
 }
 
@@ -260,7 +260,7 @@
 }
 
 .user-dropdown-button:hover {
-  background: rgba(255, 255, 255, 0.267);
+  background: rgba(255, 255, 255, 0.185);
   color: white;
   cursor: pointer;
 }
@@ -366,7 +366,7 @@
 }
 
 .exit-sidebar-btn:hover {
-  background: rgba(255, 255, 255, 0.267);
+  background: rgba(255, 255, 255, 0.185);
   color: white;
 }
 
@@ -736,7 +736,7 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 }
 
 .foot-link:hover {
-  background: rgba(255, 255, 255, 0.267);
+  background: rgba(255, 255, 255, 0.185);
   color: white;
   border-radius: 5px;
 }
@@ -1061,7 +1061,7 @@ html.sortActivityActive {
 }
 
 .navActivityBtn:hover {
-  background: rgba(255, 255, 255, 0.267);
+  background: rgba(255, 255, 255, 0.185);
   color: white;
 }
 
@@ -1087,6 +1087,25 @@ html.sortActivityActive {
   -o-object-position: center;
      object-position: center;
   z-index: 0;
+}
+
+.activities-nav {
+  padding: 0 2rem;
+  height: 3rem;
+  background-color: rgba(107, 97, 144, 0.8) !important;
+}
+.activities-nav .back-button-container .back-button {
+  height: 100%;
+  font-size: 0.8rem;
+  border: 1px white solid;
+  color: white;
+}
+.activities-nav .back-button-container .back-button:hover {
+  background: rgba(255, 255, 255, 0.185);
+  color: white;
+}
+.activities-nav .navbar-brand {
+  font-size: 1rem !important;
 }
 
 .activity-type-container {
@@ -1160,14 +1179,12 @@ html.sortActivityActive {
 }
 
 .dashboard-nav {
+  padding: 0 2rem;
   height: 3rem;
-  padding: 0.3rem;
   background-color: #480069 !important;
 }
-.dashboard-nav .back-button-container {
-  align-self: flex-end;
-}
 .dashboard-nav .back-button-container .back-button {
+  height: 100%;
   font-size: 0.8rem;
   color: #f6f6f6;
   background-color: rgba(255, 255, 255, 0.219);
@@ -1432,7 +1449,7 @@ html.sortActivityActive {
   }
 
   .nav-link:hover {
-    background: rgba(255, 255, 255, 0.267);
+    background: rgba(255, 255, 255, 0.185);
     color: white;
     border-radius: 5px;
   }

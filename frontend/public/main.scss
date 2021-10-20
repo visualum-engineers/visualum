@@ -1,7 +1,7 @@
 @import "./scss_abstracts/variables";
 
 //General Styles
-@import "../src/app/components/navbar/navbar";
+@import "../src/app/components/primaryNavbar/navbar";
 @import "../src/app/components/homePage/home";
 @import "../src/app/components/forms/form";
 @import "../src/app/components/footer/footer";
@@ -9,7 +9,7 @@
 @import "../src/app/components/dashboard/dashboard";
 
 //responsive Styles
-@import "../src/app/components/navbar/navbarBreakPoints";
+@import "../src/app/components/primaryNavbar/navbarBreakPoints";
 @import "../src/app/components/homePage/homeBreakPoints";
 @import "../src/app/components/forms/formBreakPoints";
 @import "../src/app/components/footer/footerBreakPoints";

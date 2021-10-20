@@ -1,11 +1,11 @@
 import React from 'react'
-import DashboardNav from './DashboardNav';
+import SlimNavbar from '../slimNavbar/SlimNavbar';
 import DashboardSidebar from './DashboardSidebar';
 
 export default function Dashboard(props) {
     return (
         <div className="vh-100">
-            <DashboardNav />
+            <SlimNavbar type={"dashboard-nav"}/>
             <div className="dashboard-container">
                 <DashboardSidebar page={props.page} />
                 <div className="main-content">

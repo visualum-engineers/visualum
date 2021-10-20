@@ -1,5 +1,5 @@
 import React from 'react';
-import NavWrapper from './components/navbar/NavWrapper';
+import NavWrapper from './components/primaryNavbar/NavWrapper';
 
 import DashboardHome from './components/dashboard/DashboardHome'
 import DashboardActivities from './components/dashboard/DashboardActivities';

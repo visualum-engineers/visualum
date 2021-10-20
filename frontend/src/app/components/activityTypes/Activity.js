@@ -3,6 +3,7 @@ import ShortAnswerApp from "./ShortAnswer/ShortAnswerApp"
 import SortActivityApp from "./SortActivity/SortActivityApp"
 import MatchActivityApp from "./MatchActivity/MatchActivityApp"
 import ActivityBtns from "./NavActivityBtn/ActivityBtns"
+import SlimNavbar from "../slimNavbar/SlimNavbar"
 import assignmentData from "../../helpers/sampleAssignmentData"
 import { useState } from "react"
 
@@ -41,6 +42,7 @@ const Activity = () =>{
     }
     return(
     <>
+        <SlimNavbar type={"activities-nav"} />
         <div className = "activity-body row flex-column align-items-center ">
             <img src = {activeActivityBg} className="active-activity-bg" alt="planet and stars background"/>
             <div className = "activity-type-container col-11 col-md-9 col-lg-7 col-xl-6 d-flex flex-column justify-content-center">
