@@ -109,24 +109,26 @@
     margin: 0;
 }
 
-#home-page-content div{
-    height: 20vh;
-    min-height: 300px;
-    margin-bottom: 1rem;
+#home-page-market-intro {
+    div{
+        height: 20vh;
+        min-height: 300px;
+        margin-bottom: 1rem;
 
-}
-#home-page-content div img{
-    object-fit: contain;
-    object-position: center;
-    min-height: 300px;
-    height: 100%;
-}
-#home-page-content div p{
-    font-size: 1.4rem;
-    font-weight: 800;
-    text-align: center;
-}
-#home-page-content {
+        p{
+            font-size: 1.4rem;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        img {
+            object-fit: contain;
+            object-position: center;
+            min-height: 300px;
+            height: 100%;
+        }
+    }
+
     h1{
         margin-top: 5rem;
         margin-bottom: 1rem;
@@ -168,6 +170,13 @@
             color: orange;
         }
     }
+}
+
+#home-page-market-body{
+    @extend .intro-homePage;
+}
+.home-page-market-body-bg{
+    @extend .homePageImage;
 }
 
 

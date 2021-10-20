@@ -1,6 +1,7 @@
 import {React, useEffect} from 'react'
 import IntroHome from "./IntroHome"
-import MarketingHome from "./MarketingHome"
+import MarketingHomeIntro from "./MarketingHomeIntro"
+import MarketingHomeBody from './MarketingHomeBody'
 const starsWebM = "images/stars.webm"
 const starsMov = "images/stars.mov"
 
@@ -16,7 +17,8 @@ const HomePage = () => {
                 <source src={starsWebM} type="video/webm"/>
             </video>
             <IntroHome/>
-            <MarketingHome />
+            <MarketingHomeIntro />
+            <MarketingHomeBody />
         </>
     )
     }

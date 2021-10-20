@@ -20,7 +20,7 @@ const IntroHome = () =>{
         </div>
     </div>
 
-    <a href="#home-page-content" className="home-explore-link d-flex flex-column align-items-center">
+    <a href="#home-page-market-intro" className="home-explore-link d-flex flex-column align-items-center">
         <p>Explore Our Library of Activities</p>
         <i className="fas fa-angle-down"></i>
     </a>

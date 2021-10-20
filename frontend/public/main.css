@@ -380,7 +380,7 @@
      object-fit: cover;
 }
 
-.intro-homePage {
+.intro-homePage, #home-page-market-body {
   position: relative;
   text-align: justify;
   padding: 0 10vw;
@@ -393,7 +393,7 @@
   z-index: 1;
 }
 
-.homePageImage {
+.homePageImage, .home-page-market-body-bg {
   top: 0;
   left: 0;
   right: 0;
@@ -509,13 +509,17 @@
   margin: 0;
 }
 
-#home-page-content div {
+#home-page-market-intro div {
   height: 20vh;
   min-height: 300px;
   margin-bottom: 1rem;
 }
-
-#home-page-content div img {
+#home-page-market-intro div p {
+  font-size: 1.4rem;
+  font-weight: 800;
+  text-align: center;
+}
+#home-page-market-intro div img {
   -o-object-fit: contain;
      object-fit: contain;
   -o-object-position: center;
@@ -523,49 +527,42 @@
   min-height: 300px;
   height: 100%;
 }
-
-#home-page-content div p {
-  font-size: 1.4rem;
-  font-weight: 800;
-  text-align: center;
-}
-
-#home-page-content h1 {
+#home-page-market-intro h1 {
   margin-top: 5rem;
   margin-bottom: 1rem;
   color: orange;
   font-weight: 700;
   text-align: center;
 }
-#home-page-content h6 {
+#home-page-market-intro h6 {
   font-size: 0.95rem;
   margin-bottom: 6rem;
   text-align: center;
 }
-#home-page-content .teacherPointing p {
+#home-page-market-intro .teacherPointing p {
   margin-top: -7rem;
 }
-#home-page-content .planet img {
+#home-page-market-intro .planet img {
   margin-top: -5rem;
 }
-#home-page-content .pencils p {
+#home-page-market-intro .pencils p {
   margin-top: -3rem;
 }
-#home-page-content .pencils {
+#home-page-market-intro .pencils {
   margin-bottom: 4rem;
 }
-#home-page-content h4 {
+#home-page-market-intro h4 {
   font-weight: 700;
   margin-bottom: 2rem;
   text-align: center;
 }
-#home-page-content button {
+#home-page-market-intro button {
   background-color: orange;
   color: white;
   border: orange 1px solid;
   margin-bottom: 6rem;
 }
-#home-page-content button:hover {
+#home-page-market-intro button:hover {
   background-color: white;
   color: orange;
 }
@@ -792,7 +789,9 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 }
 
 #footer {
-  background-color: #090322;
+  padding-top: 3rem;
+  padding-bottom: 2.5rem;
+  background-color: #6b6190;
 }
 
 .foot-link {
@@ -1554,7 +1553,7 @@ html.sortActivityActive {
     width: 49%;
   }
 
-  #home-page-content div p {
+  #home-page-market-intro div p {
     font-size: 1.1rem;
     font-weight: 800;
     text-align: center;
