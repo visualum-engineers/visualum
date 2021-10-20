@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom';
 
-export default function DashboardNav(props) {
+export default function SlimNav(props) {
     let history = useHistory();
 
     function handleClick() {

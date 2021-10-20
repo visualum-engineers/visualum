@@ -42,8 +42,8 @@ const Activity = () =>{
     }
     return(
     <>
-        <SlimNavbar type={"activities-nav"} />
         <div className = "activity-body row flex-column align-items-center ">
+            <SlimNavbar type={"activities-nav"} />
             <img src = {activeActivityBg} className="active-activity-bg" alt="planet and stars background"/>
             <div className = "activity-type-container col-11 col-md-9 col-lg-7 col-xl-6 d-flex flex-column justify-content-center">
                 {state.type ? activityType[state.type]

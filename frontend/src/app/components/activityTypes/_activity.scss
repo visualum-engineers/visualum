@@ -20,9 +20,12 @@
     z-index: 0;
 }
 .activities-nav {
+    position: sticky;
+    @include anchor-top-left;
     padding: 0 2rem;
     height: 3rem;
     background-color: $main-color !important;
+    z-index: 2;
     .back-button-container {
         .back-button {
             height: 100%;

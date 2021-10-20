@@ -1090,9 +1090,16 @@ html.sortActivityActive {
 }
 
 .activities-nav {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   padding: 0 2rem;
   height: 3rem;
   background-color: rgba(107, 97, 144, 0.8) !important;
+  z-index: 2;
 }
 .activities-nav .back-button-container .back-button {
   height: 100%;
