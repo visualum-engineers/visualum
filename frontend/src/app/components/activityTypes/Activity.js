@@ -7,7 +7,7 @@ import SlimNavbar from "../slimNavbar/SlimNavbar"
 import assignmentData from "../../helpers/sampleAssignmentData"
 import { useState } from "react"
 
-const activeActivityBg = "images/active-activity-bg.jpg"
+const activeActivityBg = "images/activity/active-activity-bg.jpg"
 
 const activityData = assignmentData
 

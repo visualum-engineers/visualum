@@ -15,4 +15,5 @@
 @media (max-width: 575px) { 
     @include navbar-sm;
     @include form-sm;
+    @include homePage-sm;
 }

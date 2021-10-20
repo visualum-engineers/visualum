@@ -37,7 +37,7 @@ const assignmentData = {
     2:{
         type: "multipleChoice",
         question: "What faces this world?",
-        imageURL : "images/mountain-home-bg.jpg",
+        imageURL : "images/homePage/mountain-home-bg.jpg",
         imgDescription: "",
         answerChoices: ["Good What faces this world", "Bad", "No"]
     },

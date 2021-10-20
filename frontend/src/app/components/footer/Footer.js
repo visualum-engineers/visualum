@@ -7,9 +7,9 @@ let time = d.getFullYear()
 export default class Footer extends Component {
     render() {
         return (
-            <footer className="container">
-                <div id="footer" className="d-flex flex-wrap py-2">
-                    <div className="col-sm-4 col-12 text-center py-3">
+            <footer className="w-100"  id="footer">
+                <div className="d-flex justify-content-center flex-wrap py-2">
+                    <div className="col-sm-3 col-12 text-center py-3">
                         <h5>Visualum</h5>
                         <div className="d-flex flex-column align-items-center">
                             <a className="foot-link" href="#footer">For Teachers</a>
@@ -18,7 +18,7 @@ export default class Footer extends Component {
                         </div>
                     </div>
 
-                    <div className="col-sm-4 col-12 text-center py-3">
+                    <div className="col-sm-3 col-12 text-center py-3">
                         <h5>Social</h5>
                         <div className="d-flex flex-column align-items-center">
                             <a className="foot-link" href="#footer">LinkedIn</a>
@@ -27,7 +27,7 @@ export default class Footer extends Component {
                         </div>
                     </div>
 
-                    <div className="col-sm-4 col-12 text-center py-3">
+                    <div className="col-sm-3 col-12 text-center py-3">
                         <h5>About</h5>
                         <div className="d-flex flex-column align-items-center">
                             <a className="foot-link" href="#footer">Terms</a>

@@ -8,18 +8,14 @@
 @import "../src/app/components/activityTypes/activity";
 @import "../src/app/components/dashboard/dashboard";
 
-//responsive Styles
+//responsive stylesheets as mixins
 @import "../src/app/components/primaryNavbar/navbarBreakPoints";
 @import "../src/app/components/homePage/homeBreakPoints";
 @import "../src/app/components/forms/formBreakPoints";
 @import "../src/app/components/footer/footerBreakPoints";
 
-//responsive styling
+//responsive stylesheet
 @import "./scss_abstracts/breakPoints"; 
-
-html {
-    background-color: rgb(20, 28, 62);
-}
 
 body{
     font-family: $main-font;
@@ -31,7 +27,6 @@ body{
 
 .App{
     position: relative;
-    background-color: $bg-color;
 }
 
 p{

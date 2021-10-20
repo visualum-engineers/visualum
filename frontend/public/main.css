@@ -370,7 +370,7 @@
   color: white;
 }
 
-.stars {
+.home-page-stars {
   min-height: 200px;
   position: absolute;
   width: 100%;
@@ -380,7 +380,7 @@
      object-fit: cover;
 }
 
-.homePage {
+.intro-homePage {
   position: relative;
   text-align: justify;
   padding: 0 10vw;
@@ -507,6 +507,67 @@
 .home-explore-link > p {
   display: inline;
   margin: 0;
+}
+
+#home-page-content div {
+  height: 20vh;
+  min-height: 300px;
+  margin-bottom: 1rem;
+}
+
+#home-page-content div img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  -o-object-position: center;
+     object-position: center;
+  min-height: 300px;
+  height: 100%;
+}
+
+#home-page-content div p {
+  font-size: 1.4rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+#home-page-content h1 {
+  margin-top: 5rem;
+  margin-bottom: 1rem;
+  color: orange;
+  font-weight: 700;
+  text-align: center;
+}
+#home-page-content h6 {
+  font-size: 0.95rem;
+  margin-bottom: 6rem;
+  text-align: center;
+}
+#home-page-content .teacherPointing p {
+  margin-top: -7rem;
+}
+#home-page-content .planet img {
+  margin-top: -5rem;
+}
+#home-page-content .pencils p {
+  margin-top: -3rem;
+}
+#home-page-content .pencils {
+  margin-bottom: 4rem;
+}
+#home-page-content h4 {
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+#home-page-content button {
+  background-color: orange;
+  color: white;
+  border: orange 1px solid;
+  margin-bottom: 6rem;
+}
+#home-page-content button:hover {
+  background-color: white;
+  color: orange;
 }
 
 .formContainer {
@@ -727,6 +788,11 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
 #copyright {
   margin: 0;
   padding: 0;
+  color: white;
+}
+
+#footer {
+  background-color: #090322;
 }
 
 .foot-link {
@@ -741,7 +807,7 @@ input[type=text], input[type=password], input[type=email], input[type=number] {
   border-radius: 5px;
 }
 
-#footer > div > h5 {
+#footer div div > h5 {
   color: white;
 }
 
@@ -1487,11 +1553,13 @@ html.sortActivityActive {
     font-size: 75%;
     width: 49%;
   }
-}
-html {
-  background-color: #141c3e;
-}
 
+  #home-page-content div p {
+    font-size: 1.1rem;
+    font-weight: 800;
+    text-align: center;
+  }
+}
 body {
   font-family: "Poppins", sans-serif;
   min-height: 600px;
@@ -1504,7 +1572,6 @@ body {
 
 .App {
   position: relative;
-  background-color: #090322;
 }
 
 p {

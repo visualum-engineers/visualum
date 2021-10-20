@@ -1,8 +1,11 @@
 
 #copyright{
-    @include no-space
+    @include no-space;
+    color: white;
 }
-
+#footer{
+    background-color: $bg-color;
+}
 .foot-link{
     color: $main-font-color;
     text-align: center;
@@ -14,6 +17,6 @@
     @include border-radius(5px);
 }
 
-#footer>div>h5{
+#footer div div>h5{
     color: white
 }
