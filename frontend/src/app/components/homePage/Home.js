@@ -2,8 +2,8 @@ import {React, useEffect} from 'react'
 import IntroHome from "./IntroHome"
 import MarketingHomeIntro from "./MarketingHomeIntro"
 import MarketingHomeBody from './MarketingHomeBody'
-const starsWebM = "images/stars.webm"
-const starsMov = "images/stars.mov"
+const starsWebM = "images/homePage/stars.webm"
+const starsMov = "images/homePage/stars.mov"
 
 const HomePage = () => {
     useEffect(()=>{
