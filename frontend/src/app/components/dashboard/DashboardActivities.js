@@ -14,7 +14,7 @@ export default function DashboardActivities(props) {
     return (
         <Dashboard page="activities">
             <div className="row-container">
-                <div className="control-bar">
+                <div className="control-bar" id="activity-controls">
                     <div className="buttons">
                         <button className="btn btn-success button">
                             <FontAwesomeIcon icon={faPlus} /> New
