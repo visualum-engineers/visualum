@@ -10,7 +10,7 @@ const NavItem = ({sidebar=false, url=false, handleSideBar=false, textContent}) =
                 </a>      
                 :
                 <button 
-                    className="nav-btn mx-1" 
+                    className="nav-btn home-page-nav mx-1" 
                     aria-label={textContent}
                     onClick={handleSideBar}>
                         <p>{textContent}</p>

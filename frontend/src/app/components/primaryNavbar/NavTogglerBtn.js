@@ -25,7 +25,7 @@ const NavToggler = () => {
         <button
             disabled={disabled}
             id="nav-toggler"
-            className="container-fluid navbar-toggler"
+            className="container-fluid navbar-toggler home-page-nav"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"

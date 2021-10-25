@@ -1,4 +1,4 @@
-.navbar{
+.navbar.home-page-nav{
     @include border-radius(0);
     @include fillContainer;
     @include transition(all 0.25s ease-out);
@@ -11,10 +11,10 @@
 }
 //when scrolled, padding is reduced to make navbar smaller
 //vertical height when scrolled: vertical height when not scrolled:
-.navbarScrollActive{
+.navbar.navbarScrollActive{
     padding: 5px 30px;
 }
-.navbarScrollActive.sidebar-close{
+.navbar.navbarScrollActive.sidebar-close{
     background: $main-color;
 }
 
@@ -26,8 +26,7 @@
     padding-right: 2rem;
 }
 
-
-.nav-btn{
+.nav-btn.home-page-nav{
     @include center;
     @include border-radius(10px);
     @include remove-btn-default;
@@ -37,17 +36,20 @@
     text-align: center;
     font-size: 1em;
 }
-.nav-btn{
+
+.nav-btn.home-page-nav{
     &:hover,
     &:active{
         @include hover-color;
     }
 }
-.nav-btn>p{
+
+.nav-btn.home-page-nav>p{
     @include no-space;
     position: relative;
 }
-.nav-btn{
+
+.nav-btn.home-page-nav{
     &:focus p::after,
     &:active p::after{
         position: absolute;
@@ -97,13 +99,13 @@
     width: 50px;
 }
 
-#nav-toggler{
+#nav-toggler.home-page-nav{
     @include center;
     height: 40px;
     width: 40px;
 }
 
-#nav-toggler, #search-btn{
+#nav-toggler.home-page-nav, #search-btn{
     @include no-space;
 }
 

@@ -9,11 +9,14 @@ export default function Navbar(props) {
     const windowScrollY = useScrollPos()
     return (
         <>
-            <div id="filter-navbar-container" className="navbar-expand-lg fixed-top">
+            <div 
+                id="filter-navbar-container" 
+                className="navbar-expand-lg fixed-top"
+            >
                 <nav 
                     id="navbar" 
                     className={
-                            `navbar navbar-expand-lg 
+                            `navbar home-page-nav navbar-expand-lg 
                             ${props.sidebarToggle ? null: "sidebar-close"}
                             ${windowScrollY ? "navbarScrollActive": ""}
                         `}>
