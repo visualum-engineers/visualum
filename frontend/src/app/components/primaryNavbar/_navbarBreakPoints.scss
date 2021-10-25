@@ -5,7 +5,7 @@
 }
 
 @mixin navbar-md{
-    .navbar{
+    .navbar.home-page-nav{
         padding: 15px 25px !important;
         background: $main-color;
     }
@@ -22,18 +22,10 @@
         width: calc(100% - 60px);
         height: 50px;
     }
-
-    .nav-item{
-        @include fillContainer;
-    }
-    .nav-link:hover{
-        @include hover-color;
-        border-radius: 5px;
-    }
 }
 
 @mixin navbar-lg{
-    #nav-button, #nav-icon{
+    #nav-icon{
         @include hidden;
     }
     #search-box{
@@ -45,9 +37,6 @@
     }
     .signout-btn{
         margin-left: 1.7rem;
-    }
-    .nav-item{
-        width:8%;
     }
 }
 

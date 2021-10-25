@@ -24,7 +24,7 @@ export default function Navbar(props) {
 
                     {props.windowWidth ? null: <NavToggler />}
                     
-                    <div id="navbarSupportedContent" className="collapse navbar-collapse">
+                    <div id="navbarSupportedContent" className="collapse navbar-collapse home-page-nav">
                         <div className="navbar-nav w-100 justify-content-start">
                             <NavItem 
                                 textContent={"Discover"} 

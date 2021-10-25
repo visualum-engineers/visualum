@@ -82,6 +82,7 @@
     padding-left: 10px;
     border: 0px;
 }
+
 #search-icon{
     @include border-radius(5px);
     font-size: 20px;
@@ -109,7 +110,7 @@
     @include no-space;
 }
 
-#nav-icon, #search-icon{
+#nav-icon.home-page-nav, #search-icon{
     @include center;
     @include fillContainer;
     @include transition(all 0.3s ease-out);
@@ -120,19 +121,19 @@
     @include hover-color;
 }
 
-#nav-icon.fa-arrow-down{
+#nav-icon.home-page-nav.fa-arrow-down{
     @include transition(all ease 0.2s);
     transform: rotate(180deg);
 }
 
-#nav-icon.fa-bars{
+#nav-icon.home-page-nav.fa-bars{
     @include transition(all ease 0.2s);
     transform: rotate(180deg);
     font-size: 28px;
 }
 
 /* this is to control the drop animation of navbar */
-.collapsing{
+.home-page-nav.collapsing{
     @include transition(height 0.15s ease !important);
 }
 

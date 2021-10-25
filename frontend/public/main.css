@@ -116,7 +116,7 @@
   padding: 0;
 }
 
-#nav-icon, #search-icon {
+#nav-icon.home-page-nav, #search-icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -131,19 +131,19 @@
   color: white;
 }
 
-#nav-icon.fa-arrow-down {
+#nav-icon.home-page-nav.fa-arrow-down {
   transition: all ease 0.2s;
   transform: rotate(180deg);
 }
 
-#nav-icon.fa-bars {
+#nav-icon.home-page-nav.fa-bars {
   transition: all ease 0.2s;
   transform: rotate(180deg);
   font-size: 28px;
 }
 
 /* this is to control the drop animation of navbar */
-.collapsing {
+.home-page-nav.collapsing {
   transition: height 0.15s ease !important;
 }
 
@@ -1467,7 +1467,7 @@ html.sortActivityActive {
 }
 
 @media (min-width: 992px) {
-  #nav-button, #nav-icon {
+  #nav-icon {
     display: none;
     visibility: hidden;
     position: absolute;
@@ -1486,10 +1486,6 @@ html.sortActivityActive {
     margin-left: 1.7rem;
   }
 
-  .nav-item {
-    width: 8%;
-  }
-
   #formContainer, #signUpForm, #loginForm {
     padding: 10vh 18vw;
   }
@@ -1500,7 +1496,7 @@ html.sortActivityActive {
   }
 }
 @media (max-width: 992px) {
-  .navbar {
+  .navbar.home-page-nav {
     padding: 15px 25px !important;
     background: rgba(107, 97, 144, 0.8);
   }
@@ -1520,17 +1516,6 @@ html.sortActivityActive {
   #search-bar.expand {
     width: calc(100% - 60px);
     height: 50px;
-  }
-
-  .nav-item {
-    height: 100%;
-    width: 100%;
-  }
-
-  .nav-link:hover {
-    background: rgba(255, 255, 255, 0.185);
-    color: white;
-    border-radius: 5px;
   }
 
   #formContainer, #signUpForm, #loginForm {

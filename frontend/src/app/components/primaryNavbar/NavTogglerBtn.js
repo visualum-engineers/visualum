@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 function NavIcon(props) {
     const { toggled } = props;
     return (
-        <span id="nav-icon" className={`fa ${toggled ? 'fa-arrow-down' : 'fa-bars'}`} />
+        <span id="nav-icon" className={`fa home-page-nav ${toggled ? 'fa-arrow-down' : 'fa-bars'}`} />
     )
 }
 
