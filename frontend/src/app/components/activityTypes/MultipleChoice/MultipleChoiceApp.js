@@ -6,7 +6,7 @@ import React, {useState} from 'react'
     2. Missing progress saved on local storage/memory (if user exits out of page)
 */
 
-const MultipleChoiceApp = ({activityData}) => {    
+const MultipleChoiceApp = ({activityData, transitionRightEnter, transitionRightLeave, transitionLeftEnter, transitionLeftLeave}) => {    
     //for updating redux store(data to be sent to backend)
     const [state, setState] = useState(activityData)
     const rows = state.answerChoices.length % 2 ===0 ? state.answerChoices.length/2 : Math.floor(state.answerChoices.length/2 + 1)

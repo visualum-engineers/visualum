@@ -6,7 +6,7 @@ import React, {useState} from 'react'
     2. Missing progress saved on local storage/memory (if user exits out of page)
 */
 
-const ShortAnswerApp = ({activityData }) => {
+const ShortAnswerApp = ({activityData, transitionRightEnter, transitionRightLeave, transitionLeftEnter, transitionLeftLeave }) => {
     //for updating redux store(data to be sent to backend)
     const [state] = useState(activityData)
     

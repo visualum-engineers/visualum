@@ -40,7 +40,7 @@ const nearestSquare = (array) =>{
     else return [sqrt, sqrt-1]
 }
 
-const MatchActivityApp = ({activityData}) => {
+const MatchActivityApp = ({activityData, transitionRightEnter, transitionRightLeave, transitionLeftEnter, transitionLeftLeave}) => {
     //for updating redux store(data to be sent to backend)
     const [matchPair, setMatchPair] = useState(activityData.matchPair)
     //we only shuffle tiles once at the start

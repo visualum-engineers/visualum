@@ -63,16 +63,17 @@ const transformData = (data, wordBankColumns) =>{
 }
 const SortActivityApp = ({activityData}) => {
     //for updating redux store(data to be sent to backend)
+
     const windowWidth = useWindowWidth()
     const columns = windowWidth ? Array(3).fill(0) : Array(1).fill(0)
-    const [state, setState] = useState(transformData(activityData, columns.length))
+    const [data, setData] = useState(transformData(activityData, columns.length))
     //handle width resizing
     useEffect(() => {
-        setState((state) => transformData(state, columns.length))
+        setData((data) => transformData(data, columns.length))
     }, [windowWidth, columns.length])
 
     //roundup number of elements counted
-    const numCategories = Object.keys(state.categories)
+    const numCategories = Object.keys(data.categories)
     const rows = Array(numCategories.length%columns.length === 0 ? numCategories.length/columns.length : Math.floor(numCategories.length/columns.length+1)).fill(0)
     const onDragStart = () =>{
         //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
@@ -94,67 +95,59 @@ const SortActivityApp = ({activityData}) => {
         const finishContainerType = answerChoiceTestEl(finish) ? "wordBank" : "categories"
 
         //setup
-        const startAnswersList = Array.from(answerChoiceTestEl(start) ? state.wordBank[start] : state.categories[start])
-        const finishAnswersList = Array.from(answerChoiceTestEl(finish) ? state.wordBank[finish] : state.categories[finish])
+        const startAnswersList = Array.from(answerChoiceTestEl(start) ? data.wordBank[start] : data.categories[start])
+        const finishAnswersList = Array.from(answerChoiceTestEl(finish) ? data.wordBank[finish] : data.categories[finish])
         const sameContainer = start===finish
         let newState
     
         startAnswersList.splice(source.index, 1)
         //list container are same - remove el from old idx, add to new idx
         if(sameContainer){
-            startAnswersList.splice(destination.index, 0, state.answerChoices[draggableId]);
+            startAnswersList.splice(destination.index, 0, data.answerChoices[draggableId]);
             newState = {
-                ...state,
+                ...data,
                 [startContainerType]: {
-                    ...state[startContainerType],
+                    ...data[startContainerType],
                     [start]: startAnswersList,
                 }
             }
         } 
         //list containers are different - move elements into the new container, and remove them from old one
         else {
-            finishAnswersList.splice(destination.index, 0, state.answerChoices[draggableId]);
+            finishAnswersList.splice(destination.index, 0, data.answerChoices[draggableId]);
             newState = startContainerType===finishContainerType ? {
-                ...state,
+                ...data,
                 [startContainerType]:{
-                    ...state[startContainerType],
+                    ...data[startContainerType],
                     [start] : startAnswersList,
                     [finish] : finishAnswersList,
                 },
             }
             : {
-                ...state,
+                ...data,
                 [startContainerType]:{
-                    ...state[startContainerType],
+                    ...data[startContainerType],
                     [start] : startAnswersList,
                 },
                 [finishContainerType] : {
-                    ...state[finishContainerType],
+                    ...data[finishContainerType],
                     [finish] : finishAnswersList,
                 }
             }
         } 
         //maintain wordbank across resize, so we update allWordBankItems
         if(startContainerType==="wordBank") delete newState.allWordBankItems[draggableId]
-        if(finishContainerType==="wordBank") newState.allWordBankItems[draggableId] = state.answerChoices[draggableId]
+        if(finishContainerType==="wordBank") newState.allWordBankItems[draggableId] = data.answerChoices[draggableId]
         
         //update state
-        setState(newState)
+        setData(newState)
     };
     
     return (
-       <>
+    <>
         <p className="instructions">Sort the following:</p>
         <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
                 {/* Renders sort categories */}
-                {/* {numCategories.map((columnTitle)=> {
-                    return <DroppableArea 
-                                windowWidth = {windowWidth}
-                                key={columnTitle} 
-                                id={columnTitle}
-                                currAnswers={state.categories[columnTitle]}
-                            />
-                })}  */}
                 {rows.map((content, index) =>{
                     const startSlice = index * columns.length
                     const endSlice = (index+1) * columns.length
@@ -165,27 +158,27 @@ const SortActivityApp = ({activityData}) => {
                                             windowWidth = {windowWidth}
                                             key={columnTitle} 
                                             id={columnTitle}
-                                            currAnswers={state.categories[columnTitle]}
+                                            currAnswers={data.categories[columnTitle]}
                                         />
                             })} 
                         </div>
                 )})}
-                 {/* Renders word/response bank */}
+                {/* Renders word/response bank */}
                 <div className="d-flex w-100 justify-content-center">
-                    {Object.keys(state.wordBank).map((key) =>{
+                    {Object.keys(data.wordBank).map((key) =>{
                         return (
                             <DroppableArea 
                                 windowWidth = {windowWidth}
                                 key={key}
                                 id={key} 
                                 wordBank = {true}
-                                currAnswers={state.wordBank[key]} 
+                                currAnswers={data.wordBank[key]} 
                             />
                         )
                     })}
                 </div>
         </DragDropContext>
-        </>
+    </>
     )
 }
 export default SortActivityApp
