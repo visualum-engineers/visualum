@@ -44,7 +44,7 @@ const Activity = () =>{
             <SlimNavbar type={"activities-nav"} />
             <img src = {activeActivityBg} className="active-activity-bg" alt="planet and stars background"/>
             <div className = "activity-type-container col-11 col-md-9 col-lg-7 col-xl-6 d-flex flex-column justify-content-center">
-                {/* <TransitionGroup > */}
+                {/*generate entire form data*/}
                 {question.type ?
                     Object.keys(activityData).map((key)=>{
                         const moveLeft = (prevQuestion - questionNum) > 0
@@ -69,7 +69,6 @@ const Activity = () =>{
                         )
                     })
                 :  <p>You've Submitted!</p>}
-                {/* </TransitionGroup> */}
             </div>
             {/*loads appropriate btns depending if 
                     1. There are prev questions

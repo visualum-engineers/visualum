@@ -1183,7 +1183,7 @@ html.sortActivityActive {
 .activity-type-container {
   border-radius: 25px;
   position: relative;
-  margin-top: 100px;
+  margin-top: 2rem;
   padding: 20px;
   text-align: center;
   min-height: 75vh;
