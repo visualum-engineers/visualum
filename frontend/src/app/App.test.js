@@ -1,12 +1,11 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { store } from '../redux/store';
+import { render, screen } from '@testing-library/react';
 import App from './App';
 
 describe("<App />", () => {
-  it("Renders <App /> component correctly", () => {
-    const { getByText } = render(<App />);
-    expect(getByText(/A world class education for anyone, anywhere./i)).toBeInTheDocument();
+  test("Renders <App /> component correctly", async () => {
+    render(<App />);
+    const greeting = await screen.findByText(/A world class education for anyone, anywhere./i);
+    expect(greeting).not.toEqual({});
   });
 });
