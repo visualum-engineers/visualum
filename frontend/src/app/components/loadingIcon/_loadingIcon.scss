@@ -1,0 +1,25 @@
+@keyframes animate-loading-icon{
+    from {
+        transform: rotate(0);
+        
+    } to {
+        transform: rotate(360deg);
+    }
+}
+.loading-icon-container{
+    @include center;
+    @include fillContainer;
+    .loading-icon{
+        @include border-radius(50%);
+        border: 4px rgba(99, 99, 99, 0.466) solid;
+        border-top-color: $main-color;
+        width: 30px;
+        height: 30px;
+        animation: animate-loading-icon 0.85s linear infinite;
+    }    
+}
+.loading-icon-container.fill-viewport{
+    height: 100vh;
+}
+
+

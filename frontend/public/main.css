@@ -1,3 +1,40 @@
+@-webkit-keyframes animate-loading-icon {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes animate-loading-icon {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.loading-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+.loading-icon-container .loading-icon {
+  border-radius: 50%;
+  border: 4px rgba(99, 99, 99, 0.466) solid;
+  border-top-color: rgba(107, 97, 144, 0.8);
+  width: 30px;
+  height: 30px;
+  -webkit-animation: animate-loading-icon 0.85s linear infinite;
+          animation: animate-loading-icon 0.85s linear infinite;
+}
+
+.loading-icon-container.fill-viewport {
+  height: 100vh;
+}
+
 .navbar.home-page-nav {
   border-radius: 0;
   height: 100%;
@@ -1621,6 +1658,7 @@ body {
 
 .App {
   position: relative;
+  min-height: 100vh;
 }
 
 p {

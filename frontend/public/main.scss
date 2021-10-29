@@ -1,6 +1,7 @@
 @import "./scss_abstracts/variables";
 
 //General Styles
+@import "../src/app/components/loadingIcon/loadingIcon";
 @import "../src/app/components/primaryNavbar/navbar";
 @import "../src/app/components/homePage/home";
 @import "../src/app/components/forms/form";
@@ -27,6 +28,7 @@ body{
 
 .App{
     position: relative;
+    min-height: 100vh;
 }
 
 p{

@@ -13,6 +13,7 @@ import sampleActivityData from './helpers/sampleActivityData'
 import DashboardAssignments from './components/dashboard/DashboardAssignments';
 import TestBackend from "./components/testBackend/test"
 
+import LoadingIcon from './components/loadingIcon/LoadingIcon';
 //lazy loaded components for performance
 const Settings = React.lazy(()=> import('./components/settingsPage/Settings'))
 const HomeContent = React.lazy(()=> import('./components/homePage/Home'))
@@ -28,7 +29,7 @@ function App() {
       <div className="App">
         <Suspense fallback={
           //will replace with a spinner icon like Netflix has later.
-          <p>Loading...</p>
+          <LoadingIcon entireViewport={true}/>
         }>
           <Switch>
             <Route
