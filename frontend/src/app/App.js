@@ -1,9 +1,9 @@
 import React from 'react';
 import { Suspense } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import LoadingIcon from './components/loadingIcon/LoadingIcon';
 
 import NavWrapper from './components/primaryNavbar/NavWrapper';
-
 import DashboardHome from './components/dashboard/DashboardHome'
 import DashboardActivities from './components/dashboard/DashboardActivities';
 import DashboardClasses from './components/dashboard/DashboardClasses';
@@ -13,7 +13,7 @@ import sampleActivityData from './helpers/sampleActivityData'
 import DashboardAssignments from './components/dashboard/DashboardAssignments';
 import TestBackend from "./components/testBackend/test"
 
-import LoadingIcon from './components/loadingIcon/LoadingIcon';
+
 //lazy loaded components for performance
 const Settings = React.lazy(()=> import('./components/settingsPage/Settings'))
 const HomeContent = React.lazy(()=> import('./components/homePage/Home'))
@@ -22,7 +22,7 @@ const LoginForm = React.lazy(()=> import('./components/forms/EntryForms/LoginFor
 const CreateGame = React.lazy(()=> import('./components/createGame/CreateGame'))
 const Activity = React.lazy(()=> import('./components/activityTypes/Activity'))
 const LabelPictures = React.lazy(()=> import("./components/activityTypes/LabelPictures/LabelPicturesApp"))
-
+const ActivityCreation = React.lazy(()=> import("./components/forms/ActivityCreationForm/ActivityCreationForm"))
 function App() {
   return (
     <Router>
@@ -64,6 +64,10 @@ function App() {
 
             <Route exact path="/activity">
                 <Activity />
+            </Route>
+
+            <Route exact path="/activity-creation">
+                <ActivityCreation />
             </Route>
 
             <Route exact path="/label-pictures">
