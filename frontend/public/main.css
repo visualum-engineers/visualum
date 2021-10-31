@@ -609,7 +609,7 @@
   color: orange;
 }
 
-.signup-form-container, .login-form-container {
+.signup-form-container, #signUpForm, #loginForm, .login-form-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1143,6 +1143,10 @@ html.sortActivityActive {
   color: white;
 }
 
+.nav-activity-btns {
+  max-width: 840px;
+}
+
 .navActivityBtn {
   border-radius: 5px;
   color: white;
@@ -1215,6 +1219,7 @@ html.sortActivityActive {
   text-align: center;
   min-height: 75vh;
   z-index: 1;
+  max-width: 840px;
   overflow: hidden;
 }
 
@@ -1571,13 +1576,12 @@ html.sortActivityActive {
     margin-left: 1.7rem;
   }
 
-  #formContainer, #signUpForm, #loginForm {
+  #entry-form-container {
     padding: 10vh 18vw;
   }
 
   .entry-form-nav-btns > button, .entry-form-type-btns > button {
     font-size: 120%;
-    width: 35%;
   }
 }
 @media (max-width: 992px) {

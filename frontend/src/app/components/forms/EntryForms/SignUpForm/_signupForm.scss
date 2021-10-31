@@ -12,7 +12,7 @@
     color: $main-font-color;
 }
 #signUpForm{
-    @extend #formContainer;
+    @extend .signup-form-container;
     @include border-radius(20px);
     @include fillContainer;
     display: flex;

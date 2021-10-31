@@ -1,3 +1,6 @@
+.nav-activity-btns{
+    max-width: 840px;
+}
 .navActivityBtn{
     @include border-radius(5px);
     color: $main-font-color;
