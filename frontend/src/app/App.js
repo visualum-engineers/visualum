@@ -17,8 +17,8 @@ import LoadingIcon from './components/loadingIcon/LoadingIcon';
 //lazy loaded components for performance
 const Settings = React.lazy(()=> import('./components/settingsPage/Settings'))
 const HomeContent = React.lazy(()=> import('./components/homePage/Home'))
-const SignUpForm = React.lazy(()=> import('./components/forms/signUpForm'))
-const LoginForm = React.lazy(()=> import('./components/forms/logInForm'))
+const SignUpForm = React.lazy(()=> import('./components/forms/EntryForms/SignUpForm/SignUpForm'))
+const LoginForm = React.lazy(()=> import('./components/forms/EntryForms/LoginForm/LoginForms'))
 const CreateGame = React.lazy(()=> import('./components/createGame/CreateGame'))
 const Activity = React.lazy(()=> import('./components/activityTypes/Activity'))
 const LabelPictures = React.lazy(()=> import("./components/activityTypes/LabelPictures/LabelPicturesApp"))
@@ -28,7 +28,6 @@ function App() {
     <Router>
       <div className="App">
         <Suspense fallback={
-          //will replace with a spinner icon like Netflix has later.
           <LoadingIcon entireViewport={true}/>
         }>
           <Switch>

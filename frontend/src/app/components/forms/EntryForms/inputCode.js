@@ -27,9 +27,9 @@ const InputCode = ({ length, label, description, loading, onComplete }) => {
   };
 
   return (
-    <div className="code-input mt-4 mb-4">
+    <div className="entry-code-input mt-4 mb-4">
       <label className="code-label">{label}</label>
-      <div className="code-inputs mt-2">
+      <div className="entry-code-inputs mt-2">
         {code.map((num, index) => {
           return (
             <input
@@ -48,7 +48,7 @@ const InputCode = ({ length, label, description, loading, onComplete }) => {
           );
         })}
       </div>
-      <label className="code-label mt-2">{description}</label>
+      <label className="entry-code-label mt-2">{description}</label>
     </div>
   );
 };

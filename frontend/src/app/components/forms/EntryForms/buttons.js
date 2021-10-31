@@ -8,7 +8,7 @@ export default class Buttons extends Component{
         const formType = this.props.formType
         if(this.props.formPage<=1){
             return(
-                <div className="formNavBtns d-flex justify-content-end"> 
+                <div className="entry-form-nav-btns d-flex justify-content-end"> 
                     <button 
                         type="button" 
                         className="btn continue" 
@@ -18,7 +18,7 @@ export default class Buttons extends Component{
             ) 
         } else {
             return (
-                <div className={`d-flex ${formType ? "mt-3 formTypeBtns justify-content-center": "formNavBtns justify-content-between"}`}> 
+                <div className={`d-flex ${formType ? "mt-3 entry-form-type-btns justify-content-center": "entry-form-nav-btns justify-content-between"}`}> 
                     <button 
                         type="button" 
                         className= {`btn ${formType ? this.props.accountType === "student" ? "active student":"student":"goBack"}`} 

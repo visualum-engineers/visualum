@@ -1,0 +1,37 @@
+@import './SignUpForm/signupBreakpoints';
+@import "./LoginForm/loginBreakpoints";
+
+@mixin entry-form-lg{
+    #entry-form-container{
+        padding: 10vh 18vw;
+    }
+
+    .entry-form-nav-btns>button, .entry-form-type-btns>button {
+        font-size: 120%;
+        width: 35%;
+    }
+}
+
+@mixin entry-form-md{
+    .entry-form-container{
+        padding: 10vh 15vw;
+    }
+    .entry-form-nav-btns>button, .entry-form-type-btns>button{
+        font-size: 100%;
+        width: 40%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+@mixin entry-form-sm{
+    .entry-form-container{
+        padding: 10vh 10vw;
+    }
+    .entry-form-nav-btns>button,.entry-form-type-btns>button{
+        padding-left: 0;
+        padding-right: 0;
+        font-size: 75%;
+        width: 49%;
+    }
+}

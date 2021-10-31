@@ -19,13 +19,13 @@ Notes on whats missing:
 */
 import React, { useState } from 'react';
 
-import Form from './Form'
+import Form from './SignUpForms'
 // import { passwordCheck } from '../../helpers/PasswordCheck'
 import { Redirect } from "react-router-dom"
 
 // IMPORTS FOR REDUX
 import { useSelector, useDispatch } from 'react-redux';
-import { updated } from '../../../redux/features/userInfo/userInfoSlice';
+import { updated } from '../../../../../redux/features/userInfo/userInfoSlice';
 
 // IMPORTS FOR TOASTS
 import { ToastContainer, toast } from 'react-toastify';
@@ -140,8 +140,8 @@ export default function SignUpForm() {
     }
 
     return (
-        <div className="form-page">
-            <div className="form-container">
+        <div className="entry-form-page">
+            <div className="entry-form-container">
                 <Form
                     isFormComplete={isFormComplete}
                     userInfo={userInfo}

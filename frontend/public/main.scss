@@ -4,16 +4,10 @@
 @import "../src/app/components/loadingIcon/loadingIcon";
 @import "../src/app/components/primaryNavbar/navbar";
 @import "../src/app/components/homePage/home";
-@import "../src/app/components/forms/form";
+@import "../src/app/components/forms/forms";
 @import "../src/app/components/footer/footer";
 @import "../src/app/components/activityTypes/activity";
 @import "../src/app/components/dashboard/dashboard";
-
-//responsive stylesheets as mixins
-@import "../src/app/components/primaryNavbar/navbarBreakPoints";
-@import "../src/app/components/homePage/homeBreakPoints";
-@import "../src/app/components/forms/formBreakPoints";
-@import "../src/app/components/footer/footerBreakPoints";
 
 //responsive stylesheet
 @import "./scss_abstracts/breakPoints"; 
@@ -42,3 +36,17 @@ a, a:hover, a:focus{
     transition: all 0.2s;
 }
 
+//styling for all inputs
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+input[type="text"], input[type="password"], input[type="email"], input[type="number"]{
+    height: 50px !important;
+    font-size: 14px;
+    -moz-appearance: textfield;
+}

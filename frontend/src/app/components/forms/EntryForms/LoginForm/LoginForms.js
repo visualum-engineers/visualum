@@ -16,8 +16,8 @@ Notes on whats missing:
 */
 
 import React, { Component } from 'react';
-import Buttons from './buttons';
-import InputCode from './inputCode';
+import Buttons from '../buttons';
+import InputCode from '../inputCode';
 
 const emailRegex = /.+@.+[.]{1}.+/;
 const numberRegex =/[0-9]{6,}/;
@@ -64,7 +64,7 @@ class GoogleLogin extends Component {
     render() {
         return (
             <div className="mt-4 align-self-center">
-                <button className="mb-2 google-btn">
+                <button className="mb-2 entry-google-btn">
                     <div id="g_id_onload"
                         data-client_id="297543839155-cclc3bsf6m26pfaj1bmrfb1l4bgpcin7.apps.googleusercontent.com"
                         data-context="signin"
@@ -72,7 +72,7 @@ class GoogleLogin extends Component {
                         data-login_uri="http://localhost:3001">
                     </div>
 
-                    <div className="g_id_signin"
+                    <div className="g_id_signin entry-g_id_signin"
                         data-type="standard"
                         data-shape="rectangular"
                         data-theme="outline"
@@ -89,19 +89,19 @@ class GoogleLogin extends Component {
 class ManualLogin extends Component {
     render() {
         return (<div>
-            <div className="logSignForm form-floating mt-3">
+            <div className="entry-forms-floating form-floating mt-3">
                 <input 
                     placeholder ="Email Address"
                     value ={this.props.email}
                     data-state="email"
                     onChange={this.props.handleChange}
                     type="email" 
-                    className="logSignForm  form-control" 
+                    className="entry-forms-floating form-control" 
                     id="email" 
                     aria-describedby="emailHelp"/>
-                <label htmlFor="email" className="logSignForm  form-label">Email Address</label>
+                <label htmlFor="email" className="entry-forms-floating form-label">Email Address</label>
             </div>
-            <div className= "mb-3 mt-3 flex-fill logSignForm  form-floating">
+            <div className= "mb-3 mt-3 flex-fill entry-forms-floating form-floating">
                 <input
                     placeholder="Password"
                     value ={this.props.password}
@@ -109,11 +109,11 @@ class ManualLogin extends Component {
                     data-state="password"
                     onChange={this.props.handleChange} 
                     type="password" 
-                    className="logSignForm  form-control" 
+                    className="entry-forms-floating form-control" 
                     id="password"/>
-                <label htmlFor="password" className="logSignForm  form-label">Password</label>
+                <label htmlFor="password" className="entry-forms-floating  form-label">Password</label>
             </div>
-            <div className="mb-3 form-check">
+            <div className="mb-3 entry-form-check form-check">
                 <input
                     data-state="rememberMe"
                     onChange={this.props.handleChange} 
@@ -266,12 +266,13 @@ export default class LogInForm extends Component {
             />
         const manualLoginBtn = <button 
                     onClick={this.handleClick} 
-                    className="continue mt-2 email-btn d-flex justify-content-center" 
+                    className="continue mt-2 entry-email-btn d-flex justify-content-center" 
                     type="button"
                 >
-                <span className="email-text">Login with email</span>
+                <span className="entry-email-text">Login with email</span>
             </button>
-        return (<div className="formContainer">
+        return (
+            <div className="login-form-container">
                 <form 
                     className={`${this.state.accountType==="student"? "studentSignUpForm":"teacherSignUpForm"}`} 
                     id="loginForm"
