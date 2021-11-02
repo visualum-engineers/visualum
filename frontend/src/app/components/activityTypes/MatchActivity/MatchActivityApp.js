@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import GridTiles from './GridTiles'
 import Timer from "./Timer"
 import useWindowWidth from '../../../hooks/use-window-width'
@@ -40,13 +40,22 @@ const nearestSquare = (array) =>{
     else return [sqrt, sqrt-1]
 }
 
-const MatchActivityApp = ({activityData, transitionRightEnter, transitionRightLeave, transitionLeftEnter, transitionLeftLeave}) => {
+const MatchActivityApp = ({activityData}) => {
     //for updating redux store(data to be sent to backend)
     const [matchPair, setMatchPair] = useState(activityData.matchPair)
     //we only shuffle tiles once at the start
     const [tileShuffle, setTileShuffle] = useState(shuffleItems(Object.keys(activityData.matchPair)))
     //check if all tiles have been matched or not
-    const allTilesMatched = tileShuffle.every(tile => tile === null)
+    const allTilesMatched = tileShuffle.every(tile => !tile)
+
+    //if it exists, grab info from local storage on mount.
+    useEffect(() => {
+        const locally_stored_shuffle_list = localStorage.getItem("match_activity_shuffle_list")
+        const locally_stored_match_list = localStorage.getItem("match_activity_pair_list")
+        if(locally_stored_shuffle_list) setTileShuffle(JSON.parse(locally_stored_shuffle_list)) 
+        if(locally_stored_match_list) setMatchPair(JSON.parse(locally_stored_match_list))
+    }, [])
+    
     //store starting and final elements
     const [startEl, setStartEl] = useState(null)
     const finalEl = useRef(null)
@@ -146,14 +155,17 @@ const MatchActivityApp = ({activityData, transitionRightEnter, transitionRightLe
 
         //when elements are a matching pair
         //it will remove it and replace it with an empty grid tile
-        newShuffleList.splice(newShuffleList.indexOf(start),1, null)
-        newShuffleList.splice(newShuffleList.indexOf(final),1, null)
+        newShuffleList.splice(newShuffleList.indexOf(start),1, false)
+        newShuffleList.splice(newShuffleList.indexOf(final),1, false)
         
         delete newMatchList[start]
         delete newMatchList[final]
         
         setMatchPair(newMatchList)
         setTileShuffle(newShuffleList)
+        localStorage.setItem("match_activity_shuffle_list", JSON.stringify(newShuffleList))
+        localStorage.setItem("match_activity_pair_list", JSON.stringify(newMatchList))
+
     }
     return(
         <>
@@ -175,7 +187,7 @@ const MatchActivityApp = ({activityData, transitionRightEnter, transitionRightLe
                 return(
                     <div key={rowIndex} className="row g-0">
                         {tileShuffle.slice((rowIndex)*columns, (rowIndex+1)*columns).map((content, index)=>{
-                            if(content === null) return <div key={index+columns*rowIndex} className="col m-2 tile"><div className="emptyTile"></div></div>
+                            if(!content) return <div key={index+columns*rowIndex} className="col m-2 tile"><div className="emptyTile"></div></div>
                             return (
                                 <div key={index+columns*rowIndex}  className="col m-2 tile">
                                     <GridTiles 

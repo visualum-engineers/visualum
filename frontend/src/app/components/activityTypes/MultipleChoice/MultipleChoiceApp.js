@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 /*
     Frontend:
     1. Missing re-rendering logic, when user answers question and moves on to the next one.
@@ -6,9 +6,19 @@ import React, {useState} from 'react'
     2. Missing progress saved on local storage/memory (if user exits out of page)
 */
 
-const MultipleChoiceApp = ({activityData, transitionRightEnter, transitionRightLeave, transitionLeftEnter, transitionLeftLeave}) => {    
+const MultipleChoiceApp = ({activityData}) => {    
     //for updating redux store(data to be sent to backend)
     const [state, setState] = useState(activityData)
+    //find any data stored in local storage
+    useEffect(() => {
+        const stored_selected_answer = localStorage.getItem("mc_activity_client_answer")
+        if(stored_selected_answer){
+            setState(state =>({
+                ...state,
+                clientAnswer: parseInt(stored_selected_answer) 
+            })) 
+        }
+    }, [])
     const rows = state.answerChoices.length % 2 ===0 ? state.answerChoices.length/2 : Math.floor(state.answerChoices.length/2 + 1)
     const columns = 2
     if(rows*columns !== state.answerChoices.length){
@@ -20,6 +30,14 @@ const MultipleChoiceApp = ({activityData, transitionRightEnter, transitionRightL
             ...state,
             answerChoices: newAnsList
         }))
+    }
+    const updateAnswerChoice = (e) =>{
+        const id = e.target.closest("input").id.match(/\d+/)
+        setState(state =>({
+            ...state,
+            clientAnswer: parseInt(id) 
+        })) 
+        localStorage.setItem("mc_activity_client_answer", id.toString())
     }
     return(
         <form className = "MCInputContainer">
@@ -43,11 +61,15 @@ const MultipleChoiceApp = ({activityData, transitionRightEnter, transitionRightL
                             return(
                                 <div key={index} className="mc-answer-choice col-5 col-md-4">
                                     <input 
-                                        id={"mc-answer-choice"+(rowIndex*columns+index)} 
+                                        id={"mc-answer-choice-"+(rowIndex*columns+index)} 
                                         type="radio" 
-                                        name="MCOptions"/>
+                                        name="MCOptions"
+                                        onChange = {updateAnswerChoice}
+                                        checked = {parseInt(state.clientAnswer) === rowIndex*columns+index}
+                                    />
+
                                     <label 
-                                        htmlFor={"mc-answer-choice"+(rowIndex*columns+index)} 
+                                        htmlFor={"mc-answer-choice-"+(rowIndex*columns+index)} 
                                         className="w-100 d-flex align-items-center justify-content-center">
                                             {choice}
                                     </label>

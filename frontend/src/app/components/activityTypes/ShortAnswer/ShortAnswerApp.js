@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 /*
     Frontend:
     1. Missing re-rendering logic, when user answers question and moves on to the next one.
@@ -6,9 +6,26 @@ import React, {useState} from 'react'
     2. Missing progress saved on local storage/memory (if user exits out of page)
 */
 
-const ShortAnswerApp = ({activityData, transitionRightEnter, transitionRightLeave, transitionLeftEnter, transitionLeftLeave }) => {
+const ShortAnswerApp = ({activityData}) => {
     //for updating redux store(data to be sent to backend)
-    const [state] = useState(activityData)
+    const [state, setState] = useState(activityData)
+    //grab data from local storage
+    useEffect(() => {
+        const stored_response = localStorage.getItem("SA_activity_client_answer")
+        if(stored_response) setState(state => ({
+            ...state, 
+            clientAnswer: stored_response
+        }))
+    }, [])
+
+    const handleInput = (e) =>{
+        const input_value = e.target.closest("textarea").value
+        setState(state => ({
+            ...state,
+            clientAnswer: input_value 
+        }))
+        localStorage.setItem("SA_activity_client_answer", input_value)
+    }
     
     return(
         <>
@@ -18,7 +35,10 @@ const ShortAnswerApp = ({activityData, transitionRightEnter, transitionRightLeav
                 <textarea 
                     className="form-control" 
                     placeholder="Type your answer here" 
-                    id="SAtextArea">
+                    id="SAtextArea"
+                    onChange={handleInput}
+                    value = {state.clientAnswer}
+                >
                 </textarea>
                 <label htmlFor="SAtextArea">Type your answer here</label>
             </div>

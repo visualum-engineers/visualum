@@ -23,6 +23,7 @@ const CreateGame = React.lazy(()=> import('./components/createGame/CreateGame'))
 const Activity = React.lazy(()=> import('./components/activityTypes/Activity'))
 const LabelPictures = React.lazy(()=> import("./components/activityTypes/LabelPictures/LabelPicturesApp"))
 const ActivityCreation = React.lazy(()=> import("./components/forms/ActivityCreationForm/ActivityCreationForm"))
+
 function App() {
   return (
     <Router>

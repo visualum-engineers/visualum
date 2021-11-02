@@ -67,6 +67,12 @@ const SortActivityApp = ({activityData}) => {
     const windowWidth = useWindowWidth()
     const columns = windowWidth ? Array(3).fill(0) : Array(1).fill(0)
     const [data, setData] = useState(transformData(activityData, columns.length))
+    //grab data from local storage
+    useEffect(() =>{
+        const stored_response = localStorage.getItem("sort_activity_client_answer")
+        if(stored_response) setData(JSON.parse(stored_response))
+    }, [])
+
     //handle width resizing
     useEffect(() => {
         setData((data) => transformData(data, columns.length))
@@ -141,6 +147,7 @@ const SortActivityApp = ({activityData}) => {
         
         //update state
         setData(newState)
+        localStorage.setItem("sort_activity_client_answer", JSON.stringify(newState))
     };
     
     return (
