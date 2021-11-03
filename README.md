@@ -23,11 +23,11 @@ This project was built using the MERN stack
     2. If in production : Run `npm start`
 
 ## Compiling Sass Files 
-1. Development
-    * If you use VSCode, install the extension, Live Sass Compiler.
-    * If you decide not to use VSCode:
-        1. Find another simple software that will automatically compile all scss files, into the main.scss file. 
-        2. Ensure sass files are compiled into the main.css file
-2. Production
-    * We may use webpack
+* If you use VSCode, install the extension, Live Sass Compiler.
+* If you decide not to use VSCode:
+    1. Run `npm run scss` to compile scss to a main.css file, in the public directory
+    2. Note: This method will only build the script. If you make changes, you need to run this command again, to get an updated main.css file.
+
+## Launching App for Production
+1. Run `npm build`
      
