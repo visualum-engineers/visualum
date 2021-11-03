@@ -33,10 +33,10 @@
     "redux-devtools-extension": "^2.13.9"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "npm run scss & react-scripts start",
     "scss": "dart-sass public/main.scss public/main.css",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "build": "npm run scss & react-scripts build",
+    "test": "npm run scss & react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
