@@ -16,6 +16,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "dart-sass": "^1.25.0",
     "http-proxy-middleware": "^0.19.1",
     "install": "^0.13.0",
     "npm": "^7.24.2",
@@ -33,9 +34,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "scss": "dart-sass public/main.scss public/main.css",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "scss": "node-sass -watch scss -o css",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

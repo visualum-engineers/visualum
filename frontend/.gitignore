@@ -1,5 +1,11 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+
+#generated css styles from sass compiling
+/public/main.css
+/public/main.css.map
+main.css.map*
+main.css*
 # dependencies
 /node_modules
 /.pnp
@@ -22,8 +28,3 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-main.css.map*
-main.css*
-#generated css styles from sass compiling
-/public/main.css
-/public/main.css.map
