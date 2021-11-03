@@ -29,5 +29,7 @@ This project was built using the MERN stack
     2. Note: This method will only build the script. If you make changes, you need to run this command again, to get an updated main.css file.
 
 ## Launching App for Production
-1. Run `npm build`
+1. Navigate to frontend directory and run `npm build`
+2. Navigate to backend directoy and run `npm build`
+Note: This requires 2 servers, 1 for the Node REST API, and the 1 for the frontend
      
