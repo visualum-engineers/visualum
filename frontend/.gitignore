@@ -23,6 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 main.css.map*
+main.css*
 #generated css styles from sass compiling
-/src/main.css
-/src/main.css.map
+/public/main.css
+/public/main.css.map
