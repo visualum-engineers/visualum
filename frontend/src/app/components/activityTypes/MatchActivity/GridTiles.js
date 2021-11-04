@@ -78,7 +78,9 @@ const GridTiles = ({id, content, onStop, onDrag, onStart, onTouchStart, startEl=
     )
 }
 function arePropsEqual(prevProps, nextProps) {
-    const startEl = prevProps.startEl===nextProps.startEl
-    return startEl; 
+    const startEl = prevProps.startEl === nextProps.startEl
+    const content = prevProps.content === nextProps.content
+
+    return startEl && content; 
 }
 export default memo(GridTiles, arePropsEqual)
