@@ -1,11 +1,9 @@
-@mixin box-shadow {
-    box-shadow: 0 4px 11px rgba(33,33,33,.1);
-}
+
 
 @mixin card-hover {
     &:hover {
         transform: translateY(-5px);
-        box-shadow: 0 4px 11px  rgba(33,33,33,.2); 
+        @include box-shadow(0 4px 11px  rgba(33,33,33,.2));
         h6 {
             color: rgb(138, 40, 218) !important;
         }
@@ -26,7 +24,7 @@
     p {
         font-size: .8rem;
     }
-    @include box-shadow();
+    @include box-shadow(0 4px 11px rgba(33,33,33,.1));
     @include card-hover();
 }
 
@@ -46,8 +44,8 @@
         border-right: 1px solid rgba(179, 179, 179 ,.5);
         background-color: white;
         padding: .9rem 0;
-        -webkit-box-shadow: 3px 1px 10px 7px rgba(0,0,0,0.1); 
-        box-shadow: 3px 1px 10px 7px rgba(0,0,0,0.1);
+        @include box-shadow(3px 1px 10px 7px rgba(0,0,0,0.1));
+        
         .sidebar-item {
             font-size: .9rem;
             width: 100%;
@@ -201,7 +199,7 @@
     background-color: rgb(255, 255, 255);
     margin-bottom: .8rem;
     border-radius: .25rem;
-    @include box-shadow();
+    @include box-shadow(0 4px 11px rgba(33,33,33,.1));
     .title {
         display: flex;
         align-items: center;

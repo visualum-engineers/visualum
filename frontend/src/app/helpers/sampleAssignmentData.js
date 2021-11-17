@@ -1,7 +1,9 @@
 const assignmentData = {
+    activityID: "unique",
     //matching
-    3: {
+    1: {
         type: "matching",
+        timer: {hours: 1, minutes: 1, seconds: 1},
         matchPair:{
             "Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1":"Pair1-Pair1-Pair1-Pair1-Pair1-", 
             "Pair1-Pair1-Pair1-Pair1-Pair1-":"Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1Pair1",
@@ -36,14 +38,16 @@ const assignmentData = {
     //multiple choice
     2:{
         type: "multipleChoice",
+        timer: false,
         question: "What faces this world?",
         imageURL : "images/homePage/mountain-home-bg.jpg",
         imgDescription: "",
         answerChoices: ["Good What faces this world", "Bad", "No"]
     },
     //sorting
-    1: {
+    3: {
         type: "sort",
+        timer: false,
         categories: [
             {categoryId: 1, name: "Good"},
             {categoryId: 2, name: "Medium"},
@@ -65,6 +69,7 @@ const assignmentData = {
     },
     //short answer
     4: {
+        timer:false,
         type: "shortAnswer",
         question: "What faces this world?",
     }

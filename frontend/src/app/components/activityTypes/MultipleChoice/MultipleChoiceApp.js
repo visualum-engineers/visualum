@@ -6,19 +6,19 @@ import React, {useEffect, useState} from 'react'
     2. Missing progress saved on local storage/memory (if user exits out of page)
 */
 
-const MultipleChoiceApp = ({activityData}) => {    
+const MultipleChoiceApp = ({activityData, questionNum, activityID}) => {    
     //for updating redux store(data to be sent to backend)
     const [state, setState] = useState(activityData)
     //find any data stored in local storage
     useEffect(() => {
-        const stored_selected_answer = localStorage.getItem("mc_activity_client_answer")
+        const stored_selected_answer = localStorage.getItem(`${activityID}-mc_activity_client_answer-${questionNum}`)
         if(stored_selected_answer){
             setState(state =>({
                 ...state,
                 clientAnswer: parseInt(stored_selected_answer) 
             })) 
         }
-    }, [])
+    }, [activityID, questionNum])
     const rows = state.answerChoices.length % 2 ===0 ? state.answerChoices.length/2 : Math.floor(state.answerChoices.length/2 + 1)
     const columns = 2
     if(rows*columns !== state.answerChoices.length){
@@ -37,7 +37,7 @@ const MultipleChoiceApp = ({activityData}) => {
             ...state,
             clientAnswer: parseInt(id) 
         })) 
-        localStorage.setItem("mc_activity_client_answer", id.toString())
+        localStorage.setItem(`${activityID}-mc_activity_client_answer-${questionNum}`, id.toString())
     }
     return(
         <form className = "MCInputContainer">

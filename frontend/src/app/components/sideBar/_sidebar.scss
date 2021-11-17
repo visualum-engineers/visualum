@@ -1,0 +1,147 @@
+@mixin sidebar-navItems-hover{
+    transform: scale(1.1);
+    background-color: rgb(238, 237, 237)
+}
+//from here are common styles of all sidebars
+.sidebar-nav{
+    z-index: 4;
+    height: 100vh;
+    overflow-y: auto;
+}
+.sidebar-right{
+    @include transition(all 0.3s ease-out);
+    left: 0px;
+}
+.sidebar-left{
+    @include transition(all 0.3s ease-out);
+    transform: translate(-100%);
+}
+.sidebar-bg-show{
+    display: inline;
+}
+.sidebar-bg-hide{
+    @include hidden;
+}
+
+.sidebar-dark-bg{
+    border: none;
+    z-index: 3;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(22, 22, 22, 0.685);
+}
+.primary-sidebar-link, .secondary-sidebar-link{
+    p{
+        @include no-space;
+    }
+}
+//SIMILAR STYLES END HERE
+
+//ALL FOLLOWING STYLES ARE UNIQUE TO TYPE OF SIDEBAR
+//primary siderbar styles
+.primary-sidebar-nav {
+    width: 35.9rem;
+    background: rgba(31, 49, 110, 0.582);
+}
+.primary-sidebar-link-container{
+    @include transition(all 0.25s ease-out);
+    margin-top: 90px;
+    margin-left: 36.8%;
+    width: 150px;
+    color: $main-font-color;
+    font-size: 0.9rem;
+}
+.primary-sidebar-link-container.sidebarScrollActive{
+    margin-top: 65px;
+}
+.primary-sidebar-link{
+    width: 1px;
+    margin-bottom: 5px;
+}
+
+.primary-sidebar-link:hover{
+    color: rgb(190, 190, 190)
+}
+.primary-exit-sidebar-btn{
+    @include border-radius(5px);
+    @include remove-btn-default;
+    position: absolute;
+    top:0;
+    right: 15px;
+    margin-top: 90px;
+    padding: 0 7px;
+    color: $main-font-color;
+    font-size: 1.5em;
+}
+.primary-exit-sidebar-btn:hover{
+    @include hover-color;
+}
+//PRIMARY SIDEBAR STYLES END HERE
+
+//secondary sidebar styles
+.secondary-sidebar-nav{
+    background: $light-bg-color;
+    width: 15rem;
+    @include box-shadow(4px 0px 7px -8px #000000);
+}
+.secondary-sidebar-header{
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+.secondary-sidebar-visualum-logo{
+    margin-left: -1.2rem;
+    max-width: 4.5rem;
+    object-fit: contain;
+    object-position: center;
+}
+.secondary-sidebar-link-container{
+    @include transition(all 0.25s ease-out);
+    color: $label-font-color;
+}
+
+.secondary-sidebar-link{
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+    padding: 0 0.3rem;
+    @include border-radius(5px)
+}
+.secondary-sidebar-link:hover{
+    @include sidebar-navItems-hover()
+}
+.secondary-sidebar-footer{
+    margin-bottom: 40%;
+    @extend .secondary-sidebar-link-container;
+    position: relative;
+}
+
+.secondary-exit-sidebar-btn{
+    @include remove-btn-default;
+    position: fixed;
+    top: calc(50vh - 1.6rem);
+    left: 15rem;
+    padding: 0.2rem 0.9rem 0.1rem 0.9rem;
+    color: $label-font-color;
+    font-size: 1.5rem;
+    background-color: white;
+    border: 1px rgba(0,0,0,0) solid;
+    border-left: none;
+    @include box-shadow(4px 0px 11px -8px #000000);
+    @include border-radius(0px 20px 20px 0px);
+    @include transition(all 0.3s ease-out);
+    z-index: 4;
+}
+
+.secondary-exit-sidebar-btn.sidebar-close{
+    left: 0;
+}
+.secondary-exit-sidebar-btn:hover{
+    @include sidebar-navItems-hover();
+    transform: scale(1);
+    border: 1px black solid;
+    border-left: none;
+}
+
+.secondary-sidebar-home-btn{
+    margin-bottom: 2rem;
+}

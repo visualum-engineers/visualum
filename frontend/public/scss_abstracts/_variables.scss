@@ -2,13 +2,15 @@ $main-font: 'Poppins', sans-serif;
 
 $main-color: rgba(107, 97, 144, 0.8);
 
-$bg-color: rgb(9, 3, 34);
 
 $main-font-color: white; 
 
 $label-font-color: black;
 
 $main-font-size: 14px;
+
+$bg-color: rgb(9, 3, 34);
+$light-bg-color: white;
 
 @mixin remove-btn-default {
     background: none;
@@ -21,11 +23,11 @@ $main-font-size: 14px;
     bottom: 0;
 }
 
-@mixin box-shadow($x, $y, $blur, $color){
-    -webkit-box-shadow: $x $y $blur $color;
-    -moz-box-shadow: $x $y $blur $color;
-    -ms-box-shadow: $x $y $blur $color;
-    box-shadow: $x $y $blur $color;
+@mixin box-shadow($x){
+    -webkit-box-shadow: $x;
+    -moz-box-shadow: $x;
+    -ms-box-shadow: $x;
+    box-shadow: $x;
 };
 
 @mixin border-radius($x){

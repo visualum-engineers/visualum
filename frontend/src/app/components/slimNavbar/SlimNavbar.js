@@ -9,7 +9,7 @@ export default function SlimNav(props) {
     }
     return (
         <nav className={`navbar-dark bg-light d-flex justify-content-between align-items-center ${props.type}`}>
-                <div className="navbar-brand" onClick={handleClick}>visualum</div>
+                <div className="navbar-brand" onClick={handleClick} tabIndex={0}>visualum</div>
                 <div className="back-button-container">
                     <button className="btn back-button" onClick={handleClick}>
                         Back to Homepage

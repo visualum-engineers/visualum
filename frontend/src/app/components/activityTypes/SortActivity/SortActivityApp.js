@@ -23,10 +23,10 @@ const transformData = (data, wordBankColumns) =>{
     newData["wordBank"] = {}
     newData["answerChoices"] = {}
     newData["allWordBankItems"] ={}
+    //console.log(data)
     if(!data.wordBank){
-        for(let i of data.categories){
-            newData["categories"][i.name] = []
-        }
+        for(let i of data.categories) newData["categories"][i.name] = []
+        
         for(let i=0; i<wordBankColumns; i++){
             const elementsPresent = (data.answers.length)%wordBankColumns === 0 ? (data.answers.length)/wordBankColumns : Math.floor((data.answers.length)/wordBankColumns+1)
             const startSlice = i * elementsPresent 
@@ -41,12 +41,12 @@ const transformData = (data, wordBankColumns) =>{
             newData.allWordBankItems[i.id] = {id: i.id, content: i.content}
             newData.answerChoices[i.id] = {id: i.id, content: i.content}
         }
+       
     }
     //when data was already transformed on mount 
     else {
-        for(let i of Object.keys(data.categories)){
-            newData["categories"][i] = [...data.categories[i]]
-        }
+        for(let i of Object.keys(data.categories)) newData["categories"][i] = [...data.categories[i]]
+        
         for(let i=0; i<wordBankColumns; i++){
             const keys = Object.keys(data.allWordBankItems)
             const elementsPresent = (keys.length)%wordBankColumns === 0 ? (keys.length)/wordBankColumns : Math.floor((keys.length)/wordBankColumns+1)
@@ -61,17 +61,17 @@ const transformData = (data, wordBankColumns) =>{
     }
     return newData
 }
-const SortActivityApp = ({activityData}) => {
+const SortActivityApp = ({activityData, questionNum, activityID}) => {
     //for updating redux store(data to be sent to backend)
-
     const windowWidth = useWindowWidth()
     const columns = windowWidth ? Array(3).fill(0) : Array(1).fill(0)
     const [data, setData] = useState(transformData(activityData, columns.length))
+
     //grab data from local storage
     useEffect(() =>{
-        const stored_response = localStorage.getItem("sort_activity_client_answer")
+        const stored_response = localStorage.getItem(`${activityID}-sort_activity_client_answer-${questionNum}`)
         if(stored_response) setData(JSON.parse(stored_response))
-    }, [])
+    }, [questionNum, activityID])
 
     //handle width resizing
     useEffect(() => {
@@ -147,7 +147,7 @@ const SortActivityApp = ({activityData}) => {
         
         //update state
         setData(newState)
-        localStorage.setItem("sort_activity_client_answer", JSON.stringify(newState))
+        localStorage.setItem(`${activityID}-sort_activity_client_answer-${questionNum}`, JSON.stringify(newState))
     };
     
     return (

@@ -6,17 +6,17 @@ import React, {useState, useEffect} from 'react'
     2. Missing progress saved on local storage/memory (if user exits out of page)
 */
 
-const ShortAnswerApp = ({activityData}) => {
+const ShortAnswerApp = ({activityData, questionNum, activityID}) => {
     //for updating redux store(data to be sent to backend)
     const [state, setState] = useState(activityData)
     //grab data from local storage
     useEffect(() => {
-        const stored_response = localStorage.getItem("SA_activity_client_answer")
+        const stored_response = localStorage.getItem(`${activityID}-SA_activity_client_answer-${questionNum}`)
         if(stored_response) setState(state => ({
             ...state, 
             clientAnswer: stored_response
         }))
-    }, [])
+    }, [activityID, questionNum])
 
     const handleInput = (e) =>{
         const input_value = e.target.closest("textarea").value
@@ -24,7 +24,7 @@ const ShortAnswerApp = ({activityData}) => {
             ...state,
             clientAnswer: input_value 
         }))
-        localStorage.setItem("SA_activity_client_answer", input_value)
+        localStorage.setItem(`${activityID}-SA_activity_client_answer-${questionNum}`, input_value)
     }
     
     return(

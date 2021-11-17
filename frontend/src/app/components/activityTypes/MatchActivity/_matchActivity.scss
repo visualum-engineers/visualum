@@ -29,7 +29,7 @@
     content: "";
     position: absolute;
     z-index: -1;
-    box-shadow: inset 0 0 2000px $main-font-color;
+    @include box-shadow(inset 0 0 2000px $main-font-color);
     filter: blur(3.5px);
 }
 .match-activity-timer button{

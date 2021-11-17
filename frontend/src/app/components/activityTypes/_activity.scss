@@ -4,11 +4,20 @@
 @import "./ShortAnswer/shortAnswer";
 @import "./LabelPictures/labelPictures";
 @import "./NavActivityBtn/navActivityBtn";
-
+@mixin activities-nav-navItems-hover{
+    transform: scale(1.1);
+    background-color: rgb(238, 237, 237)
+}
 .activity-body{
     @include no-space;
-    min-height: 100vh;
+    @include transition(all 0.3s ease-out);
+    background-color: #F8F8F8;
+    height: 100vh;
+    min-height: 600px;
     position: relative;
+}
+.activity-body.secondary-sidebar-open{
+    margin-left: 15rem; 
 }
 .active-activity-bg{
     @include no-space;
@@ -20,25 +29,35 @@
     z-index: 0;
 }
 .activities-nav {
-    position: sticky;
+    position: fixed;
     @include anchor-top-left;
     padding: 0 2rem;
     height: 3rem;
-    background-color: $main-color !important;
     z-index: 2;
     .back-button-container {
         .back-button {
             height: 100%;
-            font-size: .8rem;
-            border: 1px white solid;
-            color: $main-font-color;
+            font-size: 0.7rem;
+            border: 1px gray solid;
+            color: $label-font-color;
             &:hover {
-                @include hover-color;
+                @include activities-nav-navItems-hover()
             }
+            @include transition(all 0.3s ease-out);
         }
     }
     .navbar-brand {
         font-size: 1rem !important;
+        color: $label-font-color;
+        padding: 0 1rem;
+        @include border-radius(5px);
+        &:hover, &:focus{
+            cursor: pointer;
+            @include activities-nav-navItems-hover();
+            color: $label-font-color;
+        }
+        @include transition(all 0.3s ease-out)
+
     }
 }
 
@@ -48,7 +67,7 @@
     margin-top: 2rem;
     padding: 20px;
     text-align: center;
-    min-height: 75vh;
+    min-height: 80vh;
     z-index: 1;
     max-width: 840px;
     overflow: hidden;

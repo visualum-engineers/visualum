@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import SideBar from './Sidebar';
+import PrimarySideBar from '../sideBar/PrimarySidebar';
 import Navbar from './Navbar'
 import Footer from '../footer/Footer'
 import useWindowWidth from '../../hooks/use-window-width';
@@ -32,7 +32,7 @@ export default function NavWrapper(props) {
                 sidebarToggle ={sidebarToggle}
                 handleSideBar = {handleSideBar}
             />
-            {!windowWidth? null: <SideBar
+            {!windowWidth? null: <PrimarySideBar
                     sidebarToggle = {sidebarToggle} 
                     handleSideBar = {handleSideBar}
                     btnType = {sidebarBtnType}
