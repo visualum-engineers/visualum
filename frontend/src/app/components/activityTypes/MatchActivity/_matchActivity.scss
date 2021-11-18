@@ -1,14 +1,20 @@
-.tilesMatchedMessage{
-    color: $main-font-color;
+.match-activity-instructions{
+    color: $label-font-color;
+    button{
+        color: rgb(0, 57, 180);
+    }
+    button:hover{
+        color: white;
+        background: black;
+    }
+    .instructions{
+        background-color: $activities-bg-color;
+    }
 }
-.matchInstruction{
-    color: $main-font-color;
-    font-size: 1.1em;
-    margin: 0;
-}
+
 .match-activity-timer{
     position: relative;
-    color: $main-font-color;
+    color: $label-font-color;
 }
 .match-activity-timer .timer-counter{
     @include border-radius(10px);
@@ -23,19 +29,20 @@
     min-width: 70px;
     z-index: 1;
 }
+
 .match-activity-timer .timer-counter:before{
     @include border-radius(10px);
     @include anchor-top-left;
     content: "";
     position: absolute;
     z-index: -1;
-    @include box-shadow(inset 0 0 2000px $main-font-color);
+    @include box-shadow(inset 0 0 2000px $label-font-color);
     filter: blur(3.5px);
 }
-.match-activity-timer button{
+.match-activity-timer .timer-btns{
     @include remove-btn-default;
     font-size: 12px;
-    color: $main-font-color;
+    color: $label-font-color;
 }
 .gridLayout{
     margin-top: 10px;
@@ -55,9 +62,9 @@
     @include no-space;
     position: absolute;
     cursor: grab;
-    color: $main-font-color;
+    color: $label-font-color;
     font-size: 71%;
-    border: 1px $main-font-color solid;
+    border: 1px $label-font-color solid;
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -74,7 +81,7 @@
     background-color: white;
 }
 .gridTiles:hover, .gridTiles.hover{
-    background-color: $main-font-color;
+    background-color: $label-font-color;
     color: $label-font-color;
 }
 .gridTiles.active, .gridTiles:active{

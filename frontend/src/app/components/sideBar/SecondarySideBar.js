@@ -3,12 +3,19 @@ const Logo = "./images/VisualumLogo.png"
 const SecondarySideBar = (props) =>{
     return (
     <>
-        <div className={`d-flex flex-column sidebar-nav secondary-sidebar-nav fixed-top ${props.sidebarToggle ?"sidebar-right":"sidebar-left"}`}>
+        <div 
+                aria-label ="sidebar" 
+                className={`d-flex flex-column sidebar-nav secondary-sidebar-nav fixed-top ${props.sidebarToggle ?"sidebar-right":"sidebar-left"}`}
+                aria-hidden ={!props.sidebarToggle}
+            >
+        
             <div className="secondary-sidebar-header d-flex align-items-end justify-content-center">
-                <img className="secondary-sidebar-visualum-logo" 
-                    src={Logo} 
-                    alt="Visualum logo"/>
-                <a href="/">visualum</a>
+                <a href="/" aria-hidden ={!props.sidebarToggle} tabIndex ={!props.sidebarToggle?"-1": "0"}>
+                    <img className="secondary-sidebar-visualum-logo" 
+                        src={Logo} 
+                        alt="Visualum logo"/>
+                </a>
+                <a href="/" aria-hidden ={!props.sidebarToggle} tabIndex ={!props.sidebarToggle?"-1": "0"}>visualum</a>
             </div>
             <div className="secondary-sidebar-link-container d-flex flex-column align-items-center">
                 {props.data.map((navItem, index)=>{
@@ -18,6 +25,7 @@ const SecondarySideBar = (props) =>{
                             sidebar={"secondary"} 
                             url={navItem.url}
                             styles = {navItem.styles}
+                            hidden = {!props.sidebarToggle}
                         />
                     else return <NavItem
                             key={index}
@@ -25,13 +33,14 @@ const SecondarySideBar = (props) =>{
                             sidebar={"secondary"}
                             btn={true}
                             styles={navItem.styles}
+                            hidden ={!props.sidebarToggle}
                         /> 
                 })}
                 
             </div>
             <div className="secondary-sidebar-footer d-flex flex-column align-items-center justify-content-end flex-grow-1">
-                <NavItem textContent={"Settings"} sidebar={"secondary"} url={"/"}/>
-                <NavItem textContent={"Help Center"} sidebar={"secondary"} url={"/"}/>
+                <NavItem textContent={"Settings"} sidebar={"secondary"} url={"/"} hidden = {!props.sidebarToggle}/>
+                <NavItem textContent={"Help Center"} sidebar={"secondary"} url={"/"} hidden = {!props.sidebarToggle}/>
             </div>
             
         </div>
@@ -46,6 +55,8 @@ const SecondarySideBar = (props) =>{
                 className={`sidebar-dark-bg fixed-top ${props.sidebarToggle ?"sidebar-bg-show":"sidebar-bg-hide"}`}
                 aria-label="exit-sidebar"
                 onClick={props.handleSideBar}
+                aria-hidden ={!props.sidebarToggle}
+                tabIndex = {!props.sidebarToggle?"-1": "0"}
             >
             </button>
             : null

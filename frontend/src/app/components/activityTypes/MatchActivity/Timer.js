@@ -51,14 +51,14 @@ const CountDownTimer = ({timer={hours:0, minutes:0, seconds:0}, autoStart=true, 
                 {timerComponents}
             </div>
             { timerStarted ? null
-            : <button onClick={startTimer} aria-label="start-timer">
+            : <button onClick={startTimer} className="timer-btns" aria-label="start-timer">
                 <span aria-label="start-timer">
                     <i className="fa fa-play" aria-hidden="true"></i>
                 </span>
             </button>}
             {pauseBtn ?
                 timerStarted ?
-                    <button onClick={stopTimer} aria-label="pause-timer">
+                    <button onClick={stopTimer} className="timer-btns" aria-label="pause-timer">
                         <span aria-label="pause-timer">
                             <i className="fa fa-pause" aria-hidden="true"></i>
                         </span>
@@ -67,7 +67,7 @@ const CountDownTimer = ({timer={hours:0, minutes:0, seconds:0}, autoStart=true, 
             : null}
             {resetBtn ?
                 !timerStarted ?
-                    <button onClick={resetTimer} aria-label="reset-timer">
+                    <button onClick={resetTimer} className="timer-btns"  aria-label="reset-timer">
                             <span aria-label="reset-timer">
                                 <i className="fa fa-repeat" aria-hidden="true"></i>
                             </span>

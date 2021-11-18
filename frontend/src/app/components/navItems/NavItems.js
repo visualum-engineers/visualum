@@ -1,4 +1,4 @@
-const NavItem = ({sidebar=false, url=false, handleSideBar=false, btn=false, textContent, styles=false}) =>{  
+const NavItem = ({sidebar=false, url=false, handleSideBar=false, btn=false, textContent, styles=false, hidden="false"}) =>{  
     return (
         <>
             {sidebar ? 
@@ -9,13 +9,18 @@ const NavItem = ({sidebar=false, url=false, handleSideBar=false, btn=false, text
                     <a
                         className={`${sidebar === "primary" ? "primary":"secondary"}-sidebar-link ${styles? styles:""}`} 
                         aria-label={textContent}
-                        href={url}>
+                        href={url}
+                        aria-hidden = {hidden}
+                        tabIndex={`${hidden ? "-1":"0"}`}
+                    >
                             <p>{textContent}</p>
                     </a>
                     :
                     <button
                         className={styles ? styles : ""}
                         aria-label={textContent}
+                        aria-hidden = {hidden}
+                        tabIndex={`${hidden ? "-1":"0"}`}
                     >
                         <p>{textContent}</p>
                     </button>
@@ -23,7 +28,10 @@ const NavItem = ({sidebar=false, url=false, handleSideBar=false, btn=false, text
                 <button 
                     className="nav-btn home-page-nav mx-1" 
                     aria-label={textContent}
-                    onClick={handleSideBar}>
+                    onClick={handleSideBar}
+                    aria-hidden = {hidden}
+                    tabIndex={`${hidden ? "-1":"0"}`}
+                >
                         <p>{textContent}</p>
                 </button>
             }

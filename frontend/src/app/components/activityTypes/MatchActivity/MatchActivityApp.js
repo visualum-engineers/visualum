@@ -1,7 +1,8 @@
-import React, {useState, useRef, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import Timer from "./Timer"
-import {DragDropContext} from 'react-beautiful-dnd';
-import useWindowWidth from '../../../hooks/use-window-width'
+// import {DragDropContext} from 'react-beautiful-dnd';
+// import useWindowWidth from '../../../hooks/use-window-width'
+import MoreInfoBtn from '../../moreInfoBtn/MoreInfoBtn';
 /*
 To-dos
 Backend: 
@@ -13,64 +14,65 @@ Frontend:
 */
 
 //shuffles our given pairs order
-const shuffleItems = (array) => {   
-    let currentIndex = array.length,  randomIndex;
-    // While there remain elements to shuffle...
-    while (currentIndex !== 0) {
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
+// const shuffleItems = (array) => {   
+//     let currentIndex = array.length,  randomIndex;
+//     // While there remain elements to shuffle...
+//     while (currentIndex !== 0) {
+//         // Pick a remaining element...
+//         randomIndex = Math.floor(Math.random() * currentIndex);
+//         currentIndex--;
 
-        // And swap it with the current element.
-        [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
-    }
-    return array;
-}
+//         // And swap it with the current element.
+//         [array[currentIndex], array[randomIndex]] = [
+//         array[randomIndex], array[currentIndex]];
+//     }
+//     return array;
+// }
 //to render the closest square looking shape that exists for these tiles
 //will return an array. 1st value is row, 2nd value, is columns
-const nearestSquare = (array) =>{
-    //check if a square exists
-    //round up if no perfect square
-    const sqrt = (array.length**0.5) % 1 === 0 ? array.length**0.5 : Math.floor(array.length**0.5 + 1) 
-    //if no square, decrement column by 1
-    //and check if its too small to fit all tiles.
-    if (sqrt**2 === array.length) return [sqrt, sqrt]
-    if (sqrt * (sqrt-1) < array.length) return  [sqrt, sqrt]
-    else return [sqrt, sqrt-1]
-}
+// const nearestSquare = (array) =>{
+//     //check if a square exists
+//     //round up if no perfect square
+//     const sqrt = (array.length**0.5) % 1 === 0 ? array.length**0.5 : Math.floor(array.length**0.5 + 1) 
+//     //if no square, decrement column by 1
+//     //and check if its too small to fit all tiles.
+//     if (sqrt**2 === array.length) return [sqrt, sqrt]
+//     if (sqrt * (sqrt-1) < array.length) return  [sqrt, sqrt]
+//     else return [sqrt, sqrt-1]
+// }
 
 const MatchActivityApp = ({activityData, questionNum, activityID}) => {
     const [state, setState] = useState(activityData)
-
+    
     //if it exists, grab info from local storage on mount.
     useEffect(() => {
+        //on mount check local storage for data
         let stored = localStorage.getItem(`${activityID}-match_activity_client_answer-${questionNum}`)
         if(!stored) return
         setState(JSON.parse(stored))
     }, [activityID, questionNum])
     
-    const onTouchStart = () =>{
+    // const onTouchStart = () =>{
         
-    }
-    const onStart = (e) =>{
+    // }
+    // const onStart = (e) =>{
        
 
-    }
-    const onDrag = (e) =>{
+    // }
+    // const onDrag = (e) =>{
         
-    }
-    const onStop = (e) => {
-        let newMatchList = {}
-        let newShuffleList = {}
-        let store = [newMatchList, newShuffleList]
-        localStorage.setItem(`${activityID}-match_activity_client_answer-${questionNum}`, JSON.stringify(store))
-    }
-
+    // }
+    // const onStop = (e) => {
+    //     let newMatchList = {}
+    //     let newShuffleList = {}
+    //     let store = [newMatchList, newShuffleList]
+    //     localStorage.setItem(`${activityID}-match_activity_client_answer-${questionNum}`, JSON.stringify(store))
+    // }  
+    
     return(
         <>
-        <div>
-            <p>{}</p>
+        <div className="match-activity-header">
+                
         </div>
         <p className="matchInstruction">Find the Match!</p>
         {  state["timer"] ?
@@ -79,6 +81,13 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
                 <Timer
                     timer={state.timer}
                     autoStart={false}
+                />
+                <MoreInfoBtn 
+                    textContent = "Match the items in the word bank with those on the left column. The items can be dragged, or moved with the keyboard"
+                    customContainerClass = "match-activity-instructions"
+                    customContainerAriaLabel = "activity-instructions"
+                    customDropDownID = "match-activity-instructions"
+                    setTimeoutOnMount = {6000}
                 />
             </div>
           : null 

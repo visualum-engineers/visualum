@@ -1,0 +1,74 @@
+.info-btn-container{
+    position: relative;
+    width: 1rem;
+    z-index: 3;
+    @keyframes show-instructions{
+        from {width: 0px; height: 0px; font-size: 0px; opacity:0}
+        50% {height: auto; width: 10rem; font-size: 0.8rem; opacity:0;}
+        to{opacity: 1;}
+    }
+    @keyframes hide-instructions{
+        from {height: auto; width:10rem; font-size: 0.8rem; opacity: 1}
+        50% {height: auto; width:10rem; font-size: 0.8rem; opacity:0;}
+        to{width: 0px; height: 0px; font-size: 0px;}
+    }
+    
+    button{
+        @include remove-btn-default;
+        z-index: 2;
+        font-size: 1.2rem;
+        line-height: 0;
+        padding: 0;
+        @include border-radius(10px)
+    }
+
+    .instructions{
+        position: absolute;
+        @include border-radius(5px);
+        @include box-shadow(0px 0px 2px 0px #000000);
+        top:2rem;
+        left:-4.7rem;
+        color: $label-font-color;
+        opacity: 0;
+        width: 0px;
+        height: 0px;
+        font-size: 0px;
+        animation: hide-instructions 0.4s ease-in 0s 1 normal;
+        z-index: 3;
+        padding: 1rem;
+        text-align: justify;
+        p{
+            line-height: 1.15rem;
+        }
+        
+    }
+    .info-triangle{
+        position: absolute;
+        top:-0.6rem;
+        left: 4.6rem;
+        width: 0;
+        height: 0;
+        border-left: 0.6rem solid transparent;
+        border-right: 0.6rem solid transparent;
+        border-bottom: 0.6rem solid $activities-bg-color;
+        z-index: 2
+    }
+    .info-triangle-2{
+        position: absolute;
+        top:-0.6rem;
+        left: 4.6rem;
+        width: 0;
+        height: 0;
+        border-left: 0.6rem solid transparent;
+        border-right: 0.6rem solid transparent;
+        border-bottom: 0.6rem solid black;
+    }
+    
+    .instructions-show{
+        opacity: 1;
+        font-size: 0.8rem;
+        height: auto;
+        width: 10rem;
+        animation: show-instructions 0.4s ease-in 0s 1 normal;
+    }
+}
