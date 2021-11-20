@@ -5,7 +5,6 @@ const assignmentData = {
     1: {
         type: "matching",
         timer: {hours: 1, minutes: 1, seconds: 1},
-
         keyPairs: [
             {categoryID: 1, name: "Arky"},
             {categoryID: 2, name: "Luis"},
@@ -45,9 +44,9 @@ const assignmentData = {
             {id:"2", content:"Good"},
             {id:"3", content:"Nice" },
             {id:"4", content:"Duh" },
-            {id:"5",content:"Bruh"},
-            {id:"6",content:"Yuh" },
-            {id:"7",content:"Fuh" },
+            {id:"5", content:"Bruh"},
+            {id:"6", content:"Yuh" },
+            {id:"7", content:"Fuh" },
         ]
     },
     //short answer

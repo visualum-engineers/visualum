@@ -9,7 +9,7 @@ const SecondarySideBar = (props) =>{
                 aria-hidden ={!props.sidebarToggle}
             >
         
-            <div className="secondary-sidebar-header d-flex align-items-end justify-content-center">
+            <div className="secondary-sidebar-header d-flex justify-content-center align-items-center">
                 <a href="/" aria-hidden ={!props.sidebarToggle} tabIndex ={!props.sidebarToggle?"-1": "0"}>
                     <img className="secondary-sidebar-visualum-logo" 
                         src={Logo} 
