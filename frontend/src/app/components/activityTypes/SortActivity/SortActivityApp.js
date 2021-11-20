@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from 'react'
-import DroppableArea from './DroppableArea'
+//import DroppableArea from './DroppableArea'
+import DroppableArea from '../DragAndDrop/DroppableArea';
 import {DragDropContext} from 'react-beautiful-dnd';
 import useWindowWidth from '../../../hooks/use-window-width';
 /*Note Missing To-do
@@ -23,21 +24,20 @@ const transformData = (data, wordBankColumns) =>{
     newData["wordBank"] = {}
     newData["answerChoices"] = {}
     newData["allWordBankItems"] ={}
-    //console.log(data)
     if(!data.wordBank){
         for(let i of data.categories) newData["categories"][i.name] = []
         
         for(let i=0; i<wordBankColumns; i++){
-            const elementsPresent = (data.answers.length)%wordBankColumns === 0 ? (data.answers.length)/wordBankColumns : Math.floor((data.answers.length)/wordBankColumns+1)
+            const elementsPresent = (data.answerChoices.length)%wordBankColumns === 0 ? (data.answerChoices.length)/wordBankColumns : Math.floor((data.answerChoices.length)/wordBankColumns+1)
             const startSlice = i * elementsPresent 
             const endSlice = (i+1) * elementsPresent
-            newData.wordBank["answerChoices-" + i] = data.answers.slice(startSlice, endSlice).map((answer) =>{
-                return {id:answer.id, content: answer.content}
+            newData.wordBank["answerChoices-" + i] = data.answerChoices.slice(startSlice, endSlice).map((answer) =>{
+                return {id: answer.id, content: answer.content}
             })
         }
         //keep a record of all items in word bank. 
         // Needed to create 2 or 3 columns based on screen size
-        for(let i of data.answers){
+        for(let i of data.answerChoices){
             newData.allWordBankItems[i.id] = {id: i.id, content: i.content}
             newData.answerChoices[i.id] = {id: i.id, content: i.content}
         }
@@ -152,7 +152,7 @@ const SortActivityApp = ({activityData, questionNum, activityID}) => {
     
     return (
     <>
-        <p className="instructions">Sort the following:</p>
+        <p className="sort-activity-instructions">Sort the following:</p>
         <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
                 {/* Renders sort categories */}
                 {rows.map((content, index) =>{
@@ -161,12 +161,19 @@ const SortActivityApp = ({activityData, questionNum, activityID}) => {
                     return (
                         <div className="d-flex w-100 justify-content-center" key={index}> 
                             {numCategories.slice(startSlice, endSlice).map((columnTitle)=> {
-                                return <DroppableArea 
-                                            windowWidth = {windowWidth}
-                                            key={columnTitle} 
-                                            id={columnTitle}
-                                            currAnswers={data.categories[columnTitle]}
-                                        />
+                                let header = <p>{columnTitle}</p>
+                                return (
+                                    <DroppableArea
+                                        key={columnTitle} 
+                                        id={columnTitle}
+                                        content = {data.categories[columnTitle]}
+                                        droppableClassName = {`sort-activity-sort-droppables ${windowWidth ? "":"small-screen"}`}
+                                        draggableClassName = {"sort-activity-answers-draggables"}
+                                        innerDroppableClassName ={"sort-activity-inner-droppable d-flex flex-column align-items-center"}
+                                        droppableHeader = {header}
+                                        draggingOverClass = {"sort-activity-dragging-over"}
+                                    />
+                                )
                             })} 
                         </div>
                 )})}
@@ -174,12 +181,15 @@ const SortActivityApp = ({activityData, questionNum, activityID}) => {
                 <div className="d-flex w-100 justify-content-center">
                     {Object.keys(data.wordBank).map((key) =>{
                         return (
-                            <DroppableArea 
-                                windowWidth = {windowWidth}
+                            <DroppableArea
                                 key={key}
-                                id={key} 
-                                wordBank = {true}
-                                currAnswers={data.wordBank[key]} 
+                                id = {key}
+                                content = {data.wordBank[key]}
+                                droppableClassName = {`sort-activity-itemBank-droppables ${windowWidth ? "":"small-screen"}`}
+                                draggableClassName = {"sort-activity-answers-draggables"}
+                                innerDroppableClassName ={"sort-activity-inner-droppable d-flex flex-column align-items-center"}
+                                draggingOverClass = {"sort-activity-dragging-over"}
+                                isDraggingClass = {"sort-activity-is-dragging"}
                             />
                         )
                     })}

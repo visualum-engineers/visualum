@@ -1,3 +1,15 @@
+@import "./matchActivityBreakpoints";
+
+// .match-activity-header{
+//     background-color: white;
+//     min-width: 10rem;
+//     width: 30%;
+//     @include border-radius(8px);
+//     @include box-shadow(rgba(0,0,0,0.1) 0px 0 10px);
+//     padding: 1rem;
+//     margin-bottom: 1.5rem;
+// }
+
 .match-activity-instructions{
     color: $label-font-color;
     button{
@@ -8,96 +20,170 @@
         background: black;
     }
     .instructions{
-        background-color: $activities-bg-color;
+        background-color: white;
+    }
+}
+.match-activity-timer-positioning{
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+}
+.match-activity-timer{
+    position: relative;
+    color: rgb(112, 112, 112);
+    font-weight: 500;
+    font-size: 0.9rem;
+    background-color: white;
+    min-width: 10rem;
+    width: 30%;
+    @include border-radius(8px);
+    @include box-shadow(rgba(0,0,0,0.1) 0px 0 10px);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+
+    .timer-counter{
+        @include border-radius(10px);
+        color: rgb(112, 112, 112);
+        font-weight: 600;
+        text-align: center;
+        position: relative;
+        margin-left: 2px;
+        margin-right: 2px;
+        padding: 3px 0px;
+        font-size: 0.75rem;
+        overflow: hidden;
+        min-width: 3rem;
+        z-index: 1;
+        margin-top: 1.1px;
+    }
+    // .timer-counter:before{
+    //     @include border-radius(10px);
+    //     @include anchor-top-left;
+    //     content: "";
+    //     position: absolute;
+    //     z-index: -1;
+    //     @include box-shadow(inset 0 0 2000px $label-font-color);
+    //     filter: blur(3.5px);
+    // }
+    .timer-btns{
+        @include remove-btn-default;
+        font-size: 12px;
+        color: $label-font-color;
+    }
+}
+.match-activity-itemBank{
+    margin-top: 1.5rem;
+    background-color: white;
+    @include border-radius(7px);
+    @include box-shadow(rgba(0,0,0,0.1) 0px 0 10px);
+    min-width: 310px;
+    
+}
+.match-activity-keys-column, .match-activity-itemBank-column-1{
+    margin-right: 0.5rem;
+    background-color: white;
+    @include border-radius(7px);
+    @include box-shadow(rgba(0,0,0,0.1) 0px 0 10px);
+    min-width: 150px;
+    .last-item{
+        margin: 0;
+    }
+}
+.match-activity-answers-column, .match-activity-itemBank-column-2{
+    position: relative;
+    @extend .match-activity-keys-column;
+    margin-right: 0;
+}
+
+.match-activity-itemBank-column-1,
+.match-activity-itemBank-column-2{
+    background-color: rgba(0, 0,0,0);
+    @include box-shadow(none);
+    .match-activity-answers-droppables{
+        border: 1px solid rgba(0,0,0,0);
+        height: 100%;
+        min-height: 8rem;
+    }
+    .match-activity-inner-droppable{
+        list-style-type: none;
+        padding: 1rem;
+        min-height: 8rem;
+    }
+    .match-activity-draggables{
+        margin-bottom: 1rem;
+    }
+    .match-activity-draggables:hover{
+        margin-bottom: 1rem;
+    }
+}
+.match-activity-keys{
+    @extend .match-activity-answers-droppables;
+    padding: 0 1rem;
+    p{
+        margin: 0;
+        @extend .match-activity-draggables;
+    }
+    p:hover{
+        opacity: 1 !important;
+        background-color: #dbedfd !important;
+        border: 1px solid rgba(0, 0,0,0) !important;
+    }
+    
+}
+
+.match-activity-answers-droppables{
+    list-style-type: none;
+    margin-bottom: 2rem;
+    min-width: 145px;
+    height: 5rem;
+}
+.match-activity-itemBank-droppables{
+    @extend .match-activity-answers-droppables;
+    margin-bottom: 0;
+    .match-activity-inner-droppable{
+        margin: 0;
+        min-height: 6rem;
     }
 }
 
-.match-activity-timer{
-    position: relative;
-    color: $label-font-color;
-}
-.match-activity-timer .timer-counter{
-    @include border-radius(10px);
-    color: $label-font-color;
-    text-align: center;
-    position: relative;
-    margin-left: 7px;
-    margin-right: 2px;
-    padding: 3px 0px;
-    font-size: 12px;
-    overflow: hidden;
-    min-width: 70px;
-    z-index: 1;
+.match-activity-inner-droppable{
+    list-style-type: none;
+    padding: 0 1rem;
 }
 
-.match-activity-timer .timer-counter:before{
-    @include border-radius(10px);
-    @include anchor-top-left;
-    content: "";
-    position: absolute;
-    z-index: -1;
-    @include box-shadow(inset 0 0 2000px $label-font-color);
-    filter: blur(3.5px);
+.match-activity-draggable-over{
+    //background-color: #c6e3ff;
+    background-color: rgb(179, 179, 179);
 }
-.match-activity-timer .timer-btns{
-    @include remove-btn-default;
-    font-size: 12px;
-    color: $label-font-color;
-}
-.gridLayout{
-    margin-top: 10px;
-}
-.tile{
-    display: inline-block;
-    position: relative;
-}
-.tile::after{
-    padding: 50%;
-    display: block;
-    content: ""; 
-}
-.gridTiles{
-    @include anchor-top-left;
-    @include border-radius(15px);
-    @include no-space;
-    position: absolute;
-    cursor: grab;
-    color: $label-font-color;
-    font-size: 71%;
-    border: 1px $label-font-color solid;
+
+.match-activity-draggables{
+    background-color: #dbedfd;
+    text-align: center;
+    //border: 1px black solid;
+    list-style-type: none;
+    min-height: 4.5rem;
+    height: 4.5rem;
+    width: 100%;
+    min-width: 140px;
     overflow-x: hidden;
     overflow-y: auto;
-}
-
-.gridTiles::-webkit-scrollbar{
-    width: 14px;
-    margin-right: 10px;
-}
-
-.gridTiles::-webkit-scrollbar-thumb{
-    @include border-radius(10px);
-    border: 5px solid rgba(0, 0, 0, 0);
-    background-clip: padding-box;
-    background-color: white;
-}
-.gridTiles:hover, .gridTiles.hover{
-    background-color: $label-font-color;
-    color: $label-font-color;
-}
-.gridTiles.active, .gridTiles:active{
-    pointer-events: none;
-    background-color: rgba(255,255,255,0.60);
-    color: $label-font-color;
-    z-index:2;
-    border: 1px rgb(39, 39, 39) solid;
-}
-.gridTiles p{
-    @include no-space;
     overflow-wrap: break-word;
-    width: 50px;
+    @include border-radius(5px);
+    @include box-shadow(rgba(0,0,0,0.1) 0px 0 10px);
+    border: 1px solid rgba(0, 0,0,0);
 }
-.emptyTile{
-    @include anchor-top-left;
-    @include border-radius(15px);
-    position: absolute;
+
+.match-activity-dragging{
+    //background-color: none;
+    opacity: 0.8;
+    color: black;
+    margin-bottom: 0rem;
+    background-color: white;
+    border: 1px solid black;
+}
+.match-activity-draggables.last-item{
+    margin-bottom: 0 !important;
+}
+.match-activity-draggables:hover{
+    @extend .match-activity-dragging;
 }

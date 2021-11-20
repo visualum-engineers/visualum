@@ -1,0 +1,25 @@
+@mixin match-activity-lg{
+    .match-activity-keys-column, 
+    .match-activity-answers-column, 
+    .match-activity-itemBank-column-1,
+    .match-activity-itemBank-column-2{
+        padding: 3rem;
+    }
+}
+@mixin match-activity-md {
+    .match-activity-keys-column, 
+    .match-activity-answers-column, 
+    .match-activity-itemBank-column-1,
+    .match-activity-itemBank-column-2{
+        padding: 2.5rem 2rem;
+    }
+}
+@mixin match-activity-sm{
+    .match-activity-keys-column, 
+    .match-activity-answers-column, 
+    .match-activity-itemBank-column-1,
+    .match-activity-itemBank-column-2{
+        padding: 2rem 0.5rem;
+        font-size: 0.75rem;
+    }
+}

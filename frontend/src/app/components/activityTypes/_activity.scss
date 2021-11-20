@@ -11,10 +11,10 @@
 .activity-body{
     @include no-space;
     @include transition(all 0.3s ease-out);
-    background-color: #F8F8F8;
-    height: 100vh;
-    min-height: 600px;
+    background-color: $activities-bg-color;
+    height: 100%;
     position: relative;
+    min-height: max(100vh, 650px);
 }
 .activity-body.secondary-sidebar-open{
     margin-left: 15rem; 
@@ -34,6 +34,7 @@
     padding: 0 2rem;
     height: 3rem;
     z-index: 2;
+    background-color: $activities-bg-color !important;
     .back-button-container {
         .back-button {
             height: 100%;
@@ -51,26 +52,49 @@
         color: $label-font-color;
         padding: 0 1rem;
         @include border-radius(5px);
+        @include transition(all 0.3s ease-out);
         &:hover, &:focus{
             cursor: pointer;
             @include activities-nav-navItems-hover();
             color: $label-font-color;
         }
-        @include transition(all 0.3s ease-out)
+        
 
     }
 }
+.activities-sidebar-btn{
+    @include remove-btn-default;
+    @include border-radius(7px);
+    @include box-shadow(0 0 3px rgba(0, 0, 0, 1));
+    padding: 1rem;
+    margin-bottom: 0;
+    background-color: rgba(58,19,208);
+    color: white;
+    width: 65%;
+    margin-bottom: 2.7rem;
+    margin-top: 1rem;
+    @include transition(all 0.3s ease-out);
+    
+    &:hover{
+        transform: scale(1.1);
+    }
+}
+
+// .activities-sidebar-link{
+
+// }
 
 .activity-type-container{
     @include border-radius(25px);
     position: relative;
-    margin-top: 2rem;
+    margin-top: 3rem;
     padding: 20px;
     text-align: center;
-    min-height: 80vh;
+    min-height: max(80vh, 400px);
     z-index: 1;
     max-width: 840px;
     overflow: hidden;
+    min-width: 310px;
 }
 .nav-activity-btns{
     z-index: 1;

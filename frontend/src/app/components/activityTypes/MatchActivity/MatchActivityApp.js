@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
-import Timer from "./Timer"
-// import {DragDropContext} from 'react-beautiful-dnd';
-// import useWindowWidth from '../../../hooks/use-window-width'
+import Timer from '../../timer/Timer';
+import {DragDropContext} from 'react-beautiful-dnd';
+//import useWindowWidth from '../../../hooks/use-window-width'
 import MoreInfoBtn from '../../moreInfoBtn/MoreInfoBtn';
+import DroppableArea from "../DragAndDrop/DroppableArea"
 /*
 To-dos
 Backend: 
@@ -13,86 +14,238 @@ Frontend:
     2. Missing progress saved on local storage/memory (if user exits out of page)
 */
 
-//shuffles our given pairs order
-// const shuffleItems = (array) => {   
-//     let currentIndex = array.length,  randomIndex;
-//     // While there remain elements to shuffle...
-//     while (currentIndex !== 0) {
-//         // Pick a remaining element...
-//         randomIndex = Math.floor(Math.random() * currentIndex);
-//         currentIndex--;
-
-//         // And swap it with the current element.
-//         [array[currentIndex], array[randomIndex]] = [
-//         array[randomIndex], array[currentIndex]];
-//     }
-//     return array;
-// }
-//to render the closest square looking shape that exists for these tiles
-//will return an array. 1st value is row, 2nd value, is columns
-// const nearestSquare = (array) =>{
-//     //check if a square exists
-//     //round up if no perfect square
-//     const sqrt = (array.length**0.5) % 1 === 0 ? array.length**0.5 : Math.floor(array.length**0.5 + 1) 
-//     //if no square, decrement column by 1
-//     //and check if its too small to fit all tiles.
-//     if (sqrt**2 === array.length) return [sqrt, sqrt]
-//     if (sqrt * (sqrt-1) < array.length) return  [sqrt, sqrt]
-//     else return [sqrt, sqrt-1]
-// }
+const transformData = (data, itemBankColumns) =>{
+        let newData = {}
+        //on mount (initial data loaded)
+        newData["keyPairs"] = {}
+        newData["itemBank"] = {}
+        newData["answerChoices"] = {}
+        newData["allItems"] = {}
+        newData["categoryIDs"]= {}
+        newData.timer = data.timer
+        if(!data.itemBank){
+            for(let i of data.keyPairs) {
+                newData["keyPairs"][i.name] = []
+                //generate key-pars sorting both category id, and i name.
+                //This assumes both are unique! (which it should be)
+                newData.categoryIDs[i.categoryID] = i.name
+                newData.categoryIDs[i.name] = i.categoryID
+            }
+            
+            for(let i=0; i<itemBankColumns; i++){
+                const elementsPresent = (data.answerChoices.length)%itemBankColumns === 0 ? (data.answerChoices.length)/itemBankColumns : Math.floor((data.answerChoices.length)/itemBankColumns+1)
+                const startSlice = i * elementsPresent 
+                const endSlice = (i+1) * elementsPresent
+                newData.itemBank["answerChoices-" + i] = data.answerChoices.slice(startSlice, endSlice).map((answer) =>{
+                    return {id: answer.id, content: answer.content}
+                })
+            }
+            //keep a record of all items in word bank. 
+            // Needed to create 2 or 3 columns based on screen size
+            for(let i of data.answerChoices){
+                newData.allItems[i.id] = {id: i.id, content: i.content}
+                newData.answerChoices[i.id] = {id: i.id, content: i.content}
+            }
+            
+        }
+        //when data was already transformed on mount 
+        else {
+            for(let i of Object.keys(data.keyPairs)) {
+                newData["keyPairs"][i] = [...data.keyPairs[i]]
+            }
+                
+            for(let i=0; i<itemBankColumns; i++){
+                const keys = Object.keys(data.allItems)
+                const elementsPresent = (keys.length)%itemBankColumns === 0 ? (keys.length)/itemBankColumns : Math.floor((keys.length)/itemBankColumns+1)
+                const startSlice = i * elementsPresent 
+                const endSlice = (i+1) * elementsPresent
+                newData["itemBank"]["answerChoices-" + i] = keys.slice(startSlice, endSlice).map((answer) =>{
+                    return data.answerChoices[answer]
+                })
+            }
+            newData["allItems"] = {...data.allItems}
+            newData["answerChoices"] = {...data.answerChoices}
+            newData["categoryIDs"] = {...data.categoryIDs}
+        }
+        
+        return newData
+}
 
 const MatchActivityApp = ({activityData, questionNum, activityID}) => {
-    const [state, setState] = useState(activityData)
-    
+    //const windowWidth = useWindowWidth()
+    //const columns = windowWidth ? Array(2).fill(0) : Array(1).fill(0)
+    const [data, setData] = useState(transformData(activityData, 2))
     //if it exists, grab info from local storage on mount.
     useEffect(() => {
         //on mount check local storage for data
         let stored = localStorage.getItem(`${activityID}-match_activity_client_answer-${questionNum}`)
         if(!stored) return
-        setState(JSON.parse(stored))
+        setData(JSON.parse(stored))
     }, [activityID, questionNum])
-    
-    // const onTouchStart = () =>{
-        
-    // }
-    // const onStart = (e) =>{
-       
+    // //handle width resizing
+    // useEffect(() => {
+    //     setData((data) => transformData(data, columns.length))
+    // }, [windowWidth, columns.length])
 
-    // }
-    // const onDrag = (e) =>{
+    //when dragging starts
+    const onDragStart = (e) =>{
+        //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
+        document.querySelector("html").classList.add("sortActivityActive")
+    }
+    //while dragging
+    const onDragUpdate = (e) =>{
         
-    // }
-    // const onStop = (e) => {
-    //     let newMatchList = {}
-    //     let newShuffleList = {}
-    //     let store = [newMatchList, newShuffleList]
-    //     localStorage.setItem(`${activityID}-match_activity_client_answer-${questionNum}`, JSON.stringify(store))
-    // }  
+    }
+    //when dragging stops
+    const onDragEnd = (result) =>{
+        //to re-enable smooth scrolling for the remainder of the pages
+        document.querySelector("html").classList.remove("sortActivityActive")
+        //setup
+        const {destination, source, draggableId} = result
+        //means that nothing has changed
+        if(!destination) return
+        if(destination.droppableId === source.droppableId && destination.index === source.index) return
+        //start and end containers
+        const answerChoiceTestEl = (el) => /answerChoices.*/.test(el)
+        const start = answerChoiceTestEl(source.droppableId) ? source.droppableId : data.categoryIDs[source.droppableId]
+        const finish = answerChoiceTestEl(destination.droppableId) ? destination.droppableId : data.categoryIDs[destination.droppableId]
+
+        const startContainerType = answerChoiceTestEl(start) ? "itemBank" : "keyPairs"
+        const finishContainerType = answerChoiceTestEl(finish) ? "itemBank" : "keyPairs"
+        //setup
+        const startAnswersList = Array.from(answerChoiceTestEl(start) ? data.itemBank[start] : data.keyPairs[start])
+        const finishAnswersList = Array.from(answerChoiceTestEl(finish) ? data.itemBank[finish] : data.keyPairs[finish])
+        const sameContainer = start===finish
+        let newState
+        startAnswersList.splice(source.index, 1)
+        
+        //list container are same 
+        //remove el from old index, add to new index
+        if(sameContainer){
+            startAnswersList.splice(destination.index, 0, data.answerChoices[draggableId]);
+            newState = {
+                ...data,
+                [startContainerType]: {
+                    ...data[startContainerType],
+                    [start]: startAnswersList,
+                }
+            }
+        } 
+        //list containers are different - move elements into the new container, and remove them from old one
+        else {
+            finishAnswersList.splice(destination.index, 0, data.answerChoices[draggableId]);
+            newState = startContainerType===finishContainerType ? {
+                ...data,
+                [startContainerType]:{
+                    ...data[startContainerType],
+                    [start] : startAnswersList,
+                    [finish] : finishAnswersList,
+                },
+            }
+            : {
+                ...data,
+                [startContainerType]:{
+                    ...data[startContainerType],
+                    [start] : startAnswersList,
+                },
+                [finishContainerType] : {
+                    ...data[finishContainerType],
+                    [finish] : finishAnswersList,
+                }
+            }
+        } 
+        //console.log(start, finish, data.categoryIDs[start], data)
+        //maintain itembank across resize, since we have to generate multiple columns
+        if(startContainerType==="itemBank") delete newState.allItems[draggableId]
+        if(finishContainerType==="itemBank") newState.allItems[draggableId] = data.answerChoices[draggableId]
+        
+        //update state
+        setData(newState)
+        localStorage.setItem(`${activityID}-match_activity_client_answer-${questionNum}`, JSON.stringify(newState))
+    }
     
     return(
         <>
-        <div className="match-activity-header">
-                
+        <div className="d-flex justify-content-center">
+            <div className="match-activity-header d-flex justify-content-center">
+                {data.timer ?
+                    <div className="match-activity-timer d-flex justify-content-center align-items-center">
+                        <span>TIME:</span>
+                        <Timer
+                            timer={data.timer}
+                            autoStart={false}
+                        />
+                    </div>
+                : null 
+                }
+            </div>    
         </div>
-        <p className="matchInstruction">Find the Match!</p>
-        {  state["timer"] ?
-            <div className="match-activity-timer d-flex justify-content-center align-items-center">
-                <span>Time Left: </span>
-                <Timer
-                    timer={state.timer}
-                    autoStart={false}
-                />
-                <MoreInfoBtn 
-                    textContent = "Match the items in the word bank with those on the left column. The items can be dragged, or moved with the keyboard"
-                    customContainerClass = "match-activity-instructions"
-                    customContainerAriaLabel = "activity-instructions"
-                    customDropDownID = "match-activity-instructions"
-                    setTimeoutOnMount = {6000}
-                />
+        
+        <DragDropContext onDragEnd = {onDragEnd} onDragUpdate={onDragUpdate} onDragStart={onDragStart}>
+            <div className="match-activity-columns d-flex justify-content-center">
+                <div className="match-activity-keys-column w-50 d-flex flex-column align-items-center">
+                    {Object.keys(data.keyPairs).map((content,index)=>{
+                        let last = index===Object.keys(data.keyPairs).length-1
+                        return (
+                            <div key={index} className={`match-activity-keys w-100 d-flex align-items-center justify-content-center ${last? "last-item":""}`}>
+                                <p className="w-100 d-flex flex-column justify-content-center align-items-center">{content}</p>
+                            </div>
+                        )
+                    })}
+                </div>
+            
+                <div className="match-activity-answers-column w-50 d-flex flex-column align-items-center">
+                <div className="match-activity-timer-positioning">
+                    <MoreInfoBtn 
+                        textContent = "Match the items in the word bank with those on the left column. The items can be dragged, or moved with the keyboard"
+                        customContainerClass = "match-activity-instructions"
+                        customContainerAriaLabel = "activity-instructions"
+                        customDropDownID = "match-activity-instructions"
+                        setTimeoutOnMount = {5000}
+                    />
+                </div>
+                    {Object.keys(data.keyPairs).map((content, index)=>{
+                        let last = index===Object.keys(data.keyPairs).length-1
+                        return (
+                            <DroppableArea 
+                                key={data.categoryIDs[content]} 
+                                id={data.categoryIDs[content]}
+                                content = {data.keyPairs[content]}
+                                droppableClassName = {`match-activity-answers-droppables w-100 ${last? "last-item":""}`}
+                                draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
+                                innerDroppableClassName = {"match-activity-inner-droppable w-100 h-100 d-flex flex-column justify-content-center align-items-center"}
+                                draggingOverClass={"match-activity-draggable-over"}
+                                isDraggingClass={"match-activity-dragging"}
+                            />
+                        )
+                    })}
+                </div>
             </div>
-          : null 
-        }
-        </>
+
+            <div className="d-flex justify-content-center">
+                <div className="match-activity-itemBank w-100 d-flex justify-content-center">
+
+                    {Object.keys(data.itemBank).map((key, index)=>{
+                        let last = index===Object.keys(data.itemBank).length-1
+                        return (
+                            <div key={key} className={`match-activity-itemBank-column-${index+1} w-50 d-flex flex-column align-items-center`}>
+                                <DroppableArea 
+                                    id={key}
+                                    content = {data.itemBank[key]}
+                                    droppableClassName = {`match-activity-itemBank-droppables w-100 ${last? "last-item":""}`}
+                                    draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
+                                    innerDroppableClassName = {"match-activity-inner-droppable w-100  d-flex flex-column justify-content-center align-items-center"}
+                                    draggingOverClass={"match-activity-draggable-over"}
+                                    isDraggingClass = {"match-activity-dragging"}
+                                />
+                            </div>
+                        )
+                    })}
+                </div>
+            </div>
+        </DragDropContext>
+        
+     </>
     )
 }
 export default MatchActivityApp

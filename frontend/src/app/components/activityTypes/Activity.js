@@ -27,9 +27,11 @@ const Activity = () =>{
     const windowWidth = useWindowWidth(992)
     //when window width changes <992, sidebar automatically closes
     //it can still be opened though
-    useEffect(()=>{
+    useEffect(()=>{ 
         if(!windowWidth) setSidebarToggle(false)
+        else setSidebarToggle(true)
     },[windowWidth])
+
     const onNavBtnClick = (e) =>{
         const btnType = e.target.closest("button").getAttribute("btntype")
         //different btn actions
@@ -65,18 +67,18 @@ const Activity = () =>{
         <SlimNavbar type={"activities-nav"} />
         <SecondarySideBar 
                 data={[
-                    {type:"btn", textContent: "Home", styles:"secondary-sidebar-home-btn"},
-                    {type:"link", textContent: "Contacts", url: "/", styles:""},
-                    {type:"link", textContent: "Settings", url: "/"},
-                    {type:"link", textContent: "Feedback", url: "/"},
+                    {type:"btn", textContent: "Home", styles:"activities-sidebar-btn"},
+                    {type:"link", textContent: "No", url: "/", styles:"activities-sidebar-link"},
+                    {type:"link", textContent: "Contacts", url: "/", styles:"activities-sidebar-link"},
+                    {type:"link", textContent: "Feedback", url: "/", styles:"activities-sidebar-link"},
                 ]}
                 sidebarToggle = {sidebarToggle}
                 handleSideBar = {handleSideBar}
                 windowWidth = {windowWidth}
+                customFooterLinkClass = {"activities-sidebar-link"}
         />
         
-        
-        <div className = {`${sidebarToggle && windowWidth?"secondary-sidebar-open": ""} activity-body row flex-column align-items-center`}>
+        <div className = {`${sidebarToggle && windowWidth?"secondary-sidebar-open": ""} activity-body row flex-column justify-content-center align-items-center`}>
             {/* <img src = {activeActivityBg} className="active-activity-bg" alt="planet and stars background"/> */}
             <div className = "activity-type-container col-11 col-md-9 col-lg-7 col-xl-6 d-flex flex-column justify-content-center">
                 {/*generate entire form data*/}
@@ -94,9 +96,9 @@ const Activity = () =>{
                             >
                                 <div style={{...defaultTransition}} className="question-transition-container d-flex flex-column justify-content-center ">
                                     {activityData[key].type === "sort" ? <SortActivityApp activityData = {activityData[key]} questionNum = {questionNum} activityID = {activityData.activityID}/>
-                                    : activityData[key].type === "matching" ? <MatchActivityApp activityData = {activityData[key]} questionNum = {questionNum}/>
-                                    : activityData[key].type === "shortAnswer" ? <ShortAnswerApp activityData = {activityData[key]} questionNum = {questionNum}/>
-                                    : activityData[key].type === "multipleChoice"? <MultipleChoiceApp activityData = {activityData[key]} questionNum = {questionNum}/>
+                                    : activityData[key].type === "matching" ? <MatchActivityApp activityData = {activityData[key]} questionNum = {questionNum} activityID = {activityData.activityID}/>
+                                    : activityData[key].type === "shortAnswer" ? <ShortAnswerApp activityData = {activityData[key]} questionNum = {questionNum} activityID = {activityData.activityID}/>
+                                    : activityData[key].type === "multipleChoice"? <MultipleChoiceApp activityData = {activityData[key]} questionNum = {questionNum} activityID = {activityData.activityID}/>
                                     :<p>Hi</p>}
                                 </div>
 

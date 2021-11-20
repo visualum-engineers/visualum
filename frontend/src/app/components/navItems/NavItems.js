@@ -13,7 +13,7 @@ const NavItem = ({sidebar=false, url=false, handleSideBar=false, btn=false, text
                         aria-hidden = {hidden}
                         tabIndex={`${hidden ? "-1":"0"}`}
                     >
-                            <p>{textContent}</p>
+                            <span>{textContent}</span>
                     </a>
                     :
                     <button
@@ -22,7 +22,7 @@ const NavItem = ({sidebar=false, url=false, handleSideBar=false, btn=false, text
                         aria-hidden = {hidden}
                         tabIndex={`${hidden ? "-1":"0"}`}
                     >
-                        <p>{textContent}</p>
+                        <span>{textContent}</span>
                     </button>
                 :
                 <button 
@@ -32,7 +32,7 @@ const NavItem = ({sidebar=false, url=false, handleSideBar=false, btn=false, text
                     aria-hidden = {hidden}
                     tabIndex={`${hidden ? "-1":"0"}`}
                 >
-                        <p>{textContent}</p>
+                        <span>{textContent}</span>
                 </button>
             }
         </>

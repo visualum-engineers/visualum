@@ -5,7 +5,7 @@ const SecondarySideBar = (props) =>{
     <>
         <div 
                 aria-label ="sidebar" 
-                className={`d-flex flex-column sidebar-nav secondary-sidebar-nav fixed-top ${props.sidebarToggle ?"sidebar-right":"sidebar-left"}`}
+                className={`${props.sidebarToggle ?"sidebar-right":"sidebar-left"} ${props.customSidebarClass ? props.customSidebarClass: ""} d-flex flex-column sidebar-nav secondary-sidebar-nav fixed-top `}
                 aria-hidden ={!props.sidebarToggle}
             >
         
@@ -39,8 +39,8 @@ const SecondarySideBar = (props) =>{
                 
             </div>
             <div className="secondary-sidebar-footer d-flex flex-column align-items-center justify-content-end flex-grow-1">
-                <NavItem textContent={"Settings"} sidebar={"secondary"} url={"/"} hidden = {!props.sidebarToggle}/>
-                <NavItem textContent={"Help Center"} sidebar={"secondary"} url={"/"} hidden = {!props.sidebarToggle}/>
+                <NavItem textContent={"Settings"} sidebar={"secondary"} url={"/"} hidden = {!props.sidebarToggle} styles={props.customFooterLinkClass}/>
+                <NavItem textContent={"Help Center"} sidebar={"secondary"} url={"/"} hidden = {!props.sidebarToggle} styles={props.customFooterLinkClass}/>
             </div>
             
         </div>
