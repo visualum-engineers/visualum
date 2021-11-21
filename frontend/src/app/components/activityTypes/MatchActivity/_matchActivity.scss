@@ -11,15 +11,15 @@
     }
     .instructions{
         background-color: white;
-        left: -8rem;
+        left: -8.4rem;
     }
     .info-triangle{
-        left: 8rem;
+        left: 8.4rem;
         top:  -0.54rem;
     }
     .info-triangle-2{
         top:-0.59rem;
-        left: 8rem;
+        left: 8.4rem;
     }
 
 }
@@ -221,7 +221,10 @@
 .match-activity-draggable-over{
     background-color: rgb(179, 179, 179);
 }
-
+.match-activity-tap-active:hover{
+    cursor: pointer;
+    background-color: rgb(179, 179, 179)
+}
 .match-activity-draggables.hide-draggable{
     opacity: 0;
     visibility: hidden;

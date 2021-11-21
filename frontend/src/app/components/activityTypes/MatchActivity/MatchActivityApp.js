@@ -9,9 +9,6 @@ To-dos
 Backend: 
     1. Missing updating the backend with partial completion of assignment
     2. Missing updating the backend with grade after completion
-Frontend:
-    1. Add animation transition when elements are removed 
-    2. Missing progress saved on local storage/memory (if user exits out of page)
 */
 
 const transformData = (data, itemBankColumns) =>{
@@ -75,7 +72,10 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
     //const windowWidth = useWindowWidth()
     //const columns = windowWidth ? Array(2).fill(0) : Array(1).fill(0)
     const [data, setData] = useState(transformData(activityData, 2))
+    const [disableDnD,setDisableDnD] = useState(true)
+    const [firstTapEl, setFirstTapEl] = useState(null)
     const removedEl = useRef(null)
+   
     //if it exists, grab info from local storage on mount.
     useEffect(() => {
         //on mount check local storage for data
@@ -92,6 +92,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
     const onDragStart = (result) =>{
         //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
         document.querySelector("html").classList.add("sortActivityActive")
+
     }
     //while dragging
     const onDragUpdate = (result) =>{
@@ -210,25 +211,68 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
         setData(newState)
         localStorage.setItem(`${activityID}-match_activity_client_answer-${questionNum}`, JSON.stringify(newState))
     }
-    
+    const onTap = (e) =>{
+        //update the first element
+        let droppableSelected = null
+        let currListItem = e.target.closest(".match-activity-draggables")
+        if(!currListItem) {
+            droppableSelected = true
+            currListItem = e.target.closest(".match-activity-inner-droppable")
+        }
+        //used when two list items are clicked, and not an empty droppable
+        const droppableId = currListItem.dataset.tapDroppableId
+        const draggableIndex = currListItem.dataset.index
+        const firstDraggableId = currListItem.dataset.tapDraggableId
+        
+        if(!firstTapEl) {
+            setFirstTapEl({
+                droppableId: droppableId,
+                draggableId: firstDraggableId,
+                draggableIndex: draggableIndex
+            })
+            currListItem.classList.add("match-activity-dragging")
+            return
+        }
+        //update the second element, and perform tap logic
+        const draggableId = firstTapEl.draggableId
+        const source = {
+            droppableId: firstTapEl.droppableId,
+            index: firstTapEl.draggableIndex
+        }
+        const destination = {
+            droppableId: droppableId,
+            index: droppableSelected ? 0 : draggableIndex,
+        }
+        const result={
+            source: source,
+            destination: destination,
+            draggableId: draggableId
+        }
+        document.getElementById("dragItem"+firstTapEl.draggableId).classList.remove("match-activity-dragging")
+        onDragEnd(result)
+        setFirstTapEl(null)
+    }
+
     return(
         <>
         <div className="d-flex justify-content-center">
-            <div className="match-activity-header d-flex justify-content-center">
-                {data.timer ?
-                    <div className="match-activity-timer d-flex justify-content-center align-items-center">
-                        <span>TIME:</span>
-                        <Timer
-                            timer={data.timer}
-                            autoStart={false}
-                        />
-                    </div>
-                : null 
-                }
-            </div>    
+            {data.timer ?
+                <div className="match-activity-timer d-flex justify-content-center align-items-center">
+                    <span>TIME:</span>
+                    <Timer
+                        timer={data.timer}
+                        autoStart={false}
+                    />
+                </div>
+            : null 
+            }
         </div>
         
-        <DragDropContext onDragEnd = {onDragEnd} onDragUpdate={onDragUpdate} onDragStart={onDragStart}>
+        <DragDropContext 
+            onDragEnd = {!disableDnD ? onDragEnd: null} 
+            onDragUpdate={!disableDnD ? onDragUpdate: null} 
+            onDragStart={!disableDnD ? onDragStart: null}
+        >
             <div className="d-flex justify-content-center h-100">
                 <div className="match-activity-columns d-flex justify-content-center w-100">
                     <div className="match-activity-keys-column w-50 d-flex flex-column align-items-center">
@@ -255,15 +299,17 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
                         {Object.keys(data.keyPairs).map((content, index)=>{
                             let last = index===Object.keys(data.keyPairs).length-1
                             return (
-                                <DroppableArea 
+                                <DroppableArea
+                                    firstElTap = {firstTapEl} 
                                     key={data.categoryIDs[content]} 
                                     id={data.categoryIDs[content]}
                                     content = {data.keyPairs[content]}
                                     droppableClassName = {`match-activity-answers-droppables w-100 ${last? "last-item":""}`}
                                     draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
-                                    innerDroppableClassName = {"match-activity-inner-droppable w-100 h-100 d-flex flex-column justify-content-start align-items-center"}
+                                    innerDroppableClassName = {`${disableDnD && firstTapEl? "match-activity-tap-active": ""} match-activity-inner-droppable w-100 h-100 d-flex flex-column justify-content-start align-items-center`}
                                     draggingOverClass={"match-activity-draggable-over"}
                                     isDraggingClass={"match-activity-dragging"}
+                                    onTap={disableDnD? onTap: null}
                                 />
                             )
                         })}
@@ -279,14 +325,16 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
                         return (
                             <div key={key} className={`match-activity-itemBank-column-${index+1} w-50 d-flex flex-column align-items-center`}>
                                 <DroppableArea 
+                                    firstElTap = {firstTapEl} 
                                     id={key}
                                     content = {data.itemBank[key]}
                                     //droppableClassName = {`match-activity-itemBank-droppables w-100 ${last? "last-item":""}`}
-                                     droppableClassName = {`match-activity-itemBank-droppables w-100`}
+                                    droppableClassName = {`match-activity-itemBank-droppables w-100`}
                                     draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
-                                    innerDroppableClassName = {"match-activity-inner-droppable w-100 d-flex flex-column align-items-center"}
+                                    innerDroppableClassName = {`${disableDnD && firstTapEl? "match-activity-tap-active": ""} match-activity-inner-droppable w-100 d-flex flex-column align-items-center`}
                                     draggingOverClass={"match-activity-draggable-over"}
                                     isDraggingClass = {"match-activity-dragging"}
+                                    onTap={disableDnD? onTap: null}
                                 />
                             </div>
                         )
