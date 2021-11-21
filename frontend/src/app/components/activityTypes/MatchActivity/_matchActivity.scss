@@ -144,9 +144,7 @@
         height: min-content;
     }
     .match-activity-draggables{
-        margin-bottom: 1rem;
-    }
-    .match-activity-draggables:hover{
+        margin-top: 0;
         margin-bottom: 1rem;
     }
 }
@@ -164,6 +162,7 @@
     @include border-radius(5px);
     @include box-shadow(rgba(0,0,0,0.2) 0px 0 10px);
     border: 1px solid rgba(0, 0,0,0);
+    //@include transition(all 0.3s ease-out);
 }
 .match-activity-draggables:hover{
     @extend .match-activity-dragging;
@@ -171,7 +170,6 @@
 .match-activity-dragging{
     opacity: 0.8;
     color: black;
-    
     background-color: white;
     border: 1px solid black;
 }
@@ -215,12 +213,12 @@
 .match-activity-inner-droppable{
     list-style-type: none;
     padding: 0 1rem;
+    margin-bottom: 0;
     background-color: rgb(231, 231, 231);
     @include border-radius(7px)
 }
 
 .match-activity-draggable-over{
-    //background-color: #c6e3ff;
     background-color: rgb(179, 179, 179);
 }
 

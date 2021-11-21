@@ -202,7 +202,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
             }
         } 
         
-        //maintain itembank across resize, since we have to generate multiple columns
+        //maintain itembank across resize, if we have to generate multiple columns
         if(startContainerType==="itemBank") delete newState.allItems[draggableId]
         if(finishContainerType==="itemBank") newState.allItems[draggableId] = data.answerChoices[draggableId]
         
@@ -275,15 +275,16 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
                 <div className="match-activity-itemBank w-100 d-flex justify-content-center">
 
                     {Object.keys(data.itemBank).map((key, index)=>{
-                        let last = index===Object.keys(data.itemBank).length-1
+                        //let last = index===Object.keys(data.itemBank).length-1
                         return (
                             <div key={key} className={`match-activity-itemBank-column-${index+1} w-50 d-flex flex-column align-items-center`}>
                                 <DroppableArea 
                                     id={key}
                                     content = {data.itemBank[key]}
-                                    droppableClassName = {`match-activity-itemBank-droppables w-100 ${last? "last-item":""}`}
+                                    //droppableClassName = {`match-activity-itemBank-droppables w-100 ${last? "last-item":""}`}
+                                     droppableClassName = {`match-activity-itemBank-droppables w-100`}
                                     draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
-                                    innerDroppableClassName = {"match-activity-inner-droppable w-100  d-flex flex-column  align-items-center"}
+                                    innerDroppableClassName = {"match-activity-inner-droppable w-100 d-flex flex-column align-items-center"}
                                     draggingOverClass={"match-activity-draggable-over"}
                                     isDraggingClass = {"match-activity-dragging"}
                                 />
