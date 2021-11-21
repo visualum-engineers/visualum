@@ -86,7 +86,14 @@
     @extend .match-activity-keys-column;
     margin-right: 0;
 }
-
+.match-activity-answers-column{
+    .match-activity-inner-droppable{
+        overflow: hidden;
+    }
+    .match-activity-draggables{
+        margin-top: 0.25rem;
+    }
+}
 .match-activity-itemBank-column-1,
 .match-activity-itemBank-column-2{
     background-color: rgba(0, 0,0,0);
@@ -184,4 +191,7 @@
     background-color: rgb(179, 179, 179);
 }
 
-
+.match-activity-draggables.hide-draggable{
+    opacity: 0;
+    visibility: hidden;
+}

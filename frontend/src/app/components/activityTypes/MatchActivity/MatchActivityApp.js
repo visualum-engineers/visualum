@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import Timer from '../../timer/Timer';
 import {DragDropContext} from 'react-beautiful-dnd';
 //import useWindowWidth from '../../../hooks/use-window-width'
@@ -75,6 +75,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
     //const windowWidth = useWindowWidth()
     //const columns = windowWidth ? Array(2).fill(0) : Array(1).fill(0)
     const [data, setData] = useState(transformData(activityData, 2))
+    const removedEl = useRef(null)
     //if it exists, grab info from local storage on mount.
     useEffect(() => {
         //on mount check local storage for data
@@ -88,13 +89,45 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
     // }, [windowWidth, columns.length])
 
     //when dragging starts
-    const onDragStart = (e) =>{
+    const onDragStart = (result) =>{
         //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
         document.querySelector("html").classList.add("sortActivityActive")
     }
     //while dragging
-    const onDragUpdate = (e) =>{
+    const onDragUpdate = (result) =>{
+        const {destination, source} = result
+        //when dragging outside droppable container
+        if(!destination) {
+            // dont do anything if nothing is stored
+            if(!removedEl.current || !removedEl.current[0]) return
+            //unhide removed element, since there can only be 1 item in keyPairs at a time
+            document.getElementById("dragItem"+removedEl.current[0].id).classList.remove("hide-draggable")
+            removedEl.current = null
+            return
+        }
+        //when dragging inside same container
+        if(destination.droppableId === source.droppableId) {
+            if(!removedEl.current || !removedEl.current[0]) return
+            document.getElementById("dragItem"+removedEl.current[0].id).classList.remove("hide-draggable")
+            return
+        }
+        //when dragging between word bank
+        const answerChoiceTestEl = (el) => /answerChoices.*/.test(el)
+        //if dragging to another word bank container
+        if(answerChoiceTestEl(destination.droppableId)) return
         
+        //when dragging into a keypair container
+        const droppableName = data.categoryIDs[destination.droppableId]
+        const droppableList = [...data.keyPairs[droppableName]]
+        //restore visibility of old current value
+        if(removedEl.current && removedEl.current[0]){
+            document.getElementById("dragItem"+removedEl.current[0].id).classList.remove("hide-draggable")
+        }
+        //store name of keyPair, and value popped
+        removedEl.current = [droppableList.pop(), droppableName]
+        //add a class to hide current draggable in list.
+        if(!removedEl.current[0]) return 
+        document.getElementById("dragItem"+removedEl.current[0].id).classList.add("hide-draggable")
     }
     //when dragging stops
     const onDragEnd = (result) =>{
@@ -133,7 +166,17 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
         } 
         //list containers are different - move elements into the new container, and remove them from old one
         else {
-            finishAnswersList.splice(destination.index, 0, data.answerChoices[draggableId]);
+            //end container is a key pairs container
+            if(finishContainerType === "keyPairs"){
+                //remove previous answer in container, and add it to start container
+                if(finishAnswersList.length!==0) {
+                    const prevElement = finishAnswersList.splice(destination.index-1, 1)
+                    startAnswersList.splice(source.index, 0, prevElement[0])
+                }
+                finishAnswersList.push(data.answerChoices[draggableId]);
+            
+            } else finishAnswersList.splice(destination.index, 0, data.answerChoices[draggableId]);
+            
             newState = startContainerType===finishContainerType ? {
                 ...data,
                 [startContainerType]:{
@@ -154,7 +197,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
                 }
             }
         } 
-        //console.log(start, finish, data.categoryIDs[start], data)
+        
         //maintain itembank across resize, since we have to generate multiple columns
         if(startContainerType==="itemBank") delete newState.allItems[draggableId]
         if(finishContainerType==="itemBank") newState.allItems[draggableId] = data.answerChoices[draggableId]
@@ -213,7 +256,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
                                 content = {data.keyPairs[content]}
                                 droppableClassName = {`match-activity-answers-droppables w-100 ${last? "last-item":""}`}
                                 draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
-                                innerDroppableClassName = {"match-activity-inner-droppable w-100 h-100 d-flex flex-column justify-content-center align-items-center"}
+                                innerDroppableClassName = {"match-activity-inner-droppable w-100 h-100 d-flex flex-column justify-content-start align-items-center"}
                                 draggingOverClass={"match-activity-draggable-over"}
                                 isDraggingClass={"match-activity-dragging"}
                             />
@@ -249,142 +292,3 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
     )
 }
 export default MatchActivityApp
-//import GridTiles from './GridTiles'
-/*prev state*/
-    // //for updating redux store(data to be sent to backend)
-    // const [matchPair, setMatchPair] = useState(activityData.matchPair)
-    // //we only shuffle tiles once at the start
-    // const [tileShuffle, setTileShuffle] = useState(shuffleItems(Object.keys(activityData.matchPair)))
-    // //check if all tiles have been matched or not
-    // const allTilesMatched = tileShuffle.every(tile => !tile)
-// //store starting and final elements
-    // const [startEl, setStartEl] = useState(null)
-    // const finalEl = useRef(null)
-    // //determine if we are on mobile, for grid layout of 2 colums
-    // const windowWidth = useWindowWidth() 
-    // //determine column and rows of grid (for mobile and desktop)
-    // const gridShape = nearestSquare(Object.keys(tileShuffle))
-    // const rows = !windowWidth? Array(tileShuffle.length/2).fill(0): Array(gridShape[1]).fill(0)
-    // const columns= !windowWidth? 2: gridShape[0] 
-    // //for touch input, we search through this to determine if an overlay exists
-    // const newTilesPos = useRef(null)
-    // //to disable drag event so it doesnt fire all the time
-    // let dragEvtDisabled = false
-    // //handle adding tiles to end of activity to fill last row if needed.
-    // if(rows.length*columns !== tileShuffle.length){
-    //     let newTiles = [...tileShuffle]
-    //     for (let i=0; i<rows.length*columns-tileShuffle.length; i++){
-    //         newTiles.push(null)
-    //     }
-    //     setTileShuffle(newTiles)
-    // }    
-    // //grab positions of all other tiles. Necessary for detect overlay on touch inputs
-    // const grabTilePos = () =>{
-    //     const allTiles = document.querySelectorAll(".gridTiles");
-    //     newTilesPos.current = Object.keys(allTiles).map((content)=>{
-    //             if(allTiles[content]===startEl) return null
-    //             return [allTiles[content].getBoundingClientRect(), allTiles[content].id]
-    //         })
-    // }
-    // //handles autoscrolling,
-    // const autoScroll = () =>{
-    //     if(!startEl) return
-    //     const startTilePos = startEl.getBoundingClientRect()
-    //     if(startTilePos.top <= 30) window.scrollBy({top:-startTilePos.height, behavior: 'smooth'})
-    //         //startEl.style.transform = `translate(${startXTransform}px,${startYTransform -startTilePos.height}px)`
-            
-    //     if(startTilePos.bottom >= window.innerHeight-30) window.scrollBy({top: startTilePos.height, behavior: 'smooth'})
-    //         //startEl.style.transform = `translate(${startXTransform}px,${startYTransform + startTilePos.height}px)`
-    // }
-/*onTouch*/
-// startEl.classList.add("active")
-        // grabTilePos();
-/*onStart*/
- // e.preventDefault()
-        // setStartEl(e.target.closest("div"))
-        // document.querySelector("body").style.cursor = "grabbing"
-/* onDrag */
-// if(!dragEvtDisabled){
-        //     dragEvtDisabled = true
-        //     autoScroll();
-        //     // for touch events
-        //     if(e.type==="touchmove"){
-        //         grabTilePos();
-        //         const startXPos = e.touches[0].clientX
-        //         const startYPos = e.touches[0].clientY
-        //         let overlapEl
-        //         for(let tile of newTilesPos.current){
-        //             if(!tile || !tile[0]) continue;
-        //             //check width parameters
-        //             if(!(startXPos>=tile[0].x && startXPos<tile[0].right)) continue;
-        //             //check height parameters and update final el
-        //             if(startYPos>=tile[0].y && startYPos<tile[0].bottom){
-        //                 overlapEl = document.getElementById(tile[1])
-        //                 if(finalEl.current && finalEl.current!==overlapEl)finalEl.current.classList.remove("hover")
-        //                 finalEl.current = overlapEl
-        //                 finalEl.current.classList.add("hover")
-        //             }
-        //         }
-        //     }else{
-        //         //for click events 
-        //         finalEl.current = e.target.closest("div")
-        //     }
-        //     //restore function
-        //     setTimeout(()=>{
-        //         dragEvtDisabled = false
-        //     }, 150)
-        // }
-/* onStop */
-// //return default styling
-        // document.querySelector("body").style.cursor = "auto"
-        // if(finalEl.current)finalEl.current.classList.remove("hover")
-        // //setup
-        // const final = !finalEl.current ? null: finalEl.current.getAttribute("content")
-        // const start = startEl.getAttribute("content")
-        // const newMatchList = Object.assign({}, matchPair)
-        // const newShuffleList = [...tileShuffle]
-        // //reset startEl 
-        // setStartEl(null)
-        // finalEl.current = null
-        // //when elements are not considered a matching pair
-        // //it will simply return item to original position
-        // if(matchPair[start] !== final) return
-
-        // //when elements are a matching pair
-        // //it will remove it and replace it with an empty grid tile
-        // newShuffleList.splice(newShuffleList.indexOf(start),1, false)
-        // newShuffleList.splice(newShuffleList.indexOf(final),1, false)
-        
-        // delete newMatchList[start]
-        // delete newMatchList[final]
-        
-        // setMatchPair(newMatchList)
-        // setTileShuffle(newShuffleList)
-        //update local storage
-/*renders tile grid*/
-        /* <div className = "gridLayout">
-            {allTilesMatched ? <p className="tilesMatchedMessage">You Matched Everything!</p>
-              : rows.map((content,rowIndex)=>{
-                return(
-                    <div key={rowIndex} className="row g-0">
-                        {tileShuffle.slice((rowIndex)*columns, (rowIndex+1)*columns).map((content, index)=>{
-                            if(!content) return <div key={index+columns*rowIndex} className="col m-2 tile"><div className="emptyTile"></div></div>
-                            return (
-                                <div key={index+columns*rowIndex}  className="col m-2 tile">
-                                    <GridTiles 
-                                        onTouchStart={onTouchStart}
-                                        onStop = {onStop}
-                                        onDrag = {onDrag}
-                                        onStart = {onStart}
-                                        id={"gridTile-"+(index+columns*rowIndex)} 
-                                        content = {content} 
-                                        startEl = {startEl}
-                                        finalEl = {finalEl.current? finalEl.current.id === "gridTile-"+(index+columns*rowIndex): false}
-                                    />
-                                </div>
-                            )
-                        })}
-                    </div>
-                )
-            })}
-        </div> */
