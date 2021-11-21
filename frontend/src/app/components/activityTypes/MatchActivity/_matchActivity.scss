@@ -63,13 +63,42 @@
         color: $label-font-color;
     }
 }
+.match-activity-columns{
+    max-height: 26rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    min-width: 310px;
+    
+    @include border-radius(7px);
+    &::-webkit-scrollbar{
+        width: 0.5rem;
+        @include border-radius(7px);
+        background-color: rgb(201, 201, 201);
+    }
+    &::-webkit-scrollbar-thumb{
+        @include border-radius(7px);
+        background-color: rgba(8, 40, 109, 1);
+    }
+   
+}
 .match-activity-itemBank{
     margin-top: 1.5rem;
     background-color: white;
     @include border-radius(7px);
     @include box-shadow(rgba(0,0,0,0.1) 0px 0 10px);
     min-width: 310px;
-    
+    max-height: 19rem;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    &::-webkit-scrollbar{
+        width: 0.5rem;
+        @include border-radius(7px);
+        background-color: rgb(201, 201, 201, 0);
+    }
+    &::-webkit-scrollbar-thumb{
+        @include border-radius(7px);
+        background-color: rgba(8, 40, 109, 1);
+    }
 }
 .match-activity-keys-column, .match-activity-itemBank-column-1{
     margin-right: 0.5rem;
@@ -77,6 +106,8 @@
     @include border-radius(7px);
     @include box-shadow(rgba(0,0,0,0.1) 0px 0 10px);
     min-width: 150px;
+    height: min-content;
+    
     .last-item{
         margin: 0;
     }
@@ -97,16 +128,20 @@
 .match-activity-itemBank-column-1,
 .match-activity-itemBank-column-2{
     background-color: rgba(0, 0,0,0);
+    
     @include box-shadow(none);
     .match-activity-answers-droppables{
         border: 1px solid rgba(0,0,0,0);
-        height: 100%;
         min-height: 8rem;
+        height:  100%;
+        
     }
     .match-activity-inner-droppable{
         list-style-type: none;
         padding: 1rem;
+        padding-bottom: 0;
         min-height: 8rem;
+        height: min-content;
     }
     .match-activity-draggables{
         margin-bottom: 1rem;
@@ -118,7 +153,6 @@
 .match-activity-draggables{
     background-color: #dbedfd;
     text-align: center;
-    //border: 1px black solid;
     list-style-type: none;
     min-height: 4.5rem;
     height: 4.5rem;
@@ -137,13 +171,13 @@
 .match-activity-dragging{
     opacity: 0.8;
     color: black;
-    margin-bottom: 0rem;
+    
     background-color: white;
     border: 1px solid black;
 }
-.match-activity-draggables.last-item{
-    margin-bottom: 0 !important;
-}
+// .match-activity-draggables.last-item{
+//     margin-bottom: 0 !important;
+// }
 .match-activity-answers-droppables{
     list-style-type: none;
     margin-bottom: 2rem;
@@ -152,7 +186,6 @@
 }
 .match-activity-keys{
     @extend .match-activity-answers-droppables;
-    
     padding: 0 1rem;
     p{
         margin: 0;
@@ -175,7 +208,7 @@
     margin-bottom: 0;
     .match-activity-inner-droppable{
         margin: 0;
-        min-height: 6rem;
+        min-height: 6.5rem !important;
     }
 }
 

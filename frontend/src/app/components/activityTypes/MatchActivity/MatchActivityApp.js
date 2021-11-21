@@ -114,7 +114,11 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
         //when dragging between word bank
         const answerChoiceTestEl = (el) => /answerChoices.*/.test(el)
         //if dragging to another word bank container
-        if(answerChoiceTestEl(destination.droppableId)) return
+        if(answerChoiceTestEl(destination.droppableId)) {
+            if(!removedEl.current || !removedEl.current[0]) return
+            document.getElementById("dragItem"+removedEl.current[0].id).classList.remove("hide-draggable")
+            return
+        }
         
         //when dragging into a keypair container
         const droppableName = data.categoryIDs[destination.droppableId]
@@ -225,43 +229,45 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
         </div>
         
         <DragDropContext onDragEnd = {onDragEnd} onDragUpdate={onDragUpdate} onDragStart={onDragStart}>
-            <div className="match-activity-columns d-flex justify-content-center">
-                <div className="match-activity-keys-column w-50 d-flex flex-column align-items-center">
-                    {Object.keys(data.keyPairs).map((content,index)=>{
-                        let last = index===Object.keys(data.keyPairs).length-1
-                        return (
-                            <div key={index} className={`match-activity-keys w-100 d-flex align-items-center justify-content-center ${last? "last-item":""}`}>
-                                <p className="w-100 d-flex flex-column justify-content-center align-items-center">{content}</p>
-                            </div>
-                        )
-                    })}
-                </div>
-            
-                <div className="match-activity-answers-column w-50 d-flex flex-column align-items-center">
-                <div className="match-activity-timer-position">
-                    <MoreInfoBtn 
-                        textContent = "Match the items in the word bank with those on the left column. The items can be dragged, or moved with the keyboard"
-                        customContainerClass = "match-activity-instructions"
-                        customContainerAriaLabel = "activity-instructions"
-                        customDropDownID = "match-activity-instructions"
-                        setTimeoutOnMount = {5000}
-                    />
-                </div>
-                    {Object.keys(data.keyPairs).map((content, index)=>{
-                        let last = index===Object.keys(data.keyPairs).length-1
-                        return (
-                            <DroppableArea 
-                                key={data.categoryIDs[content]} 
-                                id={data.categoryIDs[content]}
-                                content = {data.keyPairs[content]}
-                                droppableClassName = {`match-activity-answers-droppables w-100 ${last? "last-item":""}`}
-                                draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
-                                innerDroppableClassName = {"match-activity-inner-droppable w-100 h-100 d-flex flex-column justify-content-start align-items-center"}
-                                draggingOverClass={"match-activity-draggable-over"}
-                                isDraggingClass={"match-activity-dragging"}
-                            />
-                        )
-                    })}
+            <div className="d-flex justify-content-center h-100">
+                <div className="match-activity-columns d-flex justify-content-center w-100">
+                    <div className="match-activity-keys-column w-50 d-flex flex-column align-items-center">
+                        {Object.keys(data.keyPairs).map((content,index)=>{
+                            let last = index===Object.keys(data.keyPairs).length-1
+                            return (
+                                <div key={index} className={`match-activity-keys w-100 d-flex align-items-center justify-content-center ${last? "last-item":""}`}>
+                                    <p className="w-100 d-flex flex-column justify-content-center align-items-center">{content}</p>
+                                </div>
+                            )
+                        })}
+                    </div>
+                
+                    <div className="match-activity-answers-column w-50 d-flex flex-column align-items-center">
+                    <div className="match-activity-timer-position">
+                        <MoreInfoBtn 
+                            textContent = "Match the items in the word bank with those on the left column. The items can be dragged, or moved with the keyboard"
+                            customContainerClass = "match-activity-instructions"
+                            customContainerAriaLabel = "activity-instructions"
+                            customDropDownID = "match-activity-instructions"
+                            setTimeoutOnMount = {5000}
+                        />
+                    </div>
+                        {Object.keys(data.keyPairs).map((content, index)=>{
+                            let last = index===Object.keys(data.keyPairs).length-1
+                            return (
+                                <DroppableArea 
+                                    key={data.categoryIDs[content]} 
+                                    id={data.categoryIDs[content]}
+                                    content = {data.keyPairs[content]}
+                                    droppableClassName = {`match-activity-answers-droppables w-100 ${last? "last-item":""}`}
+                                    draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
+                                    innerDroppableClassName = {"match-activity-inner-droppable w-100 h-100 d-flex flex-column justify-content-start align-items-center"}
+                                    draggingOverClass={"match-activity-draggable-over"}
+                                    isDraggingClass={"match-activity-dragging"}
+                                />
+                            )
+                        })}
+                    </div>
                 </div>
             </div>
 
@@ -277,7 +283,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
                                     content = {data.itemBank[key]}
                                     droppableClassName = {`match-activity-itemBank-droppables w-100 ${last? "last-item":""}`}
                                     draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
-                                    innerDroppableClassName = {"match-activity-inner-droppable w-100  d-flex flex-column justify-content-center align-items-center"}
+                                    innerDroppableClassName = {"match-activity-inner-droppable w-100  d-flex flex-column  align-items-center"}
                                     draggingOverClass={"match-activity-draggable-over"}
                                     isDraggingClass = {"match-activity-dragging"}
                                 />

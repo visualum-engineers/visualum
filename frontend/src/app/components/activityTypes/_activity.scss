@@ -3,7 +3,7 @@
 @import "./MultipleChoice/multipleChoice";
 @import "./ShortAnswer/shortAnswer";
 @import "./LabelPictures/labelPictures";
-@import "./NavActivityBtn/navActivityBtn";
+
 @mixin activities-nav-navItems-hover{
     transform: scale(1.1);
     background-color: rgb(238, 237, 237)
@@ -96,9 +96,7 @@
     overflow: hidden;
     min-width: 310px;
 }
-.nav-activity-btns{
-    z-index: 1;
-}
+
 .question-transition-container{
     position: relative;
 }
@@ -149,4 +147,24 @@
 .question-move-right-exit-active{
     opacity: 0;
     transform: translateX(-100vw);
-}   
+} 
+.nav-activity-btns{
+    z-index: 1;
+    max-width: 840px;
+    
+}
+.nav-activity-btn{
+    @include border-radius(5px);
+    color: $main-font-color;
+    background-color: #3a13d0;
+    padding: 5px 20px;
+    margin: 20px 0;
+    border: 1px $main-font-color solid;
+    @include transition(all 0.3s ease-out);
+}  
+
+.nav-activity-btn:hover{
+    @include activities-nav-navItems-hover;
+    border: 1px solid #3a13d0;
+    color: #3a13d0;
+}
