@@ -89,14 +89,18 @@
     font-weight: 600;
     margin-bottom: 2rem;
     margin-top: 1.5rem;
+    
     a{
+        color: rgb(8, 40, 109) ;
         line-height: 100%;
+    }
+    a:hover{
+        color: rgb(8, 40, 109, 0.8) ;
     }
 }
 .secondary-sidebar-visualum-logo{
     margin-left: -0.8rem;
     margin-right: 0.8rem;
-    
     max-width: 3.5rem;
     object-fit: contain;
     object-position: center;

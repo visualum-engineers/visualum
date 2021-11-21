@@ -195,7 +195,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
                 </div>
             
                 <div className="match-activity-answers-column w-50 d-flex flex-column align-items-center">
-                <div className="match-activity-timer-positioning">
+                <div className="match-activity-timer-position">
                     <MoreInfoBtn 
                         textContent = "Match the items in the word bank with those on the left column. The items can be dragged, or moved with the keyboard"
                         customContainerClass = "match-activity-instructions"
