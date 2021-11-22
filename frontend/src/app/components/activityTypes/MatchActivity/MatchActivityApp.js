@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react'
 import Timer from '../../timer/Timer';
 import {DragDropContext} from 'react-beautiful-dnd';
-//import useWindowWidth from '../../../hooks/use-window-width'
+import useWindowWidth from '../../../hooks/use-window-width'
 import MoreInfoBtn from '../../moreInfoBtn/MoreInfoBtn';
 import DroppableArea from "../DragAndDrop/DroppableArea"
 /*
@@ -68,8 +68,8 @@ const transformData = (data, itemBankColumns) =>{
         return newData
 }
 
-const MatchActivityApp = ({activityData, questionNum, activityID}) => {
-    //const windowWidth = useWindowWidth()
+const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick=null}) => {
+    const windowWidth = useWindowWidth(576)
     //const columns = windowWidth ? Array(2).fill(0) : Array(1).fill(0)
     const [data, setData] = useState(transformData(activityData, 2))
     const [disableDnD,setDisableDnD] = useState(false)
@@ -211,7 +211,8 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
         localStorage.setItem(`${activityID}-match_activity_client_answer-${questionNum}`, JSON.stringify(newState))
     }
     const onTap = (e) =>{
-        console.log(e)
+        //means a selection hasnt happened so skip for keyboard
+        if(e.type === "keydown" && e.key !=="Enter") return
         //update the first element
         let droppableSelected = null
         let currListItem = e.target.closest(".match-activity-draggables")
@@ -234,6 +235,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
             return
         }
         //update the second element, and perform tap logic
+        document.getElementById("dragItem"+firstTapEl.draggableId).classList.remove("match-activity-dragging")
         const draggableId = firstTapEl.draggableId
         const source = {
             droppableId: firstTapEl.droppableId,
@@ -248,19 +250,20 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
             destination: destination,
             draggableId: draggableId
         }
-        document.getElementById("dragItem"+firstTapEl.draggableId).classList.remove("match-activity-dragging")
+        
         onDragEnd(result)
         setFirstTapEl(null)
     }
-    const toggleTap = (e)=>{
-        //toggle dnd and tap mode based on btn
-        setDisableDnD(state => !state)
+    //toggle dnd and tap mode based on btn
+    const toggleTap = (e) => {
+        if (e.type ==="click" || (e.type ==="keydown" && e.key === "Enter")) setDisableDnD(state => !state)
     }
+    
     return(
         <>
-        <div className="d-flex match-activity-header">
+        <div className={`d-flex match-activity-header justify-content-${windowWidth?"center": "start"}`}>
             {data.timer ?
-                <div className="match-activity-timer d-flex justify-content-center align-items-center ">
+                <div className={`match-activity-timer d-flex justify-content-center align-items-center`}>
                     <span>TIME:</span>
                     <Timer
                         timer={data.timer}
@@ -274,17 +277,19 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
                 <label 
                     className="form-check-label" 
                     htmlFor="match-activity-toggle-tap-mode"
-                    aria-label ={!disableDnD ? "Enable Tap": "Enable Drag & Drop"}
+                    aria-label ={!disableDnD ? "Enable Tap": "Enable Drag"}
                 >
-                    {!disableDnD ? "Enable Tap": "Enable Drag & Drop"}
+                    {!disableDnD ? "Enable Tap": "Enable Drag"}
                 </label>
                 <input 
+                    onKeyDown={toggleTap}
                     onClick={toggleTap}
                     className="form-check-input" 
                     type="checkbox" 
                     role="switch" 
-                    aria-label ={!disableDnD ? "Enable Tap": "Enable Drag & Drop"}
+                    aria-label ={!disableDnD ? "Enable Tap": "Enable Drag"}
                     id="match-activity-toggle-tap-mode" 
+                    defaultChecked = {disableDnD}
                 />
             </div>
           
@@ -311,11 +316,12 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
                     <div className="match-activity-answers-column w-50 d-flex flex-column align-items-center">
                     <div className="match-activity-timer-position">
                         <MoreInfoBtn 
-                            textContent = "Match the items in the word bank with those on the left column. The items can be dragged, or moved with the keyboard"
+                            textContent = "View Instructions"
                             customContainerClass = "match-activity-instructions"
                             customContainerAriaLabel = "activity-instructions"
                             customDropDownID = "match-activity-instructions"
                             setTimeoutOnMount = {5000}
+                            onClick = {moreInfoOnClick}
                         />
                     </div>
                         {Object.keys(data.keyPairs).map((content, index)=>{

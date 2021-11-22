@@ -1,7 +1,12 @@
 import MultipleChoiceApp from "./MultipleChoice/MultipleChoiceApp"
+import MultipleChoiceInstructions from "./MultipleChoice/MultipleChoiceInstructions"
 import ShortAnswerApp from "./ShortAnswer/ShortAnswerApp"
+import ShortAnswerInstructions from "./ShortAnswer/ShortAnswerInstructions"
 import SortActivityApp from "./SortActivity/SortActivityApp"
+import SortActivityInstructions from "./SortActivity/SortActivityInstructions"
 import MatchActivityApp from "./MatchActivity/MatchActivityApp"
+import MatchActivityInstructions from "./MatchActivity/MatchActivityInstructions"
+
 import ActivityBtns from "./NavActivityBtn/ActivityBtns"
 import SlimNavbar from "../slimNavbar/SlimNavbar"
 import SecondarySideBar from "../sideBar/SecondarySideBar"
@@ -24,6 +29,7 @@ const Activity = () =>{
     const [questionNum, setQuestionNum] = useState(1)
     const [question, setQuestion] = useState(activityData[currQuestion])
     const [sidebarToggle, setSidebarToggle] = useState(true)
+    const [moreInfoBtn, setMoreInfoBtn] = useState(true)
     const windowWidth = useWindowWidth(992)
     //when window width changes <992, sidebar automatically closes
     //it can still be opened though
@@ -62,6 +68,7 @@ const Activity = () =>{
         if (sidebarToggle && e.target.closest("button").ariaLabel === "exit-sidebar") return exitSideBar()
         else return openSideBar()
     }
+    const moreInfoOnClick = (e) => setMoreInfoBtn(state=> !state)
     return(
     <>
         <SlimNavbar type={"activities-nav"} />
@@ -80,6 +87,34 @@ const Activity = () =>{
         
         <div className = {`${sidebarToggle && windowWidth?"secondary-sidebar-open": ""} activity-body row flex-column justify-content-center align-items-center`}>
             {/* <img src = {activeActivityBg} className="active-activity-bg" alt="planet and stars background"/> */}
+            
+            {moreInfoBtn ? 
+                <div className="d-flex justify-content-center align-items-center activity-walkthrough-dark-bg">
+                    <button 
+                        className="activity-walkthrough-bg-exit-btn" 
+                        aria-label="exit-more-info"
+                        onClick={moreInfoOnClick}>
+                    </button>
+                    <div className="activity-walkthrough-instructions col-11 col-md-9 col-lg-7 col-xl-6 col-xxl-5">
+                        <header className="activity-walkthrough-instructions-header d-flex justify-content-between align-items-center"> 
+                            <h1>Activity Instructions</h1>
+                            <button 
+                                onClick={moreInfoOnClick} 
+                                aria-label="exit-more-info" 
+                                className="d-flex align-items-center justify-content-center"
+                            >
+                                <i className="fas fa-times"></i>
+                            </button>
+                        </header>
+                        {activityData[questionNum].type === "sort" ? <SortActivityInstructions />
+                        : activityData[questionNum].type === "matching" ? <MatchActivityInstructions />
+                        : activityData[questionNum].type === "shortAnswer" ? <ShortAnswerInstructions />
+                        : activityData[questionNum].type === "multipleChoice"? <MultipleChoiceInstructions />
+                        : null}
+                    </div>
+                </div>
+            : null}
+        
             <div className = "activity-type-container col-11 col-md-9 col-lg-7 col-xl-6 d-flex flex-column justify-content-center">
                 {/*generate entire form data*/}
                 {question.type ?
@@ -96,7 +131,7 @@ const Activity = () =>{
                             >
                                 <div style={{...defaultTransition}} className="question-transition-container d-flex flex-column justify-content-center ">
                                     {activityData[key].type === "sort" ? <SortActivityApp activityData = {activityData[key]} questionNum = {questionNum} activityID = {activityData.activityID}/>
-                                    : activityData[key].type === "matching" ? <MatchActivityApp activityData = {activityData[key]} questionNum = {questionNum} activityID = {activityData.activityID}/>
+                                    : activityData[key].type === "matching" ? <MatchActivityApp activityData = {activityData[key]} questionNum = {questionNum} activityID = {activityData.activityID} moreInfoOnClick={moreInfoOnClick}/>
                                     : activityData[key].type === "shortAnswer" ? <ShortAnswerApp activityData = {activityData[key]} questionNum = {questionNum} activityID = {activityData.activityID}/>
                                     : activityData[key].type === "multipleChoice"? <MultipleChoiceApp activityData = {activityData[key]} questionNum = {questionNum} activityID = {activityData.activityID}/>
                                     :<p>Hi</p>}
