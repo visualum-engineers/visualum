@@ -18,7 +18,6 @@ const DraggableItems = ({id, index, content, draggableClassName, isDraggingClass
                     {...provided.dragHandleProps}
                     style ={provided.draggableProps.style}
                     onClick={onTap ? onTap:null}
-                    onTouchStart = {onTap ? onTap:null}
                 >
                     <div>{content}</div>
                 </li>

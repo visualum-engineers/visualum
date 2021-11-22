@@ -11,7 +11,6 @@ const DroppableArea = ({id, content, droppableHeader=null, droppableClassName=""
                 {(provided, snapshot) =>(
                     <ul 
                         onClick = {firstElTap ?  onTap: null}
-                        onTouchEnd = {firstElTap ?  onTap: null}
                         ref={provided.innerRef}
                         data-tap-droppable-id = {id.toString()}
                         className={`${innerDroppableClassName} ${snapshot.isDraggingOver ? draggingOverClass: ""}`}

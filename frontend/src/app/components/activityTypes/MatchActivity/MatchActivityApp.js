@@ -211,6 +211,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
         localStorage.setItem(`${activityID}-match_activity_client_answer-${questionNum}`, JSON.stringify(newState))
     }
     const onTap = (e) =>{
+        console.log(e)
         //update the first element
         let droppableSelected = null
         let currListItem = e.target.closest(".match-activity-draggables")
