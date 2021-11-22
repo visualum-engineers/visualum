@@ -74,9 +74,12 @@
     margin-bottom: 2.7rem;
     margin-top: 1rem;
     @include transition(all 0.3s ease-out);
-    
+    border: 1px solid rgba(0, 0, 0,0);
     &:hover{
         transform: scale(1.1);
+        color: rgba(58,19,208,1);
+        border: 1px solid rgba(58,19,208,1);
+        background-color: white;
     }
 }
 
