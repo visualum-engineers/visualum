@@ -3,7 +3,9 @@ const DraggableItems = ({id, index, content, draggableClassName, isDraggingClass
     return (
         <Draggable
             draggableId={id} 
-            index={index}>
+            index={index}
+            isDragDisabled = {onTap ? true: false}
+        >
             {(provided, snapshot) => (
                 <li 
                     id={"dragItem"+id}

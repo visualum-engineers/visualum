@@ -72,7 +72,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
     //const windowWidth = useWindowWidth()
     //const columns = windowWidth ? Array(2).fill(0) : Array(1).fill(0)
     const [data, setData] = useState(transformData(activityData, 2))
-    const [disableDnD,setDisableDnD] = useState(true)
+    const [disableDnD,setDisableDnD] = useState(false)
     const [firstTapEl, setFirstTapEl] = useState(null)
     const removedEl = useRef(null)
    
@@ -92,7 +92,6 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
     const onDragStart = (result) =>{
         //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
         document.querySelector("html").classList.add("sortActivityActive")
-
     }
     //while dragging
     const onDragUpdate = (result) =>{
@@ -252,12 +251,15 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
         onDragEnd(result)
         setFirstTapEl(null)
     }
-
+    const toggleTap = (e)=>{
+        //toggle dnd and tap mode based on btn
+        setDisableDnD(state => !state)
+    }
     return(
         <>
-        <div className="d-flex justify-content-center">
+        <div className="d-flex match-activity-header">
             {data.timer ?
-                <div className="match-activity-timer d-flex justify-content-center align-items-center">
+                <div className="match-activity-timer d-flex justify-content-center align-items-center ">
                     <span>TIME:</span>
                     <Timer
                         timer={data.timer}
@@ -266,6 +268,25 @@ const MatchActivityApp = ({activityData, questionNum, activityID}) => {
                 </div>
             : null 
             }
+           
+            <div className="match-activity-enable-tap-mode d-flex flex-column align-items-center form-check form-switch">
+                <label 
+                    className="form-check-label" 
+                    htmlFor="match-activity-toggle-tap-mode"
+                    aria-label ={!disableDnD ? "Enable Tap": "Enable Drag & Drop"}
+                >
+                    {!disableDnD ? "Enable Tap": "Enable Drag & Drop"}
+                </label>
+                <input 
+                    onClick={toggleTap}
+                    className="form-check-input" 
+                    type="checkbox" 
+                    role="switch" 
+                    aria-label ={!disableDnD ? "Enable Tap": "Enable Drag & Drop"}
+                    id="match-activity-toggle-tap-mode" 
+                />
+            </div>
+          
         </div>
         
         <DragDropContext 
