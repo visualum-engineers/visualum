@@ -138,7 +138,7 @@
     &::-webkit-scrollbar{
         width: 0.5rem;
         @include border-radius(7px);
-        background-color: rgb(201, 201, 201, 0);
+        background-color: rgba(201, 201, 201, 0);
     }
     &::-webkit-scrollbar-thumb{
         @include border-radius(7px);
