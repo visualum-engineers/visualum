@@ -38,12 +38,11 @@ const transformData = (data, itemBankColumns) =>{
                 })
             }
             //keep a record of all items in word bank. 
-            // Needed to create 2 or 3 columns based on screen size
+            // Needed to create 1 or 2 columns based on screen size
             for(let i of data.answerChoices){
                 newData.allItems[i.id] = {id: i.id, content: i.content}
                 newData.answerChoices[i.id] = {id: i.id, content: i.content}
             }
-            
         }
         //when data was already transformed on mount 
         else {
@@ -69,8 +68,9 @@ const transformData = (data, itemBankColumns) =>{
 }
 
 const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick=null}) => {
-    const windowWidth = useWindowWidth(576)
-    //const columns = windowWidth ? Array(2).fill(0) : Array(1).fill(0)
+    const smallWindowWidth = useWindowWidth(576)
+    const mediumWindowWidth = useWindowWidth(992)
+    const columns = mediumWindowWidth ? Array(1).fill(0) : Array(2).fill(0)
     const [data, setData] = useState(transformData(activityData, 2))
     const [disableDnD,setDisableDnD] = useState(false)
     const [firstTapEl, setFirstTapEl] = useState(null)
@@ -83,11 +83,10 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
         if(!stored) return
         setData(JSON.parse(stored))
     }, [activityID, questionNum])
-    // //handle width resizing
-    // useEffect(() => {
-    //     setData((data) => transformData(data, columns.length))
-    // }, [windowWidth, columns.length])
-
+    //handle width resizing
+    useEffect(() => {
+        setData((data) => transformData(data, columns.length))
+    }, [mediumWindowWidth, columns.length])
     //when dragging starts
     const onDragStart = (result) =>{
         //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
@@ -154,6 +153,9 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
         const finishAnswersList = Array.from(answerChoiceTestEl(finish) ? data.itemBank[finish] : data.keyPairs[finish])
         const sameContainer = start===finish
         let newState
+        //will be used to detect whether an item was added back to word bank, after moving to 
+        //key pair container
+        let addedToWordBank
         startAnswersList.splice(source.index, 1)
         
         //list container are same 
@@ -176,6 +178,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
                 if(finishAnswersList.length!==0) {
                     const prevElement = finishAnswersList.splice(destination.index-1, 1)
                     startAnswersList.splice(source.index, 0, prevElement[0])
+                    if(startContainerType === "itemBank") addedToWordBank = prevElement[0]
                 }
                 finishAnswersList.push(data.answerChoices[draggableId]);
             
@@ -203,6 +206,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
         } 
         
         //maintain itembank across resize, if we have to generate multiple columns
+        if(addedToWordBank) newState.allItems[addedToWordBank.id] = addedToWordBank
         if(startContainerType==="itemBank") delete newState.allItems[draggableId]
         if(finishContainerType==="itemBank") newState.allItems[draggableId] = data.answerChoices[draggableId]
         
@@ -261,7 +265,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
     
     return(
         <>
-        <div className={`d-flex match-activity-header justify-content-${windowWidth?"center": "start"}`}>
+        <div className={`d-flex match-activity-header justify-content-${smallWindowWidth?"center": "start"}`}>
             {data.timer ?
                 <div className={`match-activity-timer d-flex justify-content-center align-items-center`}>
                     <span>TIME:</span>
@@ -277,9 +281,9 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
                 <label 
                     className="form-check-label" 
                     htmlFor="match-activity-toggle-tap-mode"
-                    aria-label ={!disableDnD ? "Enable Tap": "Enable Drag"}
+                    aria-label ={!disableDnD ? "Enable Tap": "Restore Drag"}
                 >
-                    {!disableDnD ? "Enable Tap": "Enable Drag"}
+                    {!disableDnD ? "Enable Tap": "Restore Drag"}
                 </label>
                 <input 
                     onKeyDown={toggleTap}
@@ -287,7 +291,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
                     className="form-check-input" 
                     type="checkbox" 
                     role="switch" 
-                    aria-label ={!disableDnD ? "Enable Tap": "Enable Drag"}
+                    aria-label ={!disableDnD ? "Enable Tap": "Restore Drag"}
                     id="match-activity-toggle-tap-mode" 
                     defaultChecked = {disableDnD}
                 />
@@ -301,7 +305,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
             onDragStart={!disableDnD ? onDragStart: null}
         >
             <div className="d-flex justify-content-center h-100">
-                <div className="match-activity-columns d-flex justify-content-center w-100">
+                <div className={`match-activity-columns d-flex justify-content-center ${mediumWindowWidth? "three-columns": "w-100"}`}>
                     <div className="match-activity-keys-column w-50 d-flex flex-column align-items-center">
                         {Object.keys(data.keyPairs).map((content,index)=>{
                             let last = index===Object.keys(data.keyPairs).length-1
@@ -314,16 +318,16 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
                     </div>
                 
                     <div className="match-activity-answers-column w-50 d-flex flex-column align-items-center">
-                    <div className="match-activity-timer-position">
-                        <MoreInfoBtn 
-                            textContent = "View Instructions"
-                            customContainerClass = "match-activity-instructions"
-                            customContainerAriaLabel = "activity-instructions"
-                            customDropDownID = "match-activity-instructions"
-                            setTimeoutOnMount = {5000}
-                            onClick = {moreInfoOnClick}
-                        />
-                    </div>
+                        <div className="match-activity-timer-position">
+                            <MoreInfoBtn 
+                                textContent = "View Instructions"
+                                customContainerClass = "match-activity-instructions"
+                                customContainerAriaLabel = "activity-instructions"
+                                customDropDownID = "match-activity-instructions"
+                                setTimeoutOnMount = {5000}
+                                onClick = {moreInfoOnClick}
+                            />
+                        </div>
                         {Object.keys(data.keyPairs).map((content, index)=>{
                             let last = index===Object.keys(data.keyPairs).length-1
                             return (
@@ -343,32 +347,56 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
                         })}
                     </div>
                 </div>
+                {mediumWindowWidth ? 
+                 <div className="match-activity-itemBank d-flex justify-content-center three-columns">
+                        {Object.keys(data.itemBank).map((key, index)=>{
+                            //let last = index===Object.keys(data.itemBank).length-1
+                            return (
+                                <div key={key} className={`match-activity-itemBank-column-${index+1} w-100 d-flex flex-column align-items-center`}>
+                                    <DroppableArea 
+                                        firstElTap = {firstTapEl} 
+                                        id={key}
+                                        content = {data.itemBank[key]}
+                                        //droppableClassName = {`match-activity-itemBank-droppables w-100 ${last? "last-item":""}`}
+                                        droppableClassName = {`match-activity-itemBank-droppables w-100`}
+                                        draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
+                                        innerDroppableClassName = {`${disableDnD && firstTapEl? "match-activity-tap-active": ""} match-activity-inner-droppable w-100 d-flex flex-column align-items-center`}
+                                        draggingOverClass={"match-activity-draggable-over"}
+                                        isDraggingClass = {"match-activity-dragging"}
+                                        onTap={disableDnD? onTap: null}
+                                    />
+                                </div>
+                            )
+                        })}
+                    </div>
+                : null}
             </div>
-
-            <div className="d-flex justify-content-center">
-                <div className="match-activity-itemBank w-100 d-flex justify-content-center">
-
-                    {Object.keys(data.itemBank).map((key, index)=>{
-                        //let last = index===Object.keys(data.itemBank).length-1
-                        return (
-                            <div key={key} className={`match-activity-itemBank-column-${index+1} w-50 d-flex flex-column align-items-center`}>
-                                <DroppableArea 
-                                    firstElTap = {firstTapEl} 
-                                    id={key}
-                                    content = {data.itemBank[key]}
-                                    //droppableClassName = {`match-activity-itemBank-droppables w-100 ${last? "last-item":""}`}
-                                    droppableClassName = {`match-activity-itemBank-droppables w-100`}
-                                    draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
-                                    innerDroppableClassName = {`${disableDnD && firstTapEl? "match-activity-tap-active": ""} match-activity-inner-droppable w-100 d-flex flex-column align-items-center`}
-                                    draggingOverClass={"match-activity-draggable-over"}
-                                    isDraggingClass = {"match-activity-dragging"}
-                                    onTap={disableDnD? onTap: null}
-                                />
-                            </div>
-                        )
-                    })}
+            {!mediumWindowWidth ?
+                <div className="d-flex justify-content-center">
+                    <div className="match-activity-itemBank w-100 d-flex justify-content-center">
+                        {Object.keys(data.itemBank).map((key, index)=>{
+                            //let last = index===Object.keys(data.itemBank).length-1
+                            return (
+                                <div key={key} className={`match-activity-itemBank-column-${index+1} w-50 d-flex flex-column align-items-center`}>
+                                    <DroppableArea 
+                                        firstElTap = {firstTapEl} 
+                                        id={key}
+                                        content = {data.itemBank[key]}
+                                        //droppableClassName = {`match-activity-itemBank-droppables w-100 ${last? "last-item":""}`}
+                                        droppableClassName = {`match-activity-itemBank-droppables w-100`}
+                                        draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
+                                        innerDroppableClassName = {`${disableDnD && firstTapEl? "match-activity-tap-active": ""} match-activity-inner-droppable w-100 d-flex flex-column align-items-center`}
+                                        draggingOverClass={"match-activity-draggable-over"}
+                                        isDraggingClass = {"match-activity-dragging"}
+                                        onTap={disableDnD? onTap: null}
+                                    />
+                                </div>
+                            )
+                        })}
+                    </div>
                 </div>
-            </div>
+            : null}
+            
         </DragDropContext>
         
      </>

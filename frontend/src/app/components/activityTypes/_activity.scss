@@ -105,7 +105,6 @@
     background-color: white;
     z-index: 2;
     min-width: 310px;
-    //max-width: 100%;
     overflow-wrap: break-word;
     overflow-x: hidden;
     overflow-x: auto;
@@ -146,7 +145,7 @@
     text-align: center;
     min-height: max(80vh, 400px);
     z-index: 1;
-    max-width: 840px;
+    max-width: 1000px;
     overflow: hidden;
     min-width: 310px;
 }
@@ -204,7 +203,7 @@
 } 
 .nav-activity-btns{
     z-index: 1;
-    max-width: 840px;
+    max-width: 1000px;
     
 }
 .nav-activity-btn{

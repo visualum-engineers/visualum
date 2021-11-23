@@ -6,7 +6,7 @@
     position: absolute;
     right:0;
     font-size: 0.8rem;
-    width: 7rem;
+    width: 8rem;
     .form-switch,.form-check-input{
         cursor: pointer;
         margin-left: 0;
@@ -98,6 +98,32 @@
     }
    
 }
+
+    // .match-activity-itemBank-column-1{
+    //     min-width: 150px;
+    //     margin-right: 0;
+    // }
+    // .match-activity-keys-column, 
+    // .match-activity-answers-column{
+    //     width: ;
+    // }
+    //width: calc(1rem + 2 * 100% / 3);
+
+// .match-activity-itemBank.three-columns{
+//     .match-activity-itemBank-column-1{
+
+//     }
+//     // width: calc(100% / 3 + 0.5rem) ;
+//     // min-width: calc(150px + 0.5rem);
+//     // .match-activity-itemBank-column-1{
+//     //     min-width: 150px;
+//     //     margin-right: 0;
+//     //     .match-activity-inner-droppable{
+//     //         min-width: 150px;
+//     //     }
+//     // }
+    
+// }
 .match-activity-itemBank{
     margin-top: 1.5rem;
     background-color: white;
@@ -117,28 +143,33 @@
         background-color: rgba(8, 40, 109, 1);
     }
 }
-.match-activity-keys-column, .match-activity-itemBank-column-1{
-    margin-right: 0.5rem;
-    background-color: white;
+
+.match-activity-keys-column, 
+.match-activity-itemBank-column-1,
+.match-activity-answers-column, 
+.match-activity-itemBank-column-2{
     @include border-radius(7px);
     @include box-shadow(rgba(0,0,0,0.1) 0px 0 10px);
     min-width: 150px;
     height: min-content;
-    .last-item{
-        margin: 0;
-    }
 }
-.match-activity-answers-column, .match-activity-itemBank-column-2{
+.match-activity-keys-column,
+.match-activity-itemBank-column-1{
+    margin-right: 0.5rem;
+}
+.match-activity-answers-column, 
+.match-activity-itemBank-column-2{
     position: relative;
-    @extend .match-activity-keys-column;
     margin-right: 0;
+}
+.match-activity-answers-column,
+.match-activity-keys-column{
+    background-color: white;
 }
 .match-activity-answers-column{
     .match-activity-inner-droppable{
+        padding-top: 0.25rem;
         overflow: hidden;
-    }
-    .match-activity-draggables{
-        margin-top: 0.25rem;
     }
 }
 .match-activity-itemBank-column-1,
@@ -154,18 +185,17 @@
     }
     .match-activity-inner-droppable{
         list-style-type: none;
-        padding: 1rem;
+        padding: 0.25rem;
         padding-bottom: 0;
+        padding-top: 1rem;
         min-height: 8rem;
         height: min-content;
     }
     .match-activity-draggables{
         margin-top: 0;
-        margin-bottom: 1rem;
     }
 }
-.match-activity-draggables{
-    background-color: #dbedfd;
+@mixin match-activity-keypair-styles {
     list-style-type: none;
     min-height: 4.5rem;
     height: 4.5rem;
@@ -177,8 +207,84 @@
     @include border-radius(5px);
     @include box-shadow(rgba(0,0,0,0.2) 0px 0 10px);
     border: 1px solid rgba(0, 0,0,0);
-    cursor: pointer;
     padding: 0.5rem;
+}
+.match-activity-keys{
+    list-style-type: none;
+    margin-bottom: 1.5rem;
+    min-width: 145px;
+    height: 5rem;
+    padding: 0 1rem;
+    p{
+        @include match-activity-keypair-styles();
+        margin: 0;
+        background-color: white;
+        font-weight: 500;
+        color: black;
+        cursor: auto;
+    }
+    p:hover{
+        color: black;
+        opacity: 1 !important;
+        background-color: white;
+        border: 1px solid rgba(0, 0,0,0) !important;
+    }
+}
+.match-activity-keys.last-item{
+    margin: 0;
+}
+
+.match-activity-itemBank.three-columns{
+    width: calc(100% / 3);
+    min-width: 0;
+    margin-top: 0;
+    margin-left: 2rem;
+    min-height: 24rem;
+    max-height: 60vh;
+    height: 60vh;
+    .match-activity-itemBank-column-1{
+        margin: 0;
+    }
+}
+.match-activity-columns.three-columns{
+    width: calc(2 * 100% / 3);
+    min-width: 0;
+    min-height: 24rem;
+    max-height: 60vh;
+    height: 60vh;
+}
+
+.match-activity-answers-droppables{
+    list-style-type: none;
+    margin-bottom: 1.5rem;
+    min-width: 145px;
+    height: 5rem;
+}
+.match-activity-answers-droppables.last-item{
+    margin-bottom: 0;
+}
+
+.match-activity-itemBank-droppables{
+    @extend .match-activity-answers-droppables;
+    margin-bottom: 0;
+    .match-activity-inner-droppable{
+        margin: 0;
+    }
+}
+.match-activity-inner-droppable{
+    list-style-type: none;
+    padding: 0 0.25rem;
+    margin-bottom: 0;
+    background-color: rgb(231, 231, 231);
+    @include border-radius(7px)
+}
+
+.match-activity-draggables{
+    @include match-activity-keypair-styles();
+    margin-bottom: 1rem;
+    background-color: #dbedfd;
+    cursor: pointer;
+
     &::-webkit-scrollbar{
         width: 0.5rem;
         @include border-radius(7px);
@@ -197,9 +303,7 @@
         transform: scale(1.05);
     }
 }
-// .match-activity-draggables:hover{
-//     @extend .match-activity-dragging;
-// }
+
 .match-activity-dragging{
     opacity: 0.8;
     color: black;
@@ -209,52 +313,9 @@
         transform: scale(1.1);
     }
 }
-// .match-activity-draggables.last-item{
-//     margin-bottom: 0 !important;
+// .match-activity-draggables:hover{
+//     @extend .match-activity-dragging;
 // }
-.match-activity-answers-droppables{
-    list-style-type: none;
-    margin-bottom: 2rem;
-    min-width: 145px;
-    height: 5rem;
-}
-.match-activity-keys{
-    @extend .match-activity-answers-droppables;
-    padding: 0 1rem;
-    p{
-        margin: 0;
-        @extend .match-activity-draggables;
-        background-color: white;
-        font-weight: 500;
-        color: black;
-        cursor: auto;
-    }
-    p:hover{
-        color: black;
-        opacity: 1 !important;
-        background-color: white;
-        border: 1px solid rgba(0, 0,0,0) !important;
-    }
-    
-}
-
-.match-activity-itemBank-droppables{
-    @extend .match-activity-answers-droppables;
-    margin-bottom: 0;
-    .match-activity-inner-droppable{
-        margin: 0;
-        //min-height: 6.5rem !important;
-    }
-}
-
-.match-activity-inner-droppable{
-    list-style-type: none;
-    padding: 0 1rem;
-    margin-bottom: 0;
-    background-color: rgb(231, 231, 231);
-    @include border-radius(7px)
-}
-
 .match-activity-draggable-over{
     background-color: rgb(179, 179, 179);
 }

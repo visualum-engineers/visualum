@@ -114,8 +114,8 @@ const Activity = () =>{
                     </div>
                 </div>
             : null}
-        
-            <div className = "activity-type-container col-11 col-md-9 col-lg-7 col-xl-6 d-flex flex-column justify-content-center">
+            {/* col-lg-7 col-xl-6*/}
+            <div className = "activity-type-container col-11 col-md-9 d-flex flex-column justify-content-center">
                 {/*generate entire form data*/}
                 {question.type ?
                     Object.keys(activityData).map((key)=>{
@@ -144,8 +144,10 @@ const Activity = () =>{
             </div>
             {/*loads appropriate btns depending if 
                     1. There are prev questions
-                    2. This is the last question */}
-            <div className="col-11 col-md-9 col-lg-7 col-xl-6 nav-activity-btns">
+                    2. This is the last question 
+                    col-lg-7 col-xl-6
+            */}
+            <div className="col-11 col-md-9 nav-activity-btns">
                 <ActivityBtns 
                     prevQuestion = {questionNum !== 1} 
                     lastQuestion = {Object.keys(activityData).length-1 === questionNum}
