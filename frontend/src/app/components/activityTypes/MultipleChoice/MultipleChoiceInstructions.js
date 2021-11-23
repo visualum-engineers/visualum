@@ -1,7 +1,7 @@
 const MultipleChoiceInstructions = () =>{
     return(
         <div>
-            
+            MultipleChoice
         </div>
     )
 }

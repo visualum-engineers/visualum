@@ -65,7 +65,8 @@
         background: black;
     }
     .instructions{
-        background-color: white;
+        background-color: rgba(8, 40, 109, 1);
+        color: white;
         left: -8.4rem;
         text-align: center !important;
     }
@@ -73,6 +74,7 @@
     .info-triangle{
         left: 8.4rem;
         top:  -0.54rem;
+        border-bottom: 0.6rem solid rgba(8, 40, 109, 1);
     }
     .info-triangle-2{
         top:-0.59rem;

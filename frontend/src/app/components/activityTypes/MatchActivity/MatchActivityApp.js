@@ -4,6 +4,8 @@ import {DragDropContext} from 'react-beautiful-dnd';
 import useWindowWidth from '../../../hooks/use-window-width'
 import MoreInfoBtn from '../../moreInfoBtn/MoreInfoBtn';
 import DroppableArea from "../DragAndDrop/DroppableArea"
+import { useDispatch, useSelector} from 'react-redux';
+import {enableTap, enableDnD} from '../../../../redux/features/activityTypes/activitiesSlice'
 /*
 To-dos
 Backend: 
@@ -67,15 +69,21 @@ const transformData = (data, itemBankColumns) =>{
         return newData
 }
 
-const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick=null}) => {
+const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick=null, moreInfoBtn}) => {
     const smallWindowWidth = useWindowWidth(576)
     const mediumWindowWidth = useWindowWidth(992)
     const columns = mediumWindowWidth ? Array(1).fill(0) : Array(2).fill(0)
     const [data, setData] = useState(transformData(activityData, 2))
-    const [disableDnD,setDisableDnD] = useState(!smallWindowWidth)
+    const disableDnD = useSelector((state) => !state.activities.dndEnabled) 
+    const dispatch = useDispatch()
+    // setDisableDnD] = useState(() => {
+    //     if(!smallWindowWidth) dispatch(enableTap())
+    //     else dispatch(enableDnD())
+    //     return !smallWindowWidth
+    // })
     const [firstTapEl, setFirstTapEl] = useState(null)
     const removedEl = useRef(null)
-   
+    
     //if it exists, grab info from local storage on mount.
     useEffect(() => {
         //on mount check local storage for data
@@ -87,9 +95,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
     useEffect(() => {
         setData((data) => transformData(data, columns.length))
     }, [mediumWindowWidth, columns.length])
-    // useEffect(()=>{
-    //     if(!smallWindowWidth) setDisableDnD(true)
-    // })
+    
     //when dragging starts
     const onDragStart = (result) =>{
         //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
@@ -263,9 +269,22 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
     }
     //toggle dnd and tap mode based on btn
     const toggleTap = (e) => {
-        if (e.type ==="click" || (e.type ==="keydown" && e.key === "Enter")) setDisableDnD(state => !state)
+        if (e.type ==="click" || (e.type ==="keydown" && e.key === "Enter")) {
+            //setDisableDnD(state => !state)
+            //update redux store so instructions can dynamically change
+            if (disableDnD) {
+                dispatch(enableDnD())
+            }
+            else dispatch(enableTap())
+            moreInfoOnClick()
+            //if we're changing the mode, we need to reset this
+            // as its only viable for tap mode
+            if(firstTapEl) document.getElementById("dragItem"+firstTapEl.draggableId).classList.remove("match-activity-dragging")
+            removedEl.current = null
+            setFirstTapEl(null)
+        }
     }
-    
+  
     return(
         <>
         <div className={`d-flex match-activity-header justify-content-${smallWindowWidth?"center": "start"}`}>
@@ -328,7 +347,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
                                 customContainerClass = "match-activity-instructions"
                                 customContainerAriaLabel = "activity-instructions"
                                 customDropDownID = "match-activity-instructions"
-                                setTimeoutOnMount = {5000}
+                                setTimeoutOnMount = {!moreInfoBtn? 4000: 0}
                                 onClick = {moreInfoOnClick}
                             />
                         </div>
@@ -354,14 +373,12 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
                 {mediumWindowWidth ? 
                  <div className="match-activity-itemBank d-flex justify-content-center three-columns">
                         {Object.keys(data.itemBank).map((key, index)=>{
-                            //let last = index===Object.keys(data.itemBank).length-1
                             return (
                                 <div key={key} className={`match-activity-itemBank-column-${index+1} w-100 d-flex flex-column align-items-center`}>
                                     <DroppableArea 
                                         firstElTap = {firstTapEl} 
                                         id={key}
                                         content = {data.itemBank[key]}
-                                        //droppableClassName = {`match-activity-itemBank-droppables w-100 ${last? "last-item":""}`}
                                         droppableClassName = {`match-activity-itemBank-droppables d-flex flex-column w-100`}
                                         draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
                                         innerDroppableClassName = {`${disableDnD && firstTapEl? "match-activity-tap-active": ""} match-activity-inner-droppable w-100 d-flex flex-column align-items-center`}
@@ -386,7 +403,6 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
                                         firstElTap = {firstTapEl} 
                                         id={key}
                                         content = {data.itemBank[key]}
-                                        //droppableClassName = {`match-activity-itemBank-droppables w-100 ${last? "last-item":""}`}
                                         droppableClassName = {`match-activity-itemBank-droppables d-flex flex-column w-100`}
                                         draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
                                         innerDroppableClassName = {`${disableDnD && firstTapEl? "match-activity-tap-active": ""} match-activity-inner-droppable w-100 d-flex flex-column align-items-center`}

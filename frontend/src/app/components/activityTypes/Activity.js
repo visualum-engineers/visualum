@@ -1,12 +1,5 @@
-import MultipleChoiceApp from "./MultipleChoice/MultipleChoiceApp"
-import MultipleChoiceInstructions from "./MultipleChoice/MultipleChoiceInstructions"
-import ShortAnswerApp from "./ShortAnswer/ShortAnswerApp"
-import ShortAnswerInstructions from "./ShortAnswer/ShortAnswerInstructions"
-import SortActivityApp from "./SortActivity/SortActivityApp"
-import SortActivityInstructions from "./SortActivity/SortActivityInstructions"
-import MatchActivityApp from "./MatchActivity/MatchActivityApp"
-import MatchActivityInstructions from "./MatchActivity/MatchActivityInstructions"
-
+import ActivityQuestions from "./ActivityQuestions"
+import ActivityInstructions from "./ActivityInstructions"
 import ActivityBtns from "./NavActivityBtn/ActivityBtns"
 import SlimNavbar from "../slimNavbar/SlimNavbar"
 import SecondarySideBar from "../sideBar/SecondarySideBar"
@@ -14,9 +7,9 @@ import assignmentData from "../../helpers/sampleAssignmentData"
 import { useEffect, useState } from "react"
 import useWindowWidth from "../../hooks/use-window-width"
 import {CSSTransition} from "react-transition-group"
-
-//const activeActivityBg = "images/activity/active-activity-bg.jpg"
-
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux';
+import {enableTap} from '../../../redux/features/activityTypes/activitiesSlice'
 const activityData = assignmentData
 const duration = 500
 const defaultTransition = {
@@ -31,13 +24,21 @@ const Activity = () =>{
     const [sidebarToggle, setSidebarToggle] = useState(true)
     const [moreInfoBtn, setMoreInfoBtn] = useState(true)
     const windowWidth = useWindowWidth(992)
+    const smallWindowWidth = useWindowWidth(576)
+    const dndEnabled = useSelector((state) => state.activities.dndEnabled)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        //on mount check local storage for data
+        let stored = localStorage.getItem(`${activityData.activityID}-activity_last_seen_question`)
+        if(!stored) return
+        setQuestionNum(parseInt(stored))
+    }, [])
     //when window width changes <992, sidebar automatically closes
     //it can still be opened though
     useEffect(()=>{ 
         if(!windowWidth) setSidebarToggle(false)
         else setSidebarToggle(true)
     },[windowWidth])
-
     const onNavBtnClick = (e) =>{
         const btnType = e.target.closest("button").getAttribute("btntype")
         //different btn actions
@@ -56,19 +57,24 @@ const Activity = () =>{
         setPrevQuestion(questionNum)
 
         setQuestionNum(currQuestion)
-    }
+        localStorage.setItem(`${activityData.activityID}-activity_last_seen_question`, currQuestion.toString())
 
-    const exitSideBar = () =>{
-        setSidebarToggle(false)
     }
-    const openSideBar = () =>{
-        setSidebarToggle(true)
-    }
+    const exitSideBar = () => setSidebarToggle(false)
+    
+    const openSideBar = () => setSidebarToggle(true)
+    
     const handleSideBar = (e) =>{
         if (sidebarToggle && e.target.closest("button").ariaLabel === "exit-sidebar") return exitSideBar()
         else return openSideBar()
     }
-    const moreInfoOnClick = (e) => setMoreInfoBtn(state=> !state)
+    const moreInfoOnClick = () => setMoreInfoBtn(state=> !state)
+    useEffect(()=>{
+        if(!smallWindowWidth) {
+            dispatch(enableTap())
+            setMoreInfoBtn(true)
+        }
+    }, [dispatch, smallWindowWidth])
     return(
     <>
         <SlimNavbar type={"activities-nav"} />
@@ -86,33 +92,13 @@ const Activity = () =>{
         />
         
         <div className = {`${sidebarToggle && windowWidth?"secondary-sidebar-open": ""} activity-body row flex-column justify-content-center align-items-center`}>
-            {/* <img src = {activeActivityBg} className="active-activity-bg" alt="planet and stars background"/> */}
-            
             {moreInfoBtn ? 
-                <div className="d-flex justify-content-center align-items-center activity-walkthrough-dark-bg">
-                    <button 
-                        className="activity-walkthrough-bg-exit-btn" 
-                        aria-label="exit-more-info"
-                        onClick={moreInfoOnClick}>
-                    </button>
-                    <div className="activity-walkthrough-instructions col-11 col-md-9 col-lg-7 col-xl-6 col-xxl-5">
-                        <header className="activity-walkthrough-instructions-header d-flex justify-content-between align-items-center"> 
-                            <h1>Activity Instructions</h1>
-                            <button 
-                                onClick={moreInfoOnClick} 
-                                aria-label="exit-more-info" 
-                                className="d-flex align-items-center justify-content-center"
-                            >
-                                <i className="fas fa-times"></i>
-                            </button>
-                        </header>
-                        {activityData[questionNum].type === "sort" ? <SortActivityInstructions />
-                        : activityData[questionNum].type === "matching" ? <MatchActivityInstructions />
-                        : activityData[questionNum].type === "shortAnswer" ? <ShortAnswerInstructions />
-                        : activityData[questionNum].type === "multipleChoice"? <MultipleChoiceInstructions />
-                        : null}
-                    </div>
-                </div>
+                <ActivityInstructions 
+                    activityType = {activityData[questionNum].type}
+                    activityInstructions ={null}
+                    dndEnabled = {dndEnabled}
+                    moreInfoOnClick ={moreInfoOnClick}
+                />
             : null}
             {/* col-lg-7 col-xl-6*/}
             <div className = "activity-type-container col-11 col-md-9 d-flex flex-column justify-content-center">
@@ -129,14 +115,14 @@ const Activity = () =>{
                                 mountOnEnter
                                 unmountOnExit                                
                             >
-                                <div style={{...defaultTransition}} className="question-transition-container d-flex flex-column justify-content-center ">
-                                    {activityData[key].type === "sort" ? <SortActivityApp activityData = {activityData[key]} questionNum = {questionNum} activityID = {activityData.activityID}/>
-                                    : activityData[key].type === "matching" ? <MatchActivityApp activityData = {activityData[key]} questionNum = {questionNum} activityID = {activityData.activityID} moreInfoOnClick={moreInfoOnClick}/>
-                                    : activityData[key].type === "shortAnswer" ? <ShortAnswerApp activityData = {activityData[key]} questionNum = {questionNum} activityID = {activityData.activityID}/>
-                                    : activityData[key].type === "multipleChoice"? <MultipleChoiceApp activityData = {activityData[key]} questionNum = {questionNum} activityID = {activityData.activityID}/>
-                                    :<p>Hi</p>}
-                                </div>
-
+                                <ActivityQuestions 
+                                    activityData = {activityData}
+                                    activityKey = {key}
+                                    questionNum = {questionNum}
+                                    moreInfoOnClick = {moreInfoOnClick}
+                                    moreInfoBtn = {moreInfoBtn}
+                                    style ={{...defaultTransition}}
+                                />
                             </CSSTransition> 
                         )
                     })

@@ -4,12 +4,12 @@
     z-index: 3;
     @keyframes show-instructions{
         from {width: 0px; height: 0px; font-size: 0px; padding: 0; opacity:0}
-        50% {height: auto; width: 10rem; font-size: 0.8rem; padding: 1rem; opacity:0;}
+        50% {height: auto; width: 10rem; font-size: 0.8rem; padding: 0.6rem; opacity:0;}
         to{opacity: 1;}
     }
     @keyframes hide-instructions{
-        from {height: auto; width:10rem; font-size: 0.8rem; padding: 1rem; opacity: 1}
-        50% {height: auto; width:10rem; font-size: 0.8rem;padding: 1rem; opacity:0;}
+        from {height: auto; width:10rem; font-size: 0.8rem; padding: 0.6rem; opacity: 1}
+        50% {height: auto; width:10rem; font-size: 0.8rem;padding: 0.6rem; opacity:0;}
         to{width: 0px; height: 0px; font-size: 0px;}
     }
     
@@ -44,7 +44,6 @@
         height: 0;
         border-left: 0.6rem solid transparent;
         border-right: 0.6rem solid transparent;
-        border-bottom: 0.6rem solid white;
         z-index: 2
     }
     .info-triangle-2{
@@ -53,11 +52,10 @@
         height: 0;
         border-left: 0.6rem solid transparent;
         border-right: 0.6rem solid transparent;
-        border-bottom: 0.6rem solid rgba(0, 0, 0, 0.397);
     }
     
     .instructions-show{
-        padding: 1rem;
+        padding: 0.6rem;
         opacity: 1;
         font-size: 0.8rem;
         height: auto;
@@ -75,8 +73,10 @@
 .info-triangle{
     top:-0.6rem;
     left: 4.6rem;
+    border-bottom: 0.6rem solid white;
 }
 .info-triangle-2{
     top:-0.6rem;
     left: 4.6rem;
+    border-bottom: 0.6rem solid rgba(0, 0, 0, 0.397);
 }

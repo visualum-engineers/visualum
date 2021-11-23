@@ -1,7 +1,7 @@
 const MatchActivityInstructions = () =>{
     return(
         <div>
-            
+            MatchActivity
         </div>
     )
 }
