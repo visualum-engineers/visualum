@@ -3,8 +3,8 @@ $main-font: 'Poppins', sans-serif;
 $main-color: rgba(107, 97, 144, 0.8);
 
 
-$main-font-color: white; 
-$secondary-font-color: black; 
+$main-font-color: black; 
+$secondary-font-color: white; 
 $label-font-color: black;
 
 $main-font-size: 14px;
@@ -23,7 +23,7 @@ $black: black;
 $white: white;
 $light-blue: #dbedfd;
 $dark-blue: rgba(8, 40, 109, 1); 
-$purple: rgba(58,19,208);
+$purple: rgba(58,19,208,1);
 //$orange: ;
 
 @mixin remove-btn-default {

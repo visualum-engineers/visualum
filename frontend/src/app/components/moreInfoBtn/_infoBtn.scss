@@ -66,7 +66,7 @@
 .instructions{
     top:2rem;
     left:-4.7rem;
-    color: $label-font-color;
+    color: $main-font-color;
     @include border-radius(5px);
     @include box-shadow(0px 0px 2px 0px #000000);
 }

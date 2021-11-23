@@ -52,11 +52,11 @@
     .timer-btns{
         @include remove-btn-default;
         font-size: 12px;
-        color: $black;
+        color: $main-font-color;
     }
 }
 .match-activity-instructions{
-    color: $black;
+    color: $main-font-color;
     button{
         color: $dark-blue;
     }
@@ -223,11 +223,11 @@
         margin: 0;
         background-color: $white;
         font-weight: 500;
-        color: $black;
+        color: $main-font-color;
         cursor: auto;
     }
     p:hover{
-        color: $black;
+        color: $main-font-color;
         opacity: 1 !important;
         background-color: $white;
         border: 1px solid rgba(0, 0,0,0) !important;
@@ -299,7 +299,7 @@
     &::-webkit-scrollbar{
         width: 0.5rem;
         @include border-radius(7px);
-        background-color: rgb(201, 201, 201, 0);
+        background-color: rgba(201, 201, 201, 0);
     }
     &::-webkit-scrollbar-thumb{
         @include border-radius(7px);
@@ -317,7 +317,7 @@
 
 .match-activity-dragging{
     opacity: 0.8;
-    color: $black;
+    color: $main-font-color;
     background-color: $white;
     border: 1px solid $black;
     div{
