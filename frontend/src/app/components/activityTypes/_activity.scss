@@ -6,12 +6,12 @@
 
 @mixin activities-nav-navItems-hover{
     transform: scale(1.1);
-    background-color: rgb(238, 237, 237)
+    background-color: $white;
 }
 .activity-body{
     @include no-space;
     @include transition(all 0.3s ease-out);
-    background-color: $activities-bg-color;
+    background-color: $lightest-gray;
     height: 100%;
     position: relative;
     min-height: max(100vh, 650px);
@@ -34,13 +34,13 @@
     padding: 0 2rem;
     height: 3rem;
     z-index: 2;
-    background-color: $activities-bg-color !important;
+    background-color: $lightest-gray !important;
     .back-button-container {
         .back-button {
             height: 100%;
             font-size: 0.7rem;
             border: 1px gray solid;
-            color: $label-font-color;
+            color: $main-font-color;
             &:hover {
                 @include activities-nav-navItems-hover()
             }
@@ -49,14 +49,14 @@
     }
     .navbar-brand {
         font-size: 1rem !important;
-        color: $label-font-color;
+        color: $main-font-color;
         padding: 0 1rem;
         @include border-radius(5px);
         @include transition(all 0.3s ease-out);
         &:hover, &:focus{
             cursor: pointer;
             @include activities-nav-navItems-hover();
-            color: $label-font-color;
+            color: $main-font-color;
         }
         
 
@@ -68,7 +68,7 @@
     @include box-shadow(0 0 3px rgba(0, 0, 0, 1));
     padding: 1rem;
     margin-bottom: 0;
-    background-color: rgba(58,19,208);
+    background-color: $purple;
     color: white;
     width: 65%;
     margin-bottom: 2.7rem;
@@ -77,8 +77,8 @@
     border: 1px solid rgba(0, 0, 0,0);
     &:hover{
         transform: scale(1.1);
-        color: rgba(58,19,208,1);
-        border: 1px solid rgba(58,19,208,1);
+        color: $purple;
+        border: 1px solid $purple;
         background-color: white;
     }
 }
@@ -210,7 +210,7 @@
 .nav-activity-btn{
     @include border-radius(5px);
     color: $main-font-color;
-    background-color: #3a13d0;
+    background-color: $purple;
     padding: 5px 20px;
     margin: 20px 0;
     border: 1px $main-font-color solid;
@@ -219,6 +219,6 @@
 
 .nav-activity-btn:hover{
     @include activities-nav-navItems-hover;
-    border: 1px solid #3a13d0;
-    color: #3a13d0;
+    border: 1px solid $purple;
+    color: $purple;
 }

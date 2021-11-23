@@ -4,14 +4,28 @@ $main-color: rgba(107, 97, 144, 0.8);
 
 
 $main-font-color: white; 
-
+$secondary-font-color: black; 
 $label-font-color: black;
 
 $main-font-size: 14px;
 
 $bg-color: rgb(9, 3, 34);
 $light-bg-color: white;
-$activities-bg-color: #f0f0f0;
+
+
+$lightest-gray: #f3f3f3;
+$lighter-gray: #f0f0f0;
+$light-gray: rgb(201, 201, 201);
+$dark-gray: rgb(112, 112, 112);
+$darkest-gray: rgb(179, 179, 179);
+
+$black: black;
+$white: white;
+$light-blue: #dbedfd;
+$dark-blue: rgba(8, 40, 109, 1); 
+$purple: rgba(58,19,208);
+//$orange: ;
+
 @mixin remove-btn-default {
     background: none;
     border: none;

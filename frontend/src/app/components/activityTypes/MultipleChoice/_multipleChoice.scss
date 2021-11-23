@@ -1,38 +1,62 @@
-.MCInputContainer{
+.mc-activity-input-container{
     margin-top: 15px;
     font-size: 0.9em;
 }
-.MCInputContainer label{
-    @include border-radius(5px);
-    cursor: pointer;
-    height: 100%;
-    padding: 10px 20px;
-    transition: all 0.3s;
-    color: $main-font-color;
-    border: 1px $main-font-color solid;
-}
-.MCInputContainer label:hover{
-    background-color: $main-font-color;
-    color: $label-font-color;
-}
 
-.MCInputContainer input[type="radio"]{
-    @include hidden;
+.mc-activity-input-container {
+    input[type="radio"]{
+        @include hidden;
+    }
 }
-.MCInputContainer input[type="radio"]:checked + label{
-    background-color: $main-font-color;
-    color: $label-font-color;
+.mc-activity-input-container {
+    input[type="radio"]:checked + label{
+        background-color: $main-font-color;
+        color: $main-font-color;
+    }
 }
-.mc-answer-choice{
-    margin: 5px;
+.mc-activity-question{
+    margin-bottom: 2rem;
 }
-.empty-mc-item{
-    @extend .mc-answer-choice
+.mc-activity-image-container.portrait-mode{
+    max-width: 100%;
+    min-width: 300px;
+    margin-bottom: 2rem;
 }
-
+.mc-activity-image-container.landscape-mode{
+    max-width: 50%;
+    min-width: 310px;
+    margin-left: 2rem;
+}
 .mc-activity-image{
-    max-width: 70%;
+    width: 100%;
     max-height: 50%;
     object-fit: contain;
     object-position: center;
+}
+.mc-activity-mc-item{
+    width: 100%;
+    margin: 0.5rem 0rem;
+    min-height: 4rem;
+    .mc-answer-label{
+        min-height: 4rem;
+        @include border-radius(0.5rem);
+        cursor: pointer;
+        height: 100%;
+        padding: 0.8rem 1.5rem;
+        transition: all 0.3s;
+        color: $main-font-color;
+        border: 1px $main-font-color solid;
+        
+    }
+    .mc-answer-label:hover{
+        background-color: $main-font-color;
+        color: $main-font-color;
+    }
+}
+.mc-activity-mc-item.grid-layout{
+    width: 45%;
+    margin: 0.5rem;
+    .mc-answer-label{
+        @include border-radius(0.5rem);
+    }
 }

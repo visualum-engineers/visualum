@@ -7,8 +7,7 @@ import assignmentData from "../../helpers/sampleAssignmentData"
 import { useEffect, useState } from "react"
 import useWindowWidth from "../../hooks/use-window-width"
 import {CSSTransition} from "react-transition-group"
-import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux'
 import {enableTap} from '../../../redux/features/activityTypes/activitiesSlice'
 const activityData = assignmentData
 const duration = 500
@@ -70,11 +69,13 @@ const Activity = () =>{
     }
     const moreInfoOnClick = () => setMoreInfoBtn(state=> !state)
     useEffect(()=>{
-        if(!smallWindowWidth) {
+        const activityType = activityData[questionNum].type
+        const updateDnD = !smallWindowWidth && (activityType ==="matching" || activityType === "sort")
+        if(updateDnD) {
             dispatch(enableTap())
             setMoreInfoBtn(true)
         }
-    }, [dispatch, smallWindowWidth])
+    }, [dispatch, smallWindowWidth, questionNum])
     return(
     <>
         <SlimNavbar type={"activities-nav"} />
@@ -122,6 +123,7 @@ const Activity = () =>{
                                     moreInfoOnClick = {moreInfoOnClick}
                                     moreInfoBtn = {moreInfoBtn}
                                     style ={{...defaultTransition}}
+                                    mediumWindowWidth = {windowWidth}
                                 />
                             </CSSTransition> 
                         )

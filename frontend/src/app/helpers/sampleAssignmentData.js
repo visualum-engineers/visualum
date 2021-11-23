@@ -33,7 +33,7 @@ const assignmentData = {
         question: "What faces this world?",
         imageURL : "images/homePage/mountain-home-bg.jpg",
         imgDescription: "",
-        answerChoices: ["Good What faces this world", "Bad", "No"]
+        answerChoices: ["The world know no bounds except that is cannot be at piece right now", "Bad", "No"]
     },
     //sorting
     3: {

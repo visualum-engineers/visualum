@@ -69,9 +69,9 @@ const transformData = (data, itemBankColumns) =>{
         return newData
 }
 
-const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick=null, moreInfoBtn}) => {
+const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick=null, moreInfoBtn, mediumWindowWidth}) => {
     const smallWindowWidth = useWindowWidth(576)
-    const mediumWindowWidth = useWindowWidth(992)
+    //const mediumWindowWidth = useWindowWidth(992)
     const columns = mediumWindowWidth ? Array(1).fill(0) : Array(2).fill(0)
     const [data, setData] = useState(transformData(activityData, 2))
     const disableDnD = useSelector((state) => !state.activities.dndEnabled) 

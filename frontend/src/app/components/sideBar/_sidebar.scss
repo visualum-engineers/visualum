@@ -1,6 +1,6 @@
 @mixin sidebar-navItems-hover{
     transform: scale(1.1);
-    background-color: rgb(238, 237, 237)
+    background-color: $white
 }
 //from here are common styles of all sidebars
 .sidebar-nav{
@@ -95,7 +95,7 @@
         line-height: 100%;
     }
     a:hover{
-        color: rgb(8, 40, 109, 0.8) ;
+        opacity: 0.8;
     }
 }
 .secondary-sidebar-visualum-logo{
@@ -107,7 +107,7 @@
 }
 .secondary-sidebar-link-container{
     @include transition(all 0.25s ease-out);
-    color: $label-font-color;
+    color: $main-font-color;
 }
 
 .secondary-sidebar-link{

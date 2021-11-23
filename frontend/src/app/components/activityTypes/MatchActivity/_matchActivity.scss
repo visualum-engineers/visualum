@@ -22,10 +22,10 @@
 }
 .match-activity-timer{
     position: relative;
-    color: rgb(112, 112, 112);
+    color: $dark-gray;
     font-weight: 500;
     font-size: 0.9rem;
-    background-color: white;
+    background-color: $white;
     min-width: 10rem;
     width: 30%;
     @include border-radius(8px);
@@ -35,7 +35,7 @@
 
     .timer-counter{
         @include border-radius(10px);
-        color: rgb(112, 112, 112);
+        color: $dark-gray;
         font-weight: 600;
         text-align: center;
         position: relative;
@@ -52,21 +52,21 @@
     .timer-btns{
         @include remove-btn-default;
         font-size: 12px;
-        color: $label-font-color;
+        color: $black;
     }
 }
 .match-activity-instructions{
-    color: $label-font-color;
+    color: $black;
     button{
-        color: rgb(0, 57, 180);
+        color: $dark-blue;
     }
     button:hover{
-        color: white;
-        background: black;
+        color: $white;
+        background: $black;
     }
     .instructions{
-        background-color: rgba(8, 40, 109, 1);
-        color: white;
+        background-color: $dark-blue;
+        color: $white;
         left: -8.4rem;
         text-align: center !important;
     }
@@ -74,7 +74,7 @@
     .info-triangle{
         left: 8.4rem;
         top:  -0.54rem;
-        border-bottom: 0.6rem solid rgba(8, 40, 109, 1);
+        border-bottom: 0.6rem solid $dark-blue;
     }
     .info-triangle-2{
         top:-0.59rem;
@@ -92,11 +92,11 @@
     &::-webkit-scrollbar{
         width: 0.5rem;
         @include border-radius(7px);
-        background-color: rgb(201, 201, 201);
+        background-color: $light-gray;
     }
     &::-webkit-scrollbar-thumb{
         @include border-radius(7px);
-        background-color: rgba(8, 40, 109, 1);
+        background-color: $dark-blue;
     }
    
 }
@@ -128,7 +128,7 @@
 // }
 .match-activity-itemBank{
     margin-top: 1.5rem;
-    background-color: white;
+    background-color: $white;
     @include border-radius(7px);
     @include box-shadow(rgba(0,0,0,0.1) 0px 0 10px);
     min-width: 310px;
@@ -142,7 +142,7 @@
     }
     &::-webkit-scrollbar-thumb{
         @include border-radius(7px);
-        background-color: rgba(8, 40, 109, 1);
+        background-color: $dark-blue;
     }
 }
 
@@ -166,7 +166,7 @@
 }
 .match-activity-answers-column,
 .match-activity-keys-column{
-    background-color: white;
+    background-color: $white;
 }
 .match-activity-answers-column{
     .match-activity-inner-droppable{
@@ -192,6 +192,7 @@
         padding-bottom: 0;
         padding-top: 1rem;
         min-height: 8rem;
+        background: none;
     }
     .match-activity-draggables{
         margin-top: 0;
@@ -220,15 +221,15 @@
     p{
         @include match-activity-keypair-styles();
         margin: 0;
-        background-color: white;
+        background-color: $white;
         font-weight: 500;
-        color: black;
+        color: $black;
         cursor: auto;
     }
     p:hover{
-        color: black;
+        color: $black;
         opacity: 1 !important;
-        background-color: white;
+        background-color: $white;
         border: 1px solid rgba(0, 0,0,0) !important;
     }
 }
@@ -261,31 +262,39 @@
     margin-bottom: 1.5rem;
     min-width: 145px;
     height: 5rem;
-}
-.match-activity-answers-droppables.last-item{
-    margin-bottom: 0;
+    .match-activity-inner-droppable{
+        //@include box-shadow(rgba(0, 0, 0, 0.938) 0px 0 1px);
+    }
 }
 
-.match-activity-itemBank-droppables{
-    @extend .match-activity-answers-droppables;
+.match-activity-answers-droppables.last-item{
     margin-bottom: 0;
-    .match-activity-inner-droppable{
-        margin: 0;
-    }
 }
 .match-activity-inner-droppable{
     list-style-type: none;
     padding: 0 0.25rem;
     margin-bottom: 0;
-    background-color: rgb(231, 231, 231);
-    @include border-radius(7px)
+    background-color: $lightest-gray;
+    @include border-radius(7px);
 }
+.match-activity-itemBank-droppables{
+    list-style-type: none;
+    margin-bottom: 1.5rem;
+    min-width: 145px;
+    height: 5rem;
+    margin-bottom: 0;
+    .match-activity-inner-droppable{
+        margin: 0;
+    }
+}
+
 
 .match-activity-draggables{
     @include match-activity-keypair-styles();
     margin-bottom: 1rem;
-    background-color: #dbedfd;
+    background-color: $light-blue;
     cursor: pointer;
+    @include box-shadow(rgba(0,0,0,0.2) 0px 0 5px);
 
     &::-webkit-scrollbar{
         width: 0.5rem;
@@ -294,7 +303,7 @@
     }
     &::-webkit-scrollbar-thumb{
         @include border-radius(7px);
-        background-color: rgba(8, 40, 109, 1);
+        background-color: $dark-blue;
     }
     div{
         margin: auto;
@@ -308,20 +317,20 @@
 
 .match-activity-dragging{
     opacity: 0.8;
-    color: black;
-    background-color: white;
-    border: 1px solid black;
+    color: $black;
+    background-color: $white;
+    border: 1px solid $black;
     div{
         transform: scale(1.1);
     }
 }
 
-.match-activity-draggable-over{
-    background-color: rgb(179, 179, 179);
+.match-activity-inner-droppable.match-activity-draggable-over{
+    background-color: $darkest-gray;
 }
 .match-activity-tap-active:hover{
     cursor: pointer;
-    background-color: rgb(179, 179, 179)
+    background-color: $darkest-gray;
 }
 .match-activity-draggables.hide-draggable{
     opacity: 0;
