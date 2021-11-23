@@ -72,7 +72,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
     const mediumWindowWidth = useWindowWidth(992)
     const columns = mediumWindowWidth ? Array(1).fill(0) : Array(2).fill(0)
     const [data, setData] = useState(transformData(activityData, 2))
-    const [disableDnD,setDisableDnD] = useState(false)
+    const [disableDnD,setDisableDnD] = useState(!smallWindowWidth)
     const [firstTapEl, setFirstTapEl] = useState(null)
     const removedEl = useRef(null)
    
@@ -87,6 +87,9 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
     useEffect(() => {
         setData((data) => transformData(data, columns.length))
     }, [mediumWindowWidth, columns.length])
+    // useEffect(()=>{
+    //     if(!smallWindowWidth) setDisableDnD(true)
+    // })
     //when dragging starts
     const onDragStart = (result) =>{
         //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
@@ -293,7 +296,8 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
                     role="switch" 
                     aria-label ={!disableDnD ? "Enable Tap": "Restore Drag"}
                     id="match-activity-toggle-tap-mode" 
-                    defaultChecked = {disableDnD}
+                    checked = {disableDnD}
+                    readOnly
                 />
             </div>
           
@@ -358,7 +362,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
                                         id={key}
                                         content = {data.itemBank[key]}
                                         //droppableClassName = {`match-activity-itemBank-droppables w-100 ${last? "last-item":""}`}
-                                        droppableClassName = {`match-activity-itemBank-droppables w-100`}
+                                        droppableClassName = {`match-activity-itemBank-droppables d-flex flex-column w-100`}
                                         draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
                                         innerDroppableClassName = {`${disableDnD && firstTapEl? "match-activity-tap-active": ""} match-activity-inner-droppable w-100 d-flex flex-column align-items-center`}
                                         draggingOverClass={"match-activity-draggable-over"}
@@ -383,7 +387,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
                                         id={key}
                                         content = {data.itemBank[key]}
                                         //droppableClassName = {`match-activity-itemBank-droppables w-100 ${last? "last-item":""}`}
-                                        droppableClassName = {`match-activity-itemBank-droppables w-100`}
+                                        droppableClassName = {`match-activity-itemBank-droppables d-flex flex-column w-100`}
                                         draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
                                         innerDroppableClassName = {`${disableDnD && firstTapEl? "match-activity-tap-active": ""} match-activity-inner-droppable w-100 d-flex flex-column align-items-center`}
                                         draggingOverClass={"match-activity-draggable-over"}

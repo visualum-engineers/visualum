@@ -1,20 +1,51 @@
 @mixin match-activity-lg{
+    // .match-activity-keys-column, 
+    // .match-activity-answers-column, 
+    // .match-activity-itemBank-droppables{
+    //     padding: 3rem;
+    // }
     .match-activity-keys-column, 
     .match-activity-answers-column, 
     .match-activity-itemBank-column-1,
     .match-activity-itemBank-column-2{
         padding: 3rem;
     }
+    // .match-activity-itemBank-column-1,
+    // .match-activity-itemBank-column-2{
+    //     padding-bottom: 0;
+    //     .match-activity-inner-droppable{
+    //         margin-bottom: 3rem;
+    //     }
+    // }
+    
 }
 @mixin match-activity-md {
+    // .match-activity-keys-column, 
+    // .match-activity-answers-column, 
+    // .match-activity-itemBank-droppables{
+    //     padding: 3rem;
+    // }
     .match-activity-keys-column, 
     .match-activity-answers-column, 
     .match-activity-itemBank-column-1,
     .match-activity-itemBank-column-2{
         padding: 2.5rem 2rem;
     }
+    // .match-activity-itemBank-column-1,
+    // .match-activity-itemBank-column-2{
+    //     padding-bottom: 0;
+    //     .match-activity-inner-droppable{
+    //         margin-bottom: 2.5rem;
+    //     }
+    // }
+    
 }
 @mixin match-activity-sm{
+    // .match-activity-keys-column, 
+    // .match-activity-answers-column, 
+    // .match-activity-itemBank-droppables{
+    //     padding: 3rem;
+    // }
     .match-activity-keys-column, 
     .match-activity-answers-column, 
     .match-activity-itemBank-column-1,
@@ -22,4 +53,12 @@
         padding: 2rem 0.5rem;
         font-size: 0.75rem;
     }
+    // .match-activity-itemBank-column-1,
+    // .match-activity-itemBank-column-2{
+    //     padding-bottom: 0;
+    //     .match-activity-inner-droppable{
+    //         margin-bottom: 2rem;
+    //     }
+    // }
+    
 }

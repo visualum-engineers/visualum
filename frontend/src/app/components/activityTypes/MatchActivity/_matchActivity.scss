@@ -175,21 +175,21 @@
 .match-activity-itemBank-column-1,
 .match-activity-itemBank-column-2{
     background-color: rgba(0, 0,0,0);
-    
     @include box-shadow(none);
-    .match-activity-answers-droppables{
+    min-height: 100%;
+    .match-activity-itemBank-droppables{
         border: 1px solid rgba(0,0,0,0);
-        min-height: 8rem;
-        height:  100%;
-        
+        height: min-content;
+        min-height: 100%;
+        flex-grow: 1;
     }
     .match-activity-inner-droppable{
+        flex-grow: 1;
         list-style-type: none;
         padding: 0.25rem;
         padding-bottom: 0;
         padding-top: 1rem;
         min-height: 8rem;
-        height: min-content;
     }
     .match-activity-draggables{
         margin-top: 0;
@@ -313,9 +313,7 @@
         transform: scale(1.1);
     }
 }
-// .match-activity-draggables:hover{
-//     @extend .match-activity-dragging;
-// }
+
 .match-activity-draggable-over{
     background-color: rgb(179, 179, 179);
 }
@@ -325,5 +323,6 @@
 }
 .match-activity-draggables.hide-draggable{
     opacity: 0;
-    visibility: hidden;
+    visibility: hidden !important;
+
 }
