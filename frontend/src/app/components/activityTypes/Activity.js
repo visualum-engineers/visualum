@@ -102,7 +102,7 @@ const Activity = () =>{
                 />
             : null}
             {/* col-lg-7 col-xl-6*/}
-            <div className = "activity-type-container col-11 col-md-9 d-flex flex-column">
+            <div className = "activity-type-container col-11 col-md-10 d-flex flex-column">
                 {/*generate entire form data*/}
                 {question.type ?
                     Object.keys(activityData).map((key)=>{
@@ -135,7 +135,7 @@ const Activity = () =>{
                     2. This is the last question 
                     col-lg-7 col-xl-6
             */}
-            <div className="col-11 col-md-9 nav-activity-btns">
+            <div className="col-11 col-md-10 nav-activity-btns">
                 <ActivityBtns 
                     prevQuestion = {questionNum !== 1} 
                     lastQuestion = {Object.keys(activityData).length-1 === questionNum}

@@ -1,22 +1,6 @@
 .mc-activity-input-container{
-    margin-top: 15px;
-    font-size: 1rem;
-    background-color: $white;
-    padding: 2.5rem 2rem;
+    font-size: 0.8rem;
     @include border-radius(1rem);
-    overflow-x: hidden;
-    overflow-y: auto;
-    max-height: 45rem;
-    min-width: 310px;
-    &::-webkit-scrollbar{
-        width: 0.5rem;
-        @include border-radius(7px);
-        background-color: $light-gray;
-    }
-    &::-webkit-scrollbar-thumb{
-        @include border-radius(7px);
-        background-color: $dark-blue;
-    }
 }
 
 .mc-activity-input-container {
@@ -30,27 +14,57 @@
     }
 }
 .mc-activity-question{
-    margin-bottom: 2rem;
+    font-size: 1rem;
+    background-color: white;
+    @include box-shadow(rgba(0, 0, 0, 0.315) 0px 0 2px);
+    @include border-radius(7px);
+    padding: 0.5rem;
+    margin-bottom: 1.5rem;
 }
 .mc-activity-image-container{
-    padding: 1.5rem;
+    padding: 1rem;
     @include box-shadow(rgba(0, 0, 0, 0.315) 0px 0 5px);
     @include border-radius(7px);
     background-color: $white;
 }
+
 .mc-activity-image-container.portrait-mode{
     max-width: 100%;
     min-width: 290px;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     .mc-activity-image{
-        max-height: 24rem;
+        max-height: calc(max(calc(30vh - 2rem), 17rem));
     }
+}
+.mc-activity-answer-container{
+    @include box-shadow(rgba(0, 0, 0, 0.315) 0px 0 2px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    min-width: 280px;
+    max-width: 400px;
+    max-height: calc(max(50vh, 24rem));
+    height: 100%;
+    background-color: $white;
+    padding: 1rem;
+    @include border-radius(7px);
+    &::-webkit-scrollbar{
+        width: 0.5rem;
+        @include border-radius(1rem);
+        background-color: $light-gray;
+    }
+    &::-webkit-scrollbar-thumb{
+        @include border-radius(7px);
+        background-color: $dark-blue;
+    }
+}
+.mc-activity-answer-container.portrait-mode{
+    max-width: 100%;
 }
 .mc-activity-image-container.landscape-mode{
     max-width: 50%;
     min-width: 310px;
     margin-left: 2rem;
-    
+    max-height: calc(max(40vh, 26rem));
 }
 .mc-activity-image{
     height: 100%;

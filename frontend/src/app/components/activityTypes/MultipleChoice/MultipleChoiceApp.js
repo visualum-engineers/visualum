@@ -43,21 +43,25 @@ const MultipleChoiceApp = ({activityData, questionNum, activityID, mediumWindowW
         localStorage.setItem(`${activityID}-mc_activity_client_answer-${questionNum}`, id.toString())
     }
     return(
-        <div className="d-flex justify-content-center">
-            <form className = "mc-activity-input-container d-flex flex-column align-items-center">
-                <div className="mc-activity-question">{data.question}</div>
-                <div className = "d-flex justify-content-center align-items-start">
-                    <div className="d-flex flex-column justify-content-center w-100">
-                        {data.imageURL &&  !mediumWindowWidth? 
-                            <div className="mc-activity-image-container portrait-mode w-100">
-                                <img 
-                                    className = "mc-activity-image"
-                                    src={data.imageURL}
-                                    alt={data.imageDescription? data.imgDescription : null}
-                                /> 
-                            </div> 
-                        : null
-                        } 
+        <form className = "mc-activity-input-container d-flex align-items-center justify-content-center flex-grow-1">
+            <div className = {`d-flex ${mediumWindowWidth? "justify-content-between align-items-center": "flex-column"}`}>
+                {!mediumWindowWidth? 
+                        <div className="mc-activity-question">{data.question}</div>
+                : null}
+                {data.imageURL &&  !mediumWindowWidth? 
+                    <div className="mc-activity-image-container portrait-mode w-100">
+                        <img 
+                            className = "mc-activity-image"
+                            src={data.imageURL}
+                            alt={data.imageDescription? data.imgDescription : null}
+                        /> 
+                    </div> 
+                : null}
+                <div>   
+                    {mediumWindowWidth? 
+                        <div className="mc-activity-question">{data.question}</div>
+                    : null}
+                    <div className={`w-100 mc-activity-answer-container ${!mediumWindowWidth ?"portrait-mode":""}`}>
                         {/*renders different answer choices*/}
                         {!mediumWindowWidth ? 
                             Array(rows).fill(0).map((content, rowIndex) => {
@@ -78,12 +82,11 @@ const MultipleChoiceApp = ({activityData, questionNum, activityID, mediumWindowW
                                                 />
                                             )
                                         })}
-                                </div>
+                                    </div>
                             )})
                         : data.answerChoices.map((choice, index)=>{
                                 if(!choice) return null
                                 return(
-                        
                                         <MultipleChoiceItem
                                             key = {choice}
                                             index={index} 
@@ -96,19 +99,18 @@ const MultipleChoiceApp = ({activityData, questionNum, activityID, mediumWindowW
                             })
                         }
                     </div>
-                    {data.imageURL &&  mediumWindowWidth? 
-                        <div className="mc-activity-image-container landscape-mode">
-                            <img 
-                                className = "mc-activity-image"
-                                src={data.imageURL}
-                                alt={data.imageDescription? data.imgDescription : null}
-                            /> 
-                        </div> 
-                    : null
-                    } 
                 </div>
-            </form>
-        </div>
+                {data.imageURL &&  mediumWindowWidth? 
+                    <div className="mc-activity-image-container landscape-mode">
+                        <img 
+                            className = "mc-activity-image"
+                            src={data.imageURL}
+                            alt={data.imageDescription? data.imgDescription : null}
+                        /> 
+                    </div> 
+                : null} 
+            </div>
+        </form>
     )
 } 
 export default MultipleChoiceApp

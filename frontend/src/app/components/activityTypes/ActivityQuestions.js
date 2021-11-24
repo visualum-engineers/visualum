@@ -5,7 +5,7 @@ import MatchActivityApp from "./MatchActivity/MatchActivityApp"
 
 const ActivityQuestions = ({activityData, questionNum, moreInfoOnClick, moreInfoBtn, style, activityKey, mediumWindowWidth}) =>{
     return(
-        <div style={style} className="question-transition-container d-flex flex-column justify-content-center ">
+        <div style={style} className="flex-grow-1 question-transition-container d-flex flex-column">
             {activityData[activityKey].type === "sort" ? <SortActivityApp 
                                                     activityData = {activityData[activityKey]} 
                                                     questionNum = {questionNum} 
