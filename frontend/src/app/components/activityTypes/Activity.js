@@ -92,7 +92,7 @@ const Activity = () =>{
                 customFooterLinkClass = {"activities-sidebar-link"}
         />
         
-        <div className = {`${sidebarToggle && windowWidth?"secondary-sidebar-open": ""} activity-body row flex-column justify-content-center align-items-center`}>
+        <div className = {`${sidebarToggle && windowWidth?"secondary-sidebar-open": ""} activity-body row flex-column align-items-center`}>
             {moreInfoBtn ? 
                 <ActivityInstructions 
                     activityType = {activityData[questionNum].type}
@@ -102,7 +102,7 @@ const Activity = () =>{
                 />
             : null}
             {/* col-lg-7 col-xl-6*/}
-            <div className = "activity-type-container col-11 col-md-9 d-flex flex-column justify-content-center">
+            <div className = "activity-type-container col-11 col-md-9 d-flex flex-column">
                 {/*generate entire form data*/}
                 {question.type ?
                     Object.keys(activityData).map((key)=>{
