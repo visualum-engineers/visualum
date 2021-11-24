@@ -14,7 +14,7 @@
     background-color: $lightest-gray;
     height: 100%;
     position: relative;
-    min-height: max(100vh, 650px);
+    min-height: calc(max(100vh, 650px));
 }
 .activity-body.secondary-sidebar-open{
     margin-left: 15rem; 
@@ -89,14 +89,14 @@
     top: 0;
     left: 0;
     width:100%;
-    height:max(100%, 100vh);
+    height: calc(max(100%, 100vh));
     z-index: 2;
 }
 .activity-walkthrough-bg-exit-btn{
     position: absolute;
     background-color: rgba(0, 0, 0, 0.541);
     width:100%;
-    height:max(100%, 100vh);
+    height: calc(max(100%, 100vh));
     z-index: 0;
 }
 .activity-walkthrough-instructions{
@@ -106,7 +106,7 @@
     overflow-wrap: break-word;
     overflow-x: hidden;
     overflow-x: auto;
-    height: max(28rem, 448px);
+    height: calc(max(28rem, 448px));
     @include border-radius(4px)
 }
 .activity-walkthrough-instructions-header{
@@ -141,7 +141,7 @@
     margin-top: 3rem;
     padding: 20px;
     text-align: center;
-    min-height: max(75vh, 400px);
+    min-height: calc(max(75vh, 400px));
     z-index: 1;
     max-width: 1000px;
     overflow: hidden;
