@@ -138,10 +138,10 @@
 .activity-type-container{
     @include border-radius(25px);
     position: relative;
-    margin-top: 3rem;
-    padding: 20px;
+    margin-top: 2.3rem;
+    padding: 1.3rem;
     text-align: center;
-    min-height: calc(max(75vh, 400px));
+    min-height: calc(max(calc(75vh + 7.85rem), 400px));
     z-index: 1;
     max-width: 1000px;
     overflow: hidden;
@@ -209,8 +209,8 @@
     @include border-radius(5px);
     color: $secondary-font-color;
     background-color: $purple;
-    padding: 5px 20px;
-    margin: 20px 0;
+    padding: 0.4rem 1.2rem;
+    margin: 1.2rem 0;
     border: 1px $secondary-font-color solid;
     @include transition(all 0.3s ease-out);
 }  

@@ -166,6 +166,7 @@
 .match-activity-answers-column,
 .match-activity-keys-column{
     background-color: $white;
+    //min-height: 75vh;
 }
 .match-activity-answers-column{
     .match-activity-inner-droppable{
@@ -257,6 +258,11 @@
     min-height: 24rem;
     max-height: 75vh;
     height: 75vh;
+    .match-activity-answers-column,
+    .match-activity-keys-column{
+        background-color: $white;
+        min-height: 100%;
+    }
 }
 
 .match-activity-answers-droppables{
