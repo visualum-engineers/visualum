@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Dashboard from './Dashboard'
 import StudentCard from './StudentCard'
 import { useHistory } from 'react-router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import CardContainer from './CardContainer'
 
 export default function DashboardClass() {
     // let { class_id } = useParams();
@@ -27,15 +28,51 @@ export default function DashboardClass() {
             average: 99.2
         },
         {
-            name: "Kevin Arias",
+            name: "Emilio Samaniego",
+            average: 97
+        },
+        {
+            name: "Derek Widmer",
+            average: 98
+        },
+        {
+            name: "Arky Asmal",
+            average: 95.5
+        },
+        {
+            name: "Luis Lopez",
             average: 99.2
         },
         {
             name: "Emilio Samaniego",
             average: 97
         },
-
+        {
+            name: "Derek Widmer",
+            average: 98
+        },
+        {
+            name: "Arky Asmal",
+            average: 95.5
+        },
+        {
+            name: "Luis Lopez",
+            average: 99.2
+        },
+        {
+            name: "Emilio Samaniego",
+            average: 97
+        },
     ]
+
+    const cards = studentData.map(student => {
+        return (
+            <div className="col-md-4 col-12 p-2">
+                <StudentCard data={student} />
+            </div>
+        )
+    });
+
     return (
         <Dashboard page="classes">
             <div className="control-bar">
@@ -45,13 +82,9 @@ export default function DashboardClass() {
                     </button>
                 </div>
             </div>
-            <div className="card-container">
-                <StudentCard data={studentData[0]} />
-                <StudentCard data={studentData[1]} />
-                <StudentCard data={studentData[2]} />
-                <StudentCard data={studentData[3]} />
-                <StudentCard data={studentData[4]} />
-            </div>
+            <CardContainer>
+                {cards}
+            </CardContainer>
         </Dashboard >
     )
 }

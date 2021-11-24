@@ -5,7 +5,7 @@ import LoadingIcon from './components/loadingIcon/LoadingIcon';
 
 import NavWrapper from './components/primaryNavbar/NavWrapper';
 import DashboardHome from './components/dashboard/DashboardHome'
-import DashboardActivities from './components/dashboard/DashboardActivities';
+import DashboardActivities from './components/dashboard/DashboardActivities'
 import DashboardClasses from './components/dashboard/DashboardClasses';
 import DashboardClass from './components/dashboard/DashboardClass';
 
@@ -15,21 +15,21 @@ import TestBackend from "./components/testBackend/test"
 
 
 //lazy loaded components for performance
-const Settings = React.lazy(()=> import('./components/settingsPage/Settings'))
-const HomeContent = React.lazy(()=> import('./components/homePage/Home'))
-const SignUpForm = React.lazy(()=> import('./components/forms/EntryForms/SignUpForm/SignUpForm'))
-const LoginForm = React.lazy(()=> import('./components/forms/EntryForms/LoginForm/LoginForms'))
-const CreateGame = React.lazy(()=> import('./components/createGame/CreateGame'))
-const Activity = React.lazy(()=> import('./components/activityTypes/Activity'))
-const LabelPictures = React.lazy(()=> import("./components/activityTypes/LabelPictures/LabelPicturesApp"))
-const ActivityCreation = React.lazy(()=> import("./components/forms/ActivityCreationForm/ActivityCreationForm"))
+const Settings = React.lazy(() => import('./components/settingsPage/Settings'))
+const HomeContent = React.lazy(() => import('./components/homePage/Home'))
+const SignUpForm = React.lazy(() => import('./components/forms/EntryForms/SignUpForm/SignUpForm'))
+const LoginForm = React.lazy(() => import('./components/forms/EntryForms/LoginForm/LoginForms'))
+const CreateGame = React.lazy(() => import('./components/createGame/CreateGame'))
+const Activity = React.lazy(() => import('./components/activityTypes/Activity'))
+const LabelPictures = React.lazy(() => import("./components/activityTypes/LabelPictures/LabelPicturesApp"))
+const ActivityCreation = React.lazy(() => import("./components/forms/ActivityCreationForm/ActivityCreationForm"))
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Suspense fallback={
-          <LoadingIcon entireViewport={true}/>
+          <LoadingIcon entireViewport={true} />
         }>
           <Switch>
             <Route
@@ -64,11 +64,11 @@ function App() {
             </Route>
 
             <Route exact path="/activity">
-                <Activity />
+              <Activity />
             </Route>
 
             <Route exact path="/activity-creation">
-                <ActivityCreation />
+              <ActivityCreation />
             </Route>
 
             <Route exact path="/label-pictures">
@@ -96,8 +96,8 @@ function App() {
               <DashboardHome />
             </Route>
 
-            <Route exact path = "/testBackend">
-              <TestBackend/>
+            <Route exact path="/testBackend">
+              <TestBackend />
             </Route>
           </Switch>
         </Suspense>
