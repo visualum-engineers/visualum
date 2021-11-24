@@ -7,12 +7,14 @@ import CardContainer from './CardContainer';
 export default function DashboardHome() {
 
     const cards = sidebarValues.map(item => {
-        if (item.value != "home") {
+        if (item.value !== "home") {
             return (
                 <div className="col-md-4 col-12 p-2">
                     <OverviewCard value={item.value} title={item.name} subtitle={item.description} />
                 </div>
             )
+        } else {
+            return null;
         }
     });
 

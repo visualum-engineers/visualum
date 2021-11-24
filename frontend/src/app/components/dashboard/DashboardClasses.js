@@ -53,7 +53,7 @@ export default function DashboardClass() {
             <CardContainer>
                 {cards}
             </CardContainer>
-            {modalOpen && <DashboardModal close={closeModal}></DashboardModal>}
+            {modalOpen && <DashboardModal close={closeModal} onSubmit={addClass}></DashboardModal>}
         </Dashboard >
     )
 }
