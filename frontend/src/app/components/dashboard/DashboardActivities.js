@@ -26,7 +26,16 @@ export default function DashboardActivities(props) {
             <div className="row-container">
                 <div className="control-bar">
                     <div className="buttons">
-                        <button className="btn btn-success button">
+                        <button className="btn btn-success button"
+                            onClick={() => addActivity({
+                                name: "Multiple Choice Math",
+                                questions: [
+                                    {
+                                        q: "What is the ___ of ___",
+                                        a: "___"
+                                    }
+                                ]
+                            })}>
                             <span className="pe-1"><FontAwesomeIcon icon={faPlus} /></span> New
                         </button>
                     </div>

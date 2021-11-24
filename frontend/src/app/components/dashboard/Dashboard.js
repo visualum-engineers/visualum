@@ -1,22 +1,22 @@
 import React from 'react'
 import DashboardSidebar from './DashboardSidebar';
 import { useHistory } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
-import { toggledCollapsed } from '../../../redux/features/dashboardStatus/dashboardSlice';
+import { useSelector } from 'react-redux';
+// import { toggledCollapsed } from '../../../redux/features/dashboardStatus/dashboardSlice';
 import useWindowWidth from '../../hooks/use-window-width'
 import sidebarValues from './sidebarValues';
 
 export default function Dashboard(props) {
     let history = useHistory();
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const state = useSelector((state) => state.dashboard)
 
     function handleClick() {
         history.push("/");
     }
-    function handleCollapse() {
-        dispatch(toggledCollapsed());
-    }
+    // function handleCollapse() {
+    //     dispatch(toggledCollapsed());
+    // }
 
     const widthBigger = useWindowWidth(992);
 

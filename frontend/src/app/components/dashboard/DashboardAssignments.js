@@ -31,7 +31,7 @@ export default function DashboardAssignments() {
         <Dashboard page="assignments">
             <div className="control-bar">
                 <div className="buttons">
-                    <button className="btn btn-success button">
+                    <button className="btn btn-success button" onClick={() => addAssignment({ title: "Test", className: "Test Class", dueDate: "Test Due Date" })}>
                         <span className="pe-1"><FontAwesomeIcon icon={faPlus} /></span> Create New Assignment
                     </button>
                 </div>
