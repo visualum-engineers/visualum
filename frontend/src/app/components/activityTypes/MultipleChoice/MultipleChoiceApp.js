@@ -34,6 +34,7 @@ const MultipleChoiceApp = ({activityData, questionNum, activityID, mediumWindowW
         }))
     }
     const updateAnswerChoice = (e) =>{
+        console.log(document.getElementById(e.target.dataset.updateAnswerChoice))
         const id = e.target.closest("input").id.match(/\d+/)
         setData(state =>({
             ...state,
@@ -43,10 +44,10 @@ const MultipleChoiceApp = ({activityData, questionNum, activityID, mediumWindowW
     }
     return(
         <div className="d-flex justify-content-center">
-            <form className = "mc-activity-input-container d-flex flex-column align-items-center justify-content-center">
+            <form className = "mc-activity-input-container d-flex flex-column align-items-center">
                 <div className="mc-activity-question">{data.question}</div>
-                <div className = "d-flex align-items-center justify-content-center">
-                    <div className="d-flex flex-column justify-content-center align-items-center w-100">
+                <div className = "d-flex justify-content-center align-items-start">
+                    <div className="d-flex flex-column justify-content-center w-100">
                         {data.imageURL &&  !mediumWindowWidth? 
                             <div className="mc-activity-image-container portrait-mode w-100">
                                 <img 

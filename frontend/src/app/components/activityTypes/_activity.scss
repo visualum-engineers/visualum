@@ -6,7 +6,7 @@
 
 @mixin activities-nav-navItems-hover{
     transform: scale(1.1);
-    background-color: $white;
+    background-color: $lightest-gray;
 }
 .activity-body{
     @include no-space;
@@ -39,7 +39,7 @@
         .back-button {
             height: 100%;
             font-size: 0.7rem;
-            border: 1px gray solid;
+            border: 1px $dark-gray solid;
             color: $main-font-color;
             &:hover {
                 @include activities-nav-navItems-hover()
@@ -58,8 +58,6 @@
             @include activities-nav-navItems-hover();
             color: $main-font-color;
         }
-        
-
     }
 }
 .activities-sidebar-btn{
@@ -209,11 +207,11 @@
 }
 .nav-activity-btn{
     @include border-radius(5px);
-    color: $main-font-color;
+    color: $secondary-font-color;
     background-color: $purple;
     padding: 5px 20px;
     margin: 20px 0;
-    border: 1px $main-font-color solid;
+    border: 1px $secondary-font-color solid;
     @include transition(all 0.3s ease-out);
 }  
 

@@ -1,6 +1,22 @@
 .mc-activity-input-container{
     margin-top: 15px;
-    font-size: 0.9em;
+    font-size: 1rem;
+    background-color: $white;
+    padding: 2.5rem 2rem;
+    @include border-radius(1rem);
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 45rem;
+    min-width: 310px;
+    &::-webkit-scrollbar{
+        width: 0.5rem;
+        @include border-radius(7px);
+        background-color: $light-gray;
+    }
+    &::-webkit-scrollbar-thumb{
+        @include border-radius(7px);
+        background-color: $dark-blue;
+    }
 }
 
 .mc-activity-input-container {
@@ -10,33 +26,44 @@
 }
 .mc-activity-input-container {
     input[type="radio"]:checked + label{
-        background-color: $main-font-color;
-        color: $main-font-color;
+        background-color: $white;
     }
 }
 .mc-activity-question{
     margin-bottom: 2rem;
 }
+.mc-activity-image-container{
+    padding: 1.5rem;
+    @include box-shadow(rgba(0, 0, 0, 0.315) 0px 0 5px);
+    @include border-radius(7px);
+    background-color: $white;
+}
 .mc-activity-image-container.portrait-mode{
     max-width: 100%;
-    min-width: 300px;
+    min-width: 290px;
     margin-bottom: 2rem;
+    .mc-activity-image{
+        max-height: 24rem;
+    }
 }
 .mc-activity-image-container.landscape-mode{
     max-width: 50%;
     min-width: 310px;
     margin-left: 2rem;
+    
 }
 .mc-activity-image{
+    height: 100%;
     width: 100%;
-    max-height: 50%;
     object-fit: contain;
     object-position: center;
+    @include border-radius(7px)
 }
 .mc-activity-mc-item{
     width: 100%;
-    margin: 0.5rem 0rem;
+    margin-bottom: 0.5rem;
     min-height: 4rem;
+    overflow-wrap: break-word;
     .mc-answer-label{
         min-height: 4rem;
         @include border-radius(0.5rem);
@@ -44,13 +71,11 @@
         height: 100%;
         padding: 0.8rem 1.5rem;
         transition: all 0.3s;
-        color: $main-font-color;
-        border: 1px $main-font-color solid;
-        
+        background-color: $light-blue;
+        @include box-shadow(rgba(0, 0, 0, 0.151) 0px 0 3px);
     }
     .mc-answer-label:hover{
-        background-color: $main-font-color;
-        color: $main-font-color;
+        background-color: $white;
     }
 }
 .mc-activity-mc-item.grid-layout{

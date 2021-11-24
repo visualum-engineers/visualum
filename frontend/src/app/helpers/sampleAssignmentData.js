@@ -33,7 +33,7 @@ const assignmentData = {
         question: "What faces this world?",
         imageURL : "images/homePage/mountain-home-bg.jpg",
         imgDescription: "",
-        answerChoices: ["The world know no bounds except that is cannot be at piece right now", "Bad", "No"]
+        answerChoices: ["The world know no bounds except that is cannot be at piece right now-4", "Bad-4", "No-4","The world know no bounds except that is cannot be at piece right now-3", "Bad-3", "No-3", "The world know no bounds except that is cannot be at piece right now-2", "Bad-2", "No-2","The world know no bounds except that is cannot be at piece right now-1", "Bad-1", "No-1"]
     },
     //sorting
     3: {

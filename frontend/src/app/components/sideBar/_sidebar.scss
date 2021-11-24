@@ -1,6 +1,6 @@
 @mixin sidebar-navItems-hover{
     transform: scale(1.1);
-    background-color: $white
+    background-color: $lightest-gray
 }
 //from here are common styles of all sidebars
 .sidebar-nav{
@@ -136,7 +136,7 @@
     padding: 0.2rem 0.9rem 0.1rem 0.9rem;
     color: $main-font-color;
     font-size: 1.5rem;
-    background-color: white;
+    background-color: $white;
     border: 1px rgba(0,0,0,0) solid;
     border-left: none;
     @include box-shadow(4px 0px 11px -8px #000000);
