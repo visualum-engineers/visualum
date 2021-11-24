@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import LoadingIcon from './components/loadingIcon/LoadingIcon';
 
 import NavWrapper from './components/primaryNavbar/NavWrapper';
-import DashboardHome from './components/dashboard/DashboardHome'
-import DashboardActivities from './components/dashboard/DashboardActivities'
+import DashboardHome from './components/dashboard/DashboardHome';
+import DashboardActivities from './components/dashboard/DashboardActivities';
 import DashboardClasses from './components/dashboard/DashboardClasses';
 import DashboardClass from './components/dashboard/DashboardClass';
 
