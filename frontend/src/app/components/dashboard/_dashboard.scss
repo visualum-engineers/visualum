@@ -1,7 +1,7 @@
 $nav-color: #041F54;
 $highlight-color: #FF8000;
 
-@mixin box-shadow {
+@mixin box-shadow-dash {
     box-shadow: 0 4px 11px rgba(33,33,33,.1);
 }
 
@@ -30,7 +30,7 @@ $highlight-color: #FF8000;
     p {
         font-size: .8rem;
     }
-    @include box-shadow();
+    @include box-shadow-dash();
     @include card-hover();
 }
 
@@ -255,7 +255,7 @@ $highlight-color: #FF8000;
     background-color: white;
     padding: 2rem;
     border-radius: 1rem;
-    @include box-shadow();
+    @include box-shadow-dash();
     height: 96%;
 }
 
@@ -282,7 +282,7 @@ $highlight-color: #FF8000;
     height: $height;
     background-color: white;
     padding: 2rem;
-    @include box-shadow();
+    @include box-shadow-dash();
     @media (max-width:70rem) {
         width: 95%;
         height: 90%;
