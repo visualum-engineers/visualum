@@ -15,11 +15,6 @@
     }
 }
 
-.match-activity-timer-position{
-    position: absolute;
-    top: 0.5rem;
-    right: 0.75rem;
-}
 .match-activity-timer{
     position: relative;
     color: $dark-gray;
@@ -55,6 +50,11 @@
         color: $main-font-color;
     }
 }
+.match-activity-instructions-position{
+    position: absolute;
+    top: 0.3rem;
+    right: 0.5rem;
+}
 .match-activity-instructions{
     color: $main-font-color;
     button{
@@ -67,23 +67,23 @@
     .instructions{
         background-color: $dark-blue;
         color: $white;
-        left: -8.4rem;
+        left: -8.7rem;
         text-align: center !important;
     }
 
     .info-triangle{
-        left: 8.4rem;
-        top:  -0.54rem;
+        left: 8.7rem;
+        top:  -0.5rem;
         border-bottom: 0.6rem solid $dark-blue;
     }
     .info-triangle-2{
-        top:-0.59rem;
-        left: 8.4rem;
+        top:-0.55rem;
+        left: 8.7rem;
     }
 
 }
 .match-activity-columns{
-    max-height: 26rem;
+    max-height: calc(max(26rem, 40vh));
     overflow-x: hidden;
     overflow-y: auto;
     min-width: 310px;
@@ -98,7 +98,6 @@
         @include border-radius(7px);
         background-color: $dark-blue;
     }
-   
 }
 
 // .match-activity-itemBank-column-1{
@@ -132,7 +131,7 @@
     @include border-radius(7px);
     @include box-shadow(rgba(0,0,0,0.1) 0px 0 10px);
     min-width: 310px;
-    max-height: 19rem;
+    max-height: calc(max(19rem, 30vh));
     overflow-x: hidden;
     overflow-y: scroll;
     &::-webkit-scrollbar{
@@ -215,15 +214,15 @@
 }
 .match-activity-keys{
     list-style-type: none;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     min-width: 145px;
     height: 5rem;
     padding: 0 1rem;
-    
     p{
         @include match-activity-keypair-styles();
         background-color: $lightest-gray;
         margin: 0;
+        height: 5rem;
         //background-color: $white;
         font-weight: 500;
         color: $main-font-color;
@@ -232,7 +231,7 @@
     p:hover{
         color: $main-font-color;
         opacity: 1 !important;
-        background-color: $white;
+        background-color: $lightest-gray;
         border: 1px solid rgba(0, 0,0,0) !important;
     }
 }
@@ -246,8 +245,8 @@
     margin-top: 0;
     margin-left: 2rem;
     min-height: 24rem;
-    max-height: 60vh;
-    height: 60vh;
+    max-height: 75vh;
+    height: 75vh;
     .match-activity-itemBank-column-1{
         margin: 0;
     }
@@ -256,13 +255,13 @@
     width: calc(2 * 100% / 3);
     min-width: 0;
     min-height: 24rem;
-    max-height: 60vh;
-    height: 60vh;
+    max-height: 75vh;
+    height: 75vh;
 }
 
 .match-activity-answers-droppables{
     list-style-type: none;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     min-width: 145px;
     height: 5rem;
     // .match-activity-inner-droppable{

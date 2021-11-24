@@ -341,7 +341,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
                     </div>
                 
                     <div className="match-activity-answers-column w-50 d-flex flex-column align-items-center">
-                        <div className="match-activity-timer-position">
+                        <div className="match-activity-instructions-position">
                             <MoreInfoBtn 
                                 textContent = "View Instructions"
                                 customContainerClass = "match-activity-instructions"
