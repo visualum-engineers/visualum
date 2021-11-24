@@ -1,23 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Dashboard from './Dashboard'
 import ActivityCard from './ActivityCard';
+import CardContainer from './CardContainer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 export default function DashboardActivities(props) {
 
-    let activities = [];
-    props.data.forEach(activity => {
-        activities.push(<ActivityCard data={activity} />)
+    const [activities, setActivities] = useState(props.data)
+
+    const cards = activities.map(activity => {
+        return (
+            <div className="col-lg-6 col-12 p-2">
+                <ActivityCard data={activity} />
+            </div>
+        )
     });
+
+    const addActivity = (newActivity) => {
+        setActivities(curr => [...curr, newActivity])
+    }
 
     return (
         <Dashboard page="activities">
             <div className="row-container">
-                <div className="control-bar" id="activity-controls">
+                <div className="control-bar">
                     <div className="buttons">
                         <button className="btn btn-success button">
-                            <FontAwesomeIcon icon={faPlus} /> New
+                            <span className="pe-1"><FontAwesomeIcon icon={faPlus} /></span> New
                         </button>
                     </div>
                     <div className="search">
@@ -27,9 +37,9 @@ export default function DashboardActivities(props) {
                         </div>
                     </div>
                 </div>
-                <div className="activityList">
-                    {activities}
-                </div>
+                <CardContainer>
+                    {cards}
+                </CardContainer>
             </div>
         </Dashboard >
     )
