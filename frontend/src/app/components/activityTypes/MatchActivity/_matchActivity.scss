@@ -134,11 +134,11 @@
     min-width: 310px;
     max-height: calc(max(19rem, 30vh));
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     &::-webkit-scrollbar{
         width: 0.5rem;
         @include border-radius(7px);
-        background-color: rgba(201, 201, 201, 0);
+        background-color: $light-gray;
     }
     &::-webkit-scrollbar-thumb{
         @include border-radius(7px);

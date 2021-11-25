@@ -327,7 +327,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
             onDragUpdate={!disableDnD ? onDragUpdate: null} 
             onDragStart={!disableDnD ? onDragStart: null}
         >
-            <div className="d-flex justify-content-center flex-grow-1">
+            <div className="d-flex justify-content-center">
                 <div className={`match-activity-columns d-flex justify-content-center ${mediumWindowWidth? "three-columns": "w-100"}`}>
                     <div className="match-activity-keys-column w-50 d-flex flex-column align-items-center">
                         {Object.keys(data.keyPairs).map((content,index)=>{
