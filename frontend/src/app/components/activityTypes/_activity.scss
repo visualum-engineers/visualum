@@ -138,10 +138,10 @@
 .activity-type-container{
     @include border-radius(25px);
     position: relative;
-    margin-top: 3.3rem;
+    margin-top: 3.1rem;
     padding: 0 1.3rem;
     text-align: center;
-    min-height: calc(max(calc(75vh + 5.15rem), 400px));
+    min-height: calc(max(calc(75vh + 5.35rem), 400px));
     z-index: 1;
     max-width: 1000px;
     overflow: hidden;
