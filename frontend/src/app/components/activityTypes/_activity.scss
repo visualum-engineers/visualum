@@ -138,10 +138,11 @@
 .activity-type-container{
     @include border-radius(25px);
     position: relative;
-    margin-top: 2.3rem;
-    padding: 1.3rem;
+    margin-top: 3.3rem;
+    padding: 0 1.3rem;
+    //padding-bottom: 0;
     text-align: center;
-    min-height: calc(max(calc(75vh + 7.85rem), 400px));
+    min-height: calc(max(calc(75vh + 6.5rem), 400px));
     z-index: 1;
     max-width: 1000px;
     overflow: hidden;
@@ -156,7 +157,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    padding: 20px;
+    padding: 0 1.3rem;
     height: 100%;
     opacity: 0;
     transform: translateX(-100vw);
@@ -182,7 +183,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    padding: 20px;
+    padding: 0 1.3rem;
     opacity: 0;
     transform: translateX(100vw);
 }
