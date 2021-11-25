@@ -60,6 +60,7 @@
 }
 .mc-activity-answer-container.portrait-mode{
     max-width: 100%;
+    max-height: calc(max(40vh, 24rem));
 }
 .mc-activity-image-container.landscape-mode{
     max-width: 50%;

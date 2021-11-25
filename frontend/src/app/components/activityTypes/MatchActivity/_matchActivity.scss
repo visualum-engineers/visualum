@@ -133,6 +133,7 @@
     @include box-shadow(rgba(0,0,0,0.1) 0px 0 10px);
     min-width: 310px;
     max-height: calc(max(19rem, 30vh));
+    min-height: calc(max(19rem, 30vh));
     overflow-x: hidden;
     overflow-y: auto;
     &::-webkit-scrollbar{
