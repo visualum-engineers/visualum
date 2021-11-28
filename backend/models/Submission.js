@@ -16,21 +16,33 @@ var AssignmentSchema = new Schema({
   });
   var QuestionAnswerSchema = new Schema({
     QuestionType: {type: String, required: true},
+    MaxPoints: Number, 
     Data: {
             type: mongoose.Schema.Types.Mixed,
         },
-    Answer: {
-            type: mongoose.Schema.Types.Mixed,
-        }
     
     
     });
-
+    var CreatorSchema = new Schema({
+        FirstName: {type: String, required: true},
+        LastName: {type: String, required: true},
+            TeacherID: {
+                type: mongoose.Schema.Types.ObjectId,
+            }
+    });
 const SubmissionSchema = new Schema({
-    
+    Creator: CreateSchema,
+    Name: String,
     Assignment : AssignmentSchema,
     Student: StudentSchema,
-    Submission: QuestionAnswerSchema
+    Submission: QuestionAnswerSchema,
+    StartTime: Date,
+    EndTime: Date, 
+    DueDate: Date,
+    TimeLimit: Number,
+    isGraded : Boolean,
+    PointsEarned: Number
+
     
     
     

@@ -22,7 +22,7 @@ var CreatorSchema = new Schema({
 });
 var QuestionSchema = new Schema({
     QuestionType: {type: String, required: true},
-    
+    MaxPoints : number,
     Data: {
             type: mongoose.Schema.Types.Mixed,
         }
