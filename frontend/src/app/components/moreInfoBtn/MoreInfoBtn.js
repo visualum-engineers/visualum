@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 
-const MoreInfoBtn = ({textContent="", customContainerClass="", customContainerAriaLabel="", customDropDownID="", setTimeoutOnMount=0}) =>{
+const MoreInfoBtn = ({textContent="", customContainerClass="", customContainerAriaLabel="", customDropDownID="", setTimeoutOnMount=0, onClick=null}) =>{
     const [infoToggled, setInfoToggled] = useState(true)
     const [isDisabled, setIsDisabled] = useState(false)
     //on mount, pop up should appear, but then disappear after 5 seconds
@@ -30,6 +30,7 @@ const MoreInfoBtn = ({textContent="", customContainerClass="", customContainerAr
             aria-describedby="info"
             onMouseEnter = {handleInfoBtn}
             onMouseLeave = {handleInfoBtn}
+            onClick = {onClick? onClick : null}
         >
             <button 
                 aria-labelledby={customDropDownID}

@@ -1,38 +1,103 @@
-.MCInputContainer{
-    margin-top: 15px;
-    font-size: 0.9em;
+.mc-activity-input-container{
+    font-size: 0.8rem;
+    @include border-radius(1rem);
 }
-.MCInputContainer label{
-    @include border-radius(5px);
-    cursor: pointer;
+
+.mc-activity-input-container {
+    input[type="radio"]{
+        @include hidden;
+    }
+}
+.mc-activity-input-container {
+    input[type="radio"]:checked + label{
+        background-color: $white;
+    }
+}
+.mc-activity-question{
+    margin-top: 0.2rem;
+    font-size: 1rem;
+    background-color: white;
+    @include box-shadow(rgba(0, 0, 0, 0.315) 0px 0 2px);
+    @include border-radius(7px);
+    padding: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+.mc-activity-image-container{
+    padding: 1rem;
+    @include box-shadow(rgba(0, 0, 0, 0.315) 0px 0 5px);
+    @include border-radius(7px);
+    background-color: $white;
+}
+
+.mc-activity-image-container.portrait-mode{
+    max-width: 100%;
+    min-width: 290px;
+    margin-bottom: 1rem;
+    .mc-activity-image{
+        max-height: calc(max(calc(30vh - 2rem), 17rem));
+    }
+}
+.mc-activity-answer-container{
+    @include box-shadow(rgba(0, 0, 0, 0.315) 0px 0 2px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    min-width: 280px;
+    max-width: 400px;
+    max-height: calc(max(50vh, 24rem));
     height: 100%;
-    padding: 10px 20px;
-    transition: all 0.3s;
-    color: $main-font-color;
-    border: 1px $main-font-color solid;
+    background-color: $white;
+    padding: 1rem;
+    @include border-radius(7px);
+    &::-webkit-scrollbar{
+        width: 0.5rem;
+        @include border-radius(1rem);
+        background-color: $light-gray;
+    }
+    &::-webkit-scrollbar-thumb{
+        @include border-radius(7px);
+        background-color: $dark-blue;
+    }
 }
-.MCInputContainer label:hover{
-    background-color: $main-font-color;
-    color: $label-font-color;
+.mc-activity-answer-container.portrait-mode{
+    max-width: 100%;
+    max-height: calc(max(40vh, 24rem));
 }
-
-.MCInputContainer input[type="radio"]{
-    @include hidden;
+.mc-activity-image-container.landscape-mode{
+    max-width: 50%;
+    min-width: 310px;
+    margin-left: 2rem;
+    max-height: calc(max(40vh, 26rem));
 }
-.MCInputContainer input[type="radio"]:checked + label{
-    background-color: $main-font-color;
-    color: $label-font-color;
-}
-.mc-answer-choice{
-    margin: 5px;
-}
-.empty-mc-item{
-    @extend .mc-answer-choice
-}
-
 .mc-activity-image{
-    max-width: 70%;
-    max-height: 50%;
+    height: 100%;
+    width: 100%;
     object-fit: contain;
     object-position: center;
+    @include border-radius(7px)
+}
+.mc-activity-mc-item{
+    width: 100%;
+    margin-bottom: 0.5rem;
+    min-height: 4rem;
+    overflow-wrap: break-word;
+    .mc-answer-label{
+        min-height: 4rem;
+        @include border-radius(0.5rem);
+        cursor: pointer;
+        height: 100%;
+        padding: 0.8rem 1.5rem;
+        transition: all 0.3s;
+        background-color: $light-blue;
+        @include box-shadow(rgba(0, 0, 0, 0.151) 0px 0 3px);
+    }
+    .mc-answer-label:hover{
+        background-color: $white;
+    }
+}
+.mc-activity-mc-item.grid-layout{
+    width: 45%;
+    margin: 0.5rem;
+    .mc-answer-label{
+        @include border-radius(0.5rem);
+    }
 }

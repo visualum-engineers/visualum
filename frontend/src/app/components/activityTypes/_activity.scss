@@ -3,44 +3,44 @@
 @import "./MultipleChoice/multipleChoice";
 @import "./ShortAnswer/shortAnswer";
 @import "./LabelPictures/labelPictures";
-@import "./NavActivityBtn/navActivityBtn";
+
 @mixin activities-nav-navItems-hover{
     transform: scale(1.1);
-    background-color: rgb(238, 237, 237)
+    background-color: $lightest-gray;
 }
 .activity-body{
     @include no-space;
     @include transition(all 0.3s ease-out);
-    background-color: $activities-bg-color;
+    background-color: $lightest-gray;
     height: 100%;
     position: relative;
-    min-height: max(100vh, 650px);
+    min-height: calc(max(100vh, 650px));
 }
 .activity-body.secondary-sidebar-open{
     margin-left: 15rem; 
 }
-.active-activity-bg{
-    @include no-space;
-    @include anchor-top-left;
-    @include fillContainer;
-    position: absolute;
-    object-fit: cover;
-    object-position: center;
-    z-index: 0;
-}
+// .active-activity-bg{
+//     @include no-space;
+//     @include anchor-top-left;
+//     @include fillContainer;
+//     position: absolute;
+//     object-fit: cover;
+//     object-position: center;
+//     z-index: 0;
+// }
 .activities-nav {
     position: fixed;
     @include anchor-top-left;
     padding: 0 2rem;
     height: 3rem;
     z-index: 2;
-    background-color: $activities-bg-color !important;
+    background-color: $lightest-gray !important;
     .back-button-container {
         .back-button {
             height: 100%;
             font-size: 0.7rem;
-            border: 1px gray solid;
-            color: $label-font-color;
+            border: 1px $dark-gray solid;
+            color: $main-font-color;
             &:hover {
                 @include activities-nav-navItems-hover()
             }
@@ -49,17 +49,15 @@
     }
     .navbar-brand {
         font-size: 1rem !important;
-        color: $label-font-color;
+        color: $main-font-color;
         padding: 0 1rem;
         @include border-radius(5px);
         @include transition(all 0.3s ease-out);
         &:hover, &:focus{
             cursor: pointer;
             @include activities-nav-navItems-hover();
-            color: $label-font-color;
+            color: $main-font-color;
         }
-        
-
     }
 }
 .activities-sidebar-btn{
@@ -68,37 +66,88 @@
     @include box-shadow(0 0 3px rgba(0, 0, 0, 1));
     padding: 1rem;
     margin-bottom: 0;
-    background-color: rgba(58,19,208);
+    background-color: $purple;
     color: white;
     width: 65%;
     margin-bottom: 2.7rem;
     margin-top: 1rem;
     @include transition(all 0.3s ease-out);
-    
+    border: 1px solid rgba(0, 0, 0,0);
     &:hover{
         transform: scale(1.1);
+        color: $purple;
+        border: 1px solid $purple;
+        background-color: white;
     }
 }
 
 // .activities-sidebar-link{
 
 // }
-
+.activity-walkthrough-dark-bg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width:100%;
+    height: calc(max(100%, 100vh));
+    z-index: 2;
+}
+.activity-walkthrough-bg-exit-btn{
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.541);
+    width:100%;
+    height: calc(max(100%, 100vh));
+    z-index: 0;
+}
+.activity-walkthrough-instructions{
+    background-color: white;
+    z-index: 2;
+    min-width: 310px;
+    overflow-wrap: break-word;
+    overflow-x: hidden;
+    overflow-x: auto;
+    height: calc(max(28rem, 448px));
+    @include border-radius(4px)
+}
+.activity-walkthrough-instructions-header{
+    padding-left: 1.5rem;
+    padding-right: 0.8rem;
+    height: 3.7rem;
+    background-color: rgba(236, 236, 236, 0.822) ;
+    color: black;
+    h1{
+        font-size: 1.25rem;
+        font-weight: 400;
+        margin-bottom: 0;
+    }
+    button{
+        @include remove-btn-default;
+        height: 1.7rem;
+        width: 1.7rem;
+        @include border-radius(5px);
+        font-size: 1.3rem;
+        color: rgba(122, 122, 122, 0.431);
+        @include transition(all 0.2s linear)
+    }
+    button:hover{
+        background-color: rgb(185, 0, 0);
+        color: white;
+        transform: scale(1.1)
+    }
+}
 .activity-type-container{
     @include border-radius(25px);
     position: relative;
-    margin-top: 3rem;
-    padding: 20px;
+    margin-top: 3.1rem;
+    padding: 0 1.3rem;
     text-align: center;
-    min-height: max(80vh, 400px);
+    min-height: calc(max(calc(75vh + 5.35rem), 400px));
     z-index: 1;
-    max-width: 840px;
+    max-width: 1000px;
     overflow: hidden;
     min-width: 310px;
 }
-.nav-activity-btns{
-    z-index: 1;
-}
+
 .question-transition-container{
     position: relative;
 }
@@ -107,10 +156,11 @@
     top: 0;
     left: 0;
     width: 100%;
-    padding: 20px;
+    padding: 0 1.3rem;
     height: 100%;
     opacity: 0;
     transform: translateX(-100vw);
+    
 }
 .question-move-left-enter-active{
     opacity: 1;
@@ -132,7 +182,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    padding: 20px;
+    padding: 0 1.3rem;
     opacity: 0;
     transform: translateX(100vw);
 }
@@ -149,4 +199,24 @@
 .question-move-right-exit-active{
     opacity: 0;
     transform: translateX(-100vw);
-}   
+} 
+.nav-activity-btns{
+    z-index: 1;
+    max-width: 1000px;
+    
+}
+.nav-activity-btn{
+    @include border-radius(5px);
+    color: $secondary-font-color;
+    background-color: $purple;
+    padding: 0.4rem 1.2rem;
+    margin: 1.1rem 0;
+    border: 1px $secondary-font-color solid;
+    @include transition(all 0.3s ease-out);
+}  
+
+.nav-activity-btn:hover{
+    @include activities-nav-navItems-hover;
+    border: 1px solid $purple;
+    color: $purple;
+}

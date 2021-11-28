@@ -1,20 +1,25 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 export default function ActivityCard(props) {
     console.log(props.data)
     return (
-        <div className="activity-row">
-            <div className="row">
-                <div className="col-5">
-                    <div className="title">{props.data.name}</div>
+        <div className="activity-card card">
+            <div className="card-body">
+                <div className="d-flex justify-content-between">
+                    <h5 className="card-title">Activity Name</h5>
+                    <span className="activity-type">Matching</span>
                 </div>
-                <div className="col-2">
-                    <div className="num-questions">Questions: {props.data.questions.length}</div>
-                </div>
-                <div className="col-5">
-                    <div className="btns">
-                        <button className="edit-button btn btn-secondary">Edit</button>
-                        <button className="delete-button btn btn-danger">Delete</button>
+                <div className="d-flex justify-content-between">
+                    <p className="card-subtitle">This activity was created as a test.</p>
+                    <div className="activity-buttons ms-1">
+                        <div className="button">
+                            <FontAwesomeIcon icon={faEdit} />
+                        </div>
+                        <div className="button">
+                            <FontAwesomeIcon icon={faTrashAlt} />
+                        </div>
                     </div>
                 </div>
             </div>

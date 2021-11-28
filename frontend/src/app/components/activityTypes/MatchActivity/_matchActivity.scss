@@ -1,39 +1,27 @@
 @import "./matchActivityBreakpoints";
-
-// .match-activity-header{
-//     background-color: white;
-//     min-width: 10rem;
-//     width: 30%;
-//     @include border-radius(8px);
-//     @include box-shadow(rgba(0,0,0,0.1) 0px 0 10px);
-//     padding: 1rem;
-//     margin-bottom: 1.5rem;
-// }
-
-.match-activity-instructions{
-    color: $label-font-color;
-    button{
-        color: rgb(0, 57, 180);
-    }
-    button:hover{
-        color: white;
-        background: black;
-    }
-    .instructions{
-        background-color: white;
-    }
+.match-activity-header{
+    position: relative;
+    margin-top: 0.2rem;
 }
-.match-activity-timer-positioning{
+.match-activity-enable-tap-mode{
     position: absolute;
-    top: 0.5rem;
-    left: 0.5rem;
+    right:0;
+    font-size: 0.8rem;
+    width: 8rem;
+    .form-switch,.form-check-input{
+        cursor: pointer;
+        margin-left: 0;
+        width: 3rem;
+        height: 1.5rem;
+    }
 }
+
 .match-activity-timer{
     position: relative;
-    color: rgb(112, 112, 112);
+    color: $dark-gray;
     font-weight: 500;
     font-size: 0.9rem;
-    background-color: white;
+    background-color: $white;
     min-width: 10rem;
     width: 30%;
     @include border-radius(8px);
@@ -43,7 +31,7 @@
 
     .timer-counter{
         @include border-radius(10px);
-        color: rgb(112, 112, 112);
+        color: $dark-gray;
         font-weight: 600;
         text-align: center;
         position: relative;
@@ -56,110 +44,163 @@
         z-index: 1;
         margin-top: 1.1px;
     }
-    // .timer-counter:before{
-    //     @include border-radius(10px);
-    //     @include anchor-top-left;
-    //     content: "";
-    //     position: absolute;
-    //     z-index: -1;
-    //     @include box-shadow(inset 0 0 2000px $label-font-color);
-    //     filter: blur(3.5px);
-    // }
+
     .timer-btns{
         @include remove-btn-default;
         font-size: 12px;
-        color: $label-font-color;
+        color: $main-font-color;
     }
 }
+.match-activity-instructions-position{
+    position: absolute;
+    top: 0.3rem;
+    right: 0.5rem;
+}
+.match-activity-instructions{
+    color: $main-font-color;
+    button{
+        color: $dark-blue;
+    }
+    button:hover{
+        color: $white;
+        background: $black;
+    }
+    .instructions{
+        background-color: $dark-blue;
+        color: $white;
+        left: -8.7rem;
+        text-align: center !important;
+    }
+
+    .info-triangle{
+        left: 8.7rem;
+        top:  -0.5rem;
+        border-bottom: 0.6rem solid $dark-blue;
+    }
+    .info-triangle-2{
+        top:-0.55rem;
+        left: 8.7rem;
+    }
+
+}
+.match-activity-columns{
+    max-height: calc(max(26rem, 40vh));
+    overflow-x: hidden;
+    overflow-y: auto;
+    min-width: 310px;
+    
+    @include border-radius(7px);
+    &::-webkit-scrollbar{
+        width: 0.5rem;
+        @include border-radius(7px);
+        background-color: $light-gray;
+    }
+    &::-webkit-scrollbar-thumb{
+        @include border-radius(7px);
+        background-color: $dark-blue;
+    }
+}
+
+// .match-activity-itemBank-column-1{
+//     min-width: 150px;
+//     margin-right: 0;
+// }
+// .match-activity-keys-column, 
+// .match-activity-answers-column{
+//     width: ;
+// }
+//width: calc(1rem + 2 * 100% / 3);
+
+// .match-activity-itemBank.three-columns{
+//     .match-activity-itemBank-column-1{
+
+//     }
+//     // width: calc(100% / 3 + 0.5rem) ;
+//     // min-width: calc(150px + 0.5rem);
+//     // .match-activity-itemBank-column-1{
+//     //     min-width: 150px;
+//     //     margin-right: 0;
+//     //     .match-activity-inner-droppable{
+//     //         min-width: 150px;
+//     //     }
+//     // }
+    
+// }
 .match-activity-itemBank{
     margin-top: 1.5rem;
-    background-color: white;
+    background-color: $white;
     @include border-radius(7px);
     @include box-shadow(rgba(0,0,0,0.1) 0px 0 10px);
     min-width: 310px;
-    
+    max-height: calc(max(19rem, 30vh));
+    min-height: calc(max(19rem, 30vh));
+    overflow-x: hidden;
+    overflow-y: auto;
+    &::-webkit-scrollbar{
+        width: 0.5rem;
+        @include border-radius(7px);
+        background-color: $light-gray;
+    }
+    &::-webkit-scrollbar-thumb{
+        @include border-radius(7px);
+        background-color: $dark-blue;
+    }
 }
-.match-activity-keys-column, .match-activity-itemBank-column-1{
-    margin-right: 0.5rem;
-    background-color: white;
+
+.match-activity-keys-column, 
+.match-activity-itemBank-column-1,
+.match-activity-answers-column, 
+.match-activity-itemBank-column-2{
     @include border-radius(7px);
     @include box-shadow(rgba(0,0,0,0.1) 0px 0 10px);
     min-width: 150px;
-    .last-item{
-        margin: 0;
-    }
+    height: min-content;
 }
-.match-activity-answers-column, .match-activity-itemBank-column-2{
+.match-activity-keys-column,
+.match-activity-itemBank-column-1{
+    margin-right: 0.5rem;
+}
+.match-activity-answers-column, 
+.match-activity-itemBank-column-2{
     position: relative;
-    @extend .match-activity-keys-column;
     margin-right: 0;
 }
-
+.match-activity-answers-column,
+.match-activity-keys-column{
+    background-color: $white;
+    //min-height: 75vh;
+}
+.match-activity-answers-column{
+    .match-activity-inner-droppable{
+        padding-top: 0.25rem;
+        overflow: hidden;
+    }
+}
 .match-activity-itemBank-column-1,
 .match-activity-itemBank-column-2{
     background-color: rgba(0, 0,0,0);
     @include box-shadow(none);
-    .match-activity-answers-droppables{
+    min-height: 100%;
+    .match-activity-itemBank-droppables{
         border: 1px solid rgba(0,0,0,0);
-        height: 100%;
-        min-height: 8rem;
+        height: min-content;
+        min-height: 100%;
+        flex-grow: 1;
     }
     .match-activity-inner-droppable{
+        flex-grow: 1;
         list-style-type: none;
-        padding: 1rem;
+        padding: 0.25rem;
+        padding-bottom: 0;
+        padding-top: 1rem;
         min-height: 8rem;
+        background: none;
     }
     .match-activity-draggables{
-        margin-bottom: 1rem;
-    }
-    .match-activity-draggables:hover{
-        margin-bottom: 1rem;
+        margin-top: 0;
     }
 }
-.match-activity-keys{
-    @extend .match-activity-answers-droppables;
-    padding: 0 1rem;
-    p{
-        margin: 0;
-        @extend .match-activity-draggables;
-    }
-    p:hover{
-        opacity: 1 !important;
-        background-color: #dbedfd !important;
-        border: 1px solid rgba(0, 0,0,0) !important;
-    }
-    
-}
-
-.match-activity-answers-droppables{
-    list-style-type: none;
-    margin-bottom: 2rem;
-    min-width: 145px;
-    height: 5rem;
-}
-.match-activity-itemBank-droppables{
-    @extend .match-activity-answers-droppables;
-    margin-bottom: 0;
-    .match-activity-inner-droppable{
-        margin: 0;
-        min-height: 6rem;
-    }
-}
-
-.match-activity-inner-droppable{
-    list-style-type: none;
-    padding: 0 1rem;
-}
-
-.match-activity-draggable-over{
-    //background-color: #c6e3ff;
-    background-color: rgb(179, 179, 179);
-}
-
-.match-activity-draggables{
-    background-color: #dbedfd;
-    text-align: center;
-    //border: 1px black solid;
+@mixin match-activity-keypair-styles {
     list-style-type: none;
     min-height: 4.5rem;
     height: 4.5rem;
@@ -169,21 +210,140 @@
     overflow-y: auto;
     overflow-wrap: break-word;
     @include border-radius(5px);
-    @include box-shadow(rgba(0,0,0,0.1) 0px 0 10px);
+    //background-color: $lightest-gray!important;
+   // @include box-shadow(rgba(0,0,0,0.2) 0px 0 10px);
     border: 1px solid rgba(0, 0,0,0);
+    padding: 0.5rem;
+}
+.match-activity-keys{
+    list-style-type: none;
+    margin-bottom: 1rem;
+    min-width: 145px;
+    height: 5rem;
+    padding: 0 1rem;
+    p{
+        @include match-activity-keypair-styles();
+        background-color: $lightest-gray;
+        margin: 0;
+        height: 5rem;
+        //background-color: $white;
+        font-weight: 500;
+        color: $main-font-color;
+        cursor: auto;
+    }
+    p:hover{
+        color: $main-font-color;
+        opacity: 1 !important;
+        background-color: $lightest-gray;
+        border: 1px solid rgba(0, 0,0,0) !important;
+    }
+}
+.match-activity-keys.last-item{
+    margin: 0;
+}
+
+.match-activity-itemBank.three-columns{
+    width: calc(100% / 3);
+    min-width: 0;
+    margin-top: 0;
+    margin-left: 2rem;
+    min-height: 24rem;
+    max-height: 75vh;
+    height: 75vh;
+    .match-activity-itemBank-column-1{
+        margin: 0;
+    }
+}
+.match-activity-columns.three-columns{
+    width: calc(2 * 100% / 3);
+    min-width: 0;
+    min-height: 24rem;
+    max-height: 75vh;
+    height: 75vh;
+    .match-activity-answers-column,
+    .match-activity-keys-column{
+        background-color: $white;
+        min-height: 100%;
+    }
+}
+
+.match-activity-answers-droppables{
+    list-style-type: none;
+    margin-bottom: 1rem;
+    min-width: 145px;
+    height: 5rem;
+    // .match-activity-inner-droppable{
+    //     //@include box-shadow(rgba(0, 0, 0, 0.938) 0px 0 1px);
+    // }
+}
+
+.match-activity-answers-droppables.last-item{
+    margin-bottom: 0;
+}
+.match-activity-inner-droppable{
+    list-style-type: none;
+    padding: 0 0.25rem;
+    margin-bottom: 0;
+    background-color: $lightest-gray;
+    @include border-radius(7px);
+}
+.match-activity-itemBank-droppables{
+    list-style-type: none;
+    margin-bottom: 1.5rem;
+    min-width: 145px;
+    height: 5rem;
+    margin-bottom: 0;
+    .match-activity-inner-droppable{
+        margin: 0;
+    }
+}
+
+
+.match-activity-draggables{
+    @include match-activity-keypair-styles();
+    margin-bottom: 1rem;
+    background-color: $light-blue;
+    cursor: pointer;
+    @include box-shadow(rgba(0,0,0,0.2) 0px 0 5px);
+
+    &::-webkit-scrollbar{
+        width: 0.5rem;
+        @include border-radius(7px);
+        background-color: rgba(201, 201, 201, 0);
+    }
+    &::-webkit-scrollbar-thumb{
+        @include border-radius(7px);
+        background-color: $dark-blue;
+    }
+    div{
+        margin: auto;
+        width: 100%;
+        @include transition(transform 0.2s ease-out)
+    }
+    div:hover{
+        transform: scale(1.05);
+    }
 }
 
 .match-activity-dragging{
-    //background-color: none;
     opacity: 0.8;
-    color: black;
-    margin-bottom: 0rem;
-    background-color: white;
-    border: 1px solid black;
+    color: $main-font-color;
+    background-color: $white;
+    border: 1px solid $black;
+    div{
+        transform: scale(1.1);
+    }
 }
-.match-activity-draggables.last-item{
-    margin-bottom: 0 !important;
+
+.match-activity-inner-droppable.match-activity-draggable-over{
+    background-color: $darkest-gray;
 }
-.match-activity-draggables:hover{
-    @extend .match-activity-dragging;
+.match-activity-tap-active:hover{
+    cursor: pointer;
+    background-color: $darkest-gray;
+}
+.match-activity-draggables.hide-draggable{
+    opacity: 0;
+    visibility: hidden !important;
+
 }

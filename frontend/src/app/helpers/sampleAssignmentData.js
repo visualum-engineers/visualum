@@ -10,12 +10,20 @@ const assignmentData = {
             {categoryID: 2, name: "Luis"},
             {categoryID: 3, name: "Derek"},
             {categoryID: 4, name: "Emilio"},
+            {categoryID: 5, name: "lol"},
+            {categoryID: 6, name: "hi"},
+            // {categoryID: 7, name: "no"},
+            // {categoryID: 8, name: "bye"},
         ],
         answerChoices : [
             {id:"1", content:"NY"}, 
-            {id:"2", content:"Who Knows"},
+            {id:"2", content:"The world know no bounds except that is cannot be at piece right now"},
             {id:"3", content:"Long Island"},
             {id:"4", content:"Nebraska"},
+            {id:"5", content:"NY"}, 
+            {id:"6", content:"Who Knows"},
+            // {id:"7", content:"Long Island"},
+            // {id:"8", content:"Nebraska"},
         ],
     },
     //multiple choice
@@ -25,7 +33,7 @@ const assignmentData = {
         question: "What faces this world?",
         imageURL : "images/homePage/mountain-home-bg.jpg",
         imgDescription: "",
-        answerChoices: ["Good What faces this world", "Bad", "No"]
+        answerChoices: ["The world know no bounds except that is cannot be at piece right now-4", "Bad-4", "No-4","The world know no bounds except that is cannot be at piece right now-3", "Bad-3", "No-3", "The world know no bounds except that is cannot be at piece right now-2", "Bad-2", "No-2","The world know no bounds except that is cannot be at piece right now-1", "Bad-1", "No-1"]
     },
     //sorting
     3: {

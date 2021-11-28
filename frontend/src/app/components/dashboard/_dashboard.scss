@@ -1,16 +1,22 @@
+$nav-color: #041F54;
+$highlight-color: #FF8000;
 
+@mixin box-shadow-dash {
+    box-shadow: 0 4px 11px rgba(33,33,33,.1);
+}
 
 @mixin card-hover {
     &:hover {
         transform: translateY(-5px);
-        @include box-shadow(0 4px 11px  rgba(33,33,33,.2));
+        box-shadow: 0 4px 11px  rgba(33,33,33,.2); 
         h6 {
-            color: rgb(138, 40, 218) !important;
+            color: $highlight-color !important;
         }
     }
 }
 
 @mixin card {
+    height: 100%;
     cursor: pointer;
     transition: all .2s ease-in-out;
     border: none;
@@ -24,28 +30,32 @@
     p {
         font-size: .8rem;
     }
-    @include box-shadow(0 4px 11px rgba(33,33,33,.1));
+    @include box-shadow-dash();
     @include card-hover();
 }
 
+.dashboard {
+    display: flex;
+    flex-direction: column;
+}
 
 .dashboard-container {
     font-size: 1rem;
     background-color: rgb(248,248,255);
-    height: 94%;
     width: 100%;
     display: flex;
+    flex: 1;
     overflow: hidden;
     .dashboard-sidebar {
         display: flex;
         flex-direction: column;
-        width: 15%;
+        height: 100%;
         min-width: 180px;
         border-right: 1px solid rgba(179, 179, 179 ,.5);
         background-color: white;
         padding: .9rem 0;
-        @include box-shadow(3px 1px 10px 7px rgba(0,0,0,0.1));
-        
+        -webkit-box-shadow: 3px 1px 10px 7px rgba(0,0,0,0.1); 
+        box-shadow: 3px 1px 10px 7px rgba(0,0,0,0.1);
         .sidebar-item {
             font-size: .9rem;
             width: 100%;
@@ -68,9 +78,9 @@
                 transition: all .2s ease-in-out;
             }
             .selected {
-                background-color: rgb(138, 0, 202);
+                background-color: $highlight-color;
                 color: white;
-                font-weight: bold;
+                font-weight: 700;
             }
             p {
                 margin: 0;
@@ -79,36 +89,36 @@
         }
     }
     .main-content {
-        width: 85%;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
         height: 100%;
         padding: 1.7rem;
+        padding-bottom: 0;
     }
 }
 
 .dashboard-nav {
-    padding: 0 2rem;
-    height: 3rem;
-    background-color: rgb(72, 0, 105) !important;
-    .back-button-container {
-        .back-button {
-            height: 100%;
-            font-size: .8rem;
-            color: rgb(246, 246, 246);
-            background-color:rgba(255, 255, 255, 0.219);
-            &:hover {
-                background-color: rgba(255, 255, 255, 0.45);
-            }
-        }
-    }
-    .navbar-brand {
-        font-size: 1rem !important;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: $nav-color !important;        
+}
+
+.back-button {
+    font-size: .8rem;
+    color: rgb(246, 246, 246);
+    background-color:rgba(255, 255, 255, 0.219);
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.45);
     }
 }
 
 .card-container {
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.card-container::-webkit-scrollbar {
+    display: none;
 }
 
 .row-container {
@@ -119,18 +129,28 @@
 
 .overview-card {
     @include card();
-    height: 8rem;
-    margin-right: 1rem;
+    min-height: 9rem;
+    margin: auto;
+    overflow: hidden;
+}
+
+.overview-card-feature {
+    width: 100%;
+    height: 20px;
+    flex: 1;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
 }
 
 .class-card {
     @include card();
-    margin-right: 1rem;
 }
 
 .student-card {
     @include card();
-    margin: 0 .5rem .5rem 0;
     flex-direction: row;
     .icon {
         background-color: red;
@@ -156,7 +176,6 @@
     .buttons {
         display: flex;
         .button {
-            // width: 5rem;
             margin-right: 10px;
             height: 40px;
             font-size: .8rem;
@@ -164,7 +183,6 @@
     }
     .search {
         display: flex;
-        // flex-shrink: 0;
         flex-grow: 1;
         height: 40px;
         .input-group {
@@ -180,46 +198,107 @@
     }
 }
 
-.activityList {
+.activity-list {
     overflow-y: scroll;
     height: 100%;
     width: 100%;
     padding: 5px 10px;
 }
 
-#activity-controls {
-    padding: 10px 10px;
-    padding-top: 0;
-    height: auto;
-}
-
-.activity-row {
-    width: 100%;
-    padding: 10px 20px;
-    background-color: rgb(255, 255, 255);
-    margin-bottom: .8rem;
-    border-radius: .25rem;
-    @include box-shadow(0 4px 11px rgba(33,33,33,.1));
-    .title {
-        display: flex;
-        align-items: center;
-        height: 100%
-    }
-    .num-questions {
-        display: flex;
-        align-items: center;
-        height: 100%
-    }
-    .btns {
-        display: flex;
-        justify-content: flex-end;
-        .btn {
-            height: 2rem;
-            padding: 5px 10px;
-            font-size: .8rem;
-            @include center;
-            margin: 0 5px;
+.activity-card {
+    @include card();
+    &:hover {
+        .activity-type {
+            color: $highlight-color !important;
         }
     }
+    .activity-type {
+        transition: .2s ease-in-out;
+    }
+    .activity-buttons {
+        display: flex;
+        .button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 2rem;
+            width: 2rem;
+            border-radius: .5rem;
+            transition: background-color .125s ease-in-out;
+            &:hover {
+                background-color: rgb(228, 228, 228);
+            }
+        }
+    }
+}   
+
+.card-half {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
+.collapsable-sidebar {
+    width: 15%;
+    min-width: 200px;
+}
+.collapsed-sidebar {
+    display: none;
+}
+
+.main-content-full {
+    width: 100% !important;
+}
+
+.settings-page {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    @include box-shadow-dash();
+    height: 96%;
+}
+
+.settings-module {
+    padding: 1rem 0;
+}
+
+.avatar {
+    width: 200px;
+    height: 200px;
+    background-color: red;
+}
+
+.dashboard-modal {
+    $width: 65rem;
+    $height: 30rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 1rem;
+    margin-top: -($height/2);
+    margin-left: -($width/2);
+    width: $width;
+    height: $height;
+    background-color: white;
+    padding: 2rem;
+    @include box-shadow-dash();
+    @media (max-width:70rem) {
+        width: 95%;
+        height: 90%;
+        top: 5%;
+        left: 2.5%;
+        margin-top: 0;
+        margin-left: 0;
+    }
+}
+
+.modal-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba($color: #000000, $alpha: 0.5);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}

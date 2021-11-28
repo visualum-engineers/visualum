@@ -1,17 +1,17 @@
 import React from 'react'
 import SidebarItem from './SidebarItem';
+import { useSelector } from 'react-redux'
+import sidebarValues from './sidebarValues';
 
 export default function DashboardSidebar(props) {
+    const state = useSelector((state) => state.dashboard);
+    const items = sidebarValues.map(item => <SidebarItem name={item.name} value={item.value} selected={props.page === item.value} />)
+
     return (
-        <div className="dashboard-sidebar">
-            <SidebarItem name="Home" value="home" selected={props.page === 'home'} />
-            <SidebarItem name="My Classes" value="classes" selected={props.page === 'classes'} />
-            <SidebarItem name="My Assignments" value="assignments" selected={props.page === 'assignments'} />
-            <SidebarItem name="My Activities" value="activities" selected={props.page === 'activities'} />
-            <SidebarItem name="Statistics" value="statistics" selected={props.page === 'statistics'} />
-            <SidebarItem name="Grades" value="grades" selected={props.page === 'grades'} />
-            <SidebarItem name="Settings" value="settings" selected={props.page === 'settings'} />
-            <SidebarItem name="Help" value="help" selected={props.page === 'help'} />
+        <div className={state.collapsed ? "collapsed-sidebar" : "collapsable-sidebar"}>
+            <div className="dashboard-sidebar">
+                {items}
+            </div>
         </div>
     )
 }
