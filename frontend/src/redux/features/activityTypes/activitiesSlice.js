@@ -14,7 +14,7 @@ const activitiesSlice = createSlice({
         }
     }
 })
-//export reducer meant for store
+//export reducer meant for store       
 export const {enableTap, enableDnD} = activitiesSlice.actions
 
 export default activitiesSlice.reducer

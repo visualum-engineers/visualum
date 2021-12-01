@@ -4,7 +4,7 @@ import {DragDropContext} from 'react-beautiful-dnd';
 import useWindowWidth from '../../../hooks/use-window-width'
 import MoreInfoBtn from '../../moreInfoBtn/MoreInfoBtn';
 import DroppableArea from "../DragAndDrop/DroppableArea"
-import { useDispatch, useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {enableTap, enableDnD} from '../../../../redux/features/activityTypes/activitiesSlice'
 /*
 To-dos

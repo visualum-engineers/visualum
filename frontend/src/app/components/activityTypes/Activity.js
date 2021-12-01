@@ -138,7 +138,7 @@ const Activity = () =>{
             <div className="col-11 col-md-10 nav-activity-btns">
                 <ActivityBtns 
                     prevQuestion = {questionNum !== 1} 
-                    lastQuestion = {Object.keys(activityData).length-1 === questionNum}
+                    lastQuestion = {Object.keys(activityData).length-2 === questionNum}
                     onNavBtnClick = {onNavBtnClick}
                 />
             </div>
