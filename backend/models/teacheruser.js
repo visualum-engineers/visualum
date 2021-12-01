@@ -31,7 +31,12 @@ var AssignmentSchema = new Schema({
             type: mongoose.Schema.Types.ObjectId,
         }
 });
-
+var EnterpriseSchema = new Schema({
+  Name: Sting,
+  EnterpriseID: {
+    type: mongoose.Schema.Types.ObjectId
+}
+});
 const TeacherUserSchema = new Schema({
     FirstName: {type: String, required: true},
     LastName: {type: String, required: true},
@@ -42,7 +47,8 @@ const TeacherUserSchema = new Schema({
     PaymentInfo: {type: String, required: false},
     School : SchoolSchema,
     AssignmentCreated: [CreatedAssignmentSchema],
-    Classes: [ClassSchema]
+    Classes: [ClassSchema],
+    Enterprise: EnterpriseSchema
 });
 // the USer class and User mdodel 
 const TeacherUser = mongoose.model('teacheruser',TeacherUserSchema );

@@ -2,11 +2,7 @@ const { ObjectId } = require("bson");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-var AssignmentSchema = new Schema({
-    AssignmentID: {
-      type: mongoose.Schema.Types.ObjectId
-  }
-  });
+
 var EnterpriseSchema = new Schema({
     Name: Sting,
     EnterpriseID: {
@@ -23,29 +19,20 @@ var SchoolSchema = new Schema({
         }
 });
 
-const StudentUserSchema = new Schema({
+const AdminUserSchema = new Schema({
     FirstName: {type: String, required: true},
     LastName: {type: String, required: true},
     Email: {type: String, required: true},
     Password: {type: String, required: true},
-    AccountType:{type: String, required: true},
+   
     Avatar_ID: {type: String, required: true},
     PaymentInfo: {type: String, required: false},
     School : SchoolSchema,
-    CompletedAssignments : [AssignmentSchema],
+   
     Enterprise: EnterpriseSchema
 });
-// the USer class and User mdodel 
-const StudentUser = mongoose.model('studentuser',StudentUserSchema );
+// the AdminUser model
+const AdminUser = mongoose.model('adminuser',AdminUserSchema );
 //const Assignment = mongoose.model('assignment',AssignmentSchema );
 
-module.exports = StudentUser;
-//module.exports = Assignment;
-
-//const testUser = new User({FirstName: 'Arky', LastName: 'Asmal', AccountType: 'free', Avatar_ID: 'red'});
-
-//testuser.save();
-
-
-  
- 
+module.exports = AdminUser;

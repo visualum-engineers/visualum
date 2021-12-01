@@ -33,11 +33,14 @@ var ActiveAssignmentSchema = new Schema({
             type: mongoose.Schema.Types.ObjectId,
         }
 });
-
+var ClassCodeSchema = new Schema({
+    expdate: Date,
+    code: Number
+});
 
 const ClassSchema = new Schema({
     Name: String,
-    ClassCode: {type: Number, required: true},
+    ClassCode: ClassCodeSchema,
     Teacher : TeacherSchema,
     School : SchoolSchema,
     Students : [StudentSchema],
