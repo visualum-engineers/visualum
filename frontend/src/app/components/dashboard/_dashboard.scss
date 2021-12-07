@@ -93,7 +93,7 @@ $highlight-color: #FF8000;
         flex-direction: column;
         flex: 1;
         height: 100%;
-        padding: 1.7rem;
+        padding: .5rem 1.7rem;
         padding-bottom: 0;
     }
 }
@@ -101,7 +101,30 @@ $highlight-color: #FF8000;
 .dashboard-nav {
     padding-left: 2rem;
     padding-right: 2rem;
-    background-color: $nav-color !important;        
+    color: $nav-color;
+    background-color: ghostwhite;
+    // background-color: $nav-color !important;        
+}
+
+.dashboard-sidebar-brand {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: .5rem;
+}
+
+.dashboard-sidebar-name {
+    display: inline;
+    font-weight: 600;
+    color: #041F54;
+}
+
+.dashboard-logo {
+    width: 2rem;
+    height: 2rem;
+    margin-right: .5rem;
 }
 
 .back-button {
@@ -173,8 +196,10 @@ $highlight-color: #FF8000;
     width: 100%;
     height: 3rem;
     flex-shrink: 0;
+    align-items: center;
     .buttons {
         display: flex;
+        align-items: center;
         .button {
             margin-right: 10px;
             height: 40px;
