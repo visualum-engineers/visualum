@@ -1,7 +1,21 @@
-@mixin homePage-sm {
+@mixin homepage-sm {
     #home-page-market-intro div p{
         font-size: 1.1rem;
         font-weight: 800;
         text-align: center;
     }
+    .intro-blurb {
+        width: 50%;
+    }
 }
+
+@mixin homepage-xs {
+    .intro-blurb {
+        width: 100%;
+    }
+    .intro-homepage {
+        padding: 100px 2rem;
+    }
+}
+
+

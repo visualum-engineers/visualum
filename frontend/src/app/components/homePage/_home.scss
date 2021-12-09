@@ -1,35 +1,71 @@
-.home-page-stars{
-    min-height: 200px;
-    position: absolute;
-    width: 100%;
-    height: 27vh;
-    z-index: 2;
-    object-fit: cover;
+.intro {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-image: url("images/homePage/background.jpeg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
-.intro-homePage{
-    position: relative;
-    text-align: justify;
-    padding: 0 10vw;
-    padding-top: 100px;
-    padding-bottom: 20px;
+
+.intro-homepage {
+    padding: 100px 4.3rem;
+    padding-bottom: 0;
     margin: 0;
     min-height: 550px;
-    height: 100vh;
+    height: 100%;
     width: 100%;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.homePageImage{
-    @include anchor-top-left;
-    @include fillContainer;
-    position: absolute;
-    object-fit: cover;
-    object-position: top;
-    z-index: -1;
+.intro-blurb {
+    width: 30%;
+    justify-self: center;
 }
 
-.homePageText{
+.intro-tagline {
     color: $main-font-color;
+    font-weight: 600;
+}
+
+.intro-subtitle {
+    color: $main-font-color;
+    font-size: 1.5rem;
+}
+
+.intro-button {
+    background-color: #3913D0;
+    border-radius: 2rem;
+    color: $main-font-color;
+    margin-top: .8rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: .3rem 1.2rem;
+    &:hover {
+        color: rgba(255, 255, 255, 0.8);
+    }
+}
+
+.intro-explore {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    height: 100px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    transition: color ease-in-out 125ms;
+    &:hover {
+        cursor: pointer;
+        color: $main-color;
+    }
+    p {
+        display: inline;
+        margin: 0;
+    }
 }
 
 .introContainer{
@@ -97,86 +133,88 @@
     }
 }
 
-.home-explore-link{
-    color: white;
-    justify-self: end;
-}
-.home-explore-link:hover{
-    color: rgb(170, 169, 169);
-}
-.home-explore-link>p{
-    display: inline;
-    margin: 0;
-}
 
-#home-page-market-intro {
-    div{
-        height: 20vh;
-        min-height: 300px;
-        margin-bottom: 1rem;
 
-        p{
-            font-size: 1.4rem;
-            font-weight: 800;
-            text-align: center;
-        }
+// #home-page-market-body{
+//     @extend .intro-homepage;
+// }
 
-        img {
-            object-fit: contain;
-            object-position: center;
-            min-height: 300px;
-            height: 100%;
-        }
-    }
+// .home-page-market-body-bg{
+//     @extend .homePageImage;
+// }
 
-    h1{
-        margin-top: 5rem;
-        margin-bottom: 1rem;
-        color: orange;
-        font-weight: 700;
-        text-align: center;
 
-    }
-    h6{
-        font-size: 0.95rem;
-        margin-bottom: 6rem;
-        text-align: center;
-    }
+
+// #home-page-market-intro {
+//     div{
+//         height: 20vh;
+//         min-height: 300px;
+//         margin-bottom: 1rem;
+
+//         p{
+//             font-size: 1.4rem;
+//             font-weight: 800;
+//             text-align: center;
+//         }
+
+//         img {
+//             object-fit: contain;
+//             object-position: center;
+//             min-height: 300px;
+//             height: 100%;
+//         }
+//     }
+
+//     h1{
+//         margin-top: 5rem;
+//         margin-bottom: 1rem;
+//         color: orange;
+//         font-weight: 700;
+//         text-align: center;
+
+//     }
+//     h6{
+//         font-size: 0.95rem;
+//         margin-bottom: 6rem;
+//         text-align: center;
+//     }
     
-    .teacherPointing p{
-        margin-top: -7rem;
-    }
-    .planet img{
-        margin-top: -5rem;
-    }
-    .pencils p{
-        margin-top: -3rem;
-    }
-    .pencils{
-        margin-bottom: 4rem;
-    }
-    h4{
-        font-weight: 700;
-        margin-bottom: 2rem;
-        text-align: center;
-    }
-    button{
-        background-color: orange;
-        color: white;
-        border: orange 1px solid;
-        margin-bottom: 6rem;
-        &:hover{
-            background-color: white;
-            color: orange;
-        }
-    }
-}
+//     .teacherPointing p{
+//         margin-top: -7rem;
+//     }
+//     .planet img{
+//         margin-top: -5rem;
+//     }
+//     .pencils p{
+//         margin-top: -3rem;
+//     }
+//     .pencils{
+//         margin-bottom: 4rem;
+//     }
+//     h4{
+//         font-weight: 700;
+//         margin-bottom: 2rem;
+//         text-align: center;
+//     }
+//     button{
+//         background-color: orange;
+//         color: white;
+//         border: orange 1px solid;
+//         margin-bottom: 6rem;
+//         &:hover{
+//             background-color: white;
+//             color: orange;
+//         }
+//     }
+// }
 
-#home-page-market-body{
-    @extend .intro-homePage;
-}
-.home-page-market-body-bg{
-    @extend .homePageImage;
-}
+// .home-page-stars{
+//     min-height: 200px;
+//     position: absolute;
+//     width: 100%;
+//     height: 27vh;
+//     z-index: 2;
+//     object-fit: cover;
+// }
 
 
