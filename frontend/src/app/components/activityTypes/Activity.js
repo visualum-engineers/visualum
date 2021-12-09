@@ -13,7 +13,7 @@ const activityData = assignmentData
 const duration = 500
 const defaultTransition = {
     transition: `all ${duration}ms ease-out`,
-    transitionProperty: "opacity, transform",
+    transitionProperty: "opacity, transform, left",
 }
 const Activity = () =>{
     let currQuestion = 1
@@ -106,7 +106,8 @@ const Activity = () =>{
                 {/*generate entire form data*/}
                 {question.type ?
                     Object.keys(activityData).map((key)=>{
-                        const moveLeft = (prevQuestion - questionNum) > 0
+                        const moveLeft = (prevQuestion - questionNum) >= 0
+                        console.log(moveLeft, prevQuestion, questionNum)
                         return (
                             <CSSTransition
                                 key = {`question-${key}`}

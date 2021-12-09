@@ -154,17 +154,17 @@
 .question-move-left-enter{
     position:absolute;
     top: 0;
-    left: 0;
+    left: -100vw;
     width: 100%;
     padding: 0 1.3rem;
     height: 100%;
     opacity: 0;
-    transform: translateX(-100vw);
-    
+    transform: translateX(-100vw); 
 }
 .question-move-left-enter-active{
     opacity: 1;
-    transform: translateX(0);
+    left: 0;
+    transform: translateX(0)
 }
 
 .question-move-left-exit{
@@ -200,6 +200,7 @@
     opacity: 0;
     transform: translateX(-100vw);
 } 
+
 .nav-activity-btns{
     z-index: 1;
     max-width: 1000px;
