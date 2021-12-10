@@ -64,10 +64,25 @@
 }
 
 .home-feature-module {
-    height: 20rem;
+    min-height: 25rem;
+    padding: 2rem 1rem;
 }
 
 .underline {
     height: 3px;
     background-color: #3913D0;
+}
+
+.features-home {
+    font-family: "Poppins", sans-serif !important;
+    h2 {
+        font-weight: 500;
+        font-size: 1.5rem;
+    }
+}
+
+.feature-module-desc {
+    width: 75%;
+    font-size: 1rem;
+    margin-top: .5rem;
 }

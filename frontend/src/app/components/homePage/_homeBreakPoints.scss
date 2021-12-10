@@ -1,11 +1,9 @@
 @mixin homepage-sm {
-    #home-page-market-intro div p{
-        font-size: 1.1rem;
-        font-weight: 800;
-        text-align: center;
-    }
     .intro-blurb {
         width: 50%;
+    }
+    .feature-module-desc {
+        width: 100%;
     }
 }
 
