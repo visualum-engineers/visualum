@@ -34,9 +34,7 @@
     padding: 8px;
     text-align: center;
     font-size: 1em;
-}
-
-.nav-btn.home-page-nav{
+    transition: background-color ease-in-out 125ms;
     &:hover,
     &:active{
         @include hover-color;
