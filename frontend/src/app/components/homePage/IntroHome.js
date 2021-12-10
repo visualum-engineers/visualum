@@ -35,7 +35,7 @@ const IntroHome = () => {
                     <h3 className="intro-subtitle">
                         Join Visualum to start your journey.
                     </h3>
-                    <a className="btn btn-priamry intro-button">Sign Up</a>
+                    <a className="btn btn-priamry intro-button" href="/signup">Sign Up</a>
                 </div>
             </div>
             <div className="intro-explore">

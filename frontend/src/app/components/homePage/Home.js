@@ -1,7 +1,6 @@
 import { React } from 'react'
 import IntroHome from "./IntroHome"
-import MarketingHomeIntro from "./MarketingHomeIntro"
-import MarketingHomeBody from './MarketingHomeBody'
+import MarketingHomeIntro from "./FeaturesHome"
 // const starsWebM = "images/homePage/stars.webm"
 // const starsMov = "images/homePage/stars.mov"
 
