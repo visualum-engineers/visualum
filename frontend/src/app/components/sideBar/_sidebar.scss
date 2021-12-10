@@ -48,7 +48,7 @@
     margin-top: 90px;
     margin-left: 36.8%;
     width: 150px;
-    color: $main-font-color;
+    color: $secondary-font-color;
     font-size: 0.9rem;
 }
 .primary-sidebar-link-container.sidebarScrollActive{
@@ -70,7 +70,7 @@
     right: 15px;
     margin-top: 90px;
     padding: 0 7px;
-    color: $main-font-color;
+    color: $secondary-font-color;
     font-size: 1.5em;
 }
 .primary-exit-sidebar-btn:hover{
@@ -107,7 +107,7 @@
 }
 .secondary-sidebar-link-container{
     @include transition(all 0.25s ease-out);
-    color: $main-font-color;
+    color: $secondary-font-color;
 }
 
 .secondary-sidebar-link{
@@ -133,7 +133,7 @@
     top: calc(50vh - 1.6rem);
     left: 13rem;
     padding: 0.2rem 0.9rem 0.1rem 0.9rem;
-    color: $main-font-color;
+    color: $secondary-font-color;
     font-size: 1.5rem;
     background-color: $white;
     border: 1px rgba(0,0,0,0) solid;

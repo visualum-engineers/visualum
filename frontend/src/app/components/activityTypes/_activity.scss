@@ -37,7 +37,7 @@
             height: 100%;
             font-size: 0.7rem;
             border: 1px $dark-gray solid;
-            color: $main-font-color;
+            color: $secondary-font-color;
             &:hover {
                 @include activities-nav-navItems-hover()
             }
@@ -46,14 +46,14 @@
     }
     .navbar-brand {
         font-size: 1rem !important;
-        color: $main-font-color;
+        color: $secondary-font-color;
         padding: 0 1rem;
         @include border-radius(5px);
         @include transition(all 0.3s ease-out);
         &:hover, &:focus{
             cursor: pointer;
             @include activities-nav-navItems-hover();
-            color: $main-font-color;
+            color: $secondary-font-color;
         }
     }
 }
@@ -210,7 +210,7 @@
 }
 .nav-activity-btn{
     @include border-radius(5px);
-    color: $secondary-font-color;
+    color: $main-font-color;
     background-color: $purple;
     padding: 0.4rem 1.2rem;
     margin: 1.1rem 0;
@@ -257,6 +257,6 @@
     .timer-btns{
         @include remove-btn-default;
         font-size: 0.8rem;
-        color: $main-font-color;
+        color: $secondary-font-color;
     }
 }

@@ -97,10 +97,10 @@
     //background-color: $white;
     background-color: $light-blue;
     @include border-radius(7px);
-    //@include box-shadow(rgba(0,0,0,0.1) 0px 0 10px);
     min-width: 310px;
     max-height: calc(max(20rem, 30vh));
     min-height: calc(max(20rem, 30vh));
+    //@include box-shadow(rgba(0,0,0,0.1) 0px 0 10px);
     overflow-x: hidden;
     overflow-y: auto;
     &::-webkit-scrollbar{
@@ -194,11 +194,11 @@
         margin: 0;
         height: 5rem;
         font-weight: 500;
-        color: $main-font-color;
+        color: $secondary-font-color;
         cursor: auto;
     }
     p:hover{
-        color: $main-font-color;
+        color: $secondary-font-color;
         opacity: 1 !important;
         background-color: $lightest-gray;
         border: 1px solid rgba(0, 0,0,0) !important;

@@ -349,7 +349,6 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
                         />
                 </div>
             : null}
-            
         </DragDropContext>
         </div>
      </>
