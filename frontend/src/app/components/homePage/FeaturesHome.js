@@ -27,7 +27,8 @@ const MarketingHomeIntro = () => {
                             <h2 className="text-start">Choose From a Vast Library of Free Assignments</h2>
                             <div className="underline" />
                             <p className="feature-module-desc">
-                                Creating visuals is a stretch, you’re going to need some help. That’s why we’ve put together this list of digital content creation software. It contains the tools you need to nail visual content creation, and there’s an added bonus.                            </p>
+                                Creating visuals is a stretch, you’re going to need some help. That’s why we’ve put together this list of digital content creation software. It contains the tools you need to nail visual content creation, and there’s an added bonus.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -37,7 +38,8 @@ const MarketingHomeIntro = () => {
                             <h2 className="text-end">Track Student Progress with Detailed Metrics</h2>
                             <div className="underline" />
                             <p className="ms-auto text-end feature-module-desc">
-                                Creating visuals is a stretch, you’re going to need some help. That’s why we’ve put together this list of digital content creation software. It contains the tools you need to nail visual content creation, and there’s an added bonus. enter the answer by typing or..                            </p>
+                                Creating visuals is a stretch, you’re going to need some help. That’s why we’ve put together this list of digital content creation software. It contains the tools you need to nail visual content creation, and there’s an added bonus. enter the answer by typing or..
+                            </p>
                         </div>
                         <div className="col-md-6 col-12 order-2">
 

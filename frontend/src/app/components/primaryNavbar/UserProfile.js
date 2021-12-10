@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { faUser, faStar } from '@fortawesome/free-solid-svg-icons'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { CSSTransition } from 'react-transition-group'
 import { useHistory } from 'react-router-dom';
 
@@ -40,21 +40,25 @@ export default function UserProfile(props) {
                     className={`user ${open ? "user-active" : ""}`}
                     onClick={onClick}
                     onMouseLeave={exitButton}
+                    onMouseEnter={enterMenu}
                 >
                     <div className="user-profile">
                         <FontAwesomeIcon icon={faUser} className="user-icon" />
                     </div>
-                    <div className="user-reward">
+                    <div className="user-student-name">
+                        Student User
+                    </div>
+                    {/* <div className="user-reward">
                         <FontAwesomeIcon icon={faStar} className="user-reward-icon" />
                         {props.rewardNum}
-                    </div>
+                    </div> */}
                 </button>
             </li>
-            <UserDropdown 
-                open={open} 
-                enterMenu={enterMenu} 
-                exitMenu={exitMenu} 
-                />
+            <UserDropdown
+                open={open}
+                enterMenu={enterMenu}
+                exitMenu={exitMenu}
+            />
         </>
     );
 }
