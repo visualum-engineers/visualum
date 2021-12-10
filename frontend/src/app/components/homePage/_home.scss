@@ -33,7 +33,7 @@
 
 .intro-subtitle {
     color: $main-font-color;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 .intro-button {
@@ -57,14 +57,14 @@
     height: 100px;
     font-size: 1.2rem;
     font-weight: 500;
-    transition: color ease-in-out 125ms;
-    &:hover {
-        cursor: pointer;
-        color: $main-color;
-    }
     p {
         display: inline;
         margin: 0;
+        transition: color ease-in-out 125ms;
+        // &:hover {
+        //     cursor: pointer;
+        //     color: $main-color;
+        // }
     }
 }
 

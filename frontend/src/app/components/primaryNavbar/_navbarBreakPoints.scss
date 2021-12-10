@@ -22,6 +22,9 @@
         width: calc(100% - 60px);
         height: 50px;
     }
+    .companyTitle {
+        padding-left: 1rem;
+    }
 }
 
 @mixin navbar-lg{
