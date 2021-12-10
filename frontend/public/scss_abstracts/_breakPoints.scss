@@ -16,6 +16,7 @@
     @include entry-form-md;
     @include match-activity-md;
     @include activity-md;
+    @include homepage-sm;
 }
 
 @media(max-width: 768px){
@@ -25,7 +26,7 @@
 @media (max-width: 575px) { 
     @include navbar-sm;
     @include entry-form-sm;
-    @include homePage-sm;
     @include match-activity-sm;
     @include activity-sm;
+    @include homepage-xs;
 }

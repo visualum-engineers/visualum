@@ -18,12 +18,11 @@
     background: $main-color;
 }
 
-.companyTitle{
-    font-size: 1.6rem;
-    font-family: 'Merriweather', serif;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    padding-right: 2rem;
+.nav-brand {
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    margin: 0 3rem;
 }
 
 .nav-btn.home-page-nav{
@@ -35,9 +34,7 @@
     padding: 8px;
     text-align: center;
     font-size: 1em;
-}
-
-.nav-btn.home-page-nav{
+    transition: background-color ease-in-out 125ms;
     &:hover,
     &:active{
         @include hover-color;
@@ -139,22 +136,23 @@
 
 .user {
     @include center;
-    @include border-radius(25px);
+    @include border-radius(15px);
     @include transition(background-color 250ms ease-in-out);
     background-color: rgba(255, 255, 255, 0);
     border: none;
     color: $main-font-color;
     height: 100%;
     padding: 5px 10px;
-}
-
-.user:hover {
-    background-color: rgba(255, 255, 255, 0.267);
-    cursor: pointer;
+    margin-right: 3rem;
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.267);
+        cursor: pointer;
+    }
 }
 
 .user-active {
     background-color: rgba(255, 255, 255, 0.267);
+    color: rgba(10, 10, 10, 0.75);
 }
 
 .user-profile {
@@ -163,11 +161,17 @@
     height: 40px;
     margin: 5px;
     border-radius: 50%;
-    background-color: $main-font-color;
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .user-icon {
-    color: #271b53;
+    color: #3913d052;
+}
+
+.user-student-name {
+    padding: 0 0.5rem;
+    font-weight: 500;
+    transition: color ease-in-out 125ms;
 }
 
 .user-reward {
@@ -185,7 +189,8 @@
     width: 440px;
     font-size: 0.9em;
     position: absolute;
-    background-color:lighten($color: $bg-color, $amount: 10);
+    color: rgba(10, 10, 10, 0.75);
+    background-color: rgba(255, 255, 255, 0.267);
     top: 100px;
     display: flex;
 }
@@ -232,13 +237,13 @@
     @include center;
     @include transition(all 250ms ease-in-out);
     border: none;
-    color: $main-font-color;
+    color: rgba(10, 10, 10, 0.75);
     text-align: center;
     width: 90%;
     height: 38px;
     margin: 7.5px auto;
     padding: 10px;
-    background-color:lighten($color: $bg-color, $amount: 2);
+    background-color: rgba(255, 255, 255, 0.5);;
 }
 .user-dropdown-button:hover {
     @include hover-color;
