@@ -6,7 +6,7 @@ const IntroHome = () => {
             <div className="intro-homepage" style={{ backgroundImage: background }}>
                 <div className="intro-blurb">
                     <h2 className="intro-tagline">
-                        A word class education for anyone, anywhere.
+                        A world class education for anyone, anywhere.
                     </h2>
                     <h3 className="intro-subtitle">
                         Join Visualum to start your journey.
