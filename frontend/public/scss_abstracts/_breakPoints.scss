@@ -8,12 +8,14 @@
     @include navbar-lg;
     @include entry-form-lg;
     @include match-activity-lg;
+    @include activity-lg;
 }
 
 @media (max-width: 992px){
     @include navbar-md;
     @include entry-form-md;
     @include match-activity-md;
+    @include activity-md;
 }
 
 @media(max-width: 768px){
@@ -25,4 +27,5 @@
     @include entry-form-sm;
     @include homePage-sm;
     @include match-activity-sm;
+    @include activity-sm;
 }

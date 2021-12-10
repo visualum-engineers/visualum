@@ -81,11 +81,11 @@
 //secondary sidebar styles
 .secondary-sidebar-nav{
     background: $light-bg-color;
-    width: 15rem;
+    width: 13rem;
     @include box-shadow(4px 0px 7px -8px #000000);
 }
 .secondary-sidebar-header{
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 2rem;
     margin-top: 1.5rem;
@@ -101,7 +101,7 @@
 .secondary-sidebar-visualum-logo{
     margin-left: -0.8rem;
     margin-right: 0.8rem;
-    max-width: 3.5rem;
+    max-width: 2.2rem;
     object-fit: contain;
     object-position: center;
 }
@@ -111,8 +111,7 @@
 }
 
 .secondary-sidebar-link{
-    text-align: center;
-    font-size: 1rem;
+    font-size: 0.9rem;
     margin-bottom: 0.6rem;
     padding: 0.1rem 0.3rem;
     min-width: 60%;
@@ -132,7 +131,7 @@
     @include remove-btn-default;
     position: fixed;
     top: calc(50vh - 1.6rem);
-    left: 15rem;
+    left: 13rem;
     padding: 0.2rem 0.9rem 0.1rem 0.9rem;
     color: $main-font-color;
     font-size: 1.5rem;

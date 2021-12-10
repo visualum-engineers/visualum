@@ -1,8 +1,13 @@
-import React, { useState, useEffect} from 'react'
-//import DroppableArea from './DroppableArea'
+import React, { useState, useEffect, useRef} from 'react'
 import DroppableArea from '../DragAndDrop/DroppableArea';
 import {DragDropContext} from 'react-beautiful-dnd';
+import {useDispatch, useSelector} from 'react-redux';
+import {enableTap, enableDnD} from '../../../../redux/features/activityTypes/activitiesSlice'
 import useWindowWidth from '../../../hooks/use-window-width';
+import WordBank from '../DragAndDrop/WordBank';
+import DrapAndDropToggler from '../DragAndDrop/DrapAndDropToggler'
+import Timer from '../../timer/Timer';
+
 /*Note Missing To-do
 Backend: 
     1. Missing updating the backend with partial completion of assignment
@@ -17,28 +22,28 @@ Frontend:
     4. Missing progress saved on local storage/memory (if user exits out of page)
 */
 //transform data to workable model
-const transformData = (data, wordBankColumns) =>{
+const transformData = (data, itemBankColumns) =>{
     let newData = {}
     //on mount (initial data loaded)
     newData["categories"] = {}
-    newData["wordBank"] = {}
+    newData["itemBank"] = {}
     newData["answerChoices"] = {}
-    newData["allWordBankItems"] ={}
-    if(!data.wordBank){
+    newData["allItems"] ={}
+    if(!data.itemBank){
         for(let i of data.categories) newData["categories"][i.name] = []
         
-        for(let i=0; i<wordBankColumns; i++){
-            const elementsPresent = (data.answerChoices.length)%wordBankColumns === 0 ? (data.answerChoices.length)/wordBankColumns : Math.floor((data.answerChoices.length)/wordBankColumns+1)
+        for(let i=0; i<itemBankColumns; i++){
+            const elementsPresent = (data.answerChoices.length)%itemBankColumns === 0 ? (data.answerChoices.length)/itemBankColumns : Math.floor((data.answerChoices.length)/itemBankColumns+1)
             const startSlice = i * elementsPresent 
             const endSlice = (i+1) * elementsPresent
-            newData.wordBank["answerChoices-" + i] = data.answerChoices.slice(startSlice, endSlice).map((answer) =>{
+            newData.itemBank["answerChoices-" + i] = data.answerChoices.slice(startSlice, endSlice).map((answer) =>{
                 return {id: answer.id, content: answer.content}
             })
         }
         //keep a record of all items in word bank. 
         // Needed to create 2 or 3 columns based on screen size
         for(let i of data.answerChoices){
-            newData.allWordBankItems[i.id] = {id: i.id, content: i.content}
+            newData.allItems[i.id] = {id: i.id, content: i.content}
             newData.answerChoices[i.id] = {id: i.id, content: i.content}
         }
        
@@ -47,26 +52,30 @@ const transformData = (data, wordBankColumns) =>{
     else {
         for(let i of Object.keys(data.categories)) newData["categories"][i] = [...data.categories[i]]
         
-        for(let i=0; i<wordBankColumns; i++){
-            const keys = Object.keys(data.allWordBankItems)
-            const elementsPresent = (keys.length)%wordBankColumns === 0 ? (keys.length)/wordBankColumns : Math.floor((keys.length)/wordBankColumns+1)
+        for(let i=0; i<itemBankColumns; i++){
+            const keys = Object.keys(data.allItems)
+            const elementsPresent = (keys.length)%itemBankColumns === 0 ? (keys.length)/itemBankColumns : Math.floor((keys.length)/itemBankColumns+1)
             const startSlice = i * elementsPresent 
             const endSlice = (i+1) * elementsPresent
-            newData["wordBank"]["answerChoices-" + i] = keys.slice(startSlice, endSlice).map((answer) =>{
+            newData["itemBank"]["answerChoices-" + i] = keys.slice(startSlice, endSlice).map((answer) =>{
                 return data.answerChoices[answer]
             })
         }
-        newData["allWordBankItems"] = {...data.allWordBankItems}
+        newData["allItems"] = {...data.allItems}
         newData["answerChoices"] = {...data.answerChoices}
     }
     return newData
 }
-const SortActivityApp = ({activityData, questionNum, activityID}) => {
+const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick=null, moreInfoBtn, mediumWindowWidth}) => {
     //for updating redux store(data to be sent to backend)
-    const windowWidth = useWindowWidth()
-    const columns = windowWidth ? Array(3).fill(0) : Array(1).fill(0)
-    const [data, setData] = useState(transformData(activityData, columns.length))
-
+    const smallWindowWidth = useWindowWidth(576)
+    const wordBankColumns = mediumWindowWidth ? Array(1).fill(0) : Array(2).fill(0) 
+    const questionColumns = mediumWindowWidth ? Array(2).fill(0) : Array(1).fill(0) 
+    const [data, setData] = useState(transformData(activityData, wordBankColumns.length))
+    const disableDnD = useSelector((state) => !state.activities.dndEnabled) 
+    const dispatch = useDispatch()
+    const [firstTapEl, setFirstTapEl] = useState(null)
+    const removedEl = useRef(null)
     //grab data from local storage
     useEffect(() =>{
         const stored_response = localStorage.getItem(`${activityID}-sort_activity_client_answer-${questionNum}`)
@@ -75,15 +84,76 @@ const SortActivityApp = ({activityData, questionNum, activityID}) => {
 
     //handle width resizing
     useEffect(() => {
-        setData((data) => transformData(data, columns.length))
-    }, [windowWidth, columns.length])
+        setData((data) => transformData(data, wordBankColumns.length))
+    }, [mediumWindowWidth, wordBankColumns.length])
 
     //roundup number of elements counted
     const numCategories = Object.keys(data.categories)
-    const rows = Array(numCategories.length%columns.length === 0 ? numCategories.length/columns.length : Math.floor(numCategories.length/columns.length+1)).fill(0)
+    //const rows = Array(numCategories.length%wordBankColumns.length === 0 ? numCategories.length/wordBankColumns.length : Math.floor(numCategories.length/wordBankColumns.length+1)).fill(0)
     const onDragStart = () =>{
         //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
         document.querySelector("html").classList.add("sortActivityActive")
+    }
+    const onTap = (e) =>{
+        // //means a selection hasnt happened so skip for keyboard
+        // if(e.type === "keydown" && e.key !=="Enter") return
+        // //update the first element
+        // let droppableSelected = null
+        // let currListItem = e.target.closest(".match-activity-draggables")
+        // if(!currListItem) {
+        //     droppableSelected = true
+        //     currListItem = e.target.closest(".match-activity-inner-droppable")
+        // }
+        // //used when two list items are clicked, and not an empty droppable
+        // const droppableId = currListItem.dataset.tapDroppableId
+        // const draggableIndex = currListItem.dataset.index
+        // const firstDraggableId = currListItem.dataset.tapDraggableId
+        
+        // if(!firstTapEl) {
+        //     setFirstTapEl({
+        //         droppableId: droppableId,
+        //         draggableId: firstDraggableId,
+        //         draggableIndex: draggableIndex
+        //     })
+        //     currListItem.classList.add("match-activity-dragging")
+        //     return
+        // }
+        // //update the second element, and perform tap logic
+        // document.getElementById("dragItem"+firstTapEl.draggableId).classList.remove("match-activity-dragging")
+        // const draggableId = firstTapEl.draggableId
+        // const source = {
+        //     droppableId: firstTapEl.droppableId,
+        //     index: firstTapEl.draggableIndex
+        // }
+        // const destination = {
+        //     droppableId: droppableId,
+        //     index: droppableSelected ? 0 : draggableIndex,
+        // }
+        // const result={
+        //     source: source,
+        //     destination: destination,
+        //     draggableId: draggableId
+        // }
+        
+        // onDragEnd(result)
+        // setFirstTapEl(null)
+    }
+      //toggle dnd and tap mode based on btn
+      const toggleTap = (e) => {
+        if (e.type ==="click" || (e.type ==="keydown" && e.key === "Enter")) {
+            //setDisableDnD(state => !state)
+            //update redux store so instructions can dynamically change
+            if (disableDnD) {
+                dispatch(enableDnD())
+            }
+            else dispatch(enableTap())
+            moreInfoOnClick()
+            //if we're changing the mode, we need to reset this
+            // as its only viable for tap mode
+            if(firstTapEl) document.getElementById("dragItem"+firstTapEl.draggableId).classList.remove("match-activity-dragging")
+            removedEl.current = null
+            setFirstTapEl(null)
+        }
     }
     //handle state update when object stops
     const onDragEnd = (result) => {
@@ -96,13 +166,13 @@ const SortActivityApp = ({activityData, questionNum, activityID}) => {
         //start and end containers
         const answerChoiceTestEl = (el) => /answerChoices.*/.test(el)
         const start = source.droppableId;
-        const startContainerType = answerChoiceTestEl(start) ? "wordBank" : "categories"
+        const startContainerType = answerChoiceTestEl(start) ? "itemBank" : "categories"
         const finish = destination.droppableId;
-        const finishContainerType = answerChoiceTestEl(finish) ? "wordBank" : "categories"
+        const finishContainerType = answerChoiceTestEl(finish) ? "itemBank" : "categories"
 
         //setup
-        const startAnswersList = Array.from(answerChoiceTestEl(start) ? data.wordBank[start] : data.categories[start])
-        const finishAnswersList = Array.from(answerChoiceTestEl(finish) ? data.wordBank[finish] : data.categories[finish])
+        const startAnswersList = Array.from(answerChoiceTestEl(start) ? data.itemBank[start] : data.categories[start])
+        const finishAnswersList = Array.from(answerChoiceTestEl(finish) ? data.itemBank[finish] : data.categories[finish])
         const sameContainer = start===finish
         let newState
     
@@ -141,9 +211,9 @@ const SortActivityApp = ({activityData, questionNum, activityID}) => {
                 }
             }
         } 
-        //maintain wordbank across resize, so we update allWordBankItems
-        if(startContainerType==="wordBank") delete newState.allWordBankItems[draggableId]
-        if(finishContainerType==="wordBank") newState.allWordBankItems[draggableId] = data.answerChoices[draggableId]
+        //maintain itemBank across resize, so we update allItems
+        if(startContainerType==="itemBank") delete newState.allItems[draggableId]
+        if(finishContainerType==="itemBank") newState.allItems[draggableId] = data.answerChoices[draggableId]
         
         //update state
         setData(newState)
@@ -151,50 +221,87 @@ const SortActivityApp = ({activityData, questionNum, activityID}) => {
     };
     
     return (
-    <>
-        <p className="sort-activity-instructions">Sort the following:</p>
-        <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
-                {/* Renders sort categories */}
-                {rows.map((content, index) =>{
-                    const startSlice = index * columns.length
-                    const endSlice = (index+1) * columns.length
-                    return (
-                        <div className="d-flex w-100 justify-content-center" key={index}> 
-                            {numCategories.slice(startSlice, endSlice).map((columnTitle)=> {
-                                let header = <p>{columnTitle}</p>
-                                return (
-                                    <DroppableArea
-                                        key={columnTitle} 
-                                        id={columnTitle}
-                                        content = {data.categories[columnTitle]}
-                                        droppableClassName = {`sort-activity-sort-droppables ${windowWidth ? "":"small-screen"}`}
-                                        draggableClassName = {"sort-activity-answers-draggables"}
-                                        innerDroppableClassName ={"sort-activity-inner-droppable d-flex flex-column align-items-center"}
-                                        droppableHeader = {header}
-                                        draggingOverClass = {"sort-activity-dragging-over"}
-                                    />
-                                )
-                            })} 
-                        </div>
-                )})}
-                {/* Renders word/response bank */}
-                <div className="d-flex w-100 justify-content-center">
-                    {Object.keys(data.wordBank).map((key) =>{
-                        return (
-                            <DroppableArea
-                                key={key}
-                                id = {key}
-                                content = {data.wordBank[key]}
-                                droppableClassName = {`sort-activity-itemBank-droppables ${windowWidth ? "":"small-screen"}`}
-                                draggableClassName = {"sort-activity-answers-draggables"}
-                                innerDroppableClassName ={"sort-activity-inner-droppable d-flex flex-column align-items-center"}
-                                draggingOverClass = {"sort-activity-dragging-over"}
-                                isDraggingClass = {"sort-activity-is-dragging"}
-                            />
-                        )
-                    })}
+    <>  
+        <div className={`sort-activity-header d-flex justify-content-${smallWindowWidth?"center": "start"}`}>
+            {data.timer &&
+                <div className={`activity-timer d-flex justify-content-center align-items-center`}>
+                    <span>TIME:</span>
+                    <Timer
+                        timer={data.timer}
+                        autoStart={false}
+                    />
                 </div>
-        </DragDropContext>
+            }
+            <DrapAndDropToggler
+                disableDnD = {disableDnD}
+                toggleTap = {toggleTap} 
+            />
+        </div>
+        <div className={`sort-activity-container d-flex ${mediumWindowWidth ? "full-size":"flex-column align-items-center"}`}>
+            <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
+                {mediumWindowWidth && <WordBank 
+                    data ={data}
+                    firstTapEl = {firstTapEl}
+                    isDraggingClass = {"sort-activity-is-dragging"}
+                    onTap = {disableDnD ? onTap : null}
+                    overallContainerClass = {`sort-activity-itemBank ${mediumWindowWidth ? "full-size":""}`} 
+                    columnContainerClass = "sort-activity-column-container"
+                    columnTitleClass = "sort-activity-column-titles"
+                    columnClass = "sort-activity-itemBank-column"
+                    droppableClassName ={`sort-activity-itemBank-droppables ${mediumWindowWidth ? "":"small-screen"}`}
+                    innerDroppableClassName = {"sort-activity-inner-droppable d-flex flex-column align-items-center"}
+                    draggingOverClass = {"sort-activity-dragging-over"}
+                    draggableClassName = {"sort-activity-answers-draggables d-flex align-items-center justify-content-center"}
+                />}
+                <div className={`sort-activity-question-container d-flex flex-column flex-grow-1 ${mediumWindowWidth ? "":"w-100"}`}>
+                    <h2 className="sort-activity-column-titles">Question</h2>
+                    {numCategories.map((content, index) => {
+                        const thirdCategory = index+1 % 3 === 0
+                        return(thirdCategory ? 
+                            <div> </div>
+                            : <div> </div>) 
+                    })}
+                    {/* Renders sort categories */}
+                    {/* {rows.map((content, index) =>{
+                        const startSlice = index * columns.length
+                        const endSlice = (index+1) * columns.length
+                        return (
+                            <div className="d-flex w-100 justify-content-center" key={index}> 
+                                {numCategories.slice(startSlice, endSlice).map((columnTitle)=> {
+                                    let header = <p>{columnTitle}</p>
+                                    return (
+                                        <DroppableArea
+                                            key={columnTitle} 
+                                            id={columnTitle}
+                                            content = {data.categories[columnTitle]}
+                                            droppableClassName = {`sort-activity-sort-droppables ${mediumWindowWidth ? "":"small-screen"}`}
+                                            draggableClassName = {"sort-activity-answers-draggables"}
+                                            innerDroppableClassName ={"sort-activity-inner-droppable d-flex flex-column align-items-center"}
+                                            droppableHeader = {header}
+                                            draggingOverClass = {"sort-activity-dragging-over"}
+                                        />
+                                    )
+                                })} 
+                            </div>
+                    )})} */}
+                    {/* Renders word/response bank */}
+                </div>
+                {!mediumWindowWidth && <WordBank 
+                    data ={data}
+                    firstTapEl = {firstTapEl}
+                    isDraggingClass = {"sort-activity-is-dragging"}
+                    onTap = {disableDnD ? onTap : null}
+                    overallContainerClass = {`sort-activity-itemBank ${mediumWindowWidth ? "full-size":""}`} 
+                    columnContainerClass = "sort-activity-column-container"
+                    columnTitleClass = "sort-activity-column-titles"
+                    columnClass = "sort-activity-itemBank-column"
+                    droppableClassName ={`sort-activity-itemBank-droppables ${mediumWindowWidth ? "":"small-screen w-100"}`}
+                    innerDroppableClassName = {"sort-activity-inner-droppable d-flex flex-column align-items-center"}
+                    draggingOverClass = {"sort-activity-dragging-over"}
+                    draggableClassName = {"sort-activity-answers-draggables d-flex align-items-center justify-content-center"}
+                />}
+            </DragDropContext>
+        </div>
     </>
     )
 }

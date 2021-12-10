@@ -2,17 +2,17 @@ import React, {useState, useEffect, useRef} from 'react'
 import Timer from '../../timer/Timer';
 import {DragDropContext} from 'react-beautiful-dnd';
 import useWindowWidth from '../../../hooks/use-window-width'
-import MoreInfoBtn from '../../moreInfoBtn/MoreInfoBtn';
-import DroppableArea from "../DragAndDrop/DroppableArea"
 import {useDispatch, useSelector} from 'react-redux';
 import {enableTap, enableDnD} from '../../../../redux/features/activityTypes/activitiesSlice'
+import WordBank from '../DragAndDrop/WordBank';
+import AnswerBank from './MatchActivityAnswerBank';
+import DrapAndDropToggler from '../DragAndDrop/DrapAndDropToggler'
 /*
 To-dos
 Backend: 
     1. Missing updating the backend with partial completion of assignment
     2. Missing updating the backend with grade after completion
 */
-
 const transformData = (data, itemBankColumns) =>{
         let newData = {}
         //on mount (initial data loaded)
@@ -76,11 +76,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
     const [data, setData] = useState(transformData(activityData, 2))
     const disableDnD = useSelector((state) => !state.activities.dndEnabled) 
     const dispatch = useDispatch()
-    // setDisableDnD] = useState(() => {
-    //     if(!smallWindowWidth) dispatch(enableTap())
-    //     else dispatch(enableDnD())
-    //     return !smallWindowWidth
-    // })
+
     const [firstTapEl, setFirstTapEl] = useState(null)
     const removedEl = useRef(null)
     
@@ -288,137 +284,74 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
     return(
         <>
         <div className={`d-flex match-activity-header justify-content-${smallWindowWidth?"center": "start"}`}>
-            {data.timer ?
-                <div className={`match-activity-timer d-flex justify-content-center align-items-center`}>
-                    <span>TIME:</span>
-                    <Timer
-                        timer={data.timer}
-                        autoStart={false}
-                    />
-                </div>
-            : null 
+            {data.timer &&
+                    <div className={`activity-timer d-flex justify-content-center align-items-center`}>
+                        <span>TIME:</span>
+                        <Timer
+                            timer={data.timer}
+                            autoStart={false}
+                        />
+                    </div>
             }
-           
-            <div className="match-activity-enable-tap-mode d-flex flex-column align-items-center form-check form-switch">
-                <label 
-                    className="form-check-label" 
-                    htmlFor="match-activity-toggle-tap-mode"
-                    aria-label ={!disableDnD ? "Enable Tap": "Restore Drag"}
-                >
-                    {!disableDnD ? "Enable Tap": "Restore Drag"}
-                </label>
-                <input 
-                    onKeyDown={toggleTap}
-                    onClick={toggleTap}
-                    className="form-check-input" 
-                    type="checkbox" 
-                    role="switch" 
-                    aria-label ={!disableDnD ? "Enable Tap": "Restore Drag"}
-                    id="match-activity-toggle-tap-mode" 
-                    checked = {disableDnD}
-                    readOnly
-                />
-            </div>
-          
+            <DrapAndDropToggler 
+                disableDnD = {disableDnD}
+                toggleTap = {toggleTap}
+            />
         </div>
-        
+        <div className={`match-activity-container ${mediumWindowWidth ? "three-columns":""}`}>
         <DragDropContext 
             onDragEnd = {!disableDnD ? onDragEnd: null} 
             onDragUpdate={!disableDnD ? onDragUpdate: null} 
             onDragStart={!disableDnD ? onDragStart: null}
         >
-            <div className="d-flex justify-content-center">
-                <div className={`match-activity-columns d-flex justify-content-center ${mediumWindowWidth? "three-columns": "w-100"}`}>
-                    <div className="match-activity-keys-column w-50 d-flex flex-column align-items-center">
-                        {Object.keys(data.keyPairs).map((content,index)=>{
-                            let last = index===Object.keys(data.keyPairs).length-1
-                            return (
-                                <div key={index} className={`match-activity-keys w-100 d-flex align-items-center justify-content-center ${last? "last-item":""}`}>
-                                    <p className="w-100 d-flex flex-column justify-content-center align-items-center">{content}</p>
-                                </div>
-                            )
-                        })}
-                    </div>
-                
-                    <div className="match-activity-answers-column w-50 d-flex flex-column align-items-center">
-                        <div className="match-activity-instructions-position">
-                            <MoreInfoBtn 
-                                textContent = "View Instructions"
-                                customContainerClass = "match-activity-instructions"
-                                customContainerAriaLabel = "activity-instructions"
-                                customDropDownID = "match-activity-instructions"
-                                setTimeoutOnMount = {!moreInfoBtn? 4000: 0}
-                                onClick = {moreInfoOnClick}
-                            />
-                        </div>
-                        {Object.keys(data.keyPairs).map((content, index)=>{
-                            let last = index===Object.keys(data.keyPairs).length-1
-                            return (
-                                <DroppableArea
-                                    firstElTap = {firstTapEl} 
-                                    key={data.categoryIDs[content]} 
-                                    id={data.categoryIDs[content]}
-                                    content = {data.keyPairs[content]}
-                                    droppableClassName = {`match-activity-answers-droppables w-100 ${last? "last-item":""}`}
-                                    draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
-                                    innerDroppableClassName = {`${disableDnD && firstTapEl? "match-activity-tap-active": ""} match-activity-inner-droppable w-100 h-100 d-flex flex-column justify-content-start align-items-center`}
-                                    draggingOverClass={"match-activity-draggable-over"}
-                                    isDraggingClass={"match-activity-dragging"}
-                                    onTap={disableDnD? onTap: null}
-                                />
-                            )
-                        })}
-                    </div>
-                </div>
-                {mediumWindowWidth ? 
-                 <div className="match-activity-itemBank d-flex justify-content-center three-columns">
-                        {Object.keys(data.itemBank).map((key, index)=>{
-                            return (
-                                <div key={key} className={`match-activity-itemBank-column-${index+1} w-100 d-flex flex-column align-items-center`}>
-                                    <DroppableArea 
-                                        firstElTap = {firstTapEl} 
-                                        id={key}
-                                        content = {data.itemBank[key]}
-                                        droppableClassName = {`match-activity-itemBank-droppables d-flex flex-column w-100`}
-                                        draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
-                                        innerDroppableClassName = {`${disableDnD && firstTapEl? "match-activity-tap-active": ""} match-activity-inner-droppable w-100 d-flex flex-column align-items-center`}
-                                        draggingOverClass={"match-activity-draggable-over"}
-                                        isDraggingClass = {"match-activity-dragging"}
-                                        onTap={disableDnD? onTap: null}
+            <div className="d-flex justify-content-center w-100">
+                <AnswerBank 
+                    data={data}
+                    firstTapEl= {firstTapEl}
+                    mediumWindowWidth = {mediumWindowWidth}
+                    moreInfoOnClick = {moreInfoOnClick}
+                    disableDnD = {disableDnD}
+                    onTap = {onTap}
+                    moreInfoBtn = {moreInfoBtn}
+                />
+                {mediumWindowWidth ? <WordBank 
+                                       data={data}
+                                       firstTapEl= {firstTapEl}
+                                       disableDnD = {disableDnD}
+                                       onTap = {disableDnD? onTap: null}
+                                       overallContainerClass = {"match-activity-itemBank d-flex align-items-center flex-column three-columns"}
+                                       columnContainerClass = {"match-activity-itemBank-column-container w-100 flex-grow-1"}
+                                       columnTitleClass = {"match-activity-column-titles answer-choices"}
+                                       columnClass = {"match-activity-itemBank-column"}
+                                       droppableClassName = {`match-activity-itemBank-droppables d-flex flex-column w-100`}
+                                       draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
+                                       innerDroppableClassName = {`${disableDnD && firstTapEl? "match-activity-tap-active": ""} match-activity-inner-droppable w-100 d-flex flex-column align-items-center`}
+                                       draggingOverClass={"match-activity-draggable-over"}
+                                       isDraggingClass = {"match-activity-dragging"}
                                     />
-                                </div>
-                            )
-                        })}
-                    </div>
                 : null}
             </div>
             {!mediumWindowWidth ?
-                <div className="d-flex justify-content-center">
-                    <div className="match-activity-itemBank w-100 d-flex justify-content-center">
-                        {Object.keys(data.itemBank).map((key, index)=>{
-                            //let last = index===Object.keys(data.itemBank).length-1
-                            return (
-                                <div key={key} className={`match-activity-itemBank-column-${index+1} w-50 d-flex flex-column align-items-center`}>
-                                    <DroppableArea 
-                                        firstElTap = {firstTapEl} 
-                                        id={key}
-                                        content = {data.itemBank[key]}
-                                        droppableClassName = {`match-activity-itemBank-droppables d-flex flex-column w-100`}
-                                        draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
-                                        innerDroppableClassName = {`${disableDnD && firstTapEl? "match-activity-tap-active": ""} match-activity-inner-droppable w-100 d-flex flex-column align-items-center`}
-                                        draggingOverClass={"match-activity-draggable-over"}
-                                        isDraggingClass = {"match-activity-dragging"}
-                                        onTap={disableDnD? onTap: null}
-                                    />
-                                </div>
-                            )
-                        })}
-                    </div>
+                <div className="d-flex justify-content-center w-100">
+                        <WordBank 
+                            data={data}
+                            firstTapEl= {firstTapEl}
+                            onTap = {disableDnD? onTap: null}
+                            overallContainerClass = {"match-activity-itemBank d-flex flex-column align-items-center w-100"}
+                            columnContainerClass = {"match-activity-itemBank-column-container w-100 flex-grow-1"}
+                            columnClass = {"match-activity-itemBank-column"}
+                            columnTitleClass = {"match-activity-column-titles vertical"}
+                            droppableClassName = {`match-activity-itemBank-droppables d-flex flex-column w-100`}
+                            draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
+                            innerDroppableClassName = {`${disableDnD && firstTapEl? "match-activity-tap-active": ""} match-activity-inner-droppable w-100 d-flex flex-column align-items-center`}
+                            draggingOverClass={"match-activity-draggable-over"}
+                            isDraggingClass = {"match-activity-dragging"}
+                        />
                 </div>
             : null}
             
         </DragDropContext>
-        
+        </div>
      </>
     )
 }

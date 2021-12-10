@@ -2,7 +2,7 @@ const assignmentData = {
     activityID: "unique",
     activityName: "7C Week2 HW Assignment",
     //matching
-    1: {
+    3: {
         type: "matching",
         timer: {hours: 1, minutes: 1, seconds: 1},
         keyPairs: [
@@ -36,7 +36,7 @@ const assignmentData = {
         answerChoices: ["The world know no bounds except that is cannot be at piece right now-4", "Bad-4", "No-4","The world know no bounds except that is cannot be at piece right now-3", "Bad-3", "No-3", "The world know no bounds except that is cannot be at piece right now-2", "Bad-2", "No-2","The world know no bounds except that is cannot be at piece right now-1", "Bad-1", "No-1"]
     },
     //sorting
-    3: {
+    1: {
         type: "sort",
         timer: false,
         categories: [
@@ -46,9 +46,8 @@ const assignmentData = {
             {categoryId: 4, name: "Nice"},
             {categoryId: 5, name: "Bye"}
         ],
-
         answerChoices: [
-            {id:"1", content:"Okay"}, 
+            {id:"1", content:"The world know no bounds except that is cannot be at piece right now. The world will never know peace"}, 
             {id:"2", content:"Good"},
             {id:"3", content:"Nice" },
             {id:"4", content:"Duh" },

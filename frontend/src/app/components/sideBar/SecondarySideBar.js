@@ -1,5 +1,17 @@
 import NavItem from "../navItems/NavItems"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faCircleQuestion} from '@fortawesome/free-regular-svg-icons';
+import {faCog} from '@fortawesome/free-solid-svg-icons';
+
 const Logo = "./images/VisualumLogo.png"
+const settingsLink = <>
+    <span className="icon-container"><FontAwesomeIcon icon = {faCog}/></span>
+    <span className="ms-1">Settings</span>
+</>
+const helpLink = <>
+    <span className="icon-container"><FontAwesomeIcon icon = {faCircleQuestion}/></span>
+    <span className="ms-1">Help Center</span>
+</>
 const SecondarySideBar = (props) =>{
     return (
     <>
@@ -39,8 +51,20 @@ const SecondarySideBar = (props) =>{
                 
             </div>
             <div className="secondary-sidebar-footer d-flex flex-column align-items-center justify-content-end flex-grow-1">
-                <NavItem textContent={"Settings"} sidebar={"secondary"} url={"/"} hidden = {!props.sidebarToggle} styles={props.customFooterLinkClass}/>
-                <NavItem textContent={"Help Center"} sidebar={"secondary"} url={"/"} hidden = {!props.sidebarToggle} styles={props.customFooterLinkClass}/>
+                <NavItem 
+                    textContent={settingsLink} 
+                    sidebar={"secondary"} 
+                    url={"/"} 
+                    hidden = {!props.sidebarToggle} 
+                    styles={`${props.customFooterLinkClass}`}
+                />
+                <NavItem 
+                    textContent={helpLink} 
+                    sidebar={"secondary"} 
+                    url={"/"} 
+                    hidden = {!props.sidebarToggle} 
+                    styles={`${props.customFooterLinkClass}`}
+                />
             </div>
             
         </div>

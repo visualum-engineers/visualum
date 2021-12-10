@@ -1,7 +1,7 @@
 import ActivityQuestions from "./ActivityQuestions"
 import ActivityInstructions from "./ActivityInstructions"
 import ActivityBtns from "./NavActivityBtn/ActivityBtns"
-import SlimNavbar from "../slimNavbar/SlimNavbar"
+//import SlimNavbar from "../slimNavbar/SlimNavbar"
 import SecondarySideBar from "../sideBar/SecondarySideBar"
 import assignmentData from "../../helpers/sampleAssignmentData"
 import { useEffect, useState } from "react"
@@ -9,6 +9,38 @@ import useWindowWidth from "../../hooks/use-window-width"
 import {CSSTransition} from "react-transition-group"
 import { useSelector, useDispatch } from 'react-redux'
 import {enableTap} from '../../../redux/features/activityTypes/activitiesSlice'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faFileAlt, faCommentDots, faStar} from '@fortawesome/free-regular-svg-icons'
+import {faBookOpen} from '@fortawesome/free-solid-svg-icons'
+
+const secondarySideBarData = [
+    {type:"btn", styles:"activities-sidebar-btn", textContent: "Overview"},
+    {type:"link", url: "/", styles:"activities-sidebar-link", textContent: 
+        <>
+            <span className="icon-container"><FontAwesomeIcon icon = {faFileAlt}/></span>
+            <span className="ms-1">Report</span>
+        </>
+    },
+    {type:"link", url: "/", styles:"activities-sidebar-link", textContent: 
+        <>
+            <span className="icon-container"><FontAwesomeIcon icon = {faStar}/></span>
+            <span className="ms-1">Grades</span>
+        </>
+    },
+    {type:"link", url: "/", styles:"activities-sidebar-link", textContent: 
+        <>
+            <span className="icon-container"><FontAwesomeIcon icon = {faBookOpen}/></span>
+            <span className="ms-1">Reference</span>
+        </>
+    },
+    {type:"link", url: "/", styles:"activities-sidebar-link", textContent: 
+        <>
+            <span className="icon-container"><FontAwesomeIcon icon = {faCommentDots}/></span>
+            <span className="ms-1">Feedback</span>
+        </>
+    },
+]
+
 const activityData = assignmentData
 const duration = 500
 const defaultTransition = {
@@ -21,7 +53,8 @@ const Activity = () =>{
     const [questionNum, setQuestionNum] = useState(1)
     const [question, setQuestion] = useState(activityData[currQuestion])
     const [sidebarToggle, setSidebarToggle] = useState(true)
-    const [moreInfoBtn, setMoreInfoBtn] = useState(true)
+    //dont forget to change to have instruction appear on load
+    const [moreInfoBtn, setMoreInfoBtn] = useState(false)
     const windowWidth = useWindowWidth(992)
     const smallWindowWidth = useWindowWidth(576)
     const dndEnabled = useSelector((state) => state.activities.dndEnabled)
@@ -78,21 +111,16 @@ const Activity = () =>{
     }, [dispatch, smallWindowWidth, questionNum])
     return(
     <>
-        <SlimNavbar type={"activities-nav"} />
+        {/* <SlimNavbar type={"activities-nav"} /> */}
         <SecondarySideBar 
-                data={[
-                    {type:"btn", textContent: "Home", styles:"activities-sidebar-btn"},
-                    {type:"link", textContent: "No", url: "/", styles:"activities-sidebar-link"},
-                    {type:"link", textContent: "Contacts", url: "/", styles:"activities-sidebar-link"},
-                    {type:"link", textContent: "Feedback", url: "/", styles:"activities-sidebar-link"},
-                ]}
+                data={secondarySideBarData}
                 sidebarToggle = {sidebarToggle}
                 handleSideBar = {handleSideBar}
                 windowWidth = {windowWidth}
                 customFooterLinkClass = {"activities-sidebar-link"}
         />
         
-        <div className = {`${sidebarToggle && windowWidth?"secondary-sidebar-open": ""} activity-body row flex-column align-items-center`}>
+        <div className = {`${sidebarToggle && windowWidth?"secondary-sidebar-open": ""} activity-body d-flex flex-column align-items-center justify-content-center`}>
             {moreInfoBtn ? 
                 <ActivityInstructions 
                     activityType = {activityData[questionNum].type}
@@ -102,12 +130,11 @@ const Activity = () =>{
                 />
             : null}
             {/* col-lg-7 col-xl-6*/}
-            <div className = "activity-type-container col-11 col-md-10 d-flex flex-column">
+            <div className = "activity-type-container col-12 col-md-10 d-flex flex-column">
                 {/*generate entire form data*/}
                 {question.type ?
                     Object.keys(activityData).map((key)=>{
                         const moveLeft = (prevQuestion - questionNum) >= 0
-                        console.log(moveLeft, prevQuestion, questionNum)
                         return (
                             <CSSTransition
                                 key = {`question-${key}`}
@@ -136,13 +163,14 @@ const Activity = () =>{
                     2. This is the last question 
                     col-lg-7 col-xl-6
             */}
-            <div className="col-11 col-md-10 nav-activity-btns">
+            <div className="col-12 col-md-10 nav-activity-btns">
                 <ActivityBtns 
                     prevQuestion = {questionNum !== 1} 
                     lastQuestion = {Object.keys(activityData).length-2 === questionNum}
                     onNavBtnClick = {onNavBtnClick}
                 />
             </div>
+            
         </div>
         
     </>
