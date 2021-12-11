@@ -17,7 +17,7 @@ const WordBank = ({
     return(
         <div className={overallContainerClass}>
             <div className = {columnContainerClass}>
-                <h2 className={columnTitleClass}>Choices</h2>
+                <h2 className={columnTitleClass}><span>Choices</span></h2>
                 <div className="w-100 d-flex justify-content-center">
                     {Object.keys(data.itemBank).map((key, index)=>{
                         return (

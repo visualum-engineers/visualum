@@ -157,9 +157,9 @@
     .match-activity-inner-droppable{
         flex-grow: 1;
         list-style-type: none;
-        padding: 0.25rem;
-        padding-bottom: 0;
-        padding-top: 0.75rem;
+        padding: 0 0.25rem;
+        //padding-bottom: 0;
+        //padding-top: 0.75rem;
         min-height: 8rem;
         background: none;
     }
@@ -169,18 +169,29 @@
 }
 .match-activity-column-titles{
     font-size: 1.2rem;
-    margin-top: 0.8rem;
-    margin-bottom: 1.5rem;
+    // margin-top: 0.8rem;
+    // margin-bottom: 1.5rem;
+    margin: 0;
+    position: sticky;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    top:0;
+    left: 0;
+    height: 3.5rem;
+    z-index: 3;
+    background-color: $light-blue;
     color: $dark-blue;
 }
-.match-activity-column-titles.answer-choices{
-    margin-top: 1.5rem;
-    margin-bottom: 0rem;
-}
-.match-activity-column-titles.vertical{
-    margin-top: 0.8rem;
-    margin-bottom: 0rem;
-}
+// .match-activity-column-titles.answer-choices{
+//     //margin-top: 1.5rem;
+//     //margin-bottom: 0rem;
+// }
+// .match-activity-column-titles.vertical{
+//     // margin-top: 0.8rem;
+//     // margin-bottom: 0rem;
+// }
 
 .match-activity-keys{
     list-style-type: none;

@@ -1,6 +1,9 @@
 @import "./scss_abstracts/variables";
 
 //General Styles
+@import "../src/app/components/sideBar/sidebar";
+@import "../src/app/components/moreInfoBtn/infoBtn";
+@import "../src/app/components/carousel/singleSlideCarousel";
 @import "../src/app/components/loadingIcon/loadingIcon";
 @import "../src/app/components/primaryNavbar/navbar";
 @import "../src/app/components/homePage/home";
@@ -8,8 +11,7 @@
 @import "../src/app/components/footer/footer";
 @import "../src/app/components/activityTypes/activity";
 @import "../src/app/components/dashboard/dashboard";
-@import "../src/app/components/sideBar/sidebar";
-@import "../src/app/components/moreInfoBtn/infoBtn";
+
 //responsive stylesheet
 @import "./scss_abstracts/breakPoints"; 
 

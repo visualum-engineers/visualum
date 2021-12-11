@@ -163,7 +163,7 @@ const Activity = () =>{
                     2. This is the last question 
                     col-lg-7 col-xl-6
             */}
-            <div className="col-12 col-md-10 nav-activity-btns">
+            <div className="col-11 col-md-10 nav-activity-btns">
                 <ActivityBtns 
                     prevQuestion = {questionNum !== 1} 
                     lastQuestion = {Object.keys(activityData).length-2 === questionNum}

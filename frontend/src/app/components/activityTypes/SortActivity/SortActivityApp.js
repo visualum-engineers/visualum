@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef} from 'react'
-import DroppableArea from '../DragAndDrop/DroppableArea';
 import {DragDropContext} from 'react-beautiful-dnd';
 import {useDispatch, useSelector} from 'react-redux';
 import {enableTap, enableDnD} from '../../../../redux/features/activityTypes/activitiesSlice'

@@ -47,9 +47,20 @@ html.sortActivityActive{
     z-index: -1;
 }
 .sort-activity-itemBank{
+    position: relative;
     background-color: $light-blue;
     @include border-radius(0.5rem);
     margin-top: 1.5rem;
+    overflow-y: auto;
+    &::-webkit-scrollbar{
+        width: 0.5rem;
+        @include border-radius(7px);
+        background-color: rgba(201, 201, 201, 0);
+    }
+    &::-webkit-scrollbar-thumb{
+        @include border-radius(7px);
+        background-color: $dark-blue;
+    }
 }
 .sort-activity-itemBank.full-size{
     width: calc(100% / 3);
@@ -60,7 +71,6 @@ html.sortActivityActive{
     max-height: calc(75vh - 2rem);
     height: calc(75vh - 2rem);
     .sort-activity-itemBank-column-1{
-        margin: 0;
         min-height: calc(75vh - 6rem);
     }
 }
@@ -70,19 +80,27 @@ html.sortActivityActive{
     min-width: calc(280px + 3.2rem);
 }
 .sort-activity-column-titles{
+    position: sticky;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top:0;
+    left: 0;
     font-size: 1.4rem;
-    margin-top: 1.5rem;
-    margin-bottom: 0.7rem;
+    height: 3.5rem;
     color: $dark-blue;
+    z-index: 3;
+    background-color: $light-blue;
 }
 .sort-activity-itemBank-droppables{
     @include border-radius(10px);
     height: 100%;
     font-size: 1.2rem;
-    margin: 1.2%;
+   
     list-style-type: none;
     .sort-activity-inner-droppable {
         height: 100%;
+        margin-bottom: 0;
     }
 }
 

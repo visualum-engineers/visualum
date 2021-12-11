@@ -3,8 +3,8 @@
     .match-activity-answers-column, 
     .match-activity-itemBank-column-1,
     .match-activity-itemBank-column-2{
-        padding: 0.8rem;
         font-size: 0.75rem;
+        padding: 0rem 0.8rem;
     }
 }
 @mixin match-activity-md {
@@ -14,25 +14,16 @@
     .match-activity-itemBank-column-1,
     .match-activity-itemBank-column-2{
         font-size: 0.7rem;
-    }
-    .match-activity-keys-column, 
-    .match-activity-answers-column{
-        padding: 0.8rem 0.75rem;
-    }
-    .match-activity-itemBank-column-1,
-    .match-activity-itemBank-column-2{
         padding: 0rem 0.75rem;
-        font-size: 0.7rem;
     }
 
 }
 @mixin match-activity-sm{
-    
     .match-activity-keys-column, 
     .match-activity-answers-column, 
     .match-activity-itemBank-column-1,
     .match-activity-itemBank-column-2{
-        padding: 0.8rem 0.5rem;
         font-size: 0.7rem;
+        padding: 0rem 0.75rem;
     }
 }
