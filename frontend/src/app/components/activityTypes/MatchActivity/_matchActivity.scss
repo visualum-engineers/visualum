@@ -45,7 +45,8 @@
 .match-activity-instructions-position{
     position: absolute;
     top: 0.3rem;
-    right: 0.5rem;
+    right: 0;
+    z-index: 4;
 }
 .match-activity-instructions{
     color: $main-font-color;
@@ -159,7 +160,7 @@
         list-style-type: none;
         padding: 0 0.25rem;
         //padding-bottom: 0;
-        //padding-top: 0.75rem;
+        padding-top: 0.8rem;
         min-height: 8rem;
         background: none;
     }
@@ -171,6 +172,7 @@
     font-size: 1.2rem;
     // margin-top: 0.8rem;
     // margin-bottom: 1.5rem;
+    font-weight: 500;
     margin: 0;
     position: sticky;
     display: flex;

@@ -6,7 +6,9 @@ import useWindowWidth from '../../../hooks/use-window-width';
 import WordBank from '../DragAndDrop/WordBank';
 import DrapAndDropToggler from '../DragAndDrop/DrapAndDropToggler'
 import Timer from '../../timer/Timer';
-
+import SingleSlideCarousel from '../../carousel/SingleSlideCarousel';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 /*Note Missing To-do
 Backend: 
     1. Missing updating the backend with partial completion of assignment
@@ -69,10 +71,14 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
     //for updating redux store(data to be sent to backend)
     const smallWindowWidth = useWindowWidth(576)
     const wordBankColumns = mediumWindowWidth ? Array(1).fill(0) : Array(2).fill(0) 
-    const questionColumns = mediumWindowWidth ? Array(2).fill(0) : Array(1).fill(0) 
+    //const questionColumns = mediumWindowWidth ? Array(2).fill(0) : Array(1).fill(0) 
+    const [prevSlideNum, setPrevSlideNum] = useState(0)
+    const [slideNum, setSlideNum] = useState(1)
     const [data, setData] = useState(transformData(activityData, wordBankColumns.length))
     const disableDnD = useSelector((state) => !state.activities.dndEnabled) 
     const dispatch = useDispatch()
+
+    //used for tap and drop
     const [firstTapEl, setFirstTapEl] = useState(null)
     const removedEl = useRef(null)
     //grab data from local storage
@@ -88,6 +94,8 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
 
     //roundup number of elements counted
     const numCategories = Object.keys(data.categories)
+    const categorySlides = Array(Math.ceil(numCategories.length/3)).fill(0)
+    console.log(categorySlides)
     //const rows = Array(numCategories.length%wordBankColumns.length === 0 ? numCategories.length/wordBankColumns.length : Math.floor(numCategories.length/wordBankColumns.length+1)).fill(0)
     const onDragStart = () =>{
         //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
@@ -218,7 +226,27 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
         setData(newState)
         localStorage.setItem(`${activityID}-sort_activity_client_answer-${questionNum}`, JSON.stringify(newState))
     };
-    
+    const slideNavOnClick = (e) =>{
+        if(e.target.closest("button").dataset.actionType === "move-left"){
+            setPrevSlideNum((state) => state - 1)
+            setSlideNum((state) => state - 1)
+        }
+        if(e.target.closest("button").dataset.actionType === "move-right"){
+            setPrevSlideNum((state) => state + 1)
+            setSlideNum((state) => state + 1)
+        }
+    }
+    const categoryStartSlice =  3 * (slideNum - 1)
+    const categoryEndSlice =  3 * slideNum
+    const categoryData = numCategories.slice(categoryStartSlice, categoryEndSlice).map((content, index) => {
+        const thirdCategory = index+1 % 3 === 0
+        return(thirdCategory ? 
+            <div key={content}> {content} </div>
+            : <div key={content}> {content} </div>
+        ) 
+    })
+
+    //console.log(categoryStartSlice, categoryEndSlice)
     return (
     <>  
         <div className={`sort-activity-header d-flex justify-content-${smallWindowWidth?"center": "start"}`}>
@@ -254,12 +282,21 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
                 />}
                 <div className={`sort-activity-question-container d-flex flex-column flex-grow-1 ${mediumWindowWidth ? "":"w-100"}`}>
                     <h2 className="sort-activity-column-titles">Question</h2>
-                    {numCategories.map((content, index) => {
-                        const thirdCategory = index+1 % 3 === 0
-                        return(thirdCategory ? 
-                            <div> </div>
-                            : <div> </div>) 
-                    })}
+                    <SingleSlideCarousel 
+                        carouselClassName = {""}
+                        slideClassName = {""}
+                        carouselNavBtns = {""}
+                        carouselIndicators = {""}
+                        slides = {categorySlides}
+                        prevSlideNum = {prevSlideNum}
+                        slideNum = {slideNum}
+                        slideNavOnClick= {slideNavOnClick}
+                        rightNavEl = {<FontAwesomeIcon icon={faChevronRight}/>}
+                        leftNavEl = {<FontAwesomeIcon icon={faChevronLeft} />}
+                        data = {categoryData}
+                    >
+                        
+                    </SingleSlideCarousel>
                     {/* Renders sort categories */}
                     {/* {rows.map((content, index) =>{
                         const startSlice = index * columns.length

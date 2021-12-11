@@ -16,17 +16,20 @@ const AnswerBank = ({data, firstTapEl, mediumWindowWidth, moreInfoOnClick, disab
             </div>
         
             <div className="match-activity-answers-column w-50 d-flex flex-column align-items-center">
-                <h2 className="match-activity-column-titles">Answer</h2>
-                <div className="match-activity-instructions-position">
-                    <MoreInfoBtn 
-                        textContent = "View Instructions"
-                        customContainerClass = "match-activity-instructions"
-                        customContainerAriaLabel = "activity-instructions"
-                        customDropDownID = "match-activity-instructions"
-                        setTimeoutOnMount = {!moreInfoBtn? 4000: 0}
-                        onClick = {moreInfoOnClick}
-                    />
+                <div className="match-activity-column-titles">
+                    <div className="match-activity-instructions-position">
+                        <MoreInfoBtn 
+                            textContent = "View Instructions"
+                            customContainerClass = "match-activity-instructions"
+                            customContainerAriaLabel = "activity-instructions"
+                            customDropDownID = "match-activity-instructions"
+                            setTimeoutOnMount = {!moreInfoBtn? 4000: 0}
+                            onClick = {moreInfoOnClick}
+                        />
+                    </div>
+                    Answer
                 </div>
+                
                 {Object.keys(data.keyPairs).map((content, index)=>{
                     let last = index===Object.keys(data.keyPairs).length-1
                     return (

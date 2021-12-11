@@ -91,6 +91,7 @@ html.sortActivityActive{
     color: $dark-blue;
     z-index: 3;
     background-color: $light-blue;
+    margin: 0;
 }
 .sort-activity-itemBank-droppables{
     @include border-radius(10px);
@@ -109,6 +110,7 @@ html.sortActivityActive{
     list-style-type: none;
     //overflow-y: auto;
     padding: 0.8rem;
+    
 }
 
 

@@ -1,11 +1,11 @@
 import ActivityQuestions from "./ActivityQuestions"
 import ActivityInstructions from "./ActivityInstructions"
 import ActivityBtns from "./NavActivityBtn/ActivityBtns"
+import useWindowWidth from "../../hooks/use-window-width"
 //import SlimNavbar from "../slimNavbar/SlimNavbar"
 import SecondarySideBar from "../sideBar/SecondarySideBar"
 import assignmentData from "../../helpers/sampleAssignmentData"
 import { useEffect, useState } from "react"
-import useWindowWidth from "../../hooks/use-window-width"
 import {CSSTransition} from "react-transition-group"
 import { useSelector, useDispatch } from 'react-redux'
 import {enableTap} from '../../../redux/features/activityTypes/activitiesSlice'
@@ -13,6 +13,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faFileAlt, faCommentDots, faStar} from '@fortawesome/free-regular-svg-icons'
 import {faBookOpen} from '@fortawesome/free-solid-svg-icons'
 
+const activityData = assignmentData
+const duration = 500
+const defaultTransition = {
+    transition: `all ${duration}ms ease-out`,
+    transitionProperty: "opacity, transform, left",
+}
 const secondarySideBarData = [
     {type:"btn", styles:"activities-sidebar-btn", textContent: "Overview"},
     {type:"link", url: "/", styles:"activities-sidebar-link", textContent: 
@@ -41,12 +47,6 @@ const secondarySideBarData = [
     },
 ]
 
-const activityData = assignmentData
-const duration = 500
-const defaultTransition = {
-    transition: `all ${duration}ms ease-out`,
-    transitionProperty: "opacity, transform, left",
-}
 const Activity = () =>{
     let currQuestion = 1
     const [prevQuestion, setPrevQuestion] = useState(0)
