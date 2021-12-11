@@ -24,10 +24,11 @@ const SingleSlideCarousel = (props) =>{
                 <div className="single-slide-container w-100">
                     {Object.keys(props.slides).map((key)=>{
                         const moveLeft = (props.prevSlideNum - props.slideNum) >= 0
+                        //console.log(props.prevSlideNum, props.slideNum, moveLeft, props.prevSlideNum - props.slideNum)
                         return (
                         <CSSTransition
                             key = {`slide-${key}`}
-                            in = {props.slideNum === parseInt(key)}
+                            in = {props.slideNum === parseInt(key)+1}
                             timeout={duration}
                             classNames={`${moveLeft? "single-slide-move-left":"single-slide-move-right"}`}
                             mountOnEnter
@@ -35,9 +36,9 @@ const SingleSlideCarousel = (props) =>{
                         >
                             <div 
                                 style ={{...defaultTransition}} 
-                                className={`${props.slideClassName} single-slide-transition-container flex-grow-1 d-flex flex-column`}
+                                className={`${""} single-slide-transition-container flex-grow-1 d-flex flex-column`}
                             >
-                                    {props.data}
+                                {props.children}
                             </div>
                         </CSSTransition> 
                         )

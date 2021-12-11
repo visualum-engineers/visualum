@@ -7,6 +7,7 @@ import WordBank from '../DragAndDrop/WordBank';
 import DrapAndDropToggler from '../DragAndDrop/DrapAndDropToggler'
 import Timer from '../../timer/Timer';
 import SingleSlideCarousel from '../../carousel/SingleSlideCarousel';
+import SortActivityCategories from './SortActivityCategories';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 /*Note Missing To-do
@@ -23,6 +24,7 @@ Frontend:
     4. Missing progress saved on local storage/memory (if user exits out of page)
 */
 //transform data to workable model
+
 const transformData = (data, itemBankColumns) =>{
     let newData = {}
     //on mount (initial data loaded)
@@ -95,7 +97,7 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
     //roundup number of elements counted
     const numCategories = Object.keys(data.categories)
     const categorySlides = Array(Math.ceil(numCategories.length/3)).fill(0)
-    console.log(categorySlides)
+    //console.log(categorySlides)
     //const rows = Array(numCategories.length%wordBankColumns.length === 0 ? numCategories.length/wordBankColumns.length : Math.floor(numCategories.length/wordBankColumns.length+1)).fill(0)
     const onDragStart = () =>{
         //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
@@ -227,26 +229,14 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
         localStorage.setItem(`${activityID}-sort_activity_client_answer-${questionNum}`, JSON.stringify(newState))
     };
     const slideNavOnClick = (e) =>{
-        if(e.target.closest("button").dataset.actionType === "move-left"){
-            setPrevSlideNum((state) => state - 1)
-            setSlideNum((state) => state - 1)
-        }
-        if(e.target.closest("button").dataset.actionType === "move-right"){
-            setPrevSlideNum((state) => state + 1)
-            setSlideNum((state) => state + 1)
-        }
+        setPrevSlideNum(slideNum)
+        if(e.target.closest("button").dataset.actionType === "move-left") setSlideNum((state) => state - 1)
+        if(e.target.closest("button").dataset.actionType === "move-right") setSlideNum((state) => state + 1)
+    
     }
     const categoryStartSlice =  3 * (slideNum - 1)
     const categoryEndSlice =  3 * slideNum
-    const categoryData = numCategories.slice(categoryStartSlice, categoryEndSlice).map((content, index) => {
-        const thirdCategory = index+1 % 3 === 0
-        return(thirdCategory ? 
-            <div key={content}> {content} </div>
-            : <div key={content}> {content} </div>
-        ) 
-    })
 
-    //console.log(categoryStartSlice, categoryEndSlice)
     return (
     <>  
         <div className={`sort-activity-header d-flex justify-content-${smallWindowWidth?"center": "start"}`}>
@@ -293,9 +283,12 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
                         slideNavOnClick= {slideNavOnClick}
                         rightNavEl = {<FontAwesomeIcon icon={faChevronRight}/>}
                         leftNavEl = {<FontAwesomeIcon icon={faChevronLeft} />}
-                        data = {categoryData}
                     >
-                        
+                        <SortActivityCategories 
+                            numCategories = {numCategories}
+                            categoryStartSlice = {categoryStartSlice}
+                            categoryEndSlice = {categoryEndSlice}
+                        />
                     </SingleSlideCarousel>
                     {/* Renders sort categories */}
                     {/* {rows.map((content, index) =>{
