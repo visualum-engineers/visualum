@@ -44,7 +44,9 @@ const assignmentData = {
             {categoryId: 2, name: "Medium"},
             {categoryId: 3, name: "Bad"},
             {categoryId: 4, name: "Nice"},
-            {categoryId: 5, name: "Bye"}
+            {categoryId: 5, name: "Bye"},
+            {categoryId: 6, name: "Hello"},
+            {categoryId: 7, name: "Nah"}
         ],
         answerChoices: [
             {id:"1", content:"The world know no bounds except that is cannot be at piece right now. The world will never know peace"}, 
