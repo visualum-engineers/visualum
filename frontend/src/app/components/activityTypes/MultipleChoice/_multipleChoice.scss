@@ -39,8 +39,9 @@
 }
 .mc-activity-answer-container{
     @include box-shadow(rgba(0, 0, 0, 0.315) 0px 0 2px);
-    overflow-x: hidden;
     overflow-y: auto;
+    overflow: overlay;
+    overflow-x: hidden;
     min-width: 280px;
     max-width: 400px;
     max-height: calc(max(50vh, 24rem));

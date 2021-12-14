@@ -7,6 +7,8 @@
     z-index: 4;
     height: 100vh;
     overflow-y: auto;
+    overflow: overlay;
+    overflow-x: hidden;
 }
 .sidebar-right{
     @include transition(all 0.3s ease-out);

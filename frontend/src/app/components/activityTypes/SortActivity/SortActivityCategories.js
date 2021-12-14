@@ -14,7 +14,7 @@ const SortActivityCategories = ({numCategories,data, mediumWindowWidth}) =>{
                                 id={columnTitle}
                                 droppableHeader = {header}
                                 content = {data.categories[columnTitle]}
-                                droppableClassName = {`sort-activity-sort-droppables ${mediumWindowWidth ?"small-screen": ""} ${first? "first-item" : ""}`}
+                                droppableClassName = {`sort-activity-sort-droppables d-flex flex-column ${mediumWindowWidth ?"small-screen": ""} ${first? "first-item" : ""}`}
                                 draggableClassName = {"sort-activity-draggables d-flex align-items-center justify-content-center"}
                                 innerDroppableClassName ={"sort-activity-inner-droppable d-flex flex-column align-items-center"}
                                 draggingOverClass = {"sort-activity-dragging-over"}

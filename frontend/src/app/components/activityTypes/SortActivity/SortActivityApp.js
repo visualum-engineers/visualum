@@ -68,9 +68,6 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
     //for updating redux store(data to be sent to backend)
     const smallWindowWidth = useWindowWidth(576)
     const wordBankColumns = mediumWindowWidth ? Array(1).fill(0) : Array(2).fill(0) 
-    //const questionColumns = mediumWindowWidth ? Array(2).fill(0) : Array(1).fill(0) 
-    // const [prevSlideNum, setPrevSlideNum] = useState(0)
-    // const [slideNum, setSlideNum] = useState(1)
     const [data, setData] = useState(transformData(activityData, wordBankColumns.length))
     const disableDnD = useSelector((state) => !state.activities.dndEnabled) 
     const dispatch = useDispatch()
@@ -222,12 +219,6 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
         setData(newState)
         localStorage.setItem(`${activityID}-sort_activity_client_answer-${questionNum}`, JSON.stringify(newState))
     };
-    // const slideNavOnClick = (e) =>{
-    //     setPrevSlideNum(slideNum)
-    //     if(e.target.closest("button").dataset.actionType === "move-left") setSlideNum((state) => state - 1)
-    //     if(e.target.closest("button").dataset.actionType === "move-right") setSlideNum((state) => state + 1)
-    
-    // }
 
     return (
     <>  

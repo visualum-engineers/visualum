@@ -5,6 +5,8 @@
     width: 100%;
     min-width: 135px;
     overflow-y: auto;
+    // overflow: overlay;
+    overflow-x: hidden;
     overflow-wrap: break-word;
     @include border-radius(5px);
     border: 1px solid rgba(0, 0,0,0);
@@ -51,7 +53,8 @@ html.sortActivityActive{
     background-color: $light-blue;
     @include border-radius(0.5rem);
     margin-top: 1.5rem;
-    overflow-y: scroll;
+    overflow-y: auto;
+    // overflow: overlay;
     overflow-x: hidden;
     max-height: calc(max(20rem, 30vh));
     min-height: calc(max(20rem, 30vh));
@@ -82,7 +85,9 @@ html.sortActivityActive{
     background-color: $light-blue;
     @include border-radius(0.5rem);
     min-width: 300px;
-    overflow-y: scroll;
+    overflow-y: auto;
+    // overflow: overlay;
+    overflow-x: hidden;
     &::-webkit-scrollbar{
         width: 0.5rem;
         @include border-radius(7px);
@@ -112,7 +117,7 @@ html.sortActivityActive{
     font-size: 1.4rem;
     height: 3.5rem;
     color: $dark-blue;
-    z-index: 3;
+    z-index: 5;
     background-color: $light-blue;
     margin: 0;
 }
@@ -134,12 +139,51 @@ html.sortActivityActive{
 
 }
 .sort-activity-sort-droppables{
+    position: relative;
     background-color: $white;
     height: calc(40vh - 2rem);
     min-height: 15rem;
     width: calc(50% - 0.4rem);
     margin-bottom: 0.8rem;
-    @include border-radius(0.5rem)
+    @include border-radius(0.5rem);
+    overflow-y: auto;
+    // overflow: overlay;
+    overflow-x: hidden;
+    &:after{
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top:0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        content: "Drag answers here";
+        font-size: 0.8rem;
+        color: $dark-gray;
+        font-weight: 400;
+    }
+    &::-webkit-scrollbar{
+        width: 0.5rem;
+        @include border-radius(7px);
+        background-color: rgba(201, 201, 201, 0);
+    }
+    &::-webkit-scrollbar-thumb{
+        @include border-radius(7px);
+        background-color: $dark-blue;
+    }
+    .sort-activity-droppable-header{
+        height: 2rem;
+        margin: 0;
+        font-weight: 500;
+        text-decoration: underline;
+        color: $darkest-gray;
+        position: sticky;
+        top:0;
+        left: 0;
+        z-index: 3;
+        background-color: $white;
+    }   
 }
 
 .sort-activity-sort-droppables.first-item{
@@ -159,6 +203,7 @@ html.sortActivityActive{
     list-style-type: none;
     //overflow-y: auto;
     padding: 0.4rem;
+    flex-grow: 1;
 }
 
 
@@ -182,7 +227,13 @@ html.sortActivityActive{
         transform: scale(1.05);
     }
 }
-
+.sort-activity-dragging-over{
+    background-color: $darkest-gray;
+}
+.sort-activity-tap-active:hover{
+    cursor: pointer;
+    background-color: $darkest-gray;
+}
 // .sort-activity-instructions{
 //     margin: 3%;
 //     color: white;

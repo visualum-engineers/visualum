@@ -5,8 +5,9 @@
     height: 4.5rem;
     width: 100%;
     min-width: 140px;
-    overflow-x: hidden;
     overflow-y: auto;
+    // overflow: overlay;
+    overflow-x: hidden;
     overflow-wrap: break-word;
     @include border-radius(5px);
     border: 1px solid rgba(0, 0,0,0);
@@ -78,8 +79,9 @@
 }
 .match-activity-columns{
     max-height: calc(max(26rem, 40vh));
-    overflow-x: hidden;
     overflow-y: auto;
+    // overflow: overlay;
+    overflow-x: hidden;
     min-width: 310px;
     
     @include border-radius(7px);
@@ -102,8 +104,9 @@
     max-height: calc(max(20rem, 30vh));
     min-height: calc(max(20rem, 30vh));
     //@include box-shadow(rgba(0,0,0,0.1) 0px 0 10px);
-    overflow-x: hidden;
     overflow-y: auto;
+    // overflow: overlay;
+    overflow-x: hidden;
     &::-webkit-scrollbar{
         width: 0.5rem;
         @include border-radius(7px);
