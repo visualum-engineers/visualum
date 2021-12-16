@@ -14,6 +14,7 @@ import {
 	facialHairColor,
 	clotheColor
 } from './types'
+import AttributeSelector from './AttributeSelector';
 
 const hairstyleLength = hairstyle.length;
 const accessoryLength = accessory.length;
@@ -106,6 +107,11 @@ export default function AvatarCreator() {
 				eyebrowType={eyebrow[options.eyebrowType]}
 				mouthType={mouth[options.mouthType]}
 				skinColor={skinColor[options.skinColor]}
+			/>
+			<AttributeSelector
+				title="Hair Style"
+				handleIncrement={() => changeValue("topType", "inc")}
+				handleDecrement={() => { changeValue("topType", "dec") }}
 			/>
 		</Dashboard >
 	)

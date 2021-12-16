@@ -1,0 +1,32 @@
+.attribute-selector {
+	display: flex;
+	align-items: center;
+	margin: .5rem 0;
+}
+
+.attr-selector-button {
+	width: 1.5rem;
+	height: 1.5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	transition: background-color 125ms ease-in-out;
+	&:hover {
+		background-color: rgb(222, 222, 222);
+		cursor: pointer;
+	}
+}
+
+.unselectable {
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+ 
+	/*
+	  Introduced in IE 10.
+	  See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+	*/
+	-ms-user-select: none;
+	user-select: none;
+ }

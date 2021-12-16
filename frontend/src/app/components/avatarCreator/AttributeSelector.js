@@ -1,0 +1,17 @@
+import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
+
+export default function AttributeSelector(props) {
+	return (
+		<div className='attribute-selector'>
+			<div className='attr-selector-button' onClick={props.handleDecrement}>
+				<FontAwesomeIcon icon={faChevronLeft} />
+			</div>
+			<div className='attribute-title mx-1 unselectable'>{props.title}</div>
+			<div className='attr-selector-button'>
+				<FontAwesomeIcon icon={faChevronRight} onClick={props.handleIncrement} />
+			</div>
+		</div>
+	)
+}
