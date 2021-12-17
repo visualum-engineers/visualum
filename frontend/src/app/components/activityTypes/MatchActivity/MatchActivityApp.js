@@ -4,7 +4,7 @@ import {DragDropContext} from 'react-beautiful-dnd';
 import useWindowWidth from '../../../hooks/use-window-width'
 import {useDispatch, useSelector} from 'react-redux';
 import {enableTap, enableDnD} from '../../../../redux/features/activityTypes/activitiesSlice'
-import WordBank from '../DragAndDrop/WordBank';
+import WordBank from '../DragAndDrop/ReactBeautifulDnD/WordBank';
 import AnswerBank from './MatchActivityAnswerBank';
 import DrapAndDropToggler from '../DragAndDrop/DrapAndDropToggler'
 /*

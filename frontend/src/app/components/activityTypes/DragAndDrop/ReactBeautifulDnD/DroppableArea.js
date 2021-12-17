@@ -36,7 +36,6 @@ const DroppableArea = ({id, content, droppableHeader=null, droppableClassName=""
                     </ul>
                 )}
             </Droppable>
-
         </div>
     )
 }

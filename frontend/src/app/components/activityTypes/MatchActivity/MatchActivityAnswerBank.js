@@ -1,5 +1,5 @@
 import MoreInfoBtn from '../../moreInfoBtn/MoreInfoBtn';
-import DroppableArea from "../DragAndDrop/DroppableArea"
+import DroppableArea from "../DragAndDrop/ReactBeautifulDnD/DroppableArea"
 const AnswerBank = ({data, firstTapEl, mediumWindowWidth, moreInfoOnClick, disableDnD, onTap, moreInfoBtn}) => {
     return (
         <div className={`match-activity-columns d-flex justify-content-center ${mediumWindowWidth? "three-columns": "w-100"}`}>

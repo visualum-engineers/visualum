@@ -147,22 +147,8 @@ html.sortActivityActive{
     margin-bottom: 0.8rem;
     @include border-radius(0.5rem);
     overflow-y: auto;
-    // overflow: overlay;
     overflow-x: hidden;
-    &:after{
-        position: absolute;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        top:0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        content: "Drag answers here";
-        font-size: 0.8rem;
-        color: $dark-gray;
-        font-weight: 400;
-    }
+    
     &::-webkit-scrollbar{
         width: 0.5rem;
         @include border-radius(7px);
@@ -185,7 +171,20 @@ html.sortActivityActive{
         background-color: $white;
     }   
 }
-
+.sort-activity-droppable-placeholder:after{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top:0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    content: "Drag answers here";
+    font-size: 0.8rem;
+    color: $dark-gray;
+    font-weight: 400;
+}
 .sort-activity-sort-droppables.first-item{
     margin-left: 0;
     margin-right: 0.8rem;
@@ -226,7 +225,22 @@ html.sortActivityActive{
     div:hover{
         transform: scale(1.05);
     }
+    &:hover{
+        cursor: grab;
+    }
+    cursor: grabbing;
 }
+
+.sort-activity-is-dragging{
+    opacity: 0.5;
+    // color: $main-font-color ;
+    // background-color: $light-gray;
+    // border: 1px solid $black;
+    // div{
+    //     transform: scale(1.1);
+    // }
+}
+
 .sort-activity-dragging-over{
     background-color: $darkest-gray;
 }

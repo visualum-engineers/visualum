@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef} from 'react'
-import {DragDropContext} from 'react-beautiful-dnd';
+//import {DragDropContext} from 'react-beautiful-dnd';
+import {DndContext, closestCorners} from '@dnd-kit/core';
 import {useDispatch, useSelector} from 'react-redux';
 import {enableTap, enableDnD} from '../../../../redux/features/activityTypes/activitiesSlice'
 import useWindowWidth from '../../../hooks/use-window-width';
-import WordBank from '../DragAndDrop/WordBank';
+import WordBank from './SortActivityWordBank';
 import DrapAndDropToggler from '../DragAndDrop/DrapAndDropToggler'
 import Timer from '../../timer/Timer';
 import SortActivityCategories from './SortActivityCategories';
-
+import DraggableOverlay from '../DragAndDrop/DnDKit/DraggableOverlay'
 /*Note Missing To-do
 Backend: 
     1. Missing updating the backend with partial completion of assignment
@@ -64,14 +65,16 @@ const transformData = (data, itemBankColumns) =>{
     }
     return newData
 }
+
 const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick=null, moreInfoBtn, mediumWindowWidth}) => {
     //for updating redux store(data to be sent to backend)
     const smallWindowWidth = useWindowWidth(576)
     const wordBankColumns = mediumWindowWidth ? Array(1).fill(0) : Array(2).fill(0) 
     const [data, setData] = useState(transformData(activityData, wordBankColumns.length))
+    const [activeId, setActiveId] = useState(null)
+    const [isOver, setIsOver] = useState(null)
     const disableDnD = useSelector((state) => !state.activities.dndEnabled) 
     const dispatch = useDispatch()
-
     //used for tap and drop
     const [firstTapEl, setFirstTapEl] = useState(null)
     const removedEl = useRef(null)
@@ -89,11 +92,107 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
     //roundup number of elements counted
     const numCategories = Object.keys(data.categories)
     //const categorySlides = Array(Math.ceil(numCategories.length/3)).fill(0)
+    const updateSortableLists = (result) =>{
+        const {destination, source, draggableId} = result
+        if(!destination) return
+        if(destination.droppableId === source.droppableId && destination.index === source.index) return
+        //start and end containers
+        const answerChoiceTestEl = (el) => /answerChoices.*/.test(el)
+        const start = source.droppableId;
+        const startContainerType = answerChoiceTestEl(start) ? "itemBank" : "categories"
+        const finish = destination.droppableId;
+        const finishContainerType = answerChoiceTestEl(finish) ? "itemBank" : "categories"
+
+        //setup
+        const startAnswersList = Array.from(answerChoiceTestEl(start) ? data.itemBank[start] : data.categories[start])
+        const finishAnswersList = Array.from(answerChoiceTestEl(finish) ? data.itemBank[finish] : data.categories[finish])
+        const sameContainer = start===finish
+        let newState
     
-    const onDragStart = () =>{
+        startAnswersList.splice(source.index, 1)
+        //list container are same - remove el from old idx, add to new idx
+        if(sameContainer){
+            startAnswersList.splice(destination.index, 0, data.answerChoices[draggableId]);
+            newState = {
+                ...data,
+                [startContainerType]: {
+                    ...data[startContainerType],
+                    [start]: startAnswersList,
+                }
+            }
+        } 
+        //list containers are different - move elements into the new container, and remove them from old one
+        else {
+            finishAnswersList.splice(destination.index, 0, data.answerChoices[draggableId]);
+            newState = startContainerType===finishContainerType ? {
+                ...data,
+                [startContainerType]:{
+                    ...data[startContainerType],
+                    [start] : startAnswersList,
+                    [finish] : finishAnswersList,
+                },
+            }
+            : {
+                ...data,
+                [startContainerType]:{
+                    ...data[startContainerType],
+                    [start] : startAnswersList,
+                },
+                [finishContainerType] : {
+                    ...data[finishContainerType],
+                    [finish] : finishAnswersList,
+                }
+            }
+        } 
+        //maintain itemBank across resize, so we update allItems
+        if(startContainerType==="itemBank") delete newState.allItems[draggableId]
+        if(finishContainerType==="itemBank") newState.allItems[draggableId] = data.answerChoices[draggableId]
+        
+        //update state
+        setData(newState)
+        localStorage.setItem(`${activityID}-sort_activity_client_answer-${questionNum}`, JSON.stringify(newState))
+    }
+    const resultValues = (e, finishContainer) => {
+        const finish = finishContainer
+        const start = e.active.data.current.tapDroppableId
+        const startIndex = e.active.data.current.index
+        const endIndex = !e.over.data.current ? 0 : e.over.data.current.index
+        const source = {
+            droppableId: start,
+            index: startIndex
+        }
+        const destination = {
+            droppableId: finish,
+            index: endIndex,
+        }
+        const result={
+            source: source,
+            destination: destination,
+            draggableId: e.active.id
+        }
+        updateSortableLists(result)
+    }
+    const onDragStart = (e) =>{
         //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
         document.querySelector("html").classList.add("sortActivityActive")
+        setActiveId(e.active.id)
     }
+    const onDragOver = (e) =>{
+        //prevent updating if already null, and set to null if not being sorted
+        if(!e.over && !isOver) return
+        else if(!e.over) return setIsOver(null)
+        if(!e.over.data.current && isOver === e.over.id) return 
+        else if(!e.over.data.current) {
+            resultValues(e, e.over.id)
+        //runs when the droppable id changes
+        // meaning containers are different
+            return setIsOver(e.over.id)
+        }
+        //update state when in a different droppable container than a sortable one
+        if(isOver === e.over.data.current.sortable.containerId) return
+        if(e.over.data.current.sortable.containerId !== e.active.data.current.sortable.containerId) resultValues(e, e.over.data.current.sortable.containerId)
+        setIsOver(e.over.data.current.sortable.containerId)
+    } 
     const onTap = (e) =>{
         // //means a selection hasnt happened so skip for keyboard
         // if(e.type === "keydown" && e.key !=="Enter") return
@@ -156,68 +255,19 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
         }
     }
     //handle state update when object stops
-    const onDragEnd = (result) => {
+    const onDragEnd = (e) => {
         //to re-enable smooth scrolling for the remainder of the pages
         document.querySelector("html").classList.remove("sortActivityActive")
-        //setup
-        const {destination, source, draggableId} = result
-        if(!destination) return
-        if(destination.droppableId === source.droppableId && destination.index === source.index) return
-        //start and end containers
-        const answerChoiceTestEl = (el) => /answerChoices.*/.test(el)
-        const start = source.droppableId;
-        const startContainerType = answerChoiceTestEl(start) ? "itemBank" : "categories"
-        const finish = destination.droppableId;
-        const finishContainerType = answerChoiceTestEl(finish) ? "itemBank" : "categories"
-
-        //setup
-        const startAnswersList = Array.from(answerChoiceTestEl(start) ? data.itemBank[start] : data.categories[start])
-        const finishAnswersList = Array.from(answerChoiceTestEl(finish) ? data.itemBank[finish] : data.categories[finish])
-        const sameContainer = start===finish
-        let newState
-    
-        startAnswersList.splice(source.index, 1)
-        //list container are same - remove el from old idx, add to new idx
-        if(sameContainer){
-            startAnswersList.splice(destination.index, 0, data.answerChoices[draggableId]);
-            newState = {
-                ...data,
-                [startContainerType]: {
-                    ...data[startContainerType],
-                    [start]: startAnswersList,
-                }
-            }
-        } 
-        //list containers are different - move elements into the new container, and remove them from old one
-        else {
-            finishAnswersList.splice(destination.index, 0, data.answerChoices[draggableId]);
-            newState = startContainerType===finishContainerType ? {
-                ...data,
-                [startContainerType]:{
-                    ...data[startContainerType],
-                    [start] : startAnswersList,
-                    [finish] : finishAnswersList,
-                },
-            }
-            : {
-                ...data,
-                [startContainerType]:{
-                    ...data[startContainerType],
-                    [start] : startAnswersList,
-                },
-                [finishContainerType] : {
-                    ...data[finishContainerType],
-                    [finish] : finishAnswersList,
-                }
-            }
-        } 
-        //maintain itemBank across resize, so we update allItems
-        if(startContainerType==="itemBank") delete newState.allItems[draggableId]
-        if(finishContainerType==="itemBank") newState.allItems[draggableId] = data.answerChoices[draggableId]
-        
-        //update state
-        setData(newState)
-        localStorage.setItem(`${activityID}-sort_activity_client_answer-${questionNum}`, JSON.stringify(newState))
+        //this was already updated on dragMoveOver
+        setActiveId(null)
+        setIsOver(null)
+        if(!e.over) return
+        //reset overlay and over styles
+        if(!e.over.data.current || isOver !== e.over.data.current.sortable.containerId) return
+        //nothing changed
+        if(isOver === e.over.data.current.sortable.containerId && e.over.data.current.index === e.active.data.current.index) return
+        resultValues(e, e.over.data.current.sortable.containerId)
+       
     };
 
     return (
@@ -238,7 +288,14 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
             />
         </div>
         <div className={`sort-activity-container d-flex ${mediumWindowWidth ? "full-size":"flex-column align-items-center"}`}>
-            <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
+            <DndContext 
+                onDragStart={onDragStart}
+                onDragEnd = {onDragEnd}
+                collisionDetection={closestCorners}
+                onDragOver = {onDragOver}
+                
+                //announcements = 
+            >
                 {mediumWindowWidth && <WordBank 
                     data ={data}
                     firstTapEl = {firstTapEl}
@@ -252,16 +309,18 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
                     innerDroppableClassName = {"sort-activity-inner-droppable d-flex flex-column align-items-center w-100"}
                     draggingOverClass = {"sort-activity-dragging-over"}
                     draggableClassName = {"sort-activity-draggables d-flex align-items-center justify-content-center "}
+                    isOver = {isOver}
                 />}
-                    {/* Renders sort categories */}
-                    
-                    <SortActivityCategories 
-                        numCategories = {numCategories}
-                        data={data}
-                        mediumWindowWidth = {mediumWindowWidth}
-                    />
-                    
-                    {/* Renders word/response bank */}
+                {/* Renders sort categories */}
+                
+                <SortActivityCategories 
+                    numCategories = {numCategories}
+                    data={data}
+                    mediumWindowWidth = {mediumWindowWidth}
+                    isOver = {isOver}
+                />
+                
+                {/* Renders word/response bank */}
                 {!mediumWindowWidth && <WordBank 
                     data ={data}
                     firstTapEl = {firstTapEl}
@@ -275,8 +334,16 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
                     innerDroppableClassName = {"sort-activity-inner-droppable d-flex flex-column align-items-center w-100"}
                     draggingOverClass = {"sort-activity-dragging-over"}
                     draggableClassName = {"sort-activity-draggables d-flex align-items-center justify-content-center"}
+                    isOver = {isOver}
                 />}
-            </DragDropContext>
+                {/*Current element being dragged*/}
+                <DraggableOverlay
+                    activeId = {activeId}
+                    draggableClassName = {"sort-activity-draggables d-flex align-items-center justify-content-center"}
+                    data = {data}
+                    isDraggingClass = {"sort-activity-is-dragging"}
+                />
+            </DndContext>
         </div>
     </>
     )
