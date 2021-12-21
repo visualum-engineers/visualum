@@ -48,6 +48,7 @@ const hairColor = [
 ]
 
 const accessory = [
+	["Blank", "None"],
 	["Kurt", "Kurt"],
 	["Prescription01", "Prescription 1"],
 	["Prescription02", "Prescription 2"],
