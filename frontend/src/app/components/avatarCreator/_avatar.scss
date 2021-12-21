@@ -30,6 +30,12 @@
 	}
 }
 
+.attribute-title-container {
+	display: flex;
+	justify-content: center;
+	width: 20rem;
+}
+
 .unselectable {
 	-moz-user-select: -moz-none;
 	-khtml-user-select: none;

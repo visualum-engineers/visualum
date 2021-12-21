@@ -109,7 +109,7 @@ export default function AvatarCreator() {
 			/>
 			<div className='row p-3'>
 				<div className='col-6'>
-					<h6>Hair:</h6>
+					<h6 className="unselectable">Hair:</h6>
 					<AttributeSelector
 						title={hairstyle[options.topType][1]}
 						handleIncrement={() => changeValue("topType", "inc")}
@@ -117,7 +117,7 @@ export default function AvatarCreator() {
 					/>
 				</div>
 				<div className='col-6'>
-					<h6>Hair Color:</h6>
+					<h6 className="unselectable">Hair Color:</h6>
 					<AttributeSelector
 						title={hairColor[options.hairColor][1]}
 						handleIncrement={() => changeValue("hairColor", "inc")}
@@ -125,7 +125,7 @@ export default function AvatarCreator() {
 					/>
 				</div>
 				<div className='col-6'>
-					<h6>Accessory:</h6>
+					<h6 className="unselectable">Accessory:</h6>
 					<AttributeSelector
 						title={accessory[options.accessoriesType][1]}
 						handleIncrement={() => changeValue("accessoriesType", "inc")}
@@ -133,7 +133,7 @@ export default function AvatarCreator() {
 					/>
 				</div>
 				<div className='col-6'>
-					<h6>Eyes:</h6>
+					<h6 className="unselectable">Eyes:</h6>
 					<AttributeSelector
 						title={eyes[options.eyeType][1]}
 						handleIncrement={() => changeValue("eyeType", "inc")}
@@ -141,7 +141,7 @@ export default function AvatarCreator() {
 					/>
 				</div>
 				<div className='col-6'>
-					<h6>Eyebrows:</h6>
+					<h6 className="unselectable">Eyebrows:</h6>
 					<AttributeSelector
 						title={eyebrow[options.eyebrowType][1]}
 						handleIncrement={() => changeValue("eyebrowType", "inc")}
@@ -149,7 +149,7 @@ export default function AvatarCreator() {
 					/>
 				</div>
 				<div className='col-6'>
-					<h6>Mouth:</h6>
+					<h6 className="unselectable">Mouth:</h6>
 					<AttributeSelector
 						title={mouth[options.mouthType][1]}
 						handleIncrement={() => changeValue("mouthType", "inc")}
@@ -157,7 +157,7 @@ export default function AvatarCreator() {
 					/>
 				</div>
 				<div className='col-6'>
-					<h6>Skin Color:</h6>
+					<h6 className="unselectable">Skin Color:</h6>
 					<AttributeSelector
 						title={skinColor[options.skinColor][1]}
 						handleIncrement={() => changeValue("skinColor", "inc")}
@@ -165,7 +165,7 @@ export default function AvatarCreator() {
 					/>
 				</div>
 				<div className='col-6'>
-					<h6>Clothes:</h6>
+					<h6 className="unselectable">Clothes:</h6>
 					<AttributeSelector
 						title={clothes[options.clotheType][1]}
 						handleIncrement={() => changeValue("clotheType", "inc")}
@@ -173,7 +173,7 @@ export default function AvatarCreator() {
 					/>
 				</div>
 				<div className='col-6'>
-					<h6>Clothes Color:</h6>
+					<h6 className="unselectable">Clothes Color:</h6>
 					<AttributeSelector
 						title={clotheColor[options.clotheColor][1]}
 						handleIncrement={() => changeValue("clotheColor", "inc")}
@@ -181,7 +181,7 @@ export default function AvatarCreator() {
 					/>
 				</div>
 				<div className='col-6'>
-					<h6>Facial Hair:</h6>
+					<h6 className="unselectable">Facial Hair:</h6>
 					<AttributeSelector
 						title={facialHair[options.facialHairType][1]}
 						handleIncrement={() => changeValue("facialHairType", "inc")}
@@ -189,7 +189,7 @@ export default function AvatarCreator() {
 					/>
 				</div>
 				<div className='col-6'>
-					<h6>Facial Hair Color:</h6>
+					<h6 className="unselectable">Facial Hair Color:</h6>
 					<AttributeSelector
 						title={facialHairColor[options.facialHairColor][1]}
 						handleIncrement={() => changeValue("facialHairColor", "inc")}

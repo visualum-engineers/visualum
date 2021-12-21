@@ -8,7 +8,9 @@ export default function AttributeSelector(props) {
 			<div className='attr-selector-button' onClick={props.handleDecrement}>
 				<FontAwesomeIcon icon={faChevronLeft} />
 			</div>
-			<div className='attribute-title mx-1 unselectable'>{props.title}</div>
+			<div className='attribute-title-container'>
+				<div className='attribute-title mx-1 unselectable'>{props.title}</div>
+			</div>
 			<div className='attr-selector-button'>
 				<FontAwesomeIcon icon={faChevronRight} onClick={props.handleIncrement} />
 			</div>
