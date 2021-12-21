@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Dashboard from '../dashboard/Dashboard'
 import Avatar from 'avataaars'
 import {
 	hairstyle,
@@ -81,9 +80,9 @@ export default function AvatarCreator() {
 				newVal = curr[key] - 1
 			}
 			//if out of bounds, set to 0
-			if (curr[key] >= max_length) {
+			if (newVal >= max_length) {
 				newVal = 0
-			} else if (curr[key] < 0) {
+			} else if (newVal < 0) {
 				newVal = max_length - 1
 			}
 			curr[key] = newVal;
@@ -92,27 +91,112 @@ export default function AvatarCreator() {
 	}
 
 	return (
-		<Dashboard>
+		<div className='avatar-creator'>
 			<Avatar
-				style={{ width: '150px', height: '150px' }}
+				style={{ width: '200px', height: '200px' }}
 				avatarStyle='Circle'
-				topType={hairstyle[options.topType]}
-				accessoriesType={accessory[options.accessoriesType]}
-				hairColor={hairColor[options.hairColor]}
-				facialHairType={facialHair[options.facialHairType]}
-				facialHairColor={facialHairColor[options.facialHairColor]}
-				clotheType={clothes[options.clotheType]}
-				clotheColor={clotheColor[options.clotheColor]}
-				eyeType={eyes[options.eyeType]}
-				eyebrowType={eyebrow[options.eyebrowType]}
-				mouthType={mouth[options.mouthType]}
-				skinColor={skinColor[options.skinColor]}
+				topType={hairstyle[options.topType][0]}
+				accessoriesType={accessory[options.accessoriesType][0]}
+				hairColor={hairColor[options.hairColor][0]}
+				facialHairType={facialHair[options.facialHairType][0]}
+				facialHairColor={facialHairColor[options.facialHairColor][0]}
+				clotheType={clothes[options.clotheType][0]}
+				clotheColor={clotheColor[options.clotheColor][0]}
+				eyeType={eyes[options.eyeType][0]}
+				eyebrowType={eyebrow[options.eyebrowType][0]}
+				mouthType={mouth[options.mouthType][0]}
+				skinColor={skinColor[options.skinColor][0]}
 			/>
-			<AttributeSelector
-				title="Hair Style"
-				handleIncrement={() => changeValue("topType", "inc")}
-				handleDecrement={() => { changeValue("topType", "dec") }}
-			/>
-		</Dashboard >
+			<div className='row p-3'>
+				<div className='col-6'>
+					<h6>Hair:</h6>
+					<AttributeSelector
+						title={hairstyle[options.topType][1]}
+						handleIncrement={() => changeValue("topType", "inc")}
+						handleDecrement={() => { changeValue("topType", "dec") }}
+					/>
+				</div>
+				<div className='col-6'>
+					<h6>Hair Color:</h6>
+					<AttributeSelector
+						title={hairColor[options.hairColor][1]}
+						handleIncrement={() => changeValue("hairColor", "inc")}
+						handleDecrement={() => { changeValue("hairColor", "dec") }}
+					/>
+				</div>
+				<div className='col-6'>
+					<h6>Accessory:</h6>
+					<AttributeSelector
+						title={accessory[options.accessoriesType][1]}
+						handleIncrement={() => changeValue("accessoriesType", "inc")}
+						handleDecrement={() => { changeValue("accessoriesType", "dec") }}
+					/>
+				</div>
+				<div className='col-6'>
+					<h6>Eyes:</h6>
+					<AttributeSelector
+						title={eyes[options.eyeType][1]}
+						handleIncrement={() => changeValue("eyeType", "inc")}
+						handleDecrement={() => { changeValue("eyeType", "dec") }}
+					/>
+				</div>
+				<div className='col-6'>
+					<h6>Eyebrows:</h6>
+					<AttributeSelector
+						title={eyebrow[options.eyebrowType][1]}
+						handleIncrement={() => changeValue("eyebrowType", "inc")}
+						handleDecrement={() => { changeValue("eyebrowType", "dec") }}
+					/>
+				</div>
+				<div className='col-6'>
+					<h6>Mouth:</h6>
+					<AttributeSelector
+						title={mouth[options.mouthType][1]}
+						handleIncrement={() => changeValue("mouthType", "inc")}
+						handleDecrement={() => { changeValue("mouthType", "dec") }}
+					/>
+				</div>
+				<div className='col-6'>
+					<h6>Skin Color:</h6>
+					<AttributeSelector
+						title={skinColor[options.skinColor][1]}
+						handleIncrement={() => changeValue("skinColor", "inc")}
+						handleDecrement={() => { changeValue("skinColor", "dec") }}
+					/>
+				</div>
+				<div className='col-6'>
+					<h6>Clothes:</h6>
+					<AttributeSelector
+						title={clothes[options.clotheType][1]}
+						handleIncrement={() => changeValue("clotheType", "inc")}
+						handleDecrement={() => { changeValue("clotheType", "dec") }}
+					/>
+				</div>
+				<div className='col-6'>
+					<h6>Clothes Color:</h6>
+					<AttributeSelector
+						title={clotheColor[options.clotheColor][1]}
+						handleIncrement={() => changeValue("clotheColor", "inc")}
+						handleDecrement={() => { changeValue("clotheColor", "dec") }}
+					/>
+				</div>
+				<div className='col-6'>
+					<h6>Facial Hair:</h6>
+					<AttributeSelector
+						title={facialHair[options.facialHairType][1]}
+						handleIncrement={() => changeValue("facialHairType", "inc")}
+						handleDecrement={() => { changeValue("facialHairType", "dec") }}
+					/>
+				</div>
+				<div className='col-6'>
+					<h6>Facial Hair Color:</h6>
+					<AttributeSelector
+						title={facialHairColor[options.facialHairColor][1]}
+						handleIncrement={() => changeValue("facialHairColor", "inc")}
+						handleDecrement={() => { changeValue("facialHairColor", "dec") }}
+					/>
+				</div>
+			</div>
+		</div >
 	)
 }
