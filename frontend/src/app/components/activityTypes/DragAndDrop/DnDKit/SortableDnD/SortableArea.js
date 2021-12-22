@@ -21,7 +21,7 @@ const SortableArea = ({
             strategy = {verticalListSortingStrategy}
             id={id}
         >
-            <div className = {droppableClassName}>
+            <div className = {droppableClassName} id={id}>
                 {droppableHeader ? droppableHeader : null}
                 <Droppable 
                     id={id.toString()}

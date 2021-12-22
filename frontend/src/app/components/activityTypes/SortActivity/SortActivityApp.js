@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef} from 'react'
+import { useState, useEffect, useRef, createRef} from 'react'
 //import {DragDropContext} from 'react-beautiful-dnd';
-import {DndContext, closestCorners} from '@dnd-kit/core';
+import {DndContext, closestCorners, DragOverlay, getBoundingClientRect} from '@dnd-kit/core';
 import {useDispatch, useSelector} from 'react-redux';
 import {enableTap, enableDnD} from '../../../../redux/features/activityTypes/activitiesSlice'
 import useWindowWidth from '../../../hooks/use-window-width';
@@ -8,7 +8,8 @@ import WordBank from './SortActivityWordBank';
 import DrapAndDropToggler from '../DragAndDrop/DrapAndDropToggler'
 import Timer from '../../timer/Timer';
 import SortActivityCategories from './SortActivityCategories';
-import DraggableOverlay from '../DragAndDrop/DnDKit/DraggableOverlay'
+import Item from '../DragAndDrop/DnDKit/DragOverlayItem'
+import activeRectIntersection  from './customCollisionAlgo'
 /*Note Missing To-do
 Backend: 
     1. Missing updating the backend with partial completion of assignment
@@ -78,6 +79,7 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
     //used for tap and drop
     const [firstTapEl, setFirstTapEl] = useState(null)
     const removedEl = useRef(null)
+    const dragOverlayItem = useRef()
     //grab data from local storage
     useEffect(() =>{
         const stored_response = localStorage.getItem(`${activityID}-sort_activity_client_answer-${questionNum}`)
@@ -269,7 +271,11 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
         resultValues(e, e.over.data.current.sortable.containerId)
        
     };
-
+    const customCollisionAlgo = (e) =>{
+        if(!dragOverlayItem.current) return
+        const overlayRect = getBoundingClientRect(dragOverlayItem.current)
+        return activeRectIntersection(e, overlayRect)
+    }
     return (
     <>  
         <div className={`sort-activity-header d-flex justify-content-${smallWindowWidth?"center": "start"}`}>
@@ -291,7 +297,8 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
             <DndContext 
                 onDragStart={onDragStart}
                 onDragEnd = {onDragEnd}
-                collisionDetection={closestCorners}
+                //collisionDetection={closestCorners}
+                collisionDetection={customCollisionAlgo}
                 onDragOver = {onDragOver}
                 
                 //announcements = 
@@ -337,12 +344,17 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
                     isOver = {isOver}
                 />}
                 {/*Current element being dragged*/}
-                <DraggableOverlay
-                    activeId = {activeId}
-                    draggableClassName = {"sort-activity-draggables d-flex align-items-center justify-content-center"}
-                    data = {data}
-                    isDraggingClass = {"sort-activity-is-dragging"}
-                />
+                <DragOverlay>
+                   {activeId ? (
+                    <Item 
+                         ref = {dragOverlayItem}
+                         activeId = {activeId}
+                         draggableClassName = {"sort-activity-draggables d-flex align-items-center justify-content-center"}
+                         data = {data}
+                         isDraggingClass = {"sort-activity-is-dragging"}
+                    />
+                   ) : null}
+                </DragOverlay>
             </DndContext>
         </div>
     </>

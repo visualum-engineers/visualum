@@ -21,7 +21,10 @@ const WordBank = ({
                 <div className="w-100 d-flex justify-content-center">
                     {Object.keys(data.itemBank).map((key, index)=>{
                         return (
-                            <div key={key} className={`${columnClass}-${index+1} w-100 d-flex flex-column align-items-center`}>
+                            <div 
+                                id={key}
+                                key={key} 
+                                className={`${columnClass}-${index+1} w-100 d-flex flex-column align-items-center`}>
                                 <SortableArea 
                                     firstElTap = {firstTapEl} 
                                     id={key}
