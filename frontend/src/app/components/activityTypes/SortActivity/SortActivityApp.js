@@ -250,8 +250,8 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
         // onDragEnd(result)
         // setFirstTapEl(null)
     }
-      //toggle dnd and tap mode based on btn
-      const toggleTap = (e) => {
+    //toggle dnd and tap mode based on btn
+    const toggleTap = (e) => {
         if (e.type ==="click" || (e.type ==="keydown" && e.key === "Enter")) {
             //setDisableDnD(state => !state)
             //update redux store so instructions can dynamically change
@@ -308,10 +308,7 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
             <DndContext 
                 onDragStart={onDragStart}
                 onDragEnd = {onDragEnd}
-                //collisionDetection={closestCorners}
                 collisionDetection={customCollisionAlgo}
-                //onDragOver = {onDragOver}
-                //onDragOver = {debouncedOnDragOver}
                 onDragOver = {onDragOverWrapper}
                 //announcements = 
             >

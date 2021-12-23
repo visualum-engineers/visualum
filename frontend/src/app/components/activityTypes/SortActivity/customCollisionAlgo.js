@@ -1,12 +1,43 @@
+  //store all position values for each droppable
+  let currentDroppablePostion = {}
 
+  //use to get x and y offset of elements. taken from dnd-kit's own implementation
+  function getEdgeOffset(node, parent, offset={x:0, y:0}) {
+    if (!node || !node instanceof Element) {
+      return offset;
+    }
+    const nodeOffset = {
+      x: offset.x + node.offsetLeft,
+      y: offset.y + node.offsetTop,
+    };
+    if (node.offsetParent === parent) {
+      return nodeOffset;
+    }
+    return getEdgeOffset(node.offsetParent, parent, nodeOffset);
+  }
+  //set up intersectionObserver
+  const observer = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      //similar to getBoundingClientRect but without reflow drawback
+      const bounds = entry.boundingClientRect;
+      const target = entry.target
+      const entryId = target.dataset.tapDraggableId ? target.dataset.tapDraggableId : target.dataset.tapDroppableId
+      //grab offest position values
+      const {x: offsetLeft, y: offsetTop} = getEdgeOffset(target, null);
+      [bounds["offsetLeft"], bounds["offsetTop"]] = [offsetLeft, offsetTop]
+
+      //update our map with the position 
+      currentDroppablePostion[entryId] = bounds
+    }
+    // Disconnect the observer to stop from running in the background
+    observer.disconnect();
+  });
+  
   /**
    * Returns the intersecting rectangle area between two rectangles
+   * takes into account viewport or document offset depending 
+   * on sorting items, or changing containers
    */
-  //function getIntersectionRatio(entry: LayoutRect, active: Active): number {
-  import { getBoundingClientRect } from "@dnd-kit/core";
-  //prevent getboundingClient from being called everytime (only call when a scroll is detected)
-  let positionCache = {}
-  //import {closestCorners} from '@dnd-kit/core';
   function getIntersectionRatio(entry, targetOffset, targetViewport, sameContainer){
     const top = Math.max(targetOffset.top, entry.offsetTop);
     const bottom = Math.min(targetOffset.top + targetOffset.height, entry.offsetTop + entry.height);
@@ -20,17 +51,16 @@
     const height = bottom - top;
 
     const viewPortHeight = viewPortBottom - viewPortTop
+
     if (left < right && (top < bottom || viewPortTop < viewPortBottom)) {
       const targetOffsetArea = targetOffset.width * targetOffset.height;
       const entryArea = entry.width * entry.height;
       const intersectionArea = width * height;
       const intersectionRatio = intersectionArea / (targetOffsetArea + entryArea - intersectionArea);
-
+      //use viewport distance when changing containers (this is what the user will see)
       if(!sameContainer){
           const newIntersectionArea = width * viewPortHeight;
-          //console.log(newIntersectionArea, intersectionArea)
           const newIntersectionRatio = newIntersectionArea / (targetOffsetArea + entryArea - newIntersectionArea);
-          
           return Number(newIntersectionRatio.toFixed(4))
       }
       return Number(intersectionRatio.toFixed(4));
@@ -38,7 +68,6 @@
     // Rectangles do not overlap, or overlap has an area of zero (edge/corner overlap)
     return 0;
   }
-  
   /**
    * Returns the rectangle that has the greatest intersection area with a given
    * rectangle in an array of rectangles.
@@ -49,16 +78,14 @@
     const dragOverlayContainer = active.data.current.sortable.containerId
     for(let droppableContainer of droppableContainers) {
       const id = droppableContainer.id;
-      const rect = getBoundingClientRect(droppableContainer.node.current)
+      //using intersection observer for rect values since it wont 
+      //force a reflow, while getBoundingClientRect does
+      observer.observe(droppableContainer.node.current);
+      const rect = currentDroppablePostion[id]
       //grab origin container
       let droppableColumnId 
       if(droppableContainer.data.current) droppableColumnId = droppableContainer.data.current.sortable.containerId
       else droppableColumnId = id 
-      //console.log(droppableColumnId)
-      //get most updated rect positions and cache positions
-      // if(!(id in positionCache)) positionCache[id] = getBoundingClientRect(droppableContainer.node.current)
-      // const rect = positionCache[id]
-      
       if (rect) {
         const intersectionRatio = getIntersectionRatio(rect, collisionRect, overlayRect, dragOverlayContainer === droppableColumnId);
         if (intersectionRatio > maxIntersectionRatio) {
