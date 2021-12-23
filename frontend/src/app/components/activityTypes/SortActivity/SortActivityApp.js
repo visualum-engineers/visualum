@@ -1,6 +1,5 @@
-import { useState, useEffect, useRef, createRef} from 'react'
-//import {DragDropContext} from 'react-beautiful-dnd';
-import {DndContext, closestCorners, DragOverlay, getBoundingClientRect} from '@dnd-kit/core';
+import { useState, useEffect, useRef, useMemo} from 'react'
+import {DndContext, DragOverlay, getBoundingClientRect} from '@dnd-kit/core';
 import {useDispatch, useSelector} from 'react-redux';
 import {enableTap, enableDnD} from '../../../../redux/features/activityTypes/activitiesSlice'
 import useWindowWidth from '../../../hooks/use-window-width';
@@ -8,8 +7,10 @@ import WordBank from './SortActivityWordBank';
 import DrapAndDropToggler from '../DragAndDrop/DrapAndDropToggler'
 import Timer from '../../timer/Timer';
 import SortActivityCategories from './SortActivityCategories';
-import Item from '../DragAndDrop/DnDKit/DragOverlayItem'
-import activeRectIntersection  from './customCollisionAlgo'
+import Item from '../DragAndDrop/DnDKit/DragOverlayItem';
+import activeRectIntersection  from './customCollisionAlgo';
+import debounce from 'lodash.debounce';
+
 /*Note Missing To-do
 Backend: 
     1. Missing updating the backend with partial completion of assignment
@@ -172,6 +173,7 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
             destination: destination,
             draggableId: e.active.id
         }
+        //console.log(result, finishContainer)
         updateSortableLists(result)
     }
     const onDragStart = (e) =>{
@@ -179,22 +181,31 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
         document.querySelector("html").classList.add("sortActivityActive")
         setActiveId(e.active.id)
     }
-    const onDragOver = (e) =>{
+    //pass all necessary values and re-rendered functions here 
+    const onDragOver = (e, isOver, resultValues) =>{
         //prevent updating if already null, and set to null if not being sorted
         if(!e.over && !isOver) return
         else if(!e.over) return setIsOver(null)
         if(!e.over.data.current && isOver === e.over.id) return 
         else if(!e.over.data.current) {
             resultValues(e, e.over.id)
-        //runs when the droppable id changes
-        // meaning containers are different
+            //runs when the droppable id changes
+            // meaning containers are different
             return setIsOver(e.over.id)
         }
         //update state when in a different droppable container than a sortable one
         if(isOver === e.over.data.current.sortable.containerId) return
         if(e.over.data.current.sortable.containerId !== e.active.data.current.sortable.containerId) resultValues(e, e.over.data.current.sortable.containerId)
         setIsOver(e.over.data.current.sortable.containerId)
-    } 
+    }
+    //debounce expensive function, and only create debounce function once on mount
+    //creating the debounce function is also expensive so best to keep it to a min
+    const debouncedOnDragOver = useMemo(() => debounce(onDragOver, 150), []);
+    //overall wrapper containing all dependencies
+    //this function will be attached to dndContext handler
+    const onDragOverWrapper = (e) => {
+        debouncedOnDragOver(e, isOver, resultValues)
+    }
     const onTap = (e) =>{
         // //means a selection hasnt happened so skip for keyboard
         // if(e.type === "keydown" && e.key !=="Enter") return
@@ -299,8 +310,9 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
                 onDragEnd = {onDragEnd}
                 //collisionDetection={closestCorners}
                 collisionDetection={customCollisionAlgo}
-                onDragOver = {onDragOver}
-                
+                //onDragOver = {onDragOver}
+                //onDragOver = {debouncedOnDragOver}
+                onDragOver = {onDragOverWrapper}
                 //announcements = 
             >
                 {mediumWindowWidth && <WordBank 
