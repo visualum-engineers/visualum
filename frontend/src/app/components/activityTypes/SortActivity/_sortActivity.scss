@@ -148,7 +148,7 @@ html.sortActivityActive{
     @include border-radius(0.5rem);
     overflow-y: auto;
     overflow-x: hidden;
-    
+    resize: vertical;
     &::-webkit-scrollbar{
         width: 0.5rem;
         @include border-radius(7px);

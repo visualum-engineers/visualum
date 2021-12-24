@@ -19,7 +19,7 @@ function Draggable(props) {
         ref={setNodeRef} 
         {...listeners} 
         {...attributes}
-        className = {`${props.draggableClassName} ${isDragging ? props.isDraggingClass: ""}`} 
+        className = {`${props.draggableClassName}${isDragging ? " "+props.isDraggingClass: ""}`} 
         onClick = {props.onTap ? props.onTap:null}
         onKeyDown= {props.onTap ? props.onTap:null}
     >

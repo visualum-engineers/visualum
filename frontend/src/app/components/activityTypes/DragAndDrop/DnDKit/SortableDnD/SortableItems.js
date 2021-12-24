@@ -27,11 +27,13 @@ function SortableItem(props) {
 
     return (
       <div 
+        id={"dragItem"+props.id}
         ref={setNodeRef} 
         style={style} 
         data-tap-draggable-id = {props.id.toString()}
         data-tap-droppable-id = {props.droppableId.toString()}
-        className = {`${props.draggableClassName} ${isDragging ? props.isDraggingClass: ""}`} 
+        data-tap-index={props.index}
+        className = {`${props.draggableClassName}${isDragging ? " "+props.isDraggingClass: ""}`} 
         onClick = {props.onTap ? props.onTap:null}
         onKeyDown = {props.onTap ? props.onTap:null}
         {...attributes} 

@@ -13,6 +13,7 @@ const WordBank = ({
     draggingOverClass,
     draggableClassName,
     isOver=null,
+    disableDnD = null,
 }) => {
     return(
         <div className={overallContainerClass}>
@@ -26,7 +27,7 @@ const WordBank = ({
                                 key={key} 
                                 className={`${columnClass}-${index+1} w-100 d-flex flex-column align-items-center`}>
                                 <SortableArea 
-                                    firstElTap = {firstTapEl} 
+                                    firstTapEl = {firstTapEl} 
                                     id={key}
                                     content = {data.itemBank[key]}
                                     droppableClassName = {droppableClassName}
@@ -36,6 +37,7 @@ const WordBank = ({
                                     isDraggingClass = {isDraggingClass}
                                     onTap={onTap}
                                     isOver={isOver}
+                                    disableDnD = {disableDnD}     
                                 />
                             </div>
                         )

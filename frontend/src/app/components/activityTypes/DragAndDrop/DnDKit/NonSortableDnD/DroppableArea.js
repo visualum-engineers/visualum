@@ -20,7 +20,7 @@ const DroppableArea = ({id, content, droppableHeader=null, droppableClassName=""
                             index = {index}
                             id = {draggableContent.id}
                             content = {draggableContent.content}
-                            draggableClassName = {`${draggableClassName} ${last?"last-item":""}`}
+                            draggableClassName = {`${draggableClassName}${last?" last-item":""}`}
                             isDraggingClass={isDraggingClass}
                             onTap={onTap ? onTap: null}
                         />

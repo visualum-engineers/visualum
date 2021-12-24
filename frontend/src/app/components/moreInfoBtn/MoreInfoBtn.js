@@ -40,7 +40,7 @@ const MoreInfoBtn = ({textContent="", customContainerClass="", customContainerAr
             </button>
             <div 
                     aria-hidden={!infoToggled}
-                    className={`${infoToggled ? "instructions-show": ""} instructions`}
+                    className={`${infoToggled ? "instructions-show ": ""}instructions`}
                 >
                     <div className="info-triangle"/>
                     <div className="info-triangle-2"/>

@@ -68,13 +68,13 @@ const transformData = (data, itemBankColumns) =>{
     return newData
 }
 
-const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick=null, moreInfoBtn, mediumWindowWidth}) => {
+const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick, moreInfoBtn, mediumWindowWidth}) => {
     //for updating redux store(data to be sent to backend)
     const smallWindowWidth = useWindowWidth(576)
     const wordBankColumns = mediumWindowWidth ? Array(1).fill(0) : Array(2).fill(0) 
     const [data, setData] = useState(transformData(activityData, wordBankColumns.length))
     const [activeId, setActiveId] = useState(null)
-    const [isOver, setIsOver] = useState(null)
+    const [isOver, setIsOver] = useState(undefined)
     const disableDnD = useSelector((state) => !state.activities.dndEnabled) 
     const dispatch = useDispatch()
     //used for tap and drop
@@ -83,7 +83,7 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
     const dragOverlayItem = useRef()
     //grab data from local storage
     useEffect(() =>{
-        const stored_response = localStorage.getItem(`${activityID}-sort_activity_client_answer-${questionNum}`)
+        const stored_response = localStorage.getItem(`${activityID}-sort_activity_client_answer-${questionNum}`)        
         if(stored_response) setData(JSON.parse(stored_response))
     }, [questionNum, activityID])
 
@@ -155,6 +155,7 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
         setData(newState)
         localStorage.setItem(`${activityID}-sort_activity_client_answer-${questionNum}`, JSON.stringify(newState))
     }
+    //used only for dnd, not tap
     const resultValues = (e, finishContainer) => {
         const finish = finishContainer
         const start = e.active.data.current.tapDroppableId
@@ -173,7 +174,6 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
             destination: destination,
             draggableId: e.active.id
         }
-        //console.log(result, finishContainer)
         updateSortableLists(result)
     }
     const onDragStart = (e) =>{
@@ -185,7 +185,7 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
     const onDragOver = (e, isOver, resultValues) =>{
         //prevent updating if already null, and set to null if not being sorted
         if(!e.over && !isOver) return
-        else if(!e.over) return setIsOver(null)
+        else if(!e.over) return setIsOver(undefined)
         if(!e.over.data.current && isOver === e.over.id) return 
         else if(!e.over.data.current) {
             resultValues(e, e.over.id)
@@ -198,8 +198,7 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
         if(e.over.data.current.sortable.containerId !== e.active.data.current.sortable.containerId) resultValues(e, e.over.data.current.sortable.containerId)
         setIsOver(e.over.data.current.sortable.containerId)
     }
-    //debounce expensive function, and only create debounce function once on mount
-    //creating the debounce function is also expensive so best to keep it to a min
+    //debounce expensive function. We also only create debounce once, on mount
     const debouncedOnDragOver = useMemo(() => debounce(onDragOver, 150), []);
     //overall wrapper containing all dependencies
     //this function will be attached to dndContext handler
@@ -207,62 +206,61 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
         debouncedOnDragOver(e, isOver, resultValues)
     }
     const onTap = (e) =>{
-        // //means a selection hasnt happened so skip for keyboard
-        // if(e.type === "keydown" && e.key !=="Enter") return
-        // //update the first element
-        // let droppableSelected = null
-        // let currListItem = e.target.closest(".match-activity-draggables")
-        // if(!currListItem) {
-        //     droppableSelected = true
-        //     currListItem = e.target.closest(".match-activity-inner-droppable")
-        // }
-        // //used when two list items are clicked, and not an empty droppable
-        // const droppableId = currListItem.dataset.tapDroppableId
-        // const draggableIndex = currListItem.dataset.index
-        // const firstDraggableId = currListItem.dataset.tapDraggableId
+        //in case there was a lag due to debouncing
+        setIsOver(undefined)
+        //means a selection hasnt happened so skip for keyboard
+        if(e.type === "keydown" && e.key !=="Enter") return
+        //update the first element
+        let droppableSelected = null
+        let currListItem = e.target.closest(".sort-activity-draggables")
+        if(!currListItem) {
+            droppableSelected = true
+            currListItem = e.target.closest(".sort-activity-inner-droppable")
+        }
+        //used when two list items are clicked, and not an empty droppable
+        const droppableId = currListItem.dataset.tapDroppableId
+        const draggableIndex = currListItem.dataset.tapIndex
+        const firstDraggableId = currListItem.dataset.tapDraggableId
         
-        // if(!firstTapEl) {
-        //     setFirstTapEl({
-        //         droppableId: droppableId,
-        //         draggableId: firstDraggableId,
-        //         draggableIndex: draggableIndex
-        //     })
-        //     currListItem.classList.add("match-activity-dragging")
-        //     return
-        // }
-        // //update the second element, and perform tap logic
-        // document.getElementById("dragItem"+firstTapEl.draggableId).classList.remove("match-activity-dragging")
-        // const draggableId = firstTapEl.draggableId
-        // const source = {
-        //     droppableId: firstTapEl.droppableId,
-        //     index: firstTapEl.draggableIndex
-        // }
-        // const destination = {
-        //     droppableId: droppableId,
-        //     index: droppableSelected ? 0 : draggableIndex,
-        // }
-        // const result={
-        //     source: source,
-        //     destination: destination,
-        //     draggableId: draggableId
-        // }
-        
-        // onDragEnd(result)
-        // setFirstTapEl(null)
+        if(!firstTapEl) {
+            setFirstTapEl({
+                droppableId: droppableId,
+                draggableId: firstDraggableId,
+                draggableIndex: draggableIndex
+            })
+            currListItem.classList.add("sort-activity-dragging")
+            return
+        }
+        //update the second element, and perform tap logic
+        document.getElementById("dragItem"+firstTapEl.draggableId).classList.remove("sort-activity-dragging")
+        const draggableId = firstTapEl.draggableId
+        const source = {
+            droppableId: firstTapEl.droppableId,
+            index: firstTapEl.draggableIndex
+        }
+        const destination = {
+            droppableId: droppableId,
+            index: droppableSelected ? 0 : draggableIndex,
+        }
+        const result={
+            source: source,
+            destination: destination,
+            draggableId: draggableId
+        }
+        updateSortableLists(result)
+        setFirstTapEl(null)
     }
     //toggle dnd and tap mode based on btn
     const toggleTap = (e) => {
         if (e.type ==="click" || (e.type ==="keydown" && e.key === "Enter")) {
-            //setDisableDnD(state => !state)
             //update redux store so instructions can dynamically change
-            if (disableDnD) {
-                dispatch(enableDnD())
-            }
+            if (disableDnD) dispatch(enableDnD())
             else dispatch(enableTap())
+            
             moreInfoOnClick()
             //if we're changing the mode, we need to reset this
             // as its only viable for tap mode
-            if(firstTapEl) document.getElementById("dragItem"+firstTapEl.draggableId).classList.remove("match-activity-dragging")
+            if(firstTapEl) document.getElementById("dragItem"+firstTapEl.draggableId).classList.remove("sort-activity-dragging")
             removedEl.current = null
             setFirstTapEl(null)
         }
@@ -273,7 +271,7 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
         document.querySelector("html").classList.remove("sortActivityActive")
         //this was already updated on dragMoveOver
         setActiveId(null)
-        setIsOver(null)
+        setIsOver(undefined)
         if(!e.over) return
         //reset overlay and over styles
         if(!e.over.data.current || isOver !== e.over.data.current.sortable.containerId) return
@@ -306,6 +304,10 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
         </div>
         <div className={`sort-activity-container d-flex ${mediumWindowWidth ? "full-size":"flex-column align-items-center"}`}>
             <DndContext 
+                // onDragStart={!disableDnD && onDragStart}
+                // onDragEnd = {!disableDnD && onDragEnd}
+                // collisionDetection={!disableDnD && customCollisionAlgo}
+                // onDragOver = {!disableDnD && onDragOverWrapper}
                 onDragStart={onDragStart}
                 onDragEnd = {onDragEnd}
                 collisionDetection={customCollisionAlgo}
@@ -321,21 +323,25 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
                     columnContainerClass = "sort-activity-column-container w-100"
                     columnTitleClass = "sort-activity-column-titles"
                     columnClass = "sort-activity-itemBank-column"
-                    droppableClassName ={`sort-activity-itemBank-droppables w-100 ${!mediumWindowWidth?"small-screen": ""}`}
-                    innerDroppableClassName = {"sort-activity-inner-droppable d-flex flex-column align-items-center w-100"}
+                    droppableClassName ={`sort-activity-itemBank-droppables w-100${!mediumWindowWidth?" small-screen": ""}`}
+                    innerDroppableClassName = {`${disableDnD && firstTapEl? "sort-activity-tap-active ": ""}sort-activity-inner-droppable d-flex flex-column align-items-center w-100`}
                     draggingOverClass = {"sort-activity-dragging-over"}
                     draggableClassName = {"sort-activity-draggables d-flex align-items-center justify-content-center "}
                     isOver = {isOver}
+                    disableDnD = {disableDnD}
                 />}
                 {/* Renders sort categories */}
-                
                 <SortActivityCategories 
                     numCategories = {numCategories}
+                    onTap = {disableDnD ? onTap : null}
                     data={data}
                     mediumWindowWidth = {mediumWindowWidth}
                     isOver = {isOver}
+                    moreInfoBtn = {moreInfoBtn}
+                    moreInfoOnClick = {moreInfoOnClick}
+                    disableDnD = {disableDnD}
+                    firstTapEl = {firstTapEl}
                 />
-                
                 {/* Renders word/response bank */}
                 {!mediumWindowWidth && <WordBank 
                     data ={data}
@@ -346,11 +352,12 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
                     columnContainerClass = "sort-activity-column-container w-100"
                     columnTitleClass = "sort-activity-column-titles"
                     columnClass = "sort-activity-itemBank-column"
-                    droppableClassName ={`sort-activity-itemBank-droppables ${!mediumWindowWidth?"small-screen w-100": ""}`}
-                    innerDroppableClassName = {"sort-activity-inner-droppable d-flex flex-column align-items-center w-100"}
+                    droppableClassName ={`sort-activity-itemBank-droppables${!mediumWindowWidth?"small-screen w-100 ": ""}`}
+                    innerDroppableClassName = {`${disableDnD && firstTapEl? "sort-activity-tap-active ": ""}sort-activity-inner-droppable d-flex flex-column align-items-center w-100`}
                     draggingOverClass = {"sort-activity-dragging-over"}
                     draggableClassName = {"sort-activity-draggables d-flex align-items-center justify-content-center"}
                     isOver = {isOver}
+                    disableDnD = {disableDnD}
                 />}
                 {/*Current element being dragged*/}
                 <DragOverlay>

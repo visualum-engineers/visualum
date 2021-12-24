@@ -3,7 +3,7 @@ import { forwardRef } from 'react';
 const Item = forwardRef(({...props}, ref) => {
     return(
         <div
-            className = {`draggable-overlay ${props.draggableClassName}`}
+            className = {`draggable-overlay${" "+props.draggableClassName}`}
             style={{cursor:"grabbing"}} 
             ref={ref}
         >   

@@ -298,7 +298,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
                 toggleTap = {toggleTap}
             />
         </div>
-        <div className={`match-activity-container ${mediumWindowWidth ? "three-columns":""}`}>
+        <div className={`match-activity-container${mediumWindowWidth ? " three-columns":""}`}>
         <DragDropContext 
             onDragEnd = {!disableDnD ? onDragEnd: null} 
             onDragUpdate={!disableDnD ? onDragUpdate: null} 
@@ -325,7 +325,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
                                        columnClass = {"match-activity-itemBank-column"}
                                        droppableClassName = {`match-activity-itemBank-droppables d-flex flex-column w-100`}
                                        draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
-                                       innerDroppableClassName = {`${disableDnD && firstTapEl? "match-activity-tap-active": ""} match-activity-inner-droppable w-100 d-flex flex-column align-items-center`}
+                                       innerDroppableClassName = {`${disableDnD && firstTapEl? "match-activity-tap-active ": ""}match-activity-inner-droppable w-100 d-flex flex-column align-items-center`}
                                        draggingOverClass={"match-activity-draggable-over"}
                                        isDraggingClass = {"match-activity-dragging"}
                                     />
@@ -343,7 +343,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
                             columnTitleClass = {"match-activity-column-titles vertical"}
                             droppableClassName = {`match-activity-itemBank-droppables d-flex flex-column w-100`}
                             draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
-                            innerDroppableClassName = {`${disableDnD && firstTapEl? "match-activity-tap-active": ""} match-activity-inner-droppable w-100 d-flex flex-column align-items-center`}
+                            innerDroppableClassName = {`${disableDnD && firstTapEl? "match-activity-tap-active ": ""}match-activity-inner-droppable w-100 d-flex flex-column align-items-center`}
                             draggingOverClass={"match-activity-draggable-over"}
                             isDraggingClass = {"match-activity-dragging"}
                         />

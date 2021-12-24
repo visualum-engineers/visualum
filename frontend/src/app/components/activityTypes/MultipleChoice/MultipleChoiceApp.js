@@ -48,7 +48,7 @@ const MultipleChoiceApp = ({activityData, questionNum, activityID, mediumWindowW
                 {!mediumWindowWidth? 
                         <div className="mc-activity-question">{data.question}</div>
                 : null}
-                {data.imageURL &&  !mediumWindowWidth? 
+                {data.imageURL && !mediumWindowWidth? 
                     <div className="mc-activity-image-container portrait-mode w-100">
                         <img 
                             className = "mc-activity-image"
@@ -61,7 +61,7 @@ const MultipleChoiceApp = ({activityData, questionNum, activityID, mediumWindowW
                     {mediumWindowWidth? 
                         <div className="mc-activity-question">{data.question}</div>
                     : null}
-                    <div className={`w-100 mc-activity-answer-container ${!mediumWindowWidth ?"portrait-mode":""}`}>
+                    <div className={`w-100 mc-activity-answer-container${!mediumWindowWidth ?" portrait-mode":""}`}>
                         {/*renders different answer choices*/}
                         {!mediumWindowWidth ? 
                             Array(rows).fill(0).map((content, rowIndex) => {

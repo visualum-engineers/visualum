@@ -11,6 +11,8 @@ const ActivityQuestions = ({activityData, questionNum, moreInfoOnClick, moreInfo
                                                     questionNum = {questionNum} 
                                                     activityID = {activityData.activityID}
                                                     mediumWindowWidth = {mediumWindowWidth}
+                                                    moreInfoOnClick={moreInfoOnClick} 
+                                                    moreInfoBtn={moreInfoBtn}
                                                 />
             : activityData[activityKey].type === "matching" ? <MatchActivityApp 
                                                             activityData = {activityData[activityKey]} 

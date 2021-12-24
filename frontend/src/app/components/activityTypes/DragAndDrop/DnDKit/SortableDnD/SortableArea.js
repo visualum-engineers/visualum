@@ -12,8 +12,9 @@ const SortableArea = ({
     isDraggingClass= "", 
     placeHolderClass = "",
     onTap=null, 
-    firstElTap=null, 
-    isOver=null
+    firstTapEl=null, 
+    isOver=null,
+    disableDnD = null,
 }) =>{
     return (
         <SortableContext 
@@ -25,11 +26,12 @@ const SortableArea = ({
                 {droppableHeader ? droppableHeader : null}
                 <Droppable 
                     id={id.toString()}
-                    firstElTap = {firstElTap}
+                    firstTapEl = {firstTapEl}
                     innerDroppableClassName = {innerDroppableClassName}
                     draggingOverClass = {draggingOverClass}
                     isOver={isOver}
                     placeHolderClass = {content.length > 0?  null : placeHolderClass}
+                    onTap={disableDnD? onTap: null}
                 >
                     {content.map((draggableContent, index)=>{
                         let last = index === content.length-1
@@ -40,9 +42,10 @@ const SortableArea = ({
                                 index = {index}
                                 id = {draggableContent.id}
                                 content = {draggableContent.content}
-                                draggableClassName = {`${draggableClassName} ${last?"last-item":""}`}
+                                draggableClassName = {`${draggableClassName}${last?" last-item":""}`}
                                 isDraggingClass={isDraggingClass}
-                                onTap={onTap ? onTap: null}
+                                onTap={disableDnD ? onTap: null}
+                                disabled = {disableDnD}
                             />
                         )
                     })}

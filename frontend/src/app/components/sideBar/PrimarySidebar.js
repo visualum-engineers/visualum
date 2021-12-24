@@ -5,7 +5,7 @@ const PrimarySideBar = (props) =>{
     return (
     <>
         <div className={`sidebar-nav fixed-top primary-sidebar-nav ${props.sidebarToggle ?"sidebar-right":"sidebar-left"}`}>
-            <div className={`primary-sidebar-link-container ${windowScrollY? "sidebarScrollActive":""}`}>
+            <div className={`primary-sidebar-link-container${windowScrollY? " sidebarScrollActive":""}`}>
                 {props.btnType=== "Discover"?
                     <>
                         <NavItem textContent={"Get Started"} sidebar={"primary"} url={"/"}/>

@@ -43,7 +43,7 @@ const SingleSlideCarousel = (props) =>{
                     {props.slides.map((content, index) =>{
                         return (<div
                             key = {index} 
-                            className={`single-slide-caro-indicator ${index+1 === props.slideNum? "active" : ""}`}> 
+                            className={`single-slide-caro-indicator${index+1 === props.slideNum? " active" : ""}`}> 
                         </div>)
                     })}
                 </div>

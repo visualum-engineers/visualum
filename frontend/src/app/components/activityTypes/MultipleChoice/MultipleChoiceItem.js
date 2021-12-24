@@ -1,6 +1,6 @@
-const MultipleChoiceItem = ({index, data, choice, updateAnswerChoice, customContainerClass = ""}) =>{
+const MultipleChoiceItem = ({index, data, choice, updateAnswerChoice, customContainerClass = null}) =>{
     return(
-        <div key={index} className={`mc-answer-choice ${customContainerClass}`}>
+        <div key={index} className={`mc-answer-choice${customContainerClass ? " " + customContainerClass: ""}`}>
             <input 
                 id={"mc-answer-choice-"+(index)} 
                 type="radio" 

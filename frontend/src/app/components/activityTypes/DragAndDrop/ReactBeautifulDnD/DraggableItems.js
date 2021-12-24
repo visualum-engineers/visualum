@@ -12,7 +12,7 @@ const DraggableItems = ({id, index, content, draggableClassName, isDraggingClass
                     data-tap-draggable-id={id}
                     data-tap-droppable-id={droppableId}
                     data-index={index}
-                    className={`${draggableClassName} ${snapshot.isDragging ? isDraggingClass: ""}`} 
+                    className={`${draggableClassName}${snapshot.isDragging ? " "+isDraggingClass: ""}`} 
                     ref={provided.innerRef} 
                     {...provided.draggableProps} 
                     {...provided.dragHandleProps}

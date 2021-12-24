@@ -1,16 +1,32 @@
 import SortableArea from "../DragAndDrop/DnDKit/SortableDnD/SortableArea"
+import MoreInfoBtn from "../../moreInfoBtn/MoreInfoBtn"
 const SortActivityCategories = ({
         numCategories,
         data, 
         mediumWindowWidth, 
         onTap=null, 
-        firstElTap = null, 
-        isOver=null}
-    ) =>{
+        firstTapEl = null,
+        isOver=null,
+        moreInfoBtn = null,
+        moreInfoOnClick=null,
+        disableDnD=null,
+    }) =>{
     return (
         <div className={`sort-activity-categories ${mediumWindowWidth ? "full-size": "w-100"}`}>
             <div className={`sort-activity-category-container`}>
-                <h2 className="sort-activity-column-titles"><span>Question</span></h2>
+                <div className="sort-activity-column-titles">
+                    <div className="sort-activity-instructions-position">
+                        <MoreInfoBtn 
+                            textContent = "View Instructions"
+                            customContainerClass = "match-activity-instructions"
+                            customContainerAriaLabel = "activity-instructions"
+                            customDropDownID = "match-activity-instructions"
+                            setTimeoutOnMount = {!moreInfoBtn? 4000: 0}
+                            onClick = {moreInfoOnClick}
+                        />
+                    </div>
+                    Question
+                </div>
                 <div className="d-flex justify-content-center flex-wrap h-100 sort-activity-category-droppables">
                     {numCategories.map((columnTitle, columnIndex)=> {
                             const header = <p className="sort-activity-droppable-header">{columnTitle}</p>
@@ -21,16 +37,16 @@ const SortActivityCategories = ({
                                 id={columnTitle}
                                 droppableHeader = {header}
                                 content = {data.categories[columnTitle]}
-                                droppableClassName = {`sort-activity-sort-droppables d-flex flex-column ${mediumWindowWidth ?"small-screen": ""} ${first? "first-item" : ""}`}
+                                droppableClassName = {`sort-activity-sort-droppables d-flex flex-column${mediumWindowWidth ?" small-screen": ""}${first? " first-item" : ""}`}
                                 draggableClassName = {"sort-activity-draggables d-flex align-items-center justify-content-center"}
-                                innerDroppableClassName ={"sort-activity-inner-droppable d-flex flex-column align-items-center"}
+                                innerDroppableClassName = {`${disableDnD && firstTapEl? "sort-activity-tap-active ": ""}sort-activity-inner-droppable d-flex flex-column align-items-center`}
                                 draggingOverClass = {"sort-activity-dragging-over"}
                                 isDraggingClass = {"sort-activity-is-dragging"}
                                 placeHolderClass={"sort-activity-droppable-placeholder"}
-                                firstElTap ={firstElTap} 
+                                firstTapEl = {firstTapEl}
                                 onTap={onTap}
                                 isOver={isOver}
-                                
+                                disableDnD = {disableDnD}
                             />
                         )}
                     )}

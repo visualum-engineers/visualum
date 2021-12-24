@@ -17,7 +17,7 @@ const SecondarySideBar = (props) =>{
     <>
         <div 
                 aria-label ="sidebar" 
-                className={`${props.sidebarToggle ?"sidebar-right":"sidebar-left"} ${props.customSidebarClass ? props.customSidebarClass: ""} d-flex flex-column sidebar-nav secondary-sidebar-nav fixed-top `}
+                className={`${props.sidebarToggle ?"sidebar-right":"sidebar-left"}${props.customSidebarClass ? " "+props.customSidebarClass: ""} d-flex flex-column sidebar-nav secondary-sidebar-nav fixed-top`}
                 aria-hidden ={!props.sidebarToggle}
             >
         
@@ -69,7 +69,7 @@ const SecondarySideBar = (props) =>{
             
         </div>
         <button 
-            className={`secondary-exit-sidebar-btn ${props.sidebarToggle ?"":"sidebar-close"}`} 
+            className={`secondary-exit-sidebar-btn${props.sidebarToggle ?"":" sidebar-close"}`} 
             aria-label="exit-sidebar"
             onClick={props.handleSideBar}>
             <i className={`fas fa-angle-${props.sidebarToggle ? "left":"right"}`}></i>

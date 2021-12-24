@@ -2,7 +2,6 @@ import ActivityQuestions from "./ActivityQuestions"
 import ActivityInstructions from "./ActivityInstructions"
 import ActivityBtns from "./NavActivityBtn/ActivityBtns"
 import useWindowWidth from "../../hooks/use-window-width"
-//import SlimNavbar from "../slimNavbar/SlimNavbar"
 import SecondarySideBar from "../sideBar/SecondarySideBar"
 import assignmentData from "../../helpers/sampleAssignmentData"
 import { useEffect, useState } from "react"
@@ -120,7 +119,7 @@ const Activity = () =>{
                 customFooterLinkClass = {"activities-sidebar-link"}
         />
         
-        <div className = {`${sidebarToggle && windowWidth?"secondary-sidebar-open": ""} activity-body d-flex flex-column align-items-center justify-content-center`}>
+        <div className = {`${sidebarToggle && windowWidth?"secondary-sidebar-open ": ""}activity-body d-flex flex-column align-items-center justify-content-center`}>
             {moreInfoBtn ? 
                 <ActivityInstructions 
                     activityType = {activityData[questionNum].type}

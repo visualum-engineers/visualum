@@ -2,7 +2,18 @@ import { Droppable } from "react-beautiful-dnd";
 import DraggableItems from "./DraggableItems";
 //Droppable container styling
 
-const DroppableArea = ({id, content, droppableHeader=null, droppableClassName="", innerDroppableClassName ="", draggableClassName="", draggingOverClass="", isDraggingClass= "", onTap=null, firstElTap=null}) =>{
+const DroppableArea = ({
+    id, 
+    content, 
+    droppableHeader=null, 
+    droppableClassName="", 
+    innerDroppableClassName ="", 
+    draggableClassName="", 
+    draggingOverClass="", 
+    isDraggingClass= "", 
+    onTap=null, 
+    firstElTap=null
+}) =>{
    
     return(
         <div className = {droppableClassName}>
@@ -15,7 +26,7 @@ const DroppableArea = ({id, content, droppableHeader=null, droppableClassName=""
                         tabIndex = {firstElTap ? 0: -1}
                         ref={provided.innerRef}
                         data-tap-droppable-id = {id.toString()}
-                        className={`${innerDroppableClassName} ${snapshot.isDraggingOver ? draggingOverClass: ""}`}
+                        className={`${innerDroppableClassName}${snapshot.isDraggingOver ? " "+draggingOverClass: ""}`}
                     >
                         {content.map((draggableContent, index)=>{
                             let last = index === content.length-1
@@ -26,7 +37,7 @@ const DroppableArea = ({id, content, droppableHeader=null, droppableClassName=""
                                     index = {index}
                                     id = {draggableContent.id}
                                     content = {draggableContent.content}
-                                    draggableClassName = {`${draggableClassName} ${last?"last-item":""}`}
+                                    draggableClassName = {`${draggableClassName}${last?" last-item":""}`}
                                     isDraggingClass={isDraggingClass}
                                     onTap={onTap ? onTap: null}
                                 />

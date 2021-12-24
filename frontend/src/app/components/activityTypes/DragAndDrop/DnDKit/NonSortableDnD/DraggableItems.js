@@ -1,6 +1,14 @@
 
 import Draggable from "./Draggable"
-const DraggableItems = ({id, index, content, draggableClassName, isDraggingClass, onTap=null, droppableId}) =>{
+const DraggableItems = ({
+    id, 
+    index, 
+    content, 
+    draggableClassName, 
+    isDraggingClass, 
+    onTap=null, 
+    droppableId
+}) =>{
     return(
         <Draggable
             droppableId = {droppableId}
