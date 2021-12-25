@@ -1,20 +1,7 @@
+  import getEdgeOffset from "../positionFunctions/getEdgeOffset";
   //store all position values for each droppable
   let currentDroppablePostion = {}
-
-  //use to get x and y offset of elements. taken from dnd-kit's own implementation
-  function getEdgeOffset(node, parent, offset={x:0, y:0}) {
-    if (!node || !node instanceof Element) {
-      return offset;
-    }
-    const nodeOffset = {
-      x: offset.x + node.offsetLeft,
-      y: offset.y + node.offsetTop,
-    };
-    if (node.offsetParent === parent) {
-      return nodeOffset;
-    }
-    return getEdgeOffset(node.offsetParent, parent, nodeOffset);
-  }
+  
   //set up intersectionObserver
   const observer = new IntersectionObserver((entries) => {
     for (const entry of entries) {
@@ -68,6 +55,7 @@
     // Rectangles do not overlap, or overlap has an area of zero (edge/corner overlap)
     return 0;
   }
+  
   /**
    * Returns the rectangle that has the greatest intersection area with a given
    * rectangle in an array of rectangles.

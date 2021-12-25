@@ -17,6 +17,12 @@
     @include box-shadow(rgba(0, 0, 0, 0.082) 0px 5px 11px 0.1px);
     z-index: 2;
 }
+
+$activity-container-height: calc(92vh - 2rem);
+$activity-container-min-height: calc(600px - 7vh - 2rem);
+$sort-activity-container-height: calc(#{$activity-container-height} - 3.6rem - 23px);
+$sort-activity-container-min-height: calc(#{$activity-container-min-height} - 3.6rem - 23px);
+
 html.sortActivityActive{
     scroll-behavior: unset !important;
 }
@@ -24,19 +30,20 @@ html.sortActivityActive{
 .sort-activity-header{
     position: relative;
     margin-top: 0.2rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1vh;
     height: 3.4rem;
 }
 
 .sort-activity-container{
+    position: relative;
     padding: 1rem;
     background-color: $white;
-    height: 75vh;
+    height: $sort-activity-container-height;
+    min-height: $sort-activity-container-min-height;
     @include border-radius(0.5rem);
-    min-height: 47rem;
 }
 .sort-activity-container.full-size{
-    min-height: 26rem;
+    //min-height: 26rem;
 }
 .sort-activity-container::before{
     position: absolute;
@@ -44,8 +51,8 @@ html.sortActivityActive{
     top: 50%;
     left: 5%;
     width: 90%;
-    height: calc(50% - 1.1rem - 10px);
-    @include box-shadow(rgba(0, 0, 0, 0.425) 0px 2px 23px 2px);
+    height: calc(50%);
+    @include box-shadow(rgba(0, 0, 0, 0.425) 0px -2px 23px 2px);
     z-index: -1;
 }
 .sort-activity-itemBank{
@@ -56,7 +63,7 @@ html.sortActivityActive{
     overflow-y: auto;
     // overflow: overlay;
     overflow-x: hidden;
-    max-height: calc(max(20rem, 30vh));
+    //max-height: calc(max(20rem, 30vh));
     min-height: calc(max(20rem, 30vh));
     min-width: 300px;
     &::-webkit-scrollbar{
@@ -75,8 +82,8 @@ html.sortActivityActive{
     margin-top: 0;
     margin-right: 2rem;
     min-height: 25rem;
-    max-height: calc(75vh - 2rem);
-    height: calc(75vh - 2rem);
+    //max-height: calc(76vh - 2rem);
+    height: calc(76vh - 2rem);
     .sort-activity-itemBank-column-1{
         min-height: calc(75vh - 6rem);
     }

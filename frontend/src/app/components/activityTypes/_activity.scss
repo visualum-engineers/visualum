@@ -4,7 +4,6 @@
 @import "./MultipleChoice/multipleChoice";
 @import "./ShortAnswer/shortAnswer";
 @import "./LabelPictures/labelPictures";
-
 @import "./activityBreakpoints";
 
 @mixin activities-nav-navItems-hover{
@@ -17,7 +16,7 @@
     background-color: $lightest-gray;
     height: 100%;
     position: relative;
-    min-height: calc(max(100vh, 650px));
+    min-height: calc(max(100vh, 600px));
 }
 
 .activity-body.secondary-sidebar-open{
@@ -140,9 +139,9 @@
 }
 .activity-type-container{
     position: relative;
-    margin-top: 2.1rem;
+    margin-top: 1vh;
     text-align: center;
-    min-height: calc(max(calc(75vh + 6.35rem), 400px));
+    min-height: calc(max(calc(93vh - 2rem), calc(600px - 7vh - 2rem) ));
     z-index: 1;
     max-width: 1100px;
     overflow: hidden;
@@ -202,7 +201,6 @@
 } 
 
 .nav-activity-btns{
-    z-index: 1;
     max-width: 1100px;
 }
 .nav-activity-btn{
@@ -210,8 +208,10 @@
     color: $main-font-color;
     background-color: $purple;
     padding: 0.4rem 1.2rem;
-    margin: 1.1rem 0;
+    margin-top: 1vh;
+    margin-bottom: 3vh;
     border: 1px $secondary-font-color solid;
+    font-size: 1rem;
     @include transition(all 0.3s ease-out);
 }  
 
