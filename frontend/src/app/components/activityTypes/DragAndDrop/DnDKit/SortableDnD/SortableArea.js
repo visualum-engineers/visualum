@@ -32,6 +32,7 @@ const SortableArea = ({
                     isOver={isOver}
                     placeHolderClass = {content.length > 0?  null : placeHolderClass}
                     onTap={disableDnD? onTap: null}
+                    disabled = {disableDnD}
                 >
                     {content.map((draggableContent, index)=>{
                         let last = index === content.length-1

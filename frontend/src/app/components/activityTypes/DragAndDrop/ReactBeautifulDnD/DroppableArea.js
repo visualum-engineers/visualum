@@ -1,7 +1,6 @@
 import { Droppable } from "react-beautiful-dnd";
 import DraggableItems from "./DraggableItems";
 //Droppable container styling
-
 const DroppableArea = ({
     id, 
     content, 
@@ -12,9 +11,9 @@ const DroppableArea = ({
     draggingOverClass="", 
     isDraggingClass= "", 
     onTap=null, 
-    firstElTap=null
+    firstElTap=null,
+    removedEl = null,
 }) =>{
-   
     return(
         <div className = {droppableClassName}>
             {droppableHeader ? droppableHeader : null}
@@ -37,7 +36,7 @@ const DroppableArea = ({
                                     index = {index}
                                     id = {draggableContent.id}
                                     content = {draggableContent.content}
-                                    draggableClassName = {`${draggableClassName}${last?" last-item":""}`}
+                                    draggableClassName = {`${draggableClassName}${last?" last-item":""}${removedEl && removedEl.id === draggableContent.id?" hide-draggable":""}`}
                                     isDraggingClass={isDraggingClass}
                                     onTap={onTap ? onTap: null}
                                 />

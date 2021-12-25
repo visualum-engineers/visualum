@@ -113,7 +113,7 @@ export const closestCorners = ({
 
     //grab origin container
     let droppableColumnId
-    if(droppableContainer.data.current) droppableColumnId = droppableContainer.data.current.sortable.containerId
+    if(droppableContainer.data.current.sortable) droppableColumnId = droppableContainer.data.current.sortable.containerId
     else droppableColumnId = id 
     
     if (rect) { 

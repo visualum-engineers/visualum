@@ -34,7 +34,6 @@ const MultipleChoiceApp = ({activityData, questionNum, activityID, mediumWindowW
         }))
     }
     const updateAnswerChoice = (e) =>{
-        console.log(document.getElementById(e.target.dataset.updateAnswerChoice))
         const id = e.target.closest("input").id.match(/\d+/)
         setData(state =>({
             ...state,

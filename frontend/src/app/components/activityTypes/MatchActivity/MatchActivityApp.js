@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react'
+import {useState, useEffect, useRef} from 'react'
 import Timer from '../../timer/Timer';
 import {DragDropContext} from 'react-beautiful-dnd';
 import useWindowWidth from '../../../hooks/use-window-width'
@@ -71,15 +71,13 @@ const transformData = (data, itemBankColumns) =>{
 
 const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick=null, moreInfoBtn, mediumWindowWidth}) => {
     const smallWindowWidth = useWindowWidth(576)
-    //const mediumWindowWidth = useWindowWidth(992)
     const columns = mediumWindowWidth ? Array(1).fill(0) : Array(2).fill(0)
     const [data, setData] = useState(transformData(activityData, 2))
     const disableDnD = useSelector((state) => !state.activities.dndEnabled) 
     const dispatch = useDispatch()
-
     const [firstTapEl, setFirstTapEl] = useState(null)
-    const removedEl = useRef(null)
-    
+    //const removedEl = useRef(null)
+    const [removedEl, setRemovedEl] = useState(undefined)
     //if it exists, grab info from local storage on mount.
     useEffect(() => {
         //on mount check local storage for data
@@ -103,40 +101,24 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
         //when dragging outside droppable container
         if(!destination) {
             // dont do anything if nothing is stored
-            if(!removedEl.current || !removedEl.current[0]) return
-            //unhide removed element, since there can only be 1 item in keyPairs at a time
-            document.getElementById("dragItem"+removedEl.current[0].id).classList.remove("hide-draggable")
-            removedEl.current = null
-            return
+            if(!removedEl || !removedEl[0]) return
+            return setRemovedEl(undefined)
         }
         //when dragging inside same container
-        if(destination.droppableId === source.droppableId) {
-            if(!removedEl.current || !removedEl.current[0]) return
-            document.getElementById("dragItem"+removedEl.current[0].id).classList.remove("hide-draggable")
-            return
-        }
+        if(destination.droppableId === source.droppableId) return
         //when dragging between word bank
         const answerChoiceTestEl = (el) => /answerChoices.*/.test(el)
         //if dragging to another word bank container
-        if(answerChoiceTestEl(destination.droppableId)) {
-            if(!removedEl.current || !removedEl.current[0]) return
-            document.getElementById("dragItem"+removedEl.current[0].id).classList.remove("hide-draggable")
-            return
-        }
+        if(answerChoiceTestEl(destination.droppableId)) return
         
         //when dragging into a keypair container
         const droppableName = data.categoryIDs[destination.droppableId]
         const droppableList = [...data.keyPairs[droppableName]]
-        //restore visibility of old current value
-        if(removedEl.current && removedEl.current[0]){
-            document.getElementById("dragItem"+removedEl.current[0].id).classList.remove("hide-draggable")
-        }
+
         //store name of keyPair, and value popped
-        removedEl.current = [droppableList.pop(), droppableName]
-        //add a class to hide current draggable in list.
-        if(!removedEl.current[0]) return 
-        document.getElementById("dragItem"+removedEl.current[0].id).classList.add("hide-draggable")
+        setRemovedEl([droppableList.pop(), droppableName])
     }
+   
     //when dragging stops
     const onDragEnd = (result) =>{
         //to re-enable smooth scrolling for the remainder of the pages
@@ -238,13 +220,14 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
             setFirstTapEl({
                 droppableId: droppableId,
                 draggableId: firstDraggableId,
-                draggableIndex: draggableIndex
+                draggableIndex: draggableIndex,
+                node: e.target
             })
             currListItem.classList.add("match-activity-dragging")
             return
         }
         //update the second element, and perform tap logic
-        document.getElementById("dragItem"+firstTapEl.draggableId).classList.remove("match-activity-dragging")
+        firstTapEl.node.classList.remove("match-activity-dragging")
         const draggableId = firstTapEl.draggableId
         const source = {
             droppableId: firstTapEl.droppableId,
@@ -275,7 +258,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
             moreInfoOnClick()
             //if we're changing the mode, we need to reset this
             // as its only viable for tap mode
-            if(firstTapEl) document.getElementById("dragItem"+firstTapEl.draggableId).classList.remove("match-activity-dragging")
+            if(firstTapEl) firstTapEl.node.classList.remove("match-activity-dragging")
             removedEl.current = null
             setFirstTapEl(null)
         }
@@ -313,6 +296,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
                     disableDnD = {disableDnD}
                     onTap = {onTap}
                     moreInfoBtn = {moreInfoBtn}
+                    removedEl = {removedEl}
                 />
                 {mediumWindowWidth ? <WordBank 
                                        data={data}

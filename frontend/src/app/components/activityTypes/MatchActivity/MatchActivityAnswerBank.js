@@ -1,6 +1,15 @@
 import MoreInfoBtn from '../../moreInfoBtn/MoreInfoBtn';
 import DroppableArea from "../DragAndDrop/ReactBeautifulDnD/DroppableArea"
-const AnswerBank = ({data, firstTapEl, mediumWindowWidth, moreInfoOnClick, disableDnD, onTap, moreInfoBtn}) => {
+const AnswerBank = ({
+    data, 
+    firstTapEl, 
+    mediumWindowWidth, 
+    moreInfoOnClick, 
+    disableDnD, 
+    onTap, 
+    moreInfoBtn,
+    removedEl
+}) => {
     return (
         <div className={`match-activity-columns d-flex justify-content-center${mediumWindowWidth? " three-columns": " w-100"}`}>
             <div className="match-activity-keys-column w-50 d-flex flex-column align-items-center">
@@ -44,6 +53,7 @@ const AnswerBank = ({data, firstTapEl, mediumWindowWidth, moreInfoOnClick, disab
                             draggingOverClass={"match-activity-draggable-over"}
                             isDraggingClass={"match-activity-dragging"}
                             onTap={disableDnD? onTap: null}
+                            removedEl = {removedEl && removedEl[0]}                        
                         />
                     )
                 })}

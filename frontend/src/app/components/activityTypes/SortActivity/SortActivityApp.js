@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useMemo} from 'react'
 import {DndContext, DragOverlay, getBoundingClientRect} from '@dnd-kit/core';
 import { closestCorners, rectIntersection} from '../DragAndDrop/DnDKit/customCollisionAlgo/algoIndex';
-
 import addToTop from '../DragAndDrop/DnDKit/positionFunctions/addToTop';
 import {useDispatch, useSelector} from 'react-redux';
 import {enableTap, enableDnD} from '../../../../redux/features/activityTypes/activitiesSlice'
@@ -12,7 +11,6 @@ import Timer from '../../timer/Timer';
 import SortActivityCategories from './SortActivityCategories';
 import Item from '../DragAndDrop/DnDKit/DragOverlayItem';
 import debounce from 'lodash.debounce';
-
 
 /*Note Missing To-do
 Backend: 
@@ -73,17 +71,18 @@ const transformData = (data, itemBankColumns) =>{
 
 const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick, moreInfoBtn, mediumWindowWidth}) => {
     //for updating redux store(data to be sent to backend)
+    const dispatch = useDispatch()
     const smallWindowWidth = useWindowWidth(576)
     const wordBankColumns = mediumWindowWidth ? Array(1).fill(0) : Array(2).fill(0) 
     const [data, setData] = useState(transformData(activityData, wordBankColumns.length))
-    const [activeId, setActiveId] = useState(null)
+    const [activeId, setActiveId] = useState(undefined)
     const [isOver, setIsOver] = useState(undefined)
     const disableDnD = useSelector((state) => !state.activities.dndEnabled) 
-    const dispatch = useDispatch()
-    //used for tap and drop
+    const dragOverlayItem = useRef()
+
+    //used for tap and drop to track selected elements
     const [firstTapEl, setFirstTapEl] = useState(null)
     const removedEl = useRef(null)
-    const dragOverlayItem = useRef()
     //grab data from local storage
     useEffect(() =>{
         const stored_response = localStorage.getItem(`${activityID}-sort_activity_client_answer-${questionNum}`)        
@@ -95,9 +94,10 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
         setData((data) => transformData(data, wordBankColumns.length))
     }, [mediumWindowWidth, wordBankColumns.length])
 
-    //roundup number of elements counted
+    //determine how many categories there are
     const numCategories = Object.keys(data.categories)
 
+    //test is item comes from a word bank column
     const answerChoiceTestEl = (el) => /answerChoices.*/.test(el)
 
     const updateSortableLists = (result) =>{
@@ -159,22 +159,21 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
         setData(newState)
         localStorage.setItem(`${activityID}-sort_activity_client_answer-${questionNum}`, JSON.stringify(newState))
     }
-
+    
     const onDragStart = (e) =>{
         //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
         document.querySelector("html").classList.add("sortActivityActive")
         setActiveId(e.active.id)
     }
-    //used only for dnd, not tap
+    //used only for dnd, not tap. returns the result object that contains all neccessary info to update list
     const resultValues = (e, finishContainer) => {
         const finish = finishContainer
-        const finishNode = document.getElementById(finish)
         const start = e.active.data.current.tapDroppableId
         const startIndex = e.active.data.current.index
         const finishAnswersList = Array.from(answerChoiceTestEl(finish) ? data.itemBank[finish] : data.categories[finish])
         //determine if position is at start or end. if not, we use the index provided in data
-        const endIndex = !e.over.data.current 
-            ? addToTop(getBoundingClientRect(finishNode), getBoundingClientRect(dragOverlayItem.current), finishAnswersList.length)
+        const endIndex = !e.over.data.current.sortable
+            ? addToTop(getBoundingClientRect(e.over.data.current.node), getBoundingClientRect(dragOverlayItem.current), finishAnswersList.length)
             : e.over.data.current.index
 
         const source = {
@@ -190,23 +189,23 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
             destination: destination,
             draggableId: e.active.id
         }
-        updateSortableLists(result)
+        return result
     }
     //pass all necessary values and re-rendered functions here 
-    const onDragOver = (e, isOver, resultValues) =>{
+    const onDragOver = (e, isOver, resultValues, updateSortableLists) =>{
         //prevent updating if already null, and set to null if not being sorted
         if(!e.over && !isOver) return
         else if(!e.over) return setIsOver(undefined)
-        if(!e.over.data.current && isOver === e.over.id) return 
-        else if(!e.over.data.current) {
-            resultValues(e, e.over.id)
+        if(!e.over.data.current.sortable && isOver === e.over.id) return 
+        else if(!e.over.data.current.sortable) {
+            updateSortableLists(resultValues(e, e.over.id))
             //runs when the droppable id changes
             // meaning containers are different
             return setIsOver(e.over.id)
         }
         //update state when in a different droppable container than a sortable one
         if(isOver === e.over.data.current.sortable.containerId) return
-        if(e.over.data.current.sortable.containerId !== e.active.data.current.sortable.containerId) resultValues(e, e.over.data.current.sortable.containerId)
+        if(e.over.data.current.sortable.containerId !== e.active.data.current.sortable.containerId) updateSortableLists(resultValues(e, e.over.data.current.sortable.containerId))
         setIsOver(e.over.data.current.sortable.containerId)
     }
     //debounce expensive function. We also only create debounce once, on mount
@@ -214,21 +213,20 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
     
     //overall wrapper function
     const onDragOverWrapper = (e) => {
-        debouncedOnDragOver(e, isOver, resultValues)
+        debouncedOnDragOver(e, isOver, resultValues, updateSortableLists)
     }
     //handle state update when object stops
     const onDragEnd = (e) => {
         //to re-enable smooth scrolling for the remainder of the pages
         document.querySelector("html").classList.remove("sortActivityActive")
-        //this was already updated on dragMoveOver
-        setActiveId(null)
+        setActiveId(undefined)
         if(!e.over) return setIsOver(undefined)
         //reset overlay and over styles
-        if(!e.over.data.current || isOver !== e.over.data.current.sortable.containerId) return  setIsOver(undefined)
+        if(!e.over.data.current.sortable || isOver !== e.over.data.current.sortable.containerId) return setIsOver(undefined)
         //nothing changed
-        if(isOver === e.over.data.current.sortable.containerId && e.over.data.current.index === e.active.data.current.index) return  setIsOver(undefined)
+        if(isOver === e.over.data.current.sortable.containerId && e.over.data.current.index === e.active.data.current.index) return setIsOver(undefined)
         setIsOver(undefined)
-        resultValues(e, e.over.data.current.sortable.containerId)
+        updateSortableLists(resultValues(e, e.over.data.current.sortable.containerId))
     };
     const onTap = (e) =>{
         //in case there was a lag due to debouncing
@@ -251,13 +249,14 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
             setFirstTapEl({
                 droppableId: droppableId,
                 draggableId: firstDraggableId,
-                draggableIndex: draggableIndex
+                draggableIndex: draggableIndex,
+                node: e.target,
             })
             currListItem.classList.add("sort-activity-dragging")
             return
         }
         //update the second element, and perform tap logic
-        document.getElementById("dragItem"+firstTapEl.draggableId).classList.remove("sort-activity-dragging")
+        firstTapEl.node.classList.remove("sort-activity-dragging")
         const draggableId = firstTapEl.draggableId
         const source = {
             droppableId: firstTapEl.droppableId,
@@ -285,16 +284,15 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
             moreInfoOnClick()
             //if we're changing the mode, we need to reset this
             // as its only viable for tap mode
-            if(firstTapEl) document.getElementById("dragItem"+firstTapEl.draggableId).classList.remove("sort-activity-dragging")
+            if(firstTapEl) firstTapEl.node.classList.remove("sort-activity-dragging")
             removedEl.current = null
             setFirstTapEl(null)
         }
     }
-    
+
     const customCollisionAlgo = (e) =>{
         if(!dragOverlayItem.current) return
         const overlayRect = getBoundingClientRect(dragOverlayItem.current)
-        //return activeRectIntersection(e, overlayRect)
         return mediumWindowWidth ? closestCorners(e, overlayRect) : rectIntersection(e, overlayRect)
     }
     return (
