@@ -18,8 +18,6 @@ function Droppable(props) {
       id: props.id, 
       disabled: props.disabled,
       data:{
-
-        //current: props.data.current,
         node: droppableRef.current,
       }
     });

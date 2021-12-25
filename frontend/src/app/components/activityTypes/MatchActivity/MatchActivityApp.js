@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef} from 'react'
+import {useState, useEffect} from 'react'
 import Timer from '../../timer/Timer';
 import {DragDropContext} from 'react-beautiful-dnd';
 import useWindowWidth from '../../../hooks/use-window-width'
@@ -110,7 +110,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
         const answerChoiceTestEl = (el) => /answerChoices.*/.test(el)
         //if dragging to another word bank container
         if(answerChoiceTestEl(destination.droppableId)) return
-        
+
         //when dragging into a keypair container
         const droppableName = data.categoryIDs[destination.droppableId]
         const droppableList = [...data.keyPairs[droppableName]]
@@ -121,6 +121,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
    
     //when dragging stops
     const onDragEnd = (result) =>{
+        setRemovedEl(undefined)
         //to re-enable smooth scrolling for the remainder of the pages
         document.querySelector("html").classList.remove("sortActivityActive")
         //setup

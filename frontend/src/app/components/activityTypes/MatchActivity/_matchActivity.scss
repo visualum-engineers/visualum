@@ -1,12 +1,11 @@
 @import "./matchActivityBreakpoints";
 @mixin match-activity-keypair-styles {
     list-style-type: none;
-    min-height: 4.5rem;
-    height: 4.5rem;
+    min-height: 4rem;
+    height: 4rem;
     width: 100%;
     min-width: 140px;
     overflow-y: auto;
-    // overflow: overlay;
     overflow-x: hidden;
     overflow-wrap: break-word;
     @include border-radius(5px);
@@ -163,7 +162,7 @@
         list-style-type: none;
         padding: 0 0.25rem;
         //padding-bottom: 0;
-        padding-top: 0.8rem;
+        //padding-top: 0.8rem;
         min-height: 8rem;
         background: none;
     }
@@ -202,13 +201,13 @@
     list-style-type: none;
     margin-bottom: 1rem;
     min-width: 145px;
-    height: 5rem;
+    height: 4.5rem;
     padding: 0 1rem;
     p{
         @include match-activity-keypair-styles();
         background-color: $lightest-gray;
         margin: 0;
-        height: 5rem;
+        height: 4.5rem;
         font-weight: 500;
         color: $secondary-font-color;
         cursor: auto;
@@ -249,14 +248,13 @@
         background-color: $light-blue;
         min-height: 100%;
     }
-    
 }
 
 .match-activity-answers-droppables{
     list-style-type: none;
     margin-bottom: 1rem;
     min-width: 145px;
-    height: 5rem;
+    height: 4.5rem;
 }
 
 .match-activity-answers-droppables.last-item{
