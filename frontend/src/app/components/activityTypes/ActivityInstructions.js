@@ -2,15 +2,19 @@ import ShortAnswerInstructions from "./ShortAnswer/ShortAnswerInstructions"
 import SortActivityInstructions from "./SortActivity/SortActivityInstructions"
 import MatchActivityInstructions from "./MatchActivity/MatchActivityInstructions"
 import MultipleChoiceInstructions from "./MultipleChoice/MultipleChoiceInstructions"
-
-const ActivityInstructions = ({activityType, activityInstructions, dndEnabled, moreInfoOnClick}) =>{
+import ActivityPopUp from "./ActivityPopUp"
+const ActivityInstructions = ({
+    activityType, 
+    activityInstructions, 
+    dndEnabled, 
+    moreInfoOnClick,
+}) =>{
     return (
-        <div className="d-flex justify-content-center align-items-center activity-walkthrough-dark-bg">
-            <button 
-                className="activity-walkthrough-bg-exit-btn" 
-                aria-label="exit-more-info"
-                onClick={moreInfoOnClick}>
-            </button>
+        <ActivityPopUp
+            btnClassName="activity-popup-bg-exit-btn" 
+            aria-label="exit-more-info"
+            onClick={moreInfoOnClick}
+        >
             <div className="activity-walkthrough-instructions col-11 col-md-9 col-lg-7 col-xl-6 col-xxl-5">
                 <header className="activity-walkthrough-instructions-header d-flex justify-content-between align-items-center"> 
                     <h1>Activity Instructions</h1>
@@ -35,7 +39,7 @@ const ActivityInstructions = ({activityType, activityInstructions, dndEnabled, m
                                                         activityInstructions={activityInstructions}/>
                 : null}
             </div>
-        </div>
+        </ActivityPopUp>
     )
 }
 export default ActivityInstructions

@@ -7,10 +7,11 @@ import assignmentData from "../../helpers/sampleAssignmentData"
 import { useEffect, useState } from "react"
 import {CSSTransition} from "react-transition-group"
 import { useSelector, useDispatch } from 'react-redux'
-import {enableTap} from '../../../redux/features/activityTypes/activitiesSlice'
+import {enableTap, resetPopUpOn, resetPopUpOff} from '../../../redux/features/activityTypes/activitiesSlice'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faFileAlt, faCommentDots, faStar} from '@fortawesome/free-regular-svg-icons'
 import {faBookOpen} from '@fortawesome/free-solid-svg-icons'
+import ActivityResetPopUp from './ActivityResetPopUp'
 
 const activityData = assignmentData
 const duration = 500
@@ -57,6 +58,7 @@ const Activity = () =>{
     const windowWidth = useWindowWidth(992)
     const smallWindowWidth = useWindowWidth(576)
     const dndEnabled = useSelector((state) => state.activities.dndEnabled)
+    const resetPopUp = useSelector((state) => state.activities.resetPopUp)
     const dispatch = useDispatch()
     useEffect(() => {
         //on mount check local storage for data
@@ -99,6 +101,7 @@ const Activity = () =>{
         if (sidebarToggle && e.target.closest("button").ariaLabel === "exit-sidebar") return exitSideBar()
         else return openSideBar()
     }
+    //use for activity instructions popup
     const moreInfoOnClick = () => setMoreInfoBtn(state=> !state)
     useEffect(()=>{
         const activityType = activityData[questionNum].type
@@ -108,6 +111,23 @@ const Activity = () =>{
             setMoreInfoBtn(true)
         }
     }, [dispatch, smallWindowWidth, questionNum])
+
+    //used for confirmation popup of reseting data in activity 
+    const resetBtnOnClick = (e) =>{
+        const node = e.target.closest("button")
+        const questionNum = node.dataset.questionNum
+        const action = node.dataset.actionLabel
+        switch(action){
+            case "reset-question" : 
+                return dispatch(resetPopUpOn({ questionNum : questionNum, confirmed: false}))
+            case "exit-reset-question": 
+                return dispatch(resetPopUpOff())
+            case "confirm-reset-question":
+                return dispatch(resetPopUpOn({...resetPopUp, confirmed: true}))
+            default:
+                return
+        }
+    }
     return(
     <>
         {/* <SlimNavbar type={"activities-nav"} /> */}
@@ -118,7 +138,7 @@ const Activity = () =>{
                 windowWidth = {windowWidth}
                 customFooterLinkClass = {"activities-sidebar-link"}
         />
-        
+
         <div className = {`${sidebarToggle && windowWidth?"secondary-sidebar-open ": ""}activity-body d-flex flex-column align-items-center justify-content-center`}>
             {moreInfoBtn ? 
                 <ActivityInstructions 
@@ -128,7 +148,13 @@ const Activity = () =>{
                     moreInfoOnClick ={moreInfoOnClick}
                 />
             : null}
-            {/* col-lg-7 col-xl-6*/}
+
+            {resetPopUp ? 
+                <ActivityResetPopUp
+                    onClick = {resetBtnOnClick} 
+                    onKeyDown = {resetBtnOnClick}
+                />
+            :null }
             <div className = "activity-type-container col-12 col-md-10 d-flex flex-column">
                 {/*generate entire form data*/}
                 {question.type ?
@@ -151,6 +177,7 @@ const Activity = () =>{
                                     moreInfoBtn = {moreInfoBtn}
                                     style ={{...defaultTransition}}
                                     mediumWindowWidth = {windowWidth}
+                                    resetBtnOnClick = {resetBtnOnClick}
                                 />
                             </CSSTransition> 
                         )
@@ -160,7 +187,6 @@ const Activity = () =>{
             {/*loads appropriate btns depending if 
                     1. There are prev questions
                     2. This is the last question 
-                    col-lg-7 col-xl-6
             */}
             <div className="col-11 col-md-10 nav-activity-btns">
                 <ActivityBtns 

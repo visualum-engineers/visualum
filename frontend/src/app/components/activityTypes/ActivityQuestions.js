@@ -3,7 +3,15 @@ import ShortAnswerApp from "./ShortAnswer/ShortAnswerApp"
 import SortActivityApp from "./SortActivity/SortActivityApp"
 import MatchActivityApp from "./MatchActivity/MatchActivityApp"
 
-const ActivityQuestions = ({activityData, questionNum, moreInfoOnClick, moreInfoBtn, style, activityKey, mediumWindowWidth}) =>{
+const ActivityQuestions = ({
+    activityData, 
+    questionNum, 
+    moreInfoOnClick, 
+    moreInfoBtn, style, 
+    activityKey, 
+    mediumWindowWidth,
+    resetBtnOnClick, 
+}) =>{
     return(
         <div style={style} className="flex-grow-1 question-transition-container d-flex flex-column">
             {activityData[activityKey].type === "sort" ? <SortActivityApp 
@@ -13,6 +21,7 @@ const ActivityQuestions = ({activityData, questionNum, moreInfoOnClick, moreInfo
                                                     mediumWindowWidth = {mediumWindowWidth}
                                                     moreInfoOnClick={moreInfoOnClick} 
                                                     moreInfoBtn={moreInfoBtn}
+                                                    resetBtnOnClick = {resetBtnOnClick}
                                                 />
             : activityData[activityKey].type === "matching" ? <MatchActivityApp 
                                                             activityData = {activityData[activityKey]} 
@@ -21,18 +30,21 @@ const ActivityQuestions = ({activityData, questionNum, moreInfoOnClick, moreInfo
                                                             moreInfoOnClick={moreInfoOnClick} 
                                                             moreInfoBtn={moreInfoBtn}
                                                             mediumWindowWidth = {mediumWindowWidth}
+                                                            resetBtnOnClick = {resetBtnOnClick}
                                                         />
             : activityData[activityKey].type === "shortAnswer" ? <ShortAnswerApp 
                                                             activityData = {activityData[activityKey]} 
                                                             questionNum = {questionNum} 
                                                             activityID = {activityData.activityID}
                                                             mediumWindowWidth = {mediumWindowWidth}
+                                                            resetBtnOnClick = {resetBtnOnClick}
                                                         />
             : activityData[activityKey].type === "multipleChoice"? <MultipleChoiceApp 
                                                             activityData = {activityData[activityKey]} 
                                                             questionNum = {questionNum} 
                                                             activityID = {activityData.activityID}
                                                             mediumWindowWidth = {mediumWindowWidth}
+                                                            resetBtnOnClick = {resetBtnOnClick}
                                                         />
             :<p>Hi</p>}
         </div>

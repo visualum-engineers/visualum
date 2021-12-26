@@ -1,5 +1,8 @@
 import SortableArea from "../DragAndDrop/DnDKit/SortableDnD/SortableArea"
 import MoreInfoBtn from "../../moreInfoBtn/MoreInfoBtn"
+import ResetBtn from "../../resetBtn/ResetBtn"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faUndoAlt} from '@fortawesome/free-solid-svg-icons';
 const SortActivityCategories = ({
         numCategories,
         data, 
@@ -10,12 +13,24 @@ const SortActivityCategories = ({
         moreInfoBtn = null,
         moreInfoOnClick=null,
         disableDnD=null,
+        resetBtnOnClick, 
+        questionNum,
     }) =>{
     return (
         <div className={`sort-activity-categories ${mediumWindowWidth ? "full-size": "w-100"}`}>
             <div className={`sort-activity-category-container`}>
                 <div className="sort-activity-column-titles">
-                    <div className="sort-activity-instructions-position">
+                    Question
+                    <div className="sort-activity-instructions-position d-flex">
+                        <ResetBtn 
+                            customClassName = {"sort-activity-reset-btn"}
+                            customIcon = {<FontAwesomeIcon icon={faUndoAlt} />}
+                            textContent = {"Reset"}
+                            onClick = {resetBtnOnClick}
+                            onKeyDown = {resetBtnOnClick}
+                            customAriaLabel = {"reset-question"}
+                            questionNum = {questionNum}
+                        />
                         <MoreInfoBtn 
                             textContent = "View Instructions"
                             customContainerClass = "match-activity-instructions"
@@ -25,7 +40,6 @@ const SortActivityCategories = ({
                             onClick = {moreInfoOnClick}
                         />
                     </div>
-                    Question
                 </div>
                 <div className="d-flex justify-content-center flex-wrap h-100 sort-activity-category-droppables">
                     {numCategories.map((columnTitle, columnIndex)=> {

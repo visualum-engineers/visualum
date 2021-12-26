@@ -86,7 +86,7 @@
         align-items: center;
     }
 }
-.activity-walkthrough-dark-bg{
+.activity-popup-dark-bg{
     position: absolute;
     top: 0;
     left: 0;
@@ -94,7 +94,7 @@
     height: calc(max(100%, 100vh));
     z-index: 2;
 }
-.activity-walkthrough-bg-exit-btn{
+.activity-popup-bg-exit-btn{
     position: absolute;
     background-color: rgba(0, 0, 0, 0.541);
     width:100%;
@@ -137,6 +137,21 @@
         transform: scale(1.1)
     }
 }
+.activity-reset-popup{
+    @extend .activity-walkthrough-instructions;
+    height: min-content;
+    padding: 2rem;
+    h2{
+        text-align: center;
+        font-size: 1rem;
+    }
+    .reset-popup-btn-container{
+        button{
+            margin: 1.5rem;
+        }
+    }
+}
+
 .activity-type-container{
     position: relative;
     margin-top: 1vh;

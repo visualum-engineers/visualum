@@ -3,7 +3,7 @@ import {DndContext, DragOverlay, getBoundingClientRect} from '@dnd-kit/core';
 import { closestCorners, rectIntersection} from '../DragAndDrop/DnDKit/customCollisionAlgo/algoIndex';
 import addToTop from '../DragAndDrop/DnDKit/positionFunctions/addToTop';
 import {useDispatch, useSelector} from 'react-redux';
-import {enableTap, enableDnD} from '../../../../redux/features/activityTypes/activitiesSlice'
+import {enableTap, enableDnD, resetPopUpOff} from '../../../../redux/features/activityTypes/activitiesSlice'
 import useWindowWidth from '../../../hooks/use-window-width';
 import WordBank from './SortActivityWordBank';
 import DrapAndDropToggler from '../DragAndDrop/DrapAndDropToggler'
@@ -69,7 +69,15 @@ const transformData = (data, itemBankColumns) =>{
     return newData
 }
 
-const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick, moreInfoBtn, mediumWindowWidth}) => {
+const SortActivityApp = ({
+    activityData, 
+    questionNum, 
+    activityID, 
+    moreInfoOnClick, 
+    resetBtnOnClick,
+    moreInfoBtn, 
+    mediumWindowWidth
+}) => {
     //for updating redux store(data to be sent to backend)
     const dispatch = useDispatch()
     const smallWindowWidth = useWindowWidth(576)
@@ -77,9 +85,11 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
     const [data, setData] = useState(transformData(activityData, wordBankColumns.length))
     const [activeId, setActiveId] = useState(undefined)
     const [isOver, setIsOver] = useState(undefined)
-    const disableDnD = useSelector((state) => !state.activities.dndEnabled) 
     const dragOverlayItem = useRef()
-
+    //redux states
+    const disableDnD = useSelector((state) => !state.activities.dndEnabled) 
+    const resetPopUp = useSelector((state) => state.activities.resetPopUp) 
+    
     //used for tap and drop to track selected elements
     const [firstTapEl, setFirstTapEl] = useState(null)
     const removedEl = useRef(null)
@@ -88,6 +98,17 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
         const stored_response = localStorage.getItem(`${activityID}-sort_activity_client_answer-${questionNum}`)        
         if(stored_response) setData(JSON.parse(stored_response))
     }, [questionNum, activityID])
+
+    useEffect(() =>{
+        if(resetPopUp && resetPopUp.confirmed){
+            //reset all state values to default
+            setData(transformData(activityData, wordBankColumns.length))
+            setFirstTapEl(null)
+            dispatch(resetPopUpOff())
+            //remove any saved data from local storage
+            localStorage.removeItem(`${activityID}-sort_activity_client_answer-${questionNum}`)        
+        }
+    }, [dispatch, resetPopUp, activityData, wordBankColumns.length, activityID, questionNum])
 
     //handle width resizing
     useEffect(() => {
@@ -159,7 +180,7 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
         setData(newState)
         localStorage.setItem(`${activityID}-sort_activity_client_answer-${questionNum}`, JSON.stringify(newState))
     }
-    
+
     const onDragStart = (e) =>{
         //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
         document.querySelector("html").classList.add("sortActivityActive")
@@ -347,6 +368,8 @@ const SortActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick
                     moreInfoOnClick = {moreInfoOnClick}
                     disableDnD = {disableDnD}
                     firstTapEl = {firstTapEl}
+                    resetBtnOnClick = {resetBtnOnClick}
+                    questionNum = {questionNum}
                 />
                 {/* Renders word/response bank */}
                 {!mediumWindowWidth && <WordBank 
