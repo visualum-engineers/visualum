@@ -8,7 +8,7 @@ const ActivityResetPopUp = (props) => {
             onKeyDown={props.onClick}
         > 
             <div className="activity-reset-popup d-flex justify-content-center align-items-center flex-column col-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
-                <h2 className="resetQuestion"> This will reset your answers to the current question. Do you want to reset?</h2>
+                <h2 className="resetQuestion"> This will reset your answers to the current question. Do you still want to reset?</h2>
                 <div className="reset-popup-btn-container">
                     <button 
                         className="btn btn-success"

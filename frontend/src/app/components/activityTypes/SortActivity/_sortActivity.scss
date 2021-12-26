@@ -39,8 +39,22 @@ html.sortActivityActive{
 }
 .sort-activity-instructions-position{
     position: absolute;
-    top: 0;
-    right: 0.5rem;
+    top: 0.6rem;
+    right: 1rem;
+}
+.sort-activity-reset-btn{
+    
+    margin-right: 1vw;
+    padding: 0.3rem 0.5rem;
+    font-size: 1rem;
+    background-color: rgb(255, 208, 0) !important;
+    @include transition(transform 0.2s ease-out);
+    &:hover{
+        transform: scale(1.1);
+    }
+    span{
+        margin-left: 0.2rem;
+    }
 }
 .sort-activity-container{
     position: relative;
@@ -50,9 +64,7 @@ html.sortActivityActive{
     min-height: $sort-activity-container-min-height;
     @include border-radius(0.5rem);
 }
-.sort-activity-container.full-size{
-    //min-height: 26rem;
-}
+
 .sort-activity-container::before{
     position: absolute;
     content: "";
@@ -90,7 +102,7 @@ html.sortActivityActive{
     min-height:calc(#{$sort-activity-container-min-height} - 2rem);
     height: calc(#{$sort-activity-container-height} - 2rem);
     .sort-activity-itemBank-column-1{
-        min-height: calc(75vh - 6rem);
+        min-height: calc(#{$sort-activity-container-height} - 6rem)
     }
 }
 .sort-activity-categories{
@@ -119,9 +131,6 @@ html.sortActivityActive{
 
 .sort-activity-column-titles{
     position: sticky;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     top:0;
     left: 0;
     font-size: 1.4rem;
@@ -243,12 +252,6 @@ html.sortActivityActive{
 
 .sort-activity-is-dragging{
     opacity: 0.5;
-    // color: $main-font-color ;
-    // background-color: $light-gray;
-    // border: 1px solid $black;
-    // div{
-    //     transform: scale(1.1);
-    // }
 }
 
 .sort-activity-dragging-over{
@@ -258,65 +261,3 @@ html.sortActivityActive{
     cursor: pointer;
     background-color: $darkest-gray;
 }
-// .sort-activity-instructions{
-//     margin: 3%;
-//     color: white;
-//     font-size: 1.7rem;
-//     padding: 0;
-// }
-// .sort-activity-sort-droppables.small-screen, .sort-activity-itemBank-droppables.small-screen{
-//     width: 90%;
-// }
-
-// .sort-activity-sort-droppables{
-//     @include border-radius(10px);
-//     height: 100%;
-//     border: 1px solid black;
-//     font-size: 1.2rem;
-//     margin: 1.2%;
-//     list-style-type: none;
-//     width: 30%;
-//     .sort-activity-inner-droppable {
-//         @include border-radius(0px 0px 10px 10px);
-//         height: 150px;
-//         border-top: 1px black solid;
-//         overflow-y: auto;
-//     }
-//     p{
-//         color: black;
-//         @include no-space;
-//     }
-// }
-// .sort-activity-inner-droppable{
-//     @include no-space;
-//     list-style-type: none;
-// }
-
-// .sort-activity-itemBank-droppables{
-//     @extend .sort-activity-sort-droppables;
-//     border: none;
-//     margin-bottom: 5%;
-//     .sort-activity-inner-droppable {
-//         @include border-radius(10px);
-//         height: 100%;
-//         min-height: 150px;
-//         overflow-y: hidden;
-//         border: 1px rgba(0,0,0,0) solid;
-//     }
-// }
-
-
-// .sort-activity-is-dragging{
-//     background-color: white;
-//     color: black;
-// }
-// .sort-activity-answers-draggables:hover{
-//     @extend .sort-activity-is-dragging;
-// }
-// .sort-activity-answers-draggables:active{
-//     @extend .sort-activity-is-dragging;
-// }
-
-// .sort-activity-inner-droppable.sort-activity-dragging-over{
-//     background-color: $main-color;
-// }

@@ -3,12 +3,14 @@ import SortActivityInstructions from "./SortActivity/SortActivityInstructions"
 import MatchActivityInstructions from "./MatchActivity/MatchActivityInstructions"
 import MultipleChoiceInstructions from "./MultipleChoice/MultipleChoiceInstructions"
 import ActivityPopUp from "./ActivityPopUp"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faTimes } from "@fortawesome/free-solid-svg-icons"
 const ActivityInstructions = ({
     activityType, 
     activityInstructions, 
     dndEnabled, 
     moreInfoOnClick,
-}) =>{
+}) => {
     return (
         <ActivityPopUp
             btnClassName="activity-popup-bg-exit-btn" 
@@ -23,7 +25,7 @@ const ActivityInstructions = ({
                         aria-label="exit-more-info" 
                         className="d-flex align-items-center justify-content-center"
                     >
-                        <i className="fas fa-times"></i>
+                        <FontAwesomeIcon icon={faTimes}/>
                     </button>
                 </header>
                 {activityType === "sort" ? <SortActivityInstructions 

@@ -15,15 +15,16 @@ const SortActivityCategories = ({
         disableDnD=null,
         resetBtnOnClick, 
         questionNum,
+        smallWindowWidth
     }) =>{
     return (
         <div className={`sort-activity-categories ${mediumWindowWidth ? "full-size": "w-100"}`}>
             <div className={`sort-activity-category-container`}>
-                <div className="sort-activity-column-titles">
-                    Question
+                <div className={`sort-activity-column-titles d-flex align-items-center justify-content-${smallWindowWidth? "center" : "start"}`}>
+                    <span className={`${!smallWindowWidth? "ms-4":""}`}>Question</span>
                     <div className="sort-activity-instructions-position d-flex">
                         <ResetBtn 
-                            customClassName = {"sort-activity-reset-btn"}
+                            customClassName = {"sort-activity-reset-btn btn d-flex align-items-center"}
                             customIcon = {<FontAwesomeIcon icon={faUndoAlt} />}
                             textContent = {"Reset"}
                             onClick = {resetBtnOnClick}
