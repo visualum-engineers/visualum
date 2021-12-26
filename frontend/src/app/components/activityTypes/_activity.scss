@@ -154,9 +154,9 @@
 
 .activity-type-container{
     position: relative;
-    margin-top: 1vh;
+    margin-top: 2vh;
     text-align: center;
-    min-height: calc(max(calc(93vh - 2rem), calc(600px - 7vh - 2rem) ));
+    min-height: calc(max(calc(95vh - 2rem), calc(600px - 7vh - 2rem) ));
     z-index: 1;
     max-width: 1100px;
     overflow: hidden;
@@ -223,8 +223,8 @@
     color: $main-font-color;
     background-color: $purple;
     padding: 0.4rem 1.2rem;
-    margin-top: 1vh;
-    margin-bottom: 3vh;
+    //margin-top: 1vh;
+    margin-bottom: 2vh;
     border: 1px $secondary-font-color solid;
     font-size: 1rem;
     @include transition(all 0.3s ease-out);
@@ -245,6 +245,7 @@
     background-color: $white;
     min-width: 10rem;
     width: 30%;
+    height: 95%;
     @include border-radius(8px);
     @include box-shadow(rgba(0,0,0,0.1) 0px 0 10px);
     padding: 1rem;

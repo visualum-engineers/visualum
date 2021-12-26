@@ -22,7 +22,7 @@
     padding: 0.4rem;
     flex-grow: 1;
 }
-$activity-container-height: calc(92vh - 2rem);
+$activity-container-height: calc(94vh - 2rem);
 $activity-container-min-height: calc(600px - 7vh - 2rem);
 $sort-activity-container-height: calc(#{$activity-container-height} - 3.6rem - 23px);
 $sort-activity-container-min-height: calc(#{$activity-container-min-height} - 3.6rem - 23px);
