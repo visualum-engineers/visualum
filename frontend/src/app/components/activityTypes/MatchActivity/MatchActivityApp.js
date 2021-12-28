@@ -1,12 +1,11 @@
 import {useState, useEffect} from 'react'
-import Timer from '../../timer/Timer';
 import {DragDropContext} from 'react-beautiful-dnd';
 import useWindowWidth from '../../../hooks/use-window-width'
 import {useDispatch, useSelector} from 'react-redux';
-import {enableTap, enableDnD} from '../../../../redux/features/activityTypes/activitiesSlice'
+import {enableTap, enableDnD, resetPopUpOff} from '../../../../redux/features/activityTypes/activitiesSlice'
 import WordBank from '../DragAndDrop/ReactBeautifulDnD/WordBank';
 import AnswerBank from './MatchActivityAnswerBank';
-import DrapAndDropToggler from '../DragAndDrop/DrapAndDropToggler'
+import ActivityHeader from '../ActivityHeader';
 /*
 To-dos
 Backend: 
@@ -69,15 +68,25 @@ const transformData = (data, itemBankColumns) =>{
         return newData
 }
 
-const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClick=null, moreInfoBtn, mediumWindowWidth}) => {
+const MatchActivityApp = ({
+    activityData, 
+    questionNum, 
+    activityID, 
+    moreInfoOnClick,
+    resetBtnOnClick, 
+    moreInfoBtn, 
+    mediumWindowWidth
+}) => {
     const smallWindowWidth = useWindowWidth(576)
     const columns = mediumWindowWidth ? Array(1).fill(0) : Array(2).fill(0)
     const [data, setData] = useState(transformData(activityData, 2))
-    const disableDnD = useSelector((state) => !state.activities.dndEnabled) 
     const dispatch = useDispatch()
     const [firstTapEl, setFirstTapEl] = useState(null)
-    //const removedEl = useRef(null)
     const [removedEl, setRemovedEl] = useState(undefined)
+    //redux states
+    const disableDnD = useSelector((state) => !state.activities.dndEnabled) 
+    const resetPopUp = useSelector((state) => state.activities.resetPopUp) 
+
     //if it exists, grab info from local storage on mount.
     useEffect(() => {
         //on mount check local storage for data
@@ -85,11 +94,24 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
         if(!stored) return
         setData(JSON.parse(stored))
     }, [activityID, questionNum])
+
+    useEffect(() =>{
+        if(resetPopUp && resetPopUp.confirmed){
+            //reset all state values to default
+            setData(transformData(activityData, columns.length))
+            setFirstTapEl(null)
+            dispatch(resetPopUpOff())
+            //remove any saved data from local storage
+            localStorage.removeItem(`${activityID}-match_activity_client_answer-${questionNum}`)        
+        }
+    }, [dispatch, resetPopUp, activityData, columns.length, activityID, questionNum])
+
     //handle width resizing
     useEffect(() => {
         setData((data) => transformData(data, columns.length))
     }, [mediumWindowWidth, columns.length])
     
+
     //when dragging starts
     const onDragStart = (result) =>{
         //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
@@ -260,28 +282,22 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
             //if we're changing the mode, we need to reset this
             // as its only viable for tap mode
             if(firstTapEl) firstTapEl.node.classList.remove("match-activity-dragging")
-            removedEl.current = null
+            setRemovedEl(undefined)
             setFirstTapEl(null)
         }
     }
   
     return(
         <>
-        <div className={`d-flex match-activity-header justify-content-${smallWindowWidth?"center": "start"}`}>
-            {data.timer &&
-                    <div className={`activity-timer d-flex justify-content-center align-items-center`}>
-                        <span>TIME:</span>
-                        <Timer
-                            timer={data.timer}
-                            autoStart={false}
-                        />
-                    </div>
-            }
-            <DrapAndDropToggler 
-                disableDnD = {disableDnD}
-                toggleTap = {toggleTap}
-            />
-        </div>
+        <ActivityHeader 
+            smallWindowWidth = {smallWindowWidth}
+            data ={data}
+            resetBtnOnClick ={resetBtnOnClick} 
+            questionNum={questionNum}
+            disableDnD ={disableDnD}
+            toggleTap = {toggleTap}
+            type="DnD"
+        />
         <div className={`match-activity-container${mediumWindowWidth ? " full-size":""}`}>
         <DragDropContext 
             onDragEnd = {!disableDnD ? onDragEnd: null} 

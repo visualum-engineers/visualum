@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react'
+import {useState, useEffect} from 'react'
+import ActivityHeader from '../ActivityHeader'
 /*
     Frontend:
     1. Missing re-rendering logic, when user answers question and moves on to the next one.
@@ -29,6 +30,9 @@ const ShortAnswerApp = ({activityData, questionNum, activityID}) => {
     
     return(
         <>
+            <ActivityHeader
+                 
+            />
             <p className = "SAQuestion">{state.question}</p>  
             {/*renders text area that students can respond in*/}
             <div className="SAInputContainer form-floating w-100">

@@ -1,8 +1,6 @@
 import SortableArea from "../DragAndDrop/DnDKit/SortableDnD/SortableArea"
 import MoreInfoBtn from "../../moreInfoBtn/MoreInfoBtn"
-import ResetBtn from "../../resetBtn/ResetBtn"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faUndoAlt} from '@fortawesome/free-solid-svg-icons';
+
 const SortActivityCategories = ({
         numCategories,
         data, 
@@ -13,8 +11,6 @@ const SortActivityCategories = ({
         moreInfoBtn = null,
         moreInfoOnClick=null,
         disableDnD=null,
-        resetBtnOnClick, 
-        questionNum,
         smallWindowWidth
     }) =>{
     return (
@@ -23,15 +19,6 @@ const SortActivityCategories = ({
                 <div className={`sort-activity-column-titles d-flex align-items-center justify-content-${smallWindowWidth? "center" : "start"}`}>
                     <span className={`${!smallWindowWidth? "ms-4":""}`}>Question</span>
                     <div className="sort-activity-instructions-position d-flex">
-                        <ResetBtn 
-                            customClassName = {"sort-activity-reset-btn btn d-flex align-items-center"}
-                            customIcon = {<FontAwesomeIcon icon={faUndoAlt} />}
-                            textContent = {"Reset"}
-                            onClick = {resetBtnOnClick}
-                            onKeyDown = {resetBtnOnClick}
-                            customAriaLabel = {"reset-question"}
-                            questionNum = {questionNum}
-                        />
                         <MoreInfoBtn 
                             textContent = "View Instructions"
                             customContainerClass = "match-activity-instructions"

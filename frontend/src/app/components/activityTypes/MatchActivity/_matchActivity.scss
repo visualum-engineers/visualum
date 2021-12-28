@@ -34,12 +34,7 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
     @include border-radius(0.5rem);
 }
 
-.match-activity-header{
-    position: relative;
-    margin-top: 0.2rem;
-    margin-bottom: 1vh;
-    height: 3.4rem;
-}
+
 .match-activity-instructions-position{
     position: absolute;
     top: 0.3rem;
@@ -74,8 +69,7 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
     }
 
 }
-//reset btn position
-//goes here
+
 
 .match-activity-container::before{
     position: absolute;
@@ -157,11 +151,8 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
         margin: 0;
         padding-left: 0.5rem;
         min-height: 100%;
-        //height: calc(100% - 3.5rem) !important;
     }
-    // .match-activity-inner-droppable{
-    //     min-height: calc(#{$sort-activity-container-min-height} - 2rem) !important;
-    // }
+
 }
 
 .match-activity-columns{

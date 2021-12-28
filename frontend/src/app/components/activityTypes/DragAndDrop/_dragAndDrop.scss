@@ -1,12 +1,16 @@
 .enable-tap-mode{
-    position: absolute;
+    position: relative;
+    top: 0;
     right:0;
     font-size: 0.8rem;
-    width: 8rem;
-    .form-switch,.form-check-input{
+    width: 6rem;
+    .form-check-input{
         cursor: pointer;
         margin-left: 0;
         width: 3rem;
         height: 1.5rem;
     }
+}
+.enable-tap-mode.form-switch{
+    padding: 0;
 }

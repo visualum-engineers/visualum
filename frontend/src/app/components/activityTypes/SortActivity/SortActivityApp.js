@@ -6,8 +6,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {enableTap, enableDnD, resetPopUpOff} from '../../../../redux/features/activityTypes/activitiesSlice'
 import useWindowWidth from '../../../hooks/use-window-width';
 import WordBank from './SortActivityWordBank';
-import DrapAndDropToggler from '../DragAndDrop/DrapAndDropToggler'
-import Timer from '../../timer/Timer';
+import ActivityHeader from '../ActivityHeader';
 import SortActivityCategories from './SortActivityCategories';
 import Item from '../DragAndDrop/DnDKit/DragOverlayItem';
 import debounce from 'lodash.debounce';
@@ -318,21 +317,15 @@ const SortActivityApp = ({
     }
     return (
     <>  
-        <div className={`sort-activity-header d-flex justify-content-${smallWindowWidth?"center": "start"}`}>
-            {data.timer &&
-                <div className={`activity-timer d-flex justify-content-center align-items-center`}>
-                    <span>TIME:</span>
-                    <Timer
-                        timer={data.timer}
-                        autoStart={false}
-                    />
-                </div>
-            }
-            <DrapAndDropToggler
-                disableDnD = {disableDnD}
-                toggleTap = {toggleTap} 
-            />
-        </div>
+        <ActivityHeader 
+            smallWindowWidth = {smallWindowWidth}
+            data ={data}
+            resetBtnOnClick ={resetBtnOnClick} 
+            questionNum={questionNum}
+            disableDnD ={disableDnD}
+            toggleTap = {toggleTap}
+            type="DnD"
+        />
         <div className={`sort-activity-container d-flex ${mediumWindowWidth ? "full-size":"flex-column align-items-center"}`}>
             <DndContext 
                 onDragStart={onDragStart}
@@ -369,8 +362,6 @@ const SortActivityApp = ({
                     moreInfoOnClick = {moreInfoOnClick}
                     disableDnD = {disableDnD}
                     firstTapEl = {firstTapEl}
-                    resetBtnOnClick = {resetBtnOnClick}
-                    questionNum = {questionNum}
                 />
                 {/* Renders word/response bank */}
                 {!mediumWindowWidth && <WordBank 

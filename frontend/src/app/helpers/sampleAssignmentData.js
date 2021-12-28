@@ -2,7 +2,7 @@ const assignmentData = {
     activityID: "unique",
     activityName: "7C Week2 HW Assignment",
     //matching
-    3: {
+    2: {
         type: "matching",
         timer: {hours: 1, minutes: 1, seconds: 1},
         keyPairs: [
@@ -27,7 +27,7 @@ const assignmentData = {
         ],
     },
     //multiple choice
-    2:{
+    3:{
         type: "multipleChoice",
         timer: false,
         question: "What faces this world?",
