@@ -1,14 +1,13 @@
 import { useState, useEffect, useRef, useMemo} from 'react'
 import {DndContext, DragOverlay, getBoundingClientRect} from '@dnd-kit/core';
-import { closestCorners, rectIntersection} from '../DragAndDrop/DnDKit/customCollisionAlgo/algoIndex';
-import addToTop from '../DragAndDrop/DnDKit/positionFunctions/addToTop';
+import { closestCorners, rectIntersection} from '../../dragAndDrop/DnDKit/customCollisionAlgo/algoIndex';
+import addToTop from '../../dragAndDrop/DnDKit/positionFunctions/addToTop';
 import {useDispatch, useSelector} from 'react-redux';
 import {enableTap, enableDnD, resetPopUpOff} from '../../../../redux/features/activityTypes/activitiesSlice'
-import useWindowWidth from '../../../hooks/use-window-width';
 import WordBank from './SortActivityWordBank';
 import ActivityHeader from '../ActivityHeader';
 import SortActivityCategories from './SortActivityCategories';
-import Item from '../DragAndDrop/DnDKit/DragOverlayItem';
+import Item from '../../dragAndDrop/DnDKit/DragOverlayItem';
 import debounce from 'lodash.debounce';
 
 /*Note Missing To-do
@@ -75,17 +74,17 @@ const SortActivityApp = ({
     moreInfoOnClick, 
     resetBtnOnClick,
     moreInfoBtn, 
-    mediumWindowWidth
+    mediumWindowWidth,
+    smallWindowWidth,
 }) => {
     //for updating redux store(data to be sent to backend)
-    const dispatch = useDispatch()
-    const smallWindowWidth = useWindowWidth(576)
     const wordBankColumns = mediumWindowWidth ? Array(1).fill(0) : Array(2).fill(0) 
     const [data, setData] = useState(transformData(activityData, wordBankColumns.length))
     const [activeId, setActiveId] = useState(undefined)
     const [isOver, setIsOver] = useState(undefined)
     const dragOverlayItem = useRef()
     //redux states
+    const dispatch = useDispatch()
     const disableDnD = useSelector((state) => !state.activities.dndEnabled) 
     const resetPopUp = useSelector((state) => state.activities.resetPopUp) 
     

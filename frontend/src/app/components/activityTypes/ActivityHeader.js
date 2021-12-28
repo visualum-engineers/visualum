@@ -1,5 +1,5 @@
 import ResetBtn from "../resetBtn/ResetBtn"
-import DrapAndDropToggler from "./DragAndDrop/DrapAndDropToggler"
+import DrapAndDropToggler from "../dragAndDrop/DrapAndDropToggler"
 import Timer from '../timer/Timer';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUndoAlt } from "@fortawesome/free-solid-svg-icons";
@@ -14,6 +14,7 @@ const ActivityHeader = ({
     toggleTap = null,
     type = null,
 }) =>{
+    console.log(resetBtnOnClick)
     return(
         <div className={`d-flex activity-header justify-content-between align-items-center`}>
         {smallWindowWidth && <div className="col-4"></div>}

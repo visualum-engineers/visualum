@@ -114,6 +114,8 @@ const Activity = () =>{
 
     //used for confirmation popup of reseting data in activity 
     const resetBtnOnClick = (e) =>{
+        //when being used in forms, it prevents a refresh
+        e.preventDefault()
         //for keydown events, only accept enter
         if(e.type === "keydown" && e.key !== "Enter") return  
         
@@ -179,6 +181,7 @@ const Activity = () =>{
                                     moreInfoBtn = {moreInfoBtn}
                                     style ={{...defaultTransition}}
                                     mediumWindowWidth = {windowWidth}
+                                    smallWindowWidth = {smallWindowWidth}
                                     resetBtnOnClick = {resetBtnOnClick}
                                 />
                             </CSSTransition> 

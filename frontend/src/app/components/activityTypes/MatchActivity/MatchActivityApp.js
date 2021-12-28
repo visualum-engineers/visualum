@@ -1,9 +1,8 @@
 import {useState, useEffect} from 'react'
 import {DragDropContext} from 'react-beautiful-dnd';
-import useWindowWidth from '../../../hooks/use-window-width'
 import {useDispatch, useSelector} from 'react-redux';
 import {enableTap, enableDnD, resetPopUpOff} from '../../../../redux/features/activityTypes/activitiesSlice'
-import WordBank from '../DragAndDrop/ReactBeautifulDnD/WordBank';
+import WordBank from '../../dragAndDrop/ReactBeautifulDnD/WordBank';
 import AnswerBank from './MatchActivityAnswerBank';
 import ActivityHeader from '../ActivityHeader';
 /*
@@ -75,15 +74,15 @@ const MatchActivityApp = ({
     moreInfoOnClick,
     resetBtnOnClick, 
     moreInfoBtn, 
-    mediumWindowWidth
+    mediumWindowWidth,
+    smallWindowWidth
 }) => {
-    const smallWindowWidth = useWindowWidth(576)
     const columns = mediumWindowWidth ? Array(1).fill(0) : Array(2).fill(0)
     const [data, setData] = useState(transformData(activityData, 2))
-    const dispatch = useDispatch()
     const [firstTapEl, setFirstTapEl] = useState(null)
     const [removedEl, setRemovedEl] = useState(undefined)
     //redux states
+    const dispatch = useDispatch()
     const disableDnD = useSelector((state) => !state.activities.dndEnabled) 
     const resetPopUp = useSelector((state) => state.activities.resetPopUp) 
 

@@ -1,5 +1,6 @@
 import MoreInfoBtn from '../../moreInfoBtn/MoreInfoBtn';
-import DroppableArea from "../DragAndDrop/ReactBeautifulDnD/DroppableArea"
+import DroppableArea from "../../dragAndDrop/ReactBeautifulDnD/DroppableArea";
+
 const AnswerBank = ({
     data, 
     firstTapEl, 

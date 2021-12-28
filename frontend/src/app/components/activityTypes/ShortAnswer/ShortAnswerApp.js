@@ -1,4 +1,6 @@
 import {useState, useEffect} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { resetPopUpOff } from '../../../../redux/features/activityTypes/activitiesSlice'
 import ActivityHeader from '../ActivityHeader'
 /*
     Frontend:
@@ -7,13 +9,37 @@ import ActivityHeader from '../ActivityHeader'
     2. Missing progress saved on local storage/memory (if user exits out of page)
 */
 
-const ShortAnswerApp = ({activityData, questionNum, activityID}) => {
+const ShortAnswerApp = ({
+    smallWindowWidth, 
+    resetBtnOnClick, 
+    moreInfoOnClick,
+    activityData, 
+    questionNum, 
+    activityID,
+}) => {
     //for updating redux store(data to be sent to backend)
-    const [state, setState] = useState(activityData)
+    const [data, setData] = useState(activityData)
+
+    //redux states
+    const dispatch = useDispatch()
+    const resetPopUp = useSelector((state) => state.activities.resetPopUp) 
+    //reset answer
+    useEffect(() =>{
+        if(resetPopUp && resetPopUp.confirmed){
+            //reset all state values to default
+            setData(state => ({
+                ...state, 
+                clientAnswer: "",
+            }))
+            dispatch(resetPopUpOff())
+            //remove any saved data from local storage
+            localStorage.removeItem(`${activityID}-SA_activity_client_answer-${questionNum}`)        
+        }
+    }, [dispatch, resetPopUp, activityData, activityID, questionNum])
     //grab data from local storage
     useEffect(() => {
         const stored_response = localStorage.getItem(`${activityID}-SA_activity_client_answer-${questionNum}`)
-        if(stored_response) setState(state => ({
+        if(stored_response) setData(state => ({
             ...state, 
             clientAnswer: stored_response
         }))
@@ -21,7 +47,7 @@ const ShortAnswerApp = ({activityData, questionNum, activityID}) => {
 
     const handleInput = (e) =>{
         const input_value = e.target.closest("textarea").value
-        setState(state => ({
+        setData(state => ({
             ...state,
             clientAnswer: input_value 
         }))
@@ -31,21 +57,27 @@ const ShortAnswerApp = ({activityData, questionNum, activityID}) => {
     return(
         <>
             <ActivityHeader
-                 
+                smallWindowWidth = {smallWindowWidth} 
+                data = {data}
+                resetBtnOnClick = {resetBtnOnClick} 
+                questionNum = {questionNum}
             />
-            <p className = "SAQuestion">{state.question}</p>  
+            <p className = "SAQuestion">{data.question}</p>  
             {/*renders text area that students can respond in*/}
-            <div className="SAInputContainer form-floating w-100">
-                <textarea 
-                    className="form-control" 
-                    placeholder="Type your answer here" 
-                    id="SAtextArea"
-                    onChange={handleInput}
-                    value = {state.clientAnswer}
-                >
-                </textarea>
-                <label htmlFor="SAtextArea">Type your answer here</label>
+            <div className = "d-flex justify-content-center">
+                <div className="SAInputContainer form-floating w-75">
+                    <textarea 
+                        className="form-control" 
+                        placeholder="Type your answer here" 
+                        id="SAtextArea"
+                        onChange={handleInput}
+                        value = {data.clientAnswer}
+                    >
+                    </textarea>
+                    <label htmlFor="SAtextArea">Type your answer here</label>
+                </div>
             </div>
+            
         </>
     )
 } 
