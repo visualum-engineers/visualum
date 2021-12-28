@@ -11,7 +11,7 @@ const AnswerBank = ({
     removedEl
 }) => {
     return (
-        <div className={`match-activity-columns d-flex justify-content-center${mediumWindowWidth? " three-columns": " w-100"}`}>
+        <div className={`match-activity-columns d-flex justify-content-center${mediumWindowWidth? " full-size": " w-100"}`}>
             <div className="match-activity-keys-column w-50 d-flex flex-column align-items-center">
                 <h2 className="match-activity-column-titles">Key</h2>
                 {Object.keys(data.keyPairs).map((content,index)=>{

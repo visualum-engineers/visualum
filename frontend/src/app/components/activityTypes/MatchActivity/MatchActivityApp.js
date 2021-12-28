@@ -282,7 +282,7 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
                 toggleTap = {toggleTap}
             />
         </div>
-        <div className={`match-activity-container${mediumWindowWidth ? " three-columns":""}`}>
+        <div className={`match-activity-container${mediumWindowWidth ? " full-size":""}`}>
         <DragDropContext 
             onDragEnd = {!disableDnD ? onDragEnd: null} 
             onDragUpdate={!disableDnD ? onDragUpdate: null} 
@@ -304,8 +304,8 @@ const MatchActivityApp = ({activityData, questionNum, activityID, moreInfoOnClic
                                        firstTapEl= {firstTapEl}
                                        disableDnD = {disableDnD}
                                        onTap = {disableDnD? onTap: null}
-                                       overallContainerClass = {"match-activity-itemBank d-flex align-items-center flex-column three-columns"}
-                                       columnContainerClass = {"match-activity-itemBank-column-container w-100 flex-grow-1"}
+                                       overallContainerClass = {"match-activity-itemBank d-flex align-items-center flex-column full-size"}
+                                       columnContainerClass = {"match-activity-itemBank-column-container w-100 flex-grow-1 d-flex flex-column"}
                                        columnTitleClass = {"match-activity-column-titles answer-choices"}
                                        columnClass = {"match-activity-itemBank-column"}
                                        droppableClassName = {`match-activity-itemBank-droppables d-flex flex-column w-100`}

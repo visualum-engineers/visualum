@@ -114,6 +114,9 @@ const Activity = () =>{
 
     //used for confirmation popup of reseting data in activity 
     const resetBtnOnClick = (e) =>{
+        //for keydown events, only accept enter
+        if(e.type === "keydown" && e.key !== "Enter") return  
+        
         const node = e.target.closest("button")
         const questionNum = node.dataset.questionNum
         const action = node.dataset.actionLabel
@@ -130,7 +133,6 @@ const Activity = () =>{
     }
     return(
     <>
-        {/* <SlimNavbar type={"activities-nav"} /> */}
         <SecondarySideBar 
                 data={secondarySideBarData}
                 sidebarToggle = {sidebarToggle}

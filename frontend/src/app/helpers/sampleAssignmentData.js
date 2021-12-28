@@ -12,8 +12,8 @@ const assignmentData = {
             {categoryID: 4, name: "Emilio"},
             {categoryID: 5, name: "lol"},
             {categoryID: 6, name: "hi"},
-            // {categoryID: 7, name: "no"},
-            // {categoryID: 8, name: "bye"},
+            {categoryID: 7, name: "no"},
+            {categoryID: 8, name: "bye"},
         ],
         answerChoices : [
             {id:"1", content:"NY"}, 
@@ -22,8 +22,8 @@ const assignmentData = {
             {id:"4", content:"Nebraska"},
             {id:"5", content:"NY"}, 
             {id:"6", content:"Who Knows"},
-            // {id:"7", content:"Long Island"},
-            // {id:"8", content:"Nebraska"},
+            {id:"7", content:"Long Island"},
+            {id:"8", content:"Nebraska"},
         ],
     },
     //multiple choice

@@ -41,9 +41,8 @@ html.sortActivityActive{
     position: absolute;
     top: 0.6rem;
     right: 1rem;
-}
+} 
 .sort-activity-reset-btn{
-    
     margin-right: 1vw;
     padding: 0.3rem 0.5rem;
     font-size: 1rem;
@@ -82,7 +81,7 @@ html.sortActivityActive{
     margin-top: 1.5rem;
     overflow-y: scroll;
     overflow-x: hidden;
-    min-height: calc(max(20rem, 30vh));
+    //min-height: calc(max(20rem, 30vh));
     min-width: 300px;
     &::-webkit-scrollbar{
         width: 0.5rem;

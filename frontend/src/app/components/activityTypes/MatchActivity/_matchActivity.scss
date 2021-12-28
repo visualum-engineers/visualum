@@ -12,36 +12,34 @@
     border: 1px solid rgba(0, 0,0,0);
     padding: 0.5rem;
 }
+@mixin match-activity-inner-droppable {
+    position: relative;
+    list-style-type: none;
+    padding: 0 0.25rem;
+    margin-bottom: 0;
+    background-color: $white;
+    @include border-radius(7px);
+}
+$activity-container-height: calc(94vh - 2rem);
+$activity-container-min-height: calc(600px - 7vh - 2rem);
+$match-activity-container-height: calc(#{$activity-container-height} - 3.6rem - 23px);
+$match-activity-container-min-height: calc(#{$activity-container-min-height} - 3.6rem - 23px);
+
+.match-activity-container{
+    position: relative;
+    padding: 1rem;
+    background-color: $white;
+    height: $match-activity-container-height;
+    min-height: $match-activity-container-min-height;
+    @include border-radius(0.5rem);
+}
+
 .match-activity-header{
     position: relative;
     margin-top: 0.2rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1vh;
     height: 3.4rem;
-    
 }
-
-.match-activity-container{
-    padding: 1rem;
-    background-color: $white;
-    height: 75vh;
-    @include border-radius(0.5rem);
-    min-height: 49.5rem;
-}
-.match-activity-container.three-columns{
-    min-height: 26rem;
-}
-
-.match-activity-container::before{
-    position: absolute;
-    content: "";
-    top: 50%;
-    left: 5%;
-    width: 90%;
-    height: calc(50% - 1.1rem - 10px);
-    @include box-shadow(rgba(0, 0, 0, 0.425) 0px 2px 23px 2px);
-    z-index: -1;
-}
-
 .match-activity-instructions-position{
     position: absolute;
     top: 0.3rem;
@@ -76,104 +74,22 @@
     }
 
 }
-.match-activity-columns{
-    max-height: calc(max(26rem, 40vh));
-    overflow-y: auto;
-    // overflow: overlay;
-    overflow-x: hidden;
-    min-width: 310px;
-    
-    @include border-radius(7px);
-    &::-webkit-scrollbar{
-        width: 0.5rem;
-        @include border-radius(7px);
-        background-color: $light-gray;
-    }
-    &::-webkit-scrollbar-thumb{
-        @include border-radius(7px);
-        background-color: $dark-blue;
-    }
-}
-.match-activity-itemBank{
-    margin-top: 1.5rem;
-    //background-color: $white;
-    background-color: $light-blue;
-    @include border-radius(7px);
-    min-width: 310px;
-    max-height: calc(max(20rem, 30vh));
-    min-height: calc(max(20rem, 30vh));
-    //@include box-shadow(rgba(0,0,0,0.1) 0px 0 10px);
-    overflow-y: auto;
-    // overflow: overlay;
-    overflow-x: hidden;
-    &::-webkit-scrollbar{
-        width: 0.5rem;
-        @include border-radius(7px);
-        background-color: $light-gray;
-    }
-    &::-webkit-scrollbar-thumb{
-        @include border-radius(7px);
-        background-color: $dark-blue;
-    }
+//reset btn position
+//goes here
+
+.match-activity-container::before{
+    position: absolute;
+    content: "";
+    top: 50%;
+    left: 5%;
+    width: 90%;
+    height: calc(50%);
+    @include box-shadow(rgba(0, 0, 0, 0.425) 0px -2px 23px 2px);
+    z-index: -1;
 }
 
-.match-activity-keys-column, 
-.match-activity-itemBank-column-1,
-.match-activity-answers-column, 
-.match-activity-itemBank-column-2{
-    @include border-radius(7px);
-    //@include box-shadow(rgba(0,0,0,0.1) 0px 0 10px);
-    min-width: 150px;
-    height: min-content;
-}
-.match-activity-keys-column,
-.match-activity-itemBank-column-1{
-    margin-right: 0.5rem;
-}
-.match-activity-answers-column, 
-.match-activity-itemBank-column-2{
-    position: relative;
-    margin-right: 0;
-}
-.match-activity-answers-column,
-.match-activity-keys-column{
-    //background-color: $white;
-    background-color: $light-blue;
-}
-.match-activity-answers-column{
-    .match-activity-inner-droppable{
-        padding-top: 0.25rem;
-        overflow: hidden;
-    }
-}
-.match-activity-itemBank-column-1,
-.match-activity-itemBank-column-2{
-    background-color: rgba(0, 0,0,0);
-    @include box-shadow(none);
-    min-height: 100%;
-    .match-activity-itemBank-droppables{
-        border: 1px solid rgba(0,0,0,0);
-        height: min-content;
-        min-height: 100%;
-        flex-grow: 1;
-    }
-    .match-activity-inner-droppable{
-        flex-grow: 1;
-        list-style-type: none;
-        padding: 0 0.25rem;
-        //padding-bottom: 0;
-        //padding-top: 0.8rem;
-        min-height: 8rem;
-        background: none;
-    }
-    .match-activity-draggables{
-        margin-top: 0;
-    }
-}
 .match-activity-column-titles{
     font-size: 1.2rem;
-    // margin-top: 0.8rem;
-    // margin-bottom: 1.5rem;
     font-weight: 500;
     margin: 0;
     position: sticky;
@@ -188,14 +104,142 @@
     background-color: $light-blue;
     color: $dark-blue;
 }
-// .match-activity-column-titles.answer-choices{
-//     //margin-top: 1.5rem;
-//     //margin-bottom: 0rem;
-// }
-// .match-activity-column-titles.vertical{
-//     // margin-top: 0.8rem;
-//     // margin-bottom: 0rem;
-// }
+
+.match-activity-itemBank{
+    position: relative;
+    margin-top: 1.5rem;
+    background-color: $light-blue;
+    @include border-radius(7px);
+    min-width: 300px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    &::-webkit-scrollbar{
+        width: 0.5rem;
+        @include border-radius(7px);
+        //background-color: $light-gray;
+    }
+    &::-webkit-scrollbar-thumb{
+        @include border-radius(7px);
+        background-color: $dark-blue;
+    }
+
+}
+
+.match-activity-itemBank-column-1,
+.match-activity-itemBank-column-2{
+    background-color: rgba(0, 0,0,0);
+    @include box-shadow(none);
+    .match-activity-itemBank-droppables{
+        border: 1px solid rgba(0,0,0,0);
+        flex-grow: 1;
+        height: min-content;
+    }
+    .match-activity-inner-droppable{
+        list-style-type: none;
+        padding-top: 0.25rem;
+        background: none;
+        flex-grow: 1;
+        min-height: 100%;
+    }
+    .match-activity-draggables{
+        margin-top: 0;
+    }
+}
+
+.match-activity-itemBank.full-size{
+    width: calc(100% / 3);
+    min-width: 0;
+    margin-top: 0;
+    margin-left: 1.5rem;
+    min-height:calc(#{$sort-activity-container-min-height} - 2rem);
+    height: calc(#{$sort-activity-container-height} - 2rem);
+    .match-activity-itemBank-column-1{
+        margin: 0;
+        padding-left: 0.5rem;
+        min-height: 100%;
+        //height: calc(100% - 3.5rem) !important;
+    }
+    // .match-activity-inner-droppable{
+    //     min-height: calc(#{$sort-activity-container-min-height} - 2rem) !important;
+    // }
+}
+
+.match-activity-columns{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    min-width: 310px;
+    @include border-radius(7px);
+
+    .match-activity-inner-droppable::after{
+        position: absolute;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        content: "Drag answer here";
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        color: $dark-gray;
+        font-size: 0.85rem;
+    }
+    .match-activity-answers-column{
+        padding-right: 0.25rem;
+        padding-left: 0.75rem;
+    }
+    &::-webkit-scrollbar{
+        background-color: $light-blue;
+        width: 0.5rem;
+        @include border-radius(7px);
+    }
+    &::-webkit-scrollbar-thumb{
+        @include border-radius(7px);
+        background-color: $dark-blue;
+    }
+    
+}
+
+.match-activity-columns.full-size{
+    width: calc(2 * 100% / 3);
+    min-width: 0;
+    min-height:calc(#{$sort-activity-container-min-height} - 2rem);
+    height: calc(#{$sort-activity-container-height} - 2rem);
+    .match-activity-answers-column,
+    .match-activity-keys-column{
+        background-color: $light-blue;
+        min-height: 100%;
+    }
+}
+
+.match-activity-keys-column, 
+.match-activity-itemBank-column-1,
+.match-activity-answers-column, 
+.match-activity-itemBank-column-2{
+    @include border-radius(7px);
+    min-width: 150px;
+    height: min-content;
+}
+.match-activity-keys-column,
+.match-activity-itemBank-column-1{
+    margin-right: 0.5rem;
+}
+.match-activity-answers-column, 
+.match-activity-itemBank-column-2{
+    position: relative;
+    margin-right: 0;
+}
+.match-activity-answers-column,
+.match-activity-keys-column{
+    background-color: $light-blue;
+}
+.match-activity-answers-column{
+    .match-activity-inner-droppable{
+        padding-top: 0.25rem;
+        overflow: hidden;
+    }
+}
 
 .match-activity-keys{
     list-style-type: none;
@@ -219,36 +263,6 @@
         border: 1px solid rgba(0, 0,0,0) !important;
     }
 }
-.match-activity-keys.last-item{
-    margin: 0;
-}
-
-.match-activity-itemBank.three-columns{
-    width: calc(100% / 3);
-    min-width: 0;
-    margin-top: 0;
-    margin-left: 2rem;
-    min-height: 24rem;
-    max-height: calc(75vh - 2rem);
-    height: calc(75vh - 2rem);
-    .match-activity-itemBank-column-1{
-        margin: 0;
-        min-height: calc(75vh - 6rem);
-    }
-}
-.match-activity-columns.three-columns{
-    width: calc(2 * 100% / 3);
-    min-width: 0;
-    min-height: 24rem;
-    max-height: calc(75vh - 2rem);
-    height:  calc(75vh - 2rem);
-    .match-activity-answers-column,
-    .match-activity-keys-column{
-        //background-color: $white;
-        background-color: $light-blue;
-        min-height: 100%;
-    }
-}
 
 .match-activity-answers-droppables{
     list-style-type: none;
@@ -257,17 +271,8 @@
     height: 4.5rem;
 }
 
-.match-activity-answers-droppables.last-item{
-    margin-bottom: 0;
-}
 .match-activity-inner-droppable{
-    position: relative;
-    list-style-type: none;
-    padding: 0 0.25rem;
-    margin-bottom: 0;
-    //background-color: $lightest-gray;
-    background-color: $white;
-    @include border-radius(7px);
+    @include match-activity-inner-droppable()
 }
 .match-activity-itemBank-droppables{
     list-style-type: none;
@@ -275,38 +280,14 @@
     min-width: 145px;
     height: 5rem;
     margin-bottom: 0;
-    .match-activity-inner-droppable{
-        margin: 0;
-    }
-}
-.match-activity-columns{
-    .match-activity-inner-droppable::after{
-        position: absolute;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        content: "Drag answer here";
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 0;
-        color: $dark-gray;
-        font-size: 0.85rem;
-
-    }
-    
 }
 
 .match-activity-draggables{
     @include match-activity-keypair-styles();
     margin-bottom: 1rem;
-    //background-color: $light-blue;
     background-color: $white;
     cursor: pointer;
     @include box-shadow(rgba(0, 0, 0, 0.082) 0px 5px 11px 0.1px);
-    //box-shadow: 0 4px 1px rgb(33 33 33 / 10%);
     z-index: 2;
     &::-webkit-scrollbar{
         width: 0.5rem;
@@ -336,14 +317,6 @@
         transform: scale(1.1);
     }
 }
-
-.match-activity-inner-droppable.match-activity-draggable-over{
-    background-color: $darkest-gray;
-}
-.match-activity-tap-active:hover{
-    cursor: pointer;
-    background-color: $darkest-gray;
-}
 .match-activity-draggables.hide-draggable{
     position: absolute !important;
     opacity: 0;
@@ -352,3 +325,11 @@
     width: 0 !important;
     height: 0 !important;
 }
+.match-activity-inner-droppable.match-activity-draggable-over{
+    background-color: $darkest-gray;
+}
+.match-activity-tap-active:hover{
+    cursor: pointer;
+    background-color: $darkest-gray;
+}
+

@@ -319,7 +319,7 @@ const SortActivityApp = ({
     return (
     <>  
         <div className={`sort-activity-header d-flex justify-content-${smallWindowWidth?"center": "start"}`}>
-            {!data.timer &&
+            {data.timer &&
                 <div className={`activity-timer d-flex justify-content-center align-items-center`}>
                     <span>TIME:</span>
                     <Timer
