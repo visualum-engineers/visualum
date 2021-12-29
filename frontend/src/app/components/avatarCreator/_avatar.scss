@@ -17,12 +17,12 @@
 }
 
 .attr-selector-button {
-	width: 1.5rem;
-	height: 1.5rem;
+	width: 2rem;
+	height: 2rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border-radius: 50%;
+	border-radius: 100%;
 	transition: background-color 125ms ease-in-out;
 	&:hover {
 		background-color: rgb(222, 222, 222);
