@@ -1,4 +1,3 @@
-@import "../dragAndDrop/dragAndDrop";
 @import "./SortActivity/sortActivity";
 @import "./MatchActivity/matchActivity";
 @import "./MultipleChoice/multipleChoice";
@@ -140,7 +139,7 @@
 
 .activity-type-container{
     position: relative;
-    margin-top: 2vh;
+    margin-top: 1.5vh;
     text-align: center;
     min-height: calc(max(calc(95vh - 2rem), calc(600px - 7vh - 2rem) ));
     z-index: 1;
