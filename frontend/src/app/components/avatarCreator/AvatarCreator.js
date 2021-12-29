@@ -32,9 +32,9 @@ export default function AvatarCreator() {
 	const [options, setOptions] = useState(
 		{
 			topType: Math.floor(Math.random() * hairstyleLength),
-			accessoriesType: Math.floor(Math.random() * accessoryLength),
+			accessoriesType: 0,
 			hairColor: Math.floor(Math.random() * hairColorLength),
-			facialHairType: Math.floor(Math.random() * facialHairLength),
+			facialHairType: 0,
 			clotheType: Math.floor(Math.random() * clothesLength),
 			clotheColor: Math.floor(Math.random() * clotheColorLength),
 			eyeType: Math.floor(Math.random() * eyesLength),
@@ -109,13 +109,13 @@ export default function AvatarCreator() {
 			/>
 			<ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
 				<li class="nav-item" role="presentation">
-					<button class="nav-link active" id="hair-tab" data-bs-toggle="tab" data-bs-target="#hair" type="button" role="tab" aria-controls="home" aria-selected="true">Hair</button>
+					<button class="nav-link active unselectable" id="hair-tab" data-bs-toggle="tab" data-bs-target="#hair" type="button" role="tab" aria-controls="home" aria-selected="true">Hair</button>
 				</li>
 				<li class="nav-item" role="presentation">
-					<button class="nav-link" id="face-tab" data-bs-toggle="tab" data-bs-target="#face" type="button" role="tab" aria-controls="profile" aria-selected="false">Face</button>
+					<button class="nav-link unselectable" id="face-tab" data-bs-toggle="tab" data-bs-target="#face" type="button" role="tab" aria-controls="profile" aria-selected="false">Face</button>
 				</li>
 				<li class="nav-item" role="presentation">
-					<button class="nav-link" id="clothes-tab" data-bs-toggle="tab" data-bs-target="#clothes" type="button" role="tab" aria-controls="contact" aria-selected="false">Clothes</button>
+					<button class="nav-link unselectable" id="clothes-tab" data-bs-toggle="tab" data-bs-target="#clothes" type="button" role="tab" aria-controls="contact" aria-selected="false">Clothes</button>
 				</li>
 			</ul>
 			<div class="tab-content" id="myTabContent">
