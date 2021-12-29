@@ -1,7 +1,7 @@
 import React from 'react';
 import { Suspense } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import LoadingIcon from './components/loadingIcon/LoadingIcon';
+import LoadingIcon from './components/utilityComponents/loadingIcon/LoadingIcon';
 
 import NavWrapper from './components/primaryNavbar/NavWrapper';
 import DashboardHome from './components/dashboard/DashboardHome';
