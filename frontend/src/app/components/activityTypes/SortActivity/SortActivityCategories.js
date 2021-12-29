@@ -1,5 +1,5 @@
-import SortableArea from "../../dragAndDrop/DnDKit/SortableDnD/SortableArea"
-import MoreInfoBtn from "../../moreInfoBtn/MoreInfoBtn"
+import SortableArea from "../../utilityComponents/dragAndDrop/DnDKit/SortableDnD/SortableArea"
+import MoreInfoBtn from "../../utilityComponents/moreInfoBtn/MoreInfoBtn"
 
 const SortActivityCategories = ({
         numCategories,

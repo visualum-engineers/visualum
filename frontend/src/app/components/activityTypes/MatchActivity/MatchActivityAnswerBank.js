@@ -1,5 +1,5 @@
-import MoreInfoBtn from '../../moreInfoBtn/MoreInfoBtn';
-import DroppableArea from "../../dragAndDrop/ReactBeautifulDnD/DroppableArea";
+import MoreInfoBtn from '../../utilityComponents/moreInfoBtn/MoreInfoBtn';
+import DroppableArea from "../../utilityComponents/dragAndDrop/ReactBeautifulDnD/DroppableArea";
 
 const AnswerBank = ({
     data, 

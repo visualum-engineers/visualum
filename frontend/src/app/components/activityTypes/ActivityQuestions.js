@@ -12,7 +12,9 @@ const ActivityQuestions = ({
     activityKey, 
     mediumWindowWidth,
     smallWindowWidth,
-    resetBtnOnClick, 
+    resetBtnOnClick,
+    popUpBgStyles 
+    //sidebarToggle
 }) =>{
     return(
         <div style={style} className="flex-grow-1 question-transition-container d-flex flex-column">
@@ -44,6 +46,8 @@ const ActivityQuestions = ({
                                                             activityID = {activityData.activityID}
                                                             resetBtnOnClick = {resetBtnOnClick}
                                                             moreInfoOnClick = {moreInfoOnClick}
+                                                            popUpBgStyles={popUpBgStyles}
+                                                            //sidebarToggle ={sidebarToggle}
                                                         />
             : activityData[activityKey].type === "multipleChoice"? <MultipleChoiceApp 
                                                             smallWindowWidth = {smallWindowWidth}
@@ -53,6 +57,8 @@ const ActivityQuestions = ({
                                                             activityID = {activityData.activityID}
                                                             mediumWindowWidth = {mediumWindowWidth}
                                                             resetBtnOnClick = {resetBtnOnClick}
+                                                            popUpBgStyles={popUpBgStyles}
+                                                            //sidebarToggle = {sidebarToggle}
                                                         />
             :<p>Hi</p>}
         </div>

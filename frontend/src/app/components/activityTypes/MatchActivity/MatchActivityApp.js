@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react'
 import {DragDropContext} from 'react-beautiful-dnd';
 import {useDispatch, useSelector} from 'react-redux';
 import {enableTap, enableDnD, resetPopUpOff} from '../../../../redux/features/activityTypes/activitiesSlice'
-import WordBank from '../../dragAndDrop/ReactBeautifulDnD/WordBank';
+import WordBank from '../../utilityComponents/dragAndDrop/ReactBeautifulDnD/WordBank';
 import AnswerBank from './MatchActivityAnswerBank';
 import ActivityHeader from '../ActivityHeader';
 /*

@@ -86,21 +86,7 @@
         align-items: center;
     }
 }
-.activity-popup-dark-bg{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width:100%;
-    height: calc(max(100%, 100vh));
-    z-index: 2;
-}
-.activity-popup-bg-exit-btn{
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.541);
-    width:100%;
-    height: calc(max(100%, 100vh));
-    z-index: 0;
-}
+
 .activity-walkthrough-instructions{
     background-color: white;
     z-index: 2;
@@ -159,8 +145,8 @@
     min-height: calc(max(calc(95vh - 2rem), calc(600px - 7vh - 2rem) ));
     z-index: 1;
     max-width: 1100px;
-    overflow: hidden;
-    min-width: 310px;   
+    min-width: 310px; 
+    //overflow: hidden;  
 }
 
 .question-transition-container{

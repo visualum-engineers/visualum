@@ -1,8 +1,11 @@
 import {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { resetPopUpOff } from '../../../../redux/features/activityTypes/activitiesSlice'
+import { resetPopUpOff } from '../../../../redux/features/activityTypes/activitiesSlice';
+import Zoomable from '../../utilityComponents/imageContainer/Zoomable';
+import ImageContainer from '../../utilityComponents/imageContainer/ImageContainer';
 import ActivityHeader from '../ActivityHeader'
-import MultipleChoiceItem from './MultipleChoiceItem'
+//import PopUp from '../../popUp/PopUpBackground';
+import MultipleChoiceColumn from './MultipleChoiceColumn';
 
 /*
     Frontend:
@@ -10,22 +13,21 @@ import MultipleChoiceItem from './MultipleChoiceItem'
         - Included here is also rendering animation
     2. Missing progress saved on local storage/memory (if user exits out of page)
 */
-
 const MultipleChoiceApp = ({
     activityData, 
     questionNum, 
     activityID, 
     smallWindowWidth,
     mediumWindowWidth,
+    popUpBgStyles,
     moreInfoOnClick, 
     resetBtnOnClick
-}) => {    
+}) => {
     //for updating redux store(data to be sent to backend)
     const [data, setData] = useState(activityData)
     //redux states
     const dispatch = useDispatch()
     const resetPopUp = useSelector((state) => state.activities.resetPopUp)
-    console.log(resetPopUp)
     //reset answer
     useEffect(() =>{
         if(resetPopUp && resetPopUp.confirmed){
@@ -71,6 +73,7 @@ const MultipleChoiceApp = ({
         })) 
         localStorage.setItem(`${activityID}-mc_activity_client_answer-${questionNum}`, id.toString())
     }
+    
     return(
         <>
         <form className = "mc-activity-input-container d-flex align-items-center justify-content-center flex-grow-1">
@@ -86,67 +89,44 @@ const MultipleChoiceApp = ({
                     {!mediumWindowWidth? 
                             <div className="mc-activity-question">{data.question}</div>
                     : null}
-                    {data.imageURL && !mediumWindowWidth? 
-                        <div className="mc-activity-image-container portrait-mode w-100">
-                            <img 
-                                className = "mc-activity-image"
+                    {data.imageURL &&  !mediumWindowWidth &&
+                        <Zoomable>
+                            <ImageContainer 
+                                defaultContainerClass = {`portrait-mode mc-activity-image-container`}
+                                defaultImageClass = {"mc-activity-image"}
+                                zoomContainerClass = {"mc-activity-image-container zoomed-in"}
+                                zoomImageClass = {"mc-activity-image zoomed-in"}
+                                popUpBgStyles = {popUpBgStyles}
                                 src={data.imageURL}
-                                alt={data.imageDescription? data.imgDescription : null}
-                            /> 
-                        </div> 
-                    : null}
+                                alt={data.imageDescription}
+                            />
+                        </Zoomable>
+                    }
                     <div>   
                         {mediumWindowWidth? 
                             <div className="mc-activity-question">{data.question}</div>
                         : null}
-                        <div className={`w-100 mc-activity-answer-container${!mediumWindowWidth ?" portrait-mode":""}`}>
-                            {/*renders different answer choices*/}
-                            {!mediumWindowWidth ? 
-                                Array(rows).fill(0).map((content, rowIndex) => {
-                                    const startSlice = rowIndex*columns
-                                    const endSlice = (rowIndex+1)*columns
-                                    return (
-                                        <div className="d-flex w-100" key={rowIndex}>
-                                            {data.answerChoices.slice(startSlice, endSlice).map((choice, index)=>{
-                                                if(!choice) return <div key="index" className="mc-activity-mc-item w-100 grid-layout empty-mc-item"></div>
-                                                return(
-                                                    <MultipleChoiceItem
-                                                        key={choice}
-                                                        index={rowIndex*columns+index} 
-                                                        data ={data} 
-                                                        choice={choice} 
-                                                        updateAnswerChoice={updateAnswerChoice} 
-                                                        customContainerClass = "mc-activity-mc-item grid-layout w-100" 
-                                                    />
-                                                )
-                                            })}
-                                        </div>
-                                )})
-                            : data.answerChoices.map((choice, index)=>{
-                                    if(!choice) return null
-                                    return(
-                                            <MultipleChoiceItem
-                                                key = {choice}
-                                                index={index} 
-                                                data ={data} 
-                                                choice={choice} 
-                                                updateAnswerChoice={updateAnswerChoice} 
-                                                customContainerClass = "w-100 mc-activity-mc-item" 
-                                            />
-                                    )
-                                })
-                            }
-                        </div>
+                        <MultipleChoiceColumn
+                                mediumWindowWidth = {mediumWindowWidth}
+                                data = {data}
+                                columns = {columns}
+                                rows = {rows}
+                                updateAnswerChoice = {updateAnswerChoice}
+                        />
                     </div>
-                    {data.imageURL &&  mediumWindowWidth? 
-                        <div className="mc-activity-image-container landscape-mode">
-                            <img 
-                                className = "mc-activity-image"
+                    {data.imageURL &&  mediumWindowWidth &&
+                        <Zoomable>
+                            <ImageContainer 
+                                defaultContainerClass = {`landscape-mode mc-activity-image-container`}
+                                defaultImageClass = {"mc-activity-image"}
+                                zoomContainerClass = {"mc-activity-image-container zoomed-in"}
+                                zoomImageClass = {"mc-activity-image zoomed-in"}
+                                popUpBgStyles = {popUpBgStyles}
                                 src={data.imageURL}
-                                alt={data.imageDescription? data.imgDescription : null}
-                            /> 
-                        </div> 
-                    : null} 
+                                alt={data.imageDescription}
+                            />
+                        </Zoomable>
+                    }
                 </div>
             </div>   
         </form>

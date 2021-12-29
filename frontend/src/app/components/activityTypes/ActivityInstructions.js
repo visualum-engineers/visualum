@@ -2,7 +2,7 @@ import ShortAnswerInstructions from "./ShortAnswer/ShortAnswerInstructions"
 import SortActivityInstructions from "./SortActivity/SortActivityInstructions"
 import MatchActivityInstructions from "./MatchActivity/MatchActivityInstructions"
 import MultipleChoiceInstructions from "./MultipleChoice/MultipleChoiceInstructions"
-import ActivityPopUp from "./ActivityPopUp"
+import PopUp from "../utilityComponents/popUp/PopUpBackground"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTimes } from "@fortawesome/free-solid-svg-icons"
 const ActivityInstructions = ({
@@ -10,12 +10,14 @@ const ActivityInstructions = ({
     activityInstructions, 
     dndEnabled, 
     moreInfoOnClick,
+    popUpBgStyles,
 }) => {
     return (
-        <ActivityPopUp
+        <PopUp
             btnClassName="activity-popup-bg-exit-btn" 
             aria-label="exit-more-info"
             onClick={moreInfoOnClick}
+            containerStyles = {popUpBgStyles}
         >
             <div className="activity-walkthrough-instructions col-11 col-md-9 col-lg-7 col-xl-6 col-xxl-5">
                 <header className="activity-walkthrough-instructions-header d-flex justify-content-between align-items-center"> 
@@ -41,7 +43,7 @@ const ActivityInstructions = ({
                                                         activityInstructions={activityInstructions}/>
                 : null}
             </div>
-        </ActivityPopUp>
+        </PopUp>
     )
 }
 export default ActivityInstructions

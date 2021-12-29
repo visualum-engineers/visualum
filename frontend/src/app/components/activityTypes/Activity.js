@@ -15,6 +15,7 @@ import ActivityResetPopUp from './ActivityResetPopUp'
 
 const activityData = assignmentData
 const duration = 500
+const inPropDuration = duration * 2
 const defaultTransition = {
     transition: `all ${duration}ms ease-out`,
     transitionProperty: "opacity, transform, left",
@@ -53,14 +54,19 @@ const Activity = () =>{
     const [questionNum, setQuestionNum] = useState(1)
     const [question, setQuestion] = useState(activityData[currQuestion])
     const [sidebarToggle, setSidebarToggle] = useState(true)
+    const [inProp, setInProp] = useState(true);
     //dont forget to change to have instruction appear on load
     const [moreInfoBtn, setMoreInfoBtn] = useState(false)
-    const windowWidth = useWindowWidth(992)
+    const mediumWindowWidth = useWindowWidth(992)
     const smallWindowWidth = useWindowWidth(576)
     const dndEnabled = useSelector((state) => state.activities.dndEnabled)
     const resetPopUp = useSelector((state) => state.activities.resetPopUp)
     const dispatch = useDispatch()
     useEffect(() => {
+        //hide overflow on mount
+        setTimeout(() =>{
+            setInProp(false)
+        }, inPropDuration)
         //on mount check local storage for data
         let stored = localStorage.getItem(`${activityData.activityID}-activity_last_seen_question`)
         if(!stored) return
@@ -69,10 +75,12 @@ const Activity = () =>{
     //when window width changes <992, sidebar automatically closes
     //it can still be opened though
     useEffect(()=>{ 
-        if(!windowWidth) setSidebarToggle(false)
+        if(!mediumWindowWidth) setSidebarToggle(false)
         else setSidebarToggle(true)
-    },[windowWidth])
+    },[mediumWindowWidth])
     const onNavBtnClick = (e) =>{
+        //means it was just clicked. 
+        if (inProp) return 
         const btnType = e.target.closest("button").getAttribute("btntype")
         //different btn actions
         if(btnType === "prev") {
@@ -88,8 +96,11 @@ const Activity = () =>{
             ...activityData[currQuestion]
         })
         setPrevQuestion(questionNum)
-
         setQuestionNum(currQuestion)
+        setInProp(true)
+        setTimeout(() =>{
+            setInProp(false)
+        }, inPropDuration)
         localStorage.setItem(`${activityData.activityID}-activity_last_seen_question`, currQuestion.toString())
 
     }
@@ -133,33 +144,49 @@ const Activity = () =>{
                 return
         }
     }
+    const popUpBgStyles = {
+        position: "fixed",
+        top: "0",
+        height: "calc(max(100%, 100vh))",
+        zIndex: "2",
+        //left and width are conditional 
+        //to adjust for a toggled sidebar
+        left: sidebarToggle && mediumWindowWidth ? "13rem":"0" ,
+        width: sidebarToggle && mediumWindowWidth ? "calc(100% - 13rem)":"100%",
+        transition: "all 0.3s ease-out",
+    }
     return(
     <>
         <SecondarySideBar 
                 data={secondarySideBarData}
                 sidebarToggle = {sidebarToggle}
                 handleSideBar = {handleSideBar}
-                windowWidth = {windowWidth}
+                windowWidth = {mediumWindowWidth}
                 customFooterLinkClass = {"activities-sidebar-link"}
         />
 
-        <div className = {`${sidebarToggle && windowWidth?"secondary-sidebar-open ": ""}activity-body d-flex flex-column align-items-center justify-content-center`}>
-            {moreInfoBtn ? 
+        <div 
+            className = {`${sidebarToggle && mediumWindowWidth ? "secondary-sidebar-open ": ""}activity-body d-flex flex-column align-items-center justify-content-center`}>
+            {moreInfoBtn && 
                 <ActivityInstructions 
                     activityType = {activityData[questionNum].type}
                     activityInstructions ={null}
                     dndEnabled = {dndEnabled}
                     moreInfoOnClick ={moreInfoOnClick}
+                    popUpBgStyles = {popUpBgStyles}
                 />
-            : null}
+            }
 
             {resetPopUp ? 
                 <ActivityResetPopUp
+                    popUpBgStyles = {popUpBgStyles}
                     onClick = {resetBtnOnClick} 
-                    onKeyDown = {resetBtnOnClick}
                 />
             :null }
-            <div className = "activity-type-container col-12 col-md-10 d-flex flex-column">
+            <div 
+                className = "activity-type-container col-12 col-md-10 d-flex flex-column" 
+                style={inProp ? {overflow: "hidden"}: null}
+            >
                 {/*generate entire form data*/}
                 {question.type ?
                     Object.keys(activityData).map((key)=>{
@@ -180,9 +207,11 @@ const Activity = () =>{
                                     moreInfoOnClick = {moreInfoOnClick}
                                     moreInfoBtn = {moreInfoBtn}
                                     style ={{...defaultTransition}}
-                                    mediumWindowWidth = {windowWidth}
+                                    mediumWindowWidth = {mediumWindowWidth}
                                     smallWindowWidth = {smallWindowWidth}
                                     resetBtnOnClick = {resetBtnOnClick}
+                                    //sidebarToggle = {sidebarToggle}
+                                    popUpBgStyles = {popUpBgStyles}
                                 />
                             </CSSTransition> 
                         )

@@ -23,19 +23,45 @@
     margin-bottom: 1.5rem;
 }
 .mc-activity-image-container{
+    //position: relative;
     padding: 1rem;
     @include box-shadow(rgba(0, 0, 0, 0.315) 0px 0 5px);
     @include border-radius(7px);
     background-color: $white;
+    @include  transition(all 0.3s ease-out);
 }
 
 .mc-activity-image-container.portrait-mode{
+    margin-bottom: 1rem;
     max-width: 100%;
     min-width: 290px;
-    margin-bottom: 1rem;
-    .mc-activity-image{
-        max-height: calc(max(calc(30vh - 2rem), 17rem));
+}
+.mc-activity-image-container.landscape-mode{
+    margin-left: 2rem;
+    max-width: 50%;
+}
+.mc-activity-image-container.zoomed-in{
+    max-width: 90%;
+    z-index: 3;
+}
+.mc-activity-image{
+    height: 100%;
+    width: 100%;
+    max-height: calc(max(40vh, 300px));
+    object-fit: contain;
+    object-position: center;
+    @include border-radius(7px);
+    @include  transition(all 0.3s ease-out);
+    &:hover{
+        cursor: zoom-in;
     }
+}
+.mc-activity-image.zoomed-in{
+    max-height: 85vh;
+    &:hover{
+        cursor: zoom-out;
+    }
+    //z-index: 10;
 }
 .mc-activity-answer-container{
     @include box-shadow(rgba(0, 0, 0, 0.315) 0px 0 2px);
@@ -63,19 +89,8 @@
     max-width: 100%;
     max-height: calc(max(40vh, 24rem));
 }
-.mc-activity-image-container.landscape-mode{
-    max-width: 50%;
-    min-width: 310px;
-    margin-left: 2rem;
-    max-height: calc(max(40vh, 26rem));
-}
-.mc-activity-image{
-    height: 100%;
-    width: 100%;
-    object-fit: contain;
-    object-position: center;
-    @include border-radius(7px)
-}
+
+
 .mc-activity-mc-item{
     width: 100%;
     margin-bottom: 0.5rem;
@@ -87,8 +102,8 @@
         cursor: pointer;
         height: 100%;
         padding: 0.8rem 1.5rem;
-        transition: all 0.3s;
         background-color: $light-blue;
+        @include  transition(all 0.3s ease-out);
         @include box-shadow(rgba(0, 0, 0, 0.151) 0px 0 3px);
     }
     .mc-answer-label:hover{

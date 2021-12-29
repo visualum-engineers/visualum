@@ -13,6 +13,7 @@ const ShortAnswerApp = ({
     smallWindowWidth, 
     resetBtnOnClick, 
     moreInfoOnClick,
+    popUpBgStyles,
     activityData, 
     questionNum, 
     activityID,

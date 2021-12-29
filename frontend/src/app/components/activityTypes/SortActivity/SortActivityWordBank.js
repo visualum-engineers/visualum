@@ -1,4 +1,4 @@
-import SortableArea from "../../dragAndDrop/DnDKit/SortableDnD/SortableArea"
+import SortableArea from "../../utilityComponents/dragAndDrop/DnDKit/SortableDnD/SortableArea"
 const WordBank = ({
     data, 
     firstTapEl, 

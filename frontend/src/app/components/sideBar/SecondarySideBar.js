@@ -1,4 +1,4 @@
-import NavItem from "../navItems/NavItems"
+import NavItem from "../utilityComponents/navItems/NavItems"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCircleQuestion} from '@fortawesome/free-regular-svg-icons';
 import {faCog} from '@fortawesome/free-solid-svg-icons';

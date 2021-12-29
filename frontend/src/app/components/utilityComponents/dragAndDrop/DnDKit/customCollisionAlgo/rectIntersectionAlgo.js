@@ -1,5 +1,5 @@
-  import getEdgeOffset from "../positionFunctions/getEdgeOffset";
-  //store all position values for each droppable
+import getEdgeOffset from "../positionFunctions/getEdgeOffset";  
+//store all position values for each droppable
   let currentDroppablePostion = {}
   
   //set up intersectionObserver
