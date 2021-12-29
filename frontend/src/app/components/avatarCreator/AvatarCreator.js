@@ -107,94 +107,117 @@ export default function AvatarCreator() {
 				mouthType={mouth[options.mouthType][0]}
 				skinColor={skinColor[options.skinColor][0]}
 			/>
-			<div className='row p-3'>
-				<div className='col-6'>
-					<h6 className="unselectable">Hair:</h6>
-					<AttributeSelector
-						title={hairstyle[options.topType][1]}
-						handleIncrement={() => changeValue("topType", "inc")}
-						handleDecrement={() => { changeValue("topType", "dec") }}
-					/>
+			<ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
+				<li class="nav-item" role="presentation">
+					<button class="nav-link active" id="hair-tab" data-bs-toggle="tab" data-bs-target="#hair" type="button" role="tab" aria-controls="home" aria-selected="true">Hair</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="face-tab" data-bs-toggle="tab" data-bs-target="#face" type="button" role="tab" aria-controls="profile" aria-selected="false">Face</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="clothes-tab" data-bs-toggle="tab" data-bs-target="#clothes" type="button" role="tab" aria-controls="contact" aria-selected="false">Clothes</button>
+				</li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active" id="hair" role="tabpanel" aria-labelledby="hair-tab">
+					<div className='row p-3'>
+						<div className='col-12'>
+							<h6 className="unselectable">Hair:</h6>
+							<AttributeSelector
+								title={hairstyle[options.topType][1]}
+								handleIncrement={() => changeValue("topType", "inc")}
+								handleDecrement={() => { changeValue("topType", "dec") }}
+							/>
+						</div>
+						<div className='col-12'>
+							<h6 className="unselectable">Hair Color:</h6>
+							<AttributeSelector
+								title={hairColor[options.hairColor][1]}
+								handleIncrement={() => changeValue("hairColor", "inc")}
+								handleDecrement={() => { changeValue("hairColor", "dec") }}
+							/>
+						</div>
+						<div className='col-12'>
+							<h6 className="unselectable">Facial Hair:</h6>
+							<AttributeSelector
+								title={facialHair[options.facialHairType][1]}
+								handleIncrement={() => changeValue("facialHairType", "inc")}
+								handleDecrement={() => { changeValue("facialHairType", "dec") }}
+							/>
+						</div>
+						<div className='col-12'>
+							<h6 className="unselectable">Facial Hair Color:</h6>
+							<AttributeSelector
+								title={facialHairColor[options.facialHairColor][1]}
+								handleIncrement={() => changeValue("facialHairColor", "inc")}
+								handleDecrement={() => { changeValue("facialHairColor", "dec") }}
+							/>
+						</div>
+					</div>
 				</div>
-				<div className='col-6'>
-					<h6 className="unselectable">Hair Color:</h6>
-					<AttributeSelector
-						title={hairColor[options.hairColor][1]}
-						handleIncrement={() => changeValue("hairColor", "inc")}
-						handleDecrement={() => { changeValue("hairColor", "dec") }}
-					/>
+				<div class="tab-pane fade" id="face" role="tabpanel" aria-labelledby="face-tab">
+					<div className='row p-3'>
+						<div className='col-12'>
+							<h6 className="unselectable">Skin Color:</h6>
+							<AttributeSelector
+								title={skinColor[options.skinColor][1]}
+								handleIncrement={() => changeValue("skinColor", "inc")}
+								handleDecrement={() => { changeValue("skinColor", "dec") }}
+							/>
+						</div>
+						<div className='col-12'>
+							<h6 className="unselectable">Eyes:</h6>
+							<AttributeSelector
+								title={eyes[options.eyeType][1]}
+								handleIncrement={() => changeValue("eyeType", "inc")}
+								handleDecrement={() => { changeValue("eyeType", "dec") }}
+							/>
+						</div>
+						<div className='col-12'>
+							<h6 className="unselectable">Eyebrows:</h6>
+							<AttributeSelector
+								title={eyebrow[options.eyebrowType][1]}
+								handleIncrement={() => changeValue("eyebrowType", "inc")}
+								handleDecrement={() => { changeValue("eyebrowType", "dec") }}
+							/>
+						</div>
+						<div className='col-12'>
+							<h6 className="unselectable">Mouth:</h6>
+							<AttributeSelector
+								title={mouth[options.mouthType][1]}
+								handleIncrement={() => changeValue("mouthType", "inc")}
+								handleDecrement={() => { changeValue("mouthType", "dec") }}
+							/>
+						</div>
+					</div>
 				</div>
-				<div className='col-6'>
-					<h6 className="unselectable">Accessory:</h6>
-					<AttributeSelector
-						title={accessory[options.accessoriesType][1]}
-						handleIncrement={() => changeValue("accessoriesType", "inc")}
-						handleDecrement={() => { changeValue("accessoriesType", "dec") }}
-					/>
-				</div>
-				<div className='col-6'>
-					<h6 className="unselectable">Eyes:</h6>
-					<AttributeSelector
-						title={eyes[options.eyeType][1]}
-						handleIncrement={() => changeValue("eyeType", "inc")}
-						handleDecrement={() => { changeValue("eyeType", "dec") }}
-					/>
-				</div>
-				<div className='col-6'>
-					<h6 className="unselectable">Eyebrows:</h6>
-					<AttributeSelector
-						title={eyebrow[options.eyebrowType][1]}
-						handleIncrement={() => changeValue("eyebrowType", "inc")}
-						handleDecrement={() => { changeValue("eyebrowType", "dec") }}
-					/>
-				</div>
-				<div className='col-6'>
-					<h6 className="unselectable">Mouth:</h6>
-					<AttributeSelector
-						title={mouth[options.mouthType][1]}
-						handleIncrement={() => changeValue("mouthType", "inc")}
-						handleDecrement={() => { changeValue("mouthType", "dec") }}
-					/>
-				</div>
-				<div className='col-6'>
-					<h6 className="unselectable">Skin Color:</h6>
-					<AttributeSelector
-						title={skinColor[options.skinColor][1]}
-						handleIncrement={() => changeValue("skinColor", "inc")}
-						handleDecrement={() => { changeValue("skinColor", "dec") }}
-					/>
-				</div>
-				<div className='col-6'>
-					<h6 className="unselectable">Clothes:</h6>
-					<AttributeSelector
-						title={clothes[options.clotheType][1]}
-						handleIncrement={() => changeValue("clotheType", "inc")}
-						handleDecrement={() => { changeValue("clotheType", "dec") }}
-					/>
-				</div>
-				<div className='col-6'>
-					<h6 className="unselectable">Clothes Color:</h6>
-					<AttributeSelector
-						title={clotheColor[options.clotheColor][1]}
-						handleIncrement={() => changeValue("clotheColor", "inc")}
-						handleDecrement={() => { changeValue("clotheColor", "dec") }}
-					/>
-				</div>
-				<div className='col-6'>
-					<h6 className="unselectable">Facial Hair:</h6>
-					<AttributeSelector
-						title={facialHair[options.facialHairType][1]}
-						handleIncrement={() => changeValue("facialHairType", "inc")}
-						handleDecrement={() => { changeValue("facialHairType", "dec") }}
-					/>
-				</div>
-				<div className='col-6'>
-					<h6 className="unselectable">Facial Hair Color:</h6>
-					<AttributeSelector
-						title={facialHairColor[options.facialHairColor][1]}
-						handleIncrement={() => changeValue("facialHairColor", "inc")}
-						handleDecrement={() => { changeValue("facialHairColor", "dec") }}
-					/>
+				<div class="tab-pane fade" id="clothes" role="tabpanel" aria-labelledby="clothes-tab">
+					<div className='row p-3'>
+						<div className='col-12'>
+							<h6 className="unselectable">Clothes:</h6>
+							<AttributeSelector
+								title={clothes[options.clotheType][1]}
+								handleIncrement={() => changeValue("clotheType", "inc")}
+								handleDecrement={() => { changeValue("clotheType", "dec") }}
+							/>
+						</div>
+						<div className='col-12'>
+							<h6 className="unselectable">Clothes Color:</h6>
+							<AttributeSelector
+								title={clotheColor[options.clotheColor][1]}
+								handleIncrement={() => changeValue("clotheColor", "inc")}
+								handleDecrement={() => { changeValue("clotheColor", "dec") }}
+							/>
+						</div>
+						<div className='col-12'>
+							<h6 className="unselectable">Accessory:</h6>
+							<AttributeSelector
+								title={accessory[options.accessoriesType][1]}
+								handleIncrement={() => changeValue("accessoriesType", "inc")}
+								handleDecrement={() => { changeValue("accessoriesType", "dec") }}
+							/>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div >

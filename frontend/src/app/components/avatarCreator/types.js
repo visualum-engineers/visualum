@@ -61,7 +61,7 @@ const facialHair = [
 	["Blank", "None"],
 	["BeardLight", "Beard Light"],
 	["BeardMedium", "Beard Medium"],
-	["BeardMagestic", "Beard Magestic"],
+	["BeardMajestic", "Beard Majestic"],
 	["MoustacheFancy", "Moustache Fancy"],
 	["MoustacheMagnum", "Moustache Magnum"],
 ]
