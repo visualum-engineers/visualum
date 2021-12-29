@@ -1,4 +1,4 @@
-import NavItem from "../navItems/NavItems"
+import NavItem from '../utilityComponents/navItems/NavItems';
 import useScrollPos from "../../hooks/use-scroll-pos"
 const PrimarySideBar = (props) =>{
     const windowScrollY = useScrollPos()

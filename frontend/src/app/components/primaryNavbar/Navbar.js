@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Login from './LoginBtn';
 import NavToggler from './NavTogglerBtn';
-import NavItem from '../navItems/NavItems';
+import NavItem from '../utilityComponents/navItems/NavItems';
 import SearchBar from './SearchBar';
 import useScrollPos from '../../hooks/use-scroll-pos';
 export default function Navbar(props) {
