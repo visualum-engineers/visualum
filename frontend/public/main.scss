@@ -9,11 +9,12 @@
 @import "../src/app/components/footer/footer";
 @import "../src/app/components/activityTypes/activity";
 @import "../src/app/components/dashboard/dashboard";
-@import "../src/app/components/userProfile/userProfile";
+
 //styles for utility components
 @import "../src/app/components/utilityComponents/moreInfoBtn/infoBtn";
 @import "../src/app/components/utilityComponents/loadingIcon/loadingIcon";
 @import "../src/app/components/utilityComponents/dragAndDrop/dragAndDrop";
+@import "../src/app/components/utilityComponents/userProfile/userProfile";
 
 //responsive stylesheet
 @import "./scss_abstracts/breakPoints"; 
