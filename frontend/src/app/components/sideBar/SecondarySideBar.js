@@ -31,26 +31,21 @@ const SecondarySideBar = (props) =>{
             </div>
             <div className="secondary-sidebar-link-container d-flex flex-column align-items-center">
                 {props.data.map((navItem, index)=>{
-                    if(navItem.type ==="link") return <NavItem 
+                    return <NavItem 
                             key={index} 
                             textContent={navItem.textContent} 
                             sidebar={"secondary"} 
-                            url={navItem.url}
                             styles = {navItem.styles}
                             hidden = {!props.sidebarToggle}
+                            onClick={navItem.onClick}
+                            url={navItem.type === "link" && navItem.url}
+                            btn={navItem.type !== "link"}
                         />
-                    else return <NavItem
-                            key={index}
-                            textContent={navItem.textContent}
-                            sidebar={"secondary"}
-                            btn={true}
-                            styles={navItem.styles}
-                            hidden ={!props.sidebarToggle}
-                        /> 
                 })}
-                
             </div>
-            <div className="secondary-sidebar-footer d-flex flex-column align-items-center justify-content-end flex-grow-1">
+            <div 
+                className="secondary-sidebar-footer d-flex flex-column align-items-center justify-content-end flex-grow-1"
+            >
                 <NavItem 
                     textContent={settingsLink} 
                     sidebar={"secondary"} 
@@ -65,8 +60,10 @@ const SecondarySideBar = (props) =>{
                     hidden = {!props.sidebarToggle} 
                     styles={`${props.customFooterLinkClass}`}
                 />
+                {//add user profile if provided
+                    props.userProfile
+                }
             </div>
-            
         </div>
         <button 
             className={`secondary-exit-sidebar-btn${props.sidebarToggle ?"":" sidebar-close"}`} 
@@ -74,7 +71,7 @@ const SecondarySideBar = (props) =>{
             onClick={props.handleSideBar}>
             <i className={`fas fa-angle-${props.sidebarToggle ? "left":"right"}`}></i>
         </button>
-        {!props.windowWidth ? 
+        {!props.windowWidth &&  
             <button 
                 className={`sidebar-dark-bg fixed-top ${props.sidebarToggle ?"sidebar-bg-show":"sidebar-bg-hide"}`}
                 aria-label="exit-sidebar"
@@ -83,7 +80,6 @@ const SecondarySideBar = (props) =>{
                 tabIndex = {!props.sidebarToggle?"-1": "0"}
             >
             </button>
-            : null
         }    
     </>
     )

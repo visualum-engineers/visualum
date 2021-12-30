@@ -1,4 +1,14 @@
-const NavItem = ({sidebar=false, url=false, handleSideBar=false, btn=false, textContent, styles=false, ariaLabel=false, hidden="false"}) =>{  
+const NavItem = ({
+    sidebar=false, 
+    url=false, 
+    handleSideBar=false, 
+    btn=false, 
+    textContent, 
+    styles=false, 
+    ariaLabel=false, 
+    hidden="false",
+    onClick,
+}) =>{  
     return (
         <>
             {sidebar ? 
@@ -21,6 +31,7 @@ const NavItem = ({sidebar=false, url=false, handleSideBar=false, btn=false, text
                         aria-label={ariaLabel ? ariaLabel: null}
                         aria-hidden = {hidden}
                         tabIndex={`${hidden ? "-1":"0"}`}
+                        onClick={onClick}
                     >
                         <span className="nav-item-text">{textContent}</span>
                     </button>

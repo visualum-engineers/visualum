@@ -12,7 +12,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faFileAlt, faCommentDots, faStar} from '@fortawesome/free-regular-svg-icons'
 import {faBookOpen} from '@fortawesome/free-solid-svg-icons'
 import ActivityResetPopUp from './ActivityResetPopUp'
-
+import UserProfile from "../userProfile/UserProfile";
+import calculatePercentage from "../../helpers/calculatePercentage";
+import capitalizeFirstLetter from "../../helpers/capitalizeFirstLetter"
 const activityData = assignmentData
 const duration = 500
 const inPropDuration = duration * 2
@@ -47,7 +49,9 @@ const secondarySideBarData = [
         </>
     },
 ]
-
+//for testing. remove after
+const imageURL = "images/homePage/mountain-home-bg.jpg";
+//
 const Activity = () =>{
     let currQuestion = 1
     const [prevQuestion, setPrevQuestion] = useState(0)
@@ -163,6 +167,16 @@ const Activity = () =>{
                 handleSideBar = {handleSideBar}
                 windowWidth = {mediumWindowWidth}
                 customFooterLinkClass = {"activities-sidebar-link"}
+                userProfile = {
+                    <UserProfile
+                        userContainerClass={"activities-sidebar-user-profile d-flex flex-column align-items-center justify-content-center"}
+                        avatar={<img src={imageURL} alt = {"user-avatar"}/>}
+                        name = {"Arky Asmal"} 
+                        accountType={capitalizeFirstLetter("student")}
+                        progressBar={calculatePercentage(questionNum-1, (Object.keys(activityData).length-2)) + "%"}
+                    />
+                }
+                
         />
 
         <div 

@@ -10,6 +10,7 @@ import ActivityHeader from '../ActivityHeader'
 */
 
 const ShortAnswerApp = ({
+    mediumWindowWidth,
     smallWindowWidth, 
     resetBtnOnClick, 
     moreInfoOnClick,
@@ -58,7 +59,8 @@ const ShortAnswerApp = ({
     return(
         <>
             <ActivityHeader
-                smallWindowWidth = {smallWindowWidth} 
+                smallWindowWidth = {smallWindowWidth}
+                mediumWindowWidth={mediumWindowWidth} 
                 data = {data}
                 resetBtnOnClick = {resetBtnOnClick} 
                 questionNum = {questionNum}

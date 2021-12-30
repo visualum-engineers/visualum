@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUndoAlt } from "@fortawesome/free-solid-svg-icons";
 
 const ActivityHeader = ({
-    smallWindowWidth, 
+    smallWindowWidth,
+    mediumWindowWidth, 
     data,
     resetBtnOnClick, 
     questionNum,
@@ -27,6 +28,7 @@ const ActivityHeader = ({
                 </div>
         }
         <div className="d-flex align-items-center justify-content-end activity-header-btns col-4 flex-grow-1">
+            
             <ResetBtn 
                 customClassName = {"activity-reset-btn btn d-flex align-items-center"}
                 customIcon = {<FontAwesomeIcon icon={faUndoAlt} />}

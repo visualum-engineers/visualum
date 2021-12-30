@@ -83,6 +83,7 @@ const MultipleChoiceApp = ({
                     smallWindowWidth = {smallWindowWidth}
                     resetBtnOnClick = {resetBtnOnClick}
                     questionNum = {questionNum}
+                    mediumWindowWidth={mediumWindowWidth}
                 />
 
                 <div className = {`d-flex ${mediumWindowWidth? "justify-content-between align-items-center": "flex-column"}`}>

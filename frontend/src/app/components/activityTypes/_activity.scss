@@ -54,6 +54,14 @@
         }
     }
 }
+.activities-sidebar-user-profile{
+    width: 80%;
+    height: 12rem;
+    margin-top: calc(5vh - 0.6rem);
+    background-color: $light-blue;
+    @include border-radius(0.75rem);
+    font-size: 0.8rem;
+}
 .activities-sidebar-btn{
     @include remove-btn-default;
     @include border-radius(7px);
@@ -258,9 +266,9 @@
     }
 }
 .activity-reset-btn{
-    margin-right: 1vw;
+    margin:0 0.5vw;
     padding: 0.3rem 0.5rem;
-    font-size: 1rem;
+    font-size: 0.85rem;
     height: 80%;
     background-color: rgb(255, 208, 0) !important;
     @include transition(transform 0.2s ease-out);

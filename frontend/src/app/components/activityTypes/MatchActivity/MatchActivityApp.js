@@ -289,6 +289,7 @@ const MatchActivityApp = ({
     return(
         <>
         <ActivityHeader 
+            mediumWindowWidth={mediumWindowWidth}
             smallWindowWidth = {smallWindowWidth}
             data ={data}
             resetBtnOnClick ={resetBtnOnClick} 
