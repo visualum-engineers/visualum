@@ -13,6 +13,7 @@ import sampleActivityData from './helpers/sampleActivityData'
 import DashboardAssignments from './components/dashboard/DashboardAssignments';
 import TestBackend from "./components/testBackend/test"
 import AvatarCreator from './components/avatarCreator/AvatarCreator';
+import DashboardSettings from './components/dashboard/DashboardSettings';
 
 
 //lazy loaded components for performance
@@ -93,8 +94,8 @@ function App() {
             <Route exact path="/dashboard/classes">
               <DashboardClasses />
             </Route>
-            <Route exact path="/dashboard/avatar">
-              <AvatarCreator />
+            <Route exact path="/dashboard/settings">
+              <DashboardSettings />
             </Route>
             <Route path="/dashboard">
               <DashboardHome />
