@@ -37,9 +37,9 @@ export default function AvatarCreator() {
 			facialHairType: 0,
 			clotheType: Math.floor(Math.random() * clothesLength),
 			clotheColor: Math.floor(Math.random() * clotheColorLength),
-			eyeType: Math.floor(Math.random() * eyesLength),
-			eyebrowType: Math.floor(Math.random() * eyebrowLength),
-			mouthType: Math.floor(Math.random() * mouthLength),
+			eyeType: 2,
+			eyebrowType: 2,
+			mouthType: 1,
 			skinColor: Math.floor(Math.random() * skinColorLength),
 			facialHairColor: Math.floor(Math.random() * facialHairColorLength),
 		}
@@ -107,7 +107,7 @@ export default function AvatarCreator() {
 				mouthType={mouth[options.mouthType][0]}
 				skinColor={skinColor[options.skinColor][0]}
 			/>
-			<ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
+			<ul class="nav nav-pills mt-3" id="myTab" role="tablist">
 				<li class="nav-item" role="presentation">
 					<button class="nav-link active unselectable" id="hair-tab" data-bs-toggle="tab" data-bs-target="#hair" type="button" role="tab" aria-controls="home" aria-selected="true">Hair</button>
 				</li>
@@ -220,6 +220,7 @@ export default function AvatarCreator() {
 					</div>
 				</div>
 			</div>
+			<button className='btn btn-primary'>Save</button>
 		</div >
 	)
 }
