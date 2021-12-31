@@ -12,6 +12,8 @@ const MultipleChoiceItem = ({
                 type="radio" 
                 name="MCOptions"
                 onChange = {updateAnswerChoice}
+                data-update-answer-choice = {"mc-answer-choice-"+(index)}
+                //onClick={updateAnswerChoice}
                 checked = {parseInt(data.clientAnswer) === index}
             />
             <g className="d-flex align-items-center mc-answer-choice-group w-100 h-100">

@@ -2,7 +2,7 @@ import ShortAnswerInstructions from "./ShortAnswer/ShortAnswerInstructions"
 import SortActivityInstructions from "./SortActivity/SortActivityInstructions"
 import MatchActivityInstructions from "./MatchActivity/MatchActivityInstructions"
 import MultipleChoiceInstructions from "./MultipleChoice/MultipleChoiceInstructions"
-import PopUp from "../utilityComponents/popUp/PopUpBackground"
+import PopUp from "../utilities/popUp/PopUpBackground"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTimes } from "@fortawesome/free-solid-svg-icons"
 const ActivityInstructions = ({

@@ -11,10 +11,10 @@
 @import "../src/app/components/dashboard/dashboard";
 
 //styles for utility components
-@import "../src/app/components/utilityComponents/moreInfoBtn/infoBtn";
-@import "../src/app/components/utilityComponents/loadingIcon/loadingIcon";
-@import "../src/app/components/utilityComponents/dragAndDrop/dragAndDrop";
-@import "../src/app/components/utilityComponents/userProfile/userProfile";
+@import "../src/app/components/utilities/moreInfoBtn/infoBtn";
+@import "../src/app/components/utilities/loadingIcon/loadingIcon";
+@import "../src/app/components/utilities/dragAndDrop/dragAndDrop";
+@import "../src/app/components/utilities/userProfile/userProfile";
 
 //responsive stylesheet
 @import "./scss_abstracts/breakPoints"; 

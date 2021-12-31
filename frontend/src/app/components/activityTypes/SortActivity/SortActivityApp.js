@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef, useMemo} from 'react'
 import {DndContext, DragOverlay, getBoundingClientRect} from '@dnd-kit/core';
-import { closestCorners, rectIntersection} from '../../utilityComponents/dragAndDrop/DnDKit/customCollisionAlgo/algoIndex';
-import addToTop from '../../utilityComponents/dragAndDrop/DnDKit/positionFunctions/addToTop';
+import { closestCorners, rectIntersection} from '../../utilities/dragAndDrop/DnDKit/customCollisionAlgo/algoIndex';
+import addToTop from '../../utilities/dragAndDrop/DnDKit/positionFunctions/addToTop';
 import {useDispatch, useSelector} from 'react-redux';
 import {enableTap, enableDnD, resetPopUpOff} from '../../../../redux/features/activityTypes/activitiesSlice'
 import WordBank from './SortActivityWordBank';
 import ActivityHeader from '../ActivityHeader';
 import SortActivityCategories from './SortActivityCategories';
-import Item from '../../utilityComponents/dragAndDrop/DnDKit/DragOverlayItem';
+import Item from '../../utilities/dragAndDrop/DnDKit/DragOverlayItem';
 import debounce from 'lodash.debounce';
 
 /*Note Missing To-do

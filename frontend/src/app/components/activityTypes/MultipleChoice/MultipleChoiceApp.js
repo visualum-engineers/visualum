@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { resetPopUpOff } from '../../../../redux/features/activityTypes/activitiesSlice';
-import Zoomable from '../../utilityComponents/imageContainer/Zoomable';
-import ImageContainer from '../../utilityComponents/imageContainer/ImageContainer';
+import Zoomable from '../../utilities/imageContainer/Zoomable';
+import ImageContainer from '../../utilities/imageContainer/ImageContainer';
 import ActivityHeader from '../ActivityHeader'
 //import PopUp from '../../popUp/PopUpBackground';
 import MultipleChoiceColumn from './MultipleChoiceColumn';
@@ -66,12 +66,16 @@ const MultipleChoiceApp = ({
         }))
     }
     const updateAnswerChoice = (e) =>{
-        const id = e.target.closest("input").id.match(/\d+/)
+        if(e.type === "keydown" && e.key !=="Enter") return  
+        let id = e.target.closest("input")
+        if (!e.target.closest("input") && !e.target.closest("label"))  return
+        if (!id) id = e.target.closest("label")
+        const answerId = id.dataset.updateAnswerChoice.match(/\d+/)[0]
         setData(state =>({
             ...state,
-            clientAnswer: parseInt(id) 
+            clientAnswer: parseInt(answerId) 
         })) 
-        localStorage.setItem(`${activityID}-mc_activity_client_answer-${questionNum}`, id.toString())
+        localStorage.setItem(`${activityID}-mc_activity_client_answer-${questionNum}`, answerId.toString())
     }
     
     return(

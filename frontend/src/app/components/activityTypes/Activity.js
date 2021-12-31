@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faFileAlt, faCommentDots, faStar} from '@fortawesome/free-regular-svg-icons'
 import {faBookOpen} from '@fortawesome/free-solid-svg-icons'
 import ActivityResetPopUp from './ActivityResetPopUp'
-import UserProfile from "../utilityComponents/userProfile/UserProfile";
+import UserProfile from "../utilities/userProfile/UserProfile";
 import calculatePercentage from "../../helpers/calculatePercentage";
 import capitalizeFirstLetter from "../../helpers/capitalizeFirstLetter"
 const activityData = assignmentData

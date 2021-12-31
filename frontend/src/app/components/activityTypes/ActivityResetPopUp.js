@@ -1,4 +1,4 @@
-import PopUpBg from "../utilityComponents/popUp/PopUpBackground";
+import PopUpBg from "../utilities/popUp/PopUpBackground";
 const ActivityResetPopUp = (props) => {
     return (
         <PopUpBg

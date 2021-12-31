@@ -1,6 +1,6 @@
-import ResetBtn from "../utilityComponents/resetBtn/ResetBtn"
-import DrapAndDropToggler from "../utilityComponents/dragAndDrop/DrapAndDropToggler"
-import Timer from '../utilityComponents/timer/Timer';
+import ResetBtn from "../utilities/resetBtn/ResetBtn"
+import DrapAndDropToggler from "../utilities/dragAndDrop/DrapAndDropToggler"
+import Timer from '../utilities/timer/Timer';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUndoAlt } from "@fortawesome/free-solid-svg-icons";
 
