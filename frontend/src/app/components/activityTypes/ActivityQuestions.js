@@ -2,65 +2,27 @@ import MultipleChoiceApp from "./MultipleChoice/MultipleChoiceApp"
 import ShortAnswerApp from "./ShortAnswer/ShortAnswerApp"
 import SortActivityApp from "./SortActivity/SortActivityApp"
 import MatchActivityApp from "./MatchActivity/MatchActivityApp"
+import LabelPicturesApp from "./LabelPictures/LabelPicturesApp"
 
-const ActivityQuestions = ({
-    activityData, 
-    questionNum, 
-    moreInfoOnClick, 
-    moreInfoBtn, 
-    style, 
-    activityKey, 
-    mediumWindowWidth,
-    smallWindowWidth,
-    resetBtnOnClick,
-    popUpBgStyles 
-    //sidebarToggle
-}) =>{
+const ActivityQuestions = (props) =>{
+    const activityType = props.activityData[props.activityKey].type
+    const newProps = {
+        ...props, 
+        activityData: props.activityData[props.activityKey],
+        activityID: props.activityData.activityID,
+    }
+    const activityMap = {
+        sort: <SortActivityApp {...newProps} />,
+        matching: <MatchActivityApp {...newProps} />,
+        shortAnswer: <ShortAnswerApp {...newProps} />,
+        multipleChoice: <MultipleChoiceApp {...newProps} />,
+        labelPictures: <LabelPicturesApp {...newProps} />
+    }
     return(
-        <div style={style} className="flex-grow-1 question-transition-container d-flex flex-column">
-            {activityData[activityKey].type === "sort" ? <SortActivityApp 
-                                                    smallWindowWidth = {smallWindowWidth}
-                                                    mediumWindowWidth = {mediumWindowWidth}
-                                                    activityData = {activityData[activityKey]} 
-                                                    questionNum = {questionNum} 
-                                                    activityID = {activityData.activityID}
-                                                    moreInfoOnClick={moreInfoOnClick} 
-                                                    moreInfoBtn={moreInfoBtn}
-                                                    resetBtnOnClick = {resetBtnOnClick}
-                                                />
-            : activityData[activityKey].type === "matching" ? <MatchActivityApp 
-                                                            smallWindowWidth = {smallWindowWidth}
-                                                            mediumWindowWidth = {mediumWindowWidth}
-                                                            activityData = {activityData[activityKey]} 
-                                                            questionNum = {questionNum} 
-                                                            activityID = {activityData.activityID} 
-                                                            moreInfoOnClick={moreInfoOnClick} 
-                                                            moreInfoBtn={moreInfoBtn}
-                                                            resetBtnOnClick = {resetBtnOnClick}
-                                                        />
-            : activityData[activityKey].type === "shortAnswer" ? <ShortAnswerApp 
-                                                            smallWindowWidth = {smallWindowWidth}
-                                                            mediumWindowWidth = {mediumWindowWidth}
-                                                            activityData = {activityData[activityKey]} 
-                                                            questionNum = {questionNum} 
-                                                            activityID = {activityData.activityID}
-                                                            resetBtnOnClick = {resetBtnOnClick}
-                                                            moreInfoOnClick = {moreInfoOnClick}
-                                                            popUpBgStyles={popUpBgStyles}
-                                                            //sidebarToggle ={sidebarToggle}
-                                                        />
-            : activityData[activityKey].type === "multipleChoice"? <MultipleChoiceApp 
-                                                            smallWindowWidth = {smallWindowWidth}
-                                                            moreInfoOnClick = {moreInfoOnClick}
-                                                            activityData = {activityData[activityKey]} 
-                                                            questionNum = {questionNum} 
-                                                            activityID = {activityData.activityID}
-                                                            mediumWindowWidth = {mediumWindowWidth}
-                                                            resetBtnOnClick = {resetBtnOnClick}
-                                                            popUpBgStyles={popUpBgStyles}
-                                                            //sidebarToggle = {sidebarToggle}
-                                                        />
-            :<p>Hi</p>}
+        <div style={props.style} className="flex-grow-1 question-transition-container d-flex flex-column">
+            {//load specific activity
+                activityMap[activityType]
+            }
         </div>
     )
 }

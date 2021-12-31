@@ -65,6 +65,32 @@ const assignmentData = {
         type: "shortAnswer",
         question: "What faces this world?",
         clientAnswer: "",
+    },
+    5:{
+        type: "labelPictures",
+        imageURL: "images/homePage/mountain-home-bg.jpg",
+        teacherLabels:{
+            1: {
+                key:1, 
+                x:200, 
+                y:200, 
+                width:10, 
+                height: 5,
+                content:"Hello", 
+                imgSize:{width:1169.3, height: 826.7}
+            },
+            2: {
+                key:2, 
+                x:400, 
+                y:400, 
+                width:10, 
+                content:"Hi", 
+                height: 5,
+                imgSize:{width:1169.3, height: 826.7}
+            },
+        },
+        imageLabels:[],
+        wordBankLabels:[],
     }
 }
 export default assignmentData

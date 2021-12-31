@@ -2,6 +2,8 @@ import ShortAnswerInstructions from "./ShortAnswer/ShortAnswerInstructions"
 import SortActivityInstructions from "./SortActivity/SortActivityInstructions"
 import MatchActivityInstructions from "./MatchActivity/MatchActivityInstructions"
 import MultipleChoiceInstructions from "./MultipleChoice/MultipleChoiceInstructions"
+import LabelActivityInstructions from "./LabelPictures/LabelActivityInstructions"
+
 import PopUp from "../utilities/popUp/PopUpBackground"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTimes } from "@fortawesome/free-solid-svg-icons"
@@ -12,6 +14,17 @@ const ActivityInstructions = ({
     moreInfoOnClick,
     popUpBgStyles,
 }) => {
+    const newProps = {
+        dndEnabled: dndEnabled, 
+        activityInstructions: activityInstructions
+    }
+    const activityMap = {
+        sort: <SortActivityInstructions {...newProps}/>,
+        matching: <MatchActivityInstructions {...newProps}/>,
+        shortAnswer: <ShortAnswerInstructions {...newProps} />,
+        multipleChoice: <MultipleChoiceInstructions {...newProps}/>,
+        labelPictures: <LabelActivityInstructions {...newProps}/>
+    }
     return (
         <PopUp
             btnClassName="activity-popup-bg-exit-btn" 
@@ -30,18 +43,9 @@ const ActivityInstructions = ({
                         <FontAwesomeIcon icon={faTimes}/>
                     </button>
                 </header>
-                {activityType === "sort" ? <SortActivityInstructions 
-                                                dndEnabled={dndEnabled}
-                                                activityInstructions={activityInstructions}
-                                            />
-                : activityType === "matching" ? <MatchActivityInstructions
-                                                    activityInstructions = {activityInstructions}
-                                                    dndEnabled={dndEnabled}/>
-                : activityType === "shortAnswer" ? <ShortAnswerInstructions 
-                                                        activityInstructions={activityInstructions}/>
-                : activityType === "multipleChoice"? <MultipleChoiceInstructions 
-                                                        activityInstructions={activityInstructions}/>
-                : null}
+                {//load specific instructions
+                    activityMap[activityType]
+                }
             </div>
         </PopUp>
     )

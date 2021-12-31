@@ -21,7 +21,6 @@ const SignUpForm = React.lazy(() => import('./components/forms/EntryForms/SignUp
 const LoginForm = React.lazy(() => import('./components/forms/EntryForms/LoginForm/LoginForms'))
 const CreateGame = React.lazy(() => import('./components/createGame/CreateGame'))
 const Activity = React.lazy(() => import('./components/activityTypes/Activity'))
-const LabelPictures = React.lazy(() => import("./components/activityTypes/LabelPictures/LabelPicturesApp"))
 const ActivityCreation = React.lazy(() => import("./components/forms/ActivityCreationForm/ActivityCreationForm"))
 
 function App() {
@@ -69,12 +68,6 @@ function App() {
 
             <Route exact path="/activity-creation">
               <ActivityCreation />
-            </Route>
-
-            <Route exact path="/label-pictures">
-              <NavWrapper>
-                <LabelPictures />
-              </NavWrapper>
             </Route>
 
             <Route exact path="/dashboard/home">

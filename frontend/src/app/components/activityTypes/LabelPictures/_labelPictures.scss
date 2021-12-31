@@ -1,12 +1,16 @@
-.labelPicApp{
+.label-pic-activity-container{
     padding-top: 150px;
-    color: $main-font-color;
+    color: $secondary-font-color;
+    background-color: blue;
+    img{
+
+    }
 }
 
-.labelPicApp img{
-    min-width: 175px;
-    @include fillContainer;
-}
+// .label-pic-activity-container img{
+//     min-width: 175px;
+//     @include fillContainer;
+// }
 .imgIndicatorContainer{
     position: relative;
 }

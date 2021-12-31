@@ -110,7 +110,6 @@ const MatchActivityApp = ({
         setData((data) => transformData(data, columns.length))
     }, [mediumWindowWidth, columns.length])
     
-
     //when dragging starts
     const onDragStart = (result) =>{
         //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
