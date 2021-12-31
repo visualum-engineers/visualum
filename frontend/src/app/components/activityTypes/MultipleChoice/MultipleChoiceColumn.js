@@ -39,7 +39,7 @@ const MultipleChoiceColumn = ({
                                 data ={data} 
                                 choice={choice} 
                                 updateAnswerChoice={updateAnswerChoice} 
-                                customContainerClass = "w-100 mc-activity-mc-item" 
+                                customContainerClass = "d-flex align-items-center mc-activity-mc-item" 
                             />
                     )
                 })

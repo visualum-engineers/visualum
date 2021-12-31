@@ -3,16 +3,6 @@
     @include border-radius(1rem);
 }
 
-.mc-activity-input-container {
-    input[type="radio"]{
-        @include hidden;
-    }
-}
-.mc-activity-input-container {
-    input[type="radio"]:checked + label{
-        background-color: $white;
-    }
-}
 .mc-activity-question{
     margin-top: 0.2rem;
     font-size: 1rem;
@@ -90,12 +80,22 @@
     max-height: calc(max(40vh, 24rem));
 }
 
-
 .mc-activity-mc-item{
+    position: relative;
     width: 100%;
     margin-bottom: 0.5rem;
     min-height: 4rem;
     overflow-wrap: break-word;
+    .mc-custom-radio-btn{
+        position: absolute;
+        left: 0.4rem;
+        fill: transparent;
+        stroke-width: 1.2;
+    }
+    .mc-radio-outer-circle{
+        fill: transparent; 
+        stroke: $dark-blue
+    }
     .mc-answer-label{
         min-height: 4rem;
         @include border-radius(0.5rem);
@@ -105,9 +105,23 @@
         background-color: $light-blue;
         @include  transition(all 0.3s ease-out);
         @include box-shadow(rgba(0, 0, 0, 0.151) 0px 0 3px);
+        border: 1px solid transparent;
     }
     .mc-answer-label:hover{
         background-color: $white;
+    }
+    input[type="radio"]{
+        @include hidden;
+    }
+    input[type="radio"]:checked + .mc-answer-choice-group{
+        label{
+            border: 1px solid $dark-blue;
+            background-color: $white;
+        }
+        .mc-radio-inner-circle{
+            stroke: $dark-blue; 
+            fill: $dark-blue;
+        }
     }
 }
 .mc-activity-mc-item.grid-layout{
@@ -117,3 +131,4 @@
         @include border-radius(0.5rem);
     }
 }
+
