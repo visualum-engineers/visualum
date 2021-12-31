@@ -162,21 +162,20 @@ const Activity = () =>{
     return(
     <>
         <SecondarySideBar 
-                data={secondarySideBarData}
-                sidebarToggle = {sidebarToggle}
-                handleSideBar = {handleSideBar}
-                windowWidth = {mediumWindowWidth}
-                customFooterLinkClass = {"activities-sidebar-link"}
-                userProfile = {
-                    <UserProfile
-                        userContainerClass={"activities-sidebar-user-profile d-flex flex-column align-items-center justify-content-center"}
-                        avatar={<img src={imageURL} alt = {"user-avatar"}/>}
-                        name = {"Arky Asmal"} 
-                        accountType={capitalizeFirstLetter("student")}
-                        progressBar={calculatePercentage(questionNum-1, (Object.keys(activityData).length-2)) + "%"}
-                    />
-                }
-                
+            data={secondarySideBarData}
+            sidebarToggle = {sidebarToggle}
+            handleSideBar = {handleSideBar}
+            windowWidth = {mediumWindowWidth}
+            customFooterLinkClass = {"activities-sidebar-link"}
+            userProfile = {
+                <UserProfile
+                    userContainerClass={"activities-sidebar-user-profile d-flex flex-column align-items-center justify-content-center"}
+                    avatar={<img src={imageURL} alt = {"user-avatar"}/>}
+                    name = {"Arky Asmal"} 
+                    accountType={capitalizeFirstLetter("student")}
+                    progressBar={calculatePercentage(questionNum-1, (Object.keys(activityData).length-2)) + "%"}
+                />
+            }     
         />
 
         <div 

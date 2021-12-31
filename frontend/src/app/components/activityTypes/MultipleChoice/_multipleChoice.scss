@@ -1,16 +1,16 @@
 .mc-activity-input-container{
     font-size: 0.8rem;
     @include border-radius(1rem);
+    padding-bottom: 23px;
 }
 
 .mc-activity-question{
-    margin-top: 0.2rem;
     font-size: 1rem;
     background-color: white;
     @include box-shadow(rgba(0, 0, 0, 0.315) 0px 0 2px);
     @include border-radius(7px);
     padding: 0.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 .mc-activity-image-container{
     //position: relative;
@@ -60,7 +60,7 @@
     overflow-x: hidden;
     min-width: 280px;
     max-width: 400px;
-    max-height: calc(max(50vh, 24rem));
+    max-height: calc(max(70vh, 24rem));
     height: 100%;
     background-color: $white;
     padding: 1rem;
@@ -84,37 +84,42 @@
     position: relative;
     width: 100%;
     margin-bottom: 0.5rem;
-    min-height: 4rem;
+    min-height: 3.5rem;
     overflow-wrap: break-word;
     .mc-custom-radio-btn{
         position: absolute;
-        left: 0.4rem;
+        left: 0.7rem;
         fill: transparent;
         stroke-width: 1.2;
+        cursor: pointer;
     }
     .mc-radio-outer-circle{
         fill: transparent; 
         stroke: $dark-blue
     }
     .mc-answer-label{
-        min-height: 4rem;
+        min-height: 3.5rem;
         @include border-radius(0.5rem);
         cursor: pointer;
         height: 100%;
-        padding: 0.8rem 1.5rem;
+        padding: 0.3rem 1.7rem;
+        padding-right: 1rem;
         background-color: $light-blue;
         @include  transition(all 0.3s ease-out);
         @include box-shadow(rgba(0, 0, 0, 0.151) 0px 0 3px);
         border: 1px solid transparent;
     }
-    .mc-answer-label:hover{
-        background-color: $white;
+    .mc-answer-choice-group:hover{
+        .mc-answer-label{
+            background-color: $white;
+        }
     }
+    
     input[type="radio"]{
         @include hidden;
     }
     input[type="radio"]:checked + .mc-answer-choice-group{
-        label{
+        .mc-answer-label{
             border: 1px solid $dark-blue;
             background-color: $white;
         }

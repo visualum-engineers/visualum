@@ -3,14 +3,15 @@ import ShortAnswerApp from "./ShortAnswer/ShortAnswerApp"
 import SortActivityApp from "./SortActivity/SortActivityApp"
 import MatchActivityApp from "./MatchActivity/MatchActivityApp"
 import LabelPicturesApp from "./LabelPictures/LabelPicturesApp"
-
 const ActivityQuestions = (props) =>{
-    const activityType = props.activityData[props.activityKey].type
+    const questionData = props.activityData[props.activityKey] 
+    const questionType = props.activityData[props.activityKey].type
     const newProps = {
         ...props, 
-        activityData: props.activityData[props.activityKey],
+        activityData: questionData,
         activityID: props.activityData.activityID,
     }
+
     const activityMap = {
         sort: <SortActivityApp {...newProps} />,
         matching: <MatchActivityApp {...newProps} />,
@@ -21,7 +22,7 @@ const ActivityQuestions = (props) =>{
     return(
         <div style={props.style} className="flex-grow-1 question-transition-container d-flex flex-column">
             {//load specific activity
-                activityMap[activityType]
+                activityMap[questionType]
             }
         </div>
     )

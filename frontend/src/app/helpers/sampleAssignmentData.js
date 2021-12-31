@@ -2,7 +2,7 @@ const assignmentData = {
     activityID: "unique",
     activityName: "7C Week2 HW Assignment",
     //matching
-    2: {
+    1: {
         type: "matching",
         timer: {hours: 1, minutes: 1, seconds: 1},
         keyPairs: [
@@ -27,7 +27,7 @@ const assignmentData = {
         ],
     },
     //multiple choice
-    3:{
+    2:{
         type: "multipleChoice",
         timer: false,
         question: "What faces this world?",
@@ -37,7 +37,7 @@ const assignmentData = {
         clientAnswer: "",
     },
     //sorting
-    1: {
+    3: {
         type: "sort",
         timer: false,
         categories: [
@@ -69,28 +69,32 @@ const assignmentData = {
     5:{
         type: "labelPictures",
         imageURL: "images/homePage/mountain-home-bg.jpg",
-        teacherLabels:{
-            1: {
-                key:1, 
+        imgSize:{width:1169.3, height: 826.7},
+        imgLabels:[
+            {
+                id:1, 
                 x:200, 
                 y:200, 
                 width:10, 
                 height: 5,
-                content:"Hello", 
-                imgSize:{width:1169.3, height: 826.7}
             },
-            2: {
-                key:2, 
+            {
+                id:2, 
                 x:400, 
                 y:400, 
                 width:10, 
-                content:"Hi", 
                 height: 5,
-                imgSize:{width:1169.3, height: 826.7}
             },
-        },
-        imageLabels:[],
-        wordBankLabels:[],
+        ],
+        answerChoices: [
+            {id:"1", content:"The world know no bounds except that is cannot be at piece right now. The world will never know peace"}, 
+            {id:"2", content:"Good"},
+            {id:"3", content:"Nice" },
+            {id:"4", content:"Duh" },
+            {id:"5", content:"Bruh"},
+            {id:"6", content:"Yuh" },
+            {id:"7", content:"Fuh" }
+        ]
     }
 }
 export default assignmentData

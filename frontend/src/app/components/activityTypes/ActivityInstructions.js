@@ -18,7 +18,7 @@ const ActivityInstructions = ({
         dndEnabled: dndEnabled, 
         activityInstructions: activityInstructions
     }
-    const activityMap = {
+    const instructionsMap = {
         sort: <SortActivityInstructions {...newProps}/>,
         matching: <MatchActivityInstructions {...newProps}/>,
         shortAnswer: <ShortAnswerInstructions {...newProps} />,
@@ -43,8 +43,8 @@ const ActivityInstructions = ({
                         <FontAwesomeIcon icon={faTimes}/>
                     </button>
                 </header>
-                {//load specific instructions
-                    activityMap[activityType]
+                {//load specific activity instructions
+                    instructionsMap[activityType]
                 }
             </div>
         </PopUp>

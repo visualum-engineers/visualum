@@ -2,10 +2,57 @@ import { useState, useEffect } from "react"
 import {DragDropContext} from "react-beautiful-dnd"
 import ActivityHeader from "../ActivityHeader"
 //import test from '../../../../../public/images/eureka_1.jpg'
-import WordBank from "./WordBank"
-import ImageLabels from "./ImageLabels.js"
+import WordBank from "../../utilities/dragAndDrop/ReactBeautifulDnD/WordBank"
+import LabelPicturesQuestion from "./LabelPicturesQuestion"
 import { useDispatch, useSelector } from "react-redux"
+import { resetPopUpOff, enableTap, enableDnD} from "../../../../redux/features/activityTypes/activitiesSlice"
+const transformData = (data, itemBankColumns) =>{
+    let newData = {}
+    //on mount (initial data loaded)
+    newData["itemBank"] = {}
+    newData["allItems"] = {}
+    newData["answerChoices"] = {}
+    newData["categories"]= {}
+    newData.timer = data.timer
+    newData.imageURL = data.imageURL
+    newData.imgSize = data.imgSize
+    if(!data.itemBank){
+        for(let i of data.imgLabels) newData["categories"][i.id] = []
+        
+        for(let i=0; i<itemBankColumns; i++){
+            const elementsPresent = (data.answerChoices.length)%itemBankColumns === 0 ? (data.answerChoices.length)/itemBankColumns : Math.floor((data.answerChoices.length)/itemBankColumns+1)
+            const startSlice = i * elementsPresent 
+            const endSlice = (i+1) * elementsPresent
+            newData.itemBank["answerChoices-" + i] = data.answerChoices.slice(startSlice, endSlice).map((answer) =>{
+                return {id: answer.id, content: answer.content}
+            })
+        }
+        //keep a record of all items in word bank. 
+        // Needed to create 1 or 2 columns based on screen size
+        for(let i of data.answerChoices){
+            newData.allItems[i.id] = {id: i.id, content: i.content}
+            newData.answerChoices[i.id] = {id: i.id, content: i.content}
+        }
+    }
+    //when data was already transformed on mount 
+    else {
+        for(let i of Object.keys(data.categories)) newData["categories"][i] = [...data.categories[i]]
 
+        for(let i=0; i<itemBankColumns; i++){
+            const keys = Object.keys(data.allItems)
+            const elementsPresent = (keys.length)%itemBankColumns === 0 ? (keys.length)/itemBankColumns : Math.floor((keys.length)/itemBankColumns+1)
+            const startSlice = i * elementsPresent 
+            const endSlice = (i+1) * elementsPresent
+            newData["itemBank"]["answerChoices-" + i] = keys.slice(startSlice, endSlice).map((answer) =>{
+                return data.answerChoices[answer]
+            })
+        }
+        newData["allItems"] = {...data.allItems}
+        newData["answerChoices"] = {...data.answerChoices}
+    }
+
+    return newData
+}
 const LabelPicturesApp = ({
     activityData, 
     questionNum, 
@@ -16,7 +63,11 @@ const LabelPicturesApp = ({
     mediumWindowWidth,
     smallWindowWidth
 }) =>{
-    const [data, setData] = useState(activityData)
+    const [data, setData] = useState(transformData(activityData, 1))
+    //used for dnd and tap and drop actions
+    const [firstTapEl, setFirstTapEl] = useState(null)
+    const [removedEl, setRemovedEl] = useState(undefined)
+
     //redux states
     const dispatch = useDispatch()
     const disableDnD = useSelector((state) => !state.activities.dndEnabled)
@@ -29,11 +80,44 @@ const LabelPicturesApp = ({
         if(!stored) return
         setData(JSON.parse(stored))
     }, [activityID, questionNum])
+    //reset data
+    useEffect(() =>{
+        if(resetPopUp && resetPopUp.confirmed){
+            //reset all state values to default
+            setData(transformData(activityData, 1))
+            setFirstTapEl(null)
+            dispatch(resetPopUpOff())
+            //remove any saved data from local storage
+            localStorage.removeItem(`${activityID}-match_activity_client_answer-${questionNum}`)        
+        }
+    }, [dispatch, resetPopUp, activityData, activityID, questionNum])
 
-    const toggleTap = () =>{
+    const toggleTap = (e) =>{
+        if(e.type ==="keydown" && !(e.key === "Enter")) return
+        //update redux store so instructions can dynamically change
+        if (disableDnD) dispatch(enableDnD())
+        else dispatch(enableTap())
+
+        moreInfoOnClick()
+        //if we're changing the mode, we need to reset this
+        // as its only viable for tap mode
+        if(firstTapEl) firstTapEl.node.classList.remove("label-picture-activity-dragging")
+        setRemovedEl(undefined)
+        setFirstTapEl(null)
+    }
+    const onTap = () =>{
 
     }
-    
+    const onDragStart = () =>{
+
+    }
+    const onDragUpdate = () =>{
+
+    }
+    const onDragEnd = () =>{
+
+    }
+
     return(
         <>
             <ActivityHeader 
@@ -46,8 +130,34 @@ const LabelPicturesApp = ({
                 toggleTap = {toggleTap}
                 type="DnD"
             />
-            <div className="label-pic-activity-container">
-
+            <div className="label-pic-activity-container d-flex">
+                <DragDropContext 
+                    onDragEnd = {!disableDnD ? onDragEnd : null}
+                    onDragUpdate = {!disableDnD ? onDragUpdate: null}
+                    onDragStart = {!disableDnD ? onDragStart : null}
+                >
+                    <WordBank 
+                        data={data}
+                        firstTapEl= {firstTapEl}
+                        disableDnD = {disableDnD}
+                        onTap = {disableDnD? onTap: null}
+                        overallContainerClass = {"label-pic-activity-itemBank d-flex align-items-center flex-column full-size"}
+                        columnContainerClass = {"label-pic-activity-itemBank-column-container w-100 flex-grow-1 d-flex flex-column"}
+                        columnTitleClass = {"label-pic-activity-column-titles answer-choices"}
+                        columnClass = {"label-pic-activity-itemBank-column"}
+                        droppableClassName = {`label-pic-activity-itemBank-droppables d-flex flex-column w-100`}
+                        draggableClassName = {"label-pic-activity-draggables d-flex align-items-center justify-content-center"}
+                        innerDroppableClassName = {`${disableDnD && firstTapEl? "label-pic-activity-tap-active ": ""}label-pic-activity-inner-droppable w-100 d-flex flex-column align-items-center`}
+                        draggingOverClass={"label-pic-activity-draggable-over"}
+                        isDraggingClass = {"label-pic-activity-dragging"}
+                    />
+                    <LabelPicturesQuestion 
+                        data = {data}
+                        firstTapEl= {firstTapEl}
+                        disableDnD = {disableDnD}
+                        onTap = {disableDnD? onTap: null}
+                    />
+                </DragDropContext>
             </div>
         </>
     )

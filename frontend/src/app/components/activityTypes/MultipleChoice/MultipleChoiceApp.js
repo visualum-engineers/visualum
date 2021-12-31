@@ -67,7 +67,7 @@ const MultipleChoiceApp = ({
     }
     const updateAnswerChoice = (e) =>{
         if(e.type === "keydown" && e.key !=="Enter") return  
-        let id = e.target.closest("input")
+        let id = e.target.closest("label")
         if (!e.target.closest("input") && !e.target.closest("label"))  return
         if (!id) id = e.target.closest("label")
         const answerId = id.dataset.updateAnswerChoice.match(/\d+/)[0]
@@ -80,16 +80,15 @@ const MultipleChoiceApp = ({
     
     return(
         <>
+        <ActivityHeader
+            data = {data}
+            smallWindowWidth = {smallWindowWidth}
+            resetBtnOnClick = {resetBtnOnClick}
+            questionNum = {questionNum}
+            mediumWindowWidth={mediumWindowWidth}
+        />
         <form className = "mc-activity-input-container d-flex align-items-center justify-content-center flex-grow-1">
-            <div className = "px-2 pb-2">
-                <ActivityHeader
-                    data = {data}
-                    smallWindowWidth = {smallWindowWidth}
-                    resetBtnOnClick = {resetBtnOnClick}
-                    questionNum = {questionNum}
-                    mediumWindowWidth={mediumWindowWidth}
-                />
-
+            <div className = "px-2">
                 <div className = {`d-flex ${mediumWindowWidth? "justify-content-between align-items-center": "flex-column"}`}>
                     {!mediumWindowWidth? 
                             <div className="mc-activity-question">{data.question}</div>
@@ -112,11 +111,11 @@ const MultipleChoiceApp = ({
                             <div className="mc-activity-question">{data.question}</div>
                         : null}
                         <MultipleChoiceColumn
-                                mediumWindowWidth = {mediumWindowWidth}
-                                data = {data}
-                                columns = {columns}
-                                rows = {rows}
-                                updateAnswerChoice = {updateAnswerChoice}
+                            mediumWindowWidth = {mediumWindowWidth}
+                            data = {data}
+                            columns = {columns}
+                            rows = {rows}
+                            updateAnswerChoice = {updateAnswerChoice}
                         />
                     </div>
                     {data.imageURL &&  mediumWindowWidth &&

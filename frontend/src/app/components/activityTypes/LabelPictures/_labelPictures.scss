@@ -1,43 +1,217 @@
-.label-pic-activity-container{
-    padding-top: 150px;
-    color: $secondary-font-color;
-    background-color: blue;
-    img{
+@mixin label-pic-activity-draggable-styles {
+    list-style-type: none;
+    min-height: 4rem;
+    height: 4rem;
+    width: 100%;
+    min-width: 140px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+    @include border-radius(5px);
+    border: 1px solid rgba(0, 0,0,0);
+    padding: 0.5rem;
+    font-size: 0.75rem;
+    background-color: $white;
+    cursor: pointer;
+    @include box-shadow(rgba(0, 0, 0, 0.082) 0px 5px 11px 0.1px);
+    z-index: 2;
+    margin-bottom: 1rem;
+}
 
+@mixin label-pic-activity-inner-droppable {
+    position: relative;
+    list-style-type: none;
+    padding: 0 0.25rem;
+    padding-top: 0.5rem;
+    margin-bottom: 0;
+    @include border-radius(7px);
+    padding-top: 0.25rem;
+    flex-grow: 1;
+    min-height: 100%;
+}
+
+$activity-container-height: calc(94vh - 2rem);
+$activity-container-min-height: calc(600px - 7vh - 2rem);
+$label-pic-activity-container-height: calc(#{$activity-container-height} - 3.6rem - 23px);
+$label-pic-activity-container-min-height: calc(#{$activity-container-min-height} - 3.6rem - 23px);
+
+.label-pic-activity-container{
+    position: relative;
+    padding: 1rem;
+    background-color: $white;
+    height: $label-pic-activity-container-height;
+    min-height: $label-pic-activity-container-min-height;
+    @include border-radius(0.5rem);
+}
+.label-pic-activity-container::before{
+    position: absolute;
+    content: "";
+    top: 50%;
+    left: 5%;
+    width: 90%;
+    height: calc(50%);
+    @include box-shadow(rgba(0, 0, 0, 0.425) 0px -2px 23px 2px);
+    z-index: -1;
+}
+.label-pic-activity-column-titles{
+    @include border-radius(7px 7px 0 0);
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 0;
+    position: sticky;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    top:0;
+    left: 0;
+    height: 3.5rem;
+    z-index: 3;
+    background-color: $light-blue;
+    color: $dark-blue;
+}
+
+.label-pic-activity-itemBank{
+    position: relative;
+    margin-top: 1.5rem;
+    background-color: $light-blue;
+    @include border-radius(7px);
+    min-width: 300px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    &::-webkit-scrollbar{
+        width: 0.5rem;
+        @include border-radius(7px);
+        //background-color: $light-gray;
     }
+    &::-webkit-scrollbar-thumb{
+        @include border-radius(7px);
+        background-color: $dark-blue;
+    }
+}
+.label-pic-activity-itemBank-column-1,
+.label-pic-activity-itemBank-column-2{
+    background-color: rgba(0, 0,0,0);
+    @include box-shadow(none);
+    @include border-radius(7px);
+    min-width: 150px;
+    height: min-content;
+    .label-pic-activity-itemBank-droppables{
+        border: 1px solid rgba(0,0,0,0);
+        flex-grow: 1;
+        height: min-content;
+        padding-bottom: 0.5rem;
+        
+    }
+    .label-pic-activity-inner-droppable{
+        @include label-pic-activity-inner-droppable()
+    }
+    .label-pic-activity-draggables{
+        margin-top: 0;
+    }
+}
+.label-pic-activity-itemBank.full-size{
+    width: calc(100% / 3);
+    min-width: 0;
+    margin-top: 0;
+    margin-right: 1.5rem;
+    min-height:calc(#{$label-pic-activity-container-min-height} - 2rem);
+    height: calc(#{$label-pic-activity-container-height} - 2rem);
+    .label-pic-activity-itemBank-column-1{
+        margin: 0;
+        padding-left: 0.5rem;
+        min-height: 100%;
+    }
+}
+.label-pic-activity-question-container{
+    background-color: $light-blue;
+    width: calc(100% * (2 / 3));
+    @include border-radius(7px);
+    min-width: 0;
+    margin-top: 0;
+    min-height:calc(#{$label-pic-activity-container-min-height} - 2rem);
+    height: calc(#{$label-pic-activity-container-height} - 2rem);
+}
+
+.label-pic-activity-draggables{
+    @include label-pic-activity-draggable-styles();
+    
+    &::-webkit-scrollbar{
+        width: 0.5rem;
+        @include border-radius(7px);
+        background-color: rgba(201, 201, 201, 0);
+    }
+    &::-webkit-scrollbar-thumb{
+        @include border-radius(7px);
+        background-color: $dark-blue;
+    }
+    div{
+        margin: auto;
+        width: 100%;
+        @include transition(transform 0.2s ease-out)
+    }
+    div:hover{
+        transform: scale(1.05);
+    }
+}
+
+.label-pic-activity-dragging{
+    opacity: 0.8;
+    color: $main-font-color;
+    background-color: $light-gray;
+    border: 1px solid $black;
+
+    div{
+        transform: scale(1.1);
+    }
+}
+.label-pic-activity-draggables.hide-draggable{
+    position: absolute !important;
+    opacity: 0;
+    visibility: hidden !important;
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+.label-pic-activity-inner-droppable.label-pic-activity-draggable-over{
+    background-color: $darkest-gray;
+}
+.label-pic-activity-tap-active:hover{
+    cursor: pointer;
+    background-color: $darkest-gray;
 }
 
 // .label-pic-activity-container img{
 //     min-width: 175px;
 //     @include fillContainer;
 // }
-.imgIndicatorContainer{
-    position: relative;
-}
-.labelIndicators{
-    position: absolute;
-    border: 1px $main-font-color solid;
-}
-.labelWordBankColumn{
-    @include border-radius(6px);
-    min-height: 100px;
-    margin: 5px;
-    padding: 2.5px;
-}
-.imgLabelContainer{
-    @extend .labelWordBankColumn;
-    min-height: 47px;
-    border: 1px $main-font-color solid;
-}
-.labelChoices{
-    @include border-radius(5px);
-    cursor: pointer;
-    margin: 5px 0;
-    width: 100%;
-    min-height: 30px;
-    border: 1px $main-font-color solid;
-}
-.labelChoices p{
-    @include no-space;
-    color: $main-font-color;
-}
+// .imgIndicatorContainer{
+//     position: relative;
+// }
+// .labelIndicators{
+//     position: absolute;
+//     border: 1px $main-font-color solid;
+// }
+// .labelWordBankColumn{
+//     @include border-radius(6px);
+//     min-height: 100px;
+//     margin: 5px;
+//     padding: 2.5px;
+// }
+// .imgLabelContainer{
+//     @extend .labelWordBankColumn;
+//     min-height: 47px;
+//     border: 1px $main-font-color solid;
+// }
+// .labelChoices{
+//     @include border-radius(5px);
+//     cursor: pointer;
+//     margin: 5px 0;
+//     width: 100%;
+//     min-height: 30px;
+//     border: 1px $main-font-color solid;
+// }
+// .labelChoices p{
+//     @include no-space;
+//     color: $main-font-color;
+// }

@@ -3,17 +3,26 @@ import { useState } from "react";
 import { useZoomed } from "./Zoomable";
 import PopUpBg from "../popUp/PopUpBackground";
 //import ConditionalWrapper from "../conditionalWrapper/ConditionalWrapper";
-const ImageContainer = (props) =>{
+const ImageContainer = ({
+    defaultContainerClass,
+    defaultImageClass,
+    popUpBgStyles,
+    zoomContainerClass,
+    zoomImageClass,
+    onClick,
+    src,
+    alt,
+}) =>{
     const [stateChange, setStateChange] = useState(false)
     const zoom = useZoomed()
     const zoomState = zoom ? zoom.currZoomState : null
-    const onClick = (e) => {
+    const onLocalClick = (e) => {
         e.preventDefault()
         if(stateChange) return
         //prevent constant clicking, and allow animation to play
         setStateChange(true)
 
-        if(props.onClick) props.onClick(e)
+        if(onClick) onClick(e)
         //toogle state on and off
         if(zoom) zoom.changeZoomState(!zoomState)
 
@@ -24,33 +33,33 @@ const ImageContainer = (props) =>{
     //add more here
     return(
         <>
-            <div className={props.defaultContainerClass}>
+            <div className={defaultContainerClass}>
                 <img 
-                    onClick={onClick}
-                    className = {props.defaultImageClass}
-                    src={props.src}
-                    alt={props.alt}
+                    onClick={onLocalClick}
+                    className = {defaultImageClass}
+                    src={src}
+                    alt={alt}
                     tabIndex={0}
                 /> 
             </div> 
             {zoomState && 
                 <PopUpBg 
-                    onClick = {onClick}
+                    onClick = {onLocalClick}
                     ariaLabel = {"zoom-out-image"}
-                    containerStyles = {props.popUpBgStyles}
+                    containerStyles = {popUpBgStyles}
                 >
                     <div className={
-                        zoomState && props.zoomContainerClass ? props.zoomContainerClass
-                        : props.defaultContainerClass
+                        zoomState && zoomContainerClass ? zoomContainerClass
+                        : defaultContainerClass
                     }>
                         <img 
-                            onClick={onClick}
+                            onClick={onLocalClick}
                             className = {
-                                zoomState && props.zoomImageClass ? props.zoomImageClass
-                                : props.defaultImageClass
+                                zoomState && zoomImageClass ? zoomImageClass
+                                : defaultImageClass
                             }
-                            src={props.src}
-                            alt={props.alt}
+                            src={src}
+                            alt={alt}
                             tabIndex={0}
                         /> 
                     </div> 
