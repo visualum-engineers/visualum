@@ -1,0 +1,79 @@
+.avatar-creator {
+	background-color: rgb(238, 238, 238);
+	border-radius: 2rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 2rem 0;
+	padding-bottom: 1.5rem;
+	width: 40%;
+	position: absolute;
+	height: 90%;
+	@media (max-width: 992px) {
+		height: 80% !important;
+		width: 90%;
+		font-size: .9rem;
+	}
+}
+
+.avatar-creator-container {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	background-color: rgba($color: #000000, $alpha: 0.4);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.avatar-save-button-container {
+	justify-self: flex-end;
+	margin-top: auto;
+}
+
+.attribute-selector {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: .5rem 0;
+	color:rgba(0, 0, 0, 0.75);
+}
+
+.attr-selector-button {
+	width: 2rem;
+	height: 2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 100%;
+	transition: background-color 125ms ease-in-out;
+	&:hover {
+		background-color: rgb(222, 222, 222);
+		cursor: pointer;
+	}
+}
+
+.attribute-title-container {
+	display: flex;
+	justify-content: center;
+	width: 15rem;
+	white-space: nowrap;
+  	overflow: hidden;
+  	text-overflow: ellipsis;
+}
+
+.unselectable {
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+ 
+	/*
+	  Introduced in IE 10.
+	  See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+	*/
+	-ms-user-select: none;
+	user-select: none;
+ }

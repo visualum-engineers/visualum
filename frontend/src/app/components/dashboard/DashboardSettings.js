@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Avatar from 'avataaars';
 import Dashboard from './Dashboard'
+import AvatarCreator from '../avatarCreator/AvatarCreator';
 
 export default function DashboardSettings() {
+
+	const [modalOpen, setModalOpen] = useState(false);
 
 	const accountType = "student";
 	const email = "test@gmail.com"
@@ -41,6 +45,12 @@ export default function DashboardSettings() {
 
 	return (
 		<Dashboard page="settings">
+			{modalOpen ? <AvatarCreator
+				onCancel={() => setModalOpen(false)}
+				onSubmit={() => console.log('Fill this in!')}
+			/> :
+				<></>
+			}
 			<div className="settings-page overflow-scroll">
 				<h3 className="mb-3">Settings</h3>
 				<div className="d-flex flex-column">
@@ -50,8 +60,13 @@ export default function DashboardSettings() {
 					</div>
 					<div className="settings-module">
 						<h6 className="mb-2">Your Avatar</h6>
-						<div className="avatar mb-3" />
-						<button className="btn btn-primary btn-sm">Change Avatar</button>
+						<div className='my-3'>
+							<Avatar
+								style={{ width: '200px', height: '200px' }}
+								avatarStyle='Circle'
+							/>
+						</div>
+						<button className="btn btn-primary btn-sm" onClick={() => setModalOpen(true)}>Change Avatar</button>
 					</div>
 				</div>
 				{teacherSettings}
