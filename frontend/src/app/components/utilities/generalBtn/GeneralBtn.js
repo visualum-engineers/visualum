@@ -1,4 +1,4 @@
-const ResetBtn = ({
+const GeneralBtn = ({
     customClassName,
     onClick, 
     onKeyDown, 
@@ -7,13 +7,14 @@ const ResetBtn = ({
     customIcon = null,
     textContent = null
 }) =>{
+    
     return (
         <button
             className = {customClassName}
             aria-label = {customAriaLabel}
             onClick = {onClick}
             onKeyDown ={onKeyDown}
-            data-question-num = {questionNum}
+            data-question-num = {questionNum ? questionNum : null}
             data-action-label = {customAriaLabel}
         >
             {customIcon}
@@ -21,4 +22,4 @@ const ResetBtn = ({
         </button>
     )
 }
-export default ResetBtn
+export default GeneralBtn

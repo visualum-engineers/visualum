@@ -76,7 +76,7 @@ const Activity = () =>{
         if(!stored) return
         setQuestionNum(parseInt(stored))
     }, [])
-    //when window width changes <992, sidebar automatically closes
+    //when window width < 992, sidebar automatically closes
     //it can still be opened though
     useEffect(()=>{ 
         if(!mediumWindowWidth) setSidebarToggle(false)

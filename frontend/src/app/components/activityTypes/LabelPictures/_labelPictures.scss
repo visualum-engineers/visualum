@@ -42,6 +42,7 @@ $label-pic-activity-container-min-height: calc(#{$activity-container-min-height}
     height: $label-pic-activity-container-height;
     min-height: $label-pic-activity-container-min-height;
     @include border-radius(0.5rem);
+    
 }
 .label-pic-activity-container::before{
     position: absolute;
@@ -54,7 +55,6 @@ $label-pic-activity-container-min-height: calc(#{$activity-container-min-height}
     z-index: -1;
 }
 .label-pic-activity-column-titles{
-    @include border-radius(7px 7px 0 0);
     font-size: 1.2rem;
     font-weight: 500;
     margin: 0;
@@ -124,15 +124,60 @@ $label-pic-activity-container-min-height: calc(#{$activity-container-min-height}
     }
 }
 .label-pic-activity-question-container{
-    background-color: $light-blue;
-    width: calc(100% * (2 / 3));
-    @include border-radius(7px);
+    overflow: auto;
     min-width: 0;
     margin-top: 0;
+    background-color: $light-blue;
+    width: calc(100% * (2 / 3));
     min-height:calc(#{$label-pic-activity-container-min-height} - 2rem);
     height: calc(#{$label-pic-activity-container-height} - 2rem);
+    @include border-radius(7px);
+}
+.label-pic-activity-img-container{
+    padding: 0.5rem;
+    background-color: $white;
+    width: fit-content;
+    max-width: 90%;
+    min-width: 200px;
+    overflow: hidden;
+    @include box-shadow(rgba(0, 0, 0, 0.315) 0px 0 5px);
+    @include transition(all 0.3s ease-out);
+    @include border-radius(7px);
+}
+.label-pic-activity-img-container.zoomed-in{
+    max-width: 90%;
+    z-index: 3;
 }
 
+.label-pic-activity-image{
+    height: 100%;
+    width: 100%;
+    max-height: calc(max(29vh, 150px));
+    object-fit: contain;
+    object-position: center;
+    @include border-radius(7px);
+    @include  transition(all 0.3s ease-out);
+    &:hover{
+        cursor: zoom-in;
+    }
+}
+.label-pic-activity-image.zoomed-in{
+    max-height: 85vh;
+    &:hover{
+        cursor: zoom-out;
+    }
+}
+.label-pic-activity-question{
+    background: $white;
+    padding: 0.5rem;
+    min-height: 5vh;
+    text-align: center;
+    h2{
+        overflow-wrap: break-word;
+        margin: 0;
+        font-size: 0.8rem;
+    }
+}
 .label-pic-activity-draggables{
     @include label-pic-activity-draggable-styles();
     

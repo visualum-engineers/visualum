@@ -1,58 +1,13 @@
 import { useState, useEffect } from "react"
+import transformData from "./labelTransformData"
 import {DragDropContext} from "react-beautiful-dnd"
 import ActivityHeader from "../ActivityHeader"
-//import test from '../../../../../public/images/eureka_1.jpg'
 import WordBank from "../../utilities/dragAndDrop/ReactBeautifulDnD/WordBank"
-import LabelPicturesQuestion from "./LabelPicturesQuestion"
+import LabelPicturesQuestion from "./LabelQuestionColumn"
 import { useDispatch, useSelector } from "react-redux"
 import { resetPopUpOff, enableTap, enableDnD} from "../../../../redux/features/activityTypes/activitiesSlice"
-const transformData = (data, itemBankColumns) =>{
-    let newData = {}
-    //on mount (initial data loaded)
-    newData["itemBank"] = {}
-    newData["allItems"] = {}
-    newData["answerChoices"] = {}
-    newData["categories"]= {}
-    newData.timer = data.timer
-    newData.imageURL = data.imageURL
-    newData.imgSize = data.imgSize
-    if(!data.itemBank){
-        for(let i of data.imgLabels) newData["categories"][i.id] = []
-        
-        for(let i=0; i<itemBankColumns; i++){
-            const elementsPresent = (data.answerChoices.length)%itemBankColumns === 0 ? (data.answerChoices.length)/itemBankColumns : Math.floor((data.answerChoices.length)/itemBankColumns+1)
-            const startSlice = i * elementsPresent 
-            const endSlice = (i+1) * elementsPresent
-            newData.itemBank["answerChoices-" + i] = data.answerChoices.slice(startSlice, endSlice).map((answer) =>{
-                return {id: answer.id, content: answer.content}
-            })
-        }
-        //keep a record of all items in word bank. 
-        // Needed to create 1 or 2 columns based on screen size
-        for(let i of data.answerChoices){
-            newData.allItems[i.id] = {id: i.id, content: i.content}
-            newData.answerChoices[i.id] = {id: i.id, content: i.content}
-        }
-    }
-    //when data was already transformed on mount 
-    else {
-        for(let i of Object.keys(data.categories)) newData["categories"][i] = [...data.categories[i]]
 
-        for(let i=0; i<itemBankColumns; i++){
-            const keys = Object.keys(data.allItems)
-            const elementsPresent = (keys.length)%itemBankColumns === 0 ? (keys.length)/itemBankColumns : Math.floor((keys.length)/itemBankColumns+1)
-            const startSlice = i * elementsPresent 
-            const endSlice = (i+1) * elementsPresent
-            newData["itemBank"]["answerChoices-" + i] = keys.slice(startSlice, endSlice).map((answer) =>{
-                return data.answerChoices[answer]
-            })
-        }
-        newData["allItems"] = {...data.allItems}
-        newData["answerChoices"] = {...data.answerChoices}
-    }
 
-    return newData
-}
 const LabelPicturesApp = ({
     activityData, 
     questionNum, 
@@ -60,19 +15,21 @@ const LabelPicturesApp = ({
     moreInfoOnClick,
     resetBtnOnClick, 
     moreInfoBtn, 
+    popUpBgStyles,
     mediumWindowWidth,
-    smallWindowWidth
+    smallWindowWidth,
 }) =>{
     const [data, setData] = useState(transformData(activityData, 1))
+
+
     //used for dnd and tap and drop actions
     const [firstTapEl, setFirstTapEl] = useState(null)
     const [removedEl, setRemovedEl] = useState(undefined)
-
     //redux states
     const dispatch = useDispatch()
     const disableDnD = useSelector((state) => !state.activities.dndEnabled)
     const resetPopUp = useSelector((state) => state.activities.resetPopUp)
-
+    
     //if it exists, grab info from local storage on mount.
     useEffect(() => {
         //on mount check local storage for data
@@ -91,7 +48,7 @@ const LabelPicturesApp = ({
             localStorage.removeItem(`${activityID}-match_activity_client_answer-${questionNum}`)        
         }
     }, [dispatch, resetPopUp, activityData, activityID, questionNum])
-
+    
     const toggleTap = (e) =>{
         if(e.type ==="keydown" && !(e.key === "Enter")) return
         //update redux store so instructions can dynamically change
@@ -106,7 +63,7 @@ const LabelPicturesApp = ({
         setFirstTapEl(null)
     }
     const onTap = () =>{
-
+        console.log(removedEl)
     }
     const onDragStart = () =>{
 
@@ -151,11 +108,17 @@ const LabelPicturesApp = ({
                         draggingOverClass={"label-pic-activity-draggable-over"}
                         isDraggingClass = {"label-pic-activity-dragging"}
                     />
+                    
                     <LabelPicturesQuestion 
                         data = {data}
+                        //inProp={inProp}
+                        //duration = {duration}
+                        // currQuestion={currQuestion}
+                        // prevQuestion = {prevQuestion}
                         firstTapEl= {firstTapEl}
                         disableDnD = {disableDnD}
                         onTap = {disableDnD? onTap: null}
+                        popUpBgStyles={popUpBgStyles}
                     />
                 </DragDropContext>
             </div>

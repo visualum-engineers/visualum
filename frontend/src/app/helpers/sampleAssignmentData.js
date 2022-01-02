@@ -68,6 +68,11 @@ const assignmentData = {
     },
     5:{
         type: "labelPictures",
+        questions: [
+            {id: 1, content: "What faces this world?"}, 
+            {id: 2, content:"What's your name?"},
+            {id: 3, content:"What's your cool?"},
+        ],
         imageURL: "images/homePage/mountain-home-bg.jpg",
         imgSize:{width:1169.3, height: 826.7},
         imgLabels:[
