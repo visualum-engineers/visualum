@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useZoomed } from "../components/utilities/imageContainer/Zoomable"
+import { useZoomed } from "../components/utilities/imageContainer/ZoomableContext"
 const useZoomState = ({onClick} = {}) =>{
     const [stateChange, setStateChange] = useState(false)
     const zoom = useZoomed()

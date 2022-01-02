@@ -1,5 +1,5 @@
 import ImageContainer from "../../utilities/imageContainer/ImageContainer"
-import ZoomableContext from "../../utilities/imageContainer/Zoomable"
+import ZoomableContext from "../../utilities/imageContainer/ZoomableContext"
 import Image from "../../utilities/imageContainer/Image"
 const MultipleChoiceImage = ({
     data,
