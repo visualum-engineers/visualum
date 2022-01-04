@@ -161,7 +161,7 @@ const MatchActivityApp = ({
         const droppableList = [...data.keyPairs[droppableName]]
 
         //store name of keyPair, and value popped
-        setRemovedEl([droppableList.pop(), droppableName])
+        setRemovedEl([droppableList[0], droppableName])
     }
     
     //when dragging stops

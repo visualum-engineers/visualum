@@ -135,7 +135,7 @@ const SortActivityApp = ({
         setIsOver(e.over.data.current.sortable.containerId)
     }
     //debounce expensive function. We also only create debounce once, on mount
-    const debouncedOnDragOver = useMemo(() => debounce(onDragOver, 220), []);
+    const debouncedOnDragOver = useMemo(() => debounce(onDragOver, 150), []);
     
     //overall wrapper function
     const onDragOverWrapper = (e) => {
@@ -275,50 +275,3 @@ const SortActivityApp = ({
     )
 }
 export default SortActivityApp
-/*
-        //means a selection hasnt happened so skip for keyboard
-        if(e.type === "keydown" && e.key !=="Enter") return
-        //update the first element
-        let droppableSelected = null
-        let currListItem = e.target.closest(".sort-activity-draggables")
-        if(!currListItem) {
-            droppableSelected = true
-            currListItem = e.target.closest(".sort-activity-inner-droppable")
-        }
-        //used when two list items are clicked, and not an empty droppable
-        const droppableId = currListItem.dataset.tapDroppableId
-        const draggableIndex = currListItem.dataset.tapIndex
-        const firstDraggableId = currListItem.dataset.tapDraggableId
-        
-        if(!firstElTap) {
-            setFirstElTap({
-                droppableId: droppableId,
-                draggableId: firstDraggableId,
-                draggableIndex: draggableIndex,
-                node: e.target,
-            })
-            currListItem.classList.add("sort-activity-dragging")
-            return
-        }
-        //update the second element, and perform tap logic
-        firstElTap.node.classList.remove("sort-activity-dragging")
-        const draggableId = firstElTap.draggableId
-        const source = {
-            droppableId: firstElTap.droppableId,
-            index: firstElTap.draggableIndex
-        }
-        const destination = {
-            droppableId: droppableId,
-            index: droppableSelected ? 0 : draggableIndex,
-        }
-        const result={
-            source: source,
-            destination: destination,
-            draggableId: draggableId
-        }
-        */
-
-
-/*
-
-*/

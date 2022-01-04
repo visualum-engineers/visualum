@@ -17,6 +17,9 @@ const DraggableItems = ({
         >
             {(provided, snapshot) => (
                 <li 
+                    ref={provided.innerRef} 
+                    {...provided.draggableProps} 
+                    {...provided.dragHandleProps}
                     id={"dragItem"+id}
                     data-tap-draggable-id={id}
                     data-tap-droppable-id={droppableId}
@@ -26,9 +29,7 @@ const DraggableItems = ({
                     onClick={onTap ? onTap:null}
                     onKeyDown={onTap ? onTap:null}
                     tabIndex={0}
-                    ref={provided.innerRef} 
-                    {...provided.draggableProps} 
-                    {...provided.dragHandleProps}
+
                 >
                     <div>{content}</div>
                 </li>

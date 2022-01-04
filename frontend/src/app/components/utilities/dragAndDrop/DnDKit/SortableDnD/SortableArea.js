@@ -1,3 +1,4 @@
+import React from 'react';
 import {SortableContext, verticalListSortingStrategy} from '@dnd-kit/sortable';
 import SortableItems from "./SortableItems"
 import Droppable from '../NonSortableDnD/Droppable';
@@ -16,6 +17,27 @@ const SortableArea = ({
     isOver=null,
     disableDnD = null,
 }) =>{
+    const InnerList = React.memo(({
+        content, 
+        onTap    
+    }) =>
+        content.map((draggableContent, index)=>{
+            let last = index === content.length-1
+            return (
+                <SortableItems 
+                    droppableId = {id.toString()}
+                    key = {draggableContent.id}
+                    index = {index}
+                    id = {draggableContent.id}
+                    content = {draggableContent.content}
+                    draggableClassName = {`${draggableClassName}${last?" last-item":""}`}
+                    isDraggingClass={isDraggingClass}
+                    onTap={disableDnD ? onTap: null}
+                    disabled = {disableDnD}
+                />
+            )
+        }) 
+    )
     return (
         <SortableContext 
             items={content}
@@ -34,7 +56,11 @@ const SortableArea = ({
                     onTap={disableDnD? onTap: null}
                     disabled = {disableDnD}
                 >
-                    {content.map((draggableContent, index)=>{
+                    <InnerList
+                        content = {content}
+                        onTap ={onTap}
+                    />
+                    {/* {content.map((draggableContent, index)=>{
                         let last = index === content.length-1
                         return (
                             <SortableItems 
@@ -49,7 +75,7 @@ const SortableArea = ({
                                 disabled = {disableDnD}
                             />
                         )
-                    })}
+                    })} */}
                 </Droppable>
             </div>
         </SortableContext>

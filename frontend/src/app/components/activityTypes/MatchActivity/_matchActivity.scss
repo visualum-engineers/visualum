@@ -11,6 +11,7 @@
     @include border-radius(5px);
     border: 1px solid rgba(0, 0,0,0);
     padding: 0.5rem;
+    
 }
 @mixin match-activity-inner-droppable {
     position: relative;
@@ -272,6 +273,7 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
 .match-activity-draggables{
     @include match-activity-keypair-styles();
     margin-bottom: 0.75rem;
+    font-size: 0.75rem;
     background-color: $white;
     cursor: pointer;
     @include box-shadow(rgba(0, 0, 0, 0.082) 0px 5px 11px 0.1px);
