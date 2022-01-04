@@ -29,6 +29,7 @@ const SecondarySideBar = (props) =>{
                 </a>
                 <a href="/" aria-hidden ={!props.sidebarToggle} tabIndex ={!props.sidebarToggle?"-1": "0"}>visualum</a>
             </div>
+            
             <div className="secondary-sidebar-link-container d-flex flex-column align-items-center">
                 {props.data.map((navItem, index)=>{
                     return <NavItem 
@@ -43,8 +44,9 @@ const SecondarySideBar = (props) =>{
                         />
                 })}
             </div>
+            
             <div 
-                className="secondary-sidebar-footer d-flex flex-column align-items-center justify-content-end flex-grow-1"
+                className={`secondary-sidebar-footer d-flex flex-column justify-content-${props.userProfile ? "start":"end"} align-items-center flex-grow-1`}
             >
                 <NavItem 
                     textContent={settingsLink} 
@@ -61,9 +63,13 @@ const SecondarySideBar = (props) =>{
                     styles={`${props.customFooterLinkClass}`}
                 />
                 {//add user profile if provided
-                    props.userProfile
+                    props.userProfile && 
+                    <div className="d-flex align-items-end justify-content-center flex-grow-1 w-100">
+                        {props.userProfile}
+                    </div>
                 }
             </div>
+            
         </div>
         <button 
             className={`secondary-exit-sidebar-btn${props.sidebarToggle ?"":" sidebar-close"}`} 

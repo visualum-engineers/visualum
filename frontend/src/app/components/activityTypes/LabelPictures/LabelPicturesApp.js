@@ -3,9 +3,10 @@ import transformData from "./labelTransformData"
 import {DragDropContext} from "react-beautiful-dnd"
 import ActivityHeader from "../ActivityHeader"
 import WordBank from "../../utilities/dragAndDrop/ReactBeautifulDnD/WordBank"
-import LabelPicturesQuestion from "./LabelQuestionColumn"
+import LabelQuestionColumn from "./LabelQuestionColumn"
 import { useDispatch, useSelector } from "react-redux"
 import { resetPopUpOff, enableTap, enableDnD} from "../../../../redux/features/activityTypes/activitiesSlice"
+import updateMultipleSortableLists from "../../utilities/dragAndDrop/DnDUpdateAlgo.js/Sortables/updateMultipleLists"
 
 
 const LabelPicturesApp = ({
@@ -21,7 +22,6 @@ const LabelPicturesApp = ({
 }) =>{
     const [data, setData] = useState(transformData(activityData, 1))
 
-
     //used for dnd and tap and drop actions
     const [firstTapEl, setFirstTapEl] = useState(null)
     const [removedEl, setRemovedEl] = useState(undefined)
@@ -33,7 +33,7 @@ const LabelPicturesApp = ({
     //if it exists, grab info from local storage on mount.
     useEffect(() => {
         //on mount check local storage for data
-        let stored = localStorage.getItem(`${activityID}-label_activity_client_answer-${questionNum}`)
+        let stored = localStorage.getItem(`${activityID}-label_pic_activity_client_answer-${questionNum}`)
         if(!stored) return
         setData(JSON.parse(stored))
     }, [activityID, questionNum])
@@ -45,10 +45,26 @@ const LabelPicturesApp = ({
             setFirstTapEl(null)
             dispatch(resetPopUpOff())
             //remove any saved data from local storage
-            localStorage.removeItem(`${activityID}-match_activity_client_answer-${questionNum}`)        
+            localStorage.removeItem(`${activityID}-label_pic_activity_client_answer-${questionNum}`)        
         }
     }, [dispatch, resetPopUp, activityData, activityID, questionNum])
+
+    //test is item comes from a word bank column
+    const answerChoiceTestEl = (el) => /answerChoices.*/.test(el)
     
+    const onDragStart = () =>{
+
+    }
+    const onDragUpdate = () =>{
+
+    }
+    const onDragEnd = (result) =>{
+        const newState = updateMultipleSortableLists(data, result, answerChoiceTestEl)
+        if(!newState) return
+        //update state
+        setData(newState)
+        localStorage.setItem(`${activityID}-label_pic_activity_client_answer-${questionNum}`, JSON.stringify(newState))
+    }
     const toggleTap = (e) =>{
         if(e.type ==="keydown" && !(e.key === "Enter")) return
         //update redux store so instructions can dynamically change
@@ -65,22 +81,12 @@ const LabelPicturesApp = ({
     const onTap = () =>{
         console.log(removedEl)
     }
-    const onDragStart = () =>{
-
-    }
-    const onDragUpdate = () =>{
-
-    }
-    const onDragEnd = () =>{
-
-    }
-
     return(
         <>
             <ActivityHeader 
+                data ={data}
                 mediumWindowWidth={mediumWindowWidth}
                 smallWindowWidth = {smallWindowWidth}
-                data ={data}
                 resetBtnOnClick ={resetBtnOnClick} 
                 questionNum={questionNum}
                 disableDnD ={disableDnD}
@@ -109,16 +115,19 @@ const LabelPicturesApp = ({
                         isDraggingClass = {"label-pic-activity-dragging"}
                     />
                     
-                    <LabelPicturesQuestion 
+                    <LabelQuestionColumn 
                         data = {data}
-                        //inProp={inProp}
-                        //duration = {duration}
-                        // currQuestion={currQuestion}
-                        // prevQuestion = {prevQuestion}
                         firstTapEl= {firstTapEl}
                         disableDnD = {disableDnD}
                         onTap = {disableDnD? onTap: null}
                         popUpBgStyles={popUpBgStyles}
+                        placeholderClass ={"label-pic-activity-droppables-placeholder"}
+                        columnContainerClass = {"label-pic-activity-question-column flex-grow-1 d-flex flex-column w-100"}
+                        droppableClassName = {"label-pic-activity-question-droppables d-flex flex-column w-100"}
+                        innerDroppableClassName = {`${disableDnD && firstTapEl? "label-pic-activity-tap-active ": ""}label-pic-activity-inner-droppable d-flex flex-column align-items-center w-100`}
+                        draggableClassName= {"label-pic-activity-draggables d-flex align-items-center justify-content-center"}
+                        draggingOverClass={"label-pic-activity-draggable-over"}
+                        isDraggingClass ={"label-pic-activity-dragging"}
                     />
                 </DragDropContext>
             </div>

@@ -109,41 +109,9 @@ const MatchActivityApp = ({
     useEffect(() => {
         setData((data) => transformData(data, columns.length))
     }, [mediumWindowWidth, columns.length])
-    
-    //when dragging starts
-    const onDragStart = (result) =>{
-        //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
-        document.querySelector("html").classList.add("sortActivityActive")
-    }
-    //while dragging
-    const onDragUpdate = (result) =>{
-        const {destination, source} = result
-        //when dragging outside droppable container
-        if(!destination) {
-            // dont do anything if nothing is stored
-            if(!removedEl || !removedEl[0]) return
-            return setRemovedEl(undefined)
-        }
-        //when dragging inside same container
-        if(destination.droppableId === source.droppableId) return
-        //when dragging between word bank
-        const answerChoiceTestEl = (el) => /answerChoices.*/.test(el)
-        //if dragging to another word bank container
-        if(answerChoiceTestEl(destination.droppableId)) return
 
-        //when dragging into a keypair container
-        const droppableName = data.categoryIDs[destination.droppableId]
-        const droppableList = [...data.keyPairs[droppableName]]
-
-        //store name of keyPair, and value popped
-        setRemovedEl([droppableList.pop(), droppableName])
-    }
-   
-    //when dragging stops
-    const onDragEnd = (result) =>{
-        setRemovedEl(undefined)
-        //to re-enable smooth scrolling for the remainder of the pages
-        document.querySelector("html").classList.remove("sortActivityActive")
+    //used because we need to keep only one answer in a key container at a time.
+    const customUpdateLists = (result) =>{
         //setup
         const {destination, source, draggableId} = result
         //means that nothing has changed
@@ -217,7 +185,45 @@ const MatchActivityApp = ({
         if(addedToWordBank) newState.allItems[addedToWordBank.id] = addedToWordBank
         if(startContainerType==="itemBank") delete newState.allItems[draggableId]
         if(finishContainerType==="itemBank") newState.allItems[draggableId] = data.answerChoices[draggableId]
-        
+        return newState
+    }
+    
+    //when dragging starts
+    const onDragStart = (result) =>{
+        //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
+        document.querySelector("html").classList.add("sortActivityActive")
+    }
+    //while dragging
+    const onDragUpdate = (result) =>{
+        const {destination, source} = result
+        //when dragging outside droppable container
+        if(!destination) {
+            // dont do anything if nothing is stored
+            if(!removedEl || !removedEl[0]) return
+            return setRemovedEl(undefined)
+        }
+        //when dragging inside same container
+        if(destination.droppableId === source.droppableId) return
+        //when dragging between word bank
+        const answerChoiceTestEl = (el) => /answerChoices.*/.test(el)
+        //if dragging to another word bank container
+        if(answerChoiceTestEl(destination.droppableId)) return
+
+        //when dragging into a keypair container
+        const droppableName = data.categoryIDs[destination.droppableId]
+        const droppableList = [...data.keyPairs[droppableName]]
+
+        //store name of keyPair, and value popped
+        setRemovedEl([droppableList.pop(), droppableName])
+    }
+    
+    //when dragging stops
+    const onDragEnd = (result) =>{
+        setRemovedEl(undefined)
+        //to re-enable smooth scrolling for the remainder of the pages
+        document.querySelector("html").classList.remove("sortActivityActive")
+        const newState = customUpdateLists(result)
+        if(!newState) return
         //update state
         setData(newState)
         localStorage.setItem(`${activityID}-match_activity_client_answer-${questionNum}`, JSON.stringify(newState))

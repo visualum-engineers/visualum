@@ -14,7 +14,7 @@
 }
 .mc-activity-image-container{
     //position: relative;
-    padding: 1rem;
+    padding: 0.6rem;
     @include box-shadow(rgba(0, 0, 0, 0.315) 0px 0 5px);
     @include border-radius(7px);
     background-color: $white;

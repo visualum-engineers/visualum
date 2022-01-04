@@ -20,7 +20,10 @@ const ActivityQuestions = (props) =>{
         labelPictures: <LabelPicturesApp {...newProps} />
     }
     return(
-        <div style={props.style} className="flex-grow-1 question-transition-container d-flex flex-column">
+        <div 
+            style={props.style} 
+            className="flex-grow-1 question-transition-container d-flex flex-column"
+        >
             {//load specific activity
                 activityMap[questionType]
             }

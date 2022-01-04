@@ -1,3 +1,5 @@
+@import "./labelPicturesBreakpoints";
+
 @mixin label-pic-activity-draggable-styles {
     list-style-type: none;
     min-height: 4rem;
@@ -15,9 +17,31 @@
     cursor: pointer;
     @include box-shadow(rgba(0, 0, 0, 0.082) 0px 5px 11px 0.1px);
     z-index: 2;
-    margin-bottom: 1rem;
+    margin-bottom: 0.7rem;
 }
-
+@mixin label-pic-activity-containers{
+    position: relative;
+    margin-top: 1.5rem;
+    background-color: $light-blue;
+    @include border-radius(7px);
+    min-width: 300px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    &::-webkit-scrollbar{
+        width: 0.5rem;
+        @include border-radius(7px);
+    }
+    &::-webkit-scrollbar-thumb{
+        @include border-radius(7px);
+        background-color: $dark-blue;
+    }
+}
+@mixin label-pic-activity-droppables{
+    border: 1px solid rgba(0,0,0,0);
+    flex-grow: 1;
+    height: min-content;
+    padding-bottom: 0.5rem;
+}
 @mixin label-pic-activity-inner-droppable {
     position: relative;
     list-style-type: none;
@@ -31,7 +55,7 @@
 }
 
 $activity-container-height: calc(94vh - 2rem);
-$activity-container-min-height: calc(600px - 7vh - 2rem);
+$activity-container-min-height: calc(40rem - 7vh - 2rem);
 $label-pic-activity-container-height: calc(#{$activity-container-height} - 3.6rem - 23px);
 $label-pic-activity-container-min-height: calc(#{$activity-container-min-height} - 3.6rem - 23px);
 
@@ -42,7 +66,6 @@ $label-pic-activity-container-min-height: calc(#{$activity-container-min-height}
     height: $label-pic-activity-container-height;
     min-height: $label-pic-activity-container-min-height;
     @include border-radius(0.5rem);
-    
 }
 .label-pic-activity-container::before{
     position: absolute;
@@ -72,22 +95,7 @@ $label-pic-activity-container-min-height: calc(#{$activity-container-min-height}
 }
 
 .label-pic-activity-itemBank{
-    position: relative;
-    margin-top: 1.5rem;
-    background-color: $light-blue;
-    @include border-radius(7px);
-    min-width: 300px;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    &::-webkit-scrollbar{
-        width: 0.5rem;
-        @include border-radius(7px);
-        //background-color: $light-gray;
-    }
-    &::-webkit-scrollbar-thumb{
-        @include border-radius(7px);
-        background-color: $dark-blue;
-    }
+    @include label-pic-activity-containers()
 }
 .label-pic-activity-itemBank-column-1,
 .label-pic-activity-itemBank-column-2{
@@ -97,11 +105,7 @@ $label-pic-activity-container-min-height: calc(#{$activity-container-min-height}
     min-width: 150px;
     height: min-content;
     .label-pic-activity-itemBank-droppables{
-        border: 1px solid rgba(0,0,0,0);
-        flex-grow: 1;
-        height: min-content;
-        padding-bottom: 0.5rem;
-        
+        @include label-pic-activity-droppables()
     }
     .label-pic-activity-inner-droppable{
         @include label-pic-activity-inner-droppable()
@@ -123,8 +127,9 @@ $label-pic-activity-container-min-height: calc(#{$activity-container-min-height}
         min-height: 100%;
     }
 }
+
 .label-pic-activity-question-container{
-    overflow: auto;
+    //overflow: auto;
     min-width: 0;
     margin-top: 0;
     background-color: $light-blue;
@@ -132,6 +137,11 @@ $label-pic-activity-container-min-height: calc(#{$activity-container-min-height}
     min-height:calc(#{$label-pic-activity-container-min-height} - 2rem);
     height: calc(#{$label-pic-activity-container-height} - 2rem);
     @include border-radius(7px);
+    padding-bottom: 0.7rem;
+    .label-pic-activity-column-titles{
+        position: relative;
+        @include border-radius(7px)
+    }
 }
 .label-pic-activity-img-container{
     padding: 0.5rem;
@@ -171,16 +181,67 @@ $label-pic-activity-container-min-height: calc(#{$activity-container-min-height}
     background: $white;
     padding: 0.5rem;
     min-height: 5vh;
+    max-height: 8.5rem;
     text-align: center;
+    overflow: scroll;
+    resize: vertical;
+    overflow-x: hidden;
+    &::-webkit-scrollbar{
+        width: 0.5rem;
+        @include border-radius(7px);
+    }
+    &::-webkit-scrollbar-thumb{
+        @include border-radius(7px);
+        background-color: $dark-blue;
+    }
     h2{
         overflow-wrap: break-word;
-        margin: 0;
+        margin: auto;
         font-size: 0.8rem;
     }
 }
+.label-pic-activity-droppables-placeholder{
+    position: relative;
+    padding-left: 13.9% !important;
+    &:after{
+        content: "Drag answer Here";
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.8rem;
+        opacity: 0.5;
+        font-weight: 500;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+}
+.label-pic-activity-question-column{
+    @include label-pic-activity-containers();
+    min-width: 0;
+    height: 16vh;
+    min-height: 6.5rem;
+    margin-top: calc(max(1vh, 0.5rem));
+    padding: 0.5rem;
+    padding-right:0;
+    //padding-bottom: 0;
+    background-color: $white;
+    .label-pic-activity-question-droppables{
+        @include label-pic-activity-droppables();
+        padding: 0;
+    }
+    .label-pic-activity-inner-droppable{
+        @include label-pic-activity-inner-droppable();
+
+    }
+}
+
 .label-pic-activity-draggables{
     @include label-pic-activity-draggable-styles();
-    
+    //width: 100%;
     &::-webkit-scrollbar{
         width: 0.5rem;
         @include border-radius(7px);
@@ -205,19 +266,11 @@ $label-pic-activity-container-min-height: calc(#{$activity-container-min-height}
     color: $main-font-color;
     background-color: $light-gray;
     border: 1px solid $black;
-
     div{
         transform: scale(1.1);
     }
 }
-.label-pic-activity-draggables.hide-draggable{
-    position: absolute !important;
-    opacity: 0;
-    visibility: hidden !important;
-    display: none !important;
-    width: 0 !important;
-    height: 0 !important;
-}
+
 .label-pic-activity-inner-droppable.label-pic-activity-draggable-over{
     background-color: $darkest-gray;
 }
@@ -226,37 +279,54 @@ $label-pic-activity-container-min-height: calc(#{$activity-container-min-height}
     background-color: $darkest-gray;
 }
 
-// .label-pic-activity-container img{
-//     min-width: 175px;
-//     @include fillContainer;
-// }
-// .imgIndicatorContainer{
-//     position: relative;
-// }
-// .labelIndicators{
-//     position: absolute;
-//     border: 1px $main-font-color solid;
-// }
-// .labelWordBankColumn{
-//     @include border-radius(6px);
-//     min-height: 100px;
-//     margin: 5px;
-//     padding: 2.5px;
-// }
-// .imgLabelContainer{
-//     @extend .labelWordBankColumn;
-//     min-height: 47px;
-//     border: 1px $main-font-color solid;
-// }
-// .labelChoices{
-//     @include border-radius(5px);
-//     cursor: pointer;
-//     margin: 5px 0;
-//     width: 100%;
-//     min-height: 30px;
-//     border: 1px $main-font-color solid;
-// }
-// .labelChoices p{
-//     @include no-space;
-//     color: $main-font-color;
-// }
+//question transition classes
+.label-pic-question-transition-container{
+    position: relative;
+}
+
+.label-pic-question-move-left-enter{
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: translateX(-100%); 
+}
+.label-pic-question-move-left-enter-active{
+    opacity: 1;
+    left: 0;
+    transform: translateX(0)
+}
+
+.label-pic-question-move-left-exit{
+    opacity: 1;
+    transform: translateX(0);
+}
+.label-pic-question-move-left-exit-active{
+    opacity: 0;
+    transform: translateX(100%);
+}
+.label-pic-question-move-right-enter{
+    position:absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: translateX(100%);
+}
+.label-pic-question-move-right-enter-active{
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.label-pic-question-move-right-exit{
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.label-pic-question-move-right-exit-active{
+    opacity: 0;
+    transform: translateX(-100%);
+} 

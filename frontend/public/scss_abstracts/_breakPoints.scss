@@ -8,6 +8,7 @@
     @include navbar-lg;
     @include entry-form-lg;
     @include match-activity-lg;
+    @include label-pic-activity-lg;
     @include activity-lg;
 }
 
@@ -17,10 +18,11 @@
     @include match-activity-md;
     @include activity-md;
     @include homepage-sm;
+    @include label-pic-activity-md;
 }
 
 @media(max-width: 768px){
-    
+
 }
 
 @media (max-width: 575px) { 
@@ -29,4 +31,5 @@
     @include match-activity-sm;
     @include activity-sm;
     @include homepage-xs;
+    @include label-pic-activity-sm;
 }

@@ -21,7 +21,7 @@
     @include border-radius(7px);
 }
 $activity-container-height: calc(94vh - 2rem);
-$activity-container-min-height: calc(600px - 7vh - 2rem);
+$activity-container-min-height: calc(40rem - 7vh - 2rem);
 $match-activity-container-height: calc(#{$activity-container-height} - 3.6rem - 23px);
 $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3.6rem - 23px);
 
@@ -271,7 +271,7 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
 
 .match-activity-draggables{
     @include match-activity-keypair-styles();
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     background-color: $white;
     cursor: pointer;
     @include box-shadow(rgba(0, 0, 0, 0.082) 0px 5px 11px 0.1px);
