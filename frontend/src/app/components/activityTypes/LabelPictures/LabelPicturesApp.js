@@ -23,7 +23,7 @@ const LabelPicturesApp = ({
     const [data, setData] = useState(transformData(activityData, 1))
 
     //used for dnd and tap and drop actions
-    const [firstTapEl, setFirstTapEl] = useState(null)
+    const [firstElTap, setFirstElTap] = useState(null)
     const [removedEl, setRemovedEl] = useState(undefined)
     //redux states
     const dispatch = useDispatch()
@@ -42,7 +42,7 @@ const LabelPicturesApp = ({
         if(resetPopUp && resetPopUp.confirmed){
             //reset all state values to default
             setData(transformData(activityData, 1))
-            setFirstTapEl(null)
+            setFirstElTap(null)
             dispatch(resetPopUpOff())
             //remove any saved data from local storage
             localStorage.removeItem(`${activityID}-label_pic_activity_client_answer-${questionNum}`)        
@@ -53,11 +53,10 @@ const LabelPicturesApp = ({
     const answerChoiceTestEl = (el) => /answerChoices.*/.test(el)
     
     const onDragStart = () =>{
-
+        //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
+        document.querySelector("html").classList.add("sortActivityActive")
     }
-    const onDragUpdate = () =>{
 
-    }
     const onDragEnd = (result) =>{
         const newState = updateMultipleSortableLists(data, result, answerChoiceTestEl)
         if(!newState) return
@@ -74,12 +73,55 @@ const LabelPicturesApp = ({
         moreInfoOnClick()
         //if we're changing the mode, we need to reset this
         // as its only viable for tap mode
-        if(firstTapEl) firstTapEl.node.classList.remove("label-picture-activity-dragging")
+        if(firstElTap) firstElTap.node.classList.remove("label-picture-activity-dragging")
         setRemovedEl(undefined)
-        setFirstTapEl(null)
+        setFirstElTap(null)
     }
-    const onTap = () =>{
-        console.log(removedEl)
+    const onTap = (e) =>{
+        console.log(e)
+        //means a selection hasnt happened so skip for keyboard
+        if(e.type === "keydown" && e.key !=="Enter") return
+        //update the first element
+        let droppableSelected = null
+        let currListItem = e.target.closest(".label-pic-activity-draggables")
+        if(!currListItem) {
+            droppableSelected = true
+            currListItem = e.target.closest(".label-pic-activity-inner-droppable")
+        }
+        //used when two list items are clicked, and not an empty droppable
+        const droppableId = currListItem.dataset.tapDroppableId
+        const draggableIndex = currListItem.dataset.index
+        const firstDraggableId = currListItem.dataset.tapDraggableId
+        
+        if(!firstElTap) {
+            setFirstElTap({
+                droppableId: droppableId,
+                draggableId: firstDraggableId,
+                draggableIndex: draggableIndex,
+                node: e.target
+            })
+            currListItem.classList.add("label-pic-activity-dragging")
+            return
+        }
+        //update the second element, and perform tap logic
+        firstElTap.node.classList.remove("label-pic-activity-dragging")
+        const draggableId = firstElTap.draggableId
+        const source = {
+            droppableId: firstElTap.droppableId,
+            index: firstElTap.draggableIndex
+        }
+        const destination = {
+            droppableId: droppableId,
+            index: droppableSelected ? 0 : draggableIndex,
+        }
+        const result={
+            source: source,
+            destination: destination,
+            draggableId: draggableId
+        }
+        
+        onDragEnd(result)
+        setFirstElTap(null)
     }
     return(
         <>
@@ -96,13 +138,12 @@ const LabelPicturesApp = ({
             <div className="label-pic-activity-container d-flex">
                 <DragDropContext 
                     onDragEnd = {!disableDnD ? onDragEnd : null}
-                    onDragUpdate = {!disableDnD ? onDragUpdate: null}
                     onDragStart = {!disableDnD ? onDragStart : null}
                 >
                     <WordBank 
                         data={data}
-                        firstTapEl= {firstTapEl}
-                        disableDnD = {disableDnD}
+                        firstElTap= {firstElTap}
+                        //disableDnD = {disableDnD}
                         onTap = {disableDnD? onTap: null}
                         overallContainerClass = {"label-pic-activity-itemBank d-flex align-items-center flex-column full-size"}
                         columnContainerClass = {"label-pic-activity-itemBank-column-container w-100 flex-grow-1 d-flex flex-column"}
@@ -110,24 +151,25 @@ const LabelPicturesApp = ({
                         columnClass = {"label-pic-activity-itemBank-column"}
                         droppableClassName = {`label-pic-activity-itemBank-droppables d-flex flex-column w-100`}
                         draggableClassName = {"label-pic-activity-draggables d-flex align-items-center justify-content-center"}
-                        innerDroppableClassName = {`${disableDnD && firstTapEl? "label-pic-activity-tap-active ": ""}label-pic-activity-inner-droppable w-100 d-flex flex-column align-items-center`}
+                        innerDroppableClassName = {`${disableDnD && firstElTap? "label-pic-activity-tap-active ": ""}label-pic-activity-inner-droppable w-100 d-flex flex-column align-items-center`}
                         draggingOverClass={"label-pic-activity-draggable-over"}
                         isDraggingClass = {"label-pic-activity-dragging"}
                     />
                     
                     <LabelQuestionColumn 
                         data = {data}
-                        firstTapEl= {firstTapEl}
-                        disableDnD = {disableDnD}
+                        firstElTap = {firstElTap}
                         onTap = {disableDnD? onTap: null}
                         popUpBgStyles={popUpBgStyles}
                         placeholderClass ={"label-pic-activity-droppables-placeholder"}
                         columnContainerClass = {"label-pic-activity-question-column flex-grow-1 d-flex flex-column w-100"}
                         droppableClassName = {"label-pic-activity-question-droppables d-flex flex-column w-100"}
-                        innerDroppableClassName = {`${disableDnD && firstTapEl? "label-pic-activity-tap-active ": ""}label-pic-activity-inner-droppable d-flex flex-column align-items-center w-100`}
+                        innerDroppableClassName = {`${disableDnD && firstElTap? "label-pic-activity-tap-active ": ""}label-pic-activity-inner-droppable d-flex flex-column align-items-center w-100`}
                         draggableClassName= {"label-pic-activity-draggables d-flex align-items-center justify-content-center"}
                         draggingOverClass={"label-pic-activity-draggable-over"}
                         isDraggingClass ={"label-pic-activity-dragging"}
+                        moreInfoBtn = {moreInfoBtn}
+                        moreInfoOnClick={moreInfoOnClick}
                     />
                 </DragDropContext>
             </div>

@@ -4,7 +4,6 @@ const LabelQuestion = ({
     data,
     onTap, 
     firstElTap,
-    droppableHeader,
     placeholderClass,
     columnContainerClass,
     droppableClassName,
@@ -13,7 +12,8 @@ const LabelQuestion = ({
     isDraggingClass,
     draggingOverClass,
     questionID,
-    questionContent
+    questionContent,
+    //disableDnD,
 }) =>{
     return(
         <>
@@ -26,16 +26,18 @@ const LabelQuestion = ({
         <div className={columnContainerClass}>
             <DroppableArea 
                 id = {questionID}
-                placeholderClass={placeholderClass}
                 content={data.categories[questionID]}
-                droppableHeader = {droppableHeader}
+                firstElTap = {firstElTap}
+                onTap = {onTap}
+                //classes
+                placeholderClass={placeholderClass}
                 droppableClassName = {droppableClassName}
                 innerDroppableClassName = {innerDroppableClassName}
                 draggableClassName= {draggableClassName}
                 draggingOverClass =  {draggingOverClass}
                 isDraggingClass = {isDraggingClass}
-                onTap = {onTap}
-                firstElTap = {firstElTap}
+          
+                
             />
         </div>
         

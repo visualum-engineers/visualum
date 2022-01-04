@@ -90,7 +90,7 @@ const SortActivityApp = ({
     const resetPopUp = useSelector((state) => state.activities.resetPopUp) 
     
     //used for tap and drop to track selected elements
-    const [firstTapEl, setFirstTapEl] = useState(null)
+    const [firstElTap, setFirstElTap] = useState(null)
     const removedEl = useRef(null)
     //grab data from local storage
     useEffect(() =>{
@@ -102,7 +102,7 @@ const SortActivityApp = ({
         if(resetPopUp && resetPopUp.confirmed){
             //reset all state values to default
             setData(transformData(activityData, wordBankColumns.length))
-            setFirstTapEl(null)
+            setFirstElTap(null)
             dispatch(resetPopUpOff())
             //remove any saved data from local storage
             localStorage.removeItem(`${activityID}-sort_activity_client_answer-${questionNum}`)        
@@ -213,8 +213,8 @@ const SortActivityApp = ({
         const draggableIndex = currListItem.dataset.tapIndex
         const firstDraggableId = currListItem.dataset.tapDraggableId
         
-        if(!firstTapEl) {
-            setFirstTapEl({
+        if(!firstElTap) {
+            setFirstElTap({
                 droppableId: droppableId,
                 draggableId: firstDraggableId,
                 draggableIndex: draggableIndex,
@@ -224,11 +224,11 @@ const SortActivityApp = ({
             return
         }
         //update the second element, and perform tap logic
-        firstTapEl.node.classList.remove("sort-activity-dragging")
-        const draggableId = firstTapEl.draggableId
+        firstElTap.node.classList.remove("sort-activity-dragging")
+        const draggableId = firstElTap.draggableId
         const source = {
-            droppableId: firstTapEl.droppableId,
-            index: firstTapEl.draggableIndex
+            droppableId: firstElTap.droppableId,
+            index: firstElTap.draggableIndex
         }
         const destination = {
             droppableId: droppableId,
@@ -240,7 +240,7 @@ const SortActivityApp = ({
             draggableId: draggableId
         }
         updateSortableLists(result)
-        setFirstTapEl(null)
+        setFirstElTap(null)
     }
     //toggle dnd and tap mode based on btn
     const toggleTap = (e) => {
@@ -252,9 +252,9 @@ const SortActivityApp = ({
             moreInfoOnClick()
             //if we're changing the mode, we need to reset this
             // as its only viable for tap mode
-            if(firstTapEl) firstTapEl.node.classList.remove("sort-activity-dragging")
+            if(firstElTap) firstElTap.node.classList.remove("sort-activity-dragging")
             removedEl.current = null
-            setFirstTapEl(null)
+            setFirstElTap(null)
         }
     }
 
@@ -285,7 +285,7 @@ const SortActivityApp = ({
             >
                 {mediumWindowWidth && <WordBank 
                     data ={data}
-                    firstTapEl = {firstTapEl}
+                    firstElTap = {firstElTap}
                     isDraggingClass = {"sort-activity-is-dragging"}
                     onTap = {disableDnD ? onTap : null}
                     overallContainerClass = {`sort-activity-itemBank ${mediumWindowWidth ? "full-size":"w-100"}`} 
@@ -293,7 +293,7 @@ const SortActivityApp = ({
                     columnTitleClass = {`sort-activity-column-titles d-flex align-items-center justify-content-${smallWindowWidth? "center" : "start"}`}
                     columnClass = "sort-activity-itemBank-column"
                     droppableClassName ={`sort-activity-itemBank-droppables w-100${!mediumWindowWidth?" small-screen": ""}`}
-                    innerDroppableClassName = {`${disableDnD && firstTapEl? "sort-activity-tap-active ": ""}sort-activity-inner-droppable d-flex flex-column align-items-center w-100`}
+                    innerDroppableClassName = {`${disableDnD && firstElTap? "sort-activity-tap-active ": ""}sort-activity-inner-droppable d-flex flex-column align-items-center w-100`}
                     draggingOverClass = {"sort-activity-dragging-over"}
                     draggableClassName = {"sort-activity-draggables d-flex align-items-center justify-content-center "}
                     isOver = {isOver}
@@ -310,12 +310,12 @@ const SortActivityApp = ({
                     moreInfoBtn = {moreInfoBtn}
                     moreInfoOnClick = {moreInfoOnClick}
                     disableDnD = {disableDnD}
-                    firstTapEl = {firstTapEl}
+                    firstElTap = {firstElTap}
                 />
                 {/* Renders word/response bank */}
                 {!mediumWindowWidth && <WordBank 
                     data ={data}
-                    firstTapEl = {firstTapEl}
+                    firstElTap = {firstElTap}
                     isDraggingClass = {"sort-activity-is-dragging"}
                     onTap = {disableDnD ? onTap : null}
                     overallContainerClass = {`sort-activity-itemBank ${mediumWindowWidth ? "full-size":"w-100"}`} 
@@ -323,7 +323,7 @@ const SortActivityApp = ({
                     columnTitleClass = "sort-activity-column-titles"
                     columnClass = "sort-activity-itemBank-column"
                     droppableClassName ={`sort-activity-itemBank-droppables${!mediumWindowWidth?" small-screen w-100": ""}`}
-                    innerDroppableClassName = {`${disableDnD && firstTapEl? "sort-activity-tap-active ": ""}sort-activity-inner-droppable d-flex flex-column align-items-center w-100`}
+                    innerDroppableClassName = {`${disableDnD && firstElTap? "sort-activity-tap-active ": ""}sort-activity-inner-droppable d-flex flex-column align-items-center w-100`}
                     draggingOverClass = {"sort-activity-dragging-over"}
                     draggableClassName = {"sort-activity-draggables d-flex align-items-center justify-content-center"}
                     isOver = {isOver}

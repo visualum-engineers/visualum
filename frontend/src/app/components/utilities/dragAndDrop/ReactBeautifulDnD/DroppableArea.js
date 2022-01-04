@@ -48,6 +48,7 @@ const DroppableArea = ({
             )
         })
     )
+    //console.log(firstElTap)
     return(
         <div 
             className = {droppableClassName}

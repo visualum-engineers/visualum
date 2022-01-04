@@ -3,7 +3,7 @@ import DroppableArea from "../../utilities/dragAndDrop/ReactBeautifulDnD/Droppab
 
 const AnswerBank = ({
     data, 
-    firstTapEl, 
+    firstElTap, 
     mediumWindowWidth, 
     moreInfoOnClick, 
     disableDnD, 
@@ -44,13 +44,13 @@ const AnswerBank = ({
                     let last = index===Object.keys(data.keyPairs).length-1
                     return (
                         <DroppableArea
-                            firstElTap = {firstTapEl} 
+                            firstElTap = {firstElTap} 
                             key={data.categoryIDs[content]} 
                             id={data.categoryIDs[content]}
                             content = {data.keyPairs[content]}
                             droppableClassName = {`match-activity-answers-droppables w-100${last? " last-item":""}`}
                             draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
-                            innerDroppableClassName = {`${disableDnD && firstTapEl? "match-activity-tap-active ": ""}match-activity-inner-droppable w-100 h-100 d-flex flex-column justify-content-start align-items-center`}
+                            innerDroppableClassName = {`${disableDnD && firstElTap? "match-activity-tap-active ": ""}match-activity-inner-droppable w-100 h-100 d-flex flex-column justify-content-start align-items-center`}
                             draggingOverClass={"match-activity-draggable-over"}
                             isDraggingClass={"match-activity-dragging"}
                             onTap={disableDnD? onTap: null}

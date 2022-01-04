@@ -3,6 +3,7 @@ import LabelQuestionTransition from "./LabelQuestionTransition"
 import LabelQuestionNavBtns from "./LabelQuestionNavBtns"
 import { useState, useEffect } from "react"
 import {CSSTransition} from "react-transition-group"
+import MoreInfoBtn from "../../utilities/moreInfoBtn/MoreInfoBtn"
 const duration = 400
 const inPropDuration = duration + 100
 const defaultTransition = {
@@ -40,7 +41,6 @@ const LabelPicturesQuestion = (props) =>{
             setInProp(false)
         }, inPropDuration)
     }
-
     return (
         <div 
             className="label-pic-activity-question-container d-flex flex-column align-items-center"
@@ -48,6 +48,16 @@ const LabelPicturesQuestion = (props) =>{
         >
             <h2 className="label-pic-activity-column-titles">
                 <span>Question</span>
+                <div className="label-pic-activity-instructions-position d-flex">
+                    <MoreInfoBtn 
+                        textContent = "View Instructions"
+                        customContainerClass = "label-pic-activity-instructions"
+                        customContainerAriaLabel = "activity-instructions"
+                        customDropDownID = "label-pic-activity-instructions"
+                        setTimeoutOnMount = {!props.moreInfoBtn? 4000: 0}
+                        onClick = {props.moreInfoOnClick}
+                    />
+                </div>
             </h2>
             <LabelPicturesImage 
                 data={props.data}

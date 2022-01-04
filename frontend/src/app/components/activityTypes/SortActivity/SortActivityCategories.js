@@ -6,7 +6,7 @@ const SortActivityCategories = ({
         data, 
         mediumWindowWidth, 
         onTap=null, 
-        firstTapEl = null,
+        firstElTap = null,
         isOver=null,
         moreInfoBtn = null,
         moreInfoOnClick=null,
@@ -41,11 +41,11 @@ const SortActivityCategories = ({
                                 content = {data.categories[columnTitle]}
                                 droppableClassName = {`sort-activity-sort-droppables d-flex flex-column${mediumWindowWidth ?" small-screen": ""}${first? " first-item" : ""}`}
                                 draggableClassName = {"sort-activity-draggables d-flex align-items-center justify-content-center"}
-                                innerDroppableClassName = {`${disableDnD && firstTapEl? "sort-activity-tap-active ": ""}sort-activity-inner-droppable d-flex flex-column align-items-center`}
+                                innerDroppableClassName = {`${disableDnD && firstElTap? "sort-activity-tap-active ": ""}sort-activity-inner-droppable d-flex flex-column align-items-center`}
                                 draggingOverClass = {"sort-activity-dragging-over"}
                                 isDraggingClass = {"sort-activity-is-dragging"}
                                 placeHolderClass={"sort-activity-droppable-placeholder"}
-                                firstTapEl = {firstTapEl}
+                                firstElTap = {firstElTap}
                                 onTap={onTap}
                                 isOver={isOver}
                                 disableDnD = {disableDnD}

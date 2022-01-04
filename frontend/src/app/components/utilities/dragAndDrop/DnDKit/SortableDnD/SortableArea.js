@@ -12,7 +12,7 @@ const SortableArea = ({
     isDraggingClass= "", 
     placeHolderClass = "",
     onTap=null, 
-    firstTapEl=null, 
+    firstElTap=null, 
     isOver=null,
     disableDnD = null,
 }) =>{
@@ -26,7 +26,7 @@ const SortableArea = ({
                 {droppableHeader ? droppableHeader : null}
                 <Droppable 
                     id={id.toString()}
-                    firstTapEl = {firstTapEl}
+                    firstElTap = {firstElTap}
                     innerDroppableClassName = {innerDroppableClassName}
                     draggingOverClass = {draggingOverClass}
                     isOver={isOver}

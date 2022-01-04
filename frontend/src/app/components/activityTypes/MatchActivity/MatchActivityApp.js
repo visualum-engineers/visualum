@@ -79,7 +79,7 @@ const MatchActivityApp = ({
 }) => {
     const columns = mediumWindowWidth ? Array(1).fill(0) : Array(2).fill(0)
     const [data, setData] = useState(transformData(activityData, 2))
-    const [firstTapEl, setFirstTapEl] = useState(null)
+    const [firstElTap, setFirstElTap] = useState(null)
     const [removedEl, setRemovedEl] = useState(undefined)
     //redux states
     const dispatch = useDispatch()
@@ -98,7 +98,7 @@ const MatchActivityApp = ({
         if(resetPopUp && resetPopUp.confirmed){
             //reset all state values to default
             setData(transformData(activityData, columns.length))
-            setFirstTapEl(null)
+            setFirstElTap(null)
             dispatch(resetPopUpOff())
             //remove any saved data from local storage
             localStorage.removeItem(`${activityID}-match_activity_client_answer-${questionNum}`)        
@@ -243,8 +243,8 @@ const MatchActivityApp = ({
         const draggableIndex = currListItem.dataset.index
         const firstDraggableId = currListItem.dataset.tapDraggableId
         
-        if(!firstTapEl) {
-            setFirstTapEl({
+        if(!firstElTap) {
+            setFirstElTap({
                 droppableId: droppableId,
                 draggableId: firstDraggableId,
                 draggableIndex: draggableIndex,
@@ -254,11 +254,11 @@ const MatchActivityApp = ({
             return
         }
         //update the second element, and perform tap logic
-        firstTapEl.node.classList.remove("match-activity-dragging")
-        const draggableId = firstTapEl.draggableId
+        firstElTap.node.classList.remove("match-activity-dragging")
+        const draggableId = firstElTap.draggableId
         const source = {
-            droppableId: firstTapEl.droppableId,
-            index: firstTapEl.draggableIndex
+            droppableId: firstElTap.droppableId,
+            index: firstElTap.draggableIndex
         }
         const destination = {
             droppableId: droppableId,
@@ -271,7 +271,7 @@ const MatchActivityApp = ({
         }
         
         onDragEnd(result)
-        setFirstTapEl(null)
+        setFirstElTap(null)
     }
     //toggle dnd and tap mode based on btn
     const toggleTap = (e) => {
@@ -285,9 +285,9 @@ const MatchActivityApp = ({
             moreInfoOnClick()
             //if we're changing the mode, we need to reset this
             // as its only viable for tap mode
-            if(firstTapEl) firstTapEl.node.classList.remove("match-activity-dragging")
+            if(firstElTap) firstElTap.node.classList.remove("match-activity-dragging")
             setRemovedEl(undefined)
-            setFirstTapEl(null)
+            setFirstElTap(null)
         }
     }
   
@@ -312,7 +312,7 @@ const MatchActivityApp = ({
             <div className="d-flex justify-content-center w-100">
                 <AnswerBank 
                     data={data}
-                    firstTapEl= {firstTapEl}
+                    firstElTap= {firstElTap}
                     mediumWindowWidth = {mediumWindowWidth}
                     moreInfoOnClick = {moreInfoOnClick}
                     disableDnD = {disableDnD}
@@ -322,7 +322,7 @@ const MatchActivityApp = ({
                 />
                 {mediumWindowWidth ? <WordBank 
                                        data={data}
-                                       firstTapEl= {firstTapEl}
+                                       firstElTap= {firstElTap}
                                        disableDnD = {disableDnD}
                                        onTap = {disableDnD? onTap: null}
                                        overallContainerClass = {"match-activity-itemBank d-flex align-items-center flex-column full-size"}
@@ -331,7 +331,7 @@ const MatchActivityApp = ({
                                        columnClass = {"match-activity-itemBank-column"}
                                        droppableClassName = {`match-activity-itemBank-droppables d-flex flex-column w-100`}
                                        draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
-                                       innerDroppableClassName = {`${disableDnD && firstTapEl? "match-activity-tap-active ": ""}match-activity-inner-droppable w-100 d-flex flex-column align-items-center`}
+                                       innerDroppableClassName = {`${disableDnD && firstElTap? "match-activity-tap-active ": ""}match-activity-inner-droppable w-100 d-flex flex-column align-items-center`}
                                        draggingOverClass={"match-activity-draggable-over"}
                                        isDraggingClass = {"match-activity-dragging"}
                                     />
@@ -341,7 +341,7 @@ const MatchActivityApp = ({
                 <div className="d-flex justify-content-center w-100">
                         <WordBank 
                             data={data}
-                            firstTapEl= {firstTapEl}
+                            firstElTap= {firstElTap}
                             onTap = {disableDnD? onTap: null}
                             overallContainerClass = {"match-activity-itemBank d-flex flex-column align-items-center w-100"}
                             columnContainerClass = {"match-activity-itemBank-column-container w-100 flex-grow-1"}
@@ -349,7 +349,7 @@ const MatchActivityApp = ({
                             columnTitleClass = {"match-activity-column-titles vertical"}
                             droppableClassName = {`match-activity-itemBank-droppables d-flex flex-column w-100`}
                             draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
-                            innerDroppableClassName = {`${disableDnD && firstTapEl? "match-activity-tap-active ": ""}match-activity-inner-droppable w-100 d-flex flex-column align-items-center`}
+                            innerDroppableClassName = {`${disableDnD && firstElTap? "match-activity-tap-active ": ""}match-activity-inner-droppable w-100 d-flex flex-column align-items-center`}
                             draggingOverClass={"match-activity-draggable-over"}
                             isDraggingClass = {"match-activity-dragging"}
                         />

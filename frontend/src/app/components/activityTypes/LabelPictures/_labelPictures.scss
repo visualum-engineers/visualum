@@ -143,6 +143,41 @@ $label-pic-activity-container-min-height: calc(#{$activity-container-min-height}
         @include border-radius(7px)
     }
 }
+
+.label-pic-activity-instructions-position{
+    position: absolute;
+    top: 0.6rem;
+    right: 1rem;
+}
+
+.label-pic-activity-instructions{
+    color: $main-font-color;
+    button{
+        color: $dark-blue;
+    }
+    button:hover{
+        color: $white;
+        background: $black;
+    }
+    
+    .instructions{
+        background-color: $dark-blue;
+        color: $white;
+        left: -8.7rem;
+        text-align: center !important;
+    }
+
+    .info-triangle{
+        left: 8.7rem;
+        top:  -0.5rem;
+        border-bottom: 0.6rem solid $dark-blue;
+    }
+    .info-triangle-2{
+        top:-0.55rem;
+        left: 8.7rem;
+    }
+
+}
 .label-pic-activity-img-container{
     padding: 0.5rem;
     background-color: $white;
