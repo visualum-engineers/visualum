@@ -13,7 +13,6 @@ const LabelQuestion = ({
     draggingOverClass,
     questionID,
     questionContent,
-    //disableDnD,
 }) =>{
     return(
         <>

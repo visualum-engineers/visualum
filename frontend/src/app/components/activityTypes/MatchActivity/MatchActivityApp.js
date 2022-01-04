@@ -5,67 +5,14 @@ import {resetPopUpOff, enableTap, enableDnD} from '../../../../redux/features/ac
 import WordBank from '../../utilities/dragAndDrop/ReactBeautifulDnD/WordBank';
 import AnswerBank from './MatchActivityAnswerBank';
 import ActivityHeader from '../ActivityHeader';
+import transformData from './matchTransformData';
+import getResultOnTap from '../../utilities/dragAndDrop/DnDUpdateAlgo.js/Sortables/getResultOnTap';
 /*
 To-dos
 Backend: 
     1. Missing updating the backend with partial completion of assignment
     2. Missing updating the backend with grade after completion
 */
-const transformData = (data, itemBankColumns) =>{
-    let newData = {}
-    //on mount (initial data loaded)
-    newData["keyPairs"] = {}
-    newData["itemBank"] = {}
-    newData["answerChoices"] = {}
-    newData["allItems"] = {}
-    newData["categoryIDs"]= {}
-    newData.timer = data.timer
-    if(!data.itemBank){
-        for(let i of data.keyPairs) {
-            newData["keyPairs"][i.name] = []
-            //generate key-pars sorting both category id, and i name.
-            //This assumes both are unique! (which it should be)
-            newData.categoryIDs[i.categoryID] = i.name
-            newData.categoryIDs[i.name] = i.categoryID
-        }
-        
-        for(let i=0; i<itemBankColumns; i++){
-            const elementsPresent = (data.answerChoices.length)%itemBankColumns === 0 ? (data.answerChoices.length)/itemBankColumns : Math.floor((data.answerChoices.length)/itemBankColumns+1)
-            const startSlice = i * elementsPresent 
-            const endSlice = (i+1) * elementsPresent
-            newData.itemBank["answerChoices-" + i] = data.answerChoices.slice(startSlice, endSlice).map((answer) =>{
-                return {id: answer.id, content: answer.content}
-            })
-        }
-        //keep a record of all items in word bank. 
-        // Needed to create 1 or 2 columns based on screen size
-        for(let i of data.answerChoices){
-            newData.allItems[i.id] = {id: i.id, content: i.content}
-            newData.answerChoices[i.id] = {id: i.id, content: i.content}
-        }
-    }
-    //when data was already transformed on mount 
-    else {
-        for(let i of Object.keys(data.keyPairs)) {
-            newData["keyPairs"][i] = [...data.keyPairs[i]]
-        }
-            
-        for(let i=0; i<itemBankColumns; i++){
-            const keys = Object.keys(data.allItems)
-            const elementsPresent = (keys.length)%itemBankColumns === 0 ? (keys.length)/itemBankColumns : Math.floor((keys.length)/itemBankColumns+1)
-            const startSlice = i * elementsPresent 
-            const endSlice = (i+1) * elementsPresent
-            newData["itemBank"]["answerChoices-" + i] = keys.slice(startSlice, endSlice).map((answer) =>{
-                return data.answerChoices[answer]
-            })
-        }
-        newData["allItems"] = {...data.allItems}
-        newData["answerChoices"] = {...data.answerChoices}
-        newData["categoryIDs"] = {...data.categoryIDs}
-    }
-    
-    return newData
-}
 
 const MatchActivityApp = ({
     activityData, 
@@ -229,47 +176,16 @@ const MatchActivityApp = ({
         localStorage.setItem(`${activityID}-match_activity_client_answer-${questionNum}`, JSON.stringify(newState))
     }
     const onTap = (e) =>{
-        //means a selection hasnt happened so skip for keyboard
-        if(e.type === "keydown" && e.key !=="Enter") return
-        //update the first element
-        let droppableSelected = null
-        let currListItem = e.target.closest(".match-activity-draggables")
-        if(!currListItem) {
-            droppableSelected = true
-            currListItem = e.target.closest(".match-activity-inner-droppable")
+        const parm = {
+            e: e, 
+            firstElTap: firstElTap, 
+            setFirstElTap: setFirstElTap, 
+            listItemDraggableClass: "match-activity-draggables",
+            listItemInnerDroppableClass: "match-activity-inner-droppable",
+            currDraggingClass: "match-activity-dragging"
         }
-        //used when two list items are clicked, and not an empty droppable
-        const droppableId = currListItem.dataset.tapDroppableId
-        const draggableIndex = currListItem.dataset.index
-        const firstDraggableId = currListItem.dataset.tapDraggableId
-        
-        if(!firstElTap) {
-            setFirstElTap({
-                droppableId: droppableId,
-                draggableId: firstDraggableId,
-                draggableIndex: draggableIndex,
-                node: e.target
-            })
-            currListItem.classList.add("match-activity-dragging")
-            return
-        }
-        //update the second element, and perform tap logic
-        firstElTap.node.classList.remove("match-activity-dragging")
-        const draggableId = firstElTap.draggableId
-        const source = {
-            droppableId: firstElTap.droppableId,
-            index: firstElTap.draggableIndex
-        }
-        const destination = {
-            droppableId: droppableId,
-            index: droppableSelected ? 0 : draggableIndex,
-        }
-        const result={
-            source: source,
-            destination: destination,
-            draggableId: draggableId
-        }
-        
+        const result = getResultOnTap(parm)
+        if(!result) return
         onDragEnd(result)
         setFirstElTap(null)
     }

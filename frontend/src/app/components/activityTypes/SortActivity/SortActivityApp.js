@@ -9,7 +9,9 @@ import ActivityHeader from '../ActivityHeader';
 import SortActivityCategories from './SortActivityCategories';
 import Item from '../../utilities/dragAndDrop/DnDKit/DragOverlayItem';
 import debounce from 'lodash.debounce';
+import transformData from './sortTransformData';
 import updateMultipleSortableLists from '../../utilities/dragAndDrop/DnDUpdateAlgo.js/Sortables/updateMultipleLists';
+import getResultOnTap from '../../utilities/dragAndDrop/DnDUpdateAlgo.js/Sortables/getResultOnTap';
 
 /*Note Missing To-do
 Backend: 
@@ -21,52 +23,6 @@ Frontend:
     3. Missing re-rendering logic, when user answers question and moves on to the next one.
     4. Missing progress saved on local storage/memory (if user exits out of page)
 */
-
-//transform data to workable model
-const transformData = (data, itemBankColumns) =>{
-    let newData = {}
-    //on mount (initial data loaded)
-    newData["categories"] = {}
-    newData["itemBank"] = {}
-    newData["answerChoices"] = {}
-    newData["allItems"] ={}
-    if(!data.itemBank){
-        for(let i of data.categories) newData["categories"][i.name] = []
-        
-        for(let i=0; i<itemBankColumns; i++){
-            const elementsPresent = (data.answerChoices.length)%itemBankColumns === 0 ? (data.answerChoices.length)/itemBankColumns : Math.floor((data.answerChoices.length)/itemBankColumns+1)
-            const startSlice = i * elementsPresent 
-            const endSlice = (i+1) * elementsPresent
-            newData.itemBank["answerChoices-" + i] = data.answerChoices.slice(startSlice, endSlice).map((answer) =>{
-                return {id: answer.id, content: answer.content}
-            })
-        }
-        //keep a record of all items in word bank. 
-        // Needed to create 2 or 3 columns based on screen size
-        for(let i of data.answerChoices){
-            newData.allItems[i.id] = {id: i.id, content: i.content}
-            newData.answerChoices[i.id] = {id: i.id, content: i.content}
-        }
-       
-    }
-    //when data was already transformed on mount 
-    else {
-        for(let i of Object.keys(data.categories)) newData["categories"][i] = [...data.categories[i]]
-        
-        for(let i=0; i<itemBankColumns; i++){
-            const keys = Object.keys(data.allItems)
-            const elementsPresent = (keys.length)%itemBankColumns === 0 ? (keys.length)/itemBankColumns : Math.floor((keys.length)/itemBankColumns+1)
-            const startSlice = i * elementsPresent 
-            const endSlice = (i+1) * elementsPresent
-            newData["itemBank"]["answerChoices-" + i] = keys.slice(startSlice, endSlice).map((answer) =>{
-                return data.answerChoices[answer]
-            })
-        }
-        newData["allItems"] = {...data.allItems}
-        newData["answerChoices"] = {...data.answerChoices}
-    }
-    return newData
-}
 
 const SortActivityApp = ({
     activityData, 
@@ -121,7 +77,7 @@ const SortActivityApp = ({
     const answerChoiceTestEl = (el) => /answerChoices.*/.test(el)
 
     const updateSortableLists = (result) =>{
-        const newState = updateMultipleSortableLists(data,result, answerChoiceTestEl)
+        const newState = updateMultipleSortableLists(data, result, answerChoiceTestEl)
         if(!newState) return
         //update state
         setData(newState)
@@ -173,7 +129,9 @@ const SortActivityApp = ({
         }
         //update state when in a different droppable container than a sortable one
         if(isOver === e.over.data.current.sortable.containerId) return
-        if(e.over.data.current.sortable.containerId !== e.active.data.current.sortable.containerId) updateSortableLists(resultValues(e, e.over.data.current.sortable.containerId))
+        if(e.over.data.current.sortable.containerId !== e.active.data.current.sortable.containerId) {
+            updateSortableLists(resultValues(e, e.over.data.current.sortable.containerId))
+        }
         setIsOver(e.over.data.current.sortable.containerId)
     }
     //debounce expensive function. We also only create debounce once, on mount
@@ -199,48 +157,18 @@ const SortActivityApp = ({
     const onTap = (e) =>{
         //in case there was a lag due to debouncing
         setIsOver(undefined)
-        //means a selection hasnt happened so skip for keyboard
-        if(e.type === "keydown" && e.key !=="Enter") return
-        //update the first element
-        let droppableSelected = null
-        let currListItem = e.target.closest(".sort-activity-draggables")
-        if(!currListItem) {
-            droppableSelected = true
-            currListItem = e.target.closest(".sort-activity-inner-droppable")
+        const parms = {
+            e: e, 
+            firstElTap: firstElTap, 
+            setFirstElTap: setFirstElTap, 
+            listItemDraggableClass: "sort-activity-draggables",
+            listItemInnerDroppableClass: "sort-activity-inner-droppable",
+            currDraggingClass: "sort-activity-dragging"
         }
-        //used when two list items are clicked, and not an empty droppable
-        const droppableId = currListItem.dataset.tapDroppableId
-        const draggableIndex = currListItem.dataset.tapIndex
-        const firstDraggableId = currListItem.dataset.tapDraggableId
-        
-        if(!firstElTap) {
-            setFirstElTap({
-                droppableId: droppableId,
-                draggableId: firstDraggableId,
-                draggableIndex: draggableIndex,
-                node: e.target,
-            })
-            currListItem.classList.add("sort-activity-dragging")
-            return
-        }
-        //update the second element, and perform tap logic
-        firstElTap.node.classList.remove("sort-activity-dragging")
-        const draggableId = firstElTap.draggableId
-        const source = {
-            droppableId: firstElTap.droppableId,
-            index: firstElTap.draggableIndex
-        }
-        const destination = {
-            droppableId: droppableId,
-            index: droppableSelected ? 0 : draggableIndex,
-        }
-        const result={
-            source: source,
-            destination: destination,
-            draggableId: draggableId
-        }
-        updateSortableLists(result)
+        const result = getResultOnTap(parms)
+        if(!result) return
         setFirstElTap(null)
+        updateSortableLists(result)
     }
     //toggle dnd and tap mode based on btn
     const toggleTap = (e) => {
@@ -347,3 +275,50 @@ const SortActivityApp = ({
     )
 }
 export default SortActivityApp
+/*
+        //means a selection hasnt happened so skip for keyboard
+        if(e.type === "keydown" && e.key !=="Enter") return
+        //update the first element
+        let droppableSelected = null
+        let currListItem = e.target.closest(".sort-activity-draggables")
+        if(!currListItem) {
+            droppableSelected = true
+            currListItem = e.target.closest(".sort-activity-inner-droppable")
+        }
+        //used when two list items are clicked, and not an empty droppable
+        const droppableId = currListItem.dataset.tapDroppableId
+        const draggableIndex = currListItem.dataset.tapIndex
+        const firstDraggableId = currListItem.dataset.tapDraggableId
+        
+        if(!firstElTap) {
+            setFirstElTap({
+                droppableId: droppableId,
+                draggableId: firstDraggableId,
+                draggableIndex: draggableIndex,
+                node: e.target,
+            })
+            currListItem.classList.add("sort-activity-dragging")
+            return
+        }
+        //update the second element, and perform tap logic
+        firstElTap.node.classList.remove("sort-activity-dragging")
+        const draggableId = firstElTap.draggableId
+        const source = {
+            droppableId: firstElTap.droppableId,
+            index: firstElTap.draggableIndex
+        }
+        const destination = {
+            droppableId: droppableId,
+            index: droppableSelected ? 0 : draggableIndex,
+        }
+        const result={
+            source: source,
+            destination: destination,
+            draggableId: draggableId
+        }
+        */
+
+
+/*
+
+*/
