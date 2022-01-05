@@ -68,6 +68,7 @@ const assignmentData = {
     },
     5:{
         type: "labelPictures",
+        timer: false,
         questions: [
             {id: 1, content: "What faces this world?"}, 
             {id: 2, content:"What's your name?"},
@@ -99,7 +100,7 @@ const assignmentData = {
             {id:"5", content:"Bruh"},
             {id:"6", content:"Yuh" },
             {id:"7", content:"Fuh" }
-        ]
+        ],
     }
 }
 export default assignmentData

@@ -41,6 +41,7 @@ const LabelPicturesQuestion = (props) =>{
             setInProp(false)
         }, inPropDuration)
     }
+    
     return (
         <div 
             className="label-pic-activity-question-container d-flex flex-column align-items-center"

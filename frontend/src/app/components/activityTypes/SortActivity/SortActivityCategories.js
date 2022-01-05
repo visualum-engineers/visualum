@@ -31,9 +31,9 @@ const SortActivityCategories = ({
                 </div>
                 <div className="d-flex justify-content-center flex-wrap h-100 sort-activity-category-droppables">
                     {numCategories.map((columnTitle, columnIndex)=> {
-                            const header = <p className="sort-activity-droppable-header">{columnTitle}</p>
-                            const first = ((columnIndex) % 2) === 0 
-                            return (
+                        const header = <p className="sort-activity-droppable-header">{columnTitle}</p>
+                        const first = ((columnIndex) % 2) === 0 
+                        return (
                             <SortableArea
                                 key={columnTitle} 
                                 id={columnTitle}

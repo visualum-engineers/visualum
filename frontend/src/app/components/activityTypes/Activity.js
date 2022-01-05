@@ -91,7 +91,6 @@ const Activity = () =>{
             setInProp(false)
         }, inPropDuration)
         localStorage.setItem(`${activityData.activityID}-activity_last_seen_question`, currQuestion.toString())
-
     }
     const exitSideBar = () => setSidebarToggle(false)
     

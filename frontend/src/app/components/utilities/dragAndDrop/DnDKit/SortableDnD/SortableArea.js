@@ -60,22 +60,6 @@ const SortableArea = ({
                         content = {content}
                         onTap ={onTap}
                     />
-                    {/* {content.map((draggableContent, index)=>{
-                        let last = index === content.length-1
-                        return (
-                            <SortableItems 
-                                droppableId = {id.toString()}
-                                key = {draggableContent.id}
-                                index = {index}
-                                id = {draggableContent.id}
-                                content = {draggableContent.content}
-                                draggableClassName = {`${draggableClassName}${last?" last-item":""}`}
-                                isDraggingClass={isDraggingClass}
-                                onTap={disableDnD ? onTap: null}
-                                disabled = {disableDnD}
-                            />
-                        )
-                    })} */}
                 </Droppable>
             </div>
         </SortableContext>
