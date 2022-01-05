@@ -21,7 +21,6 @@ function Droppable(props) {
         node: droppableRef.current,
       }
     });
-//console.log(props.data)
     return (
       <div 
         ref={mergeRefs([setNodeRef, droppableRef])} 

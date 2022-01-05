@@ -35,7 +35,10 @@ const SortActivityApp = ({
     smallWindowWidth,
 }) => {
     //for updating redux store(data to be sent to backend)
-    const wordBankColumns = mediumWindowWidth ? Array(1).fill(0) : Array(2).fill(0) 
+    const wordBankColumns = mediumWindowWidth ? Array(1).fill(0) 
+                            : smallWindowWidth ? Array(2).fill(0) 
+                            : Array(1).fill(0) 
+
     const [data, setData] = useState(transformData(activityData, wordBankColumns.length))
     const [activeId, setActiveId] = useState(undefined)
     const [isOver, setIsOver] = useState(undefined)
@@ -147,11 +150,14 @@ const SortActivityApp = ({
         document.querySelector("html").classList.remove("sortActivityActive")
         setActiveId(undefined)
         if(!e.over) return setIsOver(undefined)
+        //console.log(e)
         //reset overlay and over styles
         if(!e.over.data.current.sortable || isOver !== e.over.data.current.sortable.containerId) return setIsOver(undefined)
+
         //nothing changed
         if(isOver === e.over.data.current.sortable.containerId && e.over.data.current.index === e.active.data.current.index) return setIsOver(undefined)
         setIsOver(undefined)
+
         updateSortableLists(resultValues(e, e.over.data.current.sortable.containerId))
     };
     const onTap = (e) =>{
@@ -163,7 +169,6 @@ const SortActivityApp = ({
             setFirstElTap: setFirstElTap, 
             listItemDraggableClass: "sort-activity-draggables",
             listItemInnerDroppableClass: "sort-activity-inner-droppable",
-            currDraggingClass: "sort-activity-dragging"
         }
         const result = getResultOnTap(parms)
         if(!result) return
@@ -185,12 +190,17 @@ const SortActivityApp = ({
             setFirstElTap(null)
         }
     }
-
     const customCollisionAlgo = (e) =>{
         if(!dragOverlayItem.current) return
         const overlayRect = getBoundingClientRect(dragOverlayItem.current)
-        return mediumWindowWidth ? closestCorners(e, overlayRect) : rectIntersection(e, overlayRect)
+        switch (true){
+            case mediumWindowWidth:
+                return closestCorners(e, overlayRect)
+            default:
+                return rectIntersection(e, overlayRect)
+        }
     }
+
     return (
     <>  
         <ActivityHeader 
@@ -203,7 +213,7 @@ const SortActivityApp = ({
             toggleTap = {toggleTap}
             type="DnD"
         />
-        <div className={`sort-activity-container d-flex ${mediumWindowWidth ? "full-size":"flex-column align-items-center"}`}>
+        <div className={`sort-activity-container d-flex ${mediumWindowWidth ? "full-size":"portrait-size flex-column align-items-center"}`}>
             <DndContext 
                 onDragStart={onDragStart}
                 onDragOver = {onDragOverWrapper}
@@ -218,7 +228,7 @@ const SortActivityApp = ({
                     onTap = {disableDnD ? onTap : null}
                     overallContainerClass = {`sort-activity-itemBank ${mediumWindowWidth ? "full-size":"w-100"}`} 
                     columnContainerClass = "sort-activity-column-container w-100"
-                    columnTitleClass = {`sort-activity-column-titles d-flex align-items-center justify-content-${smallWindowWidth? "center" : "start"}`}
+                    columnTitleClass = {`sort-activity-column-titles d-flex align-items-center justify-content-center`}
                     columnClass = "sort-activity-itemBank-column"
                     droppableClassName ={`sort-activity-itemBank-droppables w-100${!mediumWindowWidth?" small-screen": ""}`}
                     innerDroppableClassName = {`${disableDnD && firstElTap? "sort-activity-tap-active ": ""}sort-activity-inner-droppable d-flex flex-column align-items-center w-100`}
@@ -248,7 +258,7 @@ const SortActivityApp = ({
                     onTap = {disableDnD ? onTap : null}
                     overallContainerClass = {`sort-activity-itemBank ${mediumWindowWidth ? "full-size":"w-100"}`} 
                     columnContainerClass = "sort-activity-column-container w-100"
-                    columnTitleClass = "sort-activity-column-titles"
+                    columnTitleClass = {`sort-activity-column-titles d-flex align-items-center justify-content-center`}
                     columnClass = "sort-activity-itemBank-column"
                     droppableClassName ={`sort-activity-itemBank-droppables${!mediumWindowWidth?" small-screen w-100": ""}`}
                     innerDroppableClassName = {`${disableDnD && firstElTap? "sort-activity-tap-active ": ""}sort-activity-inner-droppable d-flex flex-column align-items-center w-100`}

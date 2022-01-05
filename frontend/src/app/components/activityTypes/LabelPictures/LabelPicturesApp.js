@@ -83,7 +83,6 @@ const LabelPicturesApp = ({
             setFirstElTap: setFirstElTap, 
             listItemDraggableClass: "label-pic-activity-draggables",
             listItemInnerDroppableClass: "label-pic-activity-inner-droppable",
-            currDraggingClass: "label-pic-activity-dragging"
         }
         const result = getResultOnTap(parm)
         if(!result) return

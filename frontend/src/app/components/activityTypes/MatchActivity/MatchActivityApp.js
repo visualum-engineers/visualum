@@ -182,7 +182,6 @@ const MatchActivityApp = ({
             setFirstElTap: setFirstElTap, 
             listItemDraggableClass: "match-activity-draggables",
             listItemInnerDroppableClass: "match-activity-inner-droppable",
-            currDraggingClass: "match-activity-dragging"
         }
         const result = getResultOnTap(parm)
         if(!result) return

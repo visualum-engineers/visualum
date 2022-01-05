@@ -19,7 +19,8 @@ const SortableArea = ({
 }) =>{
     const InnerList = React.memo(({
         content, 
-        onTap    
+        onTap,
+        firstElTap    
     }) =>
         content.map((draggableContent, index)=>{
             let last = index === content.length-1
@@ -30,10 +31,13 @@ const SortableArea = ({
                     index = {index}
                     id = {draggableContent.id}
                     content = {draggableContent.content}
-                    draggableClassName = {`${draggableClassName}${last?" last-item":""}`}
                     isDraggingClass={isDraggingClass}
                     onTap={disableDnD ? onTap: null}
                     disabled = {disableDnD}
+                    draggableClassName = {
+                        `${draggableClassName}${last?" last-item":""}`
+                        +`${firstElTap && firstElTap.draggableId === draggableContent.id ?` ${isDraggingClass}`: " "}`
+                    }
                 />
             )
         }) 
@@ -59,6 +63,7 @@ const SortableArea = ({
                     <InnerList
                         content = {content}
                         onTap ={onTap}
+                        firstElTap={firstElTap}
                     />
                 </Droppable>
             </div>

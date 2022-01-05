@@ -287,24 +287,20 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
         @include border-radius(7px);
         background-color: $dark-blue;
     }
+    &:hover{
+        background-color: $light-blue;
+        border: 1px solid $black;
+    }
     div{
         margin: auto;
         width: 100%;
         @include transition(transform 0.2s ease-out)
     }
-    div:hover{
-        transform: scale(1.05);
-    }
 }
 
 .match-activity-dragging{
-    opacity: 0.8;
-    color: $main-font-color;
-    background-color: $light-gray;
+    background-color: $light-blue;
     border: 1px solid $black;
-    div{
-        transform: scale(1.1);
-    }
 }
 .match-activity-draggables.hide-draggable{
     position: absolute !important;
