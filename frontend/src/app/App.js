@@ -12,7 +12,6 @@ import DashboardClass from './components/dashboard/DashboardClass';
 import sampleActivityData from './helpers/sampleActivityData'
 import DashboardAssignments from './components/dashboard/DashboardAssignments';
 import TestBackend from "./components/testBackend/test"
-import AvatarCreator from './components/avatarCreator/AvatarCreator';
 import DashboardSettings from './components/dashboard/DashboardSettings';
 
 

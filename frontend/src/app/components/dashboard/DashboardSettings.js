@@ -7,7 +7,7 @@ export default function DashboardSettings() {
 
 	const [modalOpen, setModalOpen] = useState(false);
 
-	const accountType = "student";
+	// const accountType = "student";
 	const email = "test@gmail.com"
 
 	const teacherSettings =
