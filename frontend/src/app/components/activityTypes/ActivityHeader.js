@@ -1,4 +1,4 @@
-import ResetBtn from "../utilities/resetBtn/ResetBtn"
+import ResetBtn from "../utilities/generalBtn/GeneralBtn"
 import DrapAndDropToggler from "../utilities/dragAndDrop/DrapAndDropToggler"
 import Timer from '../utilities/timer/Timer';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

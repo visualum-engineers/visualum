@@ -2,10 +2,14 @@ const ProgressBar = ({
     containerClassName,
     progressBarClassName, 
     fillBarClassName,
-    progressBar
+    progressBar,
+    ariaLabel
 }) =>{
     return (
-        <div className={containerClassName}>
+        <div 
+            className={containerClassName} 
+            aria-label={ariaLabel}
+        >
             <div 
                 className="d-flex justify-content-between"
             >

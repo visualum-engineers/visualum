@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react"
 const ZoomedContext = React.createContext(false)
-const Zoomable = ({
+const ZoomableContext = ({
     children
 }) => {
     const [zoomedIn, setZoomedIn] = useState(false)
@@ -18,4 +18,4 @@ export function useZoomed(){
     return useContext(ZoomedContext)
 }
 
-export default Zoomable
+export default ZoomableContext

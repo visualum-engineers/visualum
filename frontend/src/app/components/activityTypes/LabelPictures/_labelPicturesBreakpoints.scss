@@ -1,0 +1,33 @@
+@mixin label-pic-activity-lg{
+    .label-pic-activity-question-column{
+        .label-pic-activity-draggables{
+            //calculated based of col classes
+            width: 73.2%;
+        }
+    }
+    .label-pic-activity-droppables-placeholder{
+        padding-left: 13.6% !important;
+    }
+}
+@mixin label-pic-activity-md {
+    .label-pic-activity-question-column{
+        .label-pic-activity-draggables{
+            //calculated based of col classes
+            width: 57%;
+        }
+    }
+    .label-pic-activity-droppables-placeholder{
+        padding-left: 21.9% !important;
+    }
+}
+@mixin label-pic-activity-sm {
+    .label-pic-activity-question-column{
+        .label-pic-activity-draggables{
+            //calculated based of col classes
+            width: 90%;
+        }
+    }
+    .label-pic-activity-droppables-placeholder{
+        padding-left: 5.2% !important;
+    }
+}

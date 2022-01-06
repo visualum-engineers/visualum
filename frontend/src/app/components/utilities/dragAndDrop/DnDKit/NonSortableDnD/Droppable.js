@@ -21,14 +21,13 @@ function Droppable(props) {
         node: droppableRef.current,
       }
     });
-//console.log(props.data)
     return (
       <div 
         ref={mergeRefs([setNodeRef, droppableRef])} 
         className={`${props.innerDroppableClassName}${isOver || props.isOver === props.id ? " "+props.draggingOverClass : ""}${props.placeHolderClass? " " + props.placeHolderClass: ""}`}
-        onClick = {props.firstTapEl ?  props.onTap: null}
-        onKeyDown = {props.firstTapEl? props.onTap: null}
-        tabIndex = {props.firstTapEl ? 0: -1}
+        onClick = {props.firstElTap ?  props.onTap: null}
+        onKeyDown = {props.firstElTap? props.onTap: null}
+        tabIndex = {props.firstElTap ? 0: -1}
         data-tap-droppable-id = {props.id.toString()}
       >
         {props.children}

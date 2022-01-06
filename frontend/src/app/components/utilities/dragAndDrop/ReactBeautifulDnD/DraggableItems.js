@@ -1,5 +1,14 @@
 import { Draggable } from "react-beautiful-dnd";
-const DraggableItems = ({id, index, content, draggableClassName, isDraggingClass, onTap=null, droppableId}) =>{
+const DraggableItems = ({
+    id, 
+    index, 
+    content, 
+    draggableClassName, 
+    isDraggingClass, 
+    onTap=null, 
+    droppableId,
+
+}) =>{
     return (
         <Draggable
             draggableId={id} 
@@ -8,18 +17,19 @@ const DraggableItems = ({id, index, content, draggableClassName, isDraggingClass
         >
             {(provided, snapshot) => (
                 <li 
-                    id={"dragItem"+id}
-                    data-tap-draggable-id={id}
-                    data-tap-droppable-id={droppableId}
-                    data-index={index}
-                    className={`${draggableClassName}${snapshot.isDragging ? " "+isDraggingClass: ""}`} 
                     ref={provided.innerRef} 
                     {...provided.draggableProps} 
                     {...provided.dragHandleProps}
+                    id={"dragItem"+id}
+                    data-tap-draggable-id={id}
+                    data-tap-droppable-id={droppableId}
+                    data-tap-index={index}
+                    className={`${draggableClassName}${snapshot.isDragging ? " "+isDraggingClass: ""}`} 
                     style ={provided.draggableProps.style}
                     onClick={onTap ? onTap:null}
                     onKeyDown={onTap ? onTap:null}
                     tabIndex={0}
+
                 >
                     <div>{content}</div>
                 </li>

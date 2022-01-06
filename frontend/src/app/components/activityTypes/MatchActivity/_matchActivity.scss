@@ -11,6 +11,7 @@
     @include border-radius(5px);
     border: 1px solid rgba(0, 0,0,0);
     padding: 0.5rem;
+    
 }
 @mixin match-activity-inner-droppable {
     position: relative;
@@ -21,7 +22,7 @@
     @include border-radius(7px);
 }
 $activity-container-height: calc(94vh - 2rem);
-$activity-container-min-height: calc(600px - 7vh - 2rem);
+$activity-container-min-height: calc(40rem - 7vh - 2rem);
 $match-activity-container-height: calc(#{$activity-container-height} - 3.6rem - 23px);
 $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3.6rem - 23px);
 
@@ -271,7 +272,8 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
 
 .match-activity-draggables{
     @include match-activity-keypair-styles();
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.75rem;
     background-color: $white;
     cursor: pointer;
     @include box-shadow(rgba(0, 0, 0, 0.082) 0px 5px 11px 0.1px);
@@ -285,24 +287,20 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
         @include border-radius(7px);
         background-color: $dark-blue;
     }
+    &:hover{
+        background-color: $light-blue;
+        border: 1px solid $black;
+    }
     div{
         margin: auto;
         width: 100%;
         @include transition(transform 0.2s ease-out)
     }
-    div:hover{
-        transform: scale(1.05);
-    }
 }
 
 .match-activity-dragging{
-    opacity: 0.8;
-    color: $main-font-color;
-    background-color: $light-gray;
+    background-color: $light-blue;
     border: 1px solid $black;
-    div{
-        transform: scale(1.1);
-    }
 }
 .match-activity-draggables.hide-draggable{
     position: absolute !important;

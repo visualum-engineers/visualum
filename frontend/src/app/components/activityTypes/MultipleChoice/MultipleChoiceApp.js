@@ -1,11 +1,11 @@
 import {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { resetPopUpOff } from '../../../../redux/features/activityTypes/activitiesSlice';
-import Zoomable from '../../utilities/imageContainer/Zoomable';
-import ImageContainer from '../../utilities/imageContainer/ImageContainer';
+import MultipleChoiceImage from './MultipleChoiceImage';
 import ActivityHeader from '../ActivityHeader'
 //import PopUp from '../../popUp/PopUpBackground';
 import MultipleChoiceColumn from './MultipleChoiceColumn';
+
 
 /*
     Frontend:
@@ -94,17 +94,11 @@ const MultipleChoiceApp = ({
                             <div className="mc-activity-question">{data.question}</div>
                     : null}
                     {data.imageURL &&  !mediumWindowWidth &&
-                        <Zoomable>
-                            <ImageContainer 
-                                defaultContainerClass = {`portrait-mode mc-activity-image-container`}
-                                defaultImageClass = {"mc-activity-image"}
-                                zoomContainerClass = {"mc-activity-image-container zoomed-in"}
-                                zoomImageClass = {"mc-activity-image zoomed-in"}
-                                popUpBgStyles = {popUpBgStyles}
-                                src={data.imageURL}
-                                alt={data.imageDescription}
-                            />
-                        </Zoomable>
+                        <MultipleChoiceImage 
+                            data = {data}
+                            customClass={"portrait-mode"}
+                            popUpBgStyles={popUpBgStyles}
+                        />
                     }
                     <div>   
                         {mediumWindowWidth? 
@@ -119,17 +113,11 @@ const MultipleChoiceApp = ({
                         />
                     </div>
                     {data.imageURL &&  mediumWindowWidth &&
-                        <Zoomable>
-                            <ImageContainer 
-                                defaultContainerClass = {`landscape-mode mc-activity-image-container`}
-                                defaultImageClass = {"mc-activity-image"}
-                                zoomContainerClass = {"mc-activity-image-container zoomed-in"}
-                                zoomImageClass = {"mc-activity-image zoomed-in"}
-                                popUpBgStyles = {popUpBgStyles}
-                                src={data.imageURL}
-                                alt={data.imageDescription}
-                            />
-                        </Zoomable>
+                        <MultipleChoiceImage 
+                            data = {data}
+                            customClass={"landscape-mode"}
+                            popUpBgStyles={popUpBgStyles}
+                        />
                     }
                 </div>
             </div>   

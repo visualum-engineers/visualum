@@ -1,7 +1,7 @@
 import SortableArea from "../../utilities/dragAndDrop/DnDKit/SortableDnD/SortableArea"
 const WordBank = ({
     data, 
-    firstTapEl, 
+    firstElTap, 
     isDraggingClass,
     onTap, 
     overallContainerClass, 
@@ -27,7 +27,7 @@ const WordBank = ({
                                 key={key} 
                                 className={`${columnClass}-${index+1} w-100 d-flex flex-column align-items-center`}>
                                 <SortableArea 
-                                    firstTapEl = {firstTapEl} 
+                                    firstElTap = {firstElTap} 
                                     id={key}
                                     content = {data.itemBank[key]}
                                     droppableClassName = {droppableClassName}

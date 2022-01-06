@@ -37,7 +37,8 @@ const UserProfile = ({
                     containerClassName={"user-profile-progress-bar-container"}
                     progressBarClassName={"user-profile-progress-bar"}
                     fillBarClassName={"user-profile-fill-bar"}
-                    progressBar={progressBar}
+                    progressBar={progressBar.percentage}
+                    ariaLabel={progressBar.ariaLabel}
                 />
             }
         </div>

@@ -1,6 +1,7 @@
 import ActivityQuestions from "./ActivityQuestions"
 import ActivityInstructions from "./ActivityInstructions"
 import ActivityBtns from "./NavActivityBtn/ActivityBtns"
+import DnDActivites from "./DnDActivites"
 import useWindowWidth from "../../hooks/use-window-width"
 import SecondarySideBar from "../sideBar/SecondarySideBar"
 import assignmentData from "../../helpers/sampleAssignmentData"
@@ -9,8 +10,8 @@ import {CSSTransition} from "react-transition-group"
 import { useSelector, useDispatch } from 'react-redux'
 import {enableTap, resetPopUpOn, resetPopUpOff} from '../../../redux/features/activityTypes/activitiesSlice'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faFileAlt, faCommentDots, faStar} from '@fortawesome/free-regular-svg-icons'
-import {faBookOpen} from '@fortawesome/free-solid-svg-icons'
+import {faCommentDots} from '@fortawesome/free-regular-svg-icons'
+
 import ActivityResetPopUp from './ActivityResetPopUp'
 import UserProfile from "../utilities/userProfile/UserProfile";
 import calculatePercentage from "../../helpers/calculatePercentage";
@@ -22,36 +23,10 @@ const defaultTransition = {
     transition: `all ${duration}ms ease-out`,
     transitionProperty: "opacity, transform, left",
 }
-const secondarySideBarData = [
-    {type:"btn", styles:"activities-sidebar-btn", textContent: "Overview"},
-    {type:"link", url: "/", styles:"activities-sidebar-link", textContent: 
-        <>
-            <span className="icon-container"><FontAwesomeIcon icon = {faFileAlt}/></span>
-            <span className="ms-1">Report</span>
-        </>
-    },
-    {type:"link", url: "/", styles:"activities-sidebar-link", textContent: 
-        <>
-            <span className="icon-container"><FontAwesomeIcon icon = {faStar}/></span>
-            <span className="ms-1">Grades</span>
-        </>
-    },
-    {type:"link", url: "/", styles:"activities-sidebar-link", textContent: 
-        <>
-            <span className="icon-container"><FontAwesomeIcon icon = {faBookOpen}/></span>
-            <span className="ms-1">Reference</span>
-        </>
-    },
-    {type:"link", url: "/", styles:"activities-sidebar-link", textContent: 
-        <>
-            <span className="icon-container"><FontAwesomeIcon icon = {faCommentDots}/></span>
-            <span className="ms-1">Feedback</span>
-        </>
-    },
-]
+
 //for testing. remove after
 const imageURL = "images/homePage/mountain-home-bg.jpg";
-//
+
 const Activity = () =>{
     let currQuestion = 1
     const [prevQuestion, setPrevQuestion] = useState(0)
@@ -76,12 +51,22 @@ const Activity = () =>{
         if(!stored) return
         setQuestionNum(parseInt(stored))
     }, [])
-    //when window width changes <992, sidebar automatically closes
+    //when window width < 992, sidebar automatically closes
     //it can still be opened though
     useEffect(()=>{ 
         if(!mediumWindowWidth) setSidebarToggle(false)
         else setSidebarToggle(true)
     },[mediumWindowWidth])
+
+    useEffect(()=>{
+        const activityType = activityData[questionNum].type
+        const updateDnD = !smallWindowWidth && (activityType in DnDActivites)
+        if(updateDnD) {
+            dispatch(enableTap())
+            setMoreInfoBtn(true)
+        }
+    }, [dispatch, smallWindowWidth, questionNum])
+
     const onNavBtnClick = (e) =>{
         //means it was just clicked. 
         if (inProp) return 
@@ -106,7 +91,6 @@ const Activity = () =>{
             setInProp(false)
         }, inPropDuration)
         localStorage.setItem(`${activityData.activityID}-activity_last_seen_question`, currQuestion.toString())
-
     }
     const exitSideBar = () => setSidebarToggle(false)
     
@@ -118,14 +102,6 @@ const Activity = () =>{
     }
     //use for activity instructions popup
     const moreInfoOnClick = () => setMoreInfoBtn(state=> !state)
-    useEffect(()=>{
-        const activityType = activityData[questionNum].type
-        const updateDnD = !smallWindowWidth && (activityType ==="matching" || activityType === "sort")
-        if(updateDnD) {
-            dispatch(enableTap())
-            setMoreInfoBtn(true)
-        }
-    }, [dispatch, smallWindowWidth, questionNum])
 
     //used for confirmation popup of reseting data in activity 
     const resetBtnOnClick = (e) =>{
@@ -148,6 +124,15 @@ const Activity = () =>{
                 return
         }
     }
+    const secondarySideBarData = [
+        {type:"btn", styles:"activities-sidebar-btn", textContent: "Instructions"},
+        {type:"link", url: "/", styles:"activities-sidebar-link", textContent: 
+            <>
+                <span className="icon-container"><FontAwesomeIcon icon = {faCommentDots}/></span>
+                <span className="ms-1">Feedback</span>
+            </>
+        },
+    ]
     const popUpBgStyles = {
         position: "fixed",
         top: "0",
@@ -173,7 +158,10 @@ const Activity = () =>{
                     avatar={<img src={imageURL} alt = {"user-avatar"}/>}
                     name = {"Arky Asmal"} 
                     accountType={capitalizeFirstLetter("student")}
-                    progressBar={calculatePercentage(questionNum-1, (Object.keys(activityData).length-2)) + "%"}
+                    progressBar={{
+                        percentage: calculatePercentage(questionNum-1, (Object.keys(activityData).length-2)) + "%",
+                        ariaLabel:"activity-progress-bar"
+                    }}
                 />
             }     
         />
@@ -223,7 +211,6 @@ const Activity = () =>{
                                     mediumWindowWidth = {mediumWindowWidth}
                                     smallWindowWidth = {smallWindowWidth}
                                     resetBtnOnClick = {resetBtnOnClick}
-                                    //sidebarToggle = {sidebarToggle}
                                     popUpBgStyles = {popUpBgStyles}
                                 />
                             </CSSTransition> 
