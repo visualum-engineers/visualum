@@ -4,7 +4,7 @@
     min-height: 4rem;
     height: 4rem;
     width: 100%;
-    min-width: 140px;
+    min-width: 130px;
     overflow-y: auto;
     overflow-x: hidden;
     overflow-wrap: break-word;
@@ -33,6 +33,10 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
     height: $match-activity-container-height;
     min-height: $match-activity-container-min-height;
     @include border-radius(0.5rem);
+}
+.match-activity-container.portrait-size{
+    height: calc(#{$match-activity-container-height} * 2);
+    min-height: calc(#{$match-activity-container-min-height} * 2);
 }
 
 .match-activity-container::before{
@@ -105,10 +109,12 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
     min-width: 300px;
     overflow-x: hidden;
     overflow-y: scroll;
+    min-height:calc(#{$match-activity-container-min-height} - 2rem);
+    height: calc(#{$match-activity-container-height} - 2rem);
+
     &::-webkit-scrollbar{
         width: 0.5rem;
         @include border-radius(7px);
-        //background-color: $light-gray;
     }
     &::-webkit-scrollbar-thumb{
         @include border-radius(7px);
@@ -119,6 +125,7 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
 
 .match-activity-itemBank-column-1,
 .match-activity-itemBank-column-2{
+    min-height: 100%;
     background-color: rgba(0, 0,0,0);
     @include box-shadow(none);
     .match-activity-itemBank-droppables{
@@ -143,8 +150,6 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
     min-width: 0;
     margin-top: 0;
     margin-left: 1.5rem;
-    min-height:calc(#{$match-activity-container-min-height} - 2rem);
-    height: calc(#{$match-activity-container-height} - 2rem);
     .match-activity-itemBank-column-1{
         margin: 0;
         padding-left: 0.5rem;
@@ -157,6 +162,8 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
     overflow-x: hidden;
     min-width: 310px;
     @include border-radius(7px);
+    min-height:calc(#{$sort-activity-container-min-height} - 2rem);
+    height: calc(#{$sort-activity-container-height} - 2rem);
 
     .match-activity-inner-droppable::after{
         position: absolute;
@@ -192,8 +199,7 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
 .match-activity-columns.full-size{
     width: calc(2 * 100% / 3);
     min-width: 0;
-    min-height:calc(#{$sort-activity-container-min-height} - 2rem);
-    height: calc(#{$sort-activity-container-height} - 2rem);
+    
     .match-activity-answers-column,
     .match-activity-keys-column{
         background-color: $light-blue;
