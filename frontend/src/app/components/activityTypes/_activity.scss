@@ -65,18 +65,17 @@
 .activities-sidebar-btn{
     @include remove-btn-default;
     @include border-radius(7px);
-    @include box-shadow(0 0 3px rgba(0, 0, 0, 1));
     padding: 0.5rem;
-    background-color: $purple;
+    background-color: $dark-blue;
     color: white;
     width: 60%;
     margin-bottom: 2.5rem;
     @include transition(all 0.3s ease-out);
-    border: 1px solid rgba(0, 0, 0,0);
+    border: 1px solid transparent;
     &:hover{
         transform: scale(1.1);
-        color: $purple;
-        border: 1px solid $purple;
+        color: $dark-blue;
+        border: 1px solid $dark-blue;
         background-color: white;
     }
 }
@@ -236,12 +235,12 @@
     font-weight: 500;
     font-size: 0.9rem;
     background-color: $white;
-    min-width: 10rem;
+    min-width: fit-content;
     width: 30%;
     height: 95%;
     @include border-radius(8px);
     @include box-shadow(rgba(0,0,0,0.1) 0px 0 10px);
-    padding: 1rem;
+    padding: 1rem 0.5rem;
 
     .timer-counter{
         @include border-radius(10px);

@@ -1,7 +1,7 @@
 import NavItem from "../utilities/navItems/NavItems"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCircleQuestion} from '@fortawesome/free-regular-svg-icons';
-import {faCog} from '@fortawesome/free-solid-svg-icons';
+import {faCog, faBars, faTimes} from '@fortawesome/free-solid-svg-icons';
 
 const Logo = "./images/VisualumLogo.png"
 const settingsLink = <>
@@ -72,10 +72,13 @@ const SecondarySideBar = (props) =>{
             
         </div>
         <button 
-            className={`secondary-exit-sidebar-btn${props.sidebarToggle ?"":" sidebar-close"}`} 
+            className={`secondary-exit-sidebar-btn${props.sidebarToggle ?" sidebar-open":" sidebar-close"}`} 
             aria-label="exit-sidebar"
-            onClick={props.handleSideBar}>
-            <i className={`fas fa-angle-${props.sidebarToggle ? "left":"right"}`}></i>
+            onClick={props.handleSideBar}
+        >
+            <FontAwesomeIcon 
+                icon= {props.sidebarToggle ? faTimes : faBars}
+            />
         </button>
         {!props.windowWidth &&  
             <button 

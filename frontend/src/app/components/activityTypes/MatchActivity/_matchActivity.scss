@@ -51,8 +51,8 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
 }
 .match-activity-instructions-position{
     position: absolute;
-    top: 0.3rem;
-    right: 0.2rem;
+    top: 0.4rem;
+    right: 0.4rem;
     z-index: 4;
 }
 .match-activity-instructions{
@@ -106,12 +106,12 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
     margin-top: 1.5rem;
     background-color: $light-blue;
     @include border-radius(7px);
-    min-width: 300px;
+    min-width: 310px;
     overflow-x: hidden;
     overflow-y: scroll;
     min-height:calc(#{$match-activity-container-min-height} - 2rem);
     height: calc(#{$match-activity-container-height} - 2rem);
-
+    padding-left: 0.5rem;
     &::-webkit-scrollbar{
         width: 0.5rem;
         @include border-radius(7px);
@@ -150,6 +150,7 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
     min-width: 0;
     margin-top: 0;
     margin-left: 1.5rem;
+    padding-left: 0;
     .match-activity-itemBank-column-1{
         margin: 0;
         padding-left: 0.5rem;
@@ -180,10 +181,7 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
         color: $dark-gray;
         font-size: 0.85rem;
     }
-    .match-activity-answers-column{
-        padding-right: 0.25rem;
-        padding-left: 0.75rem;
-    }
+
     &::-webkit-scrollbar{
         background-color: $light-blue;
         width: 0.5rem;
@@ -211,24 +209,23 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
 .match-activity-itemBank-column-1,
 .match-activity-answers-column, 
 .match-activity-itemBank-column-2{
-    @include border-radius(7px);
     min-width: 150px;
     height: min-content;
 }
-.match-activity-keys-column,
-.match-activity-itemBank-column-1{
-    margin-right: 0.5rem;
-}
+
 .match-activity-answers-column, 
 .match-activity-itemBank-column-2{
     position: relative;
     margin-right: 0;
 }
-.match-activity-answers-column,
 .match-activity-keys-column{
     background-color: $light-blue;
+    padding-left: 0.75rem;
 }
 .match-activity-answers-column{
+    @include border-radius(7px 7px 7px 0);
+    background-color: $light-blue;
+    padding-right: 0.25rem;
     .match-activity-inner-droppable{
         padding-top: 0.25rem;
         overflow: hidden;
@@ -238,9 +235,8 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
 .match-activity-keys{
     list-style-type: none;
     margin-bottom: 1rem;
-    min-width: 145px;
+    min-width: calc(145px - 1.5rem);
     height: 4.5rem;
-    padding: 0 1rem;
     p{
         @include match-activity-keypair-styles();
         background-color: $lightest-gray;
@@ -257,7 +253,14 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
         border: 1px solid rgba(0, 0,0,0) !important;
     }
 }
-
+.match-activity-key-arrows{
+    height: 4.5rem;
+    width: 1.5rem;
+    path{
+        fill: $darkest-blue;
+        height: 2rem;
+    }
+}
 .match-activity-answers-droppables{
     list-style-type: none;
     margin-bottom: 1rem;

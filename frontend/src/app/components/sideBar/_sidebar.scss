@@ -132,30 +132,33 @@
 .secondary-exit-sidebar-btn{
     @include remove-btn-default;
     position: fixed;
-    top: calc(50vh - 1.6rem);
-    left: 13rem;
-    padding: 0.2rem 0.9rem 0.1rem 0.9rem;
-    color: $secondary-font-color;
+    top: 0.2rem;
+    left: 10.9rem;
+    color: $darkest-gray;
     font-size: 1.5rem;
-    background-color: $white;
     border: 1px rgba(0,0,0,0) solid;
-    border-left: none;
-    @include box-shadow(4px 0px 11px -8px #000000);
-    @include border-radius(0px 20px 20px 0px);
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    @include border-radius(0.2rem);
     @include transition(all 0.3s ease-out);
     z-index: 4;
 }
-
-.secondary-exit-sidebar-btn.sidebar-close{
-    left: 0;
-}
 .secondary-exit-sidebar-btn:hover{
-    @include sidebar-navItems-hover();
-    transform: scale(1);
-    border: 1px black solid;
-    border-left: none;
+    transform: scale(1.05);
 }
-
-.secondary-sidebar-home-btn{
-    margin-bottom: 2rem;
+.secondary-exit-sidebar-btn.sidebar-close{
+    left: 0.3rem;
+    padding: 0.3rem 0.6rem;
+    border: 3px solid $light-gray;
+    font-size: 1.7rem;
+    background: $lightest-gray;
+}
+.secondary-exit-sidebar-btn.sidebar-open{
+    color: $dark-gray;
+}
+.secondary-exit-sidebar-btn.sidebar-open:hover{
+    color: $white;
+    background-color: #b90000;
+    opacity: 1;
 }

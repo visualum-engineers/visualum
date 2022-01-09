@@ -125,7 +125,7 @@ const Activity = () =>{
         }
     }
     const secondarySideBarData = [
-        {type:"btn", styles:"activities-sidebar-btn", textContent: "Instructions"},
+        {type:"btn", styles:"activities-sidebar-btn", textContent: "Instructions", onClick: moreInfoOnClick},
         {type:"link", url: "/", styles:"activities-sidebar-link", textContent: 
             <>
                 <span className="icon-container"><FontAwesomeIcon icon = {faCommentDots}/></span>
