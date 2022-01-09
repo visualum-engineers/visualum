@@ -25,18 +25,18 @@ $activity-container-height: calc(94vh - 2rem);
 $activity-container-min-height: calc(40rem - 7vh - 2rem);
 $match-activity-container-height: calc(#{$activity-container-height} - 3.6rem - 23px);
 $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3.6rem - 23px);
+$match-column-min-height: calc(#{$match-activity-container-min-height} - 2rem);
+$match-column-height: calc(#{$match-activity-container-height} - 2rem);
 
 .match-activity-container{
     position: relative;
     padding: 1rem;
     background-color: $white;
-    height: $match-activity-container-height;
-    min-height: $match-activity-container-min-height;
+    min-height: calc(max(#{$match-activity-container-height}, #{$match-activity-container-min-height}));
     @include border-radius(0.5rem);
 }
 .match-activity-container.portrait-size{
-    height: calc(#{$match-activity-container-height} * 2);
-    min-height: calc(#{$match-activity-container-min-height} * 2);
+    min-height: calc(max(calc(#{$match-activity-container-height} * 2), calc(#{$match-activity-container-min-height} * 2)));
 }
 
 .match-activity-container::before{
@@ -109,9 +109,10 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
     min-width: 310px;
     overflow-x: hidden;
     overflow-y: scroll;
-    min-height:calc(#{$match-activity-container-min-height} - 2rem);
-    height: calc(#{$match-activity-container-height} - 2rem);
+    min-height: $match-column-min-height;
+    height: $match-column-height;
     padding-left: 0.5rem;
+    resize: vertical;
     &::-webkit-scrollbar{
         width: 0.5rem;
         @include border-radius(7px);
@@ -163,9 +164,10 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
     overflow-x: hidden;
     min-width: 310px;
     @include border-radius(7px);
-    min-height:calc(#{$sort-activity-container-min-height} - 2rem);
-    height: calc(#{$sort-activity-container-height} - 2rem);
-
+    min-height: $match-column-min-height;
+    height: $match-column-height;
+    background-color: $light-blue;
+    resize: vertical;
     .match-activity-inner-droppable::after{
         position: absolute;
         text-align: center;
@@ -197,7 +199,6 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
 .match-activity-columns.full-size{
     width: calc(2 * 100% / 3 - 1.5rem);
     min-width: 0;
-    
     .match-activity-answers-column,
     .match-activity-keys-column{
         background-color: $light-blue;

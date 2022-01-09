@@ -26,7 +26,8 @@ $activity-container-height: calc(94vh - 2rem);
 $activity-container-min-height: calc(40rem - 7vh - 2rem);
 $sort-activity-container-height: calc(#{$activity-container-height} - 3.6rem - 23px);
 $sort-activity-container-min-height: calc(#{$activity-container-min-height} - 3.6rem - 23px);
-
+$sort-column-min-height: calc(#{$sort-activity-container-min-height} - 2rem);
+$sort-column-height: calc(#{$sort-activity-container-height} - 2rem);
 html.sortActivityActive{
     scroll-behavior: unset !important;
 }
@@ -47,13 +48,11 @@ html.sortActivityActive{
     position: relative;
     padding: 1rem;
     background-color: $white;
-    height: $sort-activity-container-height;
-    min-height: $sort-activity-container-min-height;
+    min-height: calc(max(#{$sort-activity-container-min-height}, #{$sort-activity-container-height}));
     @include border-radius(0.5rem);
 }
 .sort-activity-container.portrait-size{
-    height: calc(#{$sort-activity-container-height} * 2);
-    min-height: calc(#{$sort-activity-container-min-height} * 2);
+    min-height: calc(max(calc(#{$sort-activity-container-min-height} * 2), calc(#{$sort-activity-container-height} * 2)));
 }
 .sort-activity-container::before{
     position: absolute;
@@ -75,6 +74,7 @@ html.sortActivityActive{
     min-width: 300px;
     min-height:calc(#{$sort-activity-container-min-height} - 2rem);
     height: calc(#{$sort-activity-container-height} - 2rem);
+    resize: vertical;
     .sort-activity-itemBank-column-1{
         min-height: calc(#{$sort-activity-container-height} - 6rem)
     }
@@ -102,6 +102,7 @@ html.sortActivityActive{
     overflow-x: hidden;
     min-height:calc(#{$sort-activity-container-min-height} - 2rem);
     height: calc(#{$sort-activity-container-height} - 2rem);
+    resize: vertical;
     &::-webkit-scrollbar{
         width: 0.5rem;
         @include border-radius(7px);
