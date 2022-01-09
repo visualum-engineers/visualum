@@ -64,6 +64,7 @@ const assignmentData = {
         timer:false,
         type: "shortAnswer",
         question: "What faces this world?",
+        imageURL: "images/homePage/mountain-home-bg.jpg",
         clientAnswer: "",
     },
     5:{

@@ -10,6 +10,7 @@
     @include match-activity-lg;
     @include label-pic-activity-lg;
     @include activity-lg;
+    @include sa-activity-lg;
 }
 
 @media (max-width: 992px){
@@ -19,6 +20,7 @@
     @include activity-md;
     @include homepage-sm;
     @include label-pic-activity-md;
+    @include sa-activity-md;
 }
 
 @media(max-width: 768px){
@@ -32,4 +34,5 @@
     @include activity-sm;
     @include homepage-xs;
     @include label-pic-activity-sm;
+    @include sa-activity-sm;
 }

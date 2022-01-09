@@ -1,7 +1,6 @@
 .mc-activity-input-container{
     font-size: 0.8rem;
     @include border-radius(1rem);
-    padding-bottom: 23px;
 }
 
 .mc-activity-question{
@@ -13,7 +12,6 @@
     margin-bottom: 1rem;
 }
 .mc-activity-image-container{
-    //position: relative;
     padding: 0.6rem;
     @include box-shadow(rgba(0, 0, 0, 0.315) 0px 0 5px);
     @include border-radius(7px);
@@ -23,7 +21,6 @@
 
 .mc-activity-image-container.portrait-mode{
     margin-bottom: 1rem;
-    
 }
 .mc-activity-image-container.landscape-mode{
     margin-left: 2rem;
@@ -50,7 +47,6 @@
     &:hover{
         cursor: zoom-out;
     }
-    //z-index: 10;
 }
 .mc-activity-answer-container{
     @include box-shadow(rgba(0, 0, 0, 0.315) 0px 0 2px);

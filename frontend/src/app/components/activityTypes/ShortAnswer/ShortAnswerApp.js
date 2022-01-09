@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { resetPopUpOff } from '../../../../redux/features/activityTypes/activitiesSlice'
 import ActivityHeader from '../ActivityHeader'
+import ShortAnswerImage from './ShortAnswerImage'
 /*
     Frontend:
     1. Missing re-rendering logic, when user answers question and moves on to the next one.
@@ -65,21 +66,41 @@ const ShortAnswerApp = ({
                 resetBtnOnClick = {resetBtnOnClick} 
                 questionNum = {questionNum}
             />
-            <p className = "SAQuestion">{data.question}</p>  
-            {/*renders text area that students can respond in*/}
-            <div className = "d-flex justify-content-center">
-                <div className="SAInputContainer form-floating w-75">
-                    <textarea 
-                        className="form-control" 
-                        placeholder="Type your answer here" 
-                        id="SAtextArea"
-                        onChange={handleInput}
-                        value = {data.clientAnswer}
-                    >
-                    </textarea>
-                    <label htmlFor="SAtextArea">Type your answer here</label>
+            <div className="d-flex flex-column align-items-center justify-content-center flex-grow-1">
+                <div className="sa-activity-container d-flex flex-column align-items-center flex-grow-1">
+                    <h2 className={"sa-activity-question"}> 
+                       {data.question}
+                    </h2>
+
+                    {data.imageURL &&
+                        <div className="d-flex justify-content-center w-100"> 
+                            <ShortAnswerImage 
+                                data = {data}
+                                popUpBgStyles={popUpBgStyles}
+                            />
+                        </div>
+                    }
+                    
+                    {/*renders text area that students can respond in*/}
+                    <div className="sa-activity-input-container d-flex justify-content-center flex-grow-1 w-100">
+                        <div className="sa-activity-text-input form-floating w-100 d-flex flex-column">
+                            <textarea 
+                                className="form-control" 
+                                placeholder="Type your answer here" 
+                                id="sa-activity-text"
+                                onChange={handleInput}
+                                value = {data.clientAnswer}
+                            >
+                            </textarea>
+                            <label htmlFor="sa-activity-text">
+                                Type your answer here
+                            </label>
+                        </div>
+                    </div>
                 </div>
+
             </div>
+            
             
         </>
     )

@@ -24,9 +24,12 @@ const ActivityQuestions = (props) =>{
             style={props.style} 
             className="flex-grow-1 question-transition-container d-flex flex-column"
         >
-            {//load specific activity
-                activityMap[questionType]
-            }
+            <div className = "d-flex flex-column flex-grow-1" style={{paddingBottom: "23px"}}>
+                {//load specific activity
+                    activityMap[questionType]
+                }
+            </div>
+            
         </div>
     )
 }
