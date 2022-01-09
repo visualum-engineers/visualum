@@ -44,7 +44,7 @@ const LabelPicturesQuestion = (props) =>{
     
     return (
         <div 
-            className="label-pic-activity-question-container d-flex flex-column align-items-center"
+            className={`label-pic-activity-question-container d-flex flex-column align-items-center${!props.mediumWindowWidth ?" portrait-size":""}`}
             style={inProp ? {overflow: "hidden"}: null}
         >
             <h2 className="label-pic-activity-column-titles">

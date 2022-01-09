@@ -9,6 +9,15 @@
     overflow-y: auto;
     overflow: overlay;
     overflow-x: hidden;
+    &::-webkit-scrollbar{
+        width: 0.6rem;
+        @include border-radius(7px);
+    }
+    &::-webkit-scrollbar-thumb{
+        @include border-radius(7px);
+        //background-color: $dark-blue;
+        background-color: $dark-blue;
+    }
 }
 .sidebar-right{
     @include transition(all 0.3s ease-out);
@@ -90,7 +99,7 @@
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 2rem;
-    margin-top: 1.5rem;
+    margin-top: 2rem;
     
     a{
         color: rgb(8, 40, 109) ;
@@ -132,15 +141,15 @@
 .secondary-exit-sidebar-btn{
     @include remove-btn-default;
     position: fixed;
-    top: 0.2rem;
-    left: 10.9rem;
+    top: 0.4rem;
+    left: 10.6rem;
     color: $darkest-gray;
     font-size: 1.5rem;
     border: 1px rgba(0,0,0,0) solid;
     display: flex; 
     align-items: center;
     justify-content: center;
-    @include border-radius(0.2rem);
+    @include border-radius(0.3rem);
     @include transition(all 0.3s ease-out);
     z-index: 4;
 }
@@ -155,7 +164,8 @@
     background: $lightest-gray;
 }
 .secondary-exit-sidebar-btn.sidebar-open{
-    color: $dark-gray;
+    color: $light-gray;
+    opacity: 0.8;
 }
 .secondary-exit-sidebar-btn.sidebar-open:hover{
     color: $white;
