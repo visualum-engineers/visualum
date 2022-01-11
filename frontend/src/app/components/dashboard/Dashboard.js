@@ -1,6 +1,6 @@
 import React from 'react'
 import DashboardSidebar from './DashboardSidebar';
-import { useNavigate } from 'react-router';
+import { useNavigate, Outlet } from 'react-router';
 import { useSelector } from 'react-redux';
 // import { toggledCollapsed } from '../../../redux/features/dashboardStatus/dashboardSlice';
 import useWindowWidth from '../../hooks/use-window-width'
@@ -65,7 +65,7 @@ export default function Dashboard(props) {
             <div className="dashboard-container">
                 {widthBigger ? <DashboardSidebar page={props.page} /> : <></>}
                 <div className={`main-content ${state.collapsed ? "main-content-full" : ""}`}>
-                    {props.children}
+                    <Outlet />
                 </div>
             </div>
         </div >

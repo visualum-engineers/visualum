@@ -8,11 +8,12 @@ import DashboardHome from './components/dashboard/DashboardHome';
 import DashboardActivities from './components/dashboard/DashboardActivities';
 import DashboardClasses from './components/dashboard/DashboardClasses';
 import DashboardClass from './components/dashboard/DashboardClass';
+import DashboardSettings from './components/dashboard/DashboardSettings';
+import Dashboard from './components/dashboard/Dashboard';
 
 import sampleActivityData from './helpers/sampleActivityData'
 import DashboardAssignments from './components/dashboard/DashboardAssignments';
 import TestBackend from "./components/testBackend/test"
-import DashboardSettings from './components/dashboard/DashboardSettings';
 
 
 //lazy loaded components for performance
@@ -39,7 +40,7 @@ function App() {
             <Route path="/create-game" element={<NavWrapper><CreateGame /></NavWrapper>} />
             <Route path="/activity" element={<Activity />} />
             <Route path="/activity-creation" element={<ActivityCreation />} />
-            <Route path="/dashboard/*" element={<DashboardHome />}>
+            <Route path="/dashboard/*" element={<Dashboard />}>
               <Route path="home" element={<DashboardHome />} />
               <Route path="activities" element={<DashboardActivities data={sampleActivityData} />} />
               <Route path="assignments" element={<DashboardAssignments />} />

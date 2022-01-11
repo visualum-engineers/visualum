@@ -1,5 +1,4 @@
 import React from 'react'
-import Dashboard from './Dashboard'
 import StudentCard from './StudentCard'
 import { useNavigate } from 'react-router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -75,7 +74,7 @@ export default function DashboardClass() {
     });
 
     return (
-        <Dashboard page="classes">
+        <div>
             <div className="control-bar">
                 <div className="buttons">
                     <button className="btn btn-secondary button" onClick={onBack}>
@@ -86,6 +85,6 @@ export default function DashboardClass() {
             <CardContainer>
                 {cards}
             </CardContainer>
-        </Dashboard >
+        </div >
     )
 }

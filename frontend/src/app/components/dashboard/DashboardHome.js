@@ -1,5 +1,4 @@
 import React from 'react'
-import Dashboard from './Dashboard';
 import OverviewCard from './OverviewCard';
 import sidebarValues from './sidebarValues';
 import CardContainer from './CardContainer';
@@ -19,10 +18,8 @@ export default function DashboardHome() {
     });
 
     return (
-        <Dashboard page="home">
-            <CardContainer>
-                {cards}
-            </CardContainer>
-        </Dashboard>
+        <CardContainer>
+            {cards}
+        </CardContainer>
     )
 }
