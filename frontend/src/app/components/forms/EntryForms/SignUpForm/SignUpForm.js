@@ -21,7 +21,7 @@ import React, { useState } from 'react';
 
 import Form from './SignUpForms'
 // import { passwordCheck } from '../../helpers/PasswordCheck'
-import { Redirect } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 
 // IMPORTS FOR REDUX
 import { useSelector, useDispatch } from 'react-redux';
@@ -156,7 +156,7 @@ export default function SignUpForm() {
                     completeForm={completeForm}
                 />
             </div>
-            {isFormComplete && <Redirect to="/" />}
+            {isFormComplete && <Navigate replace to="/" />}
             <ToastContainer
                 position="bottom-left"
                 autoClose={5000}

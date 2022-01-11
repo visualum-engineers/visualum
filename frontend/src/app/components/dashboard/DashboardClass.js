@@ -1,7 +1,7 @@
 import React from 'react'
 import Dashboard from './Dashboard'
 import StudentCard from './StudentCard'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import CardContainer from './CardContainer'
@@ -9,9 +9,10 @@ import CardContainer from './CardContainer'
 export default function DashboardClass() {
     // let { class_id } = useParams();
     // USE CLASS_ID TO RETRIEVE CLASS DATA
-    let history = useHistory();
+    let navigate = useNavigate();
+
     const onBack = () => {
-        history.push("/dashboard/classes");
+        navigate("/dashboard/classes");
     }
 
     const studentData = [

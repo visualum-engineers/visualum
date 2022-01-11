@@ -1,15 +1,15 @@
 import React from 'react'
 // import { useSelector, useDispatch } from 'react-redux';
 // import { updated } from '../../../redux/features/dashboardStatus/dashboardSlice';
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function SidebarItem(props) {
     // const state = useSelector((state) => state.dashboard)
     // const dispatch = useDispatch();
-    let history = useHistory();
+    let navigate = useNavigate();
 
     function handleClick() {
-        history.push(`/dashboard/${props.value}`);
+        navigate(`/dashboard/${props.value}`);
     }
     return (
         <div className="sidebar-item">

@@ -1,6 +1,6 @@
 import React from 'react'
 import DashboardSidebar from './DashboardSidebar';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
 // import { toggledCollapsed } from '../../../redux/features/dashboardStatus/dashboardSlice';
 import useWindowWidth from '../../hooks/use-window-width'
@@ -9,12 +9,12 @@ const Logo = "./images/VisualumLogo.png"
 
 
 export default function Dashboard(props) {
-    let history = useHistory();
+    let navigate = useNavigate();
     // const dispatch = useDispatch();
     const state = useSelector((state) => state.dashboard)
 
     function handleClick() {
-        history.push("/");
+        navigate("/");
     }
     // function handleCollapse() {
     //     dispatch(toggledCollapsed());

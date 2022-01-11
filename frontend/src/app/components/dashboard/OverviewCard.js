@@ -1,11 +1,11 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function OverviewCard(props) {
-    let history = useHistory();
+    let navigate = useNavigate();
 
     function handleClick() {
-        history.push(`/dashboard/${props.value}`);
+        navigate(`/dashboard/${props.value}`);
     }
     return (
         <div className="card overview-card" onClick={handleClick}>

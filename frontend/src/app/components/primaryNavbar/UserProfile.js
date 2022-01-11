@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { CSSTransition } from 'react-transition-group'
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function UserProfile(props) {
     const [isMouseOverButton, setIsMouseOverButton] = useState(false);
@@ -64,10 +64,10 @@ export default function UserProfile(props) {
 }
 
 function UserDropdown(props) {
-    let history = useHistory();
+    let navigate = useNavigate();
 
     const handleButtonClick = (val) => {
-        history.push(`/${val}`)
+        navigate(`/${val}`)
     }
     return (
         <CSSTransition
