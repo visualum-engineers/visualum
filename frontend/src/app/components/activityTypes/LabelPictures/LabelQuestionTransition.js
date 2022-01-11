@@ -5,7 +5,8 @@ const LabelQuestionTransition = (props) =>{
     const newProps = {
         ...props,
         questionID: questionID,
-        questionContent: questionContent
+        questionContent: questionContent,
+        questionIndex: props.questionIndex,
     }
     return(
         <div
