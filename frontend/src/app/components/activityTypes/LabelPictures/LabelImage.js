@@ -12,7 +12,7 @@ const LabelPicturesImage = ({
     return (
     <ZoomableContext>
         <ImageContainer 
-            defaultContainerClass = {"label-pic-activity-img-container my-1"}
+            defaultContainerClass = {"label-pic-activity-img-container"}
             zoomContainerClass={"label-pic-activity-img-container zoomed-in"}
             popUpBgStyles={newPopUpBgStyles}
             popUpEl={

@@ -4,6 +4,7 @@ import LabelPicturesImage from "./LabelImage"
 import LabelQuestionTransition from "./LabelQuestionTransition"
 import LabelQuestionColumnHeader from "./LabelQuestionColumnHeader"
 import LabelQuestionColumnTitle from "./LabelQuestionColumnTitle"
+import LabelAnswerOverview from "./LabelAnswersOverview"
 
 const duration = 400
 const inPropDuration = duration + 100
@@ -11,18 +12,21 @@ const defaultTransition = {
     transition: `all ${duration}ms ease-out`,
     transitionProperty: "opacity, transform, left",
 }
+
 const LabelPicturesQuestion = (props) =>{
     //used for transitions between internal label questions
     const [currQuestion, setCurrQuestion] = useState(0)
     const [prevQuestion, setPrevQuestion] = useState(0)
     //detect transition occuring
     const [inProp, setInProp] = useState(true)
+    
+    //fix before leaving
+    const [overviewPopUp, setOverViewPopUp] = useState(false)
     useEffect(() =>{
         setTimeout(() =>{
             setInProp(false)
         }, inPropDuration)
     }, [])
-
     const onQuestionNavClick = (e) =>{
         const target = e.target.closest("button")
         if(!target || inProp) return
@@ -42,8 +46,19 @@ const LabelPicturesQuestion = (props) =>{
             setInProp(false)
         }, inPropDuration)
     }
+    const onOverviewClick = (e) =>{
+        const action = e.target.closest("button").dataset.actionLabel
+        switch(action){
+            case 'exit-answers-overview':
+                return setOverViewPopUp(false)
+            case "open-answers-overview":
+                return setOverViewPopUp(true)
+            default:
+                return
+        }
+    }
     const onCaroIndicatorClick = (e) =>{
-        const target = e.target
+        const target = e.target.closest("button")
         if(inProp || !target) return
         const targetIndex = target.dataset.questionIndex
 
@@ -55,7 +70,19 @@ const LabelPicturesQuestion = (props) =>{
             setInProp(false)
         }, inPropDuration)
     }
+
+    const onOverviewCardClick=(e) =>{
+        const target = e.target.closest("button")
+        if(!target || inProp) return
+        //close popup
+        onOverviewClick(e)
+
+        //navigate to question on carousel
+        onCaroIndicatorClick(e)
+    }
+    
     const questionData = Object.keys(props.data.categories)
+
     return (
         <div 
             className={`label-pic-activity-question-container d-flex flex-column align-items-center`
@@ -72,11 +99,20 @@ const LabelPicturesQuestion = (props) =>{
             />
             <div className="d-flex flex-column align-items-center flex-grow-1 col-11 col-sm-10 col-lg-8">
                 <LabelQuestionColumnHeader 
-                    onClick = {onQuestionNavClick}
+                    onQuestionNavClick = {onQuestionNavClick}
+                    onOverviewClick = {onOverviewClick}
                     questionData = {questionData}
                     currQuestion ={currQuestion}
                     data = {props.data}
                 />
+                {overviewPopUp &&
+                    <LabelAnswerOverview
+                        popUpBgStyles={props.popUpBgStyles}
+                        onOverviewClick={onOverviewClick}
+                        onOverviewCardClick={onOverviewCardClick}
+                        data={props.data}
+                    />
+                }
                 <div 
                     className="d-flex flex-column align-items-center flex-grow-1 w-100"
                     style={{position:"relative"}}

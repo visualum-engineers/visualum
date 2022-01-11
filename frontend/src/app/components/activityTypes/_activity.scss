@@ -100,7 +100,8 @@
     overflow-wrap: break-word;
     overflow-x: hidden;
     overflow-x: auto;
-    height: calc(max(28rem, 448px));
+    //height: calc(max(28rem, 448px));
+    height: 70%;
     @include border-radius(4px)
 }
 .activity-walkthrough-instructions-header{
