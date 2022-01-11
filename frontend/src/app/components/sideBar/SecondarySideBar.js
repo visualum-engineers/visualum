@@ -15,11 +15,21 @@ const helpLink = <>
 const SecondarySideBar = (props) =>{
     return (
     <>
+        <button 
+            className={`secondary-exit-sidebar-btn${props.sidebarToggle ?" sidebar-open":" sidebar-close"}`} 
+            aria-label="exit-sidebar"
+            onClick={props.handleSideBar}
+        >
+            <FontAwesomeIcon 
+                icon= {props.sidebarToggle ? faTimes : faBars}
+            />
+        </button>
+        
         <div 
-                aria-label ="sidebar" 
-                className={`${props.sidebarToggle ?"sidebar-right":"sidebar-left"}${props.customSidebarClass ? " "+props.customSidebarClass: ""} d-flex flex-column sidebar-nav secondary-sidebar-nav fixed-top`}
-                aria-hidden ={!props.sidebarToggle}
-            >
+            aria-label ="sidebar" 
+            className={`${props.sidebarToggle ?"sidebar-right":"sidebar-left"}${props.customSidebarClass ? " "+props.customSidebarClass: ""} d-flex flex-column sidebar-nav secondary-sidebar-nav fixed-top`}
+            aria-hidden ={!props.sidebarToggle}
+        >
         
             <div className="secondary-sidebar-header d-flex justify-content-center align-items-center">
                 <a href="/" aria-hidden ={!props.sidebarToggle} tabIndex ={!props.sidebarToggle?"-1": "0"}>
@@ -71,15 +81,7 @@ const SecondarySideBar = (props) =>{
             </div>
             
         </div>
-        <button 
-            className={`secondary-exit-sidebar-btn${props.sidebarToggle ?" sidebar-open":" sidebar-close"}`} 
-            aria-label="exit-sidebar"
-            onClick={props.handleSideBar}
-        >
-            <FontAwesomeIcon 
-                icon= {props.sidebarToggle ? faTimes : faBars}
-            />
-        </button>
+        
         {!props.windowWidth &&  
             <button 
                 className={`sidebar-dark-bg fixed-top ${props.sidebarToggle ?"sidebar-bg-show":"sidebar-bg-hide"}`}

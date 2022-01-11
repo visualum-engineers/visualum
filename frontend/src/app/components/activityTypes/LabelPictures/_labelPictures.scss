@@ -71,6 +71,7 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
 .label-pic-activity-container.portrait-size{
     min-height: calc(max(calc(#{$label-pic-activity-container-min-height} * 2), calc(#{$label-pic-activity-container-height} * 2)));
 }
+
 .label-pic-activity-container::before{
     position: absolute;
     content: "";
@@ -81,8 +82,9 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     @include box-shadow(rgba(0, 0, 0, 0.425) 0px -2px 23px 2px);
     z-index: -1;
 }
+
 .label-pic-activity-column-titles{
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 500;
     margin: 0;
     position: sticky;
@@ -143,7 +145,7 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     min-height:calc(max(#{$label-pic-column-min-height}, #{$label-pic-column-height}));
     height: 100%;
     @include border-radius(7px);
-    padding-bottom: 0.7rem;
+    //padding-bottom: 0.7rem;
     .label-pic-activity-column-titles{
         position: relative;
         @include border-radius(7px)
@@ -169,23 +171,22 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
         background: $black;
     }
     
-    .instructions{
+    .triangle-pointer-container{
         background-color: $dark-blue;
         color: $white;
         left: -8.7rem;
         text-align: center !important;
     }
 
-    .info-triangle{
+    .triangle-pointer{
         left: 8.7rem;
         top:  -0.5rem;
         border-bottom: 0.6rem solid $dark-blue;
     }
-    .info-triangle-2{
+    .triangle-pointer-2{
         top:-0.55rem;
         left: 8.7rem;
     }
-
 }
 .label-pic-activity-img-container{
     padding: 0.5rem;
@@ -230,6 +231,7 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     overflow: scroll;
     resize: vertical;
     overflow-x: hidden;
+    @include border-radius(6px);
     &::-webkit-scrollbar{
         width: 0.5rem;
         @include border-radius(7px);
@@ -317,6 +319,63 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     background-color: $darkest-gray;
 }
 
+.label-pic-activity-question-nav-btns{
+    display: flex; 
+    button{
+        position: relative;
+        @include remove-btn-default();
+        color: $white;
+        background-color: $purple;
+        padding: 0.25rem 0.4rem;
+        margin: 0 0.15rem;
+        border: 1px solid transparent;
+        @include center();
+        @include border-radius(5px);
+        @include transition(all 0.3s ease-out);
+    }
+    button:hover{
+        transform: scale(1.1);
+        color: $purple;
+        background-color: $white;
+        border: 1px solid $purple;
+    }
+    
+    .label-pic-activity-nav-btn-placeholder{
+        padding: 0.25rem calc(0.4rem + (0.625em / 2));
+        margin: 0 0.15rem;
+        border: 1px solid transparent;
+    }
+}
+.label-pic-activity-question-nav-left,
+.label-pic-activity-question-nav-right{
+    position: relative;
+    z-index: 1;
+    .question-nav-pointer-container{
+        top: calc(-100% - 1.5rem);
+        left: -4.3rem;
+        background-color: $purple;
+        .triangle-pointer-down{
+            border-top: 0.6rem solid $purple;
+        }
+    }
+    .triangle-pointer-container{
+        animation: none;
+    }
+}
+.label-pic-question-num-indicator{
+    margin-left: 0.25rem;
+    @include border-radius(1rem);
+    background-color: $dark-blue;
+    color: $white;
+
+    font-size: 0.75rem;
+    min-width: 2rem;
+    span{
+        margin: 0;
+        padding: 0 0.2rem;
+        line-height: 0;
+    }
+}
 //question transition classes
 .label-pic-question-transition-container{
     position: relative;
@@ -368,3 +427,28 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     opacity: 0;
     transform: translateX(-100%);
 } 
+.label-pic-question-caro-indicators{
+    margin: 0.2rem 0;
+
+    button{
+        @include remove-btn-default();
+        @include border-radius(1rem);
+        border: 1px solid $purple; 
+        margin: 0.1rem;
+        font-size: 0;
+        padding: 0;
+        height: 0.8vh;
+        width: 0.8vh;
+        min-height: 0.65rem;
+        min-width: 0.65rem;
+        @include transition(all ease-in 0.2s)
+    }
+    button.question-active{
+        background-color: $purple;
+        transform: scale(1.2);
+    }
+    button:hover{
+        background-color: $purple;
+        transform: scale(1.2);
+    }
+}

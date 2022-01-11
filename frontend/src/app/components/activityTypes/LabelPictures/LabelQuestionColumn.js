@@ -1,9 +1,10 @@
-import LabelPicturesImage from "./LabelImage"
-import LabelQuestionTransition from "./LabelQuestionTransition"
-import LabelQuestionNavBtns from "./LabelQuestionNavBtns"
 import { useState, useEffect } from "react"
 import {CSSTransition} from "react-transition-group"
-import MoreInfoBtn from "../../utilities/moreInfoBtn/MoreInfoBtn"
+import LabelPicturesImage from "./LabelImage"
+import LabelQuestionTransition from "./LabelQuestionTransition"
+import LabelQuestionColumnHeader from "./LabelQuestionColumnHeader"
+import LabelQuestionColumnTitle from "./LabelQuestionColumnTitle"
+
 const duration = 400
 const inPropDuration = duration + 100
 const defaultTransition = {
@@ -41,61 +42,81 @@ const LabelPicturesQuestion = (props) =>{
             setInProp(false)
         }, inPropDuration)
     }
-    
+    const onCaroIndicatorClick = (e) =>{
+        const target = e.target
+        if(inProp || !target) return
+        const targetIndex = target.dataset.questionIndex
+
+        setInProp(true)
+        setPrevQuestion(currQuestion)
+        setCurrQuestion(parseInt(targetIndex))
+
+        setTimeout(() =>{
+            setInProp(false)
+        }, inPropDuration)
+    }
+    const questionData = Object.keys(props.data.categories)
     return (
         <div 
-            className={`label-pic-activity-question-container d-flex flex-column align-items-center${!props.mediumWindowWidth ?" portrait-size":""}`}
+            className={`label-pic-activity-question-container d-flex flex-column align-items-center`
+                        + `${!props.mediumWindowWidth ?" portrait-size":""}`}
             style={inProp ? {overflow: "hidden"}: null}
         >
-            <h2 className="label-pic-activity-column-titles">
-                <span>Question</span>
-                <div className="label-pic-activity-instructions-position d-flex">
-                    <MoreInfoBtn 
-                        textContent = "View Instructions"
-                        customContainerClass = "label-pic-activity-instructions"
-                        customContainerAriaLabel = "activity-instructions"
-                        customDropDownID = "label-pic-activity-instructions"
-                        setTimeoutOnMount = {!props.moreInfoBtn? 4000: 0}
-                        onClick = {props.moreInfoOnClick}
-                    />
-                </div>
-            </h2>
+           <LabelQuestionColumnTitle 
+                moreInfoOnClick = {props.moreInfoOnClick}
+                moreInfoBtn = {props.moreInfoBtn}
+           />
             <LabelPicturesImage 
                 data={props.data}
                 popUpBgStyles={props.popUpBgStyles}
             />
-            <LabelQuestionNavBtns 
-                totalQuestions = {props.data.questions.length}
-                currQuestion={currQuestion}
-                onClick={onQuestionNavClick}
-            />
-            <div 
-                className="d-flex flex-column align-items-center flex-grow-1 col-11 col-sm-10 col-lg-8"
-                style={{position:"relative"}}
-            >
-                {Object.keys(props.data.categories).map((key, index) => {
-                    const moveLeft = (prevQuestion - currQuestion) >= 0
-                    const questionID = props.data.questions[currQuestion].id
-                    return(
-                        <CSSTransition
-                            key = {`label-pic-question-${key}`}
-                            in = {questionID.toString() === key.toString()}
-                            timeout={duration}
-                            classNames={`${moveLeft? "label-pic-question-move-left":"label-pic-question-move-right"}`}
-                            //mountOnEnter
-                            unmountOnExit
-                        >
-                            <LabelQuestionTransition
-                                {...props}
-                                questionKey = {key}
-                                questionIndex = {index}
-                                style ={{...defaultTransition}}
-                            />
-                        </CSSTransition>
-                    )
-                })}
+            <div className="d-flex flex-column align-items-center flex-grow-1 col-11 col-sm-10 col-lg-8">
+                <LabelQuestionColumnHeader 
+                    onClick = {onQuestionNavClick}
+                    questionData = {questionData}
+                    currQuestion ={currQuestion}
+                    data = {props.data}
+                />
+                <div 
+                    className="d-flex flex-column align-items-center flex-grow-1 w-100"
+                    style={{position:"relative"}}
+                >
+                    {questionData.map((key, index) => {
+                        const moveLeft = (prevQuestion - currQuestion) >= 0
+                        const questionID = props.data.questions[currQuestion].id
+                        return(
+                            <CSSTransition
+                                key = {`label-pic-question-${key}`}
+                                in = {questionID.toString() === key.toString()}
+                                timeout={duration}
+                                classNames={`label-pic-question-move-${moveLeft? "left":"right"}`}
+                                unmountOnExit
+                            >
+                                <LabelQuestionTransition
+                                    {...props}
+                                    questionKey = {key}
+                                    questionIndex = {index}
+                                    style ={{...defaultTransition}}
+                                />
+                            </CSSTransition>
+                        )
+                    })}
+                </div>
+                <div className="label-pic-question-caro-indicators d-flex align-items-center">
+                    {questionData.map((key, index) =>{
+                        return(
+                            <button 
+                                className={currQuestion === index ? "question-active" : ""}
+                                key={key}
+                                aria-label={`go-to-sub-question-${index+1}`}
+                                onClick={onCaroIndicatorClick}
+                                data-question-index = {index}
+                            >
+                            </button>
+                        )
+                    })}
+                </div>
             </div>
-            
         </div>
     )
 }

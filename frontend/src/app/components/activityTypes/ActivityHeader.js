@@ -16,7 +16,7 @@ const ActivityHeader = ({
     type = null,
 }) =>{
     return(
-        <div className={`d-flex activity-header justify-content-between align-items-center`}>
+        <div className={`d-flex activity-header justify-content-between align-items-center px-1`}>
         {smallWindowWidth && <div className="col-4"></div>}
         {data.timer &&
                 <div className={`activity-timer d-flex justify-content-center align-items-center col-4`}>

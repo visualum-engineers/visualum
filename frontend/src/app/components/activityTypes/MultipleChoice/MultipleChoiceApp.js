@@ -88,8 +88,8 @@ const MultipleChoiceApp = ({
             mediumWindowWidth={mediumWindowWidth}
         />
         <form className = "mc-activity-input-container d-flex align-items-center justify-content-center flex-grow-1">
-            <div className = "px-2">
-                <div className = {`d-flex ${mediumWindowWidth? "justify-content-between align-items-center": "flex-column"}`}>
+            <div className = "px-2 flex-grow-1">
+                <div className = {`d-flex ${mediumWindowWidth? "justify-content-around align-items-center": "flex-column"}`}>
                     {!mediumWindowWidth? 
                             <div className="mc-activity-question">{data.question}</div>
                     : null}

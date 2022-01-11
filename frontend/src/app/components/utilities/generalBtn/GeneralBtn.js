@@ -1,7 +1,9 @@
 const GeneralBtn = ({
     customClassName,
     onClick, 
-    onKeyDown, 
+    onKeyDown,
+    onMouseEnter,
+    onMouseLeave, 
     customAriaLabel,
     questionNum,
     customIcon = null,
@@ -14,6 +16,8 @@ const GeneralBtn = ({
             aria-label = {customAriaLabel}
             onClick = {onClick}
             onKeyDown ={onKeyDown}
+            onMouseEnter = {onMouseEnter}
+            onMouseLeave = {onMouseLeave}
             data-question-num = {questionNum ? questionNum : null}
             data-action-label = {customAriaLabel}
         >

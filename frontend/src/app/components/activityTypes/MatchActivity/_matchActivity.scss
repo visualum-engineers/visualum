@@ -51,7 +51,7 @@ $match-column-height: calc(#{$match-activity-container-height} - 2rem);
 }
 .match-activity-instructions-position{
     position: absolute;
-    top: 0.4rem;
+    top: 0.7rem;
     right: 0.4rem;
     z-index: 4;
 }
@@ -65,27 +65,26 @@ $match-column-height: calc(#{$match-activity-container-height} - 2rem);
         background: $black;
     }
     
-    .instructions{
+    .triangle-pointer-container{
         background-color: $dark-blue;
         color: $white;
         left: -8.7rem;
         text-align: center !important;
     }
 
-    .info-triangle{
+    .triangle-pointer{
         left: 8.7rem;
         top:  -0.5rem;
         border-bottom: 0.6rem solid $dark-blue;
     }
-    .info-triangle-2{
+    .triangle-pointer-2{
         top:-0.55rem;
         left: 8.7rem;
     }
-
 }
 
 .match-activity-column-titles{
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 500;
     margin: 0;
     position: sticky;

@@ -151,7 +151,7 @@
     justify-content: center;
     @include border-radius(0.3rem);
     @include transition(all 0.3s ease-out);
-    z-index: 4;
+    z-index: 5;
 }
 .secondary-exit-sidebar-btn:hover{
     transform: scale(1.05);

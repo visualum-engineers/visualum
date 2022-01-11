@@ -1,4 +1,3 @@
-//import DroppableArea from "../../utilities/dragAndDrop/ReactBeautifulDnD/DroppableArea"
 import LabelQuestion from "./LabelQuestion"
 const LabelQuestionTransition = (props) =>{
     const questionID = props.data.questions[props.questionIndex].id
