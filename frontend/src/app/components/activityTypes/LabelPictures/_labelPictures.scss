@@ -505,7 +505,7 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     }
     &:hover{
         cursor: pointer;
-        transform: scale(1.05);
+        transform: translateY(-0.3rem);
     }
 }
 .label-pic-answer-overview-answers{
