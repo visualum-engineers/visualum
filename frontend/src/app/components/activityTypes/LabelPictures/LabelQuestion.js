@@ -20,7 +20,7 @@ const LabelQuestion = ({
         <div 
             className="label-pic-activity-question d-flex align-items-center w-100"
         >
-            <h2 className="w-100">{questionIndex+1 + ". " + questionContent}</h2>
+            <h2 className="w-100 unselectable">{questionIndex+1 + ". " + questionContent}</h2>
         </div>
         <div className={columnContainerClass}>
             <DroppableArea 

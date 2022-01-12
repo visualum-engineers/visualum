@@ -75,10 +75,10 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
 .label-pic-activity-container::before{
     position: absolute;
     content: "";
-    top: 50%;
-    left: 5%;
-    width: 90%;
-    height: calc(50%);
+    top: 5%;
+    left: 1%;
+    width: 98%;
+    height: calc(95%);
     @include box-shadow(rgba(0, 0, 0, 0.425) 0px -2px 23px 2px);
     z-index: -1;
 }
@@ -92,6 +92,7 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     align-items: center;
     justify-content: center;
     width: 100%;
+    padding-left: 0.5rem;
     top:0;
     left: 0;
     height: 3.5rem;
@@ -148,7 +149,8 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     //padding-bottom: 0.7rem;
     .label-pic-activity-column-titles{
         position: relative;
-        @include border-radius(7px)
+        @include border-radius(7px);
+        padding-left: 0;
     }
 }
 .label-pic-activity-question-container.portrait-size{
@@ -292,7 +294,8 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
         position: relative;
         @include remove-btn-default();
         color: $white;
-        background-color: $purple;
+        //background-color: $purple;
+        background-color: $dark-blue;
         padding: 0.25rem 0.4rem;
         margin: 0 0.15rem;
         border: 1px solid transparent;
@@ -302,9 +305,11 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     }
     button:hover{
         transform: scale(1.1);
-        color: $purple;
+        //color: $purple;
+        color: $dark-blue;
         background-color: $white;
-        border: 1px solid $purple;
+        //border: 1px solid $purple;
+        border: 1px solid $dark-blue;        
     }
     
     .label-pic-activity-nav-btn-placeholder{
@@ -320,9 +325,9 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     .question-nav-pointer-container{
         top: calc(-100% - 1.5rem);
         left: -4.3rem;
-        background-color: $purple;
+        background-color: $dark-blue;
         .triangle-pointer-down{
-            border-top: 0.6rem solid $purple;
+            border-top: 0.6rem solid $dark-blue;
         }
     }
     .triangle-pointer-container{
@@ -359,7 +364,8 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     div{
         margin: auto;
         width: 100%;
-        @include transition(transform 0.2s ease-out)
+        @include transition(transform 0.2s ease-out);
+        @include unselectable;
     }
 
 }
@@ -402,7 +408,8 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     button{
         @include remove-btn-default();
         @include border-radius(1rem);
-        border: 1px solid $purple; 
+        //border: 1px solid $purple; 
+        border: 1px solid $dark-blue; 
         margin: 0.2rem;
         font-size: 0;
         padding: 0;
@@ -413,11 +420,13 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
         @include transition(all ease-in 0.2s)
     }
     button.question-active{
-        background-color: $purple;
+        //background-color: $purple;
+        background-color: $dark-blue;
         transform: scale(1.2);
     }
     button:hover{
-        background-color: $purple;
+        //background-color: $purple;
+        background-color: $dark-blue;
         transform: scale(1.2);
     }
 }

@@ -11,21 +11,22 @@ $main-font-size: 14px;
 $bg-color: rgb(9, 3, 34);
 $light-bg-color: white;
 
-
+$black: black;
+$white: white;
 $lightest-gray: #f3f3f3;
 $lighter-gray: #f0f0f0;
 $light-gray: rgb(201, 201, 201);
 $dark-gray: rgb(179, 179, 179);
 $darkest-gray: rgb(112, 112, 112);
 
-$black: black;
-$white: white;
 $light-blue: #eff7ff;
+$blue: rgb(9, 63, 179); 
 $dark-blue: rgb(15, 60, 158);
-$darkest-blue: rgb(32, 72, 158); 
+
+
 $purple: rgba(58,19,208,1);
 $light-purple: rgba(58,19,208,0.25);
-//$orange: ;
+
 
 @mixin remove-btn-default {
     background: none;
@@ -96,4 +97,10 @@ $light-purple: rgba(58,19,208,0.25);
     -o-transition: $str;
     -moz-transition: $str; 
     transition: $str;
+}
+@mixin unselectable{
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }

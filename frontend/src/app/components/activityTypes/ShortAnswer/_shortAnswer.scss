@@ -12,6 +12,7 @@
     padding: 0.5rem;
     min-width: 50%;
     width: fit-content;
+    @include unselectable;
 }
 
 .sa-activity-image-container{

@@ -124,7 +124,6 @@ const LabelPicturesApp = ({
                         />
                     }
                     
-                    
                     <LabelQuestionColumn 
                         data = {data}
                         firstElTap = {firstElTap}
@@ -141,6 +140,7 @@ const LabelPicturesApp = ({
                         moreInfoBtn = {moreInfoBtn}
                         moreInfoOnClick={moreInfoOnClick}
                         mediumWindowWidth={mediumWindowWidth}
+                        smallWindowWidth={smallWindowWidth}
                     />
 
                     {!mediumWindowWidth &&

@@ -38,7 +38,7 @@ const ActivityHeader = ({
                 questionNum = {questionNum}
             />
             {
-                type === "DnD" && <DrapAndDropToggler 
+                type === "DnD" && smallWindowWidth && <DrapAndDropToggler 
                     disableDnD = {disableDnD}
                     toggleTap = {toggleTap}
                 />

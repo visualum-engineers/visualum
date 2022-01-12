@@ -42,10 +42,10 @@ $match-column-height: calc(#{$match-activity-container-height} - 2rem);
 .match-activity-container::before{
     position: absolute;
     content: "";
-    top: 50%;
-    left: 5%;
-    width: 90%;
-    height: calc(50%);
+    top: 5%;
+    left: 1%;
+    width: 98%;
+    height: calc(95%);
     @include box-shadow(rgba(0, 0, 0, 0.425) 0px -2px 23px 2px);
     z-index: -1;
 }
@@ -120,7 +120,9 @@ $match-column-height: calc(#{$match-activity-container-height} - 2rem);
         @include border-radius(7px);
         background-color: $dark-blue;
     }
-
+    .match-activity-column-titles{
+        padding-left: 0.5rem;
+    }
 }
 
 .match-activity-itemBank-column-1,
@@ -257,7 +259,7 @@ $match-column-height: calc(#{$match-activity-container-height} - 2rem);
     height: 4.5rem;
     width: 1.5rem;
     path{
-        fill: $darkest-blue;
+        fill: $blue;
         height: 2rem;
     }
 }
@@ -303,7 +305,8 @@ $match-column-height: calc(#{$match-activity-container-height} - 2rem);
     div{
         margin: auto;
         width: 100%;
-        @include transition(transform 0.2s ease-out)
+        @include transition(transform 0.2s ease-out);
+        @include unselectable;
     }
 }
 

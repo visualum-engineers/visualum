@@ -19,7 +19,7 @@ const LabelPicturesQuestion = (props) =>{
     const [prevQuestion, setPrevQuestion] = useState(0)
     //detect transition occuring
     const [inProp, setInProp] = useState(true)
-    
+
     //fix before leaving
     const [overviewPopUp, setOverViewPopUp] = useState(false)
     useEffect(() =>{
@@ -70,7 +70,6 @@ const LabelPicturesQuestion = (props) =>{
             setInProp(false)
         }, inPropDuration)
     }
-
     const onOverviewCardClick=(e) =>{
         const target = e.target.closest("button")
         if(!target || inProp) return
@@ -104,6 +103,7 @@ const LabelPicturesQuestion = (props) =>{
                     questionData = {questionData}
                     currQuestion ={currQuestion}
                     data = {props.data}
+                    smallWindowWidth={props.smallWindowWidth}
                 />
                 {overviewPopUp &&
                     <LabelAnswerOverview

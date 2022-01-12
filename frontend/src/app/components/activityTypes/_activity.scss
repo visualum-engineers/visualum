@@ -134,14 +134,28 @@
     @extend .activity-walkthrough-instructions;
     height: min-content;
     padding: 2rem;
+    @include border-radius(0.5rem);
     h2{
         text-align: center;
         font-size: 1rem;
+        margin:0;
     }
     .reset-popup-btn-container{
         button{
-            margin: 1.5rem;
+            margin: 0 1.5rem;
+            margin-top: 1.5rem;
         }
+        .reset-cancel-btn{
+            background-color: $dark-blue;
+            color: $white;
+            border: 1px transparent solid;
+        }
+        .reset-cancel-btn:hover{
+            background-color: $white;
+            color: $dark-blue;
+            border: 1px $dark-blue solid;
+        }
+
     }
 }
 
@@ -214,18 +228,19 @@
 .nav-activity-btn{
     @include border-radius(5px);
     color: $main-font-color;
-    background-color: $purple;
+    //background-color: $purple;
+    background-color: $blue;
     padding: 0.4rem 1.2rem;
     margin-bottom: 1.5vh;
-    border: 1px $secondary-font-color solid;
+    border: 1px transparent solid;
     font-size: 1rem;
     @include transition(all 0.3s ease-out);
 }  
 
 .nav-activity-btn:hover{
     @include activities-nav-navItems-hover;
-    border: 1px solid $purple;
-    color: $purple;
+    border: 1px solid $blue;
+    color: $blue;
 }
 
 //to be used inside activites, but not in activities general component

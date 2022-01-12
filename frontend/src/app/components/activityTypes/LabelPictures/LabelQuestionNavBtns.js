@@ -6,7 +6,8 @@ import TrianglePointer from "../../utilities/trianglePointer/TrianglePointer";
 const LabelQuestionNavBtns = ({
     totalQuestions,
     currQuestion,
-    onClick
+    smallWindowWidth,
+    onClick,
 }) =>{
     const [leftNavOver, setLeftNavOver] = usePopUp({})
     const [rightNavOver, setRightNavOver] = usePopUp({})
@@ -19,12 +20,12 @@ const LabelQuestionNavBtns = ({
     >
         {questionPos < totalQuestions - 1 ? 
             <div className="label-pic-activity-question-nav-left">
-                <TrianglePointer
+                {smallWindowWidth && <TrianglePointer
                     dropDownActive = {leftNavOver}
                     textContent={"Previous Question"}
                     customClassName={"question-nav-pointer-container"}
                     pointerDown={true}
-                />
+                />}
                 <GeneralBtn 
                     onClick={onClick}
                     customAriaLabel = {"prev-question"}
@@ -40,12 +41,12 @@ const LabelQuestionNavBtns = ({
         }
         {questionPos > 0 ?
             <div className="label-pic-activity-question-nav-right">
-                <TrianglePointer 
+                {smallWindowWidth && <TrianglePointer 
                     dropDownActive = {rightNavOver}
                     textContent={"Next Question"}
                     customClassName={"question-nav-pointer-container"}
                     pointerDown={true}
-                />
+                />}
                 <GeneralBtn 
                     onClick={onClick}
                     customAriaLabel = {"next-question"}

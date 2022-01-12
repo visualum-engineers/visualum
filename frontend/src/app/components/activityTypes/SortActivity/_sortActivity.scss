@@ -57,10 +57,10 @@ html.sortActivityActive{
 .sort-activity-container::before{
     position: absolute;
     content: "";
-    top: 50%;
-    left: 5%;
-    width: 90%;
-    height: calc(50%);
+    top: 5%;
+    left: 1%;
+    width: 98%;
+    height: calc(95%);
     @include box-shadow(rgba(0, 0, 0, 0.425) 0px -2px 23px 2px);
     z-index: -1;
 }
@@ -130,6 +130,7 @@ html.sortActivityActive{
     z-index: 5;
     background-color: $light-blue;
     margin: 0;
+    padding-left: 0.5rem;
 }
 
 .sort-activity-itemBank-droppables{
@@ -187,6 +188,7 @@ html.sortActivityActive{
         left: 0;
         z-index: 3;
         background-color: $white;
+        @include unselectable;
     }
     .sort-activity-inner-droppable {
         @include sort-activity-inner-droppable();
@@ -237,7 +239,9 @@ html.sortActivityActive{
     div{
         margin: auto;
         width: 100%;
-        @include transition(transform 0.2s ease-out)
+        @include transition(transform 0.2s ease-out);
+        @include unselectable;
+
     }
     &:hover{
         cursor: grab;

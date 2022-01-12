@@ -10,21 +10,21 @@ const ActivityResetPopUp = (props) => {
                 <h2 className="resetQuestion"> {`You will lose your answers and progress to this question. Do you want to continue?`}</h2>
                 <div className="reset-popup-btn-container">
                     <button 
-                        className="btn btn-success"
+                        className="btn btn-danger"
                         data-btn-id = "yes"
                         onClick = {props.onClick}
                         aria-label = "confirm-reset-question"
                         data-action-label = "confirm-reset-question"
-                    > Yes 
+                    > Reset
                     </button>
                     <button 
-                        className ="btn btn-danger"
+                        className ="btn reset-cancel-btn"
                         data-btn-id = "no"
                         onClick = {props.onClick}
                         aria-label = "exit-reset-question"
                         data-action-label = "exit-reset-question"
                         autoFocus
-                    > No 
+                    > Cancel
                     </button>
                 </div>
             </div>

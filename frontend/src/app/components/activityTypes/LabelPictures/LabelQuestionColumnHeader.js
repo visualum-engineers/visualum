@@ -7,6 +7,7 @@ const LabelQuestionColumnHeader = (props) =>{
                     totalQuestions = {props.data.questions.length}
                     currQuestion={props.currQuestion}
                     onClick={props.onQuestionNavClick}
+                    smallWindowWidth={props.smallWindowWidth}
                 />
                 <GeneralBtn
                     onClick={props.onOverviewClick}

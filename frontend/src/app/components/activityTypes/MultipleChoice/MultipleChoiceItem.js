@@ -44,7 +44,7 @@ const MultipleChoiceItem = ({
                     </circle>
                 </svg>
                 <div 
-                    className="w-100 d-flex align-items-center justify-content-center mc-answer-label">
+                    className="mc-answer-label w-100 d-flex align-items-center justify-content-center">
                         {choice}
                 </div>
             </label>

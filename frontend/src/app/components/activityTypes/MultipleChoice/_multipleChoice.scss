@@ -10,6 +10,7 @@
     @include border-radius(7px);
     padding: 0.5rem;
     margin-bottom: 1rem;
+    @include unselectable;
 }
 .mc-activity-image-container{
     padding: 0.6rem;
@@ -103,6 +104,7 @@
         @include  transition(all 0.3s ease-out);
         @include box-shadow(rgba(0, 0, 0, 0.151) 0px 0 3px);
         border: 1px solid transparent;
+        @include unselectable;
     }
     .mc-answer-choice-group:hover{
         .mc-answer-label{
@@ -117,6 +119,7 @@
         .mc-answer-label{
             border: 1px solid $dark-blue;
             background-color: $white;
+
         }
         .mc-radio-inner-circle{
             stroke: $dark-blue; 

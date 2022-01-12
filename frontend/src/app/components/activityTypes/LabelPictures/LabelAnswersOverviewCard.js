@@ -14,9 +14,9 @@ const LabelAnswerOverviewCard = ({
                 data-question-index = {index}
                 aria-label={`go-to-sub-question-${index+1}`}
             >
-                <h2>{index+1+". "+question.content}</h2>
+                <h2 className="unselectable">{index+1+". "+question.content}</h2>
                 <ul 
-                    className="label-pic-answer-overview-answers w-100" 
+                    className="label-pic-answer-overview-answers w-100 unselectable" 
                     style={!data.categories[questionID].length > 0 ? {padding: "0", height: "100%"}: null}
                 >
                         {data.categories[questionID].length > 0 ?
