@@ -29,7 +29,6 @@ const LabelPicturesQuestion = (props) =>{
         }, inPropDuration)
     }, [])
     const updateQuestionNumByOne = (target)=>{
-        console.log(target.dataset.actionLabel)
         switch(target.dataset.actionLabel){
             case "prev-question":
                 if(currQuestion <= 0) return

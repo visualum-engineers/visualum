@@ -22,7 +22,6 @@ const useDetectSwipe = () =>{
         const {x, y} = touchStartPos.current
         const endX = e.changedTouches[0].clientX
         const endY = e.changedTouches[0].clientY
-        console.log(x, endX)
         if(!x || !y) return
 
         if(x - endX > 0) touchDirection.current.left= true
