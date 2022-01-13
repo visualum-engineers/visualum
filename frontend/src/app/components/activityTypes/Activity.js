@@ -101,7 +101,10 @@ const Activity = () =>{
         else return openSideBar()
     }
     //use for activity instructions popup
-    const moreInfoOnClick = () => setMoreInfoBtn(state=> !state)
+    const moreInfoOnClick = (e) => {
+        setMoreInfoBtn(state => !state)
+        if(!mediumWindowWidth && !sidebarToggle) exitSideBar()
+    }
 
     //used for confirmation popup of reseting data in activity 
     const resetBtnOnClick = (e) =>{
@@ -125,8 +128,17 @@ const Activity = () =>{
         }
     }
     const secondarySideBarData = [
-        {type:"btn", styles:"activities-sidebar-btn", textContent: "Instructions", onClick: moreInfoOnClick},
-        {type:"link", url: "/", styles:"activities-sidebar-link", textContent: 
+        {
+            type:"btn", 
+            styles:"activities-sidebar-btn", 
+            textContent: "Instructions", 
+            onClick: moreInfoOnClick
+        },
+        {
+            type:"link", 
+            url: "/", 
+            styles:"activities-sidebar-link", 
+            textContent: 
             <>
                 <span className="icon-container"><FontAwesomeIcon icon = {faCommentDots}/></span>
                 <span className="ms-1">Feedback</span>

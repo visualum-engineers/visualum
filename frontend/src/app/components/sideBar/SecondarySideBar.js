@@ -26,8 +26,11 @@ const SecondarySideBar = (props) =>{
         </button>
         <div 
             aria-label ="sidebar" 
-            className={`${props.sidebarToggle ?"sidebar-right":"sidebar-left"}${props.customSidebarClass ? " "+props.customSidebarClass: ""} d-flex flex-column sidebar-nav secondary-sidebar-nav fixed-top`}
             aria-hidden ={!props.sidebarToggle}
+            className={`d-flex flex-column sidebar-nav secondary-sidebar-nav fixed-top `
+                        + `${props.sidebarToggle ?"sidebar-right":"sidebar-left"}`
+                        + `${props.customSidebarClass ? " "+props.customSidebarClass: ""}` 
+                    }
         >
         
             <div className="secondary-sidebar-header d-flex justify-content-center align-items-center">
@@ -42,20 +45,21 @@ const SecondarySideBar = (props) =>{
             <div className="secondary-sidebar-link-container d-flex flex-column align-items-center">
                 {props.data.map((navItem, index)=>{
                     return <NavItem 
-                            key={index} 
-                            textContent={navItem.textContent} 
-                            sidebar={"secondary"} 
-                            styles = {navItem.styles}
-                            hidden = {!props.sidebarToggle}
-                            onClick={navItem.onClick}
-                            url={navItem.type === "link" && navItem.url}
-                            btn={navItem.type !== "link"}
+                                key={index} 
+                                textContent={navItem.textContent} 
+                                sidebar={"secondary"} 
+                                styles = {navItem.styles}
+                                hidden = {!props.sidebarToggle}
+                                onClick={navItem.onClick}
+                                url={navItem.type === "link" && navItem.url}
+                                btn={navItem.type !== "link"}
                         />
                 })}
             </div>
             
             <div 
-                className={`secondary-sidebar-footer d-flex flex-column justify-content-${props.userProfile ? "start":"end"} align-items-center flex-grow-1`}
+                className={`secondary-sidebar-footer d-flex flex-column align-items-center flex-grow-1`
+                + ` justify-content-${props.userProfile ? "start":"end"} `}
             >
                 <NavItem 
                     textContent={settingsLink} 
