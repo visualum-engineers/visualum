@@ -27,14 +27,14 @@ const LabelQuestion = ({
         </div>
         <div 
             className={columnContainerClass}
-            onTouchStart={onQuestionNavSwipe}
-            onTouchEnd={onQuestionNavSwipe}
         >
             <DroppableArea 
                 id = {questionID}
                 content={data.categories[questionID]}
                 firstElTap = {firstElTap}
                 onTap = {onTap}
+                onAreaTouchStart={onQuestionNavSwipe}
+                onAreaTouchEnd={onQuestionNavSwipe}
                 //classes
                 placeholderClass={placeholderClass}
                 droppableClassName = {droppableClassName}

@@ -26,6 +26,8 @@ const DroppableArea = ({
     onTap=null, 
     firstElTap=null,
     removedEl = null,
+    onAreaTouchStart = null,
+    onAreaTouchEnd = null,
 }) =>{
     const renderItems = getRenderItem(content, draggableClassName, isDraggingClass)
     const InnerList = React.memo(({
@@ -59,6 +61,8 @@ const DroppableArea = ({
     return(
         <div 
             className = {droppableClassName}
+            onTouchStart={onAreaTouchStart}
+            onTouchEnd={onAreaTouchEnd}
         >
             {droppableHeader ? droppableHeader : null}
             <Droppable 

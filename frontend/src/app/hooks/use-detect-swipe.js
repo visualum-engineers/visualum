@@ -18,7 +18,7 @@ const useDetectSwipe = () =>{
         touchStartPos.current = {x: e.touches[0].clientX, y: e.touches[0].clientY}
     }
     
-    const onTouchEnd = (e) => {
+    const onTouchEnd = (e, threshold=0) => {
         if(!touchStartPos.current) return touchDirection.current
         const {x, y} = touchStartPos.current
         touchStartPos.current = null
@@ -26,11 +26,11 @@ const useDetectSwipe = () =>{
         const endY = e.changedTouches[0].clientY
         if(!x || !y) return
 
-        if(x - endX > 0) touchDirection.current.left= true
-        if(x - endX < 0) touchDirection.current.right= true
+        if(x - endX > threshold) touchDirection.current.left= true
+        if(x - endX < -threshold) touchDirection.current.right= true
         
-        if(y - endY > 0) touchDirection.current.up = true
-        if(y - endY < 0) touchDirection.current.down = true
+        if(y - endY > threshold) touchDirection.current.up = true
+        if(y - endY < -threshold) touchDirection.current.down = true
         
         return touchDirection.current
     }

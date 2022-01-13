@@ -64,13 +64,15 @@ const LabelPicturesQuestion = (props) =>{
             case "touchstart":
                 return onOverviewTouchStart(e)
             case "touchend":
-                const direction = onOveviewTouchEnd(e)
+                const direction = onOveviewTouchEnd(e, 60)
+                //console.log(direction)
                 const target = {
                     dataset:{
                         actionLabel: direction.right ? "prev-question" : "next-question"
                     }
                 }
-                return updateQuestionNumByOne(target)
+                if(direction.right || direction.left) return updateQuestionNumByOne(target)
+                return
             default:
                 return
         }
