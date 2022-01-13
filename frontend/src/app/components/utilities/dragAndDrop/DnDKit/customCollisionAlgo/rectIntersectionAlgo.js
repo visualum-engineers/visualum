@@ -60,14 +60,19 @@ import getEdgeOffset from "../positionFunctions/getEdgeOffset";
    * Returns the rectangle that has the greatest intersection area with a given
    * rectangle in an array of rectangles.
    */
-  export const rectIntersection = ({active, droppableContainers, collisionRect}, overlayRect) => {
+  export const rectIntersection = ({
+    droppableContainers, 
+    collisionRect
+  }, overlayRect
+  , isOver) => {
     let maxIntersectionRatio = 0;
     let maxIntersectingDroppableContainer = null;
-    const dragOverlayContainer = active.data.current.sortable.containerId
+    const dragOverlayContainer = isOver
     for(let droppableContainer of droppableContainers) {
       const id = droppableContainer.id;
       //using intersection observer for rect values since it wont 
       //force a reflow, while getBoundingClientRect does
+      if(!droppableContainer.node.current) continue
       observer.observe(droppableContainer.node.current);
       const rect = currentDroppablePostion[id]
       //grab origin container

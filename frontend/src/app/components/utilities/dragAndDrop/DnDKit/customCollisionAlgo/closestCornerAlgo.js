@@ -59,12 +59,18 @@ function cornersOfRectangle(
    * takes into account viewport or document offset depending 
    * on sorting items, or changing containers
    */
-function getEffectiveDistance(entry, targetOffset, targetViewPort, sameContainer){
+function getEffectiveDistance(
+    entry, 
+    targetOffset, 
+    targetViewPort, 
+    sameContainer
+){
     let entryCorners = cornersOfRectangle(entry);
     const targetOffsetDistances = targetOffset.reduce((accumulator, corner, index) => {
         return accumulator + distanceBetween(entryCorners[index], corner);
     }, 0);
     let targetViewPortDistances
+
     if(!sameContainer){
         //re-assign entry corners to viewport distance
         entryCorners = cornersOfRectangle(
@@ -77,6 +83,7 @@ function getEffectiveDistance(entry, targetOffset, targetViewPort, sameContainer
         }, 0)
         return Number((targetViewPortDistances / 4).toFixed(4))
     }
+
     return Number((targetOffsetDistances / 4).toFixed(4))
 }
 /**
@@ -84,14 +91,15 @@ function getEffectiveDistance(entry, targetOffset, targetViewPort, sameContainer
  * another rectangle.
  */
 export const closestCorners = ({
-  active,
   collisionRect,
   droppableContainers,
-}, overlayRect) => {
+}, overlayRect
+, isOver
+) => {
 
   let minDistanceToCorners = Infinity;
   let minDistanceContainer = null;
-  const dragOverlayContainer = active.data.current.sortable.containerId
+  const dragOverlayContainer = isOver
 
   const collisionCorners = cornersOfRectangle(
     collisionRect,
@@ -103,11 +111,12 @@ export const closestCorners = ({
     overlayRect.left,
     overlayRect.top
   );
-
-  for (const droppableContainer of droppableContainers) {
+ 
+  for (let droppableContainer of droppableContainers) {
     const id = droppableContainer.id;
     //using intersection observer for rect values since it wont 
     //force a reflow, while getBoundingClientRect does
+    if(!droppableContainer.node.current) continue
     observer.observe(droppableContainer.node.current);
     const rect = currentDroppablePostion[id]
 
@@ -117,14 +126,18 @@ export const closestCorners = ({
     else droppableColumnId = id 
     
     if (rect) { 
-      const effectiveDistance = getEffectiveDistance(rect, collisionCorners, overlayRectCorners, dragOverlayContainer === droppableColumnId);
-
+      const effectiveDistance = getEffectiveDistance(
+                                  rect, 
+                                  collisionCorners, 
+                                  overlayRectCorners, 
+                                  dragOverlayContainer === droppableColumnId
+                                );
+        
       if (effectiveDistance < minDistanceToCorners) {
         minDistanceToCorners = effectiveDistance;
         minDistanceContainer = droppableContainer.id;
       }
     }
   }
-
   return minDistanceContainer;
 };

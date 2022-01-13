@@ -24,7 +24,6 @@ const SecondarySideBar = (props) =>{
                 icon= {props.sidebarToggle ? faTimes : faBars}
             />
         </button>
-        
         <div 
             aria-label ="sidebar" 
             className={`${props.sidebarToggle ?"sidebar-right":"sidebar-left"}${props.customSidebarClass ? " "+props.customSidebarClass: ""} d-flex flex-column sidebar-nav secondary-sidebar-nav fixed-top`}
