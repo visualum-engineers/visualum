@@ -58,7 +58,8 @@ const LabelPicturesQuestion = (props) =>{
 
     const onQuestionNavSwipe = (e) => {
         //if a drag is started, we dont want swiping interfering
-        if(props.dragActive) return
+        console.log(props)
+        if(props.dragActive || props.firstElTap) return
         switch(e.type){
             case "touchstart":
                 return onOverviewTouchStart(e)
