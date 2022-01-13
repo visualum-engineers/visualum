@@ -16,6 +16,7 @@ import ActivityResetPopUp from './ActivityResetPopUp'
 import UserProfile from "../utilities/userProfile/UserProfile";
 import calculatePercentage from "../../helpers/calculatePercentage";
 import capitalizeFirstLetter from "../../helpers/capitalizeFirstLetter"
+import { unstable_batchedUpdates } from "react-dom"
 const activityData = assignmentData
 const duration = 500
 const inPropDuration = duration * 2
@@ -79,14 +80,17 @@ const Activity = () =>{
             currQuestion = questionNum + 1
         }
         if(btnType === "submit") return null
-        setQuestion({
-            activityID: activityData["uniqueID"],
-            questionNum: currQuestion,
-            ...activityData[currQuestion]
+        
+        unstable_batchedUpdates(()=>{
+            setQuestion({
+                activityID: activityData["uniqueID"],
+                questionNum: currQuestion,
+                ...activityData[currQuestion]
+            })
+            setPrevQuestion(questionNum)
+            setQuestionNum(currQuestion)
+            setInProp(true)
         })
-        setPrevQuestion(questionNum)
-        setQuestionNum(currQuestion)
-        setInProp(true)
         setTimeout(() =>{
             setInProp(false)
         }, inPropDuration)
@@ -103,7 +107,7 @@ const Activity = () =>{
     //use for activity instructions popup
     const moreInfoOnClick = (e) => {
         setMoreInfoBtn(state => !state)
-        if(!mediumWindowWidth && !sidebarToggle) exitSideBar()
+        if(!mediumWindowWidth && sidebarToggle) exitSideBar()
     }
 
     //used for confirmation popup of reseting data in activity 
