@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react"
+import useDetectSwipe from "../../../hooks/use-detect-swipe"
 import {CSSTransition} from "react-transition-group"
 import LabelPicturesImage from "./LabelImage"
 import LabelQuestionTransition from "./LabelQuestionTransition"
 import LabelQuestionColumnHeader from "./LabelQuestionColumnHeader"
 import LabelQuestionColumnTitle from "./LabelQuestionColumnTitle"
 import LabelAnswerOverview from "./LabelAnswersOverview"
+import { unstable_batchedUpdates } from "react-dom"
 
 const duration = 400
 const inPropDuration = duration + 100
@@ -12,14 +14,13 @@ const defaultTransition = {
     transition: `all ${duration}ms ease-out`,
     transitionProperty: "opacity, transform, left",
 }
-
 const LabelPicturesQuestion = (props) =>{
     //used for transitions between internal label questions
     const [currQuestion, setCurrQuestion] = useState(0)
     const [prevQuestion, setPrevQuestion] = useState(0)
     //detect transition occuring
     const [inProp, setInProp] = useState(true)
-
+    const [onOverviewTouchStart, onOveviewTouchEnd] = useDetectSwipe()
     //fix before leaving
     const [overviewPopUp, setOverViewPopUp] = useState(false)
     useEffect(() =>{
@@ -27,24 +28,52 @@ const LabelPicturesQuestion = (props) =>{
             setInProp(false)
         }, inPropDuration)
     }, [])
-    const onQuestionNavClick = (e) =>{
-        const target = e.target.closest("button")
-        if(!target || inProp) return
+    const updateQuestionNumByOne = (target)=>{
+        console.log(target.dataset.actionLabel)
         switch(target.dataset.actionLabel){
             case "prev-question":
+                if(currQuestion <= 0) return
                 setCurrQuestion(state => state - 1)
                 break
             case "next-question":
+                if(currQuestion >= props.data.questions.length-1) return
                 setCurrQuestion(state => parseInt(state) + 1)
                 break
             default:
                 break
         }
-        setPrevQuestion(currQuestion)
-        setInProp(true)
+        unstable_batchedUpdates(() =>{
+            setPrevQuestion(currQuestion)
+            setInProp(true)
+        })
+
         setTimeout(() =>{
             setInProp(false)
         }, inPropDuration)
+    }
+    const onQuestionNavClick = (e) =>{
+        const target = e.target.closest("button")
+        if(!target || inProp) return
+        return updateQuestionNumByOne(target)
+    }
+
+    const onQuestionNavSwipe = (e) => {
+        //if a drag is started, we dont want swiping interfering
+        if(props.dragActive) return
+        switch(e.type){
+            case "touchstart":
+                return onOverviewTouchStart(e)
+            case "touchend":
+                const direction = onOveviewTouchEnd(e)
+                const target = {
+                    dataset:{
+                        actionLabel: direction.right ? "prev-question" : "next-question"
+                    }
+                }
+                return updateQuestionNumByOne(target)
+            default:
+                return
+        }
     }
     const onOverviewClick = (e) =>{
         const action = e.target.closest("button").dataset.actionLabel
@@ -130,6 +159,7 @@ const LabelPicturesQuestion = (props) =>{
                             >
                                 <LabelQuestionTransition
                                     {...props}
+                                    onQuestionNavSwipe = {onQuestionNavSwipe}
                                     questionKey = {key}
                                     questionIndex = {index}
                                     style ={{...defaultTransition}}

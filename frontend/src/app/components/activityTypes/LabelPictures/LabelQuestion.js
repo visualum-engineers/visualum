@@ -4,6 +4,10 @@ const LabelQuestion = ({
     data,
     onTap, 
     firstElTap,
+    onQuestionNavSwipe,
+    questionID,
+    questionContent,
+    questionIndex,
     placeholderClass,
     columnContainerClass,
     droppableClassName,
@@ -11,18 +15,21 @@ const LabelQuestion = ({
     draggableClassName,
     isDraggingClass,
     draggingOverClass,
-    questionID,
-    questionContent,
-    questionIndex
 }) =>{
     return(
         <>
         <div 
             className="label-pic-activity-question d-flex align-items-center w-100"
+            onTouchStart={onQuestionNavSwipe}
+            onTouchEnd={onQuestionNavSwipe}
         >
             <h2 className="w-100 unselectable">{questionIndex+1 + ". " + questionContent}</h2>
         </div>
-        <div className={columnContainerClass}>
+        <div 
+            className={columnContainerClass}
+            onTouchStart={onQuestionNavSwipe}
+            onTouchEnd={onQuestionNavSwipe}
+        >
             <DroppableArea 
                 id = {questionID}
                 content={data.categories[questionID]}

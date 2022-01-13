@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import {unstable_batchedUpdates} from 'react-dom'
 import transformData from "./labelTransformData"
 import {DragDropContext} from "react-beautiful-dnd"
 import ActivityHeader from "../ActivityHeader"
@@ -21,7 +22,7 @@ const LabelPicturesApp = ({
     smallWindowWidth,
 }) =>{
     const [data, setData] = useState(transformData(activityData, 1))
-
+    const [dragActive, setDragActive] = useState(false)
     //used for dnd and tap and drop actions
     const [firstElTap, setFirstElTap] = useState(null)
 
@@ -55,13 +56,18 @@ const LabelPicturesApp = ({
     const onDragStart = () =>{
         //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
         document.querySelector("html").classList.add("sortActivityActive")
+        setDragActive(true)
     }
 
     const onDragEnd = (result) =>{
         const newState = updateMultipleSortableLists(data, result, answerChoiceTestEl)
         if(!newState) return
         //update state
-        setData(newState)
+
+        unstable_batchedUpdates(()=>{
+            setData(newState)
+            setDragActive(false)
+        })
         localStorage.setItem(`${activityID}-label_pic_activity_client_answer-${questionNum}`, JSON.stringify(newState))
     }
     const toggleTap = (e) =>{
@@ -86,8 +92,11 @@ const LabelPicturesApp = ({
         }
         const result = getResultOnTap(parm)
         if(!result) return
-        onDragEnd(result)
-        setFirstElTap(null)
+
+        unstable_batchedUpdates(()=>{
+            onDragEnd(result)
+            setFirstElTap(null)
+        })
     }
     return(
         <>
@@ -127,7 +136,15 @@ const LabelPicturesApp = ({
                     <LabelQuestionColumn 
                         data = {data}
                         firstElTap = {firstElTap}
+                        dragActive={dragActive}
+                        mediumWindowWidth={mediumWindowWidth}
+                        smallWindowWidth={smallWindowWidth}
+                        //func
                         onTap = {disableDnD? onTap: null}
+                        moreInfoBtn = {moreInfoBtn}
+                        moreInfoOnClick={moreInfoOnClick}
+
+                        //styles
                         popUpBgStyles={popUpBgStyles}
                         placeholderClass ={"label-pic-activity-droppables-placeholder"}
                         columnContainerClass = {"label-pic-activity-question-column flex-grow-1 d-flex flex-column w-100"}
@@ -137,10 +154,6 @@ const LabelPicturesApp = ({
                         draggableClassName= {"label-pic-activity-draggables d-flex align-items-center justify-content-center"}
                         draggingOverClass={"label-pic-activity-draggable-over"}
                         isDraggingClass ={"label-pic-activity-dragging"}
-                        moreInfoBtn = {moreInfoBtn}
-                        moreInfoOnClick={moreInfoOnClick}
-                        mediumWindowWidth={mediumWindowWidth}
-                        smallWindowWidth={smallWindowWidth}
                     />
 
                     {!mediumWindowWidth &&
