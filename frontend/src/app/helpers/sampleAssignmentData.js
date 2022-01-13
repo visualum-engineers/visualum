@@ -1,3 +1,8 @@
+const sortActivityChoices = (numChoices) =>{
+    let choices = []
+    for(let i=0; i<numChoices; i++) choices.push({id: i+1, content:"choice" + (i + 1)})
+    return choices
+}
 const assignmentData = {
     activityID: "unique",
     activityName: "7C Week2 HW Assignment",
@@ -49,15 +54,16 @@ const assignmentData = {
             {categoryId: 6, name: "Hello"},
             {categoryId: 7, name: "Nah"}
         ],
-        answerChoices: [
-            {id:"1", content:"The world know no bounds except that is cannot be at piece right now. The world will never know peace"}, 
-            {id:"2", content:"Good"},
-            {id:"3", content:"Nice" },
-            {id:"4", content:"Duh" },
-            {id:"5", content:"Bruh"},
-            {id:"6", content:"Yuh" },
-            {id:"7", content:"Fuh" },
-        ]
+        // answerChoices: [
+        //     {id:"1", content:"The world know no bounds except that is cannot be at piece right now. The world will never know peace"}, 
+        //     {id:"2", content:"Good"},
+        //     {id:"3", content:"Nice" },
+        //     {id:"4", content:"Duh" },
+        //     {id:"5", content:"Bruh"},
+        //     {id:"6", content:"Yuh" },
+        //     {id:"7", content:"Fuh" },
+        // ]
+        answerChoices: sortActivityChoices(100)
     },
     //short answer
     4: {

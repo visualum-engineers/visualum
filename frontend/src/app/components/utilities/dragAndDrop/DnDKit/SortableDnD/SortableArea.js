@@ -2,61 +2,66 @@ import React from 'react';
 import {SortableContext, verticalListSortingStrategy} from '@dnd-kit/sortable';
 import SortableItems from "./SortableItems"
 import Droppable from '../NonSortableDnD/Droppable';
+const innerListPropsEqual=(prev, next) =>{
+    const prevContent = prev.content
+    //determine if content arrays are equal
+    const isContentItemsEqual = next.content.every((item, index) => (item && prevContent[index]) && (item.id === prevContent[index].id))
+    const isContentLengthEqual = next.content.length === prev.content.length
+    const isContentEqual = isContentItemsEqual && isContentLengthEqual
+    //check all other props
+    const isDisabledEqual = prev.disableDnD === next.disableDnD 
+    const isOnTapEqual = prev.onTap === next.onTap
+    const isFirstElTap = prev.firstElTap === next.firstElTap
+    const isDraggingClassName = prev.draggableClassName === next.draggableClassName
+    const propsEqual = isContentEqual && isDisabledEqual && isOnTapEqual && isFirstElTap && isDraggingClassName
+    return propsEqual
+}
+
+const InnerList = React.memo(({
+    id,
+    content, 
+    onTap,
+    firstElTap,
+    disableDnD,
+    isDraggingClass,
+    draggableClassName
+}) => content.map((draggableContent, index)=>{
+        let last = index === content.length-1
+        return (
+            <SortableItems 
+                key = {draggableContent.id}
+                id = {draggableContent.id}
+                content = {draggableContent.content}
+                isDraggingClass={isDraggingClass}
+                index = {index}
+                droppableId = {id.toString()}
+                onTap={disableDnD ? onTap: null}
+                disabled = {disableDnD}
+                draggableClassName = {
+                    `${draggableClassName}${last?" last-item":""}`
+                    +`${firstElTap && firstElTap.draggableId === draggableContent.id ?` ${isDraggingClass}`: " "}`
+                }
+            />
+        )
+    })
+, innerListPropsEqual) 
+
 const SortableArea = ({
     id, 
     content, 
-    droppableHeader=null, 
+    droppableHeader=null,
+    onTap=null, 
+    firstElTap=null, 
+    isOver=null,
+    disableDnD = null, 
     droppableClassName="", 
     innerDroppableClassName ="", 
     draggableClassName="", 
     draggingOverClass="", 
     isDraggingClass= "", 
     placeHolderClass = "",
-    onTap=null, 
-    firstElTap=null, 
-    isOver=null,
-    disableDnD = null,
-}) =>{
 
-    const InnerList = React.memo(({
-        content, 
-        onTap,
-        firstElTap    
-    }) =>
-        content.map((draggableContent, index)=>{
-            let last = index === content.length-1
-            const InnerItem = React.memo(({
-                index,
-                droppableId,
-                onTap,
-                draggableClassName,
-            }) => <SortableItems 
-                    id = {draggableContent.id}
-                    content = {draggableContent.content}
-                    isDraggingClass={isDraggingClass}
-        
-                    index = {index}
-                    droppableId = {droppableId}
-                    onTap={onTap}
-                    disabled = {disableDnD}
-        
-                    draggableClassName = {draggableClassName}
-                />
-            )
-            return (
-                <InnerItem
-                    key = {draggableContent.id}
-                    index = {index}
-                    droppableId = {id.toString()}
-                    onTap={disableDnD ? onTap: null}
-                    draggableClassName = {
-                        `${draggableClassName}${last?" last-item":""}`
-                        +`${firstElTap && firstElTap.draggableId === draggableContent.id ?` ${isDraggingClass}`: " "}`
-                    }
-                />
-            )
-        }) 
-    )
+}) =>{
     return (
         <SortableContext 
             items={content}
@@ -76,9 +81,13 @@ const SortableArea = ({
                     disabled = {disableDnD}
                 >
                     <InnerList
+                        id={id.toString()}
+                        disableDnD ={disableDnD}
                         content = {content}
                         onTap ={onTap}
                         firstElTap={firstElTap}
+                        isDraggingClass={isDraggingClass}
+                        draggableClassName ={draggableClassName}
                     />
                 </Droppable>
             </div>

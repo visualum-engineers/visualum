@@ -176,10 +176,13 @@ const SortActivityApp = ({
 
         //different starting and ending containers
         if(currElOver.containerId !== activeElOver.containerId) {
-            updateSortableLists(resultValues(e, currElOver.containerId))
+            unstable_batchedUpdates(()=>{
+                updateSortableLists(resultValues(e, currElOver.containerId))
+                setIsOver(currElOver.containerId)
+            })
             recentlyMovedToNewContainer.current = true
+            return
         }
-
         setIsOver(currElOver.containerId)
     }
     //debounce expensive function. We also only create debounce once, on mount
