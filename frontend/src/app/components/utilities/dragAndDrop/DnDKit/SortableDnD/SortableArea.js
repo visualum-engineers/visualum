@@ -17,6 +17,7 @@ const SortableArea = ({
     isOver=null,
     disableDnD = null,
 }) =>{
+
     const InnerList = React.memo(({
         content, 
         onTap,
@@ -24,16 +25,30 @@ const SortableArea = ({
     }) =>
         content.map((draggableContent, index)=>{
             let last = index === content.length-1
-            return (
-                <SortableItems 
-                    droppableId = {id.toString()}
-                    key = {draggableContent.id}
-                    index = {index}
+            const InnerItem = React.memo(({
+                index,
+                droppableId,
+                onTap,
+                draggableClassName,
+            }) => <SortableItems 
                     id = {draggableContent.id}
                     content = {draggableContent.content}
                     isDraggingClass={isDraggingClass}
-                    onTap={disableDnD ? onTap: null}
+        
+                    index = {index}
+                    droppableId = {droppableId}
+                    onTap={onTap}
                     disabled = {disableDnD}
+        
+                    draggableClassName = {draggableClassName}
+                />
+            )
+            return (
+                <InnerItem
+                    key = {draggableContent.id}
+                    index = {index}
+                    droppableId = {id.toString()}
+                    onTap={disableDnD ? onTap: null}
                     draggableClassName = {
                         `${draggableClassName}${last?" last-item":""}`
                         +`${firstElTap && firstElTap.draggableId === draggableContent.id ?` ${isDraggingClass}`: " "}`
