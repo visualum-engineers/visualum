@@ -11,7 +11,8 @@ import DashboardClass from './components/dashboard/DashboardClass';
 
 import sampleActivityData from './helpers/sampleActivityData'
 import DashboardAssignments from './components/dashboard/DashboardAssignments';
-import TestBackend from "./components/testBackend/test"
+//import TestBackend from "./components/testBackend/test"
+//import MultipleContainers from './components/TestingSortable';
 import DashboardSettings from './components/dashboard/DashboardSettings';
 
 
@@ -93,8 +94,9 @@ function App() {
               <DashboardHome />
             </Route>
 
-            <Route exact path="/testBackend">
-              <TestBackend />
+            <Route exact path="/testSorting">
+              {/* <TestBackend /> */}
+              
             </Route>
           </Switch>
         </Suspense>

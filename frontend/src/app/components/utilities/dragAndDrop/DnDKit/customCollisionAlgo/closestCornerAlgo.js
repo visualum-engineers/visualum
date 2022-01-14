@@ -1,6 +1,5 @@
 
  import getEdgeOffset from "../positionFunctions/getEdgeOffset";
- import {getBoundingClientRect} from '@dnd-kit/core';
  //store all position values for each droppable
  let currentDroppablePostion = {}
  
@@ -70,20 +69,20 @@ function getEffectiveDistance(
     const targetOffsetDistances = targetOffset.reduce((accumulator, corner, index) => {
         return accumulator + distanceBetween(entryCorners[index], corner);
     }, 0);
-    //let targetViewPortDistances
 
-    // if(!sameContainer){
-    //     //re-assign entry corners to viewport distance
-    //     entryCorners = cornersOfRectangle(
-    //         entry,
-    //         entry.left ? entry.left : undefined,
-    //         entry.top ? entry.top : undefined
-    //     );
-    //     targetViewPortDistances = targetViewPort.reduce((accumulator, corner, index) => {
-    //         return accumulator + distanceBetween(entryCorners[index], corner);
-    //     }, 0)
-    //     return Number((targetViewPortDistances / 4).toFixed(4))
-    // }
+    let targetViewPortDistances
+    if(!sameContainer){
+        //re-assign entry corners to viewport distance
+        entryCorners = cornersOfRectangle(
+            entry,
+            entry.left ? entry.left : undefined,
+            entry.top ? entry.top : undefined
+        );
+        targetViewPortDistances = targetViewPort.reduce((accumulator, corner, index) => {
+            return accumulator + distanceBetween(entryCorners[index], corner);
+        }, 0)
+        return Number((targetViewPortDistances / 4).toFixed(4))
+    }
 
     return Number((targetOffsetDistances / 4).toFixed(4))
 }
@@ -118,10 +117,8 @@ export const closestCorners = ({
     //using intersection observer for rect values since it wont 
     //force a reflow, while getBoundingClientRect does
     if(!droppableContainer.node.current) continue
-    //observer.observe(droppableContainer.node.current);
-    //const rect = currentDroppablePostion[id]
-    const rect = getBoundingClientRect(droppableContainer.node.current)
-    //console.log(rect)
+    observer.observe(droppableContainer.node.current);
+    const rect = currentDroppablePostion[id]
     //grab origin container
     let droppableColumnId
     if(droppableContainer.data.current.sortable) droppableColumnId = droppableContainer.data.current.sortable.containerId
@@ -141,6 +138,5 @@ export const closestCorners = ({
       }
     }
   }
-  //console.log(minDistanceContainer)
   return minDistanceContainer;
 };

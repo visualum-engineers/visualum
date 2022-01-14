@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef, useMemo} from 'react'
 import {unstable_batchedUpdates} from 'react-dom'
-import {DndContext, DragOverlay, getBoundingClientRect, closestCorners, pointerWithin} from '@dnd-kit/core';
+import {DndContext, DragOverlay, getBoundingClientRect, defaultDropAnimation} from '@dnd-kit/core';
+import { closestCorners } from '../../utilities/dragAndDrop/DnDKit/customCollisionAlgo/closestCornerAlgo';
 import { rectIntersection} from '../../utilities/dragAndDrop/DnDKit/customCollisionAlgo/algoIndex';
-//closestCorners,
 import addToTop from '../../utilities/dragAndDrop/DnDKit/positionFunctions/addToTop';
 import {useDispatch, useSelector} from 'react-redux';
 import {enableTap, enableDnD, resetPopUpOff} from '../../../../redux/features/activityTypes/activitiesSlice'
@@ -25,7 +25,10 @@ Frontend:
     3. Missing re-rendering logic, when user answers question and moves on to the next one.
     4. Missing progress saved on local storage/memory (if user exits out of page)
 */
-
+const dropAnimation = {
+    ...defaultDropAnimation,
+    dragSourceOpacity: 0.5,
+  };
 const SortActivityApp = ({
     activityData, 
     questionNum, 
@@ -187,12 +190,10 @@ const SortActivityApp = ({
         }
         setIsOver(currElOver.containerId)
     }
-    //debounce expensive function. We also only create debounce once, on mount
-    const debouncedOnDragOver = useMemo(() => debounce(onDragOver, 100), []);
     
     //overall wrapper function
     const onDragOverWrapper = (e) => {
-        debouncedOnDragOver(
+        onDragOver(
             e, 
             isOver, 
             resultValues, 
@@ -268,7 +269,7 @@ const SortActivityApp = ({
         }
     }
     //debounce expensive collision function. We also only create debounce once, on mount
-    const debouncedCollisionAlgo = useMemo(() => debounce(customCollisionAlgo, 5), []);
+    const debouncedCollisionAlgo = useMemo(() => debounce(customCollisionAlgo, 6), []);
     
     //overall wrapper function
     const collisionAlgoWrapper = (e) => {
@@ -340,7 +341,9 @@ const SortActivityApp = ({
                     disableDnD = {disableDnD}
                 />}
                 {/*Current element being dragged*/}
-                <DragOverlay>
+                <DragOverlay
+                    dropAnimation={dropAnimation}
+                >
                    {activeId ? (
                     <Item 
                          ref = {dragOverlayItem}
