@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef, useMemo} from 'react'
 import {unstable_batchedUpdates} from 'react-dom'
-import {DndContext, DragOverlay, getBoundingClientRect} from '@dnd-kit/core';
-import { closestCorners, rectIntersection} from '../../utilities/dragAndDrop/DnDKit/customCollisionAlgo/algoIndex';
+import {DndContext, DragOverlay, getBoundingClientRect, closestCorners, pointerWithin} from '@dnd-kit/core';
+import { rectIntersection} from '../../utilities/dragAndDrop/DnDKit/customCollisionAlgo/algoIndex';
+//closestCorners,
 import addToTop from '../../utilities/dragAndDrop/DnDKit/positionFunctions/addToTop';
 import {useDispatch, useSelector} from 'react-redux';
 import {enableTap, enableDnD, resetPopUpOff} from '../../../../redux/features/activityTypes/activitiesSlice'
@@ -63,9 +64,9 @@ const SortActivityApp = ({
     // moving a draggable to a new contianer
     useEffect(() => {
         requestAnimationFrame(() => {
-          recentlyMovedToNewContainer.current = false;
+            if(recentlyMovedToNewContainer.current) recentlyMovedToNewContainer.current = false;
         });
-      }, [data]);
+      }, [isOver]);
 
     //grab data from local storage
     useEffect(() =>{
@@ -104,12 +105,6 @@ const SortActivityApp = ({
         setData(newState)
         localStorage.setItem(`${activityID}-sort_activity_client_answer-${questionNum}`, JSON.stringify(newState))
     }
-
-    const onDragStart = (e) =>{
-        //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
-        document.querySelector("html").classList.add("sortActivityActive")
-        setActiveId(e.active.id)
-    }
     //used only for dnd, not tap. returns the result object that contains all neccessary info to update list
     const resultValues = (e, finishContainer) => {
         const finish = finishContainer
@@ -140,6 +135,13 @@ const SortActivityApp = ({
         }
         return result
     }
+
+    const onDragStart = (e) =>{
+        //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
+        document.querySelector("html").classList.add("sortActivityActive")
+        setActiveId(e.active.id)
+    }
+
     //pass all necessary values and re-rendered functions here 
     const onDragOver = (
         e, 
@@ -176,11 +178,11 @@ const SortActivityApp = ({
 
         //different starting and ending containers
         if(currElOver.containerId !== activeElOver.containerId) {
+            recentlyMovedToNewContainer.current = true
             unstable_batchedUpdates(()=>{
                 updateSortableLists(resultValues(e, currElOver.containerId))
                 setIsOver(currElOver.containerId)
             })
-            recentlyMovedToNewContainer.current = true
             return
         }
         setIsOver(currElOver.containerId)
@@ -249,7 +251,13 @@ const SortActivityApp = ({
             setFirstElTap(null)
         }
     }
-    const customCollisionAlgo = (e, mediumWindowWidth, isOver, dragOverlayItem) =>{
+    const customCollisionAlgo = (
+        e, 
+        mediumWindowWidth, 
+        isOver, 
+        dragOverlayItem
+    ) =>{
+        if(recentlyMovedToNewContainer.current) return
         if(!dragOverlayItem.current) return
         const overlayRect = getBoundingClientRect(dragOverlayItem.current)
         switch (true){
