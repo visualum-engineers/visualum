@@ -59,12 +59,12 @@ function cornersOfRectangle(
    * takes into account viewport or document offset depending 
    * on sorting items, or changing containers
    */
-function getEffectiveDistance(
-    entry, 
-    targetOffset, 
-    targetViewPort, 
-    sameContainer
-){
+function getEffectiveDistance({
+  entry, 
+  targetOffset, 
+  targetViewPort, 
+  sameContainer
+}){
     let entryCorners = cornersOfRectangle(entry);
     const targetOffsetDistances = targetOffset.reduce((accumulator, corner, index) => {
         return accumulator + distanceBetween(entryCorners[index], corner);
@@ -91,7 +91,6 @@ function getEffectiveDistance(
  * another rectangle.
  */
 export const closestCorners = ({
-  active,
   collisionRect,
   droppableContainers,
 }
@@ -99,9 +98,6 @@ export const closestCorners = ({
   overlayRect,
   isOver,
 }) => {
-
-  //if(!isOver) return active.id
-
   let minDistanceToCorners = Infinity;
   let minDistanceContainer = null;
   const dragOverlayContainer = isOver
@@ -130,21 +126,20 @@ export const closestCorners = ({
     if(droppableContainer.data.current.sortable) droppableColumnId = droppableContainer.data.current.sortable.containerId
     else droppableColumnId = id 
 
-    if (rect) { 
-      const effectiveDistance = getEffectiveDistance(
-                                  rect, 
-                                  collisionCorners, 
-                                  overlayRectCorners, 
-                                  dragOverlayContainer === droppableColumnId
-                                );
-        
+    if(rect) { 
+      const effectiveDistance = getEffectiveDistance({
+                                  entry: rect,
+                                  targetOffset: collisionCorners,
+                                  targetViewPort: overlayRectCorners, 
+                                  sameContainer: dragOverlayContainer === droppableColumnId,
+                                });
+      
       if (effectiveDistance < minDistanceToCorners) {
         minDistanceToCorners = effectiveDistance;
         minDistanceContainer = droppableContainer.id;
       }
     }
   }
-  // console.log(active.id)
-  // if(!minDistanceContainer) return active.id
+
   return minDistanceContainer;
 };

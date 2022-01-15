@@ -25,11 +25,16 @@ import getEdgeOffset from "../positionFunctions/getEdgeOffset";
    * takes into account viewport or document offset depending 
    * on sorting items, or changing containers
    */
-  function getIntersectionRatio(entry, targetOffset, targetViewport, sameContainer){
+  function getIntersectionRatio({
+    entry, 
+    targetOffset, 
+    targetViewPort, 
+    sameContainer
+  }){
     const top = Math.max(targetOffset.top, entry.offsetTop);
     const bottom = Math.min(targetOffset.top + targetOffset.height, entry.offsetTop + entry.height);
-    const viewPortTop = Math.max(targetViewport.top, entry.top)
-    const viewPortBottom = Math.min(targetViewport.top + targetViewport.height, entry.top + entry.height)
+    const viewPortTop = Math.max(targetViewPort.top, entry.top)
+    const viewPortBottom = Math.min(targetViewPort.top + targetViewPort.height, entry.top + entry.height)
 
     const left = Math.max(targetOffset.left, entry.offsetLeft);
     const right = Math.min(targetOffset.left + targetOffset.width, entry.offsetLeft + entry.width);
@@ -82,12 +87,12 @@ import getEdgeOffset from "../positionFunctions/getEdgeOffset";
       if(droppableContainer.data.current.sortable) droppableColumnId = droppableContainer.data.current.sortable.containerId
       else droppableColumnId = id 
       if (rect) {
-        const intersectionRatio = getIntersectionRatio(
-                                    rect, 
-                                    collisionRect, 
-                                    overlayRect, 
-                                    dragOverlayContainer === droppableColumnId
-                                  );
+        const intersectionRatio = getIntersectionRatio({
+                                    entry: rect,
+                                    targetOffset: collisionRect,
+                                    targetViewPort: overlayRect,
+                                    sameContainer: dragOverlayContainer === droppableColumnId
+                                  });
         if (intersectionRatio > maxIntersectionRatio) {
           maxIntersectionRatio = intersectionRatio;
           maxIntersectingDroppableContainer = id;

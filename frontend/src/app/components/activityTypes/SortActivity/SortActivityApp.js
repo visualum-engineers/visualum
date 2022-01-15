@@ -48,7 +48,7 @@ const SortActivityApp = ({
     const [activeId, setActiveId] = useState(undefined)
     const [isOver, setIsOver] = useState(undefined)
     const dragOverlayItem = useRef()
-    //const dragStart = useRef(false)
+
     //redux states
     const dispatch = useDispatch()
     const disableDnD = useSelector((state) => !state.activities.dndEnabled) 
@@ -58,14 +58,11 @@ const SortActivityApp = ({
     const [firstElTap, setFirstElTap] = useState(null)
     const removedEl = useRef(null)
     // When a draggable item moves to a new container, the layout may shift
-    // and the `overId` may become `null`. We manually set the cached `lastOverId`
-    // to the id of the draggable item that was moved to the new container, otherwise
-    // the previous `overId` will be returned which can cause items to incorrectly shift positions
+    //and can cause items to incorrectly shift positions if the next animation frame isn't ready.
+    // this can lead to duplicated elements.
     const recentlyMovedToNewContainer = useRef(false)
-
-    //after a re-render and animation is complete 
-    // we set recently moved to false, and re-enable 
-    // moving a draggable to a new contianer
+    //after a re-render and animation is complete we can call our
+    //collision funcs and update state again
     useEffect(() => {
         requestAnimationFrame(() => {
             if(recentlyMovedToNewContainer.current) recentlyMovedToNewContainer.current = false;
@@ -148,7 +145,6 @@ const SortActivityApp = ({
             setIsOver(e.active.data.current.sortable.containerId)
         })
     }
-
     //pass all necessary values and re-rendered functions here 
     const onDragOver = (e) =>{
         //if recently moved do not update
@@ -184,13 +180,9 @@ const SortActivityApp = ({
             })
             return
         }
-        console.log("onDragOver", isOver, e.over)
-        //setIsOver(currElOver.containerId)
     }
-
     //handle state update when object stops
     const onDragEnd = (e) => {
-        //console.log("dragend", isOver)
         //to re-enable smooth scrolling for the remainder of the pages
         document.querySelector("html").classList.remove("sortActivityActive")
         unstable_batchedUpdates(()=>{
@@ -212,6 +204,12 @@ const SortActivityApp = ({
         updateSortableLists(resultValues(e, endElOver.containerId))
 
     };
+    const onDragCancel = (e) =>{
+        unstable_batchedUpdates(()=>{
+            setActiveId(undefined)
+            setIsOver(undefined)
+        })
+    }
     const onTap = (e) =>{
         //in case there was a lag due to debouncing
         setIsOver(undefined)
@@ -257,7 +255,6 @@ const SortActivityApp = ({
                 return rectIntersection(e, {overlayRect: overlayRect, isOver: isOver})
         }
     }
-
     //overall wrapper function
     const collisionAlgoWrapper = (e) => {
         const intersectingContainer = customCollisionAlgo({
@@ -283,9 +280,9 @@ const SortActivityApp = ({
         <div className={`sort-activity-container d-flex ${mediumWindowWidth ? "full-size":"portrait-size flex-column align-items-center"}`}>
             <DndContext 
                 onDragStart={onDragStart}
-                //onDragOver = {onDragOverWrapper}
                 onDragOver={onDragOver}
                 onDragEnd = {onDragEnd}
+                onDragCancel={onDragCancel}
                 collisionDetection={collisionAlgoWrapper}
             >
                 {mediumWindowWidth && <WordBank 
@@ -354,21 +351,3 @@ const SortActivityApp = ({
     )
 }
 export default SortActivityApp
-
- //overall wrapper function
-    // const onDragOverWrapper = (e) => {
-    //     //console.log("dragOver", isOver)
-
-    //     onDragOver(
-    //         e, 
-    //         isOver, 
-    //         resultValues, 
-    //         updateSortableLists,
-    //         recentlyMovedToNewContainer
-    //     )
-    // }
-
-     // isOver, 
-        // resultValues, 
-        // updateSortableLists,
-        // recentlyMovedToNewContainer

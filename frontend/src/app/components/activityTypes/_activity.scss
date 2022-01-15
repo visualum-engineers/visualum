@@ -100,7 +100,6 @@
     overflow-wrap: break-word;
     overflow-x: hidden;
     overflow-x: auto;
-    //height: calc(max(28rem, 448px));
     height: 70%;
     @include border-radius(4px)
 }
@@ -167,7 +166,13 @@
     z-index: 1;
     max-width: 1300px;
     min-width: 310px; 
-    //overflow: hidden;  
+    &::-webkit-scrollbar{
+        width: 0rem;
+        height: 0rem;
+    }
+    &::-webkit-scrollbar-thumb{
+        background-color: transparent;
+    } 
 }
 
 .question-transition-container{

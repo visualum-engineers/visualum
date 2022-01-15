@@ -143,14 +143,20 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     margin-top: 0;
     background-color: $light-blue;
     width: calc(100% * (2 / 3) - 1.5rem);
-    min-height:calc(max(#{$label-pic-column-min-height}, #{$label-pic-column-height}));
+    min-height :calc(max(#{$label-pic-column-min-height}, #{$label-pic-column-height}));
     height: 100%;
     @include border-radius(7px);
-    //padding-bottom: 0.7rem;
     .label-pic-activity-column-titles{
         position: relative;
         @include border-radius(7px);
         padding-left: 0;
+    }
+    &::-webkit-scrollbar{
+        width: 0rem;
+        height: 0rem;
+    }
+    &::-webkit-scrollbar-thumb{
+        background-color: transparent;
     }
 }
 .label-pic-activity-question-container.portrait-size{
