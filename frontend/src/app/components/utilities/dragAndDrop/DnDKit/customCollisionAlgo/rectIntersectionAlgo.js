@@ -63,8 +63,10 @@ import getEdgeOffset from "../positionFunctions/getEdgeOffset";
   export const rectIntersection = ({
     droppableContainers, 
     collisionRect
-  }, overlayRect
-  , isOver) => {
+  },
+  { overlayRect,
+    isOver,
+  }) => {   
     let maxIntersectionRatio = 0;
     let maxIntersectingDroppableContainer = null;
     const dragOverlayContainer = isOver
@@ -80,7 +82,12 @@ import getEdgeOffset from "../positionFunctions/getEdgeOffset";
       if(droppableContainer.data.current.sortable) droppableColumnId = droppableContainer.data.current.sortable.containerId
       else droppableColumnId = id 
       if (rect) {
-        const intersectionRatio = getIntersectionRatio(rect, collisionRect, overlayRect, dragOverlayContainer === droppableColumnId);
+        const intersectionRatio = getIntersectionRatio(
+                                    rect, 
+                                    collisionRect, 
+                                    overlayRect, 
+                                    dragOverlayContainer === droppableColumnId
+                                  );
         if (intersectionRatio > maxIntersectionRatio) {
           maxIntersectionRatio = intersectionRatio;
           maxIntersectingDroppableContainer = id;

@@ -1,5 +1,5 @@
 
- import getEdgeOffset from "../positionFunctions/getEdgeOffset";
+import getEdgeOffset from "../positionFunctions/getEdgeOffset";
  //store all position values for each droppable
  let currentDroppablePostion = {}
  
@@ -91,11 +91,16 @@ function getEffectiveDistance(
  * another rectangle.
  */
 export const closestCorners = ({
+  active,
   collisionRect,
   droppableContainers,
-}, overlayRect
-, isOver
-) => {
+}
+, {
+  overlayRect,
+  isOver,
+}) => {
+
+  //if(!isOver) return active.id
 
   let minDistanceToCorners = Infinity;
   let minDistanceContainer = null;
@@ -119,6 +124,7 @@ export const closestCorners = ({
     if(!droppableContainer.node.current) continue
     observer.observe(droppableContainer.node.current);
     const rect = currentDroppablePostion[id]
+    //const rect = getBoundingClientRect(droppableContainer.node.current)
     //grab origin container
     let droppableColumnId
     if(droppableContainer.data.current.sortable) droppableColumnId = droppableContainer.data.current.sortable.containerId
@@ -138,5 +144,7 @@ export const closestCorners = ({
       }
     }
   }
+  // console.log(active.id)
+  // if(!minDistanceContainer) return active.id
   return minDistanceContainer;
 };

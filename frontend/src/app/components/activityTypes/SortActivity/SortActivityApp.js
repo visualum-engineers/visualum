@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo} from 'react'
+import { useState, useEffect, useRef} from 'react'
 import {unstable_batchedUpdates} from 'react-dom'
 import {DndContext, DragOverlay, getBoundingClientRect, defaultDropAnimation} from '@dnd-kit/core';
 import { closestCorners } from '../../utilities/dragAndDrop/DnDKit/customCollisionAlgo/closestCornerAlgo';
@@ -10,7 +10,7 @@ import WordBank from './SortActivityWordBank';
 import ActivityHeader from '../ActivityHeader';
 import SortActivityCategories from './SortActivityCategories';
 import Item from '../../utilities/dragAndDrop/DnDKit/DragOverlayItem';
-import debounce from 'lodash.debounce';
+
 import transformData from './sortTransformData';
 import updateMultipleSortableLists from '../../utilities/dragAndDrop/DnDUpdateAlgo.js/Sortables/updateMultipleLists';
 import getResultOnTap from '../../utilities/dragAndDrop/DnDUpdateAlgo.js/Sortables/getResultOnTap';
@@ -48,6 +48,7 @@ const SortActivityApp = ({
     const [activeId, setActiveId] = useState(undefined)
     const [isOver, setIsOver] = useState(undefined)
     const dragOverlayItem = useRef()
+    //const dragStart = useRef(false)
     //redux states
     const dispatch = useDispatch()
     const disableDnD = useSelector((state) => !state.activities.dndEnabled) 
@@ -142,26 +143,21 @@ const SortActivityApp = ({
     const onDragStart = (e) =>{
         //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
         document.querySelector("html").classList.add("sortActivityActive")
-        setActiveId(e.active.id)
+        unstable_batchedUpdates(()=>{
+            setActiveId(e.active.id);
+            setIsOver(e.active.data.current.sortable.containerId)
+        })
     }
 
     //pass all necessary values and re-rendered functions here 
-    const onDragOver = (
-        e, 
-        isOver, 
-        resultValues, 
-        updateSortableLists,
-        recentlyMovedToNewContainer
-    ) =>{
+    const onDragOver = (e) =>{
         //if recently moved do not update
         if(recentlyMovedToNewContainer.current) return
-        
         //prevent updating if already null, and set to null if not being sorted
         if(!e.over && !isOver) return
-        else if(!e.over) return setIsOver(undefined)
+        if(!e.over) return //setIsOver(undefined)
         const currElOver = e.over.data.current.sortable
         const activeElOver = e.active.data.current.sortable
-
         //when over an empty sortable container (not a draggable item)
         if(!currElOver && isOver === e.over.id) return 
         if(!currElOver) {
@@ -188,28 +184,20 @@ const SortActivityApp = ({
             })
             return
         }
-        setIsOver(currElOver.containerId)
-    }
-    
-    //overall wrapper function
-    const onDragOverWrapper = (e) => {
-        onDragOver(
-            e, 
-            isOver, 
-            resultValues, 
-            updateSortableLists,
-            recentlyMovedToNewContainer
-        )
+        console.log("onDragOver", isOver, e.over)
+        //setIsOver(currElOver.containerId)
     }
 
     //handle state update when object stops
     const onDragEnd = (e) => {
+        //console.log("dragend", isOver)
         //to re-enable smooth scrolling for the remainder of the pages
         document.querySelector("html").classList.remove("sortActivityActive")
         unstable_batchedUpdates(()=>{
             setActiveId(undefined)
             setIsOver(undefined)
         })
+
         if(!e.over) return 
         //reset overlay and over styles
         const endElOver = e.over.data.current.sortable 
@@ -222,6 +210,7 @@ const SortActivityApp = ({
         if(isOver === endElOver.containerId && endElIndex === startElIndex) return
 
         updateSortableLists(resultValues(e, endElOver.containerId))
+
     };
     const onTap = (e) =>{
         //in case there was a lag due to debouncing
@@ -252,28 +241,32 @@ const SortActivityApp = ({
             setFirstElTap(null)
         }
     }
-    const customCollisionAlgo = (
+    const customCollisionAlgo = ({
         e, 
         mediumWindowWidth, 
         isOver, 
-        dragOverlayItem
-    ) =>{
+        dragOverlayItem,
+    }) =>{
         if(recentlyMovedToNewContainer.current) return
         if(!dragOverlayItem.current) return
         const overlayRect = getBoundingClientRect(dragOverlayItem.current)
         switch (true){
             case mediumWindowWidth:
-                return closestCorners(e, overlayRect, isOver)
+                return closestCorners(e, {overlayRect: overlayRect, isOver: isOver})
             default:
-                return rectIntersection(e, overlayRect, isOver)
+                return rectIntersection(e, {overlayRect: overlayRect, isOver: isOver})
         }
     }
-    //debounce expensive collision function. We also only create debounce once, on mount
-    const debouncedCollisionAlgo = useMemo(() => debounce(customCollisionAlgo, 6), []);
-    
+
     //overall wrapper function
     const collisionAlgoWrapper = (e) => {
-        return debouncedCollisionAlgo(e, mediumWindowWidth, isOver, dragOverlayItem)
+        const intersectingContainer = customCollisionAlgo({
+            e: e,
+            isOver: isOver,
+            mediumWindowWidth: mediumWindowWidth,
+            dragOverlayItem: dragOverlayItem,
+        })
+        return intersectingContainer
     }
     return (
     <>  
@@ -290,7 +283,8 @@ const SortActivityApp = ({
         <div className={`sort-activity-container d-flex ${mediumWindowWidth ? "full-size":"portrait-size flex-column align-items-center"}`}>
             <DndContext 
                 onDragStart={onDragStart}
-                onDragOver = {onDragOverWrapper}
+                //onDragOver = {onDragOverWrapper}
+                onDragOver={onDragOver}
                 onDragEnd = {onDragEnd}
                 collisionDetection={collisionAlgoWrapper}
             >
@@ -360,3 +354,21 @@ const SortActivityApp = ({
     )
 }
 export default SortActivityApp
+
+ //overall wrapper function
+    // const onDragOverWrapper = (e) => {
+    //     //console.log("dragOver", isOver)
+
+    //     onDragOver(
+    //         e, 
+    //         isOver, 
+    //         resultValues, 
+    //         updateSortableLists,
+    //         recentlyMovedToNewContainer
+    //     )
+    // }
+
+     // isOver, 
+        // resultValues, 
+        // updateSortableLists,
+        // recentlyMovedToNewContainer
