@@ -1,11 +1,12 @@
 import ActivityQuestions from "./ActivityQuestions"
 import ActivityInstructions from "./ActivityInstructions"
-import ActivityBtns from "./NavActivityBtn/ActivityBtns"
+import ActivityBtns from "./ActivityBtns"
 import DnDActivites from "./DnDActivites"
 import useWindowWidth from "../../hooks/use-window-width"
 import SecondarySideBar from "../sideBar/SecondarySideBar"
 import assignmentData from "../../helpers/sampleAssignmentData"
 import { useEffect, useState } from "react"
+import { unstable_batchedUpdates } from "react-dom"
 import {CSSTransition} from "react-transition-group"
 import { useSelector, useDispatch } from 'react-redux'
 import {enableTap, resetPopUpOn, resetPopUpOff} from '../../../redux/features/activityTypes/activitiesSlice'
@@ -16,7 +17,8 @@ import ActivityResetPopUp from './ActivityResetPopUp'
 import UserProfile from "../utilities/userProfile/UserProfile";
 import calculatePercentage from "../../helpers/calculatePercentage";
 import capitalizeFirstLetter from "../../helpers/capitalizeFirstLetter"
-import { unstable_batchedUpdates } from "react-dom"
+
+
 const activityData = assignmentData
 const duration = 500
 const inPropDuration = duration * 2

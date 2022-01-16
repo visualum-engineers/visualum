@@ -5,7 +5,7 @@ import {DndContext, DragOverlay, getBoundingClientRect, defaultDropAnimation} fr
 import transformData from './sortTransformData';
 import{updateMultipleSortableLists, getResultOnTap, answerChoiceTestEl} from "../../utilities/dragAndDrop/DnDUpdateAlgo.js/algoIndex"
 //pos and collision func
-import {closestCorners /*,rectIntersection*/} from '../../utilities/dragAndDrop/DnDKit/customCollisionAlgo/algoIndex';
+import {closestCorners, rectIntersection} from '../../utilities/dragAndDrop/DnDKit/customCollisionAlgo/algoIndex';
 import addToTop from '../../utilities/dragAndDrop/DnDKit/positionFunctions/addToTop';
 //redux
 import {useDispatch, useSelector} from 'react-redux';
@@ -16,18 +16,13 @@ import ActivityHeader from '../ActivityHeader';
 import SortActivityCategories from './SortActivityCategories';
 import Item from '../../utilities/dragAndDrop/DnDKit/DragOverlayItem';
 
-// import updateMultipleSortableLists from '../../utilities/dragAndDrop/DnDUpdateAlgo.js/Sortables/updateMultipleLists';
-// import getResultOnTap from '../../utilities/dragAndDrop/DnDUpdateAlgo.js/Sortables/getResultOnTap';
-
 /*Note Missing To-do
 Backend: 
     1. Missing updating the backend with partial completion of assignment
     2. Missing updating the backend with grade after completion
 
 Frontend: 
-    2. Missing answer validation (check if their sorting is correct)
-    3. Missing re-rendering logic, when user answers question and moves on to the next one.
-    4. Missing progress saved on local storage/memory (if user exits out of page)
+    1. Missing answer validation (check if their sorting is correct)
 */
 const dropAnimation = {
     ...defaultDropAnimation,
@@ -250,25 +245,25 @@ const SortActivityApp = ({
         if(recentlyMovedToNewContainer.current) return
         if(!dragOverlayItem.current) return
         const overlayRect = getBoundingClientRect(dragOverlayItem.current)
-        return closestCorners(e, {
-            overlayRect: overlayRect, 
-            containers: categories,
-            isOver: isOver, 
-        })
-        // switch (true){
-        //     case mediumWindowWidth:
-        //         return closestCorners(e, {
-        //             overlayRect: overlayRect, 
-        //             containers: categories,
-        //             isOver: isOver, 
-        //         })
-        //     default:
-        //         return rectIntersection(e, {
-        //             overlayRect: overlayRect, 
-        //             containers: categories,
-        //             isOver: isOver
-        //         })
-        // }
+        // return closestCorners(e, {
+        //     overlayRect: overlayRect, 
+        //     containers: categories,
+        //     isOver: isOver, 
+        // })
+        switch (true){
+            case mediumWindowWidth:
+                return closestCorners(e, {
+                    overlayRect: overlayRect, 
+                    containers: categories,
+                    isOver: isOver, 
+                })
+            default:
+                return rectIntersection(e, {
+                    overlayRect: overlayRect, 
+                    containers: categories,
+                    isOver: isOver
+                })
+        }
     }
     //overall wrapper function
     const collisionAlgoWrapper = (e) => {

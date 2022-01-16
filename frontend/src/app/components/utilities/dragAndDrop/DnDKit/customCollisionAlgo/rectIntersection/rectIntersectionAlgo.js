@@ -1,4 +1,5 @@
-import getEdgeOffset from "../../positionFunctions/getEdgeOffset";  
+import getEdgeOffset from "../../positionFunctions/getEdgeOffset"; 
+import {isIntersecting} from "../closestCorner/utilities/index" 
 //store all position values for each droppable
   let currentDroppablePostion = {}
   
@@ -7,14 +8,36 @@ import getEdgeOffset from "../../positionFunctions/getEdgeOffset";
     for (const entry of entries) {
       //similar to getBoundingClientRect but without reflow drawback
       const bounds = entry.boundingClientRect;
+      //couldnt use spread since bounds is a readonly object
+      const newBounds = {
+         bottom: bounds.bottom,
+         height: bounds.height,
+         left: bounds.left,
+         right: bounds.right,
+         top: bounds.top,
+         width: bounds.width,
+         x: bounds.x,
+         y: bounds.y
+      }
       const target = entry.target
       const entryId = target.dataset.tapDraggableId ? target.dataset.tapDraggableId : target.dataset.tapDroppableId
+      const entryCustomNodeId = target.dataset.customParentNodeId
       //grab offest position values
       const {x: offsetLeft, y: offsetTop} = getEdgeOffset(target, null);
-      [bounds["offsetLeft"], bounds["offsetTop"]] = [offsetLeft, offsetTop]
-
+      [newBounds["offsetLeft"], newBounds["offsetTop"]] = [offsetLeft, offsetTop]
+     /*grab custom parent node pos, and correct bottom and height props
+      * of entry node with it. This correction is made because if a 
+      * custom node is supplied, we are potentially dealing 
+      * with an overflowing container, and we must correct its height and 
+      * bottom, to match what the user sees/(is visible to them) 
+     */
+     if(entryCustomNodeId && currentDroppablePostion[entryCustomNodeId]){
+         const customNodePos = currentDroppablePostion[entryCustomNodeId]
+         newBounds["bottom"] = customNodePos.bottom
+         newBounds["height"] = customNodePos.height
+     }
       //update our map with the position 
-      currentDroppablePostion[entryId] = bounds
+      currentDroppablePostion[entryId] = newBounds
     }
     // Disconnect the observer to stop from running in the background
     observer.disconnect();
@@ -69,7 +92,9 @@ import getEdgeOffset from "../../positionFunctions/getEdgeOffset";
     droppableContainers, 
     collisionRect
   },
-  { overlayRect,
+  { 
+    containers,
+    overlayRect,
     isOver,
   }) => {   
     let maxIntersectionRatio = 0;
@@ -77,22 +102,43 @@ import getEdgeOffset from "../../positionFunctions/getEdgeOffset";
     const dragOverlayContainer = isOver
     for(let droppableContainer of droppableContainers) {
       const id = droppableContainer.id;
+      
+      //grab origin container
+      const droppableColumnId = id in containers ? id 
+                                : droppableContainer.data.current.sortable.containerId
+
       //using intersection observer for rect values since it wont 
       //force a reflow, while getBoundingClientRect does
-      if(!droppableContainer.node.current) continue
-      observer.observe(droppableContainer.node.current);
+      const droppableNode = droppableContainer.node.current
+      if(!droppableNode) continue
+      //using intersection observer for rect values since it wont 
+      //force a reflow, while getBoundingClientRect does
+
+      if(id in containers) {
+        const exposedNodes = droppableContainer.data.current
+        if(exposedNodes.customParentNode) observer.observe(exposedNodes.customParentNode)
+        observer.observe(exposedNodes.parentNode)
+      }
+      else observer.observe(droppableNode);
+
       const rect = currentDroppablePostion[id]
-      //grab origin container
-      let droppableColumnId 
-      if(droppableContainer.data.current.sortable) droppableColumnId = droppableContainer.data.current.sortable.containerId
-      else droppableColumnId = id 
+
       if (rect) {
+        //skip if container is a draggable, 
+        //and the draggable is not in view of user 
+        //(hidden by scroll)
+        if(!(id in containers) && !isIntersecting({
+                                      entryRect: rect, 
+                                      containerRect: currentDroppablePostion[droppableColumnId]
+                                    })) continue
+
         const intersectionRatio = getIntersectionRatio({
                                     entry: rect,
                                     targetOffset: collisionRect,
                                     targetViewPort: overlayRect,
                                     sameContainer: dragOverlayContainer === droppableColumnId
                                   });
+
         if (intersectionRatio > maxIntersectionRatio) {
           maxIntersectionRatio = intersectionRatio;
           maxIntersectingDroppableContainer = id;

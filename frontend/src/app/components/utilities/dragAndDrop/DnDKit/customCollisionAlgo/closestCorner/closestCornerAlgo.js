@@ -13,7 +13,7 @@ import {
    for (const entry of entries) {
      //similar to getBoundingClientRect but without reflow drawback
      const bounds = entry.boundingClientRect;
-     //could use spread since this a readonly object
+     //couldnt use spread since bounds is a readonly object
      const newBounds = {
         bottom: bounds.bottom,
         height: bounds.height,
@@ -30,7 +30,6 @@ import {
      //grab offest position values
      const {x: offsetLeft, y: offsetTop} = getEdgeOffset(target, null);
      [newBounds["offsetLeft"], newBounds["offsetTop"]] = [offsetLeft, offsetTop]
-
     /*grab custom parent node pos, and correct bottom and height props
      * of entry node with it. This correction is made because if a 
      * custom node is supplied, we are potentially dealing 
