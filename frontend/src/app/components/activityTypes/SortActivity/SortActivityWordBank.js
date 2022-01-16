@@ -1,4 +1,4 @@
-//import { useRef } from "react"
+import { useRef } from "react"
 import SortableArea from "../../utilities/dragAndDrop/DnDKit/SortableDnD/SortableArea"
 
 const WordBank = ({
@@ -7,6 +7,7 @@ const WordBank = ({
     onTap, 
     isOver=null,
     disableDnD = null,
+    
     //classes
     isDraggingClass,
     overallContainerClass, 
@@ -19,13 +20,13 @@ const WordBank = ({
     draggableClassName,
 
 }) => {
-    //const parentNode = useRef()
+    const parentNode= useRef()
     return(
         <div 
-            // data-container-id={id}
-            // data-tap-droppable-id = {id}
-            // ref={parentNode} 
-            className={overallContainerClass}>
+            ref={parentNode} 
+            data-tap-droppable-id={"answerChoices"}
+            className={overallContainerClass}
+        >
             <div className = {columnContainerClass}>
                 <h2 className={columnTitleClass}><span>Choices</span></h2>
                 <div className="w-100 d-flex justify-content-center">
@@ -39,7 +40,8 @@ const WordBank = ({
                                 onTap={onTap}
                                 isOver={isOver}
                                 disableDnD = {disableDnD}
-                                
+                                parentNode={{node: parentNode.current, id:"answerChoices"}}
+
                                 //classes
                                 droppableContainerClassName={`${columnClass}-${index+1} w-100 d-flex flex-column align-items-center`}
                                 droppableClassName = {droppableClassName}

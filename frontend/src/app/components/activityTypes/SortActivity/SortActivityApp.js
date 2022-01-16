@@ -1,19 +1,23 @@
 import { useState, useEffect, useRef} from 'react'
 import {unstable_batchedUpdates} from 'react-dom'
 import {DndContext, DragOverlay, getBoundingClientRect, defaultDropAnimation} from '@dnd-kit/core';
-import { closestCorners } from '../../utilities/dragAndDrop/DnDKit/customCollisionAlgo/closestCornerAlgo';
-import { rectIntersection} from '../../utilities/dragAndDrop/DnDKit/customCollisionAlgo/algoIndex';
+//data updating func
+import transformData from './sortTransformData';
+import{updateMultipleSortableLists, getResultOnTap, answerChoiceTestEl} from "../../utilities/dragAndDrop/DnDUpdateAlgo.js/algoIndex"
+//pos and collision func
+import {closestCorners /*,rectIntersection*/} from '../../utilities/dragAndDrop/DnDKit/customCollisionAlgo/algoIndex';
 import addToTop from '../../utilities/dragAndDrop/DnDKit/positionFunctions/addToTop';
+//redux
 import {useDispatch, useSelector} from 'react-redux';
 import {enableTap, enableDnD, resetPopUpOff} from '../../../../redux/features/activityTypes/activitiesSlice'
+//components
 import WordBank from './SortActivityWordBank';
 import ActivityHeader from '../ActivityHeader';
 import SortActivityCategories from './SortActivityCategories';
 import Item from '../../utilities/dragAndDrop/DnDKit/DragOverlayItem';
 
-import transformData from './sortTransformData';
-import updateMultipleSortableLists from '../../utilities/dragAndDrop/DnDUpdateAlgo.js/Sortables/updateMultipleLists';
-import getResultOnTap from '../../utilities/dragAndDrop/DnDUpdateAlgo.js/Sortables/getResultOnTap';
+// import updateMultipleSortableLists from '../../utilities/dragAndDrop/DnDUpdateAlgo.js/Sortables/updateMultipleLists';
+// import getResultOnTap from '../../utilities/dragAndDrop/DnDUpdateAlgo.js/Sortables/getResultOnTap';
 
 /*Note Missing To-do
 Backend: 
@@ -95,9 +99,6 @@ const SortActivityApp = ({
 
     //determine how many categories there are
     const numCategories = Object.keys(data.categories)
-
-    //test is item comes from a word bank column
-    const answerChoiceTestEl = (el) => /answerChoices.*/.test(el)
 
     const updateSortableLists = (result) =>{
         const newState = updateMultipleSortableLists(data, result, answerChoiceTestEl)
@@ -243,26 +244,31 @@ const SortActivityApp = ({
         e, 
         isOver, 
         categories,
-        mediumWindowWidth, 
+        //mediumWindowWidth, 
         dragOverlayItem
     }) =>{
         if(recentlyMovedToNewContainer.current) return
         if(!dragOverlayItem.current) return
         const overlayRect = getBoundingClientRect(dragOverlayItem.current)
-        switch (true){
-            case mediumWindowWidth:
-                return closestCorners(e, {
-                    overlayRect: overlayRect, 
-                    containers: categories,
-                    isOver: isOver, 
-                })
-            default:
-                return rectIntersection(e, {
-                    overlayRect: overlayRect, 
-                    containers: categories,
-                    isOver: isOver
-                })
-        }
+        return closestCorners(e, {
+            overlayRect: overlayRect, 
+            containers: categories,
+            isOver: isOver, 
+        })
+        // switch (true){
+        //     case mediumWindowWidth:
+        //         return closestCorners(e, {
+        //             overlayRect: overlayRect, 
+        //             containers: categories,
+        //             isOver: isOver, 
+        //         })
+        //     default:
+        //         return rectIntersection(e, {
+        //             overlayRect: overlayRect, 
+        //             containers: categories,
+        //             isOver: isOver
+        //         })
+        // }
     }
     //overall wrapper function
     const collisionAlgoWrapper = (e) => {

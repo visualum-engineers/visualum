@@ -19,7 +19,8 @@ function Droppable(props) {
       disabled: props.disabled,
       data:{
         node: droppableRef.current,
-        parentNode: props.parentNode
+        parentNode: props.parentNode,
+        customParentNode: props.customParentNode ? props.customParentNode.node : null,
       }
     });
     return (

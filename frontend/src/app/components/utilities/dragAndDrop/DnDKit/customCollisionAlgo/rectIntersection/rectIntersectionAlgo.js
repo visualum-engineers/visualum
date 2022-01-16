@@ -1,4 +1,4 @@
-import getEdgeOffset from "../positionFunctions/getEdgeOffset";  
+import getEdgeOffset from "../../positionFunctions/getEdgeOffset";  
 //store all position values for each droppable
   let currentDroppablePostion = {}
   

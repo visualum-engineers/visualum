@@ -77,8 +77,9 @@ const SortableArea = ({
                 id={id}
                 data-container-id={id}
                 data-tap-droppable-id = {id}
+                data-custom-parent-node-id = {parentNode ? parentNode.id: null}
                 className = {droppableContainerClassName}
-                ref={!parentNode ? defaultParentNode : null}
+                ref={defaultParentNode}
             >
                 <div 
                     className = {droppableClassName} 
@@ -93,7 +94,8 @@ const SortableArea = ({
                         placeHolderClass = {content.length > 0?  null : placeHolderClass}
                         onTap={disableDnD? onTap: null}
                         disabled = {disableDnD}
-                        parentNode = {parentNode ? parentNode: defaultParentNode.current}
+                        parentNode = {defaultParentNode.current}
+                        customParentNode = {parentNode}
                     >
                         <InnerList
                             id={id.toString()}
