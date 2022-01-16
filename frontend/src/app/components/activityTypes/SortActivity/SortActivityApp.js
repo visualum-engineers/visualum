@@ -241,18 +241,27 @@ const SortActivityApp = ({
     }
     const customCollisionAlgo = ({
         e, 
-        mediumWindowWidth, 
         isOver, 
-        dragOverlayItem,
+        categories,
+        mediumWindowWidth, 
+        dragOverlayItem
     }) =>{
         if(recentlyMovedToNewContainer.current) return
         if(!dragOverlayItem.current) return
         const overlayRect = getBoundingClientRect(dragOverlayItem.current)
         switch (true){
             case mediumWindowWidth:
-                return closestCorners(e, {overlayRect: overlayRect, isOver: isOver})
+                return closestCorners(e, {
+                    overlayRect: overlayRect, 
+                    containers: categories,
+                    isOver: isOver, 
+                })
             default:
-                return rectIntersection(e, {overlayRect: overlayRect, isOver: isOver})
+                return rectIntersection(e, {
+                    overlayRect: overlayRect, 
+                    containers: categories,
+                    isOver: isOver
+                })
         }
     }
     //overall wrapper function
@@ -260,8 +269,9 @@ const SortActivityApp = ({
         const intersectingContainer = customCollisionAlgo({
             e: e,
             isOver: isOver,
+            categories: {...data.categories, ...data.itemBank},
             mediumWindowWidth: mediumWindowWidth,
-            dragOverlayItem: dragOverlayItem,
+            dragOverlayItem: dragOverlayItem
         })
         return intersectingContainer
     }
@@ -288,18 +298,19 @@ const SortActivityApp = ({
                 {mediumWindowWidth && <WordBank 
                     data ={data}
                     firstElTap = {firstElTap}
-                    isDraggingClass = {"sort-activity-is-dragging"}
                     onTap = {disableDnD ? onTap : null}
+                    isOver = {isOver}
+                    disableDnD = {disableDnD}
+                    //classes
                     overallContainerClass = {`sort-activity-itemBank ${mediumWindowWidth ? "full-size":"w-100"}`} 
                     columnContainerClass = "sort-activity-column-container w-100"
                     columnTitleClass = {`sort-activity-column-titles d-flex align-items-center justify-content-center`}
-                    columnClass = "sort-activity-itemBank-column"
+                    columnClass = {"sort-activity-itemBank-column"}
                     droppableClassName ={`sort-activity-itemBank-droppables w-100${!mediumWindowWidth?" small-screen": ""}`}
                     innerDroppableClassName = {`${disableDnD && firstElTap? "sort-activity-tap-active ": ""}sort-activity-inner-droppable d-flex flex-column align-items-center w-100`}
                     draggingOverClass = {"sort-activity-dragging-over"}
                     draggableClassName = {"sort-activity-draggables d-flex align-items-center justify-content-center "}
-                    isOver = {isOver}
-                    disableDnD = {disableDnD}
+                    isDraggingClass = {"sort-activity-is-dragging"}
                 />}
                 {/* Renders sort categories */}
                 <SortActivityCategories 

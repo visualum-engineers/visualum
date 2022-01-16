@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRef } from 'react';
 import {SortableContext, verticalListSortingStrategy} from '@dnd-kit/sortable';
 import SortableItems from "./SortableItems"
 import Droppable from '../NonSortableDnD/Droppable';
@@ -53,43 +54,58 @@ const SortableArea = ({
     onTap=null, 
     firstElTap=null, 
     isOver=null,
-    disableDnD = null, 
+    disableDnD = null,
+    parentNode = null, 
+    //classes
     droppableClassName="", 
     innerDroppableClassName ="", 
     draggableClassName="", 
     draggingOverClass="", 
     isDraggingClass= "", 
     placeHolderClass = "",
-
+    droppableContainerClassName ="",
 }) =>{
+    const defaultParentNode = useRef()
+
     return (
         <SortableContext 
             items={content}
             strategy = {verticalListSortingStrategy}
             id={id}
         >
-            <div className = {droppableClassName} id={id}>
-                {droppableHeader ? droppableHeader : null}
-                <Droppable 
-                    id={id.toString()}
-                    firstElTap = {firstElTap}
-                    innerDroppableClassName = {innerDroppableClassName}
-                    draggingOverClass = {draggingOverClass}
-                    isOver={isOver}
-                    placeHolderClass = {content.length > 0?  null : placeHolderClass}
-                    onTap={disableDnD? onTap: null}
-                    disabled = {disableDnD}
+            <div
+                id={id}
+                data-container-id={id}
+                data-tap-droppable-id = {id}
+                className = {droppableContainerClassName}
+                ref={!parentNode ? defaultParentNode : null}
+            >
+                <div 
+                    className = {droppableClassName} 
                 >
-                    <InnerList
+                    {droppableHeader ? droppableHeader : null}
+                    <Droppable 
                         id={id.toString()}
-                        disableDnD ={disableDnD}
-                        content = {content}
-                        onTap ={onTap}
-                        firstElTap={firstElTap}
-                        isDraggingClass={isDraggingClass}
-                        draggableClassName ={draggableClassName}
-                    />
-                </Droppable>
+                        firstElTap = {firstElTap}
+                        innerDroppableClassName = {innerDroppableClassName}
+                        draggingOverClass = {draggingOverClass}
+                        isOver={isOver}
+                        placeHolderClass = {content.length > 0?  null : placeHolderClass}
+                        onTap={disableDnD? onTap: null}
+                        disabled = {disableDnD}
+                        parentNode = {parentNode ? parentNode: defaultParentNode.current}
+                    >
+                        <InnerList
+                            id={id.toString()}
+                            disableDnD ={disableDnD}
+                            content = {content}
+                            onTap ={onTap}
+                            firstElTap={firstElTap}
+                            isDraggingClass={isDraggingClass}
+                            draggableClassName ={draggableClassName}
+                        />
+                    </Droppable>
+                </div>
             </div>
         </SortableContext>
     )

@@ -155,14 +155,16 @@ html.sortActivityActive{
     padding-right: 0.2rem;
     padding-top: 0.8rem;
 }
-.sort-activity-sort-droppables{
+.sort-activity-sort-droppable{
+    width: calc(50% - 0.4rem);
+    margin-bottom: 0.8rem;
+}
+.sort-activity-sort-droppable-area{
     padding-left: 0.4rem;
     position: relative;
     background-color: $white;
     height: calc(40vh - 2rem);
     min-height: 15rem;
-    width: calc(50% - 0.4rem);
-    margin-bottom: 0.8rem;
     @include border-radius(0.5rem);
     overflow-y: scroll;
     overflow-x: hidden;
@@ -196,7 +198,7 @@ html.sortActivityActive{
         padding-left: 0.2rem;
     }   
 }
-.sort-activity-sort-droppables.small-screen{
+.sort-activity-sort-droppable.small-screen{
     width: calc(100% - 0.4rem);
 }
 .sort-activity-droppable-placeholder:after{
@@ -213,15 +215,9 @@ html.sortActivityActive{
     color: $dark-gray;
     font-weight: 400;
 }
-.sort-activity-sort-droppables.first-item{
+.sort-activity-sort-droppable.first-item{
     margin-left: 0;
     margin-right: 0.6rem;
-}
-
-.sort-activity-sort-droppables.third-category{
-    width: 100%;
-    margin: 0;
-    height: calc(33% - 1.5rem);
 }
 
 .sort-activity-draggables{

@@ -19,18 +19,22 @@ import getEdgeOffset from "../positionFunctions/getEdgeOffset";
    }
    // Disconnect the observer to stop from running in the background
    observer.disconnect();
- });
- 
+ }); 
 /**
  * Returns the coordinates of the corners of a given rectangle:
  * [TopLeft {x, y}, TopRight {x, y}, BottomLeft {x, y}, BottomRight {x, y}]
  */
 
-function distanceBetween(p1, p2) {
+export function distanceBetween(p1, p2) {
     return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
 }
+export function calculateDistances(positionArr, entryCorners) { 
+  return positionArr.reduce((accumulator, corner, index) => {
+            return accumulator + distanceBetween(entryCorners[index], corner);
+          }, 0)
+}
 
-function cornersOfRectangle(
+export function cornersOfRectangle(
   rect,
   left = rect.offsetLeft,
   top = rect.offsetTop
@@ -59,42 +63,40 @@ function cornersOfRectangle(
    * takes into account viewport or document offset depending 
    * on sorting items, or changing containers
    */
-function getEffectiveDistance({
+export function getEffectiveDistance({
   entry, 
   targetOffset, 
   targetViewPort, 
   sameContainer
 }){
-    let entryCorners = cornersOfRectangle(entry);
-    const targetOffsetDistances = targetOffset.reduce((accumulator, corner, index) => {
-        return accumulator + distanceBetween(entryCorners[index], corner);
-    }, 0);
+    const entryCorners = !sameContainer ? cornersOfRectangle(
+                                            entry,
+                                            entry.left ? entry.left : undefined,
+                                            entry.top ? entry.top : undefined
+                                        ) 
+                          : cornersOfRectangle(entry)
 
-    let targetViewPortDistances
-    if(!sameContainer){
-        //re-assign entry corners to viewport distance
-        entryCorners = cornersOfRectangle(
-            entry,
-            entry.left ? entry.left : undefined,
-            entry.top ? entry.top : undefined
-        );
-        targetViewPortDistances = targetViewPort.reduce((accumulator, corner, index) => {
-            return accumulator + distanceBetween(entryCorners[index], corner);
-        }, 0)
-        return Number((targetViewPortDistances / 4).toFixed(4))
-    }
-
-    return Number((targetOffsetDistances / 4).toFixed(4))
+    const targetDistances = calculateDistances(!sameContainer ? targetViewPort: targetOffset, entryCorners)
+    return Number((targetDistances / 4).toFixed(4))
 }
 /**
  * Returns the closest rectangle from an array of rectangles to the corners of
  * another rectangle.
  */
+export function isIntersecting({
+  entryRect, 
+  containerRect,
+}){
+    const top = Math.max(containerRect.top, entryRect.top);
+    const bottom = Math.min(containerRect.bottom, entryRect.bottom);
+    return top < bottom
+}
 export const closestCorners = ({
   collisionRect,
   droppableContainers,
 }
 , {
+  containers,
   overlayRect,
   isOver,
 }) => {
@@ -112,21 +114,25 @@ export const closestCorners = ({
     overlayRect.left,
     overlayRect.top
   );
- 
+  
   for (let droppableContainer of droppableContainers) {
     const id = droppableContainer.id;
+
+    //grab origin container
+    const droppableColumnId = id in containers ? id 
+                            : droppableContainer.data.current.sortable.containerId
     //using intersection observer for rect values since it wont 
     //force a reflow, while getBoundingClientRect does
     if(!droppableContainer.node.current) continue
-    observer.observe(droppableContainer.node.current);
+    if(id in containers) observer.observe(droppableContainer.data.current.parentNode)
+    else observer.observe(droppableContainer.node.current);
     const rect = currentDroppablePostion[id]
-    //const rect = getBoundingClientRect(droppableContainer.node.current)
-    //grab origin container
-    let droppableColumnId
-    if(droppableContainer.data.current.sortable) droppableColumnId = droppableContainer.data.current.sortable.containerId
-    else droppableColumnId = id 
-
     if(rect) { 
+      //skip if container is a draggable, 
+      //and the draggable is not in view of user 
+      //(hidden by scroll)
+      if(!(id in containers) && !isIntersecting({entryRect: rect, containerRect: currentDroppablePostion[droppableColumnId]})) continue
+      
       const effectiveDistance = getEffectiveDistance({
                                   entry: rect,
                                   targetOffset: collisionCorners,

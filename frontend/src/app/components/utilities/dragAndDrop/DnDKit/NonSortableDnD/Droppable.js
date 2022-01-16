@@ -19,6 +19,7 @@ function Droppable(props) {
       disabled: props.disabled,
       data:{
         node: droppableRef.current,
+        parentNode: props.parentNode
       }
     });
     return (

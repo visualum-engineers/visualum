@@ -44,16 +44,16 @@ const SortActivityCategories = ({
                                 isOver={isOver}
                                 disableDnD = {disableDnD}
                                 //classes
-                                droppableClassName = {"sort-activity-sort-droppables d-flex flex-column"
-                                                    + `${!smallWindowWidth ?" small-screen"
-                                                        : first ? " first-item" 
-                                                        : ""}`}
+                                droppableContainerClassName = {"sort-activity-sort-droppable"
+                                                             + `${!smallWindowWidth ?" small-screen"
+                                                             : first ? " first-item" 
+                                                             : ""}`}
+                                droppableClassName = {"sort-activity-sort-droppable-area d-flex flex-column"}
                                 innerDroppableClassName = {`${disableDnD && firstElTap? "sort-activity-tap-active ": ""}sort-activity-inner-droppable d-flex flex-column align-items-center`}
                                 draggableClassName = {"sort-activity-draggables d-flex align-items-center justify-content-center"}
                                 draggingOverClass = {"sort-activity-dragging-over"}
                                 isDraggingClass = {"sort-activity-is-dragging"}
                                 placeHolderClass={"sort-activity-droppable-placeholder"}
-
                             />
                         )}
                     )}
