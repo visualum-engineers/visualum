@@ -1,15 +1,37 @@
 import { useState, useEffect, useRef} from 'react'
 import {unstable_batchedUpdates} from 'react-dom'
-import {DndContext, DragOverlay, getBoundingClientRect, defaultDropAnimation} from '@dnd-kit/core';
+import {
+    DndContext, 
+    DragOverlay, 
+    getBoundingClientRect, 
+    defaultDropAnimation
+} from '@dnd-kit/core';
+
 //data updating func
 import transformData from './sortTransformData';
-import{updateMultipleSortableLists, getResultOnTap, answerChoiceTestEl} from "../../utilities/dragAndDrop/DnDUpdateAlgo.js/algoIndex"
+import{
+    updateMultipleSortableLists, 
+    getResultOnTap, 
+    answerChoiceTestEl
+} from "../../utilities/dragAndDrop/DnDUpdateAlgo.js/algoIndex"
+
 //pos and collision func
-import {closestCorners, rectIntersection} from '../../utilities/dragAndDrop/DnDKit/customCollisionAlgo/algoIndex';
-import addToTop from '../../utilities/dragAndDrop/DnDKit/positionFunctions/addToTop';
-//redux
+import {
+    closestCorners, 
+    rectIntersection,
+    cleanUpCollisionData
+} from '../../utilities/dragAndDrop/DnDKit/customCollisionAlgo/algoIndex';
+
+import {addToTop} from '../../utilities/dragAndDrop/DnDKit/positionFunctions/index';
+
+//redux states and functions
 import {useDispatch, useSelector} from 'react-redux';
-import {enableTap, enableDnD, resetPopUpOff} from '../../../../redux/features/activityTypes/activitiesSlice'
+import {
+    enableTap, 
+    enableDnD, 
+    resetPopUpOff
+} from '../../../../redux/features/activityTypes/activitiesSlice'
+
 //components
 import WordBank from './SortActivityWordBank';
 import ActivityHeader from '../ActivityHeader';
@@ -56,12 +78,12 @@ const SortActivityApp = ({
     //used for tap and drop to track selected elements
     const [firstElTap, setFirstElTap] = useState(null)
     const removedEl = useRef(null)
-    // When a draggable item moves to a new container, the layout may shift
-    //and can cause items to incorrectly shift positions if the next animation frame isn't ready.
-    // this can lead to duplicated elements.
+
+    /* When a draggable item moves to a new container, the layout may shift
+    *and can cause items to incorrectly shift positions 
+    * if the next animation frame isn't ready.
+    * this can lead to duplicated elements. */
     const recentlyMovedToNewContainer = useRef(false)
-    //after a re-render and animation is complete we can call our
-    //collision funcs and update state again
     useEffect(() => {
         requestAnimationFrame(() => {
             if(recentlyMovedToNewContainer.current) recentlyMovedToNewContainer.current = false;
@@ -73,7 +95,7 @@ const SortActivityApp = ({
         const stored_response = localStorage.getItem(`${activityID}-sort_activity_client_answer-${questionNum}`)        
         if(stored_response) setData(JSON.parse(stored_response))
     }, [questionNum, activityID])
-
+    //handle reseting data on curr question
     useEffect(() =>{
         if(resetPopUp && resetPopUp.confirmed){
             //reset all state values to default
@@ -87,11 +109,15 @@ const SortActivityApp = ({
         }
     }, [dispatch, resetPopUp, activityData, wordBankColumns.length, activityID, questionNum])
 
-    //handle width resizing
+    //handle wordbank containers adapting to window-resizing
     useEffect(() => {
         setData((data) => transformData(data, wordBankColumns.length))
     }, [mediumWindowWidth, wordBankColumns.length])
 
+    //cleanup collision data when component unmounts
+    useEffect(() =>{
+        return () => cleanUpCollisionData()
+    })
     //determine how many categories there are
     const numCategories = Object.keys(data.categories)
 
@@ -239,17 +265,13 @@ const SortActivityApp = ({
         e, 
         isOver, 
         categories,
-        //mediumWindowWidth, 
-        dragOverlayItem
+        mediumWindowWidth, 
+        dragOverlayItem,
+        recentlyMovedToNewContainer
     }) =>{
         if(recentlyMovedToNewContainer.current) return
         if(!dragOverlayItem.current) return
         const overlayRect = getBoundingClientRect(dragOverlayItem.current)
-        // return closestCorners(e, {
-        //     overlayRect: overlayRect, 
-        //     containers: categories,
-        //     isOver: isOver, 
-        // })
         switch (true){
             case mediumWindowWidth:
                 return closestCorners(e, {
@@ -272,7 +294,8 @@ const SortActivityApp = ({
             isOver: isOver,
             categories: {...data.categories, ...data.itemBank},
             mediumWindowWidth: mediumWindowWidth,
-            dragOverlayItem: dragOverlayItem
+            dragOverlayItem: dragOverlayItem,
+            recentlyMovedToNewContainer: recentlyMovedToNewContainer
         })
         return intersectingContainer
     }

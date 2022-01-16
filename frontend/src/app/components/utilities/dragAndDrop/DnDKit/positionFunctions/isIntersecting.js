@@ -8,6 +8,6 @@
   }){
       if(!containerRect) return false
       const top = Math.max(containerRect.top, entryRect.top);
-      const bottom = Math.min(containerRect.top + containerRect.height, entryRect.top + entryRect.height);
+      const bottom = Math.min(containerRect.bottom, entryRect.bottom);
       return top < bottom
   }

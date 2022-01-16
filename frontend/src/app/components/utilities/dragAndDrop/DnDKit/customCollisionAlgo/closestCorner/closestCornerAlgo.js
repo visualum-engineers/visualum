@@ -1,53 +1,13 @@
 
-import getEdgeOffset from "../../positionFunctions/getEdgeOffset";
+import {
+  updateDroppableRect,
+  isIntersecting
+} from "../../positionFunctions/index";
 import {
   getEffectiveDistance,
-  cornersOfRectangle,
-  isIntersecting,
+  cornersOfRectangle
 } from "./utilities/index"
- //store all position values for each droppable
- let currentDroppablePostion = {}
  
- //set up intersectionObserver
- const observer = new IntersectionObserver((entries) => {
-   for (const entry of entries) {
-     //similar to getBoundingClientRect but without reflow drawback
-     const bounds = entry.boundingClientRect;
-     //couldnt use spread since bounds is a readonly object
-     const newBounds = {
-        bottom: bounds.bottom,
-        height: bounds.height,
-        left: bounds.left,
-        right: bounds.right,
-        top: bounds.top,
-        width: bounds.width,
-        x: bounds.x,
-        y: bounds.y
-     }
-     const target = entry.target
-     const entryId = target.dataset.tapDraggableId ? target.dataset.tapDraggableId : target.dataset.tapDroppableId
-     const entryCustomNodeId = target.dataset.customParentNodeId
-     //grab offest position values
-     const {x: offsetLeft, y: offsetTop} = getEdgeOffset(target, null);
-     [newBounds["offsetLeft"], newBounds["offsetTop"]] = [offsetLeft, offsetTop]
-    /*grab custom parent node pos, and correct bottom and height props
-     * of entry node with it. This correction is made because if a 
-     * custom node is supplied, we are potentially dealing 
-     * with an overflowing container, and we must correct its height and 
-     * bottom, to match what the user sees/(is visible to them) 
-    */
-    if(entryCustomNodeId && currentDroppablePostion[entryCustomNodeId]){
-        const customNodePos = currentDroppablePostion[entryCustomNodeId]
-        newBounds["bottom"] = customNodePos.bottom
-        newBounds["height"] = customNodePos.height
-    }
-     //update our map with the position 
-     currentDroppablePostion[entryId] = newBounds
-   }
-   // Disconnect the observer to stop from running in the background
-   observer.disconnect();
- }); 
-
 export const closestCorners = ({
   collisionRect,
   droppableContainers,
@@ -56,7 +16,9 @@ export const closestCorners = ({
   containers,
   overlayRect,
   isOver,
+  cleanup = false,
 }) => {
+  if(cleanup) return updateDroppableRect(null, cleanup) 
   let minDistanceToCorners = Infinity;
   let minDistanceContainer = null;
   const dragOverlayContainer = isOver
@@ -82,15 +44,16 @@ export const closestCorners = ({
     const droppableNode = droppableContainer.node.current
     if(!droppableNode) continue
 
-    //using intersection observer for rect values since it wont 
-    //force a reflow, while getBoundingClientRect does
+    //grab all droppables bounding rects
+    let currentDroppablePostion
+
     if(id in containers) {
         const exposedNodes = droppableContainer.data.current
-        if(exposedNodes.customParentNode) observer.observe(exposedNodes.customParentNode)
-        observer.observe(exposedNodes.parentNode)
+        if(exposedNodes.customParentNode) currentDroppablePostion = updateDroppableRect(exposedNodes.customParentNode)
+        currentDroppablePostion = updateDroppableRect(exposedNodes.parentNode)
     }
-    else observer.observe(droppableNode);
-
+    else currentDroppablePostion = updateDroppableRect(droppableNode);
+    
     const rect = currentDroppablePostion[id]
     if(rect) { 
       //skip if container is a draggable, 
