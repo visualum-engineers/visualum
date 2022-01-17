@@ -34,6 +34,7 @@
     .checkbox-answer-choice-group{
         .checkbox-icon{
             position: absolute;
+            cursor: pointer;
             background-color: $light-gray;
             left: 0.7rem;
             height: 1.2rem;

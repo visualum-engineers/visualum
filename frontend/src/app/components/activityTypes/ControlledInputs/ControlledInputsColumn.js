@@ -69,9 +69,8 @@ const ControlledInputsColumn = ({
     const inputItemProps = {
         clientAnswer: data.clientAnswer,
         updateAnswerChoice: updateAnswerChoice,
-        customContainerClass: !mediumWindowWidth ? "grid-layout w-100" 
-                              : inputType === "checkbox" ? "controlled-inputs-checkbox-item d-flex align-items-center"
-                              :"controlled-inputs-radio-item d-flex align-items-center"             
+        customContainerClass: inputType === "checkbox" ? `${!mediumWindowWidth ? "grid-layout w-100 " : ""}controlled-inputs-checkbox-item d-flex align-items-center`
+                              :`controlled-inputs-radio-item ${!mediumWindowWidth ? "grid-layout w-100 " : ""}d-flex align-items-center`             
     }
     return (
         <div className={`w-100 controlled-inputs-activity-answer-container `
