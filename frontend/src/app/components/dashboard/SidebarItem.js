@@ -1,19 +1,18 @@
 import React from 'react'
-// import { useSelector, useDispatch } from 'react-redux';
-// import { updated } from '../../../redux/features/dashboardStatus/dashboardSlice';
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useResolvedPath, useMatch } from 'react-router-dom';
 
 export default function SidebarItem(props) {
-    // const state = useSelector((state) => state.dashboard)
-    // const dispatch = useDispatch();
-    let history = useHistory();
+    let navigate = useNavigate();
+    let resolved = useResolvedPath(props.value);
+    let match = useMatch({ path: resolved.pathname, end: true });
 
     function handleClick() {
-        history.push(`/dashboard/${props.value}`);
+        navigate(`${props.value}`);
     }
     return (
         <div className="sidebar-item">
-            <div className={`tab-button ${props.selected ? 'selected' : ''}`} onClick={handleClick}>
+            <div className={`tab-button ${match ? 'selected' : ''}`} onClick={handleClick}>
                 <p>{props.name}</p>
             </div>
         </div>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import ClassCard from './ClassCard'
-import Dashboard from './Dashboard'
 import CardContainer from './CardContainer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
@@ -41,7 +40,7 @@ export default function DashboardClass() {
     }
 
     return (
-        <Dashboard page="classes">
+        <div>
             <div className="control-bar">
                 <div className="buttons">
                     <button className="btn btn-success button" onClick={openModal}>
@@ -54,6 +53,6 @@ export default function DashboardClass() {
                 {cards}
             </CardContainer>
             {modalOpen && <DashboardModal close={closeModal} onSubmit={addClass}></DashboardModal>}
-        </Dashboard >
+        </div>
     )
 }
