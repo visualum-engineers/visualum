@@ -1,7 +1,8 @@
 import ShortAnswerInstructions from "./ShortAnswer/ShortAnswerInstructions"
 import SortActivityInstructions from "./SortActivity/SortActivityInstructions"
 import MatchActivityInstructions from "./MatchActivity/MatchActivityInstructions"
-import MultipleChoiceInstructions from "./MultipleChoice/MultipleChoiceInstructions"
+import RadioInstructions from "./ControlledInputs/Radio/RadioInstructions"
+import CheckboxInstructions from "./ControlledInputs/Checkbox/CheckboxInstructions"
 import LabelActivityInstructions from "./LabelPictures/LabelActivityInstructions"
 import PopUp from "../utilities/popUp/PopUpBackground"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -21,7 +22,8 @@ const ActivityInstructions = ({
         sort: <SortActivityInstructions {...newProps}/>,
         matching: <MatchActivityInstructions {...newProps}/>,
         shortAnswer: <ShortAnswerInstructions {...newProps} />,
-        multipleChoice: <MultipleChoiceInstructions {...newProps}/>,
+        radio: <RadioInstructions {...newProps}/>,
+        checkbox: <CheckboxInstructions {...newProps}/>,
         labelPictures: <LabelActivityInstructions {...newProps}/>
     }
     return (

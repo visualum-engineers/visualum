@@ -9,12 +9,12 @@ const MultipleChoiceImage = ({
     return(
         <ZoomableContext>
             <ImageContainer 
-                defaultContainerClass = {`${customClass} mc-activity-image-container`}
-                zoomContainerClass = {"mc-activity-image-container zoomed-in"}
+                defaultContainerClass = {`${customClass} controlled-inputs-activity-image-container`}
+                zoomContainerClass = {"controlled-inputs-activity-image-container zoomed-in"}
                 popUpBgStyles = {popUpBgStyles}
                 popUpEl={
                     <Image
-                        className={"mc-activity-image zoomed-in"}
+                        className={"controlled-inputs-activity-image zoomed-in"}
                         src = {data.imageURL}
                         alt = {data.alt}
                         tabIndex={0}
@@ -22,7 +22,7 @@ const MultipleChoiceImage = ({
                 }
             >
                 <Image
-                    className={"mc-activity-image"}
+                    className={"controlled-inputs-activity-image"}
                     src = {data.imageURL}
                     alt = {data.alt}
                     tabIndex={0}

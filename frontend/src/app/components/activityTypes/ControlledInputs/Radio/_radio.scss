@@ -1,0 +1,59 @@
+.controlled-inputs-radio-item{
+    position: relative;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    min-height: 3.5rem;
+    overflow-wrap: break-word;
+    .custom-radio-btn{
+        position: absolute;
+        left: 0.7rem;
+        fill: transparent;
+        stroke-width: 1.2;
+        cursor: pointer;
+    }
+    .radio-outer-circle{
+        fill: transparent; 
+        stroke: $dark-blue
+    }
+    .radio-answer-label{
+        min-height: 3.5rem;
+        @include border-radius(0.5rem);
+        cursor: pointer;
+        height: 100%;
+        padding: 0.3rem 1.7rem;
+        padding-right: 1rem;
+        background-color: $light-blue;
+        @include  transition(all 0.3s ease-out);
+        @include box-shadow(rgba(0, 0, 0, 0.151) 0px 0 3px);
+        border: 1px solid transparent;
+        @include unselectable;
+    }
+    .radio-answer-choice-group:hover{
+        .radio-answer-label{
+            background-color: $white;
+        }
+    }
+    
+    input[type="radio"]{
+        @include hidden;
+    }
+    input[type="radio"]:checked + .radio-answer-choice-group{
+        .radio-answer-label{
+            border: 1px solid $dark-blue;
+            background-color: $white;
+
+        }
+        .radio-inner-circle{
+            stroke: $dark-blue; 
+            fill: $dark-blue;
+        }
+    }
+}
+.controlled-inputs-radio-item.grid-layout{
+    width: 45%;
+    margin: 0.5rem;
+    .radio-answer-label{
+        @include border-radius(0.5rem);
+    }
+}
+

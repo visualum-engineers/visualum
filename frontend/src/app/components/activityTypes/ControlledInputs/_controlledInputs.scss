@@ -1,0 +1,79 @@
+@import "./Radio/radio";
+
+.controlled-inputs-activity-container{
+    font-size: 0.8rem;
+    @include border-radius(1rem);
+}
+
+.controlled-inputs-activity-question{
+    font-size: 1rem;
+    background-color: white;
+    @include box-shadow(rgba(0, 0, 0, 0.315) 0px 0 2px);
+    @include border-radius(7px);
+    @include unselectable;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+}
+.controlled-inputs-activity-image-container{
+    padding: 0.6rem;
+    @include box-shadow(rgba(0, 0, 0, 0.315) 0px 0 5px);
+    @include border-radius(7px);
+    background-color: $white;
+    @include  transition(all 0.3s ease-out);
+}
+
+.controlled-inputs-activity-image-container.portrait-mode{
+    margin-bottom: 1rem;
+}
+.controlled-inputs-activity-image-container.landscape-mode{
+    margin-left: 2rem;
+    max-width: 50%;
+}
+.controlled-inputs-activity-image-container.zoomed-in{
+    max-width: 90%;
+    z-index: 3;
+}
+.controlled-inputs-activity-image{
+    height: 100%;
+    width: 100%;
+    max-height: calc(max(40vh, 300px));
+    object-fit: contain;
+    object-position: center;
+    @include border-radius(7px);
+    @include  transition(all 0.3s ease-out);
+    &:hover{
+        cursor: zoom-in;
+    }
+}
+.controlled-inputs-activity-image.zoomed-in{
+    max-height: 85vh;
+    &:hover{
+        cursor: zoom-out;
+    }
+}
+.controlled-inputs-activity-answer-container{
+    @include box-shadow(rgba(0, 0, 0, 0.315) 0px 0 2px);
+    overflow-y: auto;
+    overflow: overlay;
+    overflow-x: hidden;
+    min-width: 280px;
+    max-width: 400px;
+    max-height: calc(max(70vh, 24rem));
+    height: 100%;
+    background-color: $white;
+    padding: 1rem;
+    @include border-radius(7px);
+    &::-webkit-scrollbar{
+        width: 0.5rem;
+        @include border-radius(1rem);
+        background-color: $light-gray;
+    }
+    &::-webkit-scrollbar-thumb{
+        @include border-radius(7px);
+        background-color: $dark-blue;
+    }
+}
+.controlled-inputs-activity-answer-container.portrait-mode{
+    max-width: 100%;
+    max-height: calc(max(40vh, 24rem));
+}

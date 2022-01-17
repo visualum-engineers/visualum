@@ -1,4 +1,4 @@
-import MultipleChoiceApp from "./MultipleChoice/MultipleChoiceApp"
+import ControlledInputs from "./ControlledInputs/ControlledInputsApp"
 import ShortAnswerApp from "./ShortAnswer/ShortAnswerApp"
 import SortActivityApp from "./SortActivity/SortActivityApp"
 import MatchActivityApp from "./MatchActivity/MatchActivityApp"
@@ -16,7 +16,8 @@ const ActivityQuestions = (props) =>{
         sort: <SortActivityApp {...newProps} />,
         matching: <MatchActivityApp {...newProps} />,
         shortAnswer: <ShortAnswerApp {...newProps} />,
-        multipleChoice: <MultipleChoiceApp {...newProps} />,
+        radio: <ControlledInputs {...newProps}  />,
+        checkbox: <ControlledInputs {...newProps} inputType = "checkbox" />,
         labelPictures: <LabelPicturesApp {...newProps} />
     }
     return(

@@ -1,11 +1,9 @@
 import {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { resetPopUpOff } from '../../../../redux/features/activityTypes/activitiesSlice';
-import MultipleChoiceImage from './MultipleChoiceImage';
+import ControlledInputsImage from './ControlledInputsImage';
+import ControlledInputsColumn from './ControlledInputsColumn';
 import ActivityHeader from '../ActivityHeader'
-//import PopUp from '../../popUp/PopUpBackground';
-import MultipleChoiceColumn from './MultipleChoiceColumn';
-
 
 /*
     Frontend:
@@ -13,7 +11,8 @@ import MultipleChoiceColumn from './MultipleChoiceColumn';
         - Included here is also rendering animation
     2. Missing progress saved on local storage/memory (if user exits out of page)
 */
-const MultipleChoiceApp = ({
+const ControlledInputsApp = ({
+    inputType,
     activityData, 
     questionNum, 
     activityID, 
@@ -24,7 +23,10 @@ const MultipleChoiceApp = ({
     resetBtnOnClick
 }) => {
     //for updating redux store(data to be sent to backend)
-    const [data, setData] = useState(activityData)
+    const [data, setData] = useState({
+        ...activityData, 
+        clientAnswer: "", 
+    })
     //redux states
     const dispatch = useDispatch()
     const resetPopUp = useSelector((state) => state.activities.resetPopUp)
@@ -87,14 +89,21 @@ const MultipleChoiceApp = ({
             questionNum = {questionNum}
             mediumWindowWidth={mediumWindowWidth}
         />
-        <form className = "mc-activity-input-container d-flex align-items-center justify-content-center flex-grow-1">
+        <form className = "controlled-inputs-activity-container d-flex align-items-center justify-content-center flex-grow-1">
             <div className = "px-2 flex-grow-1">
-                <div className = {`d-flex ${mediumWindowWidth? "justify-content-around align-items-center": "flex-column"}`}>
+                <div 
+                    className = {`d-flex ` 
+                                + `${mediumWindowWidth? "justify-content-around align-items-center": "flex-column"}`}
+                >
                     {!mediumWindowWidth? 
-                            <div className="mc-activity-question">{data.question}</div>
+                        <div 
+                            className="controlled-inputs-activity-question"
+                        >
+                            {data.question}
+                        </div>
                     : null}
                     {data.imageURL &&  !mediumWindowWidth &&
-                        <MultipleChoiceImage 
+                        <ControlledInputsImage 
                             data = {data}
                             customClass={"portrait-mode"}
                             popUpBgStyles={popUpBgStyles}
@@ -102,9 +111,14 @@ const MultipleChoiceApp = ({
                     }
                     <div>   
                         {mediumWindowWidth? 
-                            <div className="mc-activity-question">{data.question}</div>
+                            <div 
+                                className="controlled-inputs-activity-question"
+                            >
+                                {data.question}
+                            </div>
                         : null}
-                        <MultipleChoiceColumn
+                        <ControlledInputsColumn
+                            inputType = {inputType}
                             mediumWindowWidth = {mediumWindowWidth}
                             data = {data}
                             columns = {columns}
@@ -113,7 +127,7 @@ const MultipleChoiceApp = ({
                         />
                     </div>
                     {data.imageURL &&  mediumWindowWidth &&
-                        <MultipleChoiceImage 
+                        <ControlledInputsImage 
                             data = {data}
                             customClass={"landscape-mode"}
                             popUpBgStyles={popUpBgStyles}
@@ -125,5 +139,5 @@ const MultipleChoiceApp = ({
     </>
     )
 } 
-export default MultipleChoiceApp
+export default ControlledInputsApp
 

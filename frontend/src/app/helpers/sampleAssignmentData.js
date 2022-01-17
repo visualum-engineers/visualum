@@ -33,14 +33,27 @@ const assignmentData = {
     },
     //multiple choice
     2:{
-        type: "multipleChoice",
+        type: "radio",
         timer: false,
         question: "What faces this world?",
         imageURL : "images/homePage/mountain-home-bg.jpg",
         imgDescription: "",
-        answerChoices: ["The world know no bounds except that is cannot be at piece right now-4", "Bad-4", "No-4","The world know no bounds except that is cannot be at piece right now-3", "Bad-3", "No-3", "The world know no bounds except that is cannot be at piece right now-2", "Bad-2", "No-2","The world know no bounds except that is cannot be at piece right now-1", "Bad-1", "No-1"],
-        clientAnswer: "",
+        answerChoices: [  
+            {id: 1, content:"The world know no bounds except that is cannot be at piece right now-4"}, 
+            {id: 2, content: "Bad-4"}, 
+            {id: 3, content: "No-4"},
+            {id: 4, content: "The world know no bounds except that is cannot be at piece right now-3"}, 
+            {id: 5, content: "Bad-3"}, 
+            {id: 6, content: "No-3"}, 
+            {id: 7, content: "The world know no bounds except that is cannot be at piece right now-2"}, 
+            {id: 8, content: "Bad-2"}, 
+            {id: 9, content: "No-2"},
+            {id: 10, content: "The world know no bounds except that is cannot be at piece right now-1"}, 
+            {id: 11, content: "Bad-1"}, 
+            {id: 12, content:"No-1"}
+        ],
     },
+    
     //sorting
     3: {
         type: "sort",
@@ -54,15 +67,6 @@ const assignmentData = {
             {categoryId: 6, name: "Hello"},
             {categoryId: 7, name: "Nah"}
         ],
-        // answerChoices: [
-        //     {id:"1", content:"The world know no bounds except that is cannot be at piece right now. The world will never know peace"}, 
-        //     {id:"2", content:"Good"},
-        //     {id:"3", content:"Nice" },
-        //     {id:"4", content:"Duh" },
-        //     {id:"5", content:"Bruh"},
-        //     {id:"6", content:"Yuh" },
-        //     {id:"7", content:"Fuh" },
-        // ]
         answerChoices: sortActivityChoices(100)
     },
     //short answer
@@ -108,6 +112,27 @@ const assignmentData = {
             {id:"6", content:"Yuh" },
             {id:"7", content:"Fuh" }
         ],
-    }
+    },
+    6:{
+        type: "checkbox",
+        timer: false,
+        question: "What faces this world?",
+        imageURL : "images/homePage/mountain-home-bg.jpg",
+        imgDescription: "",
+        answerChoices: [  
+            {id: 1, content:"The world know no bounds except that is cannot be at piece right now-4"}, 
+            {id: 2, content: "Bad-4"}, 
+            {id: 3, content: "No-4"},
+            {id: 4, content: "The world know no bounds except that is cannot be at piece right now-3"}, 
+            {id: 5, content: "Bad-3"}, 
+            {id: 6, content: "No-3"}, 
+            {id: 7, content: "The world know no bounds except that is cannot be at piece right now-2"}, 
+            {id: 8, content: "Bad-2"}, 
+            {id: 9, content: "No-2"},
+            {id: 10, content: "The world know no bounds except that is cannot be at piece right now-1"}, 
+            {id: 11, content: "Bad-1"}, 
+            {id: 12, content:"No-1"}
+        ]
+    },
 }
 export default assignmentData
