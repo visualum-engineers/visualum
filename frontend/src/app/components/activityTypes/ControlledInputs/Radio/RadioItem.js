@@ -27,8 +27,6 @@ const RadioItem = ({
             >
                 <svg 
                     className="custom-radio-btn"
-                    width="17" 
-                    height="17" 
                     viewBox="0 0 24 24"
                 >
                     <circle 
