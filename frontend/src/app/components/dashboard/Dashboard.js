@@ -1,8 +1,7 @@
 import React from 'react'
 import DashboardSidebar from './DashboardSidebar';
-import { useNavigate, Outlet } from 'react-router';
+import { useNavigate, Outlet, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-// import { toggledCollapsed } from '../../../redux/features/dashboardStatus/dashboardSlice';
 import useWindowWidth from '../../hooks/use-window-width'
 import sidebarValues from './sidebarValues';
 const Logo = "./images/VisualumLogo.png"
@@ -10,15 +9,11 @@ const Logo = "./images/VisualumLogo.png"
 
 export default function Dashboard(props) {
     let navigate = useNavigate();
-    // const dispatch = useDispatch();
     const state = useSelector((state) => state.dashboard)
 
     function handleClick() {
         navigate("/");
     }
-    // function handleCollapse() {
-    //     dispatch(toggledCollapsed());
-    // }
 
     const widthBigger = useWindowWidth(992);
 
@@ -35,7 +30,7 @@ export default function Dashboard(props) {
             {sidebarValues.map(item => {
                 return (
                     <li className="nav-item">
-                        <a className="nav-link" href={`/dashboard/${item.value}`}>{item.name}</a>
+                        <Link className={(navData) => `${navData.isActive ? 'selected' : ''} nav-link`} to={`${item.value}`}>{item.name}</Link>
                     </li>
                 )
             })}
