@@ -20,6 +20,7 @@ $dark-gray: rgb(179, 179, 179);
 $darkest-gray: rgb(112, 112, 112);
 
 $light-blue: #eff7ff;
+$light-blue-1:  #349aff;
 $blue: rgb(9, 63, 179); 
 $dark-blue: rgb(15, 60, 158);
 
@@ -63,6 +64,10 @@ $light-purple: rgba(58,19,208,0.25);
     display: none;
     visibility: hidden;
     position: absolute;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+    opacity: 0;
 }
 
 @mixin center {
@@ -90,7 +95,11 @@ $light-purple: rgba(58,19,208,0.25);
     margin: 0;
     padding: 0;
 }
-
+@mixin transform($str...) {
+    -webkit-transform: $str;
+    -ms-transform: $str;
+    transform: $str;
+}
 @mixin transition ($str...) {
     -webkit-transition: $str;
     -ms-transition: $str;

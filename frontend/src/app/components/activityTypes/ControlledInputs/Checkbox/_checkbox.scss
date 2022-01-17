@@ -1,0 +1,94 @@
+.controlled-inputs-checkbox-item{
+    position: relative;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    min-height: 3.5rem;
+    overflow-wrap: break-word;
+    .custom-checkbox-btn{
+        position: absolute;
+        left: 0.7rem;
+        fill: transparent;
+        stroke-width: 1.2;
+        cursor: pointer;
+    }
+
+    .checkbox-outer-circle{
+        fill: transparent; 
+        stroke: $dark-blue
+    }
+
+    .checkbox-answer-label{
+        min-height: 3.5rem;
+        @include border-radius(0.5rem);
+        cursor: pointer;
+        height: 100%;
+        padding: 0.3rem 1.7rem;
+        padding-right: 1rem;
+        background-color: $light-blue;
+        @include  transition(all 0.3s ease-out);
+        @include box-shadow(rgba(0, 0, 0, 0.151) 0px 0 3px);
+        border: 1px solid transparent;
+        @include unselectable;
+    }
+    
+    .checkbox-answer-choice-group{
+        .checkbox-icon{
+            position: absolute;
+            background-color: $light-gray;
+            left: 0.7rem;
+            height: 1.2rem;
+            width: 1.2rem;
+            @include border-radius(0.3rem);
+            opacity: 0.4;
+        }
+        .checkbox-icon::after{
+            content: "";
+            position: absolute;
+            display: none;
+        }
+    }
+
+    .checkbox-answer-choice-group:hover{
+        .checkbox-answer-label{
+            background-color: $white;
+        }
+        .checkbox-icon{
+            background-color: $dark-gray;
+            opacity: 1;
+        }
+    }
+    
+    input[type="checkbox"]{
+        @include hidden;
+    }
+
+    input[type="checkbox"]:checked + .checkbox-answer-choice-group{
+        .checkbox-answer-label{
+            border: 1px solid $dark-blue;
+            background-color: $white;
+
+        }
+        .checkbox-icon{
+            background-color: $dark-blue;
+            opacity: 1;
+        }
+        .checkbox-icon::after{
+            display: block;
+            left: 0.4rem;
+            top: 0.16rem;
+            width: 0.4rem;
+            height: 0.75rem;
+            border: solid white;
+            border-width: 0 0.2rem 0.2rem 0;
+            @include transform(rotate(35deg));
+        }
+    }
+}
+.controlled-inputs-checkbox-item.grid-layout{
+    width: 45%;
+    margin: 0.5rem;
+    .checkbox-answer-label{
+        @include border-radius(0.5rem);
+    }
+}
+

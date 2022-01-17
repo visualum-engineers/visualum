@@ -1,26 +1,28 @@
 const RadioItem = ({
         id, 
-        clientAnswer, 
+        checked, 
         choice, 
         updateAnswerChoice, 
         customContainerClass = null
     }) =>{
     return(
-        <div className={`radio-answer-choice${customContainerClass ? " " + customContainerClass: ""}`}>
+        <div className={`radio-answer-choice`
+                        +`${customContainerClass ? " " + customContainerClass: ""}`}
+        >
             <input 
-                id={"radio-answer-choice-"+id} 
+                id={id} 
                 type="radio" 
                 name="answer"
                 onChange = {updateAnswerChoice}
-                data-update-answer-choice = {"radio-answer-choice-"+id}
-                checked = {parseInt(clientAnswer) === id}
+                data-update-answer-choice = {id}
+                checked = {checked}
             />
             <label 
                 className="radio-answer-choice-group d-flex align-items-center w-100 h-100"
                 tabIndex={0}
                 onKeyDown = {updateAnswerChoice}
-                htmlFor={"radio-answer-choice-"+id}
-                data-update-answer-choice = {"radio-answer-choice-"+id} 
+                htmlFor={id}
+                data-update-answer-choice = {id} 
                 onClick = {updateAnswerChoice} 
             >
                 <svg 
@@ -44,7 +46,8 @@ const RadioItem = ({
                     </circle>
                 </svg>
                 <div 
-                    className="radio-answer-label w-100 d-flex align-items-center justify-content-center">
+                    className="radio-answer-label w-100 d-flex align-items-center justify-content-center"
+                >
                         {choice}
                 </div>
             </label>

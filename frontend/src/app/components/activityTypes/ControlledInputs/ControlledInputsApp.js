@@ -11,6 +11,18 @@ import ActivityHeader from '../ActivityHeader'
         - Included here is also rendering animation
     2. Missing progress saved on local storage/memory (if user exits out of page)
 */
+const answerType = (inputType)=>{
+    let inputAnswerType
+    switch (inputType) {
+        case "checkbox":
+            inputAnswerType = "checkbox_activity_client_answer"
+            break;
+        default:
+            inputAnswerType = "radio_activity_client_answer"
+            break;
+    }
+    return inputAnswerType
+} 
 const ControlledInputsApp = ({
     inputType,
     activityData, 
@@ -25,7 +37,7 @@ const ControlledInputsApp = ({
     //for updating redux store(data to be sent to backend)
     const [data, setData] = useState({
         ...activityData, 
-        clientAnswer: "", 
+        clientAnswer: {}, 
     })
     //redux states
     const dispatch = useDispatch()
@@ -36,24 +48,26 @@ const ControlledInputsApp = ({
             //reset all state values to default
             setData(state => ({
                 ...state, 
-                clientAnswer: "",
+                clientAnswer: {},
             }))
             dispatch(resetPopUpOff())
             //remove any saved data from local storage
-            localStorage.removeItem(`${activityID}-mc_activity_client_answer-${questionNum}`)        
+            const inputAnswerType = answerType(inputType)
+            localStorage.removeItem(`${activityID}-${inputAnswerType}-${questionNum}`)        
         }
-    }, [dispatch, resetPopUp, activityData, activityID, questionNum])
+    }, [dispatch, resetPopUp, activityData, activityID, questionNum, inputType])
 
     //find any data stored in local storage
     useEffect(() => {
-        const stored_selected_answer = localStorage.getItem(`${activityID}-mc_activity_client_answer-${questionNum}`)
+        const inputAnswerType = answerType(inputType)
+        const stored_selected_answer = localStorage.getItem(`${activityID}-${inputAnswerType}-${questionNum}`)
         if(stored_selected_answer){
             setData(state =>({
                 ...state,
-                clientAnswer: parseInt(stored_selected_answer) 
+                clientAnswer: JSON.parse(stored_selected_answer)
             })) 
         }
-    }, [activityID, questionNum])
+    }, [activityID, questionNum, inputType])
 
     const rows = data.answerChoices.length % 2 ===0 ? data.answerChoices.length/2 : Math.floor(data.answerChoices.length/2 + 1)
     const columns = 2
@@ -67,19 +81,40 @@ const ControlledInputsApp = ({
             answerChoices: newAnsList
         }))
     }
+    const updateRadioBtnChoice = (id) => {
+        return {[id.dataset.updateAnswerChoice]: true}
+    }
+    const updateCheckboxChoice = (id) =>{
+        const answserId = id.dataset.updateAnswerChoice
+        const newData = {...data.clientAnswer}
+        if(answserId.toString() in data.clientAnswer) delete newData[answserId]
+        else newData[answserId] = true 
+        return newData
+    }
     const updateAnswerChoice = (e) =>{
-        if(e.type === "keydown" && e.key !=="Enter") return  
-        let id = e.target.closest("label")
-        if (!e.target.closest("input") && !e.target.closest("label"))  return
-        if (!id) id = e.target.closest("label")
-        const answerId = id.dataset.updateAnswerChoice.match(/\d+/)[0]
+        if(e.type === "keydown" && e.key !=="Enter") return 
+        if (!e.target.closest("input") && !e.target.closest("label"))  return 
+        let id = e.target.closest("input")
+        if (!id) return
+        let answerId
+        switch(inputType){
+            case "checkbox":
+                answerId = updateCheckboxChoice(id)
+                break 
+            default:
+                answerId = updateRadioBtnChoice(id)
+                break 
+        }
+
+        //update data
         setData(state =>({
             ...state,
-            clientAnswer: parseInt(answerId) 
-        })) 
-        localStorage.setItem(`${activityID}-mc_activity_client_answer-${questionNum}`, answerId.toString())
+            clientAnswer: answerId 
+        }))
+        const inputAnswerType = answerType(inputType)
+        localStorage.setItem(`${activityID}-${inputAnswerType}-${questionNum}`, JSON.stringify(answerId))
     }
-    
+
     return(
         <>
         <ActivityHeader

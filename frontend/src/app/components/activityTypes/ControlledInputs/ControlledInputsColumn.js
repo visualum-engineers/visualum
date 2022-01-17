@@ -8,12 +8,14 @@ const InputInnerGridList = ({
     inputItemProps
 }) => <div className="d-flex w-100" >
         {data.answerChoices.slice(startSlice, endSlice).map((choice, index)=>{
+            const checked = choice.id.toString() in data.clientAnswer
             if(!choice) return <div key={index} className="w-100 grid-layout empty-mc-item"></div>
             if(inputType === "checkbox") return (
                 <CheckboxItem 
                     key={choice.id}
                     id = {choice.id}
-                    choice={choice.content}  
+                    choice={choice.content}
+                    checked={checked}  
                     {...inputItemProps}
                 />
             )
@@ -22,6 +24,7 @@ const InputInnerGridList = ({
                     key={choice.id}
                     id = {choice.id}
                     choice={choice.content}
+                    checked={checked}
                     {...inputItemProps} 
                 />
             )
@@ -33,12 +36,14 @@ const InputInnerList = ({
     inputType,
     inputItemProps
 }) => data.answerChoices.map((choice)=>{
+        const checked = choice.id.toString() in data.clientAnswer
         if(!choice) return null
         if(inputType === "checkbox") return(
             <CheckboxItem 
                 key={choice.id}
                 id = {choice.id}
-                choice={choice}
+                choice={choice.content}
+                checked={checked}
                 {...inputItemProps}
             />
         )
@@ -46,7 +51,8 @@ const InputInnerList = ({
             <RadioItem
                 key = {choice.id}
                 id = {choice.id}
-                choice={choice.content} 
+                choice={choice.content}
+                checked={checked} 
                 {...inputItemProps}
             />
         )
@@ -64,7 +70,7 @@ const ControlledInputsColumn = ({
         clientAnswer: data.clientAnswer,
         updateAnswerChoice: updateAnswerChoice,
         customContainerClass: !mediumWindowWidth ? "grid-layout w-100" 
-                              : inputType === "checkbox" ? "controlled-inputs-radio-item d-flex align-items-center"
+                              : inputType === "checkbox" ? "controlled-inputs-checkbox-item d-flex align-items-center"
                               :"controlled-inputs-radio-item d-flex align-items-center"             
     }
     return (
