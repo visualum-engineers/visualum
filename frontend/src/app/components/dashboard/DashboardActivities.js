@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Dashboard from './Dashboard'
 import ActivityCard from './ActivityCard';
 import CardContainer from './CardContainer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -22,34 +21,32 @@ export default function DashboardActivities(props) {
     }
 
     return (
-        <Dashboard page="activities">
-            <div className="row-container">
-                <div className="control-bar">
-                    <div className="buttons">
-                        <button className="btn btn-success button"
-                            onClick={() => addActivity({
-                                name: "Multiple Choice Math",
-                                questions: [
-                                    {
-                                        q: "What is the ___ of ___",
-                                        a: "___"
-                                    }
-                                ]
-                            })}>
-                            <span className="pe-1"><FontAwesomeIcon icon={faPlus} /></span> New
-                        </button>
-                    </div>
-                    <div className="search">
-                        <div className="input-group">
-                            <span className="input-group-text" id="basic-addon1">Search</span>
-                            <input type="text" className="form-control" placeholder="Search Activities" aria-label="activity" aria-describedby="basic-addon1" />
-                        </div>
+        <div className="row-container">
+            <div className="control-bar">
+                <div className="buttons">
+                    <button className="btn btn-success button"
+                        onClick={() => addActivity({
+                            name: "Multiple Choice Math",
+                            questions: [
+                                {
+                                    q: "What is the ___ of ___",
+                                    a: "___"
+                                }
+                            ]
+                        })}>
+                        <span className="pe-1"><FontAwesomeIcon icon={faPlus} /></span> New
+                    </button>
+                </div>
+                <div className="search">
+                    <div className="input-group">
+                        <span className="input-group-text" id="basic-addon1">Search</span>
+                        <input type="text" className="form-control" placeholder="Search Activities" aria-label="activity" aria-describedby="basic-addon1" />
                     </div>
                 </div>
-                <CardContainer>
-                    {cards}
-                </CardContainer>
             </div>
-        </Dashboard >
+            <CardContainer>
+                {cards}
+            </CardContainer>
+        </div>
     )
 }
