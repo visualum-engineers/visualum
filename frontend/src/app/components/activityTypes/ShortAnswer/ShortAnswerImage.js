@@ -1,5 +1,5 @@
 import ImageContainer from "../../utilities/imageContainer/ImageContainer"
-import ZoomableContext from "../../utilities/imageContainer/ZoomableContext"
+import ZoomableContext from "../../utilities/contexts/ZoomableContext"
 import Image from "../../utilities/imageContainer/Image"
 const ShortAnswerImage = ({
     data,

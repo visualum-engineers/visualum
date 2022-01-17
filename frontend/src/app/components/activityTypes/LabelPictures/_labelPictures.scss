@@ -447,14 +447,14 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     padding-left: 1.5rem;
     padding-right: 0.8rem;
     height: 3.7rem;
-    background-color: rgb(231, 231, 231) ;
-    color: rgb(59, 59, 59);
+    background-color: rgba(236, 236, 236, 0.822);
+    color: $black;
 
     @include border-radius(7px 7px 0 0);
     position: relative;
     h1{
-        font-size: 1.4rem;
-        font-weight: 500;
+        font-size: 1.25rem;
+        font-weight: 400;
         margin-bottom: 0;
     }
     button{

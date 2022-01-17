@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { resetPopUpOff } from '../../../../redux/features/activityTypes/activitiesSlice'
 import ActivityHeader from '../ActivityHeader'
 import ShortAnswerImage from './ShortAnswerImage'
+import useResizable from '../../../hooks/use-resizable'
 /*
     Frontend:
     1. Missing re-rendering logic, when user answers question and moves on to the next one.
@@ -22,7 +23,7 @@ const ShortAnswerApp = ({
 }) => {
     //for updating redux store(data to be sent to backend)
     const [data, setData] = useState(activityData)
-
+    const [textAreaPos, setTextAreaPos] = useResizable({})
     //redux states
     const dispatch = useDispatch()
     const resetPopUp = useSelector((state) => state.activities.resetPopUp) 

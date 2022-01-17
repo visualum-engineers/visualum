@@ -1,6 +1,6 @@
 import Image from "../../utilities/imageContainer/Image"
 import ImageContainer from "../../utilities/imageContainer/ImageContainer"
-import ZoomableContext from "../../utilities/imageContainer/ZoomableContext"
+import ZoomableContext from "../../utilities/contexts/ZoomableContext"
 const LabelPicturesImage = ({
     popUpBgStyles, 
     data
