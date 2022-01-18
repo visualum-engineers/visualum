@@ -1,0 +1,57 @@
+@mixin vertical-handle-styles {
+    cursor: ns-resize !important;
+    width: 100%;
+    height: 1.5rem;
+    .handle-icon{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+    .inner-handle{
+        background-color: $dark-blue;
+        width: 2rem;
+        height: 0.4rem
+    }
+}
+@mixin horizontal-handle-styles {
+    cursor: ew-resize !important;
+    height: 100%;
+    width: 1.5rem;
+    .handle-icon{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+    }
+    .inner-handle{
+        background-color: $dark-blue;
+        width: 0.4rem;
+        height: 2rem
+    }
+}
+.resizable-handle{
+    position: absolute;
+    @include remove-btn-default();
+    .inner-handle{
+        @include border-radius(1rem)
+    }
+}
+
+.north-handle{
+    top: -0.73rem;
+    @include vertical-handle-styles()
+}
+.south-handle{
+    bottom: -0.73rem;
+    @include vertical-handle-styles()
+}
+
+.west-handle{ 
+    left: -0.73rem;
+    @include horizontal-handle-styles()
+}
+.east-handle{
+    right: -0.73rem;
+    @include horizontal-handle-styles()
+}

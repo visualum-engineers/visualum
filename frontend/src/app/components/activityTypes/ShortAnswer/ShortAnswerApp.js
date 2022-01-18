@@ -3,7 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { resetPopUpOff } from '../../../../redux/features/activityTypes/activitiesSlice'
 import ActivityHeader from '../ActivityHeader'
 import ShortAnswerImage from './ShortAnswerImage'
-import useResizable from '../../../hooks/use-resizable'
+import ResizableHande from '../../utilities/resizable/ResizableHandle'
+import { 
+    useResizable, 
+    applyOnResizeStartStyles, 
+    applyOnResizeEndStyles 
+} from '../../../hooks/use-resizable'
+
 /*
     Frontend:
     1. Missing re-rendering logic, when user answers question and moves on to the next one.
@@ -66,13 +72,7 @@ const ShortAnswerApp = ({
         localStorage.setItem(`${activityID}-SA_activity_client_answer-${questionNum}`, input_value)
     }
     const onResizeStartWrapper = (e) =>{
-        //declartive styles so 
-        //touch inputs do not trigger scroll on mobile
-        const body = document.querySelector("body")
-        document.querySelector("html").style.touchAction = "none"
-        //body.style.touchAction = "none"
-        body.style.cursor = "ns-resize"
-        if(!smallWindowWidth) body.style.overflow = "hidden"
+        applyOnResizeStartStyles(smallWindowWidth)
         setResizeStart(true)
         onResizeStart({
             e: e,
@@ -80,22 +80,13 @@ const ShortAnswerApp = ({
         })
     }
     const onResizeEndWrapper = (e) =>{
-        //declartive styles so 
-        //touch inputs do not trigger scroll on mobile
-        const body = document.querySelector("body")
-        document.querySelector("html").style.touchAction = "auto"
-        //body.style.touchAction = "auto"
-        body.style.cursor = null
-        if(!smallWindowWidth) body.style.overflow = null
-        
+        applyOnResizeEndStyles(smallWindowWidth)
         setResizeStart(false)
         onResizeEnd(e)
     }
     
     const textAreaHandleMove = (e) =>{
-        
         if(!textResizeStart) return
-        //e.preventDefault(); 
         onResizeMove({
             e: e, 
             handlePos: {
@@ -140,7 +131,10 @@ const ShortAnswerApp = ({
                     
                     {/*renders text area that students can respond in*/}
                     <div className="sa-activity-input-container d-flex justify-content-center flex-grow-1 w-100">
-                        <div className="sa-activity-text-input form-floating w-100 d-flex flex-column">
+                        <div 
+                            className="sa-activity-text-input form-floating w-100 d-flex flex-column"
+                            style={textAreaHeight}
+                        >
                             <textarea
                                 ref={textAreaRef} 
                                 className="form-control" 
@@ -152,14 +146,11 @@ const ShortAnswerApp = ({
                             />
                             <label htmlFor="sa-activity-text">
                                 Type your answer here
-                            </label>
-                            <button
-                                className='sa-text-area-resizable-handle'
-                                onMouseDown={onResizeStartWrapper}
-                                onTouchStart={onResizeStartWrapper}
-                            >
-
-                            </button>
+                            </label> 
+                            <ResizableHande 
+                                onResizeStartWrapper={onResizeStartWrapper}
+                                handleType={"S"}
+                            />
                         </div>
                         
                     </div>

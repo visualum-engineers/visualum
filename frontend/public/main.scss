@@ -1,4 +1,11 @@
 @import "./scss_abstracts/variables";
+//styles for utility components
+@import "../src/app/components/utilities/moreInfoBtn/infoBtn";
+@import "../src/app/components/utilities/trianglePointer/trianglePointer";
+@import "../src/app/components/utilities/loadingIcon/loadingIcon";
+@import "../src/app/components/utilities/dragAndDrop/dragAndDrop";
+@import "../src/app/components/utilities/userProfile/userProfile";
+@import "../src/app/components/utilities/resizable/resizableHandle";
 
 //General Styles
 @import "../src/app/components/sideBar/sidebar";
@@ -10,13 +17,6 @@
 @import "../src/app/components/activityTypes/activity";
 @import "../src/app/components/dashboard/dashboard";
 @import "../src/app/components/avatarCreator/avatar";
-
-//styles for utility components
-@import "../src/app/components/utilities/moreInfoBtn/infoBtn";
-@import "../src/app/components/utilities/trianglePointer/trianglePointer";
-@import "../src/app/components/utilities/loadingIcon/loadingIcon";
-@import "../src/app/components/utilities/dragAndDrop/dragAndDrop";
-@import "../src/app/components/utilities/userProfile/userProfile";
 
 //responsive stylesheet
 @import "./scss_abstracts/breakPoints"; 

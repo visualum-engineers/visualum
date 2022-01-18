@@ -49,6 +49,7 @@
     }
 }
 .sa-activity-input-container{
+    
     .form-floating>.form-control:not(:placeholder-shown)~label{
         opacity: 0;
     }
@@ -61,11 +62,7 @@
     textarea{
         font-size: 0.9rem;
     }
-}
-.sa-text-area-resizable-handle{
-    @include remove-btn-default();
-    cursor: ns-resize !important;
-    height: 1.5rem;
+    
 }
 .sa-activity-text-input{
     font-size: 0.9rem;

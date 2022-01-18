@@ -1,4 +1,22 @@
 import { useState, useRef} from "react"
+export function applyOnResizeStartStyles(width = true){
+    //declartive styles so 
+    //touch inputs do not trigger scroll on mobile
+    const body = document.querySelector("body")
+    document.querySelector("html").style.touchAction = "none"
+    //body.style.touchAction = "none"
+    body.style.cursor = "ns-resize"
+    if(!width) body.style.overflow = "hidden"
+}
+export function applyOnResizeEndStyles(width = true) {
+    //declartive styles so 
+    //touch inputs do not trigger scroll on mobile
+    const body = document.querySelector("body")
+    document.querySelector("html").style.touchAction = "auto"
+    //body.style.touchAction = "auto"
+    body.style.cursor = null
+    if(!width) body.style.overflow = null
+}
 export function horizontalMove ({
     left,
     right,
@@ -51,7 +69,7 @@ export function verticalMove ({
     return {height : newHeight, top: newTop, bottom: newBottom}
 }
 
-const useResizable = ({
+export const useResizable = ({
     initialPos = null,
 }) =>{
     const [currPos, setPos] = useState(initialPos)
