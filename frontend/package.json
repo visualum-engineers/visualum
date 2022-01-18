@@ -39,11 +39,13 @@
     "redux-devtools-extension": "=2.13.9"
   },
   "scripts": {
-    "start": "npm run scss & react-scripts start",
+    "secrets": "doppler secrets download --no-file --format env > .env",
+    "start": "npm run secrets && npm run scss & react-scripts start",
     "scss": "dart-sass public/main.scss public/main.css",
     "build": "npm run scss & react-scripts build",
     "test": "npm run scss & react-scripts test",
     "eject": "react-scripts eject"
+    
   },
   "eslintConfig": {
     "extends": "react-app"
