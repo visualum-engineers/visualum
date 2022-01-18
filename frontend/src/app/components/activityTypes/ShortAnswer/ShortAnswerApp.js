@@ -31,7 +31,7 @@ const ShortAnswerApp = ({
     ] = useResizable({})
 
     const textAreaRef = useRef()
-    const textResizeStart = useRef(false)
+    const [textResizeStart, setResizeStart] = useState(false)
     //redux states
     const dispatch = useDispatch()
     const resetPopUp = useSelector((state) => state.activities.resetPopUp) 
@@ -66,18 +66,36 @@ const ShortAnswerApp = ({
         localStorage.setItem(`${activityID}-SA_activity_client_answer-${questionNum}`, input_value)
     }
     const onResizeStartWrapper = (e) =>{
-        textResizeStart.current = true
+        //declartive styles so 
+        //touch inputs do not trigger scroll on mobile
+        const body = document.querySelector("body")
+        document.querySelector("html").style.touchAction = "none"
+        //body.style.touchAction = "none"
+        body.style.cursor = "ns-resize"
+        if(!smallWindowWidth) body.style.overflow = "hidden"
+        setResizeStart(true)
         onResizeStart({
             e: e,
             node: textAreaRef.current,
         })
     }
     const onResizeEndWrapper = (e) =>{
-        textResizeStart.current = false
+        //declartive styles so 
+        //touch inputs do not trigger scroll on mobile
+        const body = document.querySelector("body")
+        document.querySelector("html").style.touchAction = "auto"
+        //body.style.touchAction = "auto"
+        body.style.cursor = null
+        if(!smallWindowWidth) body.style.overflow = null
+        
+        setResizeStart(false)
         onResizeEnd(e)
     }
+    
     const textAreaHandleMove = (e) =>{
-        if(!textResizeStart.current) return 
+        
+        if(!textResizeStart) return
+        //e.preventDefault(); 
         onResizeMove({
             e: e, 
             handlePos: {
@@ -88,6 +106,7 @@ const ShortAnswerApp = ({
             },
         })
     }
+    
     const textAreaHeight = {height: textAreaPos ? textAreaPos.height: null}
     return(
         <>
@@ -103,7 +122,7 @@ const ShortAnswerApp = ({
                 onMouseUp={onResizeEndWrapper} 
                 onMouseMove={textAreaHandleMove}
                 onTouchEnd={onResizeEndWrapper}
-                onTouchMove={textAreaHandleMove} 
+                onTouchMove={textAreaHandleMove}
             >
                 <div className="sa-activity-container d-flex flex-column align-items-center flex-grow-1">
                     <h2 className={"sa-activity-question"}> 
@@ -135,9 +154,12 @@ const ShortAnswerApp = ({
                                 Type your answer here
                             </label>
                             <button
+                                className='sa-text-area-resizable-handle'
                                 onMouseDown={onResizeStartWrapper}
                                 onTouchStart={onResizeStartWrapper}
-                            >Handle</button>
+                            >
+
+                            </button>
                         </div>
                         
                     </div>
