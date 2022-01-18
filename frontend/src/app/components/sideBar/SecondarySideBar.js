@@ -1,7 +1,7 @@
 import NavItem from "../utilities/navItems/NavItems"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCircleQuestion} from '@fortawesome/free-regular-svg-icons';
-import {faCog} from '@fortawesome/free-solid-svg-icons';
+import {faCog, faBars, faTimes} from '@fortawesome/free-solid-svg-icons';
 
 const Logo = "./images/VisualumLogo.png"
 const settingsLink = <>
@@ -15,11 +15,23 @@ const helpLink = <>
 const SecondarySideBar = (props) =>{
     return (
     <>
+        <button 
+            className={`secondary-exit-sidebar-btn${props.sidebarToggle ?" sidebar-open":" sidebar-close"}`} 
+            aria-label="exit-sidebar"
+            onClick={props.handleSideBar}
+        >
+            <FontAwesomeIcon 
+                icon= {props.sidebarToggle ? faTimes : faBars}
+            />
+        </button>
         <div 
-                aria-label ="sidebar" 
-                className={`${props.sidebarToggle ?"sidebar-right":"sidebar-left"}${props.customSidebarClass ? " "+props.customSidebarClass: ""} d-flex flex-column sidebar-nav secondary-sidebar-nav fixed-top`}
-                aria-hidden ={!props.sidebarToggle}
-            >
+            aria-label ="sidebar" 
+            aria-hidden ={!props.sidebarToggle}
+            className={`d-flex flex-column sidebar-nav secondary-sidebar-nav fixed-top `
+                        + `${props.sidebarToggle ?"sidebar-right":"sidebar-left"}`
+                        + `${props.customSidebarClass ? " "+props.customSidebarClass: ""}` 
+                    }
+        >
         
             <div className="secondary-sidebar-header d-flex justify-content-center align-items-center">
                 <a href="/" aria-hidden ={!props.sidebarToggle} tabIndex ={!props.sidebarToggle?"-1": "0"}>
@@ -33,20 +45,21 @@ const SecondarySideBar = (props) =>{
             <div className="secondary-sidebar-link-container d-flex flex-column align-items-center">
                 {props.data.map((navItem, index)=>{
                     return <NavItem 
-                            key={index} 
-                            textContent={navItem.textContent} 
-                            sidebar={"secondary"} 
-                            styles = {navItem.styles}
-                            hidden = {!props.sidebarToggle}
-                            onClick={navItem.onClick}
-                            url={navItem.type === "link" && navItem.url}
-                            btn={navItem.type !== "link"}
+                                key={index} 
+                                textContent={navItem.textContent} 
+                                sidebar={"secondary"} 
+                                styles = {navItem.styles}
+                                hidden = {!props.sidebarToggle}
+                                onClick={navItem.onClick}
+                                url={navItem.type === "link" && navItem.url}
+                                btn={navItem.type !== "link"}
                         />
                 })}
             </div>
             
             <div 
-                className={`secondary-sidebar-footer d-flex flex-column justify-content-${props.userProfile ? "start":"end"} align-items-center flex-grow-1`}
+                className={`secondary-sidebar-footer d-flex flex-column align-items-center flex-grow-1`
+                + ` justify-content-${props.userProfile ? "start":"end"} `}
             >
                 <NavItem 
                     textContent={settingsLink} 
@@ -71,12 +84,7 @@ const SecondarySideBar = (props) =>{
             </div>
             
         </div>
-        <button 
-            className={`secondary-exit-sidebar-btn${props.sidebarToggle ?"":" sidebar-close"}`} 
-            aria-label="exit-sidebar"
-            onClick={props.handleSideBar}>
-            <i className={`fas fa-angle-${props.sidebarToggle ? "left":"right"}`}></i>
-        </button>
+        
         {!props.windowWidth &&  
             <button 
                 className={`sidebar-dark-bg fixed-top ${props.sidebarToggle ?"sidebar-bg-show":"sidebar-bg-hide"}`}

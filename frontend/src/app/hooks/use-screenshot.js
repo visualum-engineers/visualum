@@ -16,7 +16,6 @@ import html2canvas from 'html2canvas'
  */
 
 const useScreenshot = ({ type, quality } = {}) => {
-  console.log(type, quality)
   const [image, setImage] = useState(null)
   const [error, setError] = useState(null)
   /**

@@ -1,10 +1,72 @@
-.SAInputContainer{
-    margin-top: 15px;
-    font-size: 0.9em;
+@import "./shortAnswerBreakpoints";
+
+.sa-activity-container{
+    width: 85%;
 }
-.SAInputContainer>textarea{
-    min-height: 300px;
-    max-height: 40rem;
-    height: 100%;
+.sa-activity-question{
+    background-color: $white;
+    @include border-radius(7px);
+    @include box-shadow(rgba(0, 0, 0, 0.315) 0px 0 2px);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    padding: 0.5rem;
+    min-width: 50%;
+    width: fit-content;
+    @include unselectable;
 }
 
+.sa-activity-image-container{
+    padding: 0.6rem;
+    @include box-shadow(rgba(0, 0, 0, 0.315) 0px 0 5px);
+    @include border-radius(7px);
+    background-color: $white;
+    @include  transition(all 0.3s ease-out);
+    margin-bottom: 1rem;
+    width: fit-content;
+}
+
+.sa-activity-image{
+    height: 100%;
+    width: 100%;
+    max-height: calc(max(35vh, 300px));
+    object-fit: contain;
+    object-position: center;
+    @include border-radius(7px);
+    @include  transition(all 0.3s ease-out);
+    &:hover{
+        cursor: zoom-in;
+    }
+}
+
+.sa-activity-image-container.zoomed-in{
+    max-width: 90%;
+    z-index: 3;
+}
+.sa-activity-image.zoomed-in{
+    max-height: 85vh;
+    &:hover{
+        cursor: zoom-out;
+    }
+}
+.sa-activity-input-container{
+    .form-floating>.form-control:not(:placeholder-shown)~label{
+        opacity: 0;
+    }
+    .form-floating>.form-control:not(:placeholder-shown){
+        padding: 0.5rem;
+    }
+    .form-control{
+        padding-top: 0;
+    }
+    textarea{
+        font-size: 0.9rem;
+    }
+}
+
+.sa-activity-text-input{
+    font-size: 0.9rem;
+    .form-control{
+        height: 100%;
+        resize: none;
+    }
+}

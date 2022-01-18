@@ -1,7 +1,9 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useRef} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { resetPopUpOff } from '../../../../redux/features/activityTypes/activitiesSlice'
 import ActivityHeader from '../ActivityHeader'
+import ShortAnswerImage from './ShortAnswerImage'
+import useResizable from '../../../hooks/use-resizable'
 /*
     Frontend:
     1. Missing re-rendering logic, when user answers question and moves on to the next one.
@@ -21,7 +23,15 @@ const ShortAnswerApp = ({
 }) => {
     //for updating redux store(data to be sent to backend)
     const [data, setData] = useState(activityData)
+    const [
+        textAreaPos, 
+        onResizeStart, 
+        onResizeMove, 
+        onResizeEnd
+    ] = useResizable({})
 
+    const textAreaRef = useRef()
+    const textResizeStart = useRef(false)
     //redux states
     const dispatch = useDispatch()
     const resetPopUp = useSelector((state) => state.activities.resetPopUp) 
@@ -55,7 +65,30 @@ const ShortAnswerApp = ({
         }))
         localStorage.setItem(`${activityID}-SA_activity_client_answer-${questionNum}`, input_value)
     }
-    
+    const onResizeStartWrapper = (e) =>{
+        textResizeStart.current = true
+        onResizeStart({
+            e: e,
+            node: textAreaRef.current,
+        })
+    }
+    const onResizeEndWrapper = (e) =>{
+        textResizeStart.current = false
+        onResizeEnd(e)
+    }
+    const textAreaHandleMove = (e) =>{
+        if(!textResizeStart.current) return 
+        onResizeMove({
+            e: e, 
+            handlePos: {
+                south: true, 
+                north: false, 
+                east: false, 
+                west: false
+            },
+        })
+    }
+    const textAreaHeight = {height: textAreaPos ? textAreaPos.height: null}
     return(
         <>
             <ActivityHeader
@@ -65,21 +98,53 @@ const ShortAnswerApp = ({
                 resetBtnOnClick = {resetBtnOnClick} 
                 questionNum = {questionNum}
             />
-            <p className = "SAQuestion">{data.question}</p>  
-            {/*renders text area that students can respond in*/}
-            <div className = "d-flex justify-content-center">
-                <div className="SAInputContainer form-floating w-75">
-                    <textarea 
-                        className="form-control" 
-                        placeholder="Type your answer here" 
-                        id="SAtextArea"
-                        onChange={handleInput}
-                        value = {data.clientAnswer}
-                    >
-                    </textarea>
-                    <label htmlFor="SAtextArea">Type your answer here</label>
+            <div
+                className="d-flex flex-column align-items-center justify-content-center flex-grow-1"
+                onMouseUp={onResizeEndWrapper} 
+                onMouseMove={textAreaHandleMove}
+                onTouchEnd={onResizeEndWrapper}
+                onTouchMove={textAreaHandleMove} 
+            >
+                <div className="sa-activity-container d-flex flex-column align-items-center flex-grow-1">
+                    <h2 className={"sa-activity-question"}> 
+                       {data.question}
+                    </h2>
+
+                    {data.imageURL &&
+                        <div className="d-flex justify-content-center w-100"> 
+                            <ShortAnswerImage 
+                                data = {data}
+                                popUpBgStyles={popUpBgStyles}
+                            />
+                        </div>
+                    }
+                    
+                    {/*renders text area that students can respond in*/}
+                    <div className="sa-activity-input-container d-flex justify-content-center flex-grow-1 w-100">
+                        <div className="sa-activity-text-input form-floating w-100 d-flex flex-column">
+                            <textarea
+                                ref={textAreaRef} 
+                                className="form-control" 
+                                placeholder="Type your answer here" 
+                                id="sa-activity-text"
+                                onChange={handleInput}
+                                value = {data.clientAnswer}
+                                style={textAreaHeight}  
+                            />
+                            <label htmlFor="sa-activity-text">
+                                Type your answer here
+                            </label>
+                            <button
+                                onMouseDown={onResizeStartWrapper}
+                                onTouchStart={onResizeStartWrapper}
+                            >Handle</button>
+                        </div>
+                        
+                    </div>
                 </div>
+
             </div>
+            
             
         </>
     )

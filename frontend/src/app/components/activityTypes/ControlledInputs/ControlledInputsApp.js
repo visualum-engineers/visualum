@@ -1,11 +1,9 @@
 import {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { resetPopUpOff } from '../../../../redux/features/activityTypes/activitiesSlice';
-import MultipleChoiceImage from './MultipleChoiceImage';
+import ControlledInputsImage from './ControlledInputsImage';
+import ControlledInputsColumn from './ControlledInputsColumn';
 import ActivityHeader from '../ActivityHeader'
-//import PopUp from '../../popUp/PopUpBackground';
-import MultipleChoiceColumn from './MultipleChoiceColumn';
-
 
 /*
     Frontend:
@@ -13,7 +11,20 @@ import MultipleChoiceColumn from './MultipleChoiceColumn';
         - Included here is also rendering animation
     2. Missing progress saved on local storage/memory (if user exits out of page)
 */
-const MultipleChoiceApp = ({
+const answerType = (inputType)=>{
+    let inputAnswerType
+    switch (inputType) {
+        case "checkbox":
+            inputAnswerType = "checkbox_activity_client_answer"
+            break;
+        default:
+            inputAnswerType = "radio_activity_client_answer"
+            break;
+    }
+    return inputAnswerType
+} 
+const ControlledInputsApp = ({
+    inputType,
     activityData, 
     questionNum, 
     activityID, 
@@ -24,7 +35,10 @@ const MultipleChoiceApp = ({
     resetBtnOnClick
 }) => {
     //for updating redux store(data to be sent to backend)
-    const [data, setData] = useState(activityData)
+    const [data, setData] = useState({
+        ...activityData, 
+        clientAnswer: {}, 
+    })
     //redux states
     const dispatch = useDispatch()
     const resetPopUp = useSelector((state) => state.activities.resetPopUp)
@@ -34,24 +48,26 @@ const MultipleChoiceApp = ({
             //reset all state values to default
             setData(state => ({
                 ...state, 
-                clientAnswer: "",
+                clientAnswer: {},
             }))
             dispatch(resetPopUpOff())
             //remove any saved data from local storage
-            localStorage.removeItem(`${activityID}-mc_activity_client_answer-${questionNum}`)        
+            const inputAnswerType = answerType(inputType)
+            localStorage.removeItem(`${activityID}-${inputAnswerType}-${questionNum}`)        
         }
-    }, [dispatch, resetPopUp, activityData, activityID, questionNum])
+    }, [dispatch, resetPopUp, activityData, activityID, questionNum, inputType])
 
     //find any data stored in local storage
     useEffect(() => {
-        const stored_selected_answer = localStorage.getItem(`${activityID}-mc_activity_client_answer-${questionNum}`)
+        const inputAnswerType = answerType(inputType)
+        const stored_selected_answer = localStorage.getItem(`${activityID}-${inputAnswerType}-${questionNum}`)
         if(stored_selected_answer){
             setData(state =>({
                 ...state,
-                clientAnswer: parseInt(stored_selected_answer) 
+                clientAnswer: JSON.parse(stored_selected_answer)
             })) 
         }
-    }, [activityID, questionNum])
+    }, [activityID, questionNum, inputType])
 
     const rows = data.answerChoices.length % 2 ===0 ? data.answerChoices.length/2 : Math.floor(data.answerChoices.length/2 + 1)
     const columns = 2
@@ -65,19 +81,40 @@ const MultipleChoiceApp = ({
             answerChoices: newAnsList
         }))
     }
+    const updateRadioBtnChoice = (id) => {
+        return {[id.dataset.updateAnswerChoice]: true}
+    }
+    const updateCheckboxChoice = (id) =>{
+        const answserId = id.dataset.updateAnswerChoice
+        const newData = {...data.clientAnswer}
+        if(answserId.toString() in data.clientAnswer) delete newData[answserId]
+        else newData[answserId] = true 
+        return newData
+    }
     const updateAnswerChoice = (e) =>{
-        if(e.type === "keydown" && e.key !=="Enter") return  
-        let id = e.target.closest("label")
-        if (!e.target.closest("input") && !e.target.closest("label"))  return
-        if (!id) id = e.target.closest("label")
-        const answerId = id.dataset.updateAnswerChoice.match(/\d+/)[0]
+        if(e.type === "keydown" && e.key !=="Enter") return 
+        if (!e.target.closest("input") && !e.target.closest("label"))  return 
+        let id = e.target.closest("input")
+        if (!id) return
+        let answerId
+        switch(inputType){
+            case "checkbox":
+                answerId = updateCheckboxChoice(id)
+                break 
+            default:
+                answerId = updateRadioBtnChoice(id)
+                break 
+        }
+
+        //update data
         setData(state =>({
             ...state,
-            clientAnswer: parseInt(answerId) 
-        })) 
-        localStorage.setItem(`${activityID}-mc_activity_client_answer-${questionNum}`, answerId.toString())
+            clientAnswer: answerId 
+        }))
+        const inputAnswerType = answerType(inputType)
+        localStorage.setItem(`${activityID}-${inputAnswerType}-${questionNum}`, JSON.stringify(answerId))
     }
-    
+
     return(
         <>
         <ActivityHeader
@@ -87,14 +124,21 @@ const MultipleChoiceApp = ({
             questionNum = {questionNum}
             mediumWindowWidth={mediumWindowWidth}
         />
-        <form className = "mc-activity-input-container d-flex align-items-center justify-content-center flex-grow-1">
-            <div className = "px-2">
-                <div className = {`d-flex ${mediumWindowWidth? "justify-content-between align-items-center": "flex-column"}`}>
+        <form className = "controlled-inputs-activity-container d-flex align-items-center justify-content-center flex-grow-1">
+            <div className = "px-2 flex-grow-1">
+                <div 
+                    className = {`d-flex ` 
+                                + `${mediumWindowWidth? "justify-content-around align-items-center": "flex-column"}`}
+                >
                     {!mediumWindowWidth? 
-                            <div className="mc-activity-question">{data.question}</div>
+                        <div 
+                            className="controlled-inputs-activity-question"
+                        >
+                            {data.question}
+                        </div>
                     : null}
                     {data.imageURL &&  !mediumWindowWidth &&
-                        <MultipleChoiceImage 
+                        <ControlledInputsImage 
                             data = {data}
                             customClass={"portrait-mode"}
                             popUpBgStyles={popUpBgStyles}
@@ -102,9 +146,14 @@ const MultipleChoiceApp = ({
                     }
                     <div>   
                         {mediumWindowWidth? 
-                            <div className="mc-activity-question">{data.question}</div>
+                            <div 
+                                className="controlled-inputs-activity-question"
+                            >
+                                {data.question}
+                            </div>
                         : null}
-                        <MultipleChoiceColumn
+                        <ControlledInputsColumn
+                            inputType = {inputType}
                             mediumWindowWidth = {mediumWindowWidth}
                             data = {data}
                             columns = {columns}
@@ -113,7 +162,7 @@ const MultipleChoiceApp = ({
                         />
                     </div>
                     {data.imageURL &&  mediumWindowWidth &&
-                        <MultipleChoiceImage 
+                        <ControlledInputsImage 
                             data = {data}
                             customClass={"landscape-mode"}
                             popUpBgStyles={popUpBgStyles}
@@ -125,5 +174,5 @@ const MultipleChoiceApp = ({
     </>
     )
 } 
-export default MultipleChoiceApp
+export default ControlledInputsApp
 

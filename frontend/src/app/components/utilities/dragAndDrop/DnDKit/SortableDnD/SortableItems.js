@@ -24,7 +24,7 @@ function SortableItem(props) {
       transform: CSS.Transform.toString(transform),
       transition,
     };
-
+    //console.log(props.id)
     return (
       <div 
         id={"dragItem"+props.id}

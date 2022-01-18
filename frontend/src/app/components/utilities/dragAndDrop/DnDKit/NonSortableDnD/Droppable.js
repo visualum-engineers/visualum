@@ -19,9 +19,10 @@ function Droppable(props) {
       disabled: props.disabled,
       data:{
         node: droppableRef.current,
+        parentNode: props.parentNode,
+        customParentNode: props.customParentNode ? props.customParentNode.node : null,
       }
     });
-//console.log(props.data)
     return (
       <div 
         ref={mergeRefs([setNodeRef, droppableRef])} 

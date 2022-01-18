@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Dashboard from './Dashboard'
 import AssignmentCard from './AssignmentCard'
 import CardContainer from './CardContainer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -28,7 +27,7 @@ export default function DashboardAssignments() {
 
 
     return (
-        <Dashboard page="assignments">
+        <div>
             <div className="control-bar">
                 <div className="buttons">
                     <button className="btn btn-success button" onClick={() => addAssignment({ title: "Test", className: "Test Class", dueDate: "Test Due Date" })}>
@@ -39,6 +38,6 @@ export default function DashboardAssignments() {
             <CardContainer>
                 {cards}
             </CardContainer>
-        </Dashboard >
+        </div>
     )
 }

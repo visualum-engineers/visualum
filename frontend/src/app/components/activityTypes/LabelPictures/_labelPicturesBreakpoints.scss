@@ -2,7 +2,7 @@
     .label-pic-activity-question-column{
         .label-pic-activity-draggables{
             //calculated based of col classes
-            width: 73.2%;
+            width: 74.2%;
         }
     }
     .label-pic-activity-droppables-placeholder{
@@ -12,22 +12,18 @@
 @mixin label-pic-activity-md {
     .label-pic-activity-question-column{
         .label-pic-activity-draggables{
-            //calculated based of col classes
-            width: 57%;
+            width: 100%;
         }
     }
     .label-pic-activity-droppables-placeholder{
-        padding-left: 21.9% !important;
+        padding: 0.5% !important;
     }
 }
 @mixin label-pic-activity-sm {
     .label-pic-activity-question-column{
         .label-pic-activity-draggables{
-            //calculated based of col classes
-            width: 90%;
+            width: 100%;
         }
     }
-    .label-pic-activity-droppables-placeholder{
-        padding-left: 5.2% !important;
-    }
+    
 }

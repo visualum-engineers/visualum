@@ -1,11 +1,12 @@
 import ActivityQuestions from "./ActivityQuestions"
 import ActivityInstructions from "./ActivityInstructions"
-import ActivityBtns from "./NavActivityBtn/ActivityBtns"
+import ActivityBtns from "./ActivityBtns"
 import DnDActivites from "./DnDActivites"
 import useWindowWidth from "../../hooks/use-window-width"
 import SecondarySideBar from "../sideBar/SecondarySideBar"
 import assignmentData from "../../helpers/sampleAssignmentData"
 import { useEffect, useState } from "react"
+import { unstable_batchedUpdates } from "react-dom"
 import {CSSTransition} from "react-transition-group"
 import { useSelector, useDispatch } from 'react-redux'
 import {enableTap, resetPopUpOn, resetPopUpOff} from '../../../redux/features/activityTypes/activitiesSlice'
@@ -16,6 +17,8 @@ import ActivityResetPopUp from './ActivityResetPopUp'
 import UserProfile from "../utilities/userProfile/UserProfile";
 import calculatePercentage from "../../helpers/calculatePercentage";
 import capitalizeFirstLetter from "../../helpers/capitalizeFirstLetter"
+
+
 const activityData = assignmentData
 const duration = 500
 const inPropDuration = duration * 2
@@ -79,14 +82,17 @@ const Activity = () =>{
             currQuestion = questionNum + 1
         }
         if(btnType === "submit") return null
-        setQuestion({
-            activityID: activityData["uniqueID"],
-            questionNum: currQuestion,
-            ...activityData[currQuestion]
+        
+        unstable_batchedUpdates(()=>{
+            setQuestion({
+                activityID: activityData["uniqueID"],
+                questionNum: currQuestion,
+                ...activityData[currQuestion]
+            })
+            setPrevQuestion(questionNum)
+            setQuestionNum(currQuestion)
+            setInProp(true)
         })
-        setPrevQuestion(questionNum)
-        setQuestionNum(currQuestion)
-        setInProp(true)
         setTimeout(() =>{
             setInProp(false)
         }, inPropDuration)
@@ -101,7 +107,10 @@ const Activity = () =>{
         else return openSideBar()
     }
     //use for activity instructions popup
-    const moreInfoOnClick = () => setMoreInfoBtn(state=> !state)
+    const moreInfoOnClick = (e) => {
+        setMoreInfoBtn(state => !state)
+        if(!mediumWindowWidth && sidebarToggle) exitSideBar()
+    }
 
     //used for confirmation popup of reseting data in activity 
     const resetBtnOnClick = (e) =>{
@@ -125,8 +134,17 @@ const Activity = () =>{
         }
     }
     const secondarySideBarData = [
-        {type:"btn", styles:"activities-sidebar-btn", textContent: "Instructions"},
-        {type:"link", url: "/", styles:"activities-sidebar-link", textContent: 
+        {
+            type:"btn", 
+            styles:"activities-sidebar-btn", 
+            textContent: "Instructions", 
+            onClick: moreInfoOnClick
+        },
+        {
+            type:"link", 
+            url: "/", 
+            styles:"activities-sidebar-link", 
+            textContent: 
             <>
                 <span className="icon-container"><FontAwesomeIcon icon = {faCommentDots}/></span>
                 <span className="ms-1">Feedback</span>

@@ -26,12 +26,15 @@ const DroppableArea = ({
     onTap=null, 
     firstElTap=null,
     removedEl = null,
+    onAreaTouchStart = null,
+    onAreaTouchEnd = null,
 }) =>{
-    const renderItems = getRenderItem(content, id, draggableClassName, isDraggingClass)
+    const renderItems = getRenderItem(content, draggableClassName, isDraggingClass)
     const InnerList = React.memo(({
         content, 
         onTap,
-        removedEl
+        removedEl,
+        firstElTap = null,
     }) =>
         content.map((draggableContent, index)=>{
             let last = index === content.length-1
@@ -48,6 +51,7 @@ const DroppableArea = ({
                         `${draggableClassName}`
                         + `${last?" last-item":""}`
                         +`${removedEl && removedEl.id === draggableContent.id?" hide-draggable":""}`
+                        +`${firstElTap && firstElTap.draggableId === draggableContent.id ?` ${isDraggingClass}`:""}`
                     }
                 />
             )
@@ -57,6 +61,8 @@ const DroppableArea = ({
     return(
         <div 
             className = {droppableClassName}
+            onTouchStart={onAreaTouchStart}
+            onTouchEnd={onAreaTouchEnd}
         >
             {droppableHeader ? droppableHeader : null}
             <Droppable 
@@ -84,6 +90,7 @@ const DroppableArea = ({
                             content={content} 
                             removedEl={removedEl}
                             onTap={onTap}
+                            firstElTap = {firstElTap}
                         />
                         
                         {provided.placeholder}

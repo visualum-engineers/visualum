@@ -26,7 +26,8 @@ $activity-container-height: calc(94vh - 2rem);
 $activity-container-min-height: calc(40rem - 7vh - 2rem);
 $sort-activity-container-height: calc(#{$activity-container-height} - 3.6rem - 23px);
 $sort-activity-container-min-height: calc(#{$activity-container-min-height} - 3.6rem - 23px);
-
+$sort-column-min-height: calc(#{$sort-activity-container-min-height} - 2rem);
+$sort-column-height: calc(#{$sort-activity-container-height} - 2rem);
 html.sortActivityActive{
     scroll-behavior: unset !important;
 }
@@ -39,7 +40,7 @@ html.sortActivityActive{
 }
 .sort-activity-instructions-position{
     position: absolute;
-    top: 0.6rem;
+    top: 1rem;
     right: 1rem;
 } 
 
@@ -47,18 +48,19 @@ html.sortActivityActive{
     position: relative;
     padding: 1rem;
     background-color: $white;
-    height: $sort-activity-container-height;
-    min-height: $sort-activity-container-min-height;
+    min-height: calc(max(#{$sort-activity-container-min-height}, #{$sort-activity-container-height}));
     @include border-radius(0.5rem);
 }
-
+.sort-activity-container.portrait-size{
+    min-height: calc(max(calc(#{$sort-activity-container-min-height} * 2), calc(#{$sort-activity-container-height} * 2)));
+}
 .sort-activity-container::before{
     position: absolute;
     content: "";
-    top: 50%;
-    left: 5%;
-    width: 90%;
-    height: calc(50%);
+    top: 5%;
+    left: 1%;
+    width: 98%;
+    height: calc(95%);
     @include box-shadow(rgba(0, 0, 0, 0.425) 0px -2px 23px 2px);
     z-index: -1;
 }
@@ -69,8 +71,13 @@ html.sortActivityActive{
     margin-top: 1.5rem;
     overflow-y: scroll;
     overflow-x: hidden;
-    //min-height: calc(max(20rem, 30vh));
     min-width: 300px;
+    min-height:calc(#{$sort-activity-container-min-height} - 2rem);
+    height: calc(#{$sort-activity-container-height} - 2rem);
+    resize: vertical;
+    .sort-activity-itemBank-column-1{
+        min-height: calc(#{$sort-activity-container-height} - 6rem)
+    }
     &::-webkit-scrollbar{
         width: 0.5rem;
         @include border-radius(7px);
@@ -86,11 +93,6 @@ html.sortActivityActive{
     min-width: 0;
     margin-top: 0;
     margin-right: 1.5rem;
-    min-height:calc(#{$sort-activity-container-min-height} - 2rem);
-    height: calc(#{$sort-activity-container-height} - 2rem);
-    .sort-activity-itemBank-column-1{
-        min-height: calc(#{$sort-activity-container-height} - 6rem)
-    }
 }
 .sort-activity-categories{
     background-color: $light-blue;
@@ -98,6 +100,9 @@ html.sortActivityActive{
     min-width: 300px;
     overflow-y: scroll;
     overflow-x: hidden;
+    min-height:calc(#{$sort-activity-container-min-height} - 2rem);
+    height: calc(#{$sort-activity-container-height} - 2rem);
+    resize: vertical;
     &::-webkit-scrollbar{
         width: 0.5rem;
         @include border-radius(7px);
@@ -112,21 +117,20 @@ html.sortActivityActive{
     width: calc(200% / 3);
     min-width: 0;
     margin-top: 0;
-    min-height:calc(#{$sort-activity-container-min-height} - 2rem);
-    height: calc(#{$sort-activity-container-height} - 2rem);
 }
 
 .sort-activity-column-titles{
     position: sticky;
     top:0;
     left: 0;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 500;
     height: 3.5rem;
     color: $dark-blue;
     z-index: 5;
     background-color: $light-blue;
     margin: 0;
+    padding-left: 0.5rem;
 }
 
 .sort-activity-itemBank-droppables{
@@ -142,19 +146,25 @@ html.sortActivityActive{
         margin-bottom: 0;
     }
 }
+.sort-activity-itemBank-droppables.small-screen{
+    padding: 1rem;
+    padding-right: 0.5rem;
+}
 .sort-activity-category-droppables{
     padding: 0 0.6rem;
     padding-right: 0.2rem;
     padding-top: 0.8rem;
 }
-.sort-activity-sort-droppables{
+.sort-activity-sort-droppable{
+    width: calc(50% - 0.4rem);
+    margin-bottom: 0.8rem;
+}
+.sort-activity-sort-droppable-area{
     padding-left: 0.4rem;
     position: relative;
     background-color: $white;
     height: calc(40vh - 2rem);
     min-height: 15rem;
-    width: calc(50% - 0.4rem);
-    margin-bottom: 0.8rem;
     @include border-radius(0.5rem);
     overflow-y: scroll;
     overflow-x: hidden;
@@ -180,12 +190,16 @@ html.sortActivityActive{
         left: 0;
         z-index: 3;
         background-color: $white;
+        @include unselectable;
     }
     .sort-activity-inner-droppable {
         @include sort-activity-inner-droppable();
         padding-right: 0.2rem;
         padding-left: 0.2rem;
     }   
+}
+.sort-activity-sort-droppable.small-screen{
+    width: calc(100% - 0.4rem);
 }
 .sort-activity-droppable-placeholder:after{
     position: absolute;
@@ -196,24 +210,19 @@ html.sortActivityActive{
     left: 0;
     height: 100%;
     width: 100%;
-    content: "Drag answers here";
+    content: "Drag Answers Here";
     font-size: 0.8rem;
     color: $dark-gray;
     font-weight: 400;
 }
-.sort-activity-sort-droppables.first-item{
+.sort-activity-sort-droppable.first-item{
     margin-left: 0;
     margin-right: 0.6rem;
 }
 
-.sort-activity-sort-droppables.third-category{
-    width: 100%;
-    margin: 0;
-    height: calc(33% - 1.5rem);
-}
-
 .sort-activity-draggables{
     @include sort-activity-draggable-styles();
+    touch-action: none !important;
     &::-webkit-scrollbar{
         width: 0.5rem;
         @include border-radius(7px);
@@ -226,19 +235,23 @@ html.sortActivityActive{
     div{
         margin: auto;
         width: 100%;
-        @include transition(transform 0.2s ease-out)
-    }
-    div:hover{
-        transform: scale(1.05);
+        @include transition(transform 0.2s ease-out);
+        @include unselectable;
+
     }
     &:hover{
         cursor: grab;
+        //opacity: 0.5;
+        background-color: $light-blue;
+        border: 1px solid $black;
     }
     cursor: grabbing;
 }
 
 .sort-activity-is-dragging{
     opacity: 0.5;
+    background-color: $light-blue;
+    border: 1px solid $black;
 }
 
 .sort-activity-dragging-over{

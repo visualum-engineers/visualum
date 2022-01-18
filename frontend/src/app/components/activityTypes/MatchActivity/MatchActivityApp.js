@@ -182,7 +182,6 @@ const MatchActivityApp = ({
             setFirstElTap: setFirstElTap, 
             listItemDraggableClass: "match-activity-draggables",
             listItemInnerDroppableClass: "match-activity-inner-droppable",
-            currDraggingClass: "match-activity-dragging"
         }
         const result = getResultOnTap(parm)
         if(!result) return
@@ -219,7 +218,7 @@ const MatchActivityApp = ({
             toggleTap = {toggleTap}
             type="DnD"
         />
-        <div className={`match-activity-container${mediumWindowWidth ? " full-size":""}`}>
+        <div className={`match-activity-container${mediumWindowWidth ? " full-size":" portrait-size"}`}>
         <DragDropContext 
             onDragEnd = {!disableDnD ? onDragEnd: null} 
             onDragUpdate={!disableDnD ? onDragUpdate: null} 
@@ -260,7 +259,7 @@ const MatchActivityApp = ({
                             firstElTap= {firstElTap}
                             onTap = {disableDnD? onTap: null}
                             overallContainerClass = {"match-activity-itemBank d-flex flex-column align-items-center w-100"}
-                            columnContainerClass = {"match-activity-itemBank-column-container w-100 flex-grow-1"}
+                            columnContainerClass = {"match-activity-itemBank-column-container w-100 flex-grow-1 d-flex flex-column"}
                             columnClass = {"match-activity-itemBank-column"}
                             columnTitleClass = {"match-activity-column-titles vertical"}
                             droppableClassName = {`match-activity-itemBank-droppables d-flex flex-column w-100`}

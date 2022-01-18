@@ -29,6 +29,7 @@ const NavItem = ({
                     <button
                         className={styles ? styles : ""}
                         aria-label={ariaLabel ? ariaLabel: null}
+                        data-action-label ={ariaLabel ? ariaLabel : null}
                         aria-hidden = {hidden}
                         tabIndex={`${hidden ? "-1":"0"}`}
                         onClick={onClick}

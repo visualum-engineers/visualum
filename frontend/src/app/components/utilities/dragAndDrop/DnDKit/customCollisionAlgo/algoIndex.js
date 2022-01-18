@@ -1,4 +1,5 @@
-import { closestCorners } from "./closestCornerAlgo";
-import rectIntersection from "./rectIntersectionAlgo";
+import { closestCorners } from "./closestCorner/closestCornerAlgo";
+import cleanUpCollisionData from "./cleanUpCollisionData";
+import rectIntersection from "./rectIntersection/rectIntersectionAlgo";
 
-export {closestCorners, rectIntersection};
+export {closestCorners, rectIntersection, cleanUpCollisionData};

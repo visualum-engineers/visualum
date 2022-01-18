@@ -1,4 +1,4 @@
 const calculatePercentage = (currValue, total) =>{
-    return currValue/total*100
+    return Number(currValue/total*100).toFixed(2)
 }
 export default calculatePercentage

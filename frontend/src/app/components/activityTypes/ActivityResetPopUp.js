@@ -8,23 +8,23 @@ const ActivityResetPopUp = (props) => {
         > 
             <div className="activity-reset-popup d-flex justify-content-center align-items-center flex-column col-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
                 <h2 className="resetQuestion"> {`You will lose your answers and progress to this question. Do you want to continue?`}</h2>
-                <div className="reset-popup-btn-container">
+                <div className="reset-popup-btn-container d-flex w-100 justify-content-center">
                     <button 
-                        className="btn btn-success"
+                        className="btn btn-danger"
                         data-btn-id = "yes"
                         onClick = {props.onClick}
                         aria-label = "confirm-reset-question"
                         data-action-label = "confirm-reset-question"
-                    > Yes 
+                    > Reset
                     </button>
                     <button 
-                        className ="btn btn-danger"
+                        className ="btn reset-cancel-btn"
                         data-btn-id = "no"
                         onClick = {props.onClick}
                         aria-label = "exit-reset-question"
                         data-action-label = "exit-reset-question"
                         autoFocus
-                    > No 
+                    > Cancel
                     </button>
                 </div>
             </div>

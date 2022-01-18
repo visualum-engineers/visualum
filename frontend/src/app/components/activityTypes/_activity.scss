@@ -1,6 +1,6 @@
 @import "./SortActivity/sortActivity";
 @import "./MatchActivity/matchActivity";
-@import "./MultipleChoice/multipleChoice";
+@import "./ControlledInputs/controlledInputs";
 @import "./ShortAnswer/shortAnswer";
 @import "./LabelPictures/labelPictures";
 @import "./activityBreakpoints";
@@ -65,18 +65,17 @@
 .activities-sidebar-btn{
     @include remove-btn-default;
     @include border-radius(7px);
-    @include box-shadow(0 0 3px rgba(0, 0, 0, 1));
     padding: 0.5rem;
-    background-color: $purple;
+    background-color: $dark-blue;
     color: white;
     width: 60%;
     margin-bottom: 2.5rem;
     @include transition(all 0.3s ease-out);
-    border: 1px solid rgba(0, 0, 0,0);
+    border: 1px solid transparent;
     &:hover{
         transform: scale(1.1);
-        color: $purple;
-        border: 1px solid $purple;
+        color: $dark-blue;
+        border: 1px solid $dark-blue;
         background-color: white;
     }
 }
@@ -101,7 +100,7 @@
     overflow-wrap: break-word;
     overflow-x: hidden;
     overflow-x: auto;
-    height: calc(max(28rem, 448px));
+    height: 70%;
     @include border-radius(4px)
 }
 .activity-walkthrough-instructions-header{
@@ -134,14 +133,28 @@
     @extend .activity-walkthrough-instructions;
     height: min-content;
     padding: 2rem;
+    @include border-radius(0.5rem);
     h2{
         text-align: center;
         font-size: 1rem;
+        margin:0;
     }
     .reset-popup-btn-container{
         button{
-            margin: 1.5rem;
+            margin: 0 10%;
+            margin-top: 1.5rem;
         }
+        .reset-cancel-btn{
+            background-color: $dark-blue;
+            color: $white;
+            border: 1px transparent solid;
+        }
+        .reset-cancel-btn:hover{
+            background-color: $white;
+            color: $dark-blue;
+            border: 1px $dark-blue solid;
+        }
+
     }
 }
 
@@ -151,9 +164,15 @@
     text-align: center;
     min-height: calc(max(calc(95vh - 2rem), calc(40rem - 7vh - 2rem) ));
     z-index: 1;
-    max-width: 1100px;
+    max-width: 1300px;
     min-width: 310px; 
-    //overflow: hidden;  
+    &::-webkit-scrollbar{
+        width: 0rem;
+        height: 0rem;
+    }
+    &::-webkit-scrollbar-thumb{
+        background-color: transparent;
+    } 
 }
 
 .question-transition-container{
@@ -209,24 +228,24 @@
 } 
 
 .nav-activity-btns{
-    max-width: 1100px;
+    max-width: 1300px;
 }
 .nav-activity-btn{
     @include border-radius(5px);
     color: $main-font-color;
-    background-color: $purple;
+    //background-color: $purple;
+    background-color: $blue;
     padding: 0.4rem 1.2rem;
-    //margin-top: 1vh;
-    margin-bottom: 2vh;
-    border: 1px $secondary-font-color solid;
+    margin-bottom: 1.5vh;
+    border: 1px transparent solid;
     font-size: 1rem;
     @include transition(all 0.3s ease-out);
 }  
 
 .nav-activity-btn:hover{
     @include activities-nav-navItems-hover;
-    border: 1px solid $purple;
-    color: $purple;
+    border: 1px solid $blue;
+    color: $blue;
 }
 
 //to be used inside activites, but not in activities general component
@@ -236,12 +255,12 @@
     font-weight: 500;
     font-size: 0.9rem;
     background-color: $white;
-    min-width: 10rem;
+    min-width: fit-content;
     width: 30%;
     height: 95%;
     @include border-radius(8px);
     @include box-shadow(rgba(0,0,0,0.1) 0px 0 10px);
-    padding: 1rem;
+    padding: 1rem 0.5rem;
 
     .timer-counter{
         @include border-radius(10px);

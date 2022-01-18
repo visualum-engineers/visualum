@@ -13,6 +13,7 @@ const Image = ({
     //This is done to provide functionality for zooming, 
     //but also allow for flexibility in attached event handlers.
     const onLocalClick = (e) =>{
+        if(e.type ==="keydown" && e.key !== "Enter") return
         if(onImgContainerClick) onImgContainerClick(e)
         if(onClick) onClick(e)
     }
@@ -24,6 +25,8 @@ const Image = ({
             alt = {alt}
             tabIndex={tabIndex}
             onClick={onLocalClick}
+            onKeyDown={onLocalClick}
+            aria-label = {"zoom-in-image"}
      />
     )
 }

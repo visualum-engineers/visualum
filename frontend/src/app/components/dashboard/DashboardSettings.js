@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import Avatar from 'avataaars';
-import Dashboard from './Dashboard'
 import AvatarCreator from '../avatarCreator/AvatarCreator';
 
 export default function DashboardSettings() {
 
 	const [modalOpen, setModalOpen] = useState(false);
 
-	const accountType = "student";
+	// const accountType = "student";
 	const email = "test@gmail.com"
 
 	const teacherSettings =
@@ -44,7 +43,7 @@ export default function DashboardSettings() {
 		</div>
 
 	return (
-		<Dashboard page="settings">
+		<div>
 			{modalOpen ? <AvatarCreator
 				onCancel={() => setModalOpen(false)}
 				onSubmit={() => console.log('Fill this in!')}
@@ -71,6 +70,6 @@ export default function DashboardSettings() {
 				</div>
 				{teacherSettings}
 			</div>
-		</Dashboard>
+		</div>
 	)
 }

@@ -4,7 +4,7 @@
     min-height: 4rem;
     height: 4rem;
     width: 100%;
-    min-width: 140px;
+    min-width: 130px;
     overflow-y: auto;
     overflow-x: hidden;
     overflow-wrap: break-word;
@@ -25,30 +25,34 @@ $activity-container-height: calc(94vh - 2rem);
 $activity-container-min-height: calc(40rem - 7vh - 2rem);
 $match-activity-container-height: calc(#{$activity-container-height} - 3.6rem - 23px);
 $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3.6rem - 23px);
+$match-column-min-height: calc(#{$match-activity-container-min-height} - 2rem);
+$match-column-height: calc(#{$match-activity-container-height} - 2rem);
 
 .match-activity-container{
     position: relative;
     padding: 1rem;
     background-color: $white;
-    height: $match-activity-container-height;
-    min-height: $match-activity-container-min-height;
+    min-height: calc(max(#{$match-activity-container-height}, #{$match-activity-container-min-height}));
     @include border-radius(0.5rem);
+}
+.match-activity-container.portrait-size{
+    min-height: calc(max(calc(#{$match-activity-container-height} * 2), calc(#{$match-activity-container-min-height} * 2)));
 }
 
 .match-activity-container::before{
     position: absolute;
     content: "";
-    top: 50%;
-    left: 5%;
-    width: 90%;
-    height: calc(50%);
+    top: 5%;
+    left: 1%;
+    width: 98%;
+    height: calc(95%);
     @include box-shadow(rgba(0, 0, 0, 0.425) 0px -2px 23px 2px);
     z-index: -1;
 }
 .match-activity-instructions-position{
     position: absolute;
-    top: 0.3rem;
-    right: 0.2rem;
+    top: 0.7rem;
+    right: 0.4rem;
     z-index: 4;
 }
 .match-activity-instructions{
@@ -61,27 +65,26 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
         background: $black;
     }
     
-    .instructions{
+    .triangle-pointer-container{
         background-color: $dark-blue;
         color: $white;
         left: -8.7rem;
         text-align: center !important;
     }
 
-    .info-triangle{
+    .triangle-pointer{
         left: 8.7rem;
         top:  -0.5rem;
         border-bottom: 0.6rem solid $dark-blue;
     }
-    .info-triangle-2{
+    .triangle-pointer-2{
         top:-0.55rem;
         left: 8.7rem;
     }
-
 }
 
 .match-activity-column-titles{
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 500;
     margin: 0;
     position: sticky;
@@ -102,23 +105,29 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
     margin-top: 1.5rem;
     background-color: $light-blue;
     @include border-radius(7px);
-    min-width: 300px;
+    min-width: 310px;
     overflow-x: hidden;
     overflow-y: scroll;
+    min-height: $match-column-min-height;
+    height: $match-column-height;
+    padding-left: 0.5rem;
+    resize: vertical;
     &::-webkit-scrollbar{
         width: 0.5rem;
         @include border-radius(7px);
-        //background-color: $light-gray;
     }
     &::-webkit-scrollbar-thumb{
         @include border-radius(7px);
         background-color: $dark-blue;
     }
-
+    .match-activity-column-titles{
+        padding-left: 0.5rem;
+    }
 }
 
 .match-activity-itemBank-column-1,
 .match-activity-itemBank-column-2{
+    min-height: 100%;
     background-color: rgba(0, 0,0,0);
     @include box-shadow(none);
     .match-activity-itemBank-droppables{
@@ -143,8 +152,7 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
     min-width: 0;
     margin-top: 0;
     margin-left: 1.5rem;
-    min-height:calc(#{$match-activity-container-min-height} - 2rem);
-    height: calc(#{$match-activity-container-height} - 2rem);
+    padding-left: 0;
     .match-activity-itemBank-column-1{
         margin: 0;
         padding-left: 0.5rem;
@@ -157,7 +165,10 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
     overflow-x: hidden;
     min-width: 310px;
     @include border-radius(7px);
-
+    min-height: $match-column-min-height;
+    height: $match-column-height;
+    background-color: $light-blue;
+    resize: vertical;
     .match-activity-inner-droppable::after{
         position: absolute;
         text-align: center;
@@ -173,10 +184,7 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
         color: $dark-gray;
         font-size: 0.85rem;
     }
-    .match-activity-answers-column{
-        padding-right: 0.25rem;
-        padding-left: 0.75rem;
-    }
+
     &::-webkit-scrollbar{
         background-color: $light-blue;
         width: 0.5rem;
@@ -190,10 +198,8 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
 }
 
 .match-activity-columns.full-size{
-    width: calc(2 * 100% / 3);
+    width: calc(2 * 100% / 3 - 1.5rem);
     min-width: 0;
-    min-height:calc(#{$sort-activity-container-min-height} - 2rem);
-    height: calc(#{$sort-activity-container-height} - 2rem);
     .match-activity-answers-column,
     .match-activity-keys-column{
         background-color: $light-blue;
@@ -205,24 +211,23 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
 .match-activity-itemBank-column-1,
 .match-activity-answers-column, 
 .match-activity-itemBank-column-2{
-    @include border-radius(7px);
     min-width: 150px;
     height: min-content;
 }
-.match-activity-keys-column,
-.match-activity-itemBank-column-1{
-    margin-right: 0.5rem;
-}
+
 .match-activity-answers-column, 
 .match-activity-itemBank-column-2{
     position: relative;
     margin-right: 0;
 }
-.match-activity-answers-column,
 .match-activity-keys-column{
     background-color: $light-blue;
+    padding-left: 0.75rem;
 }
 .match-activity-answers-column{
+    @include border-radius(7px 7px 7px 0);
+    background-color: $light-blue;
+    padding-right: 0.25rem;
     .match-activity-inner-droppable{
         padding-top: 0.25rem;
         overflow: hidden;
@@ -232,9 +237,8 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
 .match-activity-keys{
     list-style-type: none;
     margin-bottom: 1rem;
-    min-width: 145px;
+    min-width: calc(145px - 1.5rem);
     height: 4.5rem;
-    padding: 0 1rem;
     p{
         @include match-activity-keypair-styles();
         background-color: $lightest-gray;
@@ -251,7 +255,14 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
         border: 1px solid rgba(0, 0,0,0) !important;
     }
 }
-
+.match-activity-key-arrows{
+    height: 4.5rem;
+    width: 1.5rem;
+    path{
+        fill: $blue;
+        height: 2rem;
+    }
+}
 .match-activity-answers-droppables{
     list-style-type: none;
     margin-bottom: 1rem;
@@ -287,24 +298,21 @@ $match-activity-container-min-height: calc(#{$activity-container-min-height} - 3
         @include border-radius(7px);
         background-color: $dark-blue;
     }
+    &:hover{
+        background-color: $light-blue;
+        border: 1px solid $black;
+    }
     div{
         margin: auto;
         width: 100%;
-        @include transition(transform 0.2s ease-out)
-    }
-    div:hover{
-        transform: scale(1.05);
+        @include transition(transform 0.2s ease-out);
+        @include unselectable;
     }
 }
 
 .match-activity-dragging{
-    opacity: 0.8;
-    color: $main-font-color;
-    background-color: $light-gray;
+    background-color: $light-blue;
     border: 1px solid $black;
-    div{
-        transform: scale(1.1);
-    }
 }
 .match-activity-draggables.hide-draggable{
     position: absolute !important;

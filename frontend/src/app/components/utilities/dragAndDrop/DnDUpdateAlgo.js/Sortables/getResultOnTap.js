@@ -4,7 +4,6 @@ const getResultOnTap = ({
     setFirstElTap, 
     listItemDraggableClass,
     listItemInnerDroppableClass,
-    currDraggingClass
 }) =>{
     //means a selection hasnt happened so skip for keyboard
     if(e.type === "keydown" && e.key !=="Enter") return
@@ -27,11 +26,9 @@ const getResultOnTap = ({
             draggableIndex: draggableIndex,
             node: e.target
         })
-        currListItem.classList.add(currDraggingClass)
         return
     }
     //update the second element, and perform tap logic
-    firstElTap.node.classList.remove(currDraggingClass)
     const draggableId = firstElTap.draggableId
     const source = {
         droppableId: firstElTap.droppableId,

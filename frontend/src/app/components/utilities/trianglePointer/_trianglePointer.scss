@@ -1,0 +1,100 @@
+@keyframes show-instructions{
+    from {
+        width: 0px; 
+        height: 0px; 
+        font-size: 0px; 
+        padding: 0; 
+        opacity:0
+    }
+    50% {
+        height: auto; 
+        width: 10rem; 
+        font-size: 0.8rem; 
+        padding: 0.6rem; 
+        opacity:0;
+    }
+    to{opacity: 1;}
+}
+@keyframes hide-instructions{
+    from {
+        height: auto; 
+        width:10rem; 
+        font-size: 0.8rem; 
+        padding: 0.6rem; 
+        opacity: 1
+    }
+    50% {
+        height: auto; 
+        width:10rem; 
+        font-size: 0.8rem;
+        padding: 0.6rem; 
+        opacity:0;
+    }
+    to{
+        width: 0px; 
+        height: 0px; 
+        font-size: 0px;
+    }
+}
+.triangle-pointer-container{
+    position: absolute;
+    top: 2rem;
+    left:-4.7rem;
+    color: $white;
+    width: 0px;
+    height: 0px;
+    font-size: 0px;
+    opacity: 0;
+    padding: 0;
+    @include border-radius(5px);
+    @include box-shadow(0px 0px 2px 0px #000000);
+    text-align: center;
+    animation: hide-instructions 0.3s ease-in 0s 1 normal;
+    p{
+        line-height: 1.15rem;
+        margin: 0;
+    }
+}
+.triangle-pointer{
+    top:-0.6rem;
+    left: 4.6rem;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 0.6rem solid transparent;
+    border-right: 0.6rem solid transparent;
+    z-index: 2;
+    border-bottom: 0.6rem solid white;
+}
+.triangle-pointer-2{
+    position: absolute;
+    top:-0.6rem;
+    left: 4.6rem;
+    border-bottom: 0.6rem solid rgba(0, 0, 0, 0.397);
+    width: 0;
+    height: 0;
+    border-left: 0.6rem solid transparent;
+    border-right: 0.6rem solid transparent;
+}
+.triangle-pointer-down{
+    @extend .triangle-pointer;
+    border-bottom: none;
+    border-top: 0.6rem solid white;
+    top: auto;
+    bottom: -0.6rem;
+}
+.triangle-pointer-2-down{
+    @extend .triangle-pointer-2;
+    border-bottom: none;
+    border-top: 0.6rem solid white;
+    top: auto;
+    bottom: -0.6rem;
+}
+.triangle-pointer-container-show{
+    padding: 0.6rem;
+    opacity: 1;
+    font-size: 0.8rem;
+    height: auto;
+    width: 10rem;
+    animation: show-instructions 0.3s ease-in 0s 1 normal;
+}

@@ -1,9 +1,9 @@
 import ShortAnswerInstructions from "./ShortAnswer/ShortAnswerInstructions"
 import SortActivityInstructions from "./SortActivity/SortActivityInstructions"
 import MatchActivityInstructions from "./MatchActivity/MatchActivityInstructions"
-import MultipleChoiceInstructions from "./MultipleChoice/MultipleChoiceInstructions"
+import RadioInstructions from "./ControlledInputs/Radio/RadioInstructions"
+import CheckboxInstructions from "./ControlledInputs/Checkbox/CheckboxInstructions"
 import LabelActivityInstructions from "./LabelPictures/LabelActivityInstructions"
-
 import PopUp from "../utilities/popUp/PopUpBackground"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTimes } from "@fortawesome/free-solid-svg-icons"
@@ -22,7 +22,8 @@ const ActivityInstructions = ({
         sort: <SortActivityInstructions {...newProps}/>,
         matching: <MatchActivityInstructions {...newProps}/>,
         shortAnswer: <ShortAnswerInstructions {...newProps} />,
-        multipleChoice: <MultipleChoiceInstructions {...newProps}/>,
+        radio: <RadioInstructions {...newProps}/>,
+        checkbox: <CheckboxInstructions {...newProps}/>,
         labelPictures: <LabelActivityInstructions {...newProps}/>
     }
     return (
@@ -32,7 +33,7 @@ const ActivityInstructions = ({
             onClick={moreInfoOnClick}
             containerStyles = {popUpBgStyles}
         >
-            <div className="activity-walkthrough-instructions col-11 col-md-9 col-lg-7 col-xl-6 col-xxl-5">
+            <div className="activity-walkthrough-instructions col-11 col-md-9 col-lg-7">
                 <header className="activity-walkthrough-instructions-header d-flex justify-content-between align-items-center"> 
                     <h1>Activity Instructions</h1>
                     <button 

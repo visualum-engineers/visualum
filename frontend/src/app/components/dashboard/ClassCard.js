@@ -1,10 +1,10 @@
 import React from 'react'
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 
 export default function ClassCard(props) {
-    let history = useHistory();
+    let navigate = useNavigate();
     function handleClick() {
-        history.push(`/dashboard/classes/${props.id}`);
+        navigate(`/dashboard/classes/${props.id}`);
     }
     return (
         <div class="card class-card" onClick={handleClick}>

@@ -1,0 +1,21 @@
+@mixin sa-activity-lg{
+    
+}
+
+@mixin sa-activity-md {
+    .sa-activity-question{
+        min-width: 100%;
+    } 
+    .sa-activity-image-container{
+        width: 100%;
+    }
+}
+
+@mixin sa-activity-sm{
+    .sa-activity-question{
+        min-width: 100%;
+    }
+    .sa-activity-image-container{
+        width: 100%;
+    }
+}
