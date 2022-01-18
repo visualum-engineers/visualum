@@ -14,18 +14,16 @@ import Dashboard from './components/dashboard/Dashboard';
 import sampleActivityData from './helpers/sampleActivityData'
 import DashboardAssignments from './components/dashboard/DashboardAssignments';
 import TestBackend from "./components/testBackend/test"
-import AvatarCreator from './components/avatarCreator/AvatarCreator';
-import DashboardSettings from './components/dashboard/DashboardSettings';
-import { useRealmApp, RealmAppProvider } from "./RealmApp";
-export const APP_ID = "application-0-mcywh";
+//import AvatarCreator from './components/avatarCreator/AvatarCreator';
 
-const RequireLoggedInUser = ({ children }) => {
-  // Only render children if there is a logged in user.
-  const app = useRealmApp();
-  return app.currentUser ? children : <LoginScreen />;
-};
+// import { useRealmApp, RealmAppProvider } from "./RealmApp";
+// export const APP_ID = "application-0-mcywh";
 
-
+// const RequireLoggedInUser = ({ children }) => {
+//   // Only render children if there is a logged in user.
+//   const app = useRealmApp();
+//   return app.currentUser ? children : <LoginScreen />;
+// };
 
 
 //lazy loaded components for performance
