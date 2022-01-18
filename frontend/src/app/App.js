@@ -16,7 +16,6 @@ import DashboardAssignments from './components/dashboard/DashboardAssignments';
 import TestBackend from "./components/testBackend/test"
 //import AvatarCreator from './components/avatarCreator/AvatarCreator';
 
-
 //lazy loaded components for performance
 const Settings = React.lazy(() => import('./components/settingsPage/Settings'))
 const HomeContent = React.lazy(() => import('./components/homePage/Home'))
