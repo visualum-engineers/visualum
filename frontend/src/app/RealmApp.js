@@ -3,7 +3,6 @@ import * as Realm from "realm-web";
 //import { useDispatch } from "react-redux";
 //only needed upon app initialization
 const appId = process.env["REACT_APP_REALM_APP_ID"]
-console.log(process.env)
 const RealmAppContext = React.createContext();
 
 export const useRealmApp = () => {
