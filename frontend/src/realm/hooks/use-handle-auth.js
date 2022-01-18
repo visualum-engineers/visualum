@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { unstable_batchedUpdates } from "react-dom";
-import validateEmailFormat from "../helpers/validateEmailFormat";
+import validateEmailFormat from "../../app/helpers/validateEmailFormat";
 
 const useHandleAuth = () =>{
     const [isLoggingIn, setIsLoggingIn] = useState(false) 
