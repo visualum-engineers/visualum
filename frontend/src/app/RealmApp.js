@@ -1,6 +1,7 @@
 import React from "react";
 import * as Realm from "realm-web";
-
+import { useDispatch } from "react-redux";
+import validator from "validator";
 const RealmAppContext = React.createContext();
 
 export const useRealmApp = () => {
@@ -19,7 +20,7 @@ export const RealmAppProvider = ({ appId, children }) => {
   React.useEffect(() => {
     setApp(new Realm.App(appId));
   }, [appId]);
-
+  const dispatch = useDispatch()
   // Wrap the Realm.App object's user state with React state
   const [currentUser, setCurrentUser] = React.useState(app.currentUser);
   async function logIn(credentials) {
@@ -35,12 +36,37 @@ export const RealmAppProvider = ({ appId, children }) => {
      // Otherwise, app.currentUser is null.
      setCurrentUser(app.currentUser);
   }
-
-
-
   
+  const handleLogin = async () => {
+    setIsLoggingIn(true);
+    setError((e) => ({ ...e, password: null }));
+    try {
+      await app.logIn(Realm.Credentials.emailPassword(email, password));
+    } catch (err) {
+      handleAuthenticationError(err, setError);
+    }
+  };
 
-  const wrapped = { ...app, currentUser, logIn, logOut };
+  const handleRegistrationAndLogin = async () => {
+    const isValidEmailAddress = validator.isEmail(email);
+    setError((e) => ({ ...e, password: null }));
+    if (isValidEmailAddress) {
+      try {
+        // Register the user and, if successful, log them in
+        await app.emailPasswordAuth.registerUser(email, password);
+        return await handleLogin();
+      } catch (err) {
+        handleAuthenticationError(err, setError);
+      }
+    } else {
+      setError((err) => ({ ...err, email: "Email is invalid." }));
+    }
+  };
+  //update redux store with userInfo
+  // function getUserInfo(){
+  //     //dispatch(getUserInfo())
+  // }
+  const wrapped = {...app, currentUser, logIn, logOut };
 
   return (
     <RealmAppContext.Provider value={wrapped}>
