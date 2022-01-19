@@ -103,11 +103,11 @@ const ShortAnswerApp = ({
                     <div className="sa-activity-input-container d-flex justify-content-center flex-grow-1 w-100">
                         <div 
                             className="sa-activity-text-input form-floating w-100 d-flex flex-column"
-                            style={textAreaHeight}
+                            style={{position: "relative", zIndex: "1", height: textAreaPos ? "fit-content":null}}
                         >
                             <textarea
                                 ref={textAreaRef} 
-                                className="form-control" 
+                                className="form-control flex-grow-1" 
                                 placeholder="Type your answer here" 
                                 id="sa-activity-text"
                                 onChange={handleInput}

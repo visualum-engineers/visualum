@@ -64,6 +64,16 @@ html.sortActivityActive{
     @include box-shadow(rgba(0, 0, 0, 0.425) 0px -2px 23px 2px);
     z-index: -1;
 }
+.sort-activity-itemBank-container{
+    position: relative;
+    height: fit-content;
+    z-index: 1;
+}
+.sort-activity-itemBank-container.full-size{
+    width: calc(100% / 3);
+    min-width: 0;
+    margin-right: 1.5rem;
+}
 .sort-activity-itemBank{
     position: relative;
     background-color: $light-blue;
@@ -74,7 +84,6 @@ html.sortActivityActive{
     min-width: 300px;
     min-height:calc(#{$sort-activity-container-min-height} - 2rem);
     height: calc(#{$sort-activity-container-height} - 2rem);
-    resize: vertical;
     .sort-activity-itemBank-column-1{
         min-height: calc(#{$sort-activity-container-height} - 6rem)
     }
@@ -89,10 +98,16 @@ html.sortActivityActive{
     }
 }
 .sort-activity-itemBank.full-size{
-    width: calc(100% / 3 - 0.5rem);
+    margin-top: 0;
+}
+//container is for resizable handles
+.sort-activity-categories-containers{
+    width: calc(200% / 3);
     min-width: 0;
     margin-top: 0;
-    margin-right: 1.5rem;
+    position: relative;
+    z-index: 2;
+    height: fit-content;
 }
 .sort-activity-categories{
     background-color: $light-blue;
@@ -102,7 +117,6 @@ html.sortActivityActive{
     overflow-x: hidden;
     min-height:calc(#{$sort-activity-container-min-height} - 2rem);
     height: calc(#{$sort-activity-container-height} - 2rem);
-    resize: vertical;
     &::-webkit-scrollbar{
         width: 0.5rem;
         @include border-radius(7px);
@@ -112,11 +126,6 @@ html.sortActivityActive{
         @include border-radius(7px);
         background-color: $dark-blue;
     }
-}
-.sort-activity-categories.full-size{
-    width: calc(200% / 3);
-    min-width: 0;
-    margin-top: 0;
 }
 
 .sort-activity-column-titles{
@@ -160,6 +169,7 @@ html.sortActivityActive{
     width: calc(50% - 0.4rem);
     margin-bottom: 0.8rem;
     height: fit-content;
+    z-index: 1;
 }
 .sort-activity-sort-droppable-area{
     padding-left: 0.4rem;

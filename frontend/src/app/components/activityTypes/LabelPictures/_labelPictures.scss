@@ -103,6 +103,7 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
 //resizable container
 .label-pic-activity-itemBank-container{
     height: fit-content;
+    z-index: 1;
 }
 .label-pic-activity-itemBank-container.full-size{
 

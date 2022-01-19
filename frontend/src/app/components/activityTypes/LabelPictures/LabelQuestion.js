@@ -54,7 +54,7 @@ const LabelQuestion = ({
         <>
         <div 
             className ="w-100" 
-            style={{position: "relative"}}
+            style={{position: "relative", zIndex: "1"}}
         >
             <div 
                 ref = {questionRef}
@@ -69,7 +69,7 @@ const LabelQuestion = ({
         </div>
         <div 
             className ="d-flex flex-column w-100 flex-grow-1" 
-            style={{position: "relative"}}
+            style={{position: "relative", zIndex: "1"}}
         >
             <div 
                 ref={droppableAreaRef}
