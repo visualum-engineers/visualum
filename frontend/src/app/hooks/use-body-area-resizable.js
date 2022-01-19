@@ -7,9 +7,10 @@ import {
 import ResizableHande from "../components/utilities/resizable/ResizableHandle"
 import useWindowWidth from "./use-window-width"
 
-/* This is an abstraction for the use-resizable hook
-    This hook uses the entire body element to be the area
-    where elements can be resized, instead of a custom one
+/* 
+* This is an abstraction for the use-resizable hook
+* This hook uses the entire body element to be the area
+* where elements can be resized, instead of a custom one
 */
 export const useBodyAreaResizable = ({
     nodeRef = null,

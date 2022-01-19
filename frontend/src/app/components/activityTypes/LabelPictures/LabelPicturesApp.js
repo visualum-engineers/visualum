@@ -116,21 +116,22 @@ const LabelPicturesApp = ({
                     onDragStart = {!disableDnD ? onDragStart : null}
                 >
                     {mediumWindowWidth &&
-                        <WordBank 
-                            data={data}
-                            firstElTap= {firstElTap}
-                            onTap = {disableDnD? onTap: null}
-                            overallContainerClass = {"label-pic-activity-itemBank d-flex align-items-center flex-column full-size"}
-                            columnContainerClass = {"label-pic-activity-itemBank-column-container w-100 flex-grow-1 d-flex flex-column"}
-                            columnTitleClass = {"label-pic-activity-column-titles answer-choices"}
-                            columnClass = {"label-pic-activity-itemBank-column"}
-                            droppableClassName = {`label-pic-activity-itemBank-droppables d-flex flex-column w-100`}
-                            draggableClassName = {"label-pic-activity-draggables d-flex align-items-center justify-content-center"}
-                            innerDroppableClassName = {"label-pic-activity-inner-droppable w-100 d-flex flex-column align-items-center"
-                                                    + `${disableDnD && firstElTap? " label-pic-activity-tap-active": ""}`}
-                            draggingOverClass={"label-pic-activity-draggable-over"}
-                            isDraggingClass = {"label-pic-activity-dragging"}
-                        />
+                            <WordBank 
+                                data={data}
+                                firstElTap= {firstElTap}
+                                onTap = {disableDnD? onTap: null}
+                                resizeContainerClass = {"label-pic-activity-itemBank-container full-size d-flex flex-column"}
+                                overallContainerClass = {"label-pic-activity-itemBank full-size d-flex align-items-center flex-column"}
+                                columnContainerClass = {"label-pic-activity-itemBank-column-container w-100 flex-grow-1 d-flex flex-column"}
+                                columnTitleClass = {"label-pic-activity-column-titles answer-choices"}
+                                columnClass = {"label-pic-activity-itemBank-column"}
+                                droppableClassName = {`label-pic-activity-itemBank-droppables d-flex flex-column w-100`}
+                                draggableClassName = {"label-pic-activity-draggables d-flex align-items-center justify-content-center"}
+                                innerDroppableClassName = {"label-pic-activity-inner-droppable w-100 d-flex flex-column align-items-center"
+                                                        + `${disableDnD && firstElTap? " label-pic-activity-tap-active": ""}`}
+                                draggingOverClass={"label-pic-activity-draggable-over"}
+                                isDraggingClass = {"label-pic-activity-dragging"}
+                            />
                     }
                     
                     <LabelQuestionColumn 
@@ -161,7 +162,9 @@ const LabelPicturesApp = ({
                             data={data}
                             firstElTap= {firstElTap}
                             onTap = {disableDnD? onTap: null}
-                            overallContainerClass = {"label-pic-activity-itemBank d-flex align-items-center flex-column portrait-size flex-grow-1"}
+                            //classes
+                            resizeContainerClass = {"label-pic-activity-itemBank-container portrait-size"}
+                            overallContainerClass = {"label-pic-activity-itemBank portrait-size d-flex align-items-center flex-column flex-grow-1"}
                             columnContainerClass = {"label-pic-activity-itemBank-column-container flex-grow-1 d-flex flex-column col-11 col-sm-10 portrait-size"}
                             columnTitleClass = {"label-pic-activity-column-titles answer-choices"}
                             columnClass = {"h-100 label-pic-activity-itemBank-column"}

@@ -43,6 +43,7 @@ const SortActivityCategories = ({
                                 onTap={onTap}
                                 isOver={isOver}
                                 disableDnD = {disableDnD}
+                                resizable={true}
                                 //classes
                                 droppableContainerClassName = {"sort-activity-sort-droppable"
                                                              + `${!smallWindowWidth ?" small-screen"

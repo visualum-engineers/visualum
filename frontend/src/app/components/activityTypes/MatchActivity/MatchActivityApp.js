@@ -240,6 +240,8 @@ const MatchActivityApp = ({
                                        firstElTap= {firstElTap}
                                        disableDnD = {disableDnD}
                                        onTap = {disableDnD? onTap: null}
+                                       //classes
+                                       resizeContainerClass={"match-activity-itemBank-container full-size"}
                                        overallContainerClass = {"match-activity-itemBank d-flex align-items-center flex-column full-size"}
                                        columnContainerClass = {"match-activity-itemBank-column-container w-100 flex-grow-1 d-flex flex-column"}
                                        columnTitleClass = {"match-activity-column-titles answer-choices"}
@@ -258,6 +260,8 @@ const MatchActivityApp = ({
                             data={data}
                             firstElTap= {firstElTap}
                             onTap = {disableDnD? onTap: null}
+                            //classes
+                            resizeContainerClass={"match-activity-itemBank-container w-100"}
                             overallContainerClass = {"match-activity-itemBank d-flex flex-column align-items-center w-100"}
                             columnContainerClass = {"match-activity-itemBank-column-container w-100 flex-grow-1 d-flex flex-column"}
                             columnClass = {"match-activity-itemBank-column"}

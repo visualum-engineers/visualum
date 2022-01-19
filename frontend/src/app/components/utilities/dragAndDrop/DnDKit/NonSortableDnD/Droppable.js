@@ -1,18 +1,9 @@
 //id must be unique to keep track
 import {useDroppable} from '@dnd-kit/core';
 import {useRef} from "react"
+import mergeRefs from '../../../../../helpers/mergeRefs';
 function Droppable(props) {
-    function mergeRefs(refs) {
-      return value => {
-        refs.forEach(ref => {
-          if (typeof ref === 'function') {
-            ref(value)
-          } else if (ref != null) {
-            ref.current = value
-          }
-        })
-      }
-    }
+    
     const droppableRef = useRef()
     const {isOver, setNodeRef} = useDroppable({
       id: props.id, 

@@ -3,6 +3,8 @@ import { useRef } from 'react';
 import {SortableContext, verticalListSortingStrategy} from '@dnd-kit/sortable';
 import SortableItems from "./SortableItems"
 import Droppable from '../NonSortableDnD/Droppable';
+import useBodyAreaResizable from '../../../../../hooks/use-body-area-resizable';
+
 const innerListPropsEqual=(prev, next) =>{
     const prevContent = prev.content
     //determine if content arrays are equal
@@ -56,6 +58,7 @@ const SortableArea = ({
     isOver=null,
     disableDnD = null,
     parentNode = null, 
+    resizable = null,
     //classes
     droppableClassName="", 
     innerDroppableClassName ="", 
@@ -66,7 +69,21 @@ const SortableArea = ({
     droppableContainerClassName ="",
 }) =>{
     const defaultParentNode = useRef()
-
+    const droppableResizeRef = useRef()  
+    const {
+        posData: droppableAreaPos, 
+        handle: droppableResizeHandle
+    } = useBodyAreaResizable({
+        nodeRef: droppableResizeRef,
+        handleType: "S",
+        handlePos : {
+            south: true, 
+            north: false, 
+            east: false, 
+            west: false
+        }
+    })
+    const droppableHeight = {height: droppableAreaPos ? droppableAreaPos.height: null}
     return (
         <SortableContext 
             items={content}
@@ -82,7 +99,9 @@ const SortableArea = ({
                 ref={defaultParentNode}
             >
                 <div 
+                    ref = {droppableResizeRef}
                     className = {droppableClassName} 
+                    style={droppableHeight}
                 >
                     {droppableHeader ? droppableHeader : null}
                     <Droppable 
@@ -108,6 +127,7 @@ const SortableArea = ({
                         />
                     </Droppable>
                 </div>
+                {resizable && droppableResizeHandle}
             </div>
         </SortableContext>
     )

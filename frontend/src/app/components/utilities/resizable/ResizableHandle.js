@@ -26,6 +26,7 @@ const ResizableHande = ({
             className={`resizable-handle ${handleClass}${customClass? " "+customClass: ""}`}
             onMouseDown={onResizeStartWrapper}
             onTouchStart={onResizeStartWrapper}
+            
         >
             <div className='handle-icon'><span className='inner-handle'></span></div>
         </button>

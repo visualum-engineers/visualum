@@ -100,6 +100,14 @@ $match-column-height: calc(#{$match-activity-container-height} - 2rem);
     color: $dark-blue;
 }
 
+.match-activity-itemBank-container{
+    height: fit-content;
+}
+.match-activity-itemBank-container.full-size{
+    width: calc(100% / 3);
+    min-width: 0;
+    margin-left: 1.5rem;
+}
 .match-activity-itemBank{
     position: relative;
     margin-top: 1.5rem;
@@ -111,7 +119,7 @@ $match-column-height: calc(#{$match-activity-container-height} - 2rem);
     min-height: $match-column-min-height;
     height: $match-column-height;
     padding-left: 0.5rem;
-    resize: vertical;
+    //resize: vertical;
     &::-webkit-scrollbar{
         width: 0.5rem;
         @include border-radius(7px);
@@ -148,10 +156,9 @@ $match-column-height: calc(#{$match-activity-container-height} - 2rem);
 }
 
 .match-activity-itemBank.full-size{
-    width: calc(100% / 3);
+    width: 100%;
     min-width: 0;
     margin-top: 0;
-    margin-left: 1.5rem;
     padding-left: 0;
     .match-activity-itemBank-column-1{
         margin: 0;
@@ -159,7 +166,11 @@ $match-column-height: calc(#{$match-activity-container-height} - 2rem);
         min-height: 100%;
     }
 }
-
+.match-activity-column-container{
+    width: calc(2 * 100% / 3 - 1.5rem);
+    min-width: 0;
+    height: fit-content;
+}
 .match-activity-columns{
     overflow-y: scroll;
     overflow-x: hidden;
@@ -168,7 +179,6 @@ $match-column-height: calc(#{$match-activity-container-height} - 2rem);
     min-height: $match-column-min-height;
     height: $match-column-height;
     background-color: $light-blue;
-    resize: vertical;
     .match-activity-inner-droppable::after{
         position: absolute;
         text-align: center;
@@ -184,7 +194,6 @@ $match-column-height: calc(#{$match-activity-container-height} - 2rem);
         color: $dark-gray;
         font-size: 0.85rem;
     }
-
     &::-webkit-scrollbar{
         background-color: $light-blue;
         width: 0.5rem;
@@ -194,12 +203,10 @@ $match-column-height: calc(#{$match-activity-container-height} - 2rem);
         @include border-radius(7px);
         background-color: $dark-blue;
     }
-    
 }
 
 .match-activity-columns.full-size{
-    width: calc(2 * 100% / 3 - 1.5rem);
-    min-width: 0;
+   
     .match-activity-answers-column,
     .match-activity-keys-column{
         background-color: $light-blue;

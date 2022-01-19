@@ -4,12 +4,6 @@ import { resetPopUpOff } from '../../../../redux/features/activityTypes/activiti
 import ActivityHeader from '../ActivityHeader'
 import ShortAnswerImage from './ShortAnswerImage'
 import useBodyAreaResizable from '../../../hooks/use-body-area-resizable'
-//import ResizableHande from '../../utilities/resizable/ResizableHandle'
-// import { 
-//     useResizable, 
-//     applyOnResizeStartStyles, 
-//     applyOnResizeEndStyles 
-// } from '../../../hooks/use-resizable'
 
 /*
     Frontend:

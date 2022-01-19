@@ -36,6 +36,7 @@
     .inner-handle{
         @include border-radius(1rem)
     }
+    z-index: 99;
 }
 
 .north-handle{

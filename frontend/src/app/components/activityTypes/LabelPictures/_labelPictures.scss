@@ -100,11 +100,21 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     background-color: $light-blue;
     color: $dark-blue;
 }
+//resizable container
+.label-pic-activity-itemBank-container{
+    height: fit-content;
+}
+.label-pic-activity-itemBank-container.full-size{
 
+    width: calc(100% / 3);
+    min-width: 0;
+    margin-right: 1.5rem;
+}
+
+//wordbank
 .label-pic-activity-itemBank{
     @include label-pic-activity-containers();
     padding: 0 0.25rem;
-    resize: vertical;
     min-height: $label-pic-column-min-height;
     height: $label-pic-column-height;
 }
@@ -126,11 +136,10 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
         margin-top: 0;
     }
 }
+
+
 .label-pic-activity-itemBank.full-size{
-    width: calc(100% / 3);
-    min-width: 0;
     margin-top: 0;
-    margin-right: 1.5rem;
     .label-pic-activity-itemBank-column-1{
         margin: 0;
         padding-left: 0.5rem;
@@ -143,7 +152,7 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     margin-top: 0;
     background-color: $light-blue;
     width: calc(100% * (2 / 3) - 1.5rem);
-    min-height :calc(max(#{$label-pic-column-min-height}, #{$label-pic-column-height}));
+    min-height: calc(max(#{$label-pic-column-min-height}, #{$label-pic-column-height}));
     height: 100%;
     @include border-radius(7px);
     .label-pic-activity-column-titles{
@@ -232,6 +241,7 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     }
 }
 .label-pic-activity-question{
+    position: relative;
     background: $white;
     padding: 0.6rem;
     padding-right: 0.1rem;
@@ -239,7 +249,6 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     height: 9vh;
     text-align: center;
     overflow: scroll;
-    resize: vertical;
     overflow-x: hidden;
     @include border-radius(6px);
     &::-webkit-scrollbar{
@@ -284,7 +293,6 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     padding: 0.5rem;
     padding-right:0;
     background-color: $white;
-    resize: vertical;
     .label-pic-activity-question-droppables{
         @include label-pic-activity-droppables();
         padding: 0;
