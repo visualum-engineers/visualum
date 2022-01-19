@@ -456,6 +456,7 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
         font-size: 1.25rem;
         font-weight: 400;
         margin-bottom: 0;
+        
     }
     button{
         position: absolute;
@@ -514,6 +515,7 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     .overview-card-question-header{
         max-height: 10vh;
         min-height: 1.12rem;
+        height: fit-content;
         display: flex;
         justify-content: center;
         overflow: scroll;
@@ -532,11 +534,11 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
         }
         h2{
             line-height: 1.1rem;
-            width: 100%;
-            height: 100%;
             text-align: start;
             font-size: 0.9rem;
             margin: 0;
+            margin-block-start: 0;
+            margin-block-end: 0;
         }
     }
     

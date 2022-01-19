@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { resetPopUpOff } from '../../../../redux/features/activityTypes/activitiesSlice'
 import ActivityHeader from '../ActivityHeader'
 import ShortAnswerImage from './ShortAnswerImage'
-import ResizableHande from '../../utilities/resizable/ResizableHandle'
-import { 
-    useResizable, 
-    applyOnResizeStartStyles, 
-    applyOnResizeEndStyles 
-} from '../../../hooks/use-resizable'
+import useBodyAreaResizable from '../../../hooks/use-body-area-resizable'
+//import ResizableHande from '../../utilities/resizable/ResizableHandle'
+// import { 
+//     useResizable, 
+//     applyOnResizeStartStyles, 
+//     applyOnResizeEndStyles 
+// } from '../../../hooks/use-resizable'
 
 /*
     Frontend:
@@ -29,15 +30,20 @@ const ShortAnswerApp = ({
 }) => {
     //for updating redux store(data to be sent to backend)
     const [data, setData] = useState(activityData)
-    const [
-        textAreaPos, 
-        onResizeStart, 
-        onResizeMove, 
-        onResizeEnd
-    ] = useResizable({})
-
     const textAreaRef = useRef()
-    const [textResizeStart, setResizeStart] = useState(false)
+    const {
+        posData: textAreaPos, 
+        handle: resizableHandle
+    } = useBodyAreaResizable({
+            nodeRef: textAreaRef,
+            handleType: "S",
+            handlePos : {
+                south: true, 
+                north: false, 
+                east: false, 
+                west: false
+            }
+    })
     //redux states
     const dispatch = useDispatch()
     const resetPopUp = useSelector((state) => state.activities.resetPopUp) 
@@ -71,33 +77,7 @@ const ShortAnswerApp = ({
         }))
         localStorage.setItem(`${activityID}-SA_activity_client_answer-${questionNum}`, input_value)
     }
-    const onResizeStartWrapper = (e) =>{
-        applyOnResizeStartStyles(smallWindowWidth)
-        setResizeStart(true)
-        onResizeStart({
-            e: e,
-            node: textAreaRef.current,
-        })
-    }
-    const onResizeEndWrapper = (e) =>{
-        applyOnResizeEndStyles(smallWindowWidth)
-        setResizeStart(false)
-        onResizeEnd(e)
-    }
-    
-    const textAreaHandleMove = (e) =>{
-        if(!textResizeStart) return
-        onResizeMove({
-            e: e, 
-            handlePos: {
-                south: true, 
-                north: false, 
-                east: false, 
-                west: false
-            },
-        })
-    }
-    
+
     const textAreaHeight = {height: textAreaPos ? textAreaPos.height: null}
     return(
         <>
@@ -110,10 +90,6 @@ const ShortAnswerApp = ({
             />
             <div
                 className="d-flex flex-column align-items-center justify-content-center flex-grow-1"
-                onMouseUp={onResizeEndWrapper} 
-                onMouseMove={textAreaHandleMove}
-                onTouchEnd={onResizeEndWrapper}
-                onTouchMove={textAreaHandleMove}
             >
                 <div className="sa-activity-container d-flex flex-column align-items-center flex-grow-1">
                     <h2 className={"sa-activity-question"}> 
@@ -147,10 +123,7 @@ const ShortAnswerApp = ({
                             <label htmlFor="sa-activity-text">
                                 Type your answer here
                             </label> 
-                            <ResizableHande 
-                                onResizeStartWrapper={onResizeStartWrapper}
-                                handleType={"S"}
-                            />
+                            {resizableHandle}
                         </div>
                         
                     </div>

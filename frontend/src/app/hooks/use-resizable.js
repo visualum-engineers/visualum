@@ -1,4 +1,4 @@
-import { useState, useRef} from "react"
+import { useState, useRef } from "react"
 export function applyOnResizeStartStyles(width = true){
     //declartive styles so 
     //touch inputs do not trigger scroll on mobile
@@ -86,6 +86,11 @@ export const useResizable = ({
         rect["pointerY"] = pointerY 
         initialNodePos.current = rect
     }
+
+    const onResizeEnd = (e) => {
+        initialNodePos.current = null
+    }
+
     const onResizeMove=({
         e, 
         handlePos,
@@ -119,9 +124,6 @@ export const useResizable = ({
         }
         setPos(newPos)
         return newPos 
-    }
-    const onResizeEnd = (e) => {
-        initialNodePos.current = null
     }
     return [
         currPos, 

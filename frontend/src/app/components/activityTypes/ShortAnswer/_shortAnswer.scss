@@ -49,7 +49,7 @@
     }
 }
 .sa-activity-input-container{
-    
+   
     .form-floating>.form-control:not(:placeholder-shown)~label{
         opacity: 0;
     }
@@ -60,11 +60,13 @@
         padding-top: 0;
     }
     textarea{
+        min-height: 5rem;
         font-size: 0.9rem;
     }
     
 }
 .sa-activity-text-input{
+    min-height: 5rem;
     font-size: 0.9rem;
     .form-control{
         height: 100%;
