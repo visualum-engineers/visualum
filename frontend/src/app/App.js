@@ -2,21 +2,20 @@ import React from 'react';
 import { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import LoadingIcon from './components/utilities/loadingIcon/LoadingIcon';
-
-import NavWrapper from './components/primaryNavbar/NavWrapper';
-import DashboardHome from './components/dashboard/DashboardHome';
-import DashboardActivities from './components/dashboard/DashboardActivities';
-import DashboardClasses from './components/dashboard/DashboardClasses';
-import DashboardClass from './components/dashboard/DashboardClass';
-import DashboardSettings from './components/dashboard/DashboardSettings';
-import Dashboard from './components/dashboard/Dashboard';
-
 import sampleActivityData from './helpers/sampleActivityData'
 import DashboardAssignments from './components/dashboard/DashboardAssignments';
 import TestBackend from "./components/testBackend/test"
 //import AvatarCreator from './components/avatarCreator/AvatarCreator';
 
 //lazy loaded components for performance
+const DashboardHome = React.lazy(() => import("./components/dashboard/DashboardHome"))
+const DashboardActivities = React.lazy(() => import("./components/dashboard/DashboardActivities"))
+const DashboardClasses = React.lazy(() => import("./components/dashboard/DashboardClasses"))
+const DashboardClass = React.lazy(() => import("./components/dashboard/DashboardClass"))
+const DashboardSettings = React.lazy(() => import("./components/dashboard/DashboardSettings"))
+const Dashboard = React.lazy(() => import("./components/dashboard/Dashboard"))
+
+const NavWrapper = React.lazy(() => import("./components/primaryNavbar/NavWrapper"))
 const Settings = React.lazy(() => import('./components/settingsPage/Settings'))
 const HomeContent = React.lazy(() => import('./components/homePage/Home'))
 const SignUpForm = React.lazy(() => import('./components/forms/EntryForms/SignUpForm/SignUpForm'))
