@@ -356,6 +356,7 @@ const SortActivityApp = ({
                     firstElTap = {firstElTap}
                     isDraggingClass = {"sort-activity-is-dragging"}
                     onTap = {disableDnD ? onTap : null}
+                    resizeContainerClass = {`sort-activity-itemBank-container ${mediumWindowWidth ? "full-size":"w-100"} d-flex flex-column`}
                     overallContainerClass = {`sort-activity-itemBank ${mediumWindowWidth ? "full-size":"w-100"}`} 
                     columnContainerClass = "sort-activity-column-container w-100"
                     columnTitleClass = {`sort-activity-column-titles d-flex align-items-center justify-content-center`}
