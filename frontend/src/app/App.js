@@ -5,7 +5,7 @@ import LoadingIcon from './components/utilities/loadingIcon/LoadingIcon';
 import sampleActivityData from './helpers/sampleActivityData'
 import DashboardAssignments from './components/dashboard/DashboardAssignments';
 import TestBackend from "./components/testBackend/test"
-import RequireAuth from './helpers/RequireAuth';
+// import RequireAuth from './helpers/RequireAuth';
 import { RealmAppProvider } from '../realm/RealmApp';
 
 //lazy loaded components for performance
