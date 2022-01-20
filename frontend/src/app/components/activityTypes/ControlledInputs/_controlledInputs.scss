@@ -1,10 +1,21 @@
 @import "./Radio/radio";
 @import "./Checkbox/checkbox";
 .controlled-inputs-activity-container{
+    position: relative;
     font-size: 0.8rem;
     background-color: $white;
     padding: 1rem;
     @include border-radius(0.5rem);
+}
+.controlled-inputs-activity-container::before{
+    position: absolute;
+    content: "";
+    top: 5%;
+    left: 1%;
+    width: 98%;
+    height: calc(95%);
+    @include box-shadow(rgba(0, 0, 0, 0.425) 0px -2px 23px 2px);
+    z-index: -1;
 }
 .controlled-inputs-activity{
     background-color: $light-blue;

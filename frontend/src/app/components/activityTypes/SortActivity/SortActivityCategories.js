@@ -43,7 +43,7 @@ const SortActivityCategories = ({
             >
                 <div className={`sort-activity-category-container`}>
                     <div className={`sort-activity-column-titles d-flex align-items-center justify-content-center`}>
-                        <span className={`${!smallWindowWidth? "ms-4":""}`}>Question</span>
+                        <span className={`${!smallWindowWidth? "ms-4":""}`}>Categories</span>
                         <div className="sort-activity-instructions-position d-flex">
                             <MoreInfoBtn 
                                 textContent = "View Instructions"
