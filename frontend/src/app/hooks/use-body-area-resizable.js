@@ -57,6 +57,8 @@ export const useBodyAreaResizable = ({
                             />
     useEffect(()=>{
         const onResizeEndWrapper = (e) =>{
+            //resize hasnt started
+            if(!resizeStart.current) return
             applyOnResizeEndStyles(smallWindowWidth)
             resizeStart.current = false
             onResizeEnd(e)
@@ -74,11 +76,15 @@ export const useBodyAreaResizable = ({
             document.body.removeEventListener("touchmove", textAreaHandleMove)
             document.body.removeEventListener("mouseup", onResizeEndWrapper)
             document.body.removeEventListener("touchend", onResizeEndWrapper)
+            document.body.removeEventListener("mouseleave", onResizeEndWrapper)
+            document.body.removeEventListener("touchcancel", onResizeEndWrapper)
         }
         document.body.addEventListener("mousemove", textAreaHandleMove)
         document.body.addEventListener("touchmove", textAreaHandleMove)
         document.body.addEventListener("mouseup", onResizeEndWrapper)
+        document.body.addEventListener("mouseleave", onResizeEndWrapper)
         document.body.addEventListener("touchend", onResizeEndWrapper)
+        document.body.addEventListener("touchcancel", onResizeEndWrapper)
         return () => cleanup()
     },[onResizeMove, onResizeEnd, smallWindowWidth, handlePos, nodeRef])
     
