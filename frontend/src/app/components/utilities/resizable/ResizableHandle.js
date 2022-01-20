@@ -6,16 +6,16 @@ const ResizableHande = ({
     let handleClass
     switch(handleType){
         case "N":
-            handleClass = "d-flex align-items-center north-handle"
+            handleClass = "north-handle"
             break;  
         case "S": 
-            handleClass = "d-flex align-items-center south-handle"
+            handleClass = "south-handle"
             break
         case "W": 
-            handleClass = "d-flex align-items-center west-handle"
+            handleClass = "west-handle"
             break;
         case "E": 
-            handleClass = "d-flex align-items-center east-handle"
+            handleClass = "east-handle"
             break;
         default:
             handleClass = ""

@@ -171,6 +171,13 @@ $match-column-height: calc(#{$match-activity-container-height} - 2rem);
     width: calc(2 * 100% / 3 - 1.5rem);
     min-width: 0;
     height: fit-content;
+    .match-activity-column-resize-handle{
+        .inner-handle{
+            top: 0.6rem;
+            left: calc(50% - 1.95rem);
+            position: absolute;
+        }
+    }
 }
 .match-activity-columns{
     overflow-y: scroll;
