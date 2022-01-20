@@ -5,8 +5,7 @@ import LoadingIcon from './components/utilities/loadingIcon/LoadingIcon';
 import sampleActivityData from './helpers/sampleActivityData'
 import DashboardAssignments from './components/dashboard/DashboardAssignments';
 import TestBackend from "./components/testBackend/test"
-// import RequireAuth from './helpers/RequireAuth';
-import { RealmAppProvider } from '../realm/RealmApp';
+//import { useRealmApp } from '../realm/RealmApp';
 
 //lazy loaded components for performance
 const DashboardHome = React.lazy(() => import("./components/dashboard/DashboardHome"))
@@ -27,7 +26,6 @@ const ActivityCreation = React.lazy(() => import("./components/forms/ActivityCre
 
 function App() {
   return (
-    <RealmAppProvider>
       <Router>
         <div className="App">
           <Suspense fallback={
@@ -55,7 +53,6 @@ function App() {
           </Suspense>
         </div >
       </Router >
-    </RealmAppProvider>
   );
 }
 export default App;
