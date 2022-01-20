@@ -114,7 +114,7 @@ $match-column-height: calc(#{$match-activity-container-height} - 2rem);
     margin-top: 1.5rem;
     background-color: $light-blue;
     @include border-radius(7px);
-    min-width: 310px;
+    min-width: 300px;
     overflow-x: hidden;
     overflow-y: scroll;
     min-height: $match-column-min-height;
@@ -182,7 +182,7 @@ $match-column-height: calc(#{$match-activity-container-height} - 2rem);
 .match-activity-columns{
     overflow-y: scroll;
     overflow-x: hidden;
-    min-width: 310px;
+    min-width: 300px;
     @include border-radius(7px);
     min-height: $match-column-min-height;
     height: $match-column-height;

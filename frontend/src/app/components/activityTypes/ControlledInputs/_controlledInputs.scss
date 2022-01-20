@@ -29,7 +29,6 @@
     align-items: center;
     width: 55%;
     height: 100%;
-    
 }
 .controlled-inputs-activity-question{
     font-size: 0.9rem;
@@ -37,9 +36,10 @@
     @include box-shadow(rgba(0, 0, 0, 0.315) 0px 0 2px);
     @include border-radius(7px);
     @include unselectable;
+    padding: 0.5rem;
+
     overflow-wrap: break-word;
     word-break: break-word;
-    padding: 0.5rem;
     margin-bottom: 1rem;
     width: 85%;
     max-width: 85%;
@@ -110,7 +110,7 @@
     overflow-y: auto;
     overflow: overlay;
     overflow-x: hidden;
-    min-width: 280px;
+    min-width: 250px;
     max-width: 400px;
     max-height: calc(max(70vh, 24rem));
     height: 100%;
@@ -127,6 +127,7 @@
     }
 }
 .controlled-inputs-activity-answer-container.portrait-mode{
+    padding: 0.5rem;
     max-width: 100%;
     max-height: calc(max(40vh, 24rem));
 }

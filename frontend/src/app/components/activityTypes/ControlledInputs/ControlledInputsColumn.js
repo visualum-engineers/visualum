@@ -64,20 +64,21 @@ const ControlledInputsColumn = ({
     columns, 
     rows,
     mediumWindowWidth,
+    smallWindowWidth,
     updateAnswerChoice,
 }) =>{
     const inputItemProps = {
         clientAnswer: data.clientAnswer,
         updateAnswerChoice: updateAnswerChoice,
-        customContainerClass: inputType === "checkbox" ? `${!mediumWindowWidth ? "grid-layout w-100 " : ""}controlled-inputs-checkbox-item d-flex align-items-center`
-                              :`controlled-inputs-radio-item ${!mediumWindowWidth ? "grid-layout w-100 " : ""}d-flex align-items-center`             
+        customContainerClass: inputType === "checkbox" ? `${!mediumWindowWidth && smallWindowWidth? "grid-layout w-100 " : ""}controlled-inputs-checkbox-item d-flex align-items-center`
+                              :`controlled-inputs-radio-item ${!mediumWindowWidth && smallWindowWidth ? "grid-layout w-100 " : ""}d-flex align-items-center`             
     }
     return (
         <div className={`w-100 controlled-inputs-activity-answer-container `
                         + `${!mediumWindowWidth ?" portrait-mode":""}`}
         >
             {/*renders different answer choices in specific layout*/}
-            {!mediumWindowWidth ? 
+            {!mediumWindowWidth && smallWindowWidth? 
                 Array(rows).fill(0).map((content, index) => {
                     return (
                         <InputInnerGridList 

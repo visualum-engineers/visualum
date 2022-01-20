@@ -1,10 +1,10 @@
-import {useState, useEffect, useRef} from 'react'
+import {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { resetPopUpOff } from '../../../../redux/features/activityTypes/activitiesSlice'
 import ActivityHeader from '../ActivityHeader'
 import ShortAnswerImage from './ShortAnswerImage'
-import useBodyAreaResizable from '../../../hooks/use-body-area-resizable'
-
+import ShortAnswerTextArea from './ShortAnswerTextArea'
+import ConditionalWrapper from '../../utilities/conditionalWrapper/ConditionalWrapper'
 /*
     Frontend:
     1. Missing re-rendering logic, when user answers question and moves on to the next one.
@@ -24,20 +24,7 @@ const ShortAnswerApp = ({
 }) => {
     //for updating redux store(data to be sent to backend)
     const [data, setData] = useState(activityData)
-    const textAreaRef = useRef()
-    const {
-        posData: textAreaPos, 
-        handle: resizableHandle
-    } = useBodyAreaResizable({
-            nodeRef: textAreaRef,
-            handleType: "S",
-            handlePos : {
-                south: true, 
-                north: false, 
-                east: false, 
-                west: false
-            }
-    })
+    
     //redux states
     const dispatch = useDispatch()
     const resetPopUp = useSelector((state) => state.activities.resetPopUp) 
@@ -72,7 +59,6 @@ const ShortAnswerApp = ({
         localStorage.setItem(`${activityID}-SA_activity_client_answer-${questionNum}`, input_value)
     }
 
-    const textAreaHeight = {height: textAreaPos ? textAreaPos.height: null}
     return(
         <>
             <ActivityHeader
@@ -83,43 +69,34 @@ const ShortAnswerApp = ({
                 questionNum = {questionNum}
             />
             <div
-                className="d-flex flex-column align-items-center justify-content-center flex-grow-1"
+                className="sa-activity-container d-flex flex-column align-items-center justify-content-center flex-grow-1"
             >
-                <div className="sa-activity-container d-flex flex-column align-items-center flex-grow-1">
-                    <h2 className={"sa-activity-question"}> 
-                       {data.question}
-                    </h2>
+                <div className={`sa-activity-inner-container d-flex flex-grow-1` 
+                                + `${!mediumWindowWidth || !data.imageURL? " flex-column align-items-center ": ""} `}>
 
-                    {data.imageURL &&
-                        <div className="d-flex justify-content-center w-100"> 
-                            <ShortAnswerImage 
-                                data = {data}
-                                popUpBgStyles={popUpBgStyles}
-                            />
-                        </div>
-                    }
-                    
-                    {/*renders text area that students can respond in*/}
-                    <div className="sa-activity-input-container d-flex justify-content-center flex-grow-1 w-100">
-                        <div 
-                            className="sa-activity-text-input form-floating w-100 d-flex flex-column"
-                            style={{position: "relative", zIndex: "1", height: textAreaPos ? "fit-content":null}}
-                        >
-                            <textarea
-                                ref={textAreaRef} 
-                                className="form-control flex-grow-1" 
-                                placeholder="Type your answer here" 
-                                id="sa-activity-text"
-                                onChange={handleInput}
-                                value = {data.clientAnswer}
-                                style={textAreaHeight}  
-                            />
-                            <label htmlFor="sa-activity-text">
-                                Type your answer here
-                            </label> 
-                            {resizableHandle}
-                        </div>
-                        
+                    <ConditionalWrapper
+                        condition={mediumWindowWidth && data.imageURL}
+                        wrapper={children => <div className='sa-activity-question-wrapper'>{children}</div>}
+                    >
+                        <h2 className={`sa-activity-question${mediumWindowWidth && !data.imageURL ? " w-50":""}`}> 
+                            {data.question}
+                        </h2>
+                        {data.imageURL &&
+                            <div className="d-flex justify-content-center w-100"> 
+                                <ShortAnswerImage 
+                                    data = {data}
+                                    popUpBgStyles={popUpBgStyles}
+                                />
+                            </div>
+                        }
+                    </ConditionalWrapper>
+                    <div className={`sa-activity-input-container`
+                                    + `${mediumWindowWidth && !data.imageURL ? " w-50 m-0" 
+                                    : !mediumWindowWidth ? " portrait-size": ""}`}>
+                        <ShortAnswerTextArea 
+                            data={data}
+                            handleInput={handleInput}
+                        />
                     </div>
                 </div>
 

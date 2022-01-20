@@ -164,6 +164,7 @@ const ControlledInputsApp = ({
                         <ControlledInputsColumn
                             inputType = {inputType}
                             mediumWindowWidth = {mediumWindowWidth && data.imageURL}
+                            smallWindowWidth = {smallWindowWidth}
                             data = {data}
                             columns = {columns}
                             rows = {rows}

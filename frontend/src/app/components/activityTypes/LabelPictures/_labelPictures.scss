@@ -425,24 +425,23 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     button{
         @include remove-btn-default();
         @include border-radius(1rem);
-        //border: 1px solid $purple; 
         border: 1px solid $dark-blue; 
-        margin: 0.2rem;
+        margin: 0.18rem;
         font-size: 0;
         padding: 0;
-        height: 0.8vh;
-        width: 0.8vh;
-        min-height: 0.65rem;
-        min-width: 0.65rem;
+        height: 0.5vh;
+        width: 0.5vh;
+        min-height: 0.3rem;
+        min-width: 0.3rem;
         @include transition(all ease-in 0.2s)
     }
     button.question-active{
         background-color: $dark-blue;
-        transform: scale(1.2);
+        transform: scale(1.6);
     }
     button:hover{
         background-color: $dark-blue;
-        transform: scale(1.2);
+        transform: scale(1.6);
     }
 }
 
