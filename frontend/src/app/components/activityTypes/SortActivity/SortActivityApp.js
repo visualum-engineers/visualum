@@ -233,6 +233,7 @@ const SortActivityApp = ({
         })
     }
     const onTap = (e) =>{
+        
         //in case there was a lag due to debouncing
         setIsOver(undefined)
         const parms = {

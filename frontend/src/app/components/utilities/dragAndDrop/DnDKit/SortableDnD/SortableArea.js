@@ -42,7 +42,7 @@ const InnerList = React.memo(({
                 disabled = {disableDnD}
                 draggableClassName = {
                     `${draggableClassName}${last?" last-item":""}`
-                    +`${firstElTap && firstElTap.draggableId === draggableContent.id ?` ${isDraggingClass}`: " "}`
+                    +`${firstElTap && firstElTap.draggableId.toString() === draggableContent.id.toString() ?` ${isDraggingClass}`: " "}`
                 }
             />
         )

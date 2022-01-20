@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef} from "react"
 import {
     useResizable, 
     applyOnResizeEndStyles, 
@@ -12,6 +12,17 @@ import useWindowWidth from "./use-window-width"
 * This hook uses the entire body element to be the area
 * where elements can be resized, instead of a custom one
 */
+
+// const handleParentTouchAction = (node, eType) =>{
+//     if(!node || node.isEqualNode(document)) return
+//     const nodeHeight = node.clientHeight 
+//     const nodeScrollHeight = node.scrollHeight 
+//     //if ending event
+//     //if(eType === "end" && (nodeScrollHeight > nodeHeight) && node.style.touchAction === "none") node.style.touchAction = null
+
+//     const parentNode = handleParentTouchAction(node.parentNode, eType)
+//     return parentNode
+// }
 export const useBodyAreaResizable = ({
     nodeRef = null,
     handleType = "S", 
@@ -30,10 +41,10 @@ export const useBodyAreaResizable = ({
         onResizeMove, 
         onResizeEnd
     ] = useResizable({})
-    const textResizeStart = useRef()
+    const resizeStart = useRef()
     const onResizeStartWrapper = (e) =>{
         applyOnResizeStartStyles(smallWindowWidth)
-        textResizeStart.current = true
+        resizeStart.current = true
         onResizeStart({
             e: e,
             node: nodeRef.current,
@@ -47,11 +58,12 @@ export const useBodyAreaResizable = ({
     useEffect(()=>{
         const onResizeEndWrapper = (e) =>{
             applyOnResizeEndStyles(smallWindowWidth)
-            textResizeStart.current = false
+            resizeStart.current = false
             onResizeEnd(e)
         }
         const textAreaHandleMove = (e) =>{
-            if(!textResizeStart.current) return
+
+            if(!resizeStart.current) return 
             onResizeMove({
                 e: e, 
                 handlePos: handlePos,
@@ -68,7 +80,7 @@ export const useBodyAreaResizable = ({
         document.body.addEventListener("mouseup", onResizeEndWrapper)
         document.body.addEventListener("touchend", onResizeEndWrapper)
         return () => cleanup()
-    },[onResizeMove, onResizeEnd, smallWindowWidth, handlePos])
+    },[onResizeMove, onResizeEnd, smallWindowWidth, handlePos, nodeRef])
     
     return {posData: nodePos, handle: resizeableHandle}
 }
