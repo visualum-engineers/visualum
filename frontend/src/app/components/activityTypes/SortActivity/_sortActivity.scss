@@ -7,6 +7,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     overflow-wrap: break-word;
+    word-break: break-word;
     @include border-radius(5px);
     border: 1px solid rgba(0, 0,0,0);
     padding: 0.5rem;
@@ -68,11 +69,12 @@ html.sortActivityActive{
     position: relative;
     height: fit-content;
     z-index: 1;
+    min-width: 300px;
 }
 .sort-activity-itemBank-container.full-size{
     width: calc(100% / 3);
     min-width: 0;
-    margin-right: 1.5rem;
+    margin-left: 1.5rem;
 }
 .sort-activity-itemBank{
     position: relative;
@@ -81,7 +83,6 @@ html.sortActivityActive{
     margin-top: 1.5rem;
     overflow-y: scroll;
     overflow-x: hidden;
-    min-width: 300px;
     min-height:calc(#{$sort-activity-container-min-height} - 2rem);
     height: calc(#{$sort-activity-container-height} - 2rem);
     .sort-activity-itemBank-column-1{
@@ -171,6 +172,7 @@ html.sortActivityActive{
     height: fit-content;
     z-index: 1;
 }
+
 .sort-activity-sort-droppable-area{
     padding-left: 0.4rem;
     position: relative;
@@ -230,10 +232,13 @@ html.sortActivityActive{
     margin-left: 0;
     margin-right: 0.6rem;
 }
-
+.sort-activity-sort-droppable:last-child{
+    margin-right: 0;
+    margin-bottom: 1.5rem;
+}
 .sort-activity-draggables{
     @include sort-activity-draggable-styles();
-    touch-action: none !important;
+
     &::-webkit-scrollbar{
         width: 0.5rem;
         @include border-radius(7px);
@@ -248,13 +253,9 @@ html.sortActivityActive{
         width: 100%;
         @include transition(transform 0.2s ease-out);
         @include unselectable;
-
     }
     &:hover{
         cursor: grab;
-        //opacity: 0.5;
-        background-color: $light-blue;
-        border: 1px solid $black;
     }
     cursor: grabbing;
 }

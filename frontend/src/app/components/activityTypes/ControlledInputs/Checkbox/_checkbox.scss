@@ -4,6 +4,7 @@
     margin-bottom: 0.5rem;
     min-height: 3.5rem;
     overflow-wrap: break-word;
+    word-break: break-word;
     .checkbox-answer-label{
         min-height: 3.5rem;
         @include border-radius(0.5rem);

@@ -19,6 +19,7 @@ const AnswerBank = ({
         handle: matchColumnHandle
     } = useBodyAreaResizable({
             nodeRef: matchColumnRef,
+            handleClassName: "match-activity-column-resize-handle",
             handleType: "S",
             handlePos : {
                 south: true, 

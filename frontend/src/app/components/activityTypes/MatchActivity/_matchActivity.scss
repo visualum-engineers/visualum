@@ -8,6 +8,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     overflow-wrap: break-word;
+    word-break: break-word;
     @include border-radius(5px);
     border: 1px solid rgba(0, 0,0,0);
     padding: 0.5rem;
@@ -113,7 +114,7 @@ $match-column-height: calc(#{$match-activity-container-height} - 2rem);
     margin-top: 1.5rem;
     background-color: $light-blue;
     @include border-radius(7px);
-    min-width: 310px;
+    min-width: 300px;
     overflow-x: hidden;
     overflow-y: scroll;
     min-height: $match-column-min-height;
@@ -170,11 +171,18 @@ $match-column-height: calc(#{$match-activity-container-height} - 2rem);
     width: calc(2 * 100% / 3 - 1.5rem);
     min-width: 0;
     height: fit-content;
+    .match-activity-column-resize-handle{
+        .inner-handle{
+            top: 0.6rem;
+            left: calc(50% - 1.95rem);
+            position: absolute;
+        }
+    }
 }
 .match-activity-columns{
     overflow-y: scroll;
     overflow-x: hidden;
-    min-width: 310px;
+    min-width: 300px;
     @include border-radius(7px);
     min-height: $match-column-min-height;
     height: $match-column-height;

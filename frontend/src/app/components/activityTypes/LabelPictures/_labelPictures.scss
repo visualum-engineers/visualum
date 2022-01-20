@@ -9,6 +9,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     overflow-wrap: break-word;
+    word-break: break-word;
     @include border-radius(5px);
     border: 1px solid rgba(0, 0,0,0);
     padding: 0.5rem;
@@ -104,17 +105,18 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
 .label-pic-activity-itemBank-container{
     height: fit-content;
     z-index: 1;
+    min-width: 280px;
 }
 .label-pic-activity-itemBank-container.full-size{
-
     width: calc(100% / 3);
     min-width: 0;
-    margin-right: 1.5rem;
+    margin-left: 1.5rem;
 }
 
 //wordbank
 .label-pic-activity-itemBank{
     @include label-pic-activity-containers();
+    min-width: 0;
     padding: 0 0.25rem;
     min-height: $label-pic-column-min-height;
     height: $label-pic-column-height;
@@ -262,6 +264,7 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     }
     h2{
         overflow-wrap: break-word;
+        word-break: break-word;
         margin: auto;
         font-size: 0.85rem;
     }
@@ -422,26 +425,23 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     button{
         @include remove-btn-default();
         @include border-radius(1rem);
-        //border: 1px solid $purple; 
         border: 1px solid $dark-blue; 
-        margin: 0.2rem;
+        margin: 0.18rem;
         font-size: 0;
         padding: 0;
-        height: 0.8vh;
-        width: 0.8vh;
-        min-height: 0.65rem;
-        min-width: 0.65rem;
+        height: 0.5vh;
+        width: 0.5vh;
+        min-height: 0.3rem;
+        min-width: 0.3rem;
         @include transition(all ease-in 0.2s)
     }
     button.question-active{
-        //background-color: $purple;
         background-color: $dark-blue;
-        transform: scale(1.2);
+        transform: scale(1.6);
     }
     button:hover{
-        //background-color: $purple;
         background-color: $dark-blue;
-        transform: scale(1.2);
+        transform: scale(1.6);
     }
 }
 
@@ -512,9 +512,9 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     min-height: 20vh;
     padding: 0;
     margin: 0.4rem;
-    box-shadow: 0 4px 11px rgba(33,33,33,.1);
-    @include border-radius(0.4rem);
+    box-shadow: 0 4px 11px rgba(33,33,33,0.1);
     background-color: $white;
+    @include border-radius(0.4rem);
     @include transition(all 0.2s ease-in);
     button{
         @include remove-btn-default();
@@ -523,10 +523,11 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     };
     .overview-card-question-header{
         max-height: 10vh;
-        min-height: 1.12rem;
+        min-height: 2.3rem;
         height: fit-content;
         display: flex;
         justify-content: center;
+        align-items: center;
         overflow: scroll;
         overflow-x: hidden;
         width: 100%;
@@ -545,12 +546,9 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
             line-height: 1.1rem;
             text-align: start;
             font-size: 0.9rem;
-            margin: 0;
-            margin-block-start: 0;
-            margin-block-end: 0;
+            margin: auto;
         }
     }
-    
     &:hover{
         cursor: pointer;
         transform: translateY(-0.3rem);

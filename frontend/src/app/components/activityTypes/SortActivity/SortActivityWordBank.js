@@ -37,7 +37,9 @@ const WordBank = ({
                 west: false
             }
     })
-    const wordBankHeight = {height: wordBankContainerPos ? wordBankContainerPos.height : null}
+    const wordBankHeight = {
+        height: wordBankContainerPos ? wordBankContainerPos.height : null,
+    }
 
     return(
         <div className={resizeContainerClass}>

@@ -4,6 +4,7 @@
     margin-bottom: 0.5rem;
     min-height: 3.5rem;
     overflow-wrap: break-word;
+    word-break: break-word;
     .custom-radio-btn{
         position: absolute;
         left: 0.55rem;
@@ -49,6 +50,9 @@
             stroke: $dark-blue; 
             fill: $dark-blue;
         }
+    }
+    &:last-child{
+        margin: 0;
     }
 }
 .controlled-inputs-radio-item.grid-layout{

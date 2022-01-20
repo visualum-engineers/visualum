@@ -233,6 +233,7 @@ const SortActivityApp = ({
         })
     }
     const onTap = (e) =>{
+        
         //in case there was a lag due to debouncing
         setIsOver(undefined)
         const parms = {
@@ -319,6 +320,19 @@ const SortActivityApp = ({
                 onDragCancel={onDragCancel}
                 collisionDetection={collisionAlgoWrapper}
             >
+                {/* Renders sort categories */}
+                <SortActivityCategories 
+                    numCategories = {numCategories}
+                    onTap = {disableDnD ? onTap : null}
+                    data={data}
+                    mediumWindowWidth = {mediumWindowWidth}
+                    smallWindowWidth = {smallWindowWidth}
+                    isOver = {isOver}
+                    moreInfoBtn = {moreInfoBtn}
+                    moreInfoOnClick = {moreInfoOnClick}
+                    disableDnD = {disableDnD}
+                    firstElTap = {firstElTap}
+                />
                 {mediumWindowWidth && <WordBank 
                     data ={data}
                     firstElTap = {firstElTap}
@@ -337,19 +351,7 @@ const SortActivityApp = ({
                     draggableClassName = {"sort-activity-draggables d-flex align-items-center justify-content-center "}
                     isDraggingClass = {"sort-activity-is-dragging"}
                 />}
-                {/* Renders sort categories */}
-                <SortActivityCategories 
-                    numCategories = {numCategories}
-                    onTap = {disableDnD ? onTap : null}
-                    data={data}
-                    mediumWindowWidth = {mediumWindowWidth}
-                    smallWindowWidth = {smallWindowWidth}
-                    isOver = {isOver}
-                    moreInfoBtn = {moreInfoBtn}
-                    moreInfoOnClick = {moreInfoOnClick}
-                    disableDnD = {disableDnD}
-                    firstElTap = {firstElTap}
-                />
+                
                 {/* Renders word/response bank */}
                 {!mediumWindowWidth && <WordBank 
                     data ={data}

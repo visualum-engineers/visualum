@@ -36,7 +36,7 @@ const assignmentData = {
         type: "radio",
         timer: false,
         question: "What faces this world?",
-        imageURL : "images/homePage/mountain-home-bg.jpg",
+
         imgDescription: "",
         answerChoices: [  
             {id: 1, content:"The world know no bounds except that is cannot be at piece right now-4"}, 
@@ -52,6 +52,8 @@ const assignmentData = {
             {id: 11, content: "Bad-1"}, 
             {id: 12, content:"No-1"}
         ],
+        imageURL : "images/homePage/mountain-home-bg.jpg",
+
     },
     
     //sorting

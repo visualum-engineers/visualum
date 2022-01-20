@@ -20,7 +20,7 @@ import capitalizeFirstLetter from "../../helpers/capitalizeFirstLetter"
 
 
 const activityData = assignmentData
-const duration = 500
+const duration = 375
 const inPropDuration = duration * 2
 const defaultTransition = {
     transition: `all ${duration}ms ease-out`,

@@ -32,6 +32,8 @@
 }
 .resizable-handle{
     position: absolute;
+    display: flex;
+    align-items: center;
     @include remove-btn-default();
     .inner-handle{
         @include border-radius(1rem)

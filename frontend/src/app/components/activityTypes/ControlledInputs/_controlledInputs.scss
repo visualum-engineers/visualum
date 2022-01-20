@@ -1,18 +1,64 @@
 @import "./Radio/radio";
 @import "./Checkbox/checkbox";
 .controlled-inputs-activity-container{
+    position: relative;
     font-size: 0.8rem;
-    @include border-radius(1rem);
+    background-color: $white;
+    padding: 1rem;
+    @include border-radius(0.5rem);
 }
-
+.controlled-inputs-activity-container::before{
+    position: absolute;
+    content: "";
+    top: 5%;
+    left: 1%;
+    width: 98%;
+    height: calc(95%);
+    @include box-shadow(rgba(0, 0, 0, 0.425) 0px -2px 23px 2px);
+    z-index: -1;
+}
+.controlled-inputs-activity{
+    background-color: $light-blue;
+    @include border-radius(0.5rem);
+    padding: 1rem;
+}
+.controlled-inputs-activity-question-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 55%;
+    height: 100%;
+}
 .controlled-inputs-activity-question{
-    font-size: 1rem;
+    font-size: 0.9rem;
     background-color: white;
     @include box-shadow(rgba(0, 0, 0, 0.315) 0px 0 2px);
     @include border-radius(7px);
     @include unselectable;
     padding: 0.5rem;
+
+    overflow-wrap: break-word;
+    word-break: break-word;
     margin-bottom: 1rem;
+    width: 85%;
+    max-width: 85%;
+    max-height: calc(max(25vh, 200px));
+    overflow: auto;
+    overflow-x: hidden;
+    &::-webkit-scrollbar{
+        width: 0.5rem;
+        @include border-radius(1rem);
+    }
+    &::-webkit-scrollbar-thumb{
+        @include border-radius(7px);
+        background-color: $dark-blue;
+    }
+}
+.controlled-inputs-activity-question.portrait-mode{
+    width: 100%;
+    max-width: 100%;
+    max-height: none;
 }
 .controlled-inputs-activity-image-container{
     padding: 0.6rem;
@@ -26,8 +72,7 @@
     margin-bottom: 1rem;
 }
 .controlled-inputs-activity-image-container.landscape-mode{
-    margin-left: 2rem;
-    max-width: 50%;
+    max-width: 90%;
 }
 .controlled-inputs-activity-image-container.zoomed-in{
     max-width: 90%;
@@ -51,12 +96,21 @@
         cursor: zoom-out;
     }
 }
+.controlled-inputs-activity-answer-column{
+    display: flex;
+    justify-content: center;
+    width: 45%;
+}
+.controlled-inputs-activity-answer-column.portrait-mode{
+    width: 100%
+
+}
 .controlled-inputs-activity-answer-container{
     @include box-shadow(rgba(0, 0, 0, 0.315) 0px 0 2px);
     overflow-y: auto;
     overflow: overlay;
     overflow-x: hidden;
-    min-width: 280px;
+    min-width: 250px;
     max-width: 400px;
     max-height: calc(max(70vh, 24rem));
     height: 100%;
@@ -66,7 +120,6 @@
     &::-webkit-scrollbar{
         width: 0.5rem;
         @include border-radius(1rem);
-        background-color: $light-gray;
     }
     &::-webkit-scrollbar-thumb{
         @include border-radius(7px);
@@ -74,6 +127,7 @@
     }
 }
 .controlled-inputs-activity-answer-container.portrait-mode{
+    padding: 0.5rem;
     max-width: 100%;
     max-height: calc(max(40vh, 24rem));
 }

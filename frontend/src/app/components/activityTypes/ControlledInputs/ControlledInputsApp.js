@@ -124,51 +124,55 @@ const ControlledInputsApp = ({
             questionNum = {questionNum}
             mediumWindowWidth={mediumWindowWidth}
         />
-        <form className = "controlled-inputs-activity-container d-flex align-items-center justify-content-center flex-grow-1">
-            <div className = "px-2 flex-grow-1">
+        <form className = "controlled-inputs-activity-container d-flex flex-grow-1">
+            <div className = "controlled-inputs-activity d-flex flex-column justify-content-center flex-grow-1">
                 <div 
-                    className = {`d-flex ` 
-                                + `${mediumWindowWidth? "justify-content-around align-items-center": "flex-column"}`}
+                    className = {`d-flex`
+                            + `${mediumWindowWidth && !data.imageURL ? " align-self-center w-50" : ""}` 
+                            + `${mediumWindowWidth && data.imageURL ? " justify-content-between align-items-center": " flex-column"}`}
                 >
-                    {!mediumWindowWidth? 
+                    {(!mediumWindowWidth || !data.imageURL) && 
                         <div 
-                            className="controlled-inputs-activity-question"
+                            className="controlled-inputs-activity-question portrait-mode"
                         >
                             {data.question}
                         </div>
-                    : null}
-                    {data.imageURL &&  !mediumWindowWidth &&
+                    }
+                    {data.imageURL && !mediumWindowWidth &&
                         <ControlledInputsImage 
                             data = {data}
                             customClass={"portrait-mode"}
                             popUpBgStyles={popUpBgStyles}
                         />
                     }
-                    <div>   
-                        {mediumWindowWidth? 
+                    
+                    {data.imageURL &&  mediumWindowWidth &&
+                        <div className="controlled-inputs-activity-question-container">
                             <div 
                                 className="controlled-inputs-activity-question"
                             >
-                                {data.question}
+                                {data.question} 
                             </div>
-                        : null}
+                            <ControlledInputsImage 
+                                data = {data}
+                                customClass={"landscape-mode"}
+                                popUpBgStyles={popUpBgStyles}
+                            />
+                        </div>
+                    }
+                    <div className={`controlled-inputs-activity-answer-column${!mediumWindowWidth || !data.imageURL ? " portrait-mode":""}`}>  
                         <ControlledInputsColumn
                             inputType = {inputType}
-                            mediumWindowWidth = {mediumWindowWidth}
+                            mediumWindowWidth = {mediumWindowWidth && data.imageURL}
+                            smallWindowWidth = {smallWindowWidth}
                             data = {data}
                             columns = {columns}
                             rows = {rows}
                             updateAnswerChoice = {updateAnswerChoice}
                         />
                     </div>
-                    {data.imageURL &&  mediumWindowWidth &&
-                        <ControlledInputsImage 
-                            data = {data}
-                            customClass={"landscape-mode"}
-                            popUpBgStyles={popUpBgStyles}
-                        />
-                    }
                 </div>
+                
             </div>   
         </form>
     </>
@@ -176,3 +180,7 @@ const ControlledInputsApp = ({
 } 
 export default ControlledInputsApp
 
+/*
+
+
+            */

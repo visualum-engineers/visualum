@@ -17,7 +17,7 @@ const SortActivityCategories = ({
     const categoriesResizableRef = useRef()
     const {
         posData: categoriesContainerPos, 
-        handle: categoriesResizeHandle
+        handle: categoriesResizeHandle,
     } = useBodyAreaResizable({
             nodeRef: categoriesResizableRef,
             handleType: "S",
@@ -28,7 +28,10 @@ const SortActivityCategories = ({
                 west: false
             }
     })
-    const categoriesHeight = {height: categoriesContainerPos ? categoriesContainerPos.height : null}
+    const categoriesHeight = {
+        height: categoriesContainerPos ? categoriesContainerPos.height : null,
+        touchAction: "none"
+    }
     return (
         <div 
             className={`sort-activity-categories-containers ${mediumWindowWidth ? "full-size": "portrait-mode w-100"}`}
@@ -40,7 +43,7 @@ const SortActivityCategories = ({
             >
                 <div className={`sort-activity-category-container`}>
                     <div className={`sort-activity-column-titles d-flex align-items-center justify-content-center`}>
-                        <span className={`${!smallWindowWidth? "ms-4":""}`}>Question</span>
+                        <span className={`${!smallWindowWidth? "ms-4":""}`}>Categories</span>
                         <div className="sort-activity-instructions-position d-flex">
                             <MoreInfoBtn 
                                 textContent = "View Instructions"

@@ -1,18 +1,65 @@
 @import "./shortAnswerBreakpoints";
 
 .sa-activity-container{
-    width: 85%;
+    position: relative;
+    @include border-radius(0.5rem);
+    background-color: $white;
+    padding: 1rem;
+    width: 100%;
+}
+.sa-activity-container::before{
+    position: absolute;
+    content: "";
+    top: 5%;
+    left: 1%;
+    width: 98%;
+    height: calc(95%);
+    @include box-shadow(rgba(0, 0, 0, 0.425) 0px -2px 23px 2px);
+    z-index: -1;
+}
+.sa-activity-inner-container{
+    @include border-radius(0.5rem);
+    background-color: $light-blue;
+    padding: 1rem;
+    width: 100%;
 }
 .sa-activity-question{
     background-color: $white;
     @include border-radius(7px);
     @include box-shadow(rgba(0, 0, 0, 0.315) 0px 0 2px);
+    @include unselectable;
     margin-bottom: 1rem;
     font-size: 1.1rem;
     padding: 0.5rem;
-    min-width: 50%;
-    width: fit-content;
-    @include unselectable;
+    width: 100%;
+    // min-width: 50%;
+    // width: fit-content;
+}
+
+.sa-activity-question-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 55%;
+    .sa-activity-question{
+        overflow-wrap: break-word;
+        word-break: break-word;
+        margin-bottom: 1rem;
+        width: 85%;
+        max-width: 85%;
+        max-height: calc(max(25vh, 200px));
+        overflow: auto;
+        overflow-x: hidden;
+        &::-webkit-scrollbar{
+            width: 0.5rem;
+            @include border-radius(1rem);
+        }
+        &::-webkit-scrollbar-thumb{
+            @include border-radius(7px);
+            background-color: $dark-blue;
+        }
+    }
 }
 
 .sa-activity-image-container{
@@ -49,7 +96,11 @@
     }
 }
 .sa-activity-input-container{
-   
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+    margin-left: 1rem; 
+    width: 45%;
     .form-floating>.form-control:not(:placeholder-shown)~label{
         opacity: 0;
     }
@@ -60,10 +111,15 @@
         padding-top: 0;
     }
     textarea{
+        width: 100%;
         min-height: 5rem;
         font-size: 0.9rem;
     }
     
+}
+.sa-activity-input-container.portrait-size{
+    width: 100%;
+    margin-left: 0; 
 }
 .sa-activity-text-input{
     min-height: 5rem;
