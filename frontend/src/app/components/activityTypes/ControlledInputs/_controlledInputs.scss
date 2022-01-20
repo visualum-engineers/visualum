@@ -2,17 +2,52 @@
 @import "./Checkbox/checkbox";
 .controlled-inputs-activity-container{
     font-size: 0.8rem;
-    @include border-radius(1rem);
+    background-color: $white;
+    padding: 1rem;
+    @include border-radius(0.5rem);
 }
-
+.controlled-inputs-activity{
+    background-color: $light-blue;
+    @include border-radius(0.5rem);
+    padding: 1rem;
+}
+.controlled-inputs-activity-question-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 55%;
+    height: 100%;
+    
+}
 .controlled-inputs-activity-question{
-    font-size: 1rem;
+    font-size: 0.9rem;
     background-color: white;
     @include box-shadow(rgba(0, 0, 0, 0.315) 0px 0 2px);
     @include border-radius(7px);
     @include unselectable;
+    overflow-wrap: break-word;
+    word-break: break-word;
     padding: 0.5rem;
     margin-bottom: 1rem;
+    width: 85%;
+    max-width: 85%;
+    max-height: calc(max(25vh, 200px));
+    overflow: auto;
+    overflow-x: hidden;
+    &::-webkit-scrollbar{
+        width: 0.5rem;
+        @include border-radius(1rem);
+    }
+    &::-webkit-scrollbar-thumb{
+        @include border-radius(7px);
+        background-color: $dark-blue;
+    }
+}
+.controlled-inputs-activity-question.portrait-mode{
+    width: 100%;
+    max-width: 100%;
+    max-height: none;
 }
 .controlled-inputs-activity-image-container{
     padding: 0.6rem;
@@ -26,8 +61,7 @@
     margin-bottom: 1rem;
 }
 .controlled-inputs-activity-image-container.landscape-mode{
-    margin-left: 2rem;
-    max-width: 50%;
+    max-width: 90%;
 }
 .controlled-inputs-activity-image-container.zoomed-in{
     max-width: 90%;
@@ -51,6 +85,15 @@
         cursor: zoom-out;
     }
 }
+.controlled-inputs-activity-answer-column{
+    display: flex;
+    justify-content: center;
+    width: 45%;
+}
+.controlled-inputs-activity-answer-column.portrait-mode{
+    width: 100%
+
+}
 .controlled-inputs-activity-answer-container{
     @include box-shadow(rgba(0, 0, 0, 0.315) 0px 0 2px);
     overflow-y: auto;
@@ -66,7 +109,6 @@
     &::-webkit-scrollbar{
         width: 0.5rem;
         @include border-radius(1rem);
-        background-color: $light-gray;
     }
     &::-webkit-scrollbar-thumb{
         @include border-radius(7px);

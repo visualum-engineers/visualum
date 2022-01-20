@@ -7,6 +7,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     overflow-wrap: break-word;
+    word-break: break-word;
     @include border-radius(5px);
     border: 1px solid rgba(0, 0,0,0);
     padding: 0.5rem;
@@ -171,9 +172,7 @@ html.sortActivityActive{
     height: fit-content;
     z-index: 1;
 }
-.sort-activity-sort-droppable:last-child{
-    margin-bottom: 1.5rem;
-}
+
 .sort-activity-sort-droppable-area{
     padding-left: 0.4rem;
     position: relative;
@@ -233,7 +232,10 @@ html.sortActivityActive{
     margin-left: 0;
     margin-right: 0.6rem;
 }
-
+.sort-activity-sort-droppable:last-child{
+    margin-right: 0;
+    margin-bottom: 1.5rem;
+}
 .sort-activity-draggables{
     @include sort-activity-draggable-styles();
 

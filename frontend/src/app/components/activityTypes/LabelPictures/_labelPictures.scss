@@ -9,6 +9,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     overflow-wrap: break-word;
+    word-break: break-word;
     @include border-radius(5px);
     border: 1px solid rgba(0, 0,0,0);
     padding: 0.5rem;
@@ -263,6 +264,7 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     }
     h2{
         overflow-wrap: break-word;
+        word-break: break-word;
         margin: auto;
         font-size: 0.85rem;
     }
