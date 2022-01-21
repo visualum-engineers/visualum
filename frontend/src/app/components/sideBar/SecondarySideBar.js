@@ -50,7 +50,7 @@ const SecondarySideBar = (props) =>{
             </div>
             
             <div 
-                className={`secondary-sidebar-footer d-flex flex-column align-items-center flex-grow-1`
+                className={`secondary-sidebar-footer d-flex flex-column align-items-center`
                 + ` justify-content-${props.userProfile ? "start":"end"} `}
             >
                 {props.footerData.map((navItem, index)=>{
@@ -66,10 +66,7 @@ const SecondarySideBar = (props) =>{
                         />
                 })}
                 {//add user profile if provided
-                    props.userProfile && 
-                    <div className="d-flex align-items-end justify-content-center flex-grow-1 w-100">
-                        {props.userProfile}
-                    </div>
+                    props.userProfile
                 }
             </div>
             

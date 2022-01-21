@@ -23,6 +23,7 @@ export const activitySecondarySideBarData = ({
             customClass={"activities-table-of-contents"}
             btnCustomClass = "activities-sidebar-table-btns"
             btnActiveClass = {"question-active"}
+            btnInnerCustomClass={"table-btns-inner-container"}
         />
     },
     {
@@ -35,8 +36,6 @@ export const activitySecondarySideBarData = ({
             <span className="ms-1">Feedback</span>
         </>
     },
-]
-export const activitySecondarySidebarFooterData = () => [
     {
         type: "link",
         url: "/",
@@ -57,4 +56,7 @@ export const activitySecondarySidebarFooterData = () => [
         </>,
         
     }
+]
+export const activitySecondarySidebarFooterData = () => [
+    
 ]
