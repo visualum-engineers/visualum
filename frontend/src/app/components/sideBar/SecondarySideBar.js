@@ -1,17 +1,9 @@
 import NavItem from "../utilities/navItems/NavItems"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faCircleQuestion} from '@fortawesome/free-regular-svg-icons';
-import {faCog, faBars, faTimes} from '@fortawesome/free-solid-svg-icons';
+import {faBars, faTimes} from '@fortawesome/free-solid-svg-icons';
 
 const Logo = "./images/VisualumLogo.png"
-const settingsLink = <>
-    <span className="icon-container"><FontAwesomeIcon icon = {faCog}/></span>
-    <span className="ms-1">Settings</span>
-</>
-const helpLink = <>
-    <span className="icon-container"><FontAwesomeIcon icon = {faCircleQuestion}/></span>
-    <span className="ms-1">Help Center</span>
-</>
+
 const SecondarySideBar = (props) =>{
     return (
     <>
@@ -46,13 +38,13 @@ const SecondarySideBar = (props) =>{
                 {props.data.map((navItem, index)=>{
                     return <NavItem 
                                 key={index} 
-                                textContent={navItem.textContent} 
+                                navType = {navItem.type}
+                                content={navItem.content} 
                                 sidebar={"secondary"} 
-                                styles = {navItem.styles}
+                                customClass = {navItem.customClass}
                                 hidden = {!props.sidebarToggle}
                                 onClick={navItem.onClick}
                                 url={navItem.type === "link" && navItem.url}
-                                btn={navItem.type !== "link"}
                         />
                 })}
             </div>
@@ -61,20 +53,18 @@ const SecondarySideBar = (props) =>{
                 className={`secondary-sidebar-footer d-flex flex-column align-items-center flex-grow-1`
                 + ` justify-content-${props.userProfile ? "start":"end"} `}
             >
-                <NavItem 
-                    textContent={settingsLink} 
-                    sidebar={"secondary"} 
-                    url={"/"} 
-                    hidden = {!props.sidebarToggle} 
-                    styles={`${props.customFooterLinkClass}`}
-                />
-                <NavItem 
-                    textContent={helpLink} 
-                    sidebar={"secondary"} 
-                    url={"/"} 
-                    hidden = {!props.sidebarToggle} 
-                    styles={`${props.customFooterLinkClass}`}
-                />
+                {props.footerData.map((navItem, index)=>{
+                    return <NavItem 
+                                key={index} 
+                                navType = {navItem.type}
+                                content={navItem.content} 
+                                sidebar={"secondary"} 
+                                customClass = {navItem.customClass}
+                                hidden = {!props.sidebarToggle}
+                                onClick={navItem.onClick}
+                                url={navItem.type === "link" && navItem.url}
+                        />
+                })}
                 {//add user profile if provided
                     props.userProfile && 
                     <div className="d-flex align-items-end justify-content-center flex-grow-1 w-100">

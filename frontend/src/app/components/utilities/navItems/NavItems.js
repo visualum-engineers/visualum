@@ -3,49 +3,50 @@ const NavItem = ({
     url=false, 
     handleSideBar=false, 
     btn=false, 
-    textContent, 
-    styles=false, 
+    content, 
+    customClass=false, 
     ariaLabel=false, 
     hidden="false",
     onClick,
+    navType
 }) =>{  
-    return (
+    const navTypes = {
+        link: <a
+                className={`${sidebar === "primary" ? "primary":"secondary"}-sidebar-link ${customClass? customClass:""}`} 
+                aria-label={ariaLabel ? ariaLabel: null}
+                href={url}
+                aria-hidden = {hidden}
+                tabIndex={`${hidden ? "-1":"0"}`}
+            >
+                    <span className="nav-item-text">{content}</span>
+            </a>,
+        btn: <button
+                className={customClass ? customClass : ""}
+                aria-label={ariaLabel ? ariaLabel: null}
+                data-action-label ={ariaLabel ? ariaLabel : null}
+                aria-hidden = {hidden}
+                tabIndex={`${hidden ? "-1":"0"}`}
+                onClick={onClick}
+            >
+                <span className="nav-item-text">{content}</span>
+            </button>,
+        custom: content,
+    }
+    return(
         <>
-            {sidebar ? 
-                //when btn parameter is not provided, we default to links
+            {sidebar ? navTypes[navType]
+                //when btn, or custom el parameter is not provided, we default to links
                 //if not we provide a button 
                 //both accept custom classes
-                !btn ? 
-                    <a
-                        className={`${sidebar === "primary" ? "primary":"secondary"}-sidebar-link ${styles? styles:""}`} 
-                        aria-label={ariaLabel ? ariaLabel: null}
-                        href={url}
-                        aria-hidden = {hidden}
-                        tabIndex={`${hidden ? "-1":"0"}`}
-                    >
-                            <span className="nav-item-text">{textContent}</span>
-                    </a>
-                    :
-                    <button
-                        className={styles ? styles : ""}
-                        aria-label={ariaLabel ? ariaLabel: null}
-                        data-action-label ={ariaLabel ? ariaLabel : null}
-                        aria-hidden = {hidden}
-                        tabIndex={`${hidden ? "-1":"0"}`}
-                        onClick={onClick}
-                    >
-                        <span className="nav-item-text">{textContent}</span>
-                    </button>
-                :
-                <button 
-                    className="nav-btn home-page-nav mx-1" 
-                    aria-label={ariaLabel ? ariaLabel: null}
-                    onClick={handleSideBar}
-                    aria-hidden = {hidden}
-                    tabIndex={`${hidden ? "-1":"0"}`}
-                >
-                        <span className="nav-item-text">{textContent}</span>
-                </button>
+            : <button 
+                className="nav-btn home-page-nav mx-1" 
+                aria-label={ariaLabel ? ariaLabel: null}
+                onClick={handleSideBar}
+                aria-hidden = {hidden}
+                tabIndex={`${hidden ? "-1":"0"}`}
+            >
+                    <span className="nav-item-text">{content}</span>
+            </button>
             }
         </>
     )

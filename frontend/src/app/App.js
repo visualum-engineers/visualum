@@ -6,7 +6,6 @@ import sampleActivityData from './helpers/sampleActivityData'
 import DashboardAssignments from './components/dashboard/DashboardAssignments';
 import TestBackend from "./components/testBackend/test"
 //import { useRealmApp } from '../realm/RealmApp';
-
 //lazy loaded components for performance
 const DashboardHome = React.lazy(() => import("./components/dashboard/DashboardHome"))
 const DashboardActivities = React.lazy(() => import("./components/dashboard/DashboardActivities"))
@@ -25,6 +24,7 @@ const Activity = React.lazy(() => import('./components/activityTypes/Activity'))
 const ActivityCreation = React.lazy(() => import("./components/forms/ActivityCreationForm/ActivityCreationForm"))
 
 function App() {
+  //const app = useRealmApp()
   return (
       <Router>
         <div className="App">

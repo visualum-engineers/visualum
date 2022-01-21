@@ -19,7 +19,7 @@
 }
 
 .activity-body.secondary-sidebar-open{
-    margin-left: 13rem; 
+    margin-left: calc(min(17rem, 300px)); 
 }
 
 .activities-nav {
@@ -55,7 +55,7 @@
     }
 }
 .activities-sidebar-user-profile{
-    width: 80%;
+    width: 70%;
     height: 12rem;
     margin-top: calc(5vh - 0.6rem);
     background-color: $light-blue;
@@ -68,8 +68,8 @@
     padding: 0.5rem;
     background-color: $dark-blue;
     color: white;
-    width: 60%;
-    margin-bottom: 2.5rem;
+    width: 55%;
+    margin-bottom: 2rem;
     @include transition(all 0.3s ease-out);
     border: 1px solid transparent;
     &:hover{
@@ -81,6 +81,8 @@
 }
 
 .activities-sidebar-link{
+    width: 50%;
+    min-width: 50%;
     .nav-item-text{
         padding-left: 0.8rem;
         display: flex;

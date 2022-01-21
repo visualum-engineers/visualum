@@ -10,8 +10,7 @@ import { unstable_batchedUpdates } from "react-dom"
 import {CSSTransition} from "react-transition-group"
 import { useSelector, useDispatch } from 'react-redux'
 import {enableTap, resetPopUpOn, resetPopUpOff} from '../../../redux/features/activityTypes/activitiesSlice'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faCommentDots} from '@fortawesome/free-regular-svg-icons'
+import { secondarySideBarData, secondarySidebarFooterData } from "./ActivitySidebarData"
 
 import ActivityResetPopUp from './ActivityResetPopUp'
 import UserProfile from "../utilities/userProfile/UserProfile";
@@ -133,24 +132,8 @@ const Activity = () =>{
                 return
         }
     }
-    const secondarySideBarData = [
-        {
-            type:"btn", 
-            styles:"activities-sidebar-btn", 
-            textContent: "Instructions", 
-            onClick: moreInfoOnClick
-        },
-        {
-            type:"link", 
-            url: "/", 
-            styles:"activities-sidebar-link", 
-            textContent: 
-            <>
-                <span className="icon-container"><FontAwesomeIcon icon = {faCommentDots}/></span>
-                <span className="ms-1">Feedback</span>
-            </>
-        },
-    ]
+    const sideBarData = secondarySideBarData({onInstructionsClick: moreInfoOnClick})
+    const sidebarFooterData = secondarySidebarFooterData()
     const popUpBgStyles = {
         position: "fixed",
         top: "0",
@@ -158,18 +141,18 @@ const Activity = () =>{
         zIndex: "2",
         //left and width are conditional 
         //to adjust for a toggled sidebar
-        left: sidebarToggle && mediumWindowWidth ? "13rem":"0" ,
-        width: sidebarToggle && mediumWindowWidth ? "calc(100% - 13rem)":"100%",
+        left: sidebarToggle && mediumWindowWidth ? "17rem":"0" ,
+        width: sidebarToggle && mediumWindowWidth ? "calc(100% - 17rem)":"100%",
         transition: "all 0.3s ease-out",
     }
     return(
     <>
         <SecondarySideBar 
-            data={secondarySideBarData}
+            data={sideBarData}
+            footerData = {sidebarFooterData}
             sidebarToggle = {sidebarToggle}
             handleSideBar = {handleSideBar}
             windowWidth = {mediumWindowWidth}
-            customFooterLinkClass = {"activities-sidebar-link"}
             userProfile = {
                 <UserProfile
                     userContainerClass={"activities-sidebar-user-profile d-flex flex-column align-items-center justify-content-center"}
@@ -203,7 +186,7 @@ const Activity = () =>{
                 />
             :null }
             <div 
-                className = "activity-type-container col-12 col-md-10 d-flex flex-column" 
+                className = "activity-type-container col-12 col-md-11 d-flex flex-column" 
                 style={inProp ? {overflow: "hidden"}: null}
             >
                 {/*generate entire form data*/}
@@ -240,7 +223,7 @@ const Activity = () =>{
                     1. There are prev questions
                     2. This is the last question 
             */}
-            <div className="col-11 col-md-10 nav-activity-btns">
+            <div className="col-11 nav-activity-btns">
                 <ActivityBtns 
                     prevQuestion = {questionNum !== 1} 
                     lastQuestion = {Object.keys(activityData).length-2 === questionNum}
