@@ -39,7 +39,7 @@ export default function Navbar(props) {
                         </div>
                         <div className="navbar-nav w-100 justify-content-end">
                             <SearchBar />
-                            <div className="d-flex justify-content-end align-self-stretch px-1 m-0">
+                            <div className="d-flex justify-content-end align-self-stretch m-0">
                                 <Login
                                     windowWidth={props.windowWidth}
                                     signedIn={true}

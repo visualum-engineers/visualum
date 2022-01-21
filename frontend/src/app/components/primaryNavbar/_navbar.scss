@@ -136,7 +136,7 @@
 
 .user {
     @include center;
-    @include border-radius(15px);
+    @include border-radius(5px);
     @include transition(background-color 250ms ease-in-out);
     background-color: rgba(255, 255, 255, 0);
     border: none;
@@ -170,14 +170,14 @@
 }
 
 .user-dropdown {
-    @include border-radius(15px);
+    @include border-radius(5px);
     height: 310px;
     width: 440px;
     font-size: 0.9em;
     position: absolute;
     color: rgba(10, 10, 10, 0.75);
-    background-color: rgba(255, 255, 255, 0.267);
-    top: 100px;
+    background-color: rgba(255, 255, 255, 0.85);
+    top: 70px;
     right: 30px;
     display: flex;
 }
