@@ -154,8 +154,8 @@ const Activity = () =>{
         zIndex: "2",
         //left and width are conditional 
         //to adjust for a toggled sidebar
-        left: sidebarToggle && mediumWindowWidth ? "17rem":"0" ,
-        width: sidebarToggle && mediumWindowWidth ? "calc(100% - 17rem)":"100%",
+        left: sidebarToggle && mediumWindowWidth ? "16rem":"0" ,
+        width: sidebarToggle && mediumWindowWidth ? "calc(100% - 16rem)":"100%",
         transition: "all 0.3s ease-out",
     }
     return(

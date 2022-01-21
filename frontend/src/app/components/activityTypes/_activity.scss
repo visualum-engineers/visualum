@@ -19,7 +19,7 @@
 }
 
 .activity-body.secondary-sidebar-open{
-    margin-left: calc(min(17rem, 300px)); 
+    margin-left: calc(min(16rem, 300px)); 
 }
 
 
@@ -119,8 +119,8 @@
     @include activities-sidebar-table-btn-active()
 }
 .activities-sidebar-link{
-    width: 50%;
-    min-width: 50%;
+    width: 60%;
+    min-width: 60%;
     .nav-item-text{
         padding-left: 0.8rem;
         display: flex;

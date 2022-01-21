@@ -92,7 +92,7 @@
 //secondary sidebar styles
 .secondary-sidebar-nav{
     background: $light-bg-color;
-    width: 17rem;
+    width: 16rem;
     max-width: 300px;
     @include box-shadow(4px 0px 7px -8px #000000);
 }
@@ -143,7 +143,7 @@
     @include remove-btn-default;
     position: fixed;
     top: 0.4rem;
-    left: calc(min(14.6rem, 300px));
+    left: calc(min(13.6rem, 300px));
     color: $darkest-gray;
     font-size: 1.5rem;
     padding: 0.15rem 0.35rem;
