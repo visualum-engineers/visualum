@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInstagram, faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { CSSTransition } from 'react-transition-group'
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 export default function UserProfile(props) {
     const [isMouseOverButton, setIsMouseOverButton] = useState(false);
@@ -60,11 +58,11 @@ export default function UserProfile(props) {
 }
 
 function UserDropdown(props) {
-    let navigate = useNavigate();
+    // let navigate = useNavigate();
 
-    const handleButtonClick = (val) => {
-        navigate(`/${val}`)
-    }
+    // const handleButtonClick = (val) => {
+    //     navigate(`/${val}`)
+    // }
     return (
         <CSSTransition
             in={props.open}
@@ -73,37 +71,7 @@ function UserDropdown(props) {
             unmountOnExit
         >
             <div className="user-dropdown" onMouseEnter={props.enterMenu} onMouseLeave={props.exitMenu}>
-                <div className="user-dropdown-panel pe-0">
-                    <div className="user-dropdown-assignment">
-                        <button
-                            style={{ "fontSize": "0.85em" }}
-                            className="user-dropdown-button">Current Assignment
-                        </button>
-                        <button
-                            style={{ "fontSize": "0.85em" }}
-                            className="user-dropdown-button">Completion History
-                        </button>
-                    </div>
-                    <div className="user-dropdown-connect">
-                        <div className="user-dropdown-panel-header">Connect</div>
-                        <button className="user-dropdown-button">
-                            <FontAwesomeIcon icon={faInstagram} className="user-dropdown-social-icon" /> Instagram
-                        </button>
-                        <button className="user-dropdown-button">
-                            <FontAwesomeIcon icon={faFacebook} className="user-dropdown-social-icon" /> Facebook
-                        </button>
-                        <button className="user-dropdown-button">
-                            <FontAwesomeIcon icon={faTwitter} className="user-dropdown-social-icon" /> Twitter
-                        </button>
-                    </div>
-                </div>
-                <div className="user-dropdown-panel ps-0">
-                    <button className="user-dropdown-button" onClick={() => handleButtonClick("dashboard")}>Dashboard</button>
-                    <button className="user-dropdown-button">Activity</button>
-                    <button className="user-dropdown-button">Redeem</button>
-                    <button className="user-dropdown-button">Settings</button>
-                    <button className="user-dropdown-button">Help</button>
-                </div>
+
             </div>
         </CSSTransition>
     )
