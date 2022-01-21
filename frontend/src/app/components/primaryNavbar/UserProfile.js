@@ -42,9 +42,6 @@ export default function UserProfile(props) {
                     onMouseLeave={exitButton}
                     onMouseEnter={enterMenu}
                 >
-                    <div className="user-profile">
-                        <FontAwesomeIcon icon={faUser} className="user-icon" />
-                    </div>
                     <div className="user-student-name">
                         Student User
                     </div>

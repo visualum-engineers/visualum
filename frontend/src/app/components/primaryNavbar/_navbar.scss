@@ -22,7 +22,7 @@
     font-size: 1.2rem;
     font-weight: 600;
     letter-spacing: 0.1rem;
-    margin: 0 3rem;
+    margin: 0 2rem;
 }
 
 .nav-btn.home-page-nav{
@@ -143,7 +143,6 @@
     color: $main-font-color;
     height: 100%;
     padding: 5px 10px;
-    margin-right: 3rem;
     &:hover {
         background-color: rgba(255, 255, 255, 0.267);
         cursor: pointer;
@@ -153,19 +152,6 @@
 .user-active {
     background-color: rgba(255, 255, 255, 0.267);
     color: rgba(10, 10, 10, 0.75);
-}
-
-.user-profile {
-    @include center;
-    width: 40px;
-    height: 40px;
-    margin: 5px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.5);
-}
-
-.user-icon {
-    color: #3913d052;
 }
 
 .user-student-name {
@@ -192,6 +178,7 @@
     color: rgba(10, 10, 10, 0.75);
     background-color: rgba(255, 255, 255, 0.267);
     top: 100px;
+    right: 30px;
     display: flex;
 }
 
