@@ -134,7 +134,7 @@
     @include sidebar-navItems-hover()
 }
 .secondary-sidebar-footer{
-    margin-bottom: 5vh;
+
     @extend .secondary-sidebar-link-container;
     position: relative;
 }

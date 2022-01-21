@@ -1,15 +1,29 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCog} from '@fortawesome/free-solid-svg-icons';
 import {faCommentDots, faCircleQuestion} from '@fortawesome/free-regular-svg-icons'
-
-export const secondarySideBarData = ({
+import ActivityTableOfContents from './ActivityTableOfContents';
+export const activitySecondarySideBarData = ({
+    activityData,
     onInstructionsClick,
+    onTableOfContentClick, 
+    currQuestion
 }) => [
     {
         type:"btn", 
         customClass:"activities-sidebar-btn", 
         content: "Instructions", 
         onClick: onInstructionsClick
+    },
+    {
+        type: "custom",
+        content: <ActivityTableOfContents 
+            currQuestion = {parseInt(currQuestion)}
+            data ={activityData}
+            onClick = {onTableOfContentClick}
+            customClass={"activities-table-of-contents"}
+            btnCustomClass = "activities-sidebar-table-btns"
+            btnActiveClass = {"question-active"}
+        />
     },
     {
         type:"link", 
@@ -22,7 +36,7 @@ export const secondarySideBarData = ({
         </>
     },
 ]
-export const secondarySidebarFooterData = () => [
+export const activitySecondarySidebarFooterData = () => [
     {
         type: "link",
         url: "/",

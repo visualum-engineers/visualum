@@ -10,13 +10,12 @@ import { unstable_batchedUpdates } from "react-dom"
 import {CSSTransition} from "react-transition-group"
 import { useSelector, useDispatch } from 'react-redux'
 import {enableTap, resetPopUpOn, resetPopUpOff} from '../../../redux/features/activityTypes/activitiesSlice'
-import { secondarySideBarData, secondarySidebarFooterData } from "./ActivitySidebarData"
+import { activitySecondarySideBarData, activitySecondarySidebarFooterData } from "./ActivitySidebarData"
 
 import ActivityResetPopUp from './ActivityResetPopUp'
 import UserProfile from "../utilities/userProfile/UserProfile";
 import calculatePercentage from "../../helpers/calculatePercentage";
 import capitalizeFirstLetter from "../../helpers/capitalizeFirstLetter"
-
 
 const activityData = assignmentData
 const duration = 375
@@ -30,10 +29,10 @@ const defaultTransition = {
 const imageURL = "images/homePage/mountain-home-bg.jpg";
 
 const Activity = () =>{
-    let currQuestion = 1
+    let currQuestion = 0
     const [prevQuestion, setPrevQuestion] = useState(0)
-    const [questionNum, setQuestionNum] = useState(1)
-    const [question, setQuestion] = useState(activityData[currQuestion])
+    const [questionNum, setQuestionNum] = useState(0)
+    const [question, setQuestion] = useState(activityData.questions[currQuestion])
     const [sidebarToggle, setSidebarToggle] = useState(true)
     const [inProp, setInProp] = useState(true);
     //dont forget to change to have instruction appear on load
@@ -61,7 +60,7 @@ const Activity = () =>{
     },[mediumWindowWidth])
 
     useEffect(()=>{
-        const activityType = activityData[questionNum].type
+        const activityType = activityData.questions[questionNum].type
         const updateDnD = !smallWindowWidth && (activityType in DnDActivites)
         if(updateDnD) {
             dispatch(enableTap())
@@ -72,21 +71,30 @@ const Activity = () =>{
     const onNavBtnClick = (e) =>{
         //means it was just clicked. 
         if (inProp) return 
-        const btnType = e.target.closest("button").getAttribute("btntype")
+        const target = e.target.closest("button")
+        const btnType = target.dataset.btnType
         //different btn actions
-        if(btnType === "prev") {
-            currQuestion = questionNum - 1
+        switch(btnType){
+            case "prev":
+                currQuestion = questionNum - 1
+                break;
+            case "continue":
+                currQuestion = questionNum + 1
+                break;
+            case "submit":
+                return
+            case "tableOfContents":
+                currQuestion = parseInt(target.dataset.questionNum)
+                break;
+            default:
+                return
         }
-        if(btnType === "continue") {
-            currQuestion = questionNum + 1
-        }
-        if(btnType === "submit") return null
-        
+        //update state
         unstable_batchedUpdates(()=>{
             setQuestion({
                 activityID: activityData["uniqueID"],
                 questionNum: currQuestion,
-                ...activityData[currQuestion]
+                ...activityData.questions[currQuestion]
             })
             setPrevQuestion(questionNum)
             setQuestionNum(currQuestion)
@@ -132,8 +140,13 @@ const Activity = () =>{
                 return
         }
     }
-    const sideBarData = secondarySideBarData({onInstructionsClick: moreInfoOnClick})
-    const sidebarFooterData = secondarySidebarFooterData()
+    const sideBarData = activitySecondarySideBarData({
+        activityData: activityData,
+        onInstructionsClick: moreInfoOnClick,
+        onTableOfContentClick: onNavBtnClick,
+        currQuestion: questionNum,
+    })
+    const sidebarFooterData = activitySecondarySidebarFooterData()
     const popUpBgStyles = {
         position: "fixed",
         top: "0",
@@ -153,6 +166,7 @@ const Activity = () =>{
             sidebarToggle = {sidebarToggle}
             handleSideBar = {handleSideBar}
             windowWidth = {mediumWindowWidth}
+            customSidebarClass={"activities-sidebar"}
             userProfile = {
                 <UserProfile
                     userContainerClass={"activities-sidebar-user-profile d-flex flex-column align-items-center justify-content-center"}
@@ -160,7 +174,7 @@ const Activity = () =>{
                     name = {"Arky Asmal"} 
                     accountType={capitalizeFirstLetter("student")}
                     progressBar={{
-                        percentage: calculatePercentage(questionNum-1, (Object.keys(activityData).length-2)) + "%",
+                        percentage: calculatePercentage(questionNum, (activityData.questions.length-1)) + "%",
                         ariaLabel:"activity-progress-bar"
                     }}
                 />
@@ -171,7 +185,7 @@ const Activity = () =>{
             className = {`${sidebarToggle && mediumWindowWidth ? "secondary-sidebar-open ": ""}activity-body d-flex flex-column align-items-center justify-content-center`}>
             {moreInfoBtn && 
                 <ActivityInstructions 
-                    activityType = {activityData[questionNum].type}
+                    activityType = {activityData.questions[questionNum].type}
                     activityInstructions ={null}
                     dndEnabled = {dndEnabled}
                     moreInfoOnClick ={moreInfoOnClick}
@@ -191,12 +205,12 @@ const Activity = () =>{
             >
                 {/*generate entire form data*/}
                 {question.type ?
-                    Object.keys(activityData).map((key)=>{
+                    activityData.questions.map((question, index)=>{
                         const moveLeft = (prevQuestion - questionNum) >= 0
                         return (
                             <CSSTransition
-                                key = {`question-${key}`}
-                                in = {questionNum === parseInt(key)}
+                                key = {`question-${index}`}
+                                in = {questionNum === parseInt(index)}
                                 timeout={duration}
                                 classNames={`${moveLeft? "question-move-left":"question-move-right"}`}
                                 mountOnEnter
@@ -204,7 +218,7 @@ const Activity = () =>{
                             >
                                 <ActivityQuestions 
                                     activityData = {activityData}
-                                    activityKey = {key}
+                                    activityKey = {index}
                                     questionNum = {questionNum}
                                     moreInfoOnClick = {moreInfoOnClick}
                                     moreInfoBtn = {moreInfoBtn}
@@ -225,12 +239,11 @@ const Activity = () =>{
             */}
             <div className="col-11 nav-activity-btns">
                 <ActivityBtns 
-                    prevQuestion = {questionNum !== 1} 
-                    lastQuestion = {Object.keys(activityData).length-2 === questionNum}
+                    prevQuestion = {questionNum !== 0} 
+                    lastQuestion = {activityData.questions.length-1 === questionNum}
                     onNavBtnClick = {onNavBtnClick}
                 />
             </div>
-            
         </div>
         
     </>

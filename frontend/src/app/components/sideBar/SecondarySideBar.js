@@ -16,7 +16,7 @@ const SecondarySideBar = (props) =>{
                 icon= {props.sidebarToggle ? faTimes : faBars}
             />
         </button>
-        <div 
+        <nav 
             aria-label ="sidebar" 
             aria-hidden ={!props.sidebarToggle}
             className={`d-flex flex-column sidebar-nav secondary-sidebar-nav fixed-top `
@@ -73,7 +73,7 @@ const SecondarySideBar = (props) =>{
                 }
             </div>
             
-        </div>
+        </nav>
         
         {!props.windowWidth &&  
             <button 
