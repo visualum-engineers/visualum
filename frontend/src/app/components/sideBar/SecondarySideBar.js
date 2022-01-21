@@ -34,7 +34,7 @@ const SecondarySideBar = (props) =>{
                 <a href="/" aria-hidden ={!props.sidebarToggle} tabIndex ={!props.sidebarToggle?"-1": "0"}>visualum</a>
             </div>
             
-            <div className="secondary-sidebar-link-container d-flex flex-column align-items-center">
+            <div className="secondary-sidebar-link-container d-flex flex-column">
                 {props.data.map((navItem, index)=>{
                     return <NavItem 
                                 key={index} 

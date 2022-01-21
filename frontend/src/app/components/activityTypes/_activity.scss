@@ -50,6 +50,10 @@ $activites-table-of-contents-height: calc(
     padding-bottom: 4vh;
     .secondary-sidebar-link-container{
         flex-grow: 1;
+        align-items: center;
+    }
+    .activities-table-of-contents{
+        align-self: start;
     }
 }
 .activities-sidebar-user-profile{
@@ -87,7 +91,7 @@ $activites-table-of-contents-height: calc(
     flex-direction: column;
     flex-grow: 1;
     align-items: center;
-    overflow: auto;
+    overflow: overlay;
     overflow-x: hidden;
     width: 100%;
     height: $activites-table-of-contents-height;
