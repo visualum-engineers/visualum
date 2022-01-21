@@ -13,6 +13,8 @@ $light-bg-color: white;
 
 $black: black;
 $white: white;
+
+
 $lightest-gray: #f3f3f3;
 $lighter-gray: #f0f0f0;
 $light-gray: rgb(201, 201, 201);
@@ -23,11 +25,15 @@ $light-blue: #eff7ff;
 $blue: rgb(9, 63, 179); 
 $dark-blue: rgb(15, 60, 158);
 
-
 $purple: rgba(58,19,208,1);
 $light-purple: rgba(58,19,208,0.25);
+//new color palattes
+$off-white: #f4f4f4;
+$yellow: #ffda4d;
+$light-yellow: #fde06c;
 
-
+$new-purple: #b5c1f6;
+$new-light-purple: #e0e5ff;
 @mixin remove-btn-default {
     background: none;
     border: none;

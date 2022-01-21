@@ -546,7 +546,6 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
         overflow: scroll;
         overflow-x: hidden;
         width: 100%;
-        margin-bottom: 1rem;
         padding: 0;
         &::-webkit-scrollbar{
             width: 0.5rem;
