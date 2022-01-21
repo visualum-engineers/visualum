@@ -70,7 +70,7 @@
     align-self: stretch;
     width: 0px;
     border: 0;
-    height: 70%;
+    height: 100%;
 }
 
 #search-bar.expand{
@@ -93,7 +93,7 @@
 #search-btn{
     @include border-radius(5px);
     @include remove-btn-default;
-    height: 70%;
+    height: 100%;
     width: 50px;
 }
 
