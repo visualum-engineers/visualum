@@ -98,8 +98,7 @@ $highlight-color: #FF8000;
 }
 
 .dashboard-nav {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding: .8rem;
     color: $nav-color;
     background-color: ghostwhite;
     // background-color: $nav-color !important;        
@@ -326,4 +325,11 @@ $highlight-color: #FF8000;
     width: 100%;
     height: 100%;
     overflow: hidden;
+}
+
+.center-logo {
+    position: absolute;
+    left: calc(50% - 5px);
+    top: 1rem;
+    z-index: 10000000;
 }

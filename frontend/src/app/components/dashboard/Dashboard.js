@@ -17,15 +17,7 @@ export default function Dashboard(props) {
 
     const widthBigger = useWindowWidth(992);
 
-    const dropDownItems = widthBigger ?
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-                <button className="btn back-button" onClick={handleClick}>
-                    Back to Homepage
-                </button>
-            </li>
-        </ul>
-        :
+    const dropDownItems =
         <ul className="navbar-nav me-auto">
             {sidebarValues.map(item => {
                 return (
@@ -35,7 +27,6 @@ export default function Dashboard(props) {
                 )
             })}
         </ul>
-
     const nav =
         <nav className="navbar navbar-light sticky-top navbar-expand-lg dashboard-nav">
             <div className="container-fluid">
@@ -56,7 +47,15 @@ export default function Dashboard(props) {
 
     return (
         <div className="dashboard vh-100">
-            {widthBigger ? <></> : nav}
+            {widthBigger ? <></> :
+                <>
+                    <div className='center-logo'>
+                        <img className="secondary-sidebar-visualum-logo dashboard-logo"
+                            src={Logo}
+                            alt="Visualum logo" />
+                    </div>
+                    {nav}
+                </>}
             <div className="dashboard-container">
                 {widthBigger ? <DashboardSidebar page={props.page} /> : <></>}
                 <div className={`main-content ${state.collapsed ? "main-content-full" : ""}`}>
