@@ -424,24 +424,39 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
     margin: 2% 0;
     button{
         @include remove-btn-default();
-        @include border-radius(1rem);
-        border: 1px solid $dark-blue; 
+        //@include border-radius(1rem);
+        //border: 1px solid $dark-blue; 
         margin: 0.18rem;
         font-size: 0;
         padding: 0;
         height: 0.5vh;
         width: 0.5vh;
-        min-height: 0.3rem;
-        min-width: 0.3rem;
+        min-height: 6px;
+        min-width: 6px;
         @include transition(all ease-in 0.2s)
     }
     button.question-active{
-        background-color: $dark-blue;
         transform: scale(1.6);
+        circle{
+            fill: $dark-blue;
+        }
     }
     button:hover{
-        background-color: $dark-blue;
         transform: scale(1.6);
+        circle{
+            fill: $dark-blue;
+        }
+    }
+    svg{
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        circle{
+            stroke-width: 10px;
+            stroke: $dark-blue;
+            fill: none;
+        }
     }
 }
 
@@ -531,7 +546,6 @@ $label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
         overflow: scroll;
         overflow-x: hidden;
         width: 100%;
-        margin-bottom: 1rem;
         padding: 0;
         &::-webkit-scrollbar{
             width: 0.5rem;

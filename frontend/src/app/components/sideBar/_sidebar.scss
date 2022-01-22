@@ -99,7 +99,7 @@
 .secondary-sidebar-header{
     font-size: 1.5rem;
     font-weight: 600;
-    margin-bottom: 2rem;
+    margin-bottom: calc(min(1.5rem, 2vh));
     margin-top: 2rem;
     
     a{
@@ -134,8 +134,8 @@
     @include sidebar-navItems-hover()
 }
 .secondary-sidebar-footer{
-
-    @extend .secondary-sidebar-link-container;
+    @include transition(all 0.25s ease-out);
+    color: $secondary-font-color;
     position: relative;
 }
 
@@ -143,8 +143,9 @@
     @include remove-btn-default;
     position: fixed;
     top: 0.4rem;
-    left: calc(min(13.6rem, 300px));
+    left: calc(min(13.5rem, 300px));
     color: $darkest-gray;
+    background: $white;
     font-size: 1.5rem;
     padding: 0.15rem 0.35rem;
     text-align: center;
@@ -168,7 +169,7 @@
 }
 .secondary-exit-sidebar-btn.sidebar-open{
     color: $light-gray;
-    opacity: 0.8;
+    //opacity: 0.8;
 }
 .secondary-exit-sidebar-btn.sidebar-open:hover{
     color: $white;

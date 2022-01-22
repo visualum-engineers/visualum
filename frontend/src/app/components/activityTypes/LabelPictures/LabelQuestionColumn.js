@@ -180,6 +180,16 @@ const LabelPicturesQuestion = (props) =>{
                                 onClick={onCaroIndicatorClick}
                                 data-question-index = {index}
                             >
+                                <svg 
+                                    viewBox="0 0 100 100"
+                                >
+                                    <circle 
+                                        className="radio-outer-circle"
+                                        cx="50" 
+                                        cy="50" 
+                                        r="45" 
+                                    ></circle>
+                                </svg>
                             </button>
                         )
                     })}
