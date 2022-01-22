@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
 import { CSSTransition } from 'react-transition-group'
-// import { useNavigate } from 'react-router-dom';
+import useScrollPos from '../../hooks/use-scroll-pos';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { links } from './DropdownLinks'
+import { useNavigate } from 'react-router-dom';
 
 export default function UserProfile(props) {
     const [isMouseOverButton, setIsMouseOverButton] = useState(false);
     const [isMouseOverMenu, setIsMouseOverMenu] = useState(false);
+    const windowScrollY = useScrollPos()
+
     const enterButton = () => {
         return setIsMouseOverButton(true);
     }
@@ -30,11 +35,12 @@ export default function UserProfile(props) {
     }
 
     const open = isMouseOverButton || isMouseOverMenu;
+
     return (
         <>
             <li className="nav-item flex-fill justify-content-center ">
                 <button
-                    className={`user ${open ? "user-active" : ""}`}
+                    className={`user ${open ? "user-active" : ""} ${windowScrollY ? "navbarScrollActive" : ""}`}
                     onClick={onClick}
                     onMouseLeave={exitButton}
                     onMouseEnter={enterMenu}
@@ -42,27 +48,35 @@ export default function UserProfile(props) {
                     <div className="user-student-name">
                         Student User
                     </div>
-                    {/* <div className="user-reward">
-                        <FontAwesomeIcon icon={faStar} className="user-reward-icon" />
-                        {props.rewardNum}
-                    </div> */}
                 </button>
             </li>
             <UserDropdown
                 open={open}
                 enterMenu={enterMenu}
                 exitMenu={exitMenu}
+                type="teacher"
+                windowScrollY={windowScrollY}
             />
         </>
     );
 }
 
 function UserDropdown(props) {
-    // let navigate = useNavigate();
+    let navigate = useNavigate();
 
-    // const handleButtonClick = (val) => {
-    //     navigate(`/${val}`)
-    // }
+    const handleButtonClick = (val) => {
+        navigate(`/${val}`)
+    }
+
+    const values = links[props.type].map(link => {
+        return (
+            <button className='user-dropdown-button' onClick={() => handleButtonClick(link.value)}>
+                <span className='user-dropdown-text'>{link.name}</span>
+                <FontAwesomeIcon className='user-dropdown-icon' icon={link.icon} />
+            </button>
+        )
+    })
+
     return (
         <CSSTransition
             in={props.open}
@@ -70,8 +84,12 @@ function UserDropdown(props) {
             classNames="dropdown"
             unmountOnExit
         >
-            <div className="user-dropdown" onMouseEnter={props.enterMenu} onMouseLeave={props.exitMenu}>
-
+            <div
+                className={`user-dropdown ${props.windowScrollY ? "navbarScrollActive" : ""}`}
+                onMouseEnter={props.enterMenu}
+                onMouseLeave={props.exitMenu}
+            >
+                {values}
             </div>
         </CSSTransition>
     )
