@@ -34,12 +34,12 @@ export default function Dashboard(props) {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse mt-3 mt-lg-0" id="navbarTogglerDemo01">
-                    <a className="navbar-brand" href="/">
+                    <div className="navbar-brand" onClick={handleClick}>
                         <img className="secondary-sidebar-visualum-logo dashboard-logo"
                             src={Logo}
                             alt="Visualum logo" />
                         visualum
-                    </a>
+                    </div>
                     {dropDownItems}
                 </div>
             </div>
