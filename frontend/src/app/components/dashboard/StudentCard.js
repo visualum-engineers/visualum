@@ -1,4 +1,5 @@
 import React from 'react'
+import Avatar from 'avataaars'
 
 export default function StudentCard(props) {
     return (
@@ -7,7 +8,8 @@ export default function StudentCard(props) {
                 <h5 class="card-title">{props.data.name}</h5>
                 <h6 className="card-subtitle mb-2 text-muted">Average: {props.data.average}</h6>
             </div>
-            <div className="card-body icon">
+            <div className='student-avatar'>
+                <Avatar style={{height: "100%"}}/>
             </div>
         </div>
     )

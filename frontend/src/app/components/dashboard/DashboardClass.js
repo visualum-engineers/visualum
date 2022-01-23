@@ -67,7 +67,7 @@ export default function DashboardClass() {
 
     const cards = studentData.map(student => {
         return (
-            <div className="col-md-4 col-12 p-2">
+            <div className="col-md-6 col-xl-4 col-12 p-2">
                 <StudentCard data={student} />
             </div>
         )
