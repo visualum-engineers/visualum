@@ -1,6 +1,6 @@
 import React from 'react'
 import DashboardSidebar from './DashboardSidebar';
-import { useNavigate, Outlet, Link } from 'react-router-dom';
+import { useNavigate, Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import useWindowWidth from '../../hooks/use-window-width'
 import sidebarValues from './sidebarValues';
@@ -21,8 +21,8 @@ export default function Dashboard(props) {
         <ul className="navbar-nav me-auto">
             {sidebarValues.map(item => {
                 return (
-                    <li className="nav-item">
-                        <Link className={(navData) => `${navData.isActive ? 'selected' : ''} nav-link`} to={`${item.value}`}>{item.name}</Link>
+                    <li className="nav-item dropdown-nav-link">
+                        <a href={`/dashboard/${item.value}`}>{item.name}</a>
                     </li>
                 )
             })}
@@ -34,12 +34,6 @@ export default function Dashboard(props) {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse mt-3 mt-lg-0" id="navbarTogglerDemo01">
-                    <div className="navbar-brand" onClick={handleClick}>
-                        <img className="secondary-sidebar-visualum-logo dashboard-logo"
-                            src={Logo}
-                            alt="Visualum logo" />
-                        visualum
-                    </div>
                     {dropDownItems}
                 </div>
             </div>
@@ -50,9 +44,11 @@ export default function Dashboard(props) {
             {widthBigger ? <></> :
                 <>
                     <div className='center-logo'>
-                        <img className="secondary-sidebar-visualum-logo dashboard-logo"
+                        <img className="dashboard-logo"
                             src={Logo}
-                            alt="Visualum logo" />
+                            alt="Visualum logo"
+                            onClick={handleClick}
+                        />
                     </div>
                     {nav}
                 </>}
