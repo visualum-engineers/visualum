@@ -6,14 +6,19 @@ import ActivityHeader from "../ActivityHeader"
 import WordBank from "../../utilities/dragAndDrop/ReactBeautifulDnD/WordBank"
 import LabelQuestionColumn from "./LabelQuestionColumn"
 import { useDispatch, useSelector } from "react-redux"
-import { resetPopUpOff, enableTap, enableDnD} from "../../../../redux/features/activityTypes/activitiesSlice"
+import { updateActivityData } from "../../../../redux/features/activityTypes/activitiesData"
+import { 
+    resetPopUpOff, 
+    enableTap, 
+    enableDnD
+} from "../../../../redux/features/activityTypes/activitiesSettings"
 import updateMultipleSortableLists from "../../utilities/dragAndDrop/DnDUpdateAlgo.js/Sortables/updateMultipleLists"
 import getResultOnTap from "../../utilities/dragAndDrop/DnDUpdateAlgo.js/Sortables/getResultOnTap"
 
 const LabelPicturesApp = ({
     activityData, 
+    originalQuestionData,
     questionNum, 
-    activityID, 
     moreInfoOnClick,
     resetBtnOnClick, 
     moreInfoBtn, 
@@ -28,27 +33,25 @@ const LabelPicturesApp = ({
 
     //redux states
     const dispatch = useDispatch()
-    const disableDnD = useSelector((state) => !state.activities.dndEnabled)
-    const resetPopUp = useSelector((state) => state.activities.resetPopUp)
+    const disableDnD = useSelector((state) => !state.activities.settings.dndEnabled)
+    const resetPopUp = useSelector((state) => state.activities.settings.resetPopUp)
     
-    //if it exists, grab info from local storage on mount.
-    useEffect(() => {
-        //on mount check local storage for data
-        let stored = localStorage.getItem(`${activityID}-label_pic_activity_client_answer-${questionNum}`)
-        if(!stored) return
-        setData(JSON.parse(stored))
-    }, [activityID, questionNum])
     //reset data
     useEffect(() =>{
         if(resetPopUp && resetPopUp.confirmed){
             //reset all state values to default
-            setData(transformData(activityData, 1))
-            setFirstElTap(null)
-            dispatch(resetPopUpOff())
-            //remove any saved data from local storage
-            localStorage.removeItem(`${activityID}-label_pic_activity_client_answer-${questionNum}`)        
+            unstable_batchedUpdates(()=>{
+                setData(transformData(originalQuestionData, 1))
+                setFirstElTap(null)
+                dispatch(resetPopUpOff())
+                dispatch(updateActivityData({
+                    type: "singleQuestionUpdate",
+                    questionNum: questionNum,
+                    data: transformData(originalQuestionData, 1)
+                }))
+            })
         }
-    }, [dispatch, resetPopUp, activityData, activityID, questionNum])
+    }, [dispatch, resetPopUp, originalQuestionData, questionNum])
 
     //test is item comes from a word bank column
     const answerChoiceTestEl = (el) => /answerChoices.*/.test(el)
@@ -63,12 +66,15 @@ const LabelPicturesApp = ({
         const newState = updateMultipleSortableLists(data, result, answerChoiceTestEl)
         if(!newState) return
         //update state
-
         unstable_batchedUpdates(()=>{
             setData(newState)
             setDragActive(false)
+            dispatch(updateActivityData({
+                type: "singleQuestionUpdate",
+                questionNum: questionNum,
+                data: newState
+            }))
         })
-        localStorage.setItem(`${activityID}-label_pic_activity_client_answer-${questionNum}`, JSON.stringify(newState))
     }
     const toggleTap = (e) =>{
         if(e.type ==="keydown" && !(e.key === "Enter")) return

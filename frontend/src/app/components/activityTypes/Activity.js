@@ -4,20 +4,28 @@ import ActivityBtns from "./ActivityBtns"
 import DnDActivites from "./DnDActivites"
 import useWindowWidth from "../../hooks/use-window-width"
 import SecondarySideBar from "../sideBar/SecondarySideBar"
-import assignmentData from "../../helpers/sampleAssignmentData"
+
 import { useEffect, useState } from "react"
 import { unstable_batchedUpdates } from "react-dom"
 import {CSSTransition} from "react-transition-group"
 import { useSelector, useDispatch } from 'react-redux'
-import {enableTap, resetPopUpOn, resetPopUpOff} from '../../../redux/features/activityTypes/activitiesSlice'
-import { activitySecondarySideBarData, activitySecondarySidebarFooterData } from "./ActivitySidebarData"
+import {updateActivityData} from "../../../redux/features/activityTypes/activitiesData"
+import {
+    enableTap, 
+    resetPopUpOn, 
+    resetPopUpOff,
+} from '../../../redux/features/activityTypes/activitiesSettings'
+import { 
+    activitySecondarySideBarData, 
+    activitySecondarySidebarFooterData 
+} from "./ActivitySidebarData"
 
 import ActivityResetPopUp from './ActivityResetPopUp'
 import UserProfile from "../utilities/userProfile/UserProfile";
 import calculatePercentage from "../../helpers/calculatePercentage";
 import capitalizeFirstLetter from "../../helpers/capitalizeFirstLetter"
 
-const activityData = assignmentData
+
 const duration = 375
 const inPropDuration = duration * 2
 const defaultTransition = {
@@ -29,28 +37,35 @@ const defaultTransition = {
 const imageURL = "images/homePage/mountain-home-bg.jpg";
 
 const Activity = () =>{
+    //redux states
+    const activityData = useSelector((state) => state.activities.data.present.clientAnswerData)
+    const dndEnabled = useSelector((state) => state.activities.settings.dndEnabled)
+    const resetPopUp = useSelector((state) => state.activities.settings.resetPopUp)
+    const dispatch = useDispatch()
+
+    //component specific state
     let currQuestion = 0
     const [prevQuestion, setPrevQuestion] = useState(0)
-    const [questionNum, setQuestionNum] = useState(0)
-    const [question, setQuestion] = useState(activityData.questions[currQuestion])
+    const [questionNum, setQuestionNum] = useState(activityData.lastQuestionSeen ?
+                                                    parseInt(activityData.lastQuestionSeen) : 0
+                                                )
+    //question data
+    const question = activityData.questions[questionNum]
+    const originalQuestionData = useSelector((state) => state.activities.data.present.activityData.questions[questionNum])
+
+    //utility components
     const [sidebarToggle, setSidebarToggle] = useState(true)
     const [inProp, setInProp] = useState(true);
     //dont forget to change to have instruction appear on load
     const [moreInfoBtn, setMoreInfoBtn] = useState(false)
     const mediumWindowWidth = useWindowWidth(992)
     const smallWindowWidth = useWindowWidth(576)
-    const dndEnabled = useSelector((state) => state.activities.dndEnabled)
-    const resetPopUp = useSelector((state) => state.activities.resetPopUp)
-    const dispatch = useDispatch()
+
     useEffect(() => {
         //hide overflow on mount
         setTimeout(() =>{
             setInProp(false)
         }, inPropDuration)
-        //on mount check local storage for data
-        let stored = localStorage.getItem(`${activityData.activityID}-activity_last_seen_question`)
-        if(!stored) return
-        setQuestionNum(parseInt(stored))
     }, [])
     //when window width < 992, sidebar automatically closes
     //it can still be opened though
@@ -60,13 +75,13 @@ const Activity = () =>{
     },[mediumWindowWidth])
 
     useEffect(()=>{
-        const activityType = activityData.questions[questionNum].type
-        const updateDnD = !smallWindowWidth && (activityType in DnDActivites)
+        const questionType = question.type
+        const updateDnD = !smallWindowWidth && (questionType in DnDActivites)
         if(updateDnD) {
             dispatch(enableTap())
             setMoreInfoBtn(true)
         }
-    }, [dispatch, smallWindowWidth, questionNum])
+    }, [dispatch, smallWindowWidth, questionNum, question])
 
     const onNavBtnClick = (e) =>{
         //means it was just clicked. 
@@ -91,19 +106,14 @@ const Activity = () =>{
         }
         //update state
         unstable_batchedUpdates(()=>{
-            setQuestion({
-                activityID: activityData["uniqueID"],
-                questionNum: currQuestion,
-                ...activityData.questions[currQuestion]
-            })
             setPrevQuestion(questionNum)
             setQuestionNum(currQuestion)
             setInProp(true)
+            dispatch(updateActivityData({lastSeenQuestion: currQuestion}))
         })
         setTimeout(() =>{
             setInProp(false)
         }, inPropDuration)
-        localStorage.setItem(`${activityData.activityID}-activity_last_seen_question`, currQuestion.toString())
     }
     const exitSideBar = () => setSidebarToggle(false)
     
@@ -185,7 +195,7 @@ const Activity = () =>{
             className = {`${sidebarToggle && mediumWindowWidth ? "secondary-sidebar-open ": ""}activity-body d-flex flex-column align-items-center justify-content-center`}>
             {moreInfoBtn && 
                 <ActivityInstructions 
-                    activityType = {activityData.questions[questionNum].type}
+                    activityType = {question.type}
                     activityInstructions ={null}
                     dndEnabled = {dndEnabled}
                     moreInfoOnClick ={moreInfoOnClick}
@@ -218,6 +228,7 @@ const Activity = () =>{
                             >
                                 <ActivityQuestions 
                                     activityData = {activityData}
+                                    originalQuestionData = {originalQuestionData}
                                     activityKey = {index}
                                     questionNum = {questionNum}
                                     moreInfoOnClick = {moreInfoOnClick}

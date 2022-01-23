@@ -1,27 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { combineReducers } from 'redux';
+import activitiesData from  './activitiesData'
+import activitiesSettings from './activitiesSettings';
 
-const activitiesSlice = createSlice({
-    name: "activitiesSlice",
-    initialState: {
-        dndEnabled: true,
-        resetPopUp: null,
-    },
-    reducers:{
-        enableTap: state =>{
-            state.dndEnabled = false
-        },
-        enableDnD: state =>{
-            state.dndEnabled = true
-        },
-        resetPopUpOn: (state, action) => {
-            state.resetPopUp = action.payload
-        },
-        resetPopUpOff: state => {
-            state.resetPopUp = null
-        }
-    }
+const activitiesSlice = combineReducers({
+    data: activitiesData,
+    settings: activitiesSettings
 })
-//export reducer meant for store       
-export const {enableTap, enableDnD, resetPopUpOn, resetPopUpOff} = activitiesSlice.actions
 
-export default activitiesSlice.reducer
+export default activitiesSlice

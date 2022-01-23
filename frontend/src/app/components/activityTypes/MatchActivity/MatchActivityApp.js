@@ -1,12 +1,18 @@
 import {useState, useEffect} from 'react'
+import { unstable_batchedUpdates } from 'react-dom';
 import {DragDropContext} from 'react-beautiful-dnd';
-import {useDispatch, useSelector} from 'react-redux';
-import {resetPopUpOff, enableTap, enableDnD} from '../../../../redux/features/activityTypes/activitiesSlice'
 import WordBank from '../../utilities/dragAndDrop/ReactBeautifulDnD/WordBank';
 import AnswerBank from './MatchActivityAnswerBank';
 import ActivityHeader from '../ActivityHeader';
 import transformData from './matchTransformData';
 import getResultOnTap from '../../utilities/dragAndDrop/DnDUpdateAlgo.js/Sortables/getResultOnTap';
+import {useDispatch, useSelector} from 'react-redux';
+import {updateActivityData} from "../../../../redux/features/activityTypes/activitiesData"
+import {
+    resetPopUpOff, 
+    enableTap, 
+    enableDnD,
+} from '../../../../redux/features/activityTypes/activitiesSettings'
 /*
 To-dos
 Backend: 
@@ -16,8 +22,8 @@ Backend:
 
 const MatchActivityApp = ({
     activityData, 
+    originalQuestionData,
     questionNum, 
-    activityID, 
     moreInfoOnClick,
     resetBtnOnClick, 
     moreInfoBtn, 
@@ -30,27 +36,23 @@ const MatchActivityApp = ({
     const [removedEl, setRemovedEl] = useState(undefined)
     //redux states
     const dispatch = useDispatch()
-    const disableDnD = useSelector((state) => !state.activities.dndEnabled) 
-    const resetPopUp = useSelector((state) => state.activities.resetPopUp) 
-
-    //if it exists, grab info from local storage on mount.
-    useEffect(() => {
-        //on mount check local storage for data
-        let stored = localStorage.getItem(`${activityID}-match_activity_client_answer-${questionNum}`)
-        if(!stored) return
-        setData(JSON.parse(stored))
-    }, [activityID, questionNum])
-
+    const disableDnD = useSelector((state) => !state.activities.settings.dndEnabled) 
+    const resetPopUp = useSelector((state) => state.activities.settings.resetPopUp) 
     useEffect(() =>{
         if(resetPopUp && resetPopUp.confirmed){
             //reset all state values to default
-            setData(transformData(activityData, columns.length))
-            setFirstElTap(null)
-            dispatch(resetPopUpOff())
-            //remove any saved data from local storage
-            localStorage.removeItem(`${activityID}-match_activity_client_answer-${questionNum}`)        
+            unstable_batchedUpdates(()=>{
+                setData(transformData(originalQuestionData, columns.length))
+                setFirstElTap(null)
+                dispatch(resetPopUpOff())
+                dispatch(updateActivityData({
+                    type: "singleQuestionUpdate",
+                    questionNum: questionNum,
+                    data: transformData(originalQuestionData, columns.length)
+                }))
+            })
         }
-    }, [dispatch, resetPopUp, activityData, columns.length, activityID, questionNum])
+    }, [dispatch, resetPopUp, originalQuestionData, columns.length, questionNum])
 
     //handle width resizing
     useEffect(() => {
@@ -127,7 +129,6 @@ const MatchActivityApp = ({
                 }
             }
         } 
-        
         //maintain itembank across resize, if we have to generate multiple columns
         if(addedToWordBank) newState.allItems[addedToWordBank.id] = addedToWordBank
         if(startContainerType==="itemBank") delete newState.allItems[draggableId]
@@ -172,8 +173,14 @@ const MatchActivityApp = ({
         const newState = customUpdateLists(result)
         if(!newState) return
         //update state
-        setData(newState)
-        localStorage.setItem(`${activityID}-match_activity_client_answer-${questionNum}`, JSON.stringify(newState))
+        unstable_batchedUpdates(()=>{
+            setData(newState)
+            dispatch(updateActivityData({
+                type: "singleQuestionUpdate",
+                questionNum: questionNum,
+                data: newState
+            }))
+        })
     }
     const onTap = (e) =>{
         const parm = {
