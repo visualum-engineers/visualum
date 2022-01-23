@@ -78,7 +78,11 @@ $highlight-color: #FF8000;
     flex: 1;
     height: 100%;
     padding: .5rem 1.7rem;
-    padding-bottom: 0;
+    // padding-bottom: 0;
+    overflow: scroll;
+    @media (max-width: 992px) {
+        padding-bottom: 5rem;
+    }
 }
 
 .card-container {
