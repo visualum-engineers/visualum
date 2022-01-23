@@ -10,6 +10,7 @@
 	width: 40%;
 	position: absolute;
 	height: 90%;
+	z-index: 3;
 	@media (max-width: 992px) {
 		height: 80% !important;
 		width: 90%;
