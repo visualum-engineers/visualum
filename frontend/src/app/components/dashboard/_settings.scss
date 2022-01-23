@@ -1,0 +1,17 @@
+.settings-page {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    @include box-shadow-dash();
+    height: 96%;
+}
+
+.settings-module {
+    padding: 1rem 0;
+}
+
+.avatar {
+    width: 200px;
+    height: 200px;
+    background-color: red;
+}

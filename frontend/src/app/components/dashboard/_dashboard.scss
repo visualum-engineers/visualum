@@ -1,3 +1,4 @@
+
 $nav-color: #041F54;
 $highlight-color: #FF8000;
 
@@ -33,6 +34,10 @@ $highlight-color: #FF8000;
     @include card-hover();
 }
 
+@import './overview';
+@import './sidebar';
+@import './settings';
+
 .dashboard {
     display: flex;
     flex-direction: column;
@@ -47,45 +52,17 @@ $highlight-color: #FF8000;
     overflow: hidden;
 }
 
-.dashboard-sidebar {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 16rem;
-    background-color: white;
-    box-shadow: 4px 0px 7px -8px #000000;
-    -webkit-box-shadow: 4px 0px 7px -8px #000000;
-    .sidebar-item {
-        font-size: 1rem;
-        width: 100%;
-        @include center;
-        padding: .5rem 1rem;
-        cursor: pointer;
-        .tab-button {
-            @include border-radius(15px);
-            padding: .2rem 1rem;
-            // width: 95%;
-            display: flex;
-            justify-content: center;
-            &:hover {
-                transform: scale(1.05);
-            }
-            &:hover:not(.selected){
-                background-color: rgba(0,0,0,0.05);
-            }
-            transition: all .2s ease-in-out;
-        }
-        .selected {
-            background-color: $dark-blue;
-            color: white;
-            font-weight: 700;
-        }
-        p {
-            margin: 0;
-            font-weight: 400;
-        }
-    }
+.dashboard-nav {
+    background-color: ghostwhite;
 }
+
+.center-logo {
+    position: absolute;
+    left: calc(50% - 5px);
+    top: 1rem;
+    z-index: 10000000;
+}
+
 .main-content {
     display: flex;
     flex-direction: column;
@@ -95,50 +72,11 @@ $highlight-color: #FF8000;
     padding-bottom: 0;
 }
 
-
-.dashboard-nav {
-    padding: .8rem;
-    color: $nav-color;
-    background-color: ghostwhite;
-    // background-color: $nav-color !important;        
-}
-
-.dashboard-sidebar-brand {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: .7rem;
-    margin-top: 1.5rem;
-}
-
-.dashboard-sidebar-name {
-    display: inline;
-    font-weight: 600;
-    font-size: 1.4rem;
-    color: #041F54;
-}
-
-.dashboard-logo {
-    width: 2.5rem;
-    height: 2.5rem;
-    margin-right: .8rem;
-}
-
-.back-button {
-    font-size: .8rem;
-    color: rgb(246, 246, 246);
-    background-color:rgba(255, 255, 255, 0.219);
-    &:hover {
-        background-color: rgba(255, 255, 255, 0.45);
-    }
-}
-
 .card-container {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
+
 .card-container::-webkit-scrollbar {
     display: none;
 }
@@ -147,36 +85,6 @@ $highlight-color: #FF8000;
     display: flex;
     flex-direction: column;
     height: 100%;
-}
-
-.overview-card {
-    @include card();
-    .overview-icon {
-        transition: color 200ms ease-in-out;
-    }
-    &:hover {
-        h6 {
-            color: inherit !important;
-        }
-        .overview-icon {
-            color: $highlight-color;
-        }
-    }
-    min-height: 15rem;
-    margin: auto;
-    overflow: hidden;
-}
-
-.overview-col {
-    &:last-child {
-        margin-bottom: 1rem;
-    }
-}
-
-.overview-card-feature {
-    width: 100%;
-    height: 20px;
-    flex: 1;
 }
 
 .card-body {
@@ -243,77 +151,6 @@ $highlight-color: #FF8000;
     }
 }
 
-.activity-list {
-    overflow-y: scroll;
-    height: 100%;
-    width: 100%;
-    padding: 5px 10px;
-}
-
-.activity-card {
-    @include card();
-    &:hover {
-        .activity-type {
-            color: $highlight-color !important;
-        }
-    }
-    .activity-type {
-        transition: .2s ease-in-out;
-    }
-    .activity-buttons {
-        display: flex;
-        .button {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 2rem;
-            width: 2rem;
-            border-radius: .5rem;
-            transition: background-color .125s ease-in-out;
-            &:hover {
-                background-color: rgb(228, 228, 228);
-            }
-        }
-    }
-}   
-
-.card-half {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.collapsable-sidebar {
-    width: 15%;
-    min-width: 200px;
-}
-.collapsed-sidebar {
-    display: none;
-}
-
-.main-content-full {
-    width: 100% !important;
-}
-
-.settings-page {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 1rem;
-    @include box-shadow-dash();
-    height: 96%;
-}
-
-.settings-module {
-    padding: 1rem 0;
-}
-
-.avatar {
-    width: 200px;
-    height: 200px;
-    background-color: red;
-}
-
 .dashboard-modal {
     $width: 65rem;
     $height: 30rem;
@@ -348,23 +185,3 @@ $highlight-color: #FF8000;
     overflow: hidden;
 }
 
-.center-logo {
-    position: absolute;
-    left: calc(50% - 5px);
-    top: 1rem;
-    z-index: 10000000;
-}
-
-.overview-center {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.overview-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
