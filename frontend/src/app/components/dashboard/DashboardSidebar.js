@@ -10,7 +10,6 @@ export default function DashboardSidebar(props) {
     const items = sidebarValues.map(item => <SidebarItem name={item.name} value={item.value} selected={props.page === item.value} />)
 
     return (
-        <div className={state.collapsed ? "collapsed-sidebar" : "collapsable-sidebar"}>
             <div className="dashboard-sidebar">
                 <a className="dashboard-sidebar-brand" href="/">
                     <img className="dashboard-logo"
@@ -22,6 +21,5 @@ export default function DashboardSidebar(props) {
                 </a>
                 {items}
             </div>
-        </div>
     )
 }
