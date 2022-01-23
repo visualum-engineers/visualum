@@ -81,7 +81,7 @@ const Activity = () =>{
             dispatch(enableTap())
             setMoreInfoBtn(true)
         }
-    }, [dispatch, smallWindowWidth, questionNum, question])
+    }, [dispatch, smallWindowWidth, question.type])
 
     const onNavBtnClick = (e) =>{
         //means it was just clicked. 

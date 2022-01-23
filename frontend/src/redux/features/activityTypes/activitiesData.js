@@ -22,7 +22,7 @@ const saveToLocalStorage = ({
         const serizalizedState = JSON.stringify(storedState);
         localStorage.setItem(storedState.activityID, serizalizedState)
     } catch{
-        console.log(state, payload, newState)
+        console.log("not saved")
     }
 }
 const throttledSaveToStorage = throttle((newState) => saveToLocalStorage(newState), 1500)
@@ -32,7 +32,7 @@ const getDataFromLocalStorage = (data) =>{
         const newData = JSON.parse(localStorage.getItem(data.activityID))
         return newData
     } catch{
-        console.log("get Item error")
+            console.log("get Item error")
         return
     }
 }

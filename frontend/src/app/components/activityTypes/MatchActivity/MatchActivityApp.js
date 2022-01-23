@@ -200,9 +200,7 @@ const MatchActivityApp = ({
         if (e.type ==="click" || (e.type ==="keydown" && e.key === "Enter")) {
             //setDisableDnD(state => !state)
             //update redux store so instructions can dynamically change
-            if (disableDnD) {
-                dispatch(enableDnD())
-            }
+            if (disableDnD) dispatch(enableDnD())
             else dispatch(enableTap())
             moreInfoOnClick()
             //if we're changing the mode, we need to reset this
