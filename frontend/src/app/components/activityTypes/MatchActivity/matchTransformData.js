@@ -1,6 +1,7 @@
 const transformData = (data, itemBankColumns) =>{
     let newData = {}
     //on mount (initial data loaded)
+    newData["type"] = data.type
     newData["keyPairs"] = {}
     newData["itemBank"] = {}
     newData["answerChoices"] = {}

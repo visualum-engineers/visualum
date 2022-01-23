@@ -1,6 +1,8 @@
 import {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { resetPopUpOff } from '../../../../redux/features/activityTypes/activitiesSlice';
+import { unstable_batchedUpdates } from 'react-dom';
+import { updateActivityData } from '../../../../redux/features/activityTypes/activitiesData';
+import { resetPopUpOff } from '../../../../redux/features/activityTypes/activitiesSettings';
 import ControlledInputsImage from './ControlledInputsImage';
 import ControlledInputsColumn from './ControlledInputsColumn';
 import ActivityHeader from '../ActivityHeader'
@@ -11,23 +13,11 @@ import ActivityHeader from '../ActivityHeader'
         - Included here is also rendering animation
     2. Missing progress saved on local storage/memory (if user exits out of page)
 */
-const answerType = (inputType)=>{
-    let inputAnswerType
-    switch (inputType) {
-        case "checkbox":
-            inputAnswerType = "checkbox_activity_client_answer"
-            break;
-        default:
-            inputAnswerType = "radio_activity_client_answer"
-            break;
-    }
-    return inputAnswerType
-} 
 const ControlledInputsApp = ({
     inputType,
     activityData, 
+    originalQuestionData,
     questionNum, 
-    activityID, 
     smallWindowWidth,
     mediumWindowWidth,
     popUpBgStyles,
@@ -36,38 +26,33 @@ const ControlledInputsApp = ({
 }) => {
     //for updating redux store(data to be sent to backend)
     const [data, setData] = useState({
-        ...activityData, 
         clientAnswer: {}, 
+        ...activityData, 
     })
     //redux states
     const dispatch = useDispatch()
-    const resetPopUp = useSelector((state) => state.activities.resetPopUp)
+    const resetPopUp = useSelector((state) => state.activities.settings.resetPopUp)
     //reset answer
     useEffect(() =>{
         if(resetPopUp && resetPopUp.confirmed){
             //reset all state values to default
-            setData(state => ({
-                ...state, 
-                clientAnswer: {},
-            }))
-            dispatch(resetPopUpOff())
-            //remove any saved data from local storage
-            const inputAnswerType = answerType(inputType)
-            localStorage.removeItem(`${activityID}-${inputAnswerType}-${questionNum}`)        
+            unstable_batchedUpdates(()=>{
+                setData({
+                    ...originalQuestionData, 
+                    clientAnswer: {},
+                })
+                dispatch(resetPopUpOff())
+                dispatch(updateActivityData({
+                    type: "singleQuestionUpdate",
+                    questionNum: questionNum,
+                    data: {
+                        ...originalQuestionData, 
+                        clientAnswer: {},
+                    }
+                }))
+            })
         }
-    }, [dispatch, resetPopUp, activityData, activityID, questionNum, inputType])
-
-    //find any data stored in local storage
-    useEffect(() => {
-        const inputAnswerType = answerType(inputType)
-        const stored_selected_answer = localStorage.getItem(`${activityID}-${inputAnswerType}-${questionNum}`)
-        if(stored_selected_answer){
-            setData(state =>({
-                ...state,
-                clientAnswer: JSON.parse(stored_selected_answer)
-            })) 
-        }
-    }, [activityID, questionNum, inputType])
+    }, [dispatch, resetPopUp, originalQuestionData, questionNum])
 
     const rows = data.answerChoices.length % 2 ===0 ? data.answerChoices.length/2 : Math.floor(data.answerChoices.length/2 + 1)
     const columns = 2
@@ -107,12 +92,18 @@ const ControlledInputsApp = ({
         }
 
         //update data
-        setData(state =>({
-            ...state,
-            clientAnswer: answerId 
-        }))
-        const inputAnswerType = answerType(inputType)
-        localStorage.setItem(`${activityID}-${inputAnswerType}-${questionNum}`, JSON.stringify(answerId))
+        setData((state) => {
+            const newState = {
+                ...state,
+                clientAnswer: answerId 
+            }
+            dispatch(updateActivityData({
+                type: "singleQuestionUpdate",
+                questionNum: questionNum,
+                data: newState
+            }))
+            return newState
+        })
     }
 
     return(

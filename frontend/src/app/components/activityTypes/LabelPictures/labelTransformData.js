@@ -5,6 +5,7 @@ const transformData = (data, itemBankColumns) =>{
     newData["allItems"] = {}
     newData["answerChoices"] = {}
     newData["categories"]= {}
+    newData.type = data.type
     newData.timer = data.timer
     newData.imageURL = data.imageURL
     newData.imgSize = data.imgSize

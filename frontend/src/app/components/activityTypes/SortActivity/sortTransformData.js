@@ -2,10 +2,12 @@
 const transformData = (data, itemBankColumns) =>{
     let newData = {}
     //on mount (initial data loaded)
+    newData["type"] = data.type
     newData["categories"] = {}
     newData["itemBank"] = {}
     newData["answerChoices"] = {}
     newData["allItems"] ={}
+    newData.timer = data.timer
     if(!data.itemBank){
         for(let i of data.categories) newData["categories"][i.name] = []
         

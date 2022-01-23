@@ -1,6 +1,9 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useMemo} from 'react'
+import {unstable_batchedUpdates} from 'react-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { resetPopUpOff } from '../../../../redux/features/activityTypes/activitiesSlice'
+import { resetPopUpOff } from '../../../../redux/features/activityTypes/activitiesSettings'
+import {updateActivityData} from '../../../../redux/features/activityTypes/activitiesData'
+import {debounce} from "lodash"
 import ActivityHeader from '../ActivityHeader'
 import ShortAnswerImage from './ShortAnswerImage'
 import ShortAnswerTextArea from './ShortAnswerTextArea'
@@ -19,6 +22,7 @@ const ShortAnswerApp = ({
     moreInfoOnClick,
     popUpBgStyles,
     activityData, 
+    originalQuestionData,
     questionNum, 
     activityID,
 }) => {
@@ -27,36 +31,49 @@ const ShortAnswerApp = ({
     
     //redux states
     const dispatch = useDispatch()
-    const resetPopUp = useSelector((state) => state.activities.resetPopUp) 
+    const resetPopUp = useSelector((state) => state.activities.settings.resetPopUp) 
     //reset answer
     useEffect(() =>{
         if(resetPopUp && resetPopUp.confirmed){
             //reset all state values to default
-            setData(state => ({
-                ...state, 
-                clientAnswer: "",
-            }))
-            dispatch(resetPopUpOff())
-            //remove any saved data from local storage
-            localStorage.removeItem(`${activityID}-SA_activity_client_answer-${questionNum}`)        
+            unstable_batchedUpdates(()=>{
+                setData(state => ({
+                    ...state, 
+                    clientAnswer: "",
+                }))
+                dispatch(resetPopUpOff())   
+                dispatch(updateActivityData({
+                    type: "singleQuestionUpdate",
+                    questionNum: questionNum,
+                    data: originalQuestionData
+                }))
+            })
+            
         }
-    }, [dispatch, resetPopUp, activityData, activityID, questionNum])
-    //grab data from local storage
-    useEffect(() => {
-        const stored_response = localStorage.getItem(`${activityID}-SA_activity_client_answer-${questionNum}`)
-        if(stored_response) setData(state => ({
-            ...state, 
-            clientAnswer: stored_response
+    }, [dispatch, resetPopUp, originalQuestionData, questionNum])
+    const reduxUpdate = (
+        newState, 
+        questionNum, 
+        dispatch
+    ) => dispatch(
+        updateActivityData({
+            type: "singleQuestionUpdate",
+            questionNum: questionNum,
+            data: newState
         }))
-    }, [activityID, questionNum])
-
+    const debounceReduxUpdate = useMemo(
+        ()=>debounce(reduxUpdate, 1000), 
+    [])
     const handleInput = (e) =>{
         const input_value = e.target.closest("textarea").value
-        setData(state => ({
-            ...state,
-            clientAnswer: input_value 
-        }))
-        localStorage.setItem(`${activityID}-SA_activity_client_answer-${questionNum}`, input_value)
+        setData((state) => {
+            const newState = {
+                ...state,
+                clientAnswer: input_value 
+            }
+            debounceReduxUpdate(newState, questionNum, dispatch)
+            return newState
+        })
     }
 
     return(
