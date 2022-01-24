@@ -29,6 +29,13 @@ export default function Dashboard(props) {
         </ul>
     const nav =
         <nav className="navbar navbar-light sticky-top navbar-expand-lg dashboard-nav">
+            <div className='center-logo'>
+                <img className="mobile-floating-logo"
+                    src={Logo}
+                    alt="Visualum logo"
+                    onClick={handleClick}
+                />
+            </div>
             <div className="container-fluid">
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
@@ -43,13 +50,6 @@ export default function Dashboard(props) {
         <div className="dashboard vh-100">
             {widthBigger ? <></> :
                 <>
-                    <div className='center-logo'>
-                        <img className="mobile-floating-logo"
-                            src={Logo}
-                            alt="Visualum logo"
-                            onClick={handleClick}
-                        />
-                    </div>
                     {nav}
                 </>}
             <div className="dashboard-container">

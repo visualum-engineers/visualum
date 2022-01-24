@@ -1,0 +1,15 @@
+.dashboard-modal {
+    width: 65rem;
+    height: 30rem;
+    border-radius: 1rem;
+    background-color: white;
+    padding: 2rem;
+    z-index: 3;
+    @include box-shadow-dash();
+    @media (max-width:992px) {
+        width: 95%;
+        height: 80%;
+        margin-top: 0;
+        margin-left: 0;
+    }
+}

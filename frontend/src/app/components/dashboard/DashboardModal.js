@@ -1,9 +1,10 @@
 import React from 'react'
+import PopUpBackground from '../utilities/popUp/PopUpBackground'
 
 export default function DashboardModal(props) {
 	const { close } = props;
 	return (
-		<div className="modal-container">
+		<PopUpBackground onClick={close}>
 			<div className="dashboard-modal d-flex flex-column">
 				<h2 className="mb-3">Create Your Class</h2>
 				<div className="row">
@@ -18,6 +19,6 @@ export default function DashboardModal(props) {
 					<button className="btn btn-danger" onClick={close}>Cancel</button>
 				</div>
 			</div>
-		</div>
+		</PopUpBackground>
 	)
 }
