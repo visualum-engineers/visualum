@@ -21,7 +21,7 @@ export default function Dashboard(props) {
         <ul className="navbar-nav me-auto">
             {sidebarValues.map(item => {
                 return (
-                    <li className="nav-item dropdown-nav-link">
+                    <li className="nav-item dropdown-nav-link" key={item.value}>
                         <a href={`/dashboard/${item.value}`}>{item.name}</a>
                     </li>
                 )

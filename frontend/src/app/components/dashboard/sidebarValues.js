@@ -1,4 +1,4 @@
-import { faBookOpen, faChalkboard, faChartBar, faCog, faGraduationCap, faUsers, faQuestion } from '@fortawesome/free-solid-svg-icons'
+import { faBookOpen, faChartBar, faCog, faGraduationCap, faUsers, faQuestion } from '@fortawesome/free-solid-svg-icons'
 
 const sidebarValues = [
 	{ value: 'home', name: 'Home', description: "An overview of dashboard functions.." },

@@ -8,7 +8,7 @@ export default function DashboardHome() {
     const cards = sidebarValues.map(item => {
         if (item.value !== "home") {
             return (
-                <div className="col-md-4 col-12 p-2">
+                <div className="col-md-4 col-12 p-2" key={item.value}>
                     <OverviewCard value={item.value} title={item.name} subtitle={item.description} icon={item.icon}/>
                 </div>
             )

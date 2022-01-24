@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Avatar from 'avataaars';
 import AvatarCreator from '../avatarCreator/AvatarCreator';
 import SettingsCard from './SettingsCard';
 import CardContainer from './CardContainer'
@@ -20,7 +19,7 @@ export default function DashboardSettings() {
 	]
 
 	const cards = settings.map(item =>
-		<div className="col-md-4 col-12 p-2">
+		<div className="col-md-4 col-12 p-2" key={item.title}>
 			<SettingsCard title={item.title} subtitle={item.subtitle} handleClick={item.handleClick} />
 		</div>
 	);

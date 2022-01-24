@@ -31,47 +31,45 @@ export default function DashboardClass() {
             name: "Emilio Samaniego",
             average: 97
         },
-        {
-            name: "Derek Widmer",
-            average: 98
-        },
-        {
-            name: "Arky Asmal",
-            average: 95.5
-        },
-        {
-            name: "Luis Lopez",
-            average: 99.2
-        },
-        {
-            name: "Emilio Samaniego",
-            average: 97
-        },
-        {
-            name: "Derek Widmer",
-            average: 98
-        },
-        {
-            name: "Arky Asmal",
-            average: 95.5
-        },
-        {
-            name: "Luis Lopez",
-            average: 99.2
-        },
-        {
-            name: "Emilio Samaniego",
-            average: 97
-        },
+        // {
+        //     name: "Derek Widmer",
+        //     average: 98
+        // },
+        // {
+        //     name: "Arky Asmal",
+        //     average: 95.5
+        // },
+        // {
+        //     name: "Luis Lopez",
+        //     average: 99.2
+        // },
+        // {
+        //     name: "Emilio Samaniego",
+        //     average: 97
+        // },
+        // {
+        //     name: "Derek Widmer",
+        //     average: 98
+        // },
+        // {
+        //     name: "Arky Asmal",
+        //     average: 95.5
+        // },
+        // {
+        //     name: "Luis Lopez",
+        //     average: 99.2
+        // },
+        // {
+        //     name: "Emilio Samaniego",
+        //     average: 97
+        // },
     ]
 
-    const cards = studentData.map(student => {
-        return (
-            <div className="col-md-6 col-xl-4 col-12 p-2">
-                <StudentCard data={student} />
-            </div>
-        )
-    });
+    const cards = studentData.map(student =>
+        <div className="col-md-6 col-xl-4 col-12 p-2" key={student.name}>
+            <StudentCard data={student} />
+        </div>
+    );
 
     return (
         <div>

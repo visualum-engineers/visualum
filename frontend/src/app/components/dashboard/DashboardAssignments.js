@@ -9,8 +9,8 @@ export default function DashboardAssignments() {
     const [assignments, setAssignments] = useState([
         { title: "History Homework", className: "4th Period", dueDate: "Dec 31st, 2021" },
         { title: "Math Homework", className: "8th Period", dueDate: "Dec 30th, 2021" },
-        { title: "History Homework", className: "4th Period", dueDate: "Dec 31st, 2021" },
-        { title: "Math Homework", className: "8th Period", dueDate: "Dec 30th, 2021" },
+        { title: "Chemistry Homework", className: "4th Period", dueDate: "Dec 31st, 2021" },
+        { title: "English Homework", className: "8th Period", dueDate: "Dec 30th, 2021" },
     ])
 
     const addAssignment = (newAssignment) => {
@@ -19,7 +19,7 @@ export default function DashboardAssignments() {
 
     const cards = assignments.map(assignment => {
         return (
-            <div className="col-md-4 col-12 p-2">
+            <div className="col-md-4 col-12 p-2" key={assignment.title}>
                 <AssignmentCard title={assignment.title} className={assignment.className} dueDate={assignment.dueDate} />
             </div>
         )
