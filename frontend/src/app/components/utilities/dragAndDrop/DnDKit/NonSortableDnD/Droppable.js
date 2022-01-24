@@ -3,7 +3,6 @@ import {useDroppable} from '@dnd-kit/core';
 import {useRef} from "react"
 import mergeRefs from '../../../../../helpers/mergeRefs';
 function Droppable(props) {
-    
     const droppableRef = useRef()
     const {isOver, setNodeRef} = useDroppable({
       id: props.id, 

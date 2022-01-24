@@ -1,7 +1,5 @@
 import { useEffect } from 'react'
-import {unstable_batchedUpdates} from 'react-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import ActivityHeader from '../ActivityHeader'
 import ShortAnswerImage from './ShortAnswerImage'
 import ShortAnswerTextArea from './ShortAnswerTextArea'
 import ConditionalWrapper from '../../utilities/conditionalWrapper/ConditionalWrapper'
@@ -15,8 +13,6 @@ import { resetHistory } from '../activityHistoryFunc'
 
 const ShortAnswerApp = ({
     mediumWindowWidth,
-    smallWindowWidth, 
-    resetBtnOnClick, 
     moreInfoOnClick,
     popUpBgStyles,
     originalQuestionData,
@@ -32,27 +28,16 @@ const ShortAnswerApp = ({
     useEffect(() =>{
         if(resetPopUp && resetPopUp.confirmed){
             //reset all state values to default
-            unstable_batchedUpdates(()=>{
-                resetHistory({
-                    dispatch,
-                    questionNum: questionNum,
-                    newState: originalQuestionData
-                })  
-            })
-            
+            resetHistory({
+                dispatch,
+                questionNum: questionNum,
+                newState: originalQuestionData
+            })  
         }
     }, [dispatch, resetPopUp, originalQuestionData, questionNum])
  
-
     return(
         <>
-            <ActivityHeader
-                smallWindowWidth = {smallWindowWidth}
-                mediumWindowWidth={mediumWindowWidth} 
-                data = {data}
-                resetBtnOnClick = {resetBtnOnClick} 
-                questionNum = {questionNum}
-            />
             <div
                 className="sa-activity-container d-flex flex-column align-items-center justify-content-center flex-grow-1"
             >

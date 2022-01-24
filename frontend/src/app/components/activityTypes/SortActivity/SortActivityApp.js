@@ -26,14 +26,14 @@ import {addToTop} from '../../utilities/dragAndDrop/DnDKit/positionFunctions/ind
 
 //redux states and functions
 import {useDispatch, useSelector} from 'react-redux';
-import {
-    enableTap, 
-    enableDnD, 
-} from '../../../../redux/features/activityTypes/activitiesSettings'
+// import {
+//     enableTap, 
+//     enableDnD, 
+// } from '../../../../redux/features/activityTypes/activitiesSettings'
 import {updateActivityData} from '../../../../redux/features/activityTypes/activitiesData'
 //components
 import WordBank from './SortActivityWordBank';
-import ActivityHeader from '../ActivityHeader';
+//import ActivityHeader from '../ActivityHeader';
 import SortActivityCategories from './SortActivityCategories';
 import Item from '../../utilities/dragAndDrop/DnDKit/DragOverlayItem';
 import { resetHistory } from '../activityHistoryFunc';
@@ -54,7 +54,7 @@ const SortActivityApp = ({
     originalQuestionData,
     questionNum, 
     moreInfoOnClick, 
-    resetBtnOnClick,
+    //resetBtnOnClick,
     moreInfoBtn, 
     mediumWindowWidth,
     smallWindowWidth,
@@ -71,7 +71,7 @@ const SortActivityApp = ({
     
     //redux states
     const dispatch = useDispatch()
-    const disableDnD = useSelector((state) => !state.activities.settings.dndEnabled) 
+    const disableDnD = useSelector((state) => state.activities.settings.dndEnabled) 
     const resetPopUp = useSelector((state) => state.activities.settings.resetPopUp) 
     
     //used for tap and drop to track selected elements
@@ -89,6 +89,15 @@ const SortActivityApp = ({
         });
       }, [isOver]);
 
+    useEffect(() => {
+        //if we're changing the mode, we need to reset this
+        if(disableDnD){
+            if(firstElTap) firstElTap.node.classList.remove("sort-activity-dragging")
+            removedEl.current = null
+            setFirstElTap(null)
+        }
+    }, [firstElTap, disableDnD])
+    
     //handle reseting data on curr question
     useEffect(() =>{
         if(resetPopUp && resetPopUp.confirmed){
@@ -126,6 +135,7 @@ const SortActivityApp = ({
     useEffect(() =>{
         return () => cleanUpCollisionData()
     })
+    
     //determine how many categories there are
     const numCategories = Object.keys(data.categories)
 
@@ -249,7 +259,6 @@ const SortActivityApp = ({
         if(isOver === endElOver.containerId && endElIndex === startElIndex) return
 
         updateSortableLists(resultValues(e, endElOver.containerId))
-        
     };
     const onDragCancel = (e) =>{
         unstable_batchedUpdates(()=>{
@@ -270,22 +279,14 @@ const SortActivityApp = ({
         const result = getResultOnTap(parms)
         if(!result) return
         setFirstElTap(null)
-        updateSortableLists(result)
+        const newState = updateSortableLists(result)
+        dispatch(updateActivityData({
+            type: "singleQuestionUpdate",
+            questionNum: questionNum,
+            data: newState
+        }))
     }
-    //toggle dnd and tap mode based on btn
-    const toggleTap = (e) => {
-        if (e.type ==="click" || (e.type ==="keydown" && e.key === "Enter")) {
-            //update redux store so instructions can dynamically change
-            if (disableDnD) dispatch(enableDnD())
-            else dispatch(enableTap())
-            moreInfoOnClick()
-            //if we're changing the mode, we need to reset this
-            // as its only viable for tap mode
-            if(firstElTap) firstElTap.node.classList.remove("sort-activity-dragging")
-            removedEl.current = null
-            setFirstElTap(null)
-        }
-    }
+   
     const customCollisionAlgo = ({
         e, 
         isOver, 
@@ -328,7 +329,7 @@ const SortActivityApp = ({
     if(!onMount.current) return <div></div>
     return (
     <>  
-        <ActivityHeader 
+        {/* <ActivityHeader 
             mediumWindowWidth={mediumWindowWidth}
             smallWindowWidth = {smallWindowWidth}
             data ={data}
@@ -337,7 +338,7 @@ const SortActivityApp = ({
             disableDnD ={disableDnD}
             toggleTap = {toggleTap}
             type="DnD"
-        />
+        /> */}
         <div className={`sort-activity-container d-flex ${mediumWindowWidth ? "full-size":"portrait-size flex-column align-items-center"}`}>
             <DndContext 
                 onDragStart={onDragStart}
@@ -349,22 +350,22 @@ const SortActivityApp = ({
                 {/* Renders sort categories */}
                 <SortActivityCategories 
                     numCategories = {numCategories}
-                    onTap = {disableDnD ? onTap : null}
+                    onTap = {!disableDnD ? onTap : null}
                     data={data}
                     mediumWindowWidth = {mediumWindowWidth}
                     smallWindowWidth = {smallWindowWidth}
                     isOver = {isOver}
                     moreInfoBtn = {moreInfoBtn}
                     moreInfoOnClick = {moreInfoOnClick}
-                    disableDnD = {disableDnD}
+                    disableDnD = {!disableDnD}
                     firstElTap = {firstElTap}
                 />
                 {mediumWindowWidth && <WordBank 
                     data ={data}
                     firstElTap = {firstElTap}
-                    onTap = {disableDnD ? onTap : null}
+                    onTap = {!disableDnD ? onTap : null}
                     isOver = {isOver}
-                    disableDnD = {disableDnD}
+                    disableDnD = {!disableDnD}
                     //classes
                     resizeContainerClass = {`sort-activity-itemBank-container ${mediumWindowWidth ? "full-size":"w-100"} d-flex flex-column`}
                     overallContainerClass = {`sort-activity-itemBank ${mediumWindowWidth ? "full-size":"w-100"}`} 
@@ -372,7 +373,7 @@ const SortActivityApp = ({
                     columnTitleClass = {`sort-activity-column-titles d-flex align-items-center justify-content-center`}
                     columnClass = {"sort-activity-itemBank-column"}
                     droppableClassName ={`sort-activity-itemBank-droppables w-100${!mediumWindowWidth?" small-screen": ""}`}
-                    innerDroppableClassName = {`${disableDnD && firstElTap? "sort-activity-tap-active ": ""}sort-activity-inner-droppable d-flex flex-column align-items-center w-100`}
+                    innerDroppableClassName = {`${!disableDnD && firstElTap? "sort-activity-tap-active ": ""}sort-activity-inner-droppable d-flex flex-column align-items-center w-100`}
                     draggingOverClass = {"sort-activity-dragging-over"}
                     draggableClassName = {"sort-activity-draggables d-flex align-items-center justify-content-center "}
                     isDraggingClass = {"sort-activity-is-dragging"}
@@ -383,18 +384,18 @@ const SortActivityApp = ({
                     data ={data}
                     firstElTap = {firstElTap}
                     isDraggingClass = {"sort-activity-is-dragging"}
-                    onTap = {disableDnD ? onTap : null}
+                    onTap = {!disableDnD ? onTap : null}
                     resizeContainerClass = {`sort-activity-itemBank-container ${mediumWindowWidth ? "full-size":"w-100"} d-flex flex-column`}
                     overallContainerClass = {`sort-activity-itemBank ${mediumWindowWidth ? "full-size":"w-100"}`} 
                     columnContainerClass = "sort-activity-column-container w-100"
                     columnTitleClass = {`sort-activity-column-titles d-flex align-items-center justify-content-center`}
                     columnClass = "sort-activity-itemBank-column"
                     droppableClassName ={`sort-activity-itemBank-droppables${!mediumWindowWidth?" small-screen w-100": ""}`}
-                    innerDroppableClassName = {`${disableDnD && firstElTap? "sort-activity-tap-active ": ""}sort-activity-inner-droppable d-flex flex-column align-items-center w-100`}
+                    innerDroppableClassName = {`${!disableDnD && firstElTap? "sort-activity-tap-active ": ""}sort-activity-inner-droppable d-flex flex-column align-items-center w-100`}
                     draggingOverClass = {"sort-activity-dragging-over"}
                     draggableClassName = {"sort-activity-draggables d-flex align-items-center justify-content-center"}
                     isOver = {isOver}
-                    disableDnD = {disableDnD}
+                    disableDnD = {!disableDnD}
                 />}
                 {/*Current element being dragged*/}
                 <DragOverlay

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { updateActivityData } from '../../../../redux/features/activityTypes/activitiesData';
 import ControlledInputsImage from './ControlledInputsImage';
 import ControlledInputsColumn from './ControlledInputsColumn';
-import ActivityHeader from '../ActivityHeader'
 import { resetHistory } from '../activityHistoryFunc';
 
 /*
@@ -20,7 +19,6 @@ const ControlledInputsApp = ({
     mediumWindowWidth,
     popUpBgStyles,
     moreInfoOnClick, 
-    resetBtnOnClick
 }) => {
     //for updating redux store(data to be sent to backend)
     const data = useSelector(state => state.activities.data.present.clientAnswerData.questions[questionNum])
@@ -109,13 +107,6 @@ const ControlledInputsApp = ({
     if(!isMount.current) return <div></div>
     return(
         <>
-        <ActivityHeader
-            data = {data}
-            smallWindowWidth = {smallWindowWidth}
-            resetBtnOnClick = {resetBtnOnClick}
-            questionNum = {questionNum}
-            mediumWindowWidth={mediumWindowWidth}
-        />
         <form className = "controlled-inputs-activity-container d-flex flex-grow-1">
             <div className = "controlled-inputs-activity d-flex flex-column justify-content-center flex-grow-1">
                 <div 

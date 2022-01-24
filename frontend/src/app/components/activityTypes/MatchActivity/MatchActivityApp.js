@@ -3,19 +3,12 @@ import { unstable_batchedUpdates } from 'react-dom';
 import {DragDropContext} from 'react-beautiful-dnd';
 import WordBank from '../../utilities/dragAndDrop/ReactBeautifulDnD/WordBank';
 import AnswerBank from './MatchActivityAnswerBank';
-import ActivityHeader from '../ActivityHeader';
 import transformData from './matchTransformData';
 import getResultOnTap from '../../utilities/dragAndDrop/DnDUpdateAlgo.js/Sortables/getResultOnTap';
 import {useDispatch, useSelector} from 'react-redux';
 import {updateActivityData} from "../../../../redux/features/activityTypes/activitiesData"
 import { resetHistory } from '../activityHistoryFunc';
 import {cloneDeep} from 'lodash'
-
-import {
-    enableTap, 
-    enableDnD,
-} from '../../../../redux/features/activityTypes/activitiesSettings'
-
 /*
 To-dos
 Backend: 
@@ -27,10 +20,8 @@ const MatchActivityApp = ({
     originalQuestionData,
     questionNum, 
     moreInfoOnClick,
-    resetBtnOnClick, 
     moreInfoBtn, 
-    mediumWindowWidth,
-    smallWindowWidth
+    mediumWindowWidth
 }) => {
     const columns = mediumWindowWidth ? Array(1).fill(0) : Array(2).fill(0)
     const [firstElTap, setFirstElTap] = useState(null)
@@ -39,7 +30,7 @@ const MatchActivityApp = ({
     //redux states
     const dispatch = useDispatch()
     const data = useSelector(state => state.activities.data.present.clientAnswerData.questions[questionNum])
-    const disableDnD = useSelector((state) => !state.activities.settings.dndEnabled) 
+    const disableDnD = useSelector((state) => state.activities.settings.dndEnabled) 
     const resetPopUp = useSelector((state) => state.activities.settings.resetPopUp) 
 
     //to manage data side effect 
@@ -74,7 +65,14 @@ const MatchActivityApp = ({
         }
     }, [dispatch, resetPopUp, originalQuestionData, columns.length, questionNum])
     
-    
+    useEffect(() => {
+        //if we're changing the mode, we need to reset this
+        if(disableDnD){
+            if(firstElTap) firstElTap.node.classList.remove("sort-activity-dragging")
+            setRemovedEl(undefined)
+            setFirstElTap(null)
+        }
+    }, [firstElTap, disableDnD])
 
     //used because we need to keep only one answer in a key container at a time.
     const customUpdateLists = (result) =>{
@@ -216,40 +214,17 @@ const MatchActivityApp = ({
         onDragEnd(result)
         setFirstElTap(null)
     }
-    //toggle dnd and tap mode based on btn
-    const toggleTap = (e) => {
-        if (e.type ==="click" || (e.type ==="keydown" && e.key === "Enter")) {
-            //setDisableDnD(state => !state)
-            //update redux store so instructions can dynamically change
-            if (disableDnD) dispatch(enableDnD())
-            else dispatch(enableTap())
-            moreInfoOnClick()
-            //if we're changing the mode, we need to reset this
-            // as its only viable for tap mode
-            if(firstElTap) firstElTap.node.classList.remove("match-activity-dragging")
-            setRemovedEl(undefined)
-            setFirstElTap(null)
-        }
-    }
+
     //ensure redux state is transformed first
     if(!onMount.current) return <div></div>
     return(
         <>
-        <ActivityHeader 
-            mediumWindowWidth={mediumWindowWidth}
-            smallWindowWidth = {smallWindowWidth}
-            data ={data}
-            resetBtnOnClick ={resetBtnOnClick} 
-            questionNum={questionNum}
-            disableDnD ={disableDnD}
-            toggleTap = {toggleTap}
-            type="DnD"
-        />
+
         <div className={`match-activity-container${mediumWindowWidth ? " full-size":" portrait-size"}`}>
         <DragDropContext 
-            onDragEnd = {!disableDnD ? onDragEnd: null} 
-            onDragUpdate={!disableDnD ? onDragUpdate: null} 
-            onDragStart={!disableDnD ? onDragStart: null}
+            onDragEnd = {disableDnD ? onDragEnd: null} 
+            onDragUpdate={disableDnD ? onDragUpdate: null} 
+            onDragStart={disableDnD ? onDragStart: null}
         >
             <div className="d-flex justify-content-center w-100">
                 <AnswerBank 
@@ -257,7 +232,7 @@ const MatchActivityApp = ({
                     firstElTap= {firstElTap}
                     mediumWindowWidth = {mediumWindowWidth}
                     moreInfoOnClick = {moreInfoOnClick}
-                    disableDnD = {disableDnD}
+                    disableDnD = {!disableDnD}
                     onTap = {onTap}
                     moreInfoBtn = {moreInfoBtn}
                     removedEl = {removedEl}
@@ -265,8 +240,8 @@ const MatchActivityApp = ({
                 {mediumWindowWidth ? <WordBank 
                                        data={data}
                                        firstElTap= {firstElTap}
-                                       disableDnD = {disableDnD}
-                                       onTap = {disableDnD? onTap: null}
+                                       disableDnD = {!disableDnD}
+                                       onTap = {!disableDnD? onTap: null}
                                        //classes
                                        resizeContainerClass={"match-activity-itemBank-container full-size"}
                                        overallContainerClass = {"match-activity-itemBank d-flex align-items-center flex-column full-size"}
@@ -275,7 +250,7 @@ const MatchActivityApp = ({
                                        columnClass = {"match-activity-itemBank-column"}
                                        droppableClassName = {`match-activity-itemBank-droppables d-flex flex-column w-100`}
                                        draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
-                                       innerDroppableClassName = {`${disableDnD && firstElTap? "match-activity-tap-active ": ""}match-activity-inner-droppable w-100 d-flex flex-column align-items-center`}
+                                       innerDroppableClassName = {`${!disableDnD && firstElTap? "match-activity-tap-active ": ""}match-activity-inner-droppable w-100 d-flex flex-column align-items-center`}
                                        draggingOverClass={"match-activity-draggable-over"}
                                        isDraggingClass = {"match-activity-dragging"}
                                     />
@@ -286,7 +261,7 @@ const MatchActivityApp = ({
                         <WordBank 
                             data={data}
                             firstElTap= {firstElTap}
-                            onTap = {disableDnD? onTap: null}
+                            onTap = {!disableDnD? onTap: null}
                             //classes
                             resizeContainerClass={"match-activity-itemBank-container w-100"}
                             overallContainerClass = {"match-activity-itemBank d-flex flex-column align-items-center w-100"}
@@ -295,7 +270,7 @@ const MatchActivityApp = ({
                             columnTitleClass = {"match-activity-column-titles vertical"}
                             droppableClassName = {`match-activity-itemBank-droppables d-flex flex-column w-100`}
                             draggableClassName = {"match-activity-draggables d-flex align-items-center justify-content-center"}
-                            innerDroppableClassName = {`${disableDnD && firstElTap? "match-activity-tap-active ": ""}match-activity-inner-droppable w-100 d-flex flex-column align-items-center`}
+                            innerDroppableClassName = {`${!disableDnD && firstElTap? "match-activity-tap-active ": ""}match-activity-inner-droppable w-100 d-flex flex-column align-items-center`}
                             draggingOverClass={"match-activity-draggable-over"}
                             isDraggingClass = {"match-activity-dragging"}
                         />

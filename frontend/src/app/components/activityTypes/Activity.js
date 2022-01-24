@@ -1,6 +1,7 @@
 import ActivityQuestions from "./ActivityQuestions"
 import ActivityInstructions from "./ActivityInstructions"
 import ActivityBtns from "./ActivityBtns"
+import ActivityHeader from "./ActivityHeader"
 import DnDActivites from "./DnDActivites"
 import useWindowWidth from "../../hooks/use-window-width"
 import SecondarySideBar from "../sideBar/SecondarySideBar"
@@ -9,7 +10,12 @@ import { unstable_batchedUpdates } from "react-dom"
 import {CSSTransition} from "react-transition-group"
 import { useSelector, useDispatch } from 'react-redux'
 import {updateActivityData} from "../../../redux/features/activityTypes/activitiesData"
+import ActivityResetPopUp from './ActivityResetPopUp'
+import UserProfile from "../utilities/userProfile/UserProfile";
+import calculatePercentage from "../../helpers/calculatePercentage";
+import capitalizeFirstLetter from "../../helpers/capitalizeFirstLetter"
 import {
+    enableDnD,
     enableTap, 
     resetPopUpOn, 
     resetPopUpOff,
@@ -18,11 +24,6 @@ import {
     activitySecondarySideBarData, 
     activitySecondarySidebarFooterData 
 } from "./ActivitySidebarData"
-
-import ActivityResetPopUp from './ActivityResetPopUp'
-import UserProfile from "../utilities/userProfile/UserProfile";
-import calculatePercentage from "../../helpers/calculatePercentage";
-import capitalizeFirstLetter from "../../helpers/capitalizeFirstLetter"
 
 
 const duration = 375
@@ -40,6 +41,8 @@ let Activity = () =>{
     const activityData = useSelector((state) => state.activities.data.present.activityData)
     const dndEnabled = useSelector((state) => state.activities.settings.dndEnabled)
     const resetPopUp = useSelector((state) => state.activities.settings.resetPopUp)
+    const disableDnD = useSelector((state) => !state.activities.settings.dndEnabled) 
+
     const dispatch = useDispatch()
 
     //component specific state
@@ -149,6 +152,15 @@ let Activity = () =>{
                 return
         }
     }
+    //toggle dnd and tap mode based on btn
+    const toggleTap = (e) => {
+        if (e.type ==="click" || (e.type ==="keydown" && e.key === "Enter")) {
+            //update redux store so instructions can dynamically change
+            if (disableDnD) dispatch(enableDnD())
+            else dispatch(enableTap())
+            moreInfoOnClick()
+        }
+    }
     const sideBarData = activitySecondarySideBarData({
         activityData: activityData,
         onInstructionsClick: moreInfoOnClick,
@@ -212,6 +224,16 @@ let Activity = () =>{
                 className = "activity-type-container col-12 col-md-11 d-flex flex-column" 
                 style={inProp ? {overflow: "hidden"}: null}
             >
+                <ActivityHeader 
+                    mediumWindowWidth={mediumWindowWidth}
+                    smallWindowWidth = {smallWindowWidth}
+                    data ={activityData.questions[questionNum]}
+                    resetBtnOnClick ={resetBtnOnClick} 
+                    questionNum={questionNum}
+                    disableDnD ={disableDnD}
+                    toggleTap = {toggleTap}
+                    type="DnD"
+                />
                 {/*generate entire form data*/}
                 {question.type ?
                     activityData.questions.map((question, index)=>{

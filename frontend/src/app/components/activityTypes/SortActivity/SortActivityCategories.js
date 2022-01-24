@@ -32,6 +32,7 @@ const SortActivityCategories = ({
         height: categoriesContainerPos ? categoriesContainerPos.height : null,
         touchAction: "none"
     }
+   
     return (
         <div 
             className={`sort-activity-categories-containers ${mediumWindowWidth ? "full-size": "portrait-mode w-100"}`}
