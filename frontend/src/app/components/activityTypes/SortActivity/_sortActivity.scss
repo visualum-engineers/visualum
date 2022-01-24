@@ -25,10 +25,24 @@
 }
 $activity-container-height: calc(94vh - 2rem);
 $activity-container-min-height: calc(40rem - 7vh - 2rem);
-$sort-activity-container-height: calc(#{$activity-container-height} - 3.6rem - 23px);
-$sort-activity-container-min-height: calc(#{$activity-container-min-height} - 3.6rem - 23px);
-$sort-column-min-height: calc(#{$sort-activity-container-min-height} - 2rem);
-$sort-column-height: calc(#{$sort-activity-container-height} - 2rem);
+$sort-activity-container-height: calc(
+    #{$activity-container-height} 
+    - 3.6rem 
+    - 23px
+);
+$sort-activity-container-min-height: calc(
+    #{$activity-container-min-height} 
+    - 3.6rem 
+    - 23px
+);
+$sort-column-min-height: calc(
+    #{$sort-activity-container-min-height} 
+    - 2rem
+);
+$sort-column-height: calc(
+    #{$sort-activity-container-height} 
+    - 2rem
+);
 html.sortActivityActive{
     scroll-behavior: unset !important;
 }

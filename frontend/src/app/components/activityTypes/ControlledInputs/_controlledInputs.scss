@@ -1,11 +1,25 @@
 @import "./Radio/radio";
 @import "./Checkbox/checkbox";
+$activity-container-height: calc(94vh - 2rem);
+$activity-container-min-height: calc(40rem - 7vh - 2rem);
+$mc-activity-container-height: calc(
+    #{$activity-container-height} 
+    - 3.6rem 
+    - 23px
+);
+$mc-activity-container-min-height: calc(
+    #{$activity-container-min-height} 
+    - 3.6rem 
+    - 23px
+);
+
 .controlled-inputs-activity-container{
     position: relative;
     font-size: 0.8rem;
     background-color: $white;
     padding: 1rem;
     @include border-radius(0.5rem);
+    min-height: calc(max(#{$match-activity-container-height}, #{$match-activity-container-min-height}));
 }
 .controlled-inputs-activity-container::before{
     position: absolute;

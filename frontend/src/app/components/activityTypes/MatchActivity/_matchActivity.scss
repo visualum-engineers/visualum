@@ -24,17 +24,36 @@
 }
 $activity-container-height: calc(94vh - 2rem);
 $activity-container-min-height: calc(40rem - 7vh - 2rem);
-$match-activity-container-height: calc(#{$activity-container-height} - 3.6rem - 23px);
-$match-activity-container-min-height: calc(#{$activity-container-min-height} - 3.6rem - 23px);
-$match-column-min-height: calc(#{$match-activity-container-min-height} - 2rem);
-$match-column-height: calc(#{$match-activity-container-height} - 2rem);
+$match-activity-container-height: calc(
+    #{$activity-container-height} 
+    - 3.6rem 
+    - 23px
+);
+$match-activity-container-min-height: calc(
+    #{$activity-container-min-height} 
+    - 3.6rem 
+    - 23px
+);
+$match-column-min-height: calc(
+    #{$match-activity-container-min-height} 
+    - 2rem
+);
+$match-column-height: calc(
+    #{$match-activity-container-height} 
+    - 2rem
+);
 
 .match-activity-container{
     position: relative;
     padding: 1rem;
     background-color: $white;
-    min-height: calc(max(#{$match-activity-container-height}, #{$match-activity-container-min-height}));
     @include border-radius(0.5rem);
+    min-height: calc(
+        max(
+            #{$match-activity-container-height}, 
+            #{$match-activity-container-min-height}
+        )
+    );
 }
 .match-activity-container.portrait-size{
     min-height: calc(max(calc(#{$match-activity-container-height} * 2), calc(#{$match-activity-container-min-height} * 2)));

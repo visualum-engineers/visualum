@@ -38,40 +38,40 @@ const ShortAnswerApp = ({
  
     return(
         <>
-            <div
-                className="sa-activity-container d-flex flex-column align-items-center justify-content-center flex-grow-1"
-            >
-                <div className={`sa-activity-inner-container d-flex flex-grow-1` 
-                                + `${!mediumWindowWidth || !data.imageURL? " flex-column align-items-center ": ""} `}>
 
-                    <ConditionalWrapper
-                        condition={mediumWindowWidth && data.imageURL}
-                        wrapper={children => <div className='sa-activity-question-wrapper'>{children}</div>}
-                    >
-                        <h2 className={`sa-activity-question${mediumWindowWidth && !data.imageURL ? " w-50":""}`}> 
-                            {data.question}
-                        </h2>
-                        {data.imageURL &&
-                            <div className="d-flex justify-content-center w-100"> 
-                                <ShortAnswerImage 
-                                    data = {data}
-                                    popUpBgStyles={popUpBgStyles}
-                                />
-                            </div>
-                        }
-                    </ConditionalWrapper>
-                    <div className={`sa-activity-input-container`
-                                    + `${mediumWindowWidth && !data.imageURL ? " w-50 m-0" 
-                                    : !mediumWindowWidth ? " portrait-size": ""}`}>
-                        <ShortAnswerTextArea 
-                            data={data}
-                            questionNum={questionNum}
-                        />
-                    </div>
+        <div
+            className={`sa-activity-container ${mediumWindowWidth ? "full-size" : "portrait-mode"}`}
+        >
+            <div className={`sa-activity-inner-container d-flex flex-grow-1` 
+                            + `${!mediumWindowWidth || !data.imageURL? " flex-column align-items-center ": ""} `}>
+
+                <ConditionalWrapper
+                    condition={mediumWindowWidth && data.imageURL}
+                    wrapper={children => <div className='sa-activity-question-wrapper'>{children}</div>}
+                >
+                    <h2 className={`sa-activity-question${mediumWindowWidth && !data.imageURL ? " w-50":""}`}> 
+                        {data.question}
+                    </h2>
+                    {data.imageURL &&
+                        <div className="d-flex justify-content-center w-100"> 
+                            <ShortAnswerImage 
+                                data = {data}
+                                popUpBgStyles={popUpBgStyles}
+                            />
+                        </div>
+                    }
+                </ConditionalWrapper>
+                <div className={`sa-activity-input-container`
+                                + `${mediumWindowWidth && !data.imageURL ? " w-50 m-0" 
+                                : !mediumWindowWidth ? " portrait-size": ""}`}>
+                    <ShortAnswerTextArea 
+                        data={data}
+                        questionNum={questionNum}
+                    />
                 </div>
-
             </div>
-            
+
+        </div>
             
         </>
     )

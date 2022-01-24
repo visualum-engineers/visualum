@@ -107,7 +107,7 @@ const ControlledInputsApp = ({
     if(!isMount.current) return <div></div>
     return(
         <>
-        <form className = "controlled-inputs-activity-container d-flex flex-grow-1">
+        <form className = "controlled-inputs-activity-container d-flex">
             <div className = "controlled-inputs-activity d-flex flex-column justify-content-center flex-grow-1">
                 <div 
                     className = {`d-flex`

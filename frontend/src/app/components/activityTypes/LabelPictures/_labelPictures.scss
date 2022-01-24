@@ -57,10 +57,24 @@
 
 $activity-container-height: calc(94vh - 2rem);
 $activity-container-min-height: calc(40rem - 7vh - 2rem);
-$label-pic-activity-container-height: calc(#{$activity-container-height} - 3.6rem - 23px);
-$label-pic-activity-container-min-height: calc(#{$activity-container-min-height} - 3.6rem - 23px);
-$label-pic-column-min-height: calc(#{$label-pic-activity-container-min-height} - 2rem);
-$label-pic-column-height: calc(#{$label-pic-activity-container-height} - 2rem);
+$label-pic-activity-container-height: calc(
+    #{$activity-container-height} 
+    - 3.6rem 
+    - 23px
+);
+$label-pic-activity-container-min-height: calc(
+    #{$activity-container-min-height} 
+    - 3.6rem 
+    - 23px
+);
+$label-pic-column-min-height: calc(
+    #{$label-pic-activity-container-min-height} 
+    - 2rem
+);
+$label-pic-column-height: calc(
+    #{$label-pic-activity-container-height} 
+    - 2rem
+);
 
 .label-pic-activity-container{
     position: relative;
