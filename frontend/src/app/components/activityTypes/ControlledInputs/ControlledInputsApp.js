@@ -1,4 +1,4 @@
-import {useEffect} from 'react'
+import {useEffect, useRef} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateActivityData } from '../../../../redux/features/activityTypes/activitiesData';
 import ControlledInputsImage from './ControlledInputsImage';
@@ -41,7 +41,20 @@ const ControlledInputsApp = ({
             })
         }
     }, [dispatch, resetPopUp, originalQuestionData, questionNum])
-
+    //onMount
+    //reset answer
+    const isMount = useRef(false)
+    useEffect(() =>{
+        if(!isMount.current){
+            isMount.current = true
+            //reset all state values to default
+            dispatch(updateActivityData({
+                type: "singleQuestionUpdate",
+                questionNum: questionNum,
+                data: {...data, clientAnswer:{}}
+            }))
+        }
+    }, [dispatch, data, questionNum])
     const rows = data.answerChoices.length % 2 ===0 ? data.answerChoices.length/2 : Math.floor(data.answerChoices.length/2 + 1)
     const columns = 2
 
@@ -62,6 +75,7 @@ const ControlledInputsApp = ({
     }
     const updateCheckboxChoice = (id) =>{
         const answserId = id.dataset.updateAnswerChoice
+        if(!data.clientAnswer) return {[answserId] : true}
         const newData = {...data.clientAnswer}
         if(answserId.toString() in data.clientAnswer) delete newData[answserId]
         else newData[answserId] = true 
@@ -91,7 +105,8 @@ const ControlledInputsApp = ({
             data: newState
         }))
     }
-
+    
+    if(!isMount.current) return <div></div>
     return(
         <>
         <ActivityHeader
