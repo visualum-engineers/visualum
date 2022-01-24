@@ -72,6 +72,7 @@ $highlight-color: #FF8000;
 .mobile-floating-logo {
     width: 2.5rem;
     height: 2.5rem;
+    cursor: pointer;
 }
 
 .main-content {
@@ -114,13 +115,16 @@ $highlight-color: #FF8000;
 .student-card {
     @include card();
     flex-direction: row;
+    .card-body {
+        padding-right: 0;
+    }
     .student-avatar {
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100%;
-        width: 9rem;
-        padding-right: 1rem;
+        width: 7rem;
+        // padding-right: .3rem;
     }
 }
 

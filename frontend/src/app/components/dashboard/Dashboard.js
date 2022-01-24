@@ -28,7 +28,7 @@ export default function Dashboard(props) {
             })}
         </ul>
     const nav =
-        <nav className="navbar navbar-light sticky-top navbar-expand-lg dashboard-nav">
+        <nav className="navbar navbar-light fixed-top navbar-expand-lg dashboard-nav">
             <div className='center-logo'>
                 <img className="mobile-floating-logo"
                     src={Logo}
@@ -52,7 +52,7 @@ export default function Dashboard(props) {
                 <>
                     {nav}
                 </>}
-            <div className="dashboard-container">
+            <div className={`dashboard-container ${widthBigger ? '' : 'mt-5'}`}>
                 {widthBigger ? <DashboardSidebar page={props.page} /> : <></>}
                 <div className={`main-content ${state.collapsed ? "main-content-full" : ""}`}>
                     <Outlet />
