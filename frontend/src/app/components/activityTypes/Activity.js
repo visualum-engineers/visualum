@@ -2,7 +2,7 @@ import ActivityQuestions from "./ActivityQuestions"
 import ActivityInstructions from "./ActivityInstructions"
 import ActivityBtns from "./ActivityBtns"
 import ActivityHeader from "./ActivityHeader"
-import DnDActivites from "./DnDActivites"
+import DnDActivities from "./DnDActivities"
 import useWindowWidth from "../../hooks/use-window-width"
 import SecondarySideBar from "../sideBar/SecondarySideBar"
 import { useEffect, useState } from "react"
@@ -79,7 +79,7 @@ let Activity = () =>{
 
     useEffect(()=>{
         const questionType = question.type
-        const updateDnD = !smallWindowWidth && (questionType in DnDActivites)
+        const updateDnD = !smallWindowWidth && (questionType in DnDActivities)
         if(updateDnD) {
             dispatch(enableTap())
             setMoreInfoBtn(true)
@@ -232,7 +232,7 @@ let Activity = () =>{
                     questionNum={questionNum}
                     disableDnD ={disableDnD}
                     toggleTap = {toggleTap}
-                    type="DnD"
+                    type={activityData.questions[questionNum].type in DnDActivities ? "DnD" : null}
                 />
                 {/*generate entire form data*/}
                 {question.type ?
