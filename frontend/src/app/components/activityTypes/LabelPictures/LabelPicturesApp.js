@@ -59,7 +59,7 @@ const LabelPicturesApp = ({
                 resetHistory({
                     dispatch: dispatch,
                     questionNum: questionNum,
-                    data: transformData(originalQuestionData, 1)
+                    newState: transformData(originalQuestionData, 1)
                 })
             })
         }

@@ -13,8 +13,7 @@ export const resetHistory = ({
         questionNum: questionNum,
         data: newState
     }))
-    dispatch({type: "activities/data/jump", action: -1})
-
+    //dispatch({type: "activities/data/jump", action: -1})
 }
 
 export const undoHistory = (dispatch) =>{
