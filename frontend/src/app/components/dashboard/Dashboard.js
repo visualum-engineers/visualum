@@ -44,7 +44,7 @@ export default function Dashboard(props) {
             {widthBigger ? <></> :
                 <>
                     <div className='center-logo'>
-                        <img className="dashboard-logo"
+                        <img className="mobile-floating-logo"
                             src={Logo}
                             alt="Visualum logo"
                             onClick={handleClick}
