@@ -32,7 +32,7 @@ const getDataFromLocalStorage = (data) =>{
         const newData = JSON.parse(localStorage.getItem(data.activityID))
         return newData
     } catch{
-            console.log("get Item error")
+            console.log("activity not previously stored")
         return
     }
 }
