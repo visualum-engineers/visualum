@@ -1,11 +1,10 @@
-import {useEffect, useState} from 'react'
+import {useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { unstable_batchedUpdates } from 'react-dom';
 import { updateActivityData } from '../../../../redux/features/activityTypes/activitiesData';
-import { resetPopUpOff } from '../../../../redux/features/activityTypes/activitiesSettings';
 import ControlledInputsImage from './ControlledInputsImage';
 import ControlledInputsColumn from './ControlledInputsColumn';
 import ActivityHeader from '../ActivityHeader'
+import { resetHistory } from '../activityHistoryFunc';
 
 /*
     Frontend:
@@ -15,7 +14,6 @@ import ActivityHeader from '../ActivityHeader'
 */
 const ControlledInputsApp = ({
     inputType,
-    activityData, 
     originalQuestionData,
     questionNum, 
     smallWindowWidth,
@@ -25,10 +23,7 @@ const ControlledInputsApp = ({
     resetBtnOnClick
 }) => {
     //for updating redux store(data to be sent to backend)
-    const [data, setData] = useState({
-        clientAnswer: {}, 
-        ...activityData, 
-    })
+    const data = useSelector(state => state.activities.data.present.clientAnswerData.questions[questionNum])
     //redux states
     const dispatch = useDispatch()
     const resetPopUp = useSelector((state) => state.activities.settings.resetPopUp)
@@ -36,36 +31,32 @@ const ControlledInputsApp = ({
     useEffect(() =>{
         if(resetPopUp && resetPopUp.confirmed){
             //reset all state values to default
-            unstable_batchedUpdates(()=>{
-                setData({
+            resetHistory({
+                dispatch: dispatch,
+                questionNum: questionNum,
+                newState: {
                     ...originalQuestionData, 
                     clientAnswer: {},
-                })
-                dispatch(resetPopUpOff())
-                dispatch(updateActivityData({
-                    type: "singleQuestionUpdate",
-                    questionNum: questionNum,
-                    data: {
-                        ...originalQuestionData, 
-                        clientAnswer: {},
-                    }
-                }))
+                }
             })
         }
     }, [dispatch, resetPopUp, originalQuestionData, questionNum])
 
     const rows = data.answerChoices.length % 2 ===0 ? data.answerChoices.length/2 : Math.floor(data.answerChoices.length/2 + 1)
     const columns = 2
+
     if(rows*columns !== data.answerChoices.length){
         let newAnsList = [...data.answerChoices]
         for (let i=0; i<rows*columns-data.answerChoices.length; i++){
             newAnsList.push(null)
         }
-        setData(state => ({
-            ...state,
-            answerChoices: newAnsList
+        dispatch(updateActivityData({
+            type: "singleQuestionUpdate",
+            questionNum: questionNum,
+            data: {...data, answerChoices: newAnsList}
         }))
     }
+
     const updateRadioBtnChoice = (id) => {
         return {[id.dataset.updateAnswerChoice]: true}
     }
@@ -90,20 +81,15 @@ const ControlledInputsApp = ({
                 answerId = updateRadioBtnChoice(id)
                 break 
         }
-
-        //update data
-        setData((state) => {
-            const newState = {
-                ...state,
-                clientAnswer: answerId 
-            }
-            dispatch(updateActivityData({
-                type: "singleQuestionUpdate",
-                questionNum: questionNum,
-                data: newState
-            }))
-            return newState
-        })
+        const newState = {
+            ...data,
+            clientAnswer: answerId
+        }      
+        dispatch(updateActivityData({
+            type: "singleQuestionUpdate",
+            questionNum: questionNum,
+            data: newState
+        }))
     }
 
     return(
@@ -163,7 +149,6 @@ const ControlledInputsApp = ({
                         />
                     </div>
                 </div>
-                
             </div>   
         </form>
     </>

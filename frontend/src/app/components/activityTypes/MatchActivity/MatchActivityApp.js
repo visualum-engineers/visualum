@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useRef} from 'react'
 import { unstable_batchedUpdates } from 'react-dom';
 import {DragDropContext} from 'react-beautiful-dnd';
 import WordBank from '../../utilities/dragAndDrop/ReactBeautifulDnD/WordBank';
@@ -8,11 +8,14 @@ import transformData from './matchTransformData';
 import getResultOnTap from '../../utilities/dragAndDrop/DnDUpdateAlgo.js/Sortables/getResultOnTap';
 import {useDispatch, useSelector} from 'react-redux';
 import {updateActivityData} from "../../../../redux/features/activityTypes/activitiesData"
+import { resetHistory } from '../activityHistoryFunc';
+import {cloneDeep} from 'lodash'
+
 import {
-    resetPopUpOff, 
     enableTap, 
     enableDnD,
 } from '../../../../redux/features/activityTypes/activitiesSettings'
+
 /*
 To-dos
 Backend: 
@@ -21,7 +24,6 @@ Backend:
 */
 
 const MatchActivityApp = ({
-    activityData, 
     originalQuestionData,
     questionNum, 
     moreInfoOnClick,
@@ -31,33 +33,48 @@ const MatchActivityApp = ({
     smallWindowWidth
 }) => {
     const columns = mediumWindowWidth ? Array(1).fill(0) : Array(2).fill(0)
-    const [data, setData] = useState(transformData(activityData, 2))
     const [firstElTap, setFirstElTap] = useState(null)
     const [removedEl, setRemovedEl] = useState(undefined)
+    
     //redux states
     const dispatch = useDispatch()
+    const data = useSelector(state => state.activities.data.present.clientAnswerData.questions[questionNum])
     const disableDnD = useSelector((state) => !state.activities.settings.dndEnabled) 
     const resetPopUp = useSelector((state) => state.activities.settings.resetPopUp) 
-    useEffect(() =>{
-        if(resetPopUp && resetPopUp.confirmed){
-            //reset all state values to default
-            unstable_batchedUpdates(()=>{
-                setData(transformData(originalQuestionData, columns.length))
-                setFirstElTap(null)
-                dispatch(resetPopUpOff())
-                dispatch(updateActivityData({
+
+    //to manage data side effect 
+    //and prevent infinite loop
+    const onMount = useRef(false)
+    const windowValue = useRef(mediumWindowWidth)
+    //handle width resizing
+    useEffect(() => {
+        if(windowValue.current !== mediumWindowWidth || !onMount.current){
+            if(!onMount.current) onMount.current = true
+            dispatch(
+                updateActivityData({
                     type: "singleQuestionUpdate",
                     questionNum: questionNum,
-                    data: transformData(originalQuestionData, columns.length)
-                }))
+                    data: transformData(data, columns.length)
+            }))
+            windowValue.current = mediumWindowWidth
+        } else return     
+    }, [dispatch, mediumWindowWidth, columns.length, questionNum, data])
+
+    //reset all state values to default
+    useEffect(() =>{
+        if(resetPopUp && resetPopUp.confirmed){
+            unstable_batchedUpdates(()=>{
+                setFirstElTap(null)
+                resetHistory({
+                    dispatch: dispatch,
+                    questionNum: questionNum,
+                    newState: transformData(originalQuestionData, columns.length)
+                })
             })
         }
     }, [dispatch, resetPopUp, originalQuestionData, columns.length, questionNum])
-
-    //handle width resizing
-    useEffect(() => {
-        setData((data) => transformData(data, columns.length))
-    }, [mediumWindowWidth, columns.length])
+    
+    
 
     //used because we need to keep only one answer in a key container at a time.
     const customUpdateLists = (result) =>{
@@ -66,6 +83,9 @@ const MatchActivityApp = ({
         //means that nothing has changed
         if(!destination) return
         if(destination.droppableId === source.droppableId && destination.index === source.index) return
+        
+
+
         //start and end containers
         const answerChoiceTestEl = (el) => /answerChoices.*/.test(el)
         const start = answerChoiceTestEl(source.droppableId) ? source.droppableId : data.categoryIDs[source.droppableId]
@@ -82,15 +102,19 @@ const MatchActivityApp = ({
         //key pair container
         let addedToWordBank
         startAnswersList.splice(source.index, 1)
-        
+
+        //deep clone since we're using redux and changing
+        //object references. Hits performance x 10, but is needed
+        const clonedData = cloneDeep(data)
+
         //list container are same 
         //remove el from old index, add to new index
         if(sameContainer){
-            startAnswersList.splice(destination.index, 0, data.answerChoices[draggableId]);
+            startAnswersList.splice(destination.index, 0, clonedData.answerChoices[draggableId]);
             newState = {
-                ...data,
+                ...clonedData,
                 [startContainerType]: {
-                    ...data[startContainerType],
+                    ...clonedData[startContainerType],
                     [start]: startAnswersList,
                 }
             }
@@ -105,37 +129,37 @@ const MatchActivityApp = ({
                     startAnswersList.splice(source.index, 0, prevElement[0])
                     if(startContainerType === "itemBank") addedToWordBank = prevElement[0]
                 }
-                finishAnswersList.push(data.answerChoices[draggableId]);
+                finishAnswersList.push(clonedData.answerChoices[draggableId]);
             
-            } else finishAnswersList.splice(destination.index, 0, data.answerChoices[draggableId]);
+            } else finishAnswersList.splice(destination.index, 0, clonedData.answerChoices[draggableId]);
             
             newState = startContainerType===finishContainerType ? {
-                ...data,
+                ...clonedData,
                 [startContainerType]:{
-                    ...data[startContainerType],
+                    ...clonedData[startContainerType],
                     [start] : startAnswersList,
                     [finish] : finishAnswersList,
                 },
             }
             : {
-                ...data,
+                ...clonedData,
                 [startContainerType]:{
-                    ...data[startContainerType],
+                    ...clonedData[startContainerType],
                     [start] : startAnswersList,
                 },
                 [finishContainerType] : {
-                    ...data[finishContainerType],
+                    ...clonedData[finishContainerType],
                     [finish] : finishAnswersList,
                 }
             }
-        } 
+        }  
         //maintain itembank across resize, if we have to generate multiple columns
         if(addedToWordBank) newState.allItems[addedToWordBank.id] = addedToWordBank
         if(startContainerType==="itemBank") delete newState.allItems[draggableId]
-        if(finishContainerType==="itemBank") newState.allItems[draggableId] = data.answerChoices[draggableId]
+        if(finishContainerType==="itemBank") newState.allItems[draggableId] = clonedData.answerChoices[draggableId]
         return newState
     }
-    
+
     //when dragging starts
     const onDragStart = (result) =>{
         //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
@@ -173,14 +197,11 @@ const MatchActivityApp = ({
         const newState = customUpdateLists(result)
         if(!newState) return
         //update state
-        unstable_batchedUpdates(()=>{
-            setData(newState)
-            dispatch(updateActivityData({
-                type: "singleQuestionUpdate",
-                questionNum: questionNum,
-                data: newState
-            }))
-        })
+        dispatch(updateActivityData({
+            type: "singleQuestionUpdate",
+            questionNum: questionNum,
+            data: newState
+        }))
     }
     const onTap = (e) =>{
         const parm = {
@@ -210,7 +231,8 @@ const MatchActivityApp = ({
             setFirstElTap(null)
         }
     }
-  
+    //ensure redux state is transformed first
+    if(!onMount.current) return <div></div>
     return(
         <>
         <ActivityHeader 

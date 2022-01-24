@@ -29,7 +29,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {
     enableTap, 
     enableDnD, 
-    resetPopUpOff
 } from '../../../../redux/features/activityTypes/activitiesSettings'
 import {updateActivityData} from '../../../../redux/features/activityTypes/activitiesData'
 //components
@@ -37,6 +36,7 @@ import WordBank from './SortActivityWordBank';
 import ActivityHeader from '../ActivityHeader';
 import SortActivityCategories from './SortActivityCategories';
 import Item from '../../utilities/dragAndDrop/DnDKit/DragOverlayItem';
+import { resetHistory } from '../activityHistoryFunc';
 
 /*Note Missing To-do
 Backend: 
@@ -51,7 +51,6 @@ const dropAnimation = {
     dragSourceOpacity: 0.5,
   };
 const SortActivityApp = ({
-    activityData, 
     originalQuestionData,
     questionNum, 
     moreInfoOnClick, 
@@ -65,7 +64,7 @@ const SortActivityApp = ({
                             : smallWindowWidth ? Array(2).fill(0) 
                             : Array(1).fill(0) 
 
-    const [data, setData] = useState(transformData(activityData, wordBankColumns.length))
+    const data = useSelector(state => state.activities.data.present.clientAnswerData.questions[questionNum])
     const [activeId, setActiveId] = useState(undefined)
     const [isOver, setIsOver] = useState(undefined)
     const dragOverlayItem = useRef()
@@ -95,22 +94,33 @@ const SortActivityApp = ({
         if(resetPopUp && resetPopUp.confirmed){
             //reset all state values to default
             unstable_batchedUpdates(() =>{
-                setData(transformData(originalQuestionData, wordBankColumns.length))
                 setFirstElTap(null)
-                dispatch(resetPopUpOff())  
-                dispatch(updateActivityData({
-                    type: "singleQuestionUpdate",
+                resetHistory({
+                    dispatch: dispatch,
                     questionNum: questionNum,
-                    data: transformData(originalQuestionData, wordBankColumns.length)
-                }))
+                    newState: transformData(originalQuestionData, wordBankColumns.length)
+                })
             })  
         }
     }, [dispatch, resetPopUp, originalQuestionData, wordBankColumns.length, questionNum])
 
     //handle wordbank containers adapting to window-resizing
+    //to manage data side effect 
+    //and prevent infinite loop
+    const onMount = useRef(false)
+    const windowValue = useRef(mediumWindowWidth)
     useEffect(() => {
-        setData((data) => transformData(data, wordBankColumns.length))
-    }, [mediumWindowWidth, wordBankColumns.length])
+        if(windowValue.current !== mediumWindowWidth || !onMount.current){
+            if(!onMount.current) onMount.current = true
+            dispatch(
+                updateActivityData({
+                    type: "singleQuestionUpdate",
+                    questionNum: questionNum,
+                    data: transformData(data, wordBankColumns.length)
+            }))
+            windowValue.current = mediumWindowWidth
+        } else return   
+    }, [dispatch, mediumWindowWidth, wordBankColumns.length, questionNum, data])
 
     //cleanup collision data when component unmounts
     useEffect(() =>{
@@ -123,7 +133,11 @@ const SortActivityApp = ({
         const newState = updateMultipleSortableLists(data, result, answerChoiceTestEl)
         if(!newState) return
         //update state
-        setData(newState)
+        dispatch(updateActivityData({
+            type: "singleQuestionUpdate-drag-active",
+            questionNum: questionNum,
+            data: newState
+        }))
         return newState
     }
     //used only for dnd, not tap. returns the result object that contains all neccessary info to update list
@@ -234,12 +248,8 @@ const SortActivityApp = ({
 
         if(isOver === endElOver.containerId && endElIndex === startElIndex) return
 
-        const newState = updateSortableLists(resultValues(e, endElOver.containerId))
-        dispatch(updateActivityData({
-            type: "singleQuestionUpdate",
-            questionNum: questionNum,
-            data: newState
-        }))
+        updateSortableLists(resultValues(e, endElOver.containerId))
+        
     };
     const onDragCancel = (e) =>{
         unstable_batchedUpdates(()=>{
@@ -260,12 +270,7 @@ const SortActivityApp = ({
         const result = getResultOnTap(parms)
         if(!result) return
         setFirstElTap(null)
-        const newState = updateSortableLists(result)
-        dispatch(updateActivityData({
-            type: "singleQuestionUpdate",
-            questionNum: questionNum,
-            data: newState
-        }))
+        updateSortableLists(result)
     }
     //toggle dnd and tap mode based on btn
     const toggleTap = (e) => {
@@ -319,6 +324,8 @@ const SortActivityApp = ({
         })
         return intersectingContainer
     }
+    //ensure redux state is transformed first
+    if(!onMount.current) return <div></div>
     return (
     <>  
         <ActivityHeader 

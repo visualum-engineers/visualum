@@ -1,13 +1,11 @@
-import {useState, useEffect, useMemo} from 'react'
+import { useEffect } from 'react'
 import {unstable_batchedUpdates} from 'react-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { resetPopUpOff } from '../../../../redux/features/activityTypes/activitiesSettings'
-import {updateActivityData} from '../../../../redux/features/activityTypes/activitiesData'
-import {debounce} from "lodash"
 import ActivityHeader from '../ActivityHeader'
 import ShortAnswerImage from './ShortAnswerImage'
 import ShortAnswerTextArea from './ShortAnswerTextArea'
 import ConditionalWrapper from '../../utilities/conditionalWrapper/ConditionalWrapper'
+import { resetHistory } from '../activityHistoryFunc'
 /*
     Frontend:
     1. Missing re-rendering logic, when user answers question and moves on to the next one.
@@ -21,13 +19,11 @@ const ShortAnswerApp = ({
     resetBtnOnClick, 
     moreInfoOnClick,
     popUpBgStyles,
-    activityData, 
     originalQuestionData,
     questionNum, 
-    activityID,
 }) => {
     //for updating redux store(data to be sent to backend)
-    const [data, setData] = useState(activityData)
+    const data = useSelector((state) => state.activities.data.present.clientAnswerData.questions[questionNum])
     
     //redux states
     const dispatch = useDispatch()
@@ -37,44 +33,16 @@ const ShortAnswerApp = ({
         if(resetPopUp && resetPopUp.confirmed){
             //reset all state values to default
             unstable_batchedUpdates(()=>{
-                setData(state => ({
-                    ...state, 
-                    clientAnswer: "",
-                }))
-                dispatch(resetPopUpOff())   
-                dispatch(updateActivityData({
-                    type: "singleQuestionUpdate",
+                resetHistory({
+                    dispatch,
                     questionNum: questionNum,
-                    data: originalQuestionData
-                }))
+                    newState: originalQuestionData
+                })  
             })
             
         }
     }, [dispatch, resetPopUp, originalQuestionData, questionNum])
-    const reduxUpdate = (
-        newState, 
-        questionNum, 
-        dispatch
-    ) => dispatch(
-        updateActivityData({
-            type: "singleQuestionUpdate",
-            questionNum: questionNum,
-            data: newState
-        }))
-    const debounceReduxUpdate = useMemo(
-        ()=>debounce(reduxUpdate, 1000), 
-    [])
-    const handleInput = (e) =>{
-        const input_value = e.target.closest("textarea").value
-        setData((state) => {
-            const newState = {
-                ...state,
-                clientAnswer: input_value 
-            }
-            debounceReduxUpdate(newState, questionNum, dispatch)
-            return newState
-        })
-    }
+ 
 
     return(
         <>
@@ -112,7 +80,7 @@ const ShortAnswerApp = ({
                                     : !mediumWindowWidth ? " portrait-size": ""}`}>
                         <ShortAnswerTextArea 
                             data={data}
-                            handleInput={handleInput}
+                            questionNum={questionNum}
                         />
                     </div>
                 </div>

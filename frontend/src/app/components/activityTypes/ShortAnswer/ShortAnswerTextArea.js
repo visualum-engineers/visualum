@@ -1,9 +1,20 @@
 import useBodyAreaResizable from '../../../hooks/use-body-area-resizable'
 import { useRef } from 'react'
+import { useDispatch } from 'react-redux'
+import { updateActivityData } from '../../../../redux/features/activityTypes/activitiesData'
 const ShortAnswerTextArea = ({
     data, 
-    handleInput
+    questionNum
 }) =>{
+    const dispatch = useDispatch()
+    const handleInput = (e) =>{
+        const inputValue = e.target.closest("textarea").value
+        dispatch(updateActivityData({
+                type: "singleQuestionUpdate",
+                questionNum: questionNum,
+                data: {...data, clientAnswer: inputValue}
+            }))
+    }
     const textAreaRef = useRef()
     const {
         posData: textAreaPos, 
@@ -18,6 +29,7 @@ const ShortAnswerTextArea = ({
                 west: false
             }
     })
+    
     const textAreaHeight = {height: textAreaPos ? textAreaPos.height: null}
     return(
         <>

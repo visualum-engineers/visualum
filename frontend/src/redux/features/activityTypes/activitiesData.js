@@ -1,9 +1,9 @@
 import { 
     createSlice, 
-    createAsyncThunk,
+    //createAsyncThunk,
 } from '@reduxjs/toolkit'
 import assignmentData from "../../../app/helpers/sampleAssignmentData";
-import {throttle, cloneDeep} from "lodash"
+import {throttle } from "lodash"
 import undoable from 'redux-undo';
 
 const activityData = assignmentData
@@ -25,7 +25,7 @@ const saveToLocalStorage = ({
         console.log("not saved")
     }
 }
-const throttledSaveToStorage = throttle((newState) => saveToLocalStorage(newState), 1500)
+const throttledSaveToStorage = throttle((newState) => saveToLocalStorage(newState), 2000)
 
 const getDataFromLocalStorage = (data) =>{
     try{
@@ -38,15 +38,15 @@ const getDataFromLocalStorage = (data) =>{
 }
 
 //deep cloning takes time. Therefore it happens async
-export const updateActivityData = createAsyncThunk("activites/updateActivityData", async(action) =>{
-    switch(action.type){
-        case "singleQuestionUpdate":
-            action["data"] = cloneDeep(action.data);
-            return action
-        default:
-            return action
-    }
-})
+// export const updateActivityData = createAsyncThunk("activites/updateActivityData", async(action) =>{
+//     switch(action.type){
+//         case "singleQuestionUpdate":
+//             action["data"] = cloneDeep(action.data);
+//             return action
+//         default:
+//             return action
+//     }
+// })
 
 const activitiesData = createSlice({
     name: "activitiesData",
@@ -56,27 +56,33 @@ const activitiesData = createSlice({
                           getDataFromLocalStorage(activityData)
                           :activityData,
     },
-    extraReducers:{
-        //this action is used to update data for the use,
+    reducers:{
+        //this action is used to update data for the use
         // of reset, undo, and localStorage capabilities
-        //for activities. 
-        [updateActivityData.fulfilled] : (state, action) =>{
+        updateActivityData : (state, action) =>{
             let newState
+            const singleQuestionUpdate = () =>{
+                const questionData = state.clientAnswerData.questions[action.payload.questionNum]
+                const newQuestionData = {
+                    ...questionData, 
+                    ...action.payload.data
+                }
+                newState = newQuestionData
+                state.clientAnswerData.questions[action.payload.questionNum] = newQuestionData
+            }
             switch(action.payload.type){
                 case "singleQuestionUpdate":
-                    const questionData = state.clientAnswerData.questions[action.payload.questionNum]
-                    const newQuestionData = {
-                        ...questionData, 
-                        ...action.payload.data
-                    }
-                    newState = newQuestionData
-                    state.clientAnswerData.questions[action.payload.questionNum] = newQuestionData
+                    singleQuestionUpdate()
                     break;
+                case "singleQuestionUpdate-drag-active":
+                    singleQuestionUpdate()
+                    //we return early to prevent throttling 
+                    //since state is update quickly on an active drag
+                    return
                 default:
                     newState = {...state.clientAnswerData}
                     newState["lastQuestionSeen"] = action.payload.lastSeenQuestion
-                    state.clientAnswerData = newState
-                    
+                    state.clientAnswerData = newState  
                     break;
             }
             throttledSaveToStorage({
@@ -87,7 +93,14 @@ const activitiesData = createSlice({
         },
     },
 })
-
+export const {
+    updateActivityData
+} = activitiesData.actions
 export default undoable(activitiesData.reducer, {
-    limit: 40,
+    undoType: "activities/data/undo",
+    redoType: "activities/data/redo",
+    jumpType: "activities/data/jump",
+    jumpToFutureType: "activities/data/jumpToFuture",
+    clearHistoryType: "activities/data/clearHistory",
+    limit: 100,
 })

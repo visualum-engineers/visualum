@@ -4,12 +4,10 @@ import SortActivityApp from "./SortActivity/SortActivityApp"
 import MatchActivityApp from "./MatchActivity/MatchActivityApp"
 import LabelPicturesApp from "./LabelPictures/LabelPicturesApp"
 const ActivityQuestions = (props) =>{
-    const questionData = props.activityData.questions[props.activityKey] 
-    const questionType = props.activityData.questions[props.activityKey].type
+    const questionType = props.questions[props.activityKey].type
     const newProps = {
         ...props, 
-        activityData: questionData,
-        activityID: props.activityData.activityID,
+        questionNum: props.activityKey,
     }
 
     const activityMap = {

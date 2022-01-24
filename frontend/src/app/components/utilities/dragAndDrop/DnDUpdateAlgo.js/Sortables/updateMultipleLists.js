@@ -1,7 +1,9 @@
+import {cloneDeep} from 'lodash'
+//test is item comes from a word bank column
+const answerChoiceTestEl = (el) => /answerChoices.*/.test(el) 
 function updateMultipleSortableLists(
     data, 
-    result, 
-    answerChoiceTestEl
+    result
 ){
     const {destination, source, draggableId} = result
     if(!destination) return
@@ -18,44 +20,47 @@ function updateMultipleSortableLists(
     const sameContainer = start===finish
     let newState
 
+    //deep clone since we're using redux. Perforance is x10 slower
+    //but is necessary
+    const newData = cloneDeep(data)
     startAnswersList.splice(source.index, 1)
     //list container are same - remove el from old idx, add to new idx
     if(sameContainer){
-        startAnswersList.splice(destination.index, 0, data.answerChoices[draggableId]);
+        startAnswersList.splice(destination.index, 0, newData.answerChoices[draggableId]);
         newState = {
-            ...data,
+            ...newData,
             [startContainerType]: {
-                ...data[startContainerType],
+                ...newData[startContainerType],
                 [start]: startAnswersList,
             }
         }
     } 
     //list containers are different - move elements into the new container, and remove them from old one
     else {
-        finishAnswersList.splice(destination.index, 0, data.answerChoices[draggableId]);
+        finishAnswersList.splice(destination.index, 0, newData.answerChoices[draggableId]);
         newState = startContainerType===finishContainerType ? {
-            ...data,
+            ...newData,
             [startContainerType]:{
-                ...data[startContainerType],
+                ...newData[startContainerType],
                 [start] : startAnswersList,
                 [finish] : finishAnswersList,
             },
         }
         : {
-            ...data,
+            ...newData,
             [startContainerType]:{
-                ...data[startContainerType],
+                ...newData[startContainerType],
                 [start] : startAnswersList,
             },
             [finishContainerType] : {
-                ...data[finishContainerType],
+                ...newData[finishContainerType],
                 [finish] : finishAnswersList,
             }
         }
     } 
     //maintain itemBank across resize, so we update allItems
     if(startContainerType==="itemBank") delete newState.allItems[draggableId]
-    if(finishContainerType==="itemBank") newState.allItems[draggableId] = data.answerChoices[draggableId]
+    if(finishContainerType==="itemBank") newState.allItems[draggableId] = newData.answerChoices[draggableId]
     return newState
 }
 export default updateMultipleSortableLists

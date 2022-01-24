@@ -1,4 +1,4 @@
-import { configureStore} from '@reduxjs/toolkit'
+import {configureStore} from '@reduxjs/toolkit'
 import userInfoReducer from '../redux/features/userInfo/userInfoSlice';
 import dashboardReducer from '../redux/features/dashboardStatus/dashboardSlice'
 import activitiesReducer from  '../redux/features/activityTypes/activitiesSlice'

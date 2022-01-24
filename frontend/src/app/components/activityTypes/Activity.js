@@ -4,7 +4,6 @@ import ActivityBtns from "./ActivityBtns"
 import DnDActivites from "./DnDActivites"
 import useWindowWidth from "../../hooks/use-window-width"
 import SecondarySideBar from "../sideBar/SecondarySideBar"
-
 import { useEffect, useState } from "react"
 import { unstable_batchedUpdates } from "react-dom"
 import {CSSTransition} from "react-transition-group"
@@ -36,9 +35,9 @@ const defaultTransition = {
 //for testing. remove after
 const imageURL = "images/homePage/mountain-home-bg.jpg";
 
-const Activity = () =>{
+let Activity = () =>{
     //redux states
-    const activityData = useSelector((state) => state.activities.data.present.clientAnswerData)
+    const activityData = useSelector((state) => state.activities.data.present.activityData)
     const dndEnabled = useSelector((state) => state.activities.settings.dndEnabled)
     const resetPopUp = useSelector((state) => state.activities.settings.resetPopUp)
     const dispatch = useDispatch()
@@ -46,16 +45,17 @@ const Activity = () =>{
     //component specific state
     let currQuestion = 0
     const [prevQuestion, setPrevQuestion] = useState(0)
-    const [questionNum, setQuestionNum] = useState(activityData.lastQuestionSeen ?
-                                                    parseInt(activityData.lastQuestionSeen) : 0
-                                                )
+
     //question data
+    const questionNumber = useSelector((state) => state.activities.data.present.clientAnswerData.lastQuestionSeen)
+    const questionNum = questionNumber ? questionNumber : 0
     const question = activityData.questions[questionNum]
-    const originalQuestionData = useSelector((state) => state.activities.data.present.activityData.questions[questionNum])
+    const originalQuestionData = activityData.questions[questionNum]
 
     //utility components
     const [sidebarToggle, setSidebarToggle] = useState(true)
     const [inProp, setInProp] = useState(true);
+
     //dont forget to change to have instruction appear on load
     const [moreInfoBtn, setMoreInfoBtn] = useState(false)
     const mediumWindowWidth = useWindowWidth(992)
@@ -107,9 +107,8 @@ const Activity = () =>{
         //update state
         unstable_batchedUpdates(()=>{
             setPrevQuestion(questionNum)
-            setQuestionNum(currQuestion)
-            setInProp(true)
             dispatch(updateActivityData({lastSeenQuestion: currQuestion}))
+            setInProp(true)
         })
         setTimeout(() =>{
             setInProp(false)
@@ -227,10 +226,9 @@ const Activity = () =>{
                                 unmountOnExit                                
                             >
                                 <ActivityQuestions 
-                                    activityData = {activityData}
                                     originalQuestionData = {originalQuestionData}
+                                    questions = {activityData.questions}
                                     activityKey = {index}
-                                    questionNum = {questionNum}
                                     moreInfoOnClick = {moreInfoOnClick}
                                     moreInfoBtn = {moreInfoBtn}
                                     style ={{...defaultTransition}}
@@ -260,4 +258,6 @@ const Activity = () =>{
     </>
     )
 }
+
 export default Activity
+

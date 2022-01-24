@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import {unstable_batchedUpdates} from 'react-dom'
 import transformData from "./labelTransformData"
 import {DragDropContext} from "react-beautiful-dnd"
@@ -7,16 +7,15 @@ import WordBank from "../../utilities/dragAndDrop/ReactBeautifulDnD/WordBank"
 import LabelQuestionColumn from "./LabelQuestionColumn"
 import { useDispatch, useSelector } from "react-redux"
 import { updateActivityData } from "../../../../redux/features/activityTypes/activitiesData"
+import updateMultipleSortableLists from "../../utilities/dragAndDrop/DnDUpdateAlgo.js/Sortables/updateMultipleLists"
+import getResultOnTap from "../../utilities/dragAndDrop/DnDUpdateAlgo.js/Sortables/getResultOnTap"
+import { resetHistory } from "../activityHistoryFunc"
 import { 
-    resetPopUpOff, 
     enableTap, 
     enableDnD
 } from "../../../../redux/features/activityTypes/activitiesSettings"
-import updateMultipleSortableLists from "../../utilities/dragAndDrop/DnDUpdateAlgo.js/Sortables/updateMultipleLists"
-import getResultOnTap from "../../utilities/dragAndDrop/DnDUpdateAlgo.js/Sortables/getResultOnTap"
 
 const LabelPicturesApp = ({
-    activityData, 
     originalQuestionData,
     questionNum, 
     moreInfoOnClick,
@@ -26,35 +25,47 @@ const LabelPicturesApp = ({
     mediumWindowWidth,
     smallWindowWidth,
 }) =>{
-    const [data, setData] = useState(transformData(activityData, 1))
     const [dragActive, setDragActive] = useState(false)
     //used for dnd and tap and drop actions
     const [firstElTap, setFirstElTap] = useState(null)
 
     //redux states
     const dispatch = useDispatch()
+    const data = useSelector(state => state.activities.data.present.clientAnswerData.questions[questionNum])
     const disableDnD = useSelector((state) => !state.activities.settings.dndEnabled)
     const resetPopUp = useSelector((state) => state.activities.settings.resetPopUp)
-    
+    const onMount = useRef(false)
+    //since were using redux,
+    //to prevent side effect, 
+    //we useRef to control only running 
+    //on mount
+    useEffect(() => { 
+        if(!onMount.current){
+            dispatch(updateActivityData({
+                type: "singleQuestionUpdate",
+                questionNum: questionNum,
+                data: transformData(data, 1)
+            }))
+            onMount.current = true
+        } 
+    }, [data, dispatch, questionNum])
+
     //reset data
     useEffect(() =>{
         if(resetPopUp && resetPopUp.confirmed){
             //reset all state values to default
             unstable_batchedUpdates(()=>{
-                setData(transformData(originalQuestionData, 1))
                 setFirstElTap(null)
-                dispatch(resetPopUpOff())
-                dispatch(updateActivityData({
-                    type: "singleQuestionUpdate",
+                resetHistory({
+                    dispatch: dispatch,
                     questionNum: questionNum,
                     data: transformData(originalQuestionData, 1)
-                }))
+                })
             })
         }
     }, [dispatch, resetPopUp, originalQuestionData, questionNum])
 
-    //test is item comes from a word bank column
-    const answerChoiceTestEl = (el) => /answerChoices.*/.test(el)
+    
     
     const onDragStart = () =>{
         //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
@@ -63,11 +74,10 @@ const LabelPicturesApp = ({
     }
 
     const onDragEnd = (result) =>{
-        const newState = updateMultipleSortableLists(data, result, answerChoiceTestEl)
+        const newState = updateMultipleSortableLists(data, result)
         if(!newState) return
         //update state
         unstable_batchedUpdates(()=>{
-            setData(newState)
             setDragActive(false)
             dispatch(updateActivityData({
                 type: "singleQuestionUpdate",
@@ -104,6 +114,8 @@ const LabelPicturesApp = ({
             setFirstElTap(null)
         })
     }
+    //ensure redux state is transformed first
+    if(!onMount.current) return <div></div>
     return(
         <>
             <ActivityHeader 
