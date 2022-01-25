@@ -11,7 +11,12 @@ export default function DashboardModal(props) {
 					<div className="col-12">
 						<div className="mb-3">
 							<label htmlFor="classNameInput" className="form-label">Class Name:</label>
-							<input type="text" className="form-control" id="classNameInput" placeholder="Input Class Name Here" />
+							<input
+								type="text"
+								className="form-control"
+								id="classNameInput"
+								placeholder="Input Class Name Here"
+							/>
 						</div>
 					</div>
 				</div>

@@ -1,18 +1,27 @@
 import React from 'react'
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useResolvedPath, useMatch } from 'react-router-dom';
 
 export default function SidebarItem(props) {
     let navigate = useNavigate();
-    let resolved = useResolvedPath(props.value);
-    let match = useMatch({ path: resolved.pathname, end: false });
+    let location = useLocation();
+    let match = useMatch({ path: `/dashboard/${props.value}`, end: false });
+    console.log('location', location)
+    console.log(match)
+
+    console.log('prop value', props.value)
 
     function handleClick() {
         navigate(`${props.value}`);
     }
+
+    const toHighlight = match || (location.pathname === '/dashboard' || location.pathname === '/dashboard/') && (props.value) === 'home'
+
     return (
         <div className="sidebar-item">
-            <div className={`tab-button ${match ? 'selected' : ''}`} onClick={handleClick}>
+            <div className={`tab-button ${toHighlight ? 'selected' : ''} `}
+                onClick={handleClick}
+            >
                 <p>{props.name}</p>
             </div>
         </div>
