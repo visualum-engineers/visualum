@@ -9,9 +9,9 @@ export default function DashboardModal(props) {
 				<h2 className="mb-3">Create Your Class</h2>
 				<div className="row">
 					<div className="col-12">
-						<div class="mb-3">
-							<label for="classNameInput" class="form-label">Class Name:</label>
-							<input type="text" class="form-control" id="classNameInput" placeholder="Input Class Name Here" />
+						<div className="mb-3">
+							<label htmlFor="classNameInput" className="form-label">Class Name:</label>
+							<input type="text" className="form-control" id="classNameInput" placeholder="Input Class Name Here" />
 						</div>
 					</div>
 				</div>
