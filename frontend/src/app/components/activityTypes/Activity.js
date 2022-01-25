@@ -36,7 +36,7 @@ const defaultTransition = {
 
 const Activity = () =>{
     //redux states
-    const activityData = useSelector((state) => state.activities.data.present.activityData)
+    const activityData = useSelector((state) => state.activities.data.originalData.activityData)
     const dndEnabled = useSelector((state) => state.activities.settings.dndEnabled)
     const resetPopUp = useSelector((state) => state.activities.settings.resetPopUp)
     const disableDnD = useSelector((state) => !state.activities.settings.dndEnabled) 
@@ -48,7 +48,7 @@ const Activity = () =>{
     const [prevQuestion, setPrevQuestion] = useState(0)
 
     //question data
-    const questionNumber = useSelector((state) => state.activities.data.present.clientAnswerData.lastQuestionSeen)
+    const questionNumber = useSelector((state) => state.activities.data.clientData.present.clientAnswerData.lastQuestionSeen)
     const questionNum = questionNumber ? questionNumber : 0
     const question = activityData.questions[questionNum]
     const originalQuestionData = activityData.questions[questionNum]

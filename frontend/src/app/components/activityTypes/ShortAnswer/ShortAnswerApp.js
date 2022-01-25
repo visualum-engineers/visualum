@@ -19,7 +19,7 @@ const ShortAnswerApp = ({
     questionNum, 
 }) => {
     //for updating redux store(data to be sent to backend)
-    const data = useSelector((state) => state.activities.data.present.clientAnswerData.questions[questionNum])
+    const data = useSelector((state) => state.activities.data.clientData.present.clientAnswerData.questions[questionNum])
     
     //redux states
     const dispatch = useDispatch()

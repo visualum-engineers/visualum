@@ -64,7 +64,7 @@ const SortActivityApp = ({
                             : smallWindowWidth ? Array(2).fill(0) 
                             : Array(1).fill(0) 
 
-    const data = useSelector(state => state.activities.data.present.clientAnswerData.questions[questionNum])
+    const data = useSelector(state => state.activities.data.clientData.present.clientAnswerData.questions[questionNum])
     const [activeId, setActiveId] = useState(undefined)
     const [isOver, setIsOver] = useState(undefined)
     const dragOverlayItem = useRef()

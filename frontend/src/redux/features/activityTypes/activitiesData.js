@@ -1,9 +1,10 @@
 import { 
     createSlice, 
+    combineReducers
     //createAsyncThunk,
 } from '@reduxjs/toolkit'
 import assignmentData from "../../../app/helpers/sampleAssignmentData";
-import {throttle } from "lodash"
+import {throttle} from "lodash"
 import undoable from 'redux-undo';
 
 const activityData = assignmentData
@@ -22,7 +23,6 @@ const saveToLocalStorage = ({
         const serizalizedState = JSON.stringify(storedState);
         localStorage.setItem(storedState.activityID, serizalizedState)
     } catch{
-        console.log("not saved")
     }
 }
 const throttledSaveToStorage = throttle((newState) => saveToLocalStorage(newState), 2000)
@@ -36,22 +36,18 @@ const getDataFromLocalStorage = (data) =>{
         return
     }
 }
-
-//deep cloning takes time. Therefore it happens async
-// export const updateActivityData = createAsyncThunk("activites/updateActivityData", async(action) =>{
-//     switch(action.type){
-//         case "singleQuestionUpdate":
-//             action["data"] = cloneDeep(action.data);
-//             return action
-//         default:
-//             return action
-//     }
-// })
+//seperate because only client Answer Data will be undoable. 
+//no need to store the same activity over and over again.
 
 const activitiesData = createSlice({
     name: "activitiesData",
-    initialState: {
+    initialState:{
         activityData: activityData,
+    }
+})
+const clientAnswerData = createSlice({
+    name: "clientAnswerActivitiesData",
+    initialState: {
         clientAnswerData: getDataFromLocalStorage(activityData) ? 
                           getDataFromLocalStorage(activityData)
                           :activityData,
@@ -95,8 +91,9 @@ const activitiesData = createSlice({
 })
 export const {
     updateActivityData
-} = activitiesData.actions
-export default undoable(activitiesData.reducer, {
+} = clientAnswerData.actions
+
+const undoableData = undoable(clientAnswerData.reducer, {
     undoType: "activities/data/undo",
     redoType: "activities/data/redo",
     jumpType: "activities/data/jump",
@@ -104,3 +101,9 @@ export default undoable(activitiesData.reducer, {
     clearHistoryType: "activities/data/clearHistory",
     limit: 100,
 })
+const rootReducer = combineReducers({
+    originalData: activitiesData.reducer,
+    clientData: undoableData
+})
+
+export default rootReducer

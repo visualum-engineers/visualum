@@ -29,7 +29,7 @@ const MatchActivityApp = ({
     
     //redux states
     const dispatch = useDispatch()
-    const data = useSelector(state => state.activities.data.present.clientAnswerData.questions[questionNum])
+    const data = useSelector(state => state.activities.data.clientData.present.clientAnswerData.questions[questionNum])
     const disableDnD = useSelector((state) => state.activities.settings.dndEnabled) 
     const resetPopUp = useSelector((state) => state.activities.settings.resetPopUp) 
 
