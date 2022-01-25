@@ -6,7 +6,7 @@ import AnswerBank from './MatchActivityAnswerBank';
 import transformData from './matchTransformData';
 import getResultOnTap from '../../utilities/dragAndDrop/DnDUpdateAlgo.js/Sortables/getResultOnTap';
 import {useDispatch, useSelector} from 'react-redux';
-import {updateActivityData} from "../../../../redux/features/activityTypes/activitiesData"
+import {updateActivityData, updateActivityDataLayout} from "../../../../redux/features/activityTypes/activitiesData"
 import { resetHistory } from '../activityHistoryFunc';
 import {cloneDeep} from 'lodash'
 /*
@@ -42,13 +42,22 @@ const MatchActivityApp = ({
         if(windowValue.current !== mediumWindowWidth || !onMount.current){
             if(!onMount.current) onMount.current = true
             dispatch(
-                updateActivityData({
+                updateActivityDataLayout({
                     type: "singleQuestionUpdate",
                     questionNum: questionNum,
                     data: transformData(data, columns.length)
             }))
             windowValue.current = mediumWindowWidth
-        } else return     
+        }
+        //on undo if item was moved when at a different width, 
+        // fix layout  
+        if(mediumWindowWidth && data.itemBank){
+            if(Object.keys(data.itemBank).length > 1) dispatch(
+                updateActivityDataLayout({
+                    questionNum: questionNum,
+                    data: transformData(data, columns.length)
+            }))
+        }     
     }, [dispatch, mediumWindowWidth, columns.length, questionNum, data])
 
     //reset all state values to default

@@ -38,7 +38,6 @@ const ShortAnswerApp = ({
  
     return(
         <>
-
         <div
             className={`sa-activity-container ${mediumWindowWidth ? "full-size" : "portrait-mode"}`}
         >

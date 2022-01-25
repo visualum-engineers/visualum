@@ -64,10 +64,11 @@ const Activity = () =>{
 
     useEffect(() => {
         //hide overflow on mount
+        setInProp(true)
         setTimeout(() =>{
             setInProp(false)
         }, inPropDuration)
-    }, [])
+    }, [questionNum])
     //when window width < 992, sidebar automatically closes
     //it can still be opened though
     useEffect(()=>{ 

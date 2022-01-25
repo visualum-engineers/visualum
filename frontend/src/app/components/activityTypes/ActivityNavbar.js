@@ -23,8 +23,8 @@ const ActivityNavbar = ({
     const [editPointer, setEditPointer] =  useState(false)
     const [editDropdownOpen, setEditDropdown] = useState(false)    
     const dispatch = useDispatch()
-    const pastLength = useSelector((state) => state.activities.data.clientData.future.length)
-    const futureLength = useSelector((state) => state.activities.data.clientData.past.length)
+    const pastLength = useSelector((state) => state.activities.data.clientData.past.length)
+    const futureLength = useSelector((state) => state.activities.data.clientData.future.length)
 
     //keyboard shortcuts for undo and redo
     const editPointFocus =(e) =>{
@@ -47,12 +47,18 @@ const ActivityNavbar = ({
     //keyboard shortcuts
     useKeyboardShortcut(
         ['Control', 'Alt', 'Delete'], 
-        () => redoHistory({dispatch: dispatch}), 
+        () => {
+            if(!(futureLength > 0)) return
+            redoHistory({dispatch: dispatch})
+        }, 
         { overrideSystem: false }
     )  
     useKeyboardShortcut(
         ['Control', "Z"], 
-        () => undoHistory({dispatch: dispatch}), 
+        () => {
+            if(!(pastLength>0)) return
+            undoHistory({dispatch: dispatch})
+        }, 
         { overrideSystem: false }
     )
     useKeyboardShortcut(
@@ -108,22 +114,22 @@ const ActivityNavbar = ({
                         onClick={() => setEditDropdown((state) => !state)}
                     >
                         <GeneralBtn 
-                            customClassName = {"d-flex align-items-center"}
+                            customClassName = {`d-flex align-items-center${pastLength > 0 ? " edit-btn-disabled":""}`}
                             customIcon = {<FontAwesomeIcon icon={faUndoAlt} />}
                             textContent = {<><div>Undo</div><div className="key-shortcut">Ctrl+Z</div></>}
                             onClick={onUndoClick}
                             customAriaLabel = {"reset-question"}
                             questionNum = {questionNum}
-                            disabled = {pastLength > 0}
+                            disabled = {!(pastLength > 0)}
                         />
                         <GeneralBtn 
-                            customClassName = {"d-flex align-items-center"}
+                            customClassName = {`d-flex align-items-center${futureLength > 0 ? " edit-btn-disabled":""}`}
                             customIcon = {<FontAwesomeIcon icon={faRedoAlt} />}
                             textContent = {<><div>Redo</div><div className="key-shortcut">Ctrl+Y</div></>}
                             onClick={onRedoClick}
                             customAriaLabel = {"reset-question"}
                             questionNum = {questionNum}
-                            disabled = {futureLength > 0}
+                            disabled = {!(futureLength > 0)}
                         />
                         {/* resetbtn*/}
                         <GeneralBtn 

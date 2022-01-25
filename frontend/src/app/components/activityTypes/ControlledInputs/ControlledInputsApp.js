@@ -1,6 +1,6 @@
 import {useEffect, useRef} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateActivityData } from '../../../../redux/features/activityTypes/activitiesData';
+import { updateActivityData, updateActivityDataLayout } from '../../../../redux/features/activityTypes/activitiesData';
 import ControlledInputsImage from './ControlledInputsImage';
 import ControlledInputsColumn from './ControlledInputsColumn';
 import { resetHistory } from '../activityHistoryFunc';
@@ -43,10 +43,10 @@ const ControlledInputsApp = ({
     //reset answer
     const isMount = useRef(false)
     useEffect(() =>{
-        if(!isMount.current){
+        if(!isMount.current || !data.clientAnswer){
             isMount.current = true
             //reset all state values to default
-            dispatch(updateActivityData({
+            dispatch(updateActivityDataLayout({
                 type: "singleQuestionUpdate",
                 questionNum: questionNum,
                 data: {...data, clientAnswer:{}}

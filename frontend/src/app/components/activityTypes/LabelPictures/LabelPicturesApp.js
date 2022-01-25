@@ -5,7 +5,7 @@ import {DragDropContext} from "react-beautiful-dnd"
 import WordBank from "../../utilities/dragAndDrop/ReactBeautifulDnD/WordBank"
 import LabelQuestionColumn from "./LabelQuestionColumn"
 import { useDispatch, useSelector } from "react-redux"
-import { updateActivityData } from "../../../../redux/features/activityTypes/activitiesData"
+import { updateActivityData, updateActivityDataLayout } from "../../../../redux/features/activityTypes/activitiesData"
 import updateMultipleSortableLists from "../../utilities/dragAndDrop/DnDUpdateAlgo.js/Sortables/updateMultipleLists"
 import getResultOnTap from "../../utilities/dragAndDrop/DnDUpdateAlgo.js/Sortables/getResultOnTap"
 import { resetHistory } from "../activityHistoryFunc"
@@ -35,7 +35,7 @@ const LabelPicturesApp = ({
     //on mount
     useEffect(() => { 
         if(!onMount.current){
-            dispatch(updateActivityData({
+            dispatch(updateActivityDataLayout({
                 type: "singleQuestionUpdate",
                 questionNum: questionNum,
                 data: transformData(data, 1)

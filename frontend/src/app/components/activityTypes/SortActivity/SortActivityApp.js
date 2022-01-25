@@ -26,7 +26,7 @@ import {addToTop} from '../../utilities/dragAndDrop/DnDKit/positionFunctions/ind
 
 //redux states and functions
 import {useDispatch, useSelector} from 'react-redux';
-import {updateActivityData} from '../../../../redux/features/activityTypes/activitiesData'
+import {updateActivityData, updateActivityDragActive, updateActivityDataLayout} from '../../../../redux/features/activityTypes/activitiesData'
 //components
 import WordBank from './SortActivityWordBank';
 import SortActivityCategories from './SortActivityCategories';
@@ -49,7 +49,6 @@ const SortActivityApp = ({
     originalQuestionData,
     questionNum, 
     moreInfoOnClick, 
-    //resetBtnOnClick,
     moreInfoBtn, 
     mediumWindowWidth,
     smallWindowWidth,
@@ -113,18 +112,28 @@ const SortActivityApp = ({
     //and prevent infinite loop
     const onMount = useRef(false)
     const windowValue = useRef(mediumWindowWidth)
+    const smallWindowValue = useRef(smallWindowWidth)
     useEffect(() => {
-        if(windowValue.current !== mediumWindowWidth || !onMount.current){
+        if(windowValue.current !== mediumWindowWidth || smallWindowValue.current !== smallWindowWidth || !onMount.current){
             if(!onMount.current) onMount.current = true
             dispatch(
-                updateActivityData({
-                    type: "singleQuestionUpdate",
+                updateActivityDataLayout({
                     questionNum: questionNum,
                     data: transformData(data, wordBankColumns.length)
             }))
             windowValue.current = mediumWindowWidth
-        } else return   
-    }, [dispatch, mediumWindowWidth, wordBankColumns.length, questionNum, data])
+            smallWindowValue.current = smallWindowWidth
+        }
+        //on undo if item was moved when at a different width, 
+        // fix layout  
+        if((mediumWindowWidth || !smallWindowWidth) && data.itemBank){
+            if(Object.keys(data.itemBank).length > 1) dispatch(
+                updateActivityDataLayout({
+                    questionNum: questionNum,
+                    data: transformData(data, wordBankColumns.length)
+            }))
+        } 
+    }, [dispatch, mediumWindowWidth, smallWindowWidth, wordBankColumns.length, questionNum, data])
 
     //cleanup collision data when component unmounts
     useEffect(() =>{
@@ -138,8 +147,7 @@ const SortActivityApp = ({
         const newState = updateMultipleSortableLists(data, result, answerChoiceTestEl)
         if(!newState) return
         //update state
-        dispatch(updateActivityData({
-            type: "singleQuestionUpdate-drag-active",
+        dispatch(updateActivityDragActive({
             questionNum: questionNum,
             data: newState
         }))

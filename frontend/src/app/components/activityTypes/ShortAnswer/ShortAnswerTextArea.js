@@ -1,20 +1,40 @@
 import useBodyAreaResizable from '../../../hooks/use-body-area-resizable'
-import { useRef } from 'react'
+import { useRef, useMemo } from 'react'
 import { useDispatch } from 'react-redux'
-import { updateActivityData } from '../../../../redux/features/activityTypes/activitiesData'
+import { updateActivityData, updateActivityDataLayout } from '../../../../redux/features/activityTypes/activitiesData'
+import {debounce} from "lodash"
+
 const ShortAnswerTextArea = ({
     data, 
     questionNum
 }) =>{
     const dispatch = useDispatch()
-
+    const historyStackUpdate = (
+        newState, 
+        questionNum, 
+        dispatch
+    ) => dispatch(
+        updateActivityData({
+            type: "singleQuestionUpdate",
+            questionNum: questionNum,
+            data: newState
+        }))
+    const debounceHistoryUpdate = useMemo(
+        ()=>debounce(historyStackUpdate, 1000), 
+    [])
     const handleInput = (e) =>{
         const inputValue = e.target.closest("textarea").value
-        dispatch(updateActivityData({
+        dispatch(updateActivityDataLayout({
                 type: "singleQuestionUpdate",
                 questionNum: questionNum,
                 data: {...data, clientAnswer: inputValue}
             }))
+        //updateHistoryStack
+        debounceHistoryUpdate(
+            {...data, clientAnswer: inputValue}, 
+            questionNum, 
+            dispatch
+        )
     }
     
     const textAreaRef = useRef()

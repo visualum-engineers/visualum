@@ -5,7 +5,7 @@ import {
 } from '@reduxjs/toolkit'
 import assignmentData from "../../../app/helpers/sampleAssignmentData";
 import {throttle} from "lodash"
-import undoable from 'redux-undo';
+import undoable, {excludeAction} from 'redux-undo';
 
 const activityData = assignmentData
 
@@ -36,9 +36,17 @@ const getDataFromLocalStorage = (data) =>{
         return
     }
 }
+const singleQuestionUpdate = (state, action) =>{
+    const questionData = state.clientAnswerData.questions[action.payload.questionNum]
+    const newQuestionData = {
+        ...questionData, 
+        ...action.payload.data
+    }
+    state.clientAnswerData.questions[action.payload.questionNum] = newQuestionData
+    return newQuestionData
+}
 //seperate because only client Answer Data will be undoable. 
 //no need to store the same activity over and over again.
-
 const activitiesData = createSlice({
     name: "activitiesData",
     initialState:{
@@ -57,24 +65,10 @@ const clientAnswerData = createSlice({
         // of reset, undo, and localStorage capabilities
         updateActivityData : (state, action) =>{
             let newState
-            const singleQuestionUpdate = () =>{
-                const questionData = state.clientAnswerData.questions[action.payload.questionNum]
-                const newQuestionData = {
-                    ...questionData, 
-                    ...action.payload.data
-                }
-                newState = newQuestionData
-                state.clientAnswerData.questions[action.payload.questionNum] = newQuestionData
-            }
             switch(action.payload.type){
                 case "singleQuestionUpdate":
-                    singleQuestionUpdate()
+                    newState = singleQuestionUpdate(state, action)
                     break;
-                case "singleQuestionUpdate-drag-active":
-                    singleQuestionUpdate()
-                    //we return early to prevent throttling 
-                    //since state is update quickly on an active drag
-                    return
                 default:
                     newState = {...state.clientAnswerData}
                     newState["lastQuestionSeen"] = action.payload.lastSeenQuestion
@@ -87,18 +81,36 @@ const clientAnswerData = createSlice({
                 newState: newState
             })
         },
+        //we created a seperate reducer, to exclude this
+        //from undo, redo history.
+        updateActivityDragActive: (state, action) =>{
+            singleQuestionUpdate(state, action)
+            return
+        },
+        updateActivityDataLayout: (state, action) =>{
+            const newState = singleQuestionUpdate(state, action)
+            throttledSaveToStorage({
+                state: state.clientAnswerData,
+                payload: action.payload,  
+                newState: newState
+            })
+        }
     },
 })
 export const {
-    updateActivityData
+    updateActivityData,
+    updateActivityDragActive,
+    updateActivityDataLayout
 } = clientAnswerData.actions
 
 const undoableData = undoable(clientAnswerData.reducer, {
     undoType: "activities/data/undo",
     redoType: "activities/data/redo",
-    jumpType: "activities/data/jump",
-    jumpToFutureType: "activities/data/jumpToFuture",
-    clearHistoryType: "activities/data/clearHistory",
+    filter: excludeAction([
+        "clientAnswerActivitiesData/updateActivityDragActive",
+        "clientAnswerActivitiesData/updateActivityDataLayout"
+    ]),
+
     limit: 100,
 })
 const rootReducer = combineReducers({
