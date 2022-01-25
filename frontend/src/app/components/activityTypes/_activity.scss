@@ -105,17 +105,19 @@ $activites-table-of-contents-height: calc(
     width: 100%;
     top: 2.1rem;
     left: 0rem;
-    background-color: $dark-blue;
+    background-color: #3d3d3d;
     color: $white;
     padding: 0.2rem 0.3rem;
     font-size: 0.75rem;
     animation: none;
+    box-shadow: none;
+    @include border-radius(0.2rem);
     .triangle-pointer, .triangle-pointer-2{
         top: -0.4rem;
         left: 0.4rem;
         border-left: 0.5rem solid transparent;
         border-right: 0.5rem solid transparent;
-        border-bottom: 0.5rem solid $dark-blue;
+        border-bottom: 0.5rem solid #3d3d3d;
     }
 }
 .activity-edit-btn-dropdown{

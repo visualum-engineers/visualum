@@ -1,5 +1,6 @@
 import GeneralBtn from "../utilities/generalBtn/GeneralBtn"
-import { useState, useEffect } from "react";
+import { useState} from "react";
+import useKeyboardShortcut from "../../hooks/use-keyboard-shortcuts";
 import DrapAndDropToggler from "../utilities/dragAndDrop/DrapAndDropToggler"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSyncAlt, faUndoAlt, faRedoAlt, faBars } from "@fortawesome/free-solid-svg-icons";
@@ -20,21 +21,12 @@ const ActivityNavbar = ({
 }) =>{
     //local states
     const [editPointer, setEditPointer] =  useState(false)
-    const [editDropdownOpen, setEditDropdown] = useState(false)
-
-    //redux
+    const [editDropdownOpen, setEditDropdown] = useState(false)    
     const dispatch = useDispatch()
     const pastLength = useSelector((state) => state.activities.data.clientData.future.length)
     const futureLength = useSelector((state) => state.activities.data.clientData.past.length)
 
     //keyboard shortcuts for undo and redo
-    useEffect(() => {
-        const listenToShortcuts = (e) =>{
-
-        }
-        window.addEventListener("keydown", listenToShortcuts)
-        return () => window.removeEventListener("keydown", listenToShortcuts)
-    }, [])
     const editPointFocus =(e) =>{
         e.preventDefault()
         if(e.currentTarget.contains(e.relatedTarget)) return
@@ -52,6 +44,23 @@ const ActivityNavbar = ({
             dispatch: dispatch
         })
     }
+    //keyboard shortcuts
+    useKeyboardShortcut(
+        ['Control', 'Alt', 'Delete'], 
+        () => redoHistory({dispatch: dispatch}), 
+        { overrideSystem: false }
+    )  
+    useKeyboardShortcut(
+        ['Control', "Z"], 
+        () => undoHistory({dispatch: dispatch}), 
+        { overrideSystem: false }
+    )
+    useKeyboardShortcut(
+        ['Control', "Y"], 
+        () => redoHistory({dispatch: dispatch}), 
+        { overrideSystem: false }
+    )
+    
     return(
         <div className={`d-flex activity-navbar justify-content-between align-items-center px-1`}>
              <button 
