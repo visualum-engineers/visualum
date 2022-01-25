@@ -1,3 +1,4 @@
+
 const GeneralBtn = ({
     customClassName,
     onClick, 
@@ -7,7 +8,8 @@ const GeneralBtn = ({
     customAriaLabel,
     questionNum,
     customIcon = null,
-    textContent = null
+    textContent = null,
+    disabled = false,
 }) =>{
     
     return (
@@ -20,6 +22,7 @@ const GeneralBtn = ({
             onMouseLeave = {onMouseLeave}
             data-question-num = {questionNum ? questionNum : null}
             data-action-label = {customAriaLabel}
+            disabled={disabled}
         >
             {customIcon}
             <span> {textContent} </span>

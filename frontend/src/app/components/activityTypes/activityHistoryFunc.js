@@ -16,9 +16,13 @@ export const resetHistory = ({
     //dispatch({type: "activities/data/jump", action: -1})
 }
 
-export const undoHistory = (dispatch) =>{
+export const undoHistory = ({
+    dispatch
+}) =>{
     dispatch({type: "activities/data/undo"})
 }
-export const redoHistory = (dispatch) =>{
+export const redoHistory = ({
+    dispatch
+}) =>{
     dispatch({type: "activities/data/redo"})
 }

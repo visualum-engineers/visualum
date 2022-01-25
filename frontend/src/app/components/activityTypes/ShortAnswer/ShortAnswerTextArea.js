@@ -7,6 +7,7 @@ const ShortAnswerTextArea = ({
     questionNum
 }) =>{
     const dispatch = useDispatch()
+
     const handleInput = (e) =>{
         const inputValue = e.target.closest("textarea").value
         dispatch(updateActivityData({
@@ -15,6 +16,7 @@ const ShortAnswerTextArea = ({
                 data: {...data, clientAnswer: inputValue}
             }))
     }
+    
     const textAreaRef = useRef()
     const {
         posData: textAreaPos, 

@@ -1,13 +1,17 @@
-import ResetBtn from "../utilities/generalBtn/GeneralBtn"
+import GeneralBtn from "../utilities/generalBtn/GeneralBtn"
+import { useState } from "react";
 import DrapAndDropToggler from "../utilities/dragAndDrop/DrapAndDropToggler"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUndoAlt, faBars } from "@fortawesome/free-solid-svg-icons";
+import { faSyncAlt, faUndoAlt, faRedoAlt, faBars } from "@fortawesome/free-solid-svg-icons";
+import {faEdit} from "@fortawesome/free-regular-svg-icons"
+import TrianglePointer from "../utilities/trianglePointer/TrianglePointer";
+import { undoHistory, redoHistory } from "./activityHistoryFunc";
+import { useDispatch } from "react-redux";
+const Logo = "./images/VisualumLogo.png"
 const ActivityNavbar = ({
     smallWindowWidth,
     sidebarToggle,
     handleSideBar,
-    mediumWindowWidth, 
-    data,
     resetBtnOnClick, 
     questionNum,
     //below are for drag and drop 
@@ -15,7 +19,19 @@ const ActivityNavbar = ({
     toggleTap = null,
     type = null,
 }) =>{
-    const Logo = "./images/VisualumLogo.png"
+    const [editPointer, setEditPointer] =  useState(false)
+    const [editDropdownOpen, setEditDropdown] = useState(false)
+    const dispatch = useDispatch()
+    const onUndoClick = () => {
+        undoHistory({
+            dispatch: dispatch
+        })
+    }
+    const onRedoClick = () =>{
+        redoHistory({
+            dispatch: dispatch
+        })
+    }
     return(
         <div className={`d-flex activity-navbar justify-content-between align-items-center px-1`}>
              <button 
@@ -36,14 +52,61 @@ const ActivityNavbar = ({
                     {smallWindowWidth && <a href="/">visualum</a> }
                 </div>
         <div className="d-flex align-items-center justify-content-end activity-header-btns col-4 flex-grow-1">
-            <ResetBtn 
-                customClassName = {"activity-reset-btn btn d-flex align-items-center"}
-                customIcon = {<FontAwesomeIcon icon={faUndoAlt} />}
-                textContent = {"Reset"}
-                onClick = {resetBtnOnClick}
-                customAriaLabel = {"reset-question"}
-                questionNum = {questionNum}
-            />
+            <div 
+                style={{position: "relative", zIndex: "1"}}
+            >
+                <button 
+                    onMouseEnter={() => setEditPointer(true)}
+                    onMouseLeave={() => setEditPointer(false)}
+                    onClick={() => setEditDropdown((state) => !state)}
+                    className="activity-edit-btn"
+                >
+                    <FontAwesomeIcon icon={faEdit}/>
+                    {!editDropdownOpen &&
+                        <TrianglePointer 
+                            customClassName={"activity-edit-dropdown-pointer"}
+                            dropDownActive={editPointer}
+                            customDropDownID={"activity-edit"}
+                            textContent={"Edit"}
+                        />
+                    }
+                </button>
+                {editDropdownOpen && 
+                    <div
+                        className='activity-edit-btn-dropdown' 
+                        aria-label={"edit-options"}
+                        onClick={() => setEditDropdown((state) => !state)}
+                    >
+                        <GeneralBtn 
+                            customClassName = {"d-flex align-items-center"}
+                            customIcon = {<FontAwesomeIcon icon={faUndoAlt} />}
+                            textContent = {<><div>Undo</div><div className="key-shortcut">Ctrl+Z</div></>}
+                            onClick = {onUndoClick}
+                            customAriaLabel = {"reset-question"}
+                            questionNum = {questionNum}
+                        />
+                        <GeneralBtn 
+                            customClassName = {"d-flex align-items-center"}
+                            customIcon = {<FontAwesomeIcon icon={faRedoAlt} />}
+                            textContent = {<><div>Redo</div><div className="key-shortcut">Ctrl+Y</div></>}
+                            onClick = {onRedoClick}
+                            customAriaLabel = {"reset-question"}
+                            questionNum = {questionNum}
+                        />
+                        {/* resetbtn*/}
+                        <GeneralBtn 
+                            customClassName = {"d-flex align-items-center"}
+                            customIcon = {<FontAwesomeIcon icon={faSyncAlt} />}
+                            textContent = {<><div>Reset</div><div className="key-shortcut">Ctrl+Alt+Del</div></>}
+                            onClick = {resetBtnOnClick}
+                            customAriaLabel = {"reset-question"}
+                            questionNum = {questionNum}
+                        />
+                        
+                    </div>
+                }
+            </div>
+            
             {
                 type === "DnD" && smallWindowWidth && <DrapAndDropToggler 
                     disableDnD = {disableDnD}

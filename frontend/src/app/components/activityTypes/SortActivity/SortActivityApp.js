@@ -26,14 +26,9 @@ import {addToTop} from '../../utilities/dragAndDrop/DnDKit/positionFunctions/ind
 
 //redux states and functions
 import {useDispatch, useSelector} from 'react-redux';
-// import {
-//     enableTap, 
-//     enableDnD, 
-// } from '../../../../redux/features/activityTypes/activitiesSettings'
 import {updateActivityData} from '../../../../redux/features/activityTypes/activitiesData'
 //components
 import WordBank from './SortActivityWordBank';
-//import ActivityHeader from '../ActivityHeader';
 import SortActivityCategories from './SortActivityCategories';
 import Item from '../../utilities/dragAndDrop/DnDKit/DragOverlayItem';
 import { resetHistory } from '../activityHistoryFunc';
@@ -329,16 +324,6 @@ const SortActivityApp = ({
     if(!onMount.current) return <div></div>
     return (
     <>  
-        {/* <ActivityHeader 
-            mediumWindowWidth={mediumWindowWidth}
-            smallWindowWidth = {smallWindowWidth}
-            data ={data}
-            resetBtnOnClick ={resetBtnOnClick} 
-            questionNum={questionNum}
-            disableDnD ={disableDnD}
-            toggleTap = {toggleTap}
-            type="DnD"
-        /> */}
         <div className={`sort-activity-container d-flex ${mediumWindowWidth ? "full-size":"portrait-size flex-column align-items-center"}`}>
             <DndContext 
                 onDragStart={onDragStart}
