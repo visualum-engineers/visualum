@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import LoadingIcon from './components/utilities/loadingIcon/LoadingIcon';
 import DashboardAssignments from './components/dashboard/DashboardAssignments';
 import TestBackend from "./components/testBackend/test"
+import DashboardNothingFound from './components/dashboard/DashboardNothingFound';
 //import { useRealmApp } from '../realm/RealmApp';
 //lazy loaded components for performance
 const DashboardHome = React.lazy(() => import("./components/dashboard/DashboardHome"))
@@ -37,12 +38,13 @@ function App() {
             <Route path="/activity" element={<Activity />} />
             <Route path="/activity-creation" element={<ActivityCreation />} />
             <Route path="/dashboard" element={<Dashboard />}>
+              <Route index path="home" element={<DashboardHome />} />
               <Route index element={<DashboardHome />} />
               <Route path="assignments" element={<DashboardAssignments />} />
               <Route path="classes/:class_id" element={<DashboardClass />} />
               <Route path="classes" element={<DashboardClasses />} />
               <Route path="settings" element={<DashboardSettings />} />
-              <Route path="*" element={<DashboardHome />} />
+              <Route path="*" element={<DashboardNothingFound />} />
             </Route>
             <Route path="/testBackend" element={<TestBackend />} />
           </Routes>
