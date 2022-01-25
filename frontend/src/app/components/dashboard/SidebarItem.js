@@ -1,6 +1,5 @@
 import React from 'react'
-import { useLocation, useNavigate } from "react-router-dom";
-import { useResolvedPath, useMatch } from 'react-router-dom';
+import { useLocation, useMatch, useNavigate } from "react-router-dom";
 
 export default function SidebarItem(props) {
     let navigate = useNavigate();
@@ -15,7 +14,7 @@ export default function SidebarItem(props) {
         navigate(`${props.value}`);
     }
 
-    const toHighlight = match || (location.pathname === '/dashboard' || location.pathname === '/dashboard/') && (props.value) === 'home'
+    const toHighlight = match || ((location.pathname === '/dashboard' || location.pathname === '/dashboard/') && (props.value) === 'home')
 
     return (
         <div className="sidebar-item">
