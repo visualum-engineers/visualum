@@ -6,7 +6,7 @@ import { faSyncAlt, faUndoAlt, faRedoAlt, faBars } from "@fortawesome/free-solid
 import {faEdit} from "@fortawesome/free-regular-svg-icons"
 import TrianglePointer from "../utilities/trianglePointer/TrianglePointer";
 import { undoHistory, redoHistory } from "./activityHistoryFunc";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 const Logo = "./images/VisualumLogo.png"
 const ActivityNavbar = ({
     smallWindowWidth,
@@ -17,11 +17,15 @@ const ActivityNavbar = ({
     //below are for drag and drop 
     disableDnD = null,
     toggleTap = null,
-    type = null,
 }) =>{
+    //local states
     const [editPointer, setEditPointer] =  useState(false)
     const [editDropdownOpen, setEditDropdown] = useState(false)
+
+    //redux
     const dispatch = useDispatch()
+    const pastLength = useSelector((state) => state.activities.data.clientData.future.length)
+    const futureLength = useSelector((state) => state.activities.data.clientData.past.length)
     const onUndoClick = () => {
         undoHistory({
             dispatch: dispatch
@@ -84,6 +88,7 @@ const ActivityNavbar = ({
                             onClick = {onUndoClick}
                             customAriaLabel = {"reset-question"}
                             questionNum = {questionNum}
+                            disabled = {pastLength > 0}
                         />
                         <GeneralBtn 
                             customClassName = {"d-flex align-items-center"}
@@ -92,6 +97,7 @@ const ActivityNavbar = ({
                             onClick = {onRedoClick}
                             customAriaLabel = {"reset-question"}
                             questionNum = {questionNum}
+                            disabled = {futureLength > 0}
                         />
                         {/* resetbtn*/}
                         <GeneralBtn 
@@ -108,7 +114,7 @@ const ActivityNavbar = ({
             </div>
             
             {
-                type === "DnD" && smallWindowWidth && <DrapAndDropToggler 
+                 <DrapAndDropToggler 
                     disableDnD = {disableDnD}
                     toggleTap = {toggleTap}
                 />

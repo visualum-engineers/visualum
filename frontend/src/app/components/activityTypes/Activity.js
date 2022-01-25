@@ -185,7 +185,6 @@ const Activity = () =>{
             questionNum={questionNum}
             disableDnD ={disableDnD}
             toggleTap = {toggleTap}
-            type={activityData.questions[questionNum].type in DnDActivities ? "DnD" : null}
             sidebarToggle={sidebarToggle}
             handleSideBar={handleSideBar}
         />
