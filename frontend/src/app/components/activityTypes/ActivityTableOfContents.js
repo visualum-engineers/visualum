@@ -7,9 +7,12 @@ const ActivityTableOfContents = ({
     btnCustomClass,
     btnInnerCustomClass,
     btnActiveClass,
+    header
 }) =>{
     return(
         <div className={customClass}>
+            <div style={{marignTop: "auto", width:"100%"}}>
+            {header}
             {data.questions.map((question, index) => {
                 const first = index === 0
                 const last = index === data.questions.length-1
@@ -43,6 +46,7 @@ const ActivityTableOfContents = ({
                     </button>
                 )
             })}
+            </div>
         </div>
     )
 }

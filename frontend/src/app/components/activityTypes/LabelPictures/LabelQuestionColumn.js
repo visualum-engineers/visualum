@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { createPortal } from "react-dom"
 import useDetectSwipe from "../../../hooks/use-detect-swipe"
 import {CSSTransition} from "react-transition-group"
 import LabelPicturesImage from "./LabelImage"
@@ -136,12 +137,15 @@ const LabelPicturesQuestion = (props) =>{
                     smallWindowWidth={props.smallWindowWidth}
                 />
                 {overviewPopUp &&
-                    <LabelAnswerOverview
-                        popUpBgStyles={props.popUpBgStyles}
-                        onOverviewClick={onOverviewClick}
-                        onOverviewCardClick={onOverviewCardClick}
-                        data={props.data}
-                    />
+                    createPortal(
+                        <LabelAnswerOverview
+                            popUpBgStyles={props.popUpBgStyles}
+                            onOverviewClick={onOverviewClick}
+                            onOverviewCardClick={onOverviewCardClick}
+                            data={props.data}
+                        />, document.body
+                    )
+                    
                 }
                 <div 
                     className="d-flex flex-column align-items-center flex-grow-1 w-100"

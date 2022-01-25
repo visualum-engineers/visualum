@@ -36,7 +36,7 @@
 
 .sidebar-dark-bg{
     border: none;
-    z-index: 3;
+    z-index: 2;
     width: 100vw;
     height: 100vh;
     background: rgba(22, 22, 22, 0.685);
@@ -145,7 +145,8 @@
     top: 0.4rem;
     left: calc(min(13.5rem, 300px));
     color: $darkest-gray;
-    background: $white;
+    //background: $white;
+    background: $lightest-gray;
     font-size: 1.5rem;
     padding: 0.15rem 0.35rem;
     text-align: center;

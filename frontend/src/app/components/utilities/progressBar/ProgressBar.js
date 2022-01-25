@@ -2,27 +2,27 @@ const ProgressBar = ({
     containerClassName,
     progressBarClassName, 
     fillBarClassName,
-    progressBar,
-    ariaLabel
+    percentage,
+    ariaLabel,
+    additionalContent,
 }) =>{
     return (
         <div 
-            className={containerClassName} 
+            className={containerClassName ? containerClassName :"progress-bar-container"} 
             aria-label={ariaLabel}
         >
             <div 
-                className="d-flex justify-content-between"
+                className="d-flex justify-content-start"
             >
-                <span>Progress</span>
-                <span>{progressBar}</span>
+                <span>{percentage}{additionalContent}</span>
             </div> 
             <div 
-                className={progressBarClassName}
+                className={progressBarClassName ? progressBarClassName : "progress-bar"}
                 style={{position: "relative"}}
             >
                 <div 
-                    className={fillBarClassName}
-                    style={{width:`${progressBar}`, position: "absolute"}}
+                    className={fillBarClassName ? fillBarClassName : "progress-bar-fill-bar"}
+                    style={{width:`${percentage}`, position: "absolute"}}
                 > </div>
             </div>
         </div>

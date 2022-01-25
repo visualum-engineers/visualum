@@ -10,7 +10,7 @@
     background-color: $lightest-gray;
 }
 @mixin activities-sidebar-table-btn-active{
-    background-color: rgb(238, 238, 238);
+    background-color: $light-gray;
     .activities-question-circle-indicator{
         circle{
             fill: $dark-blue;
@@ -32,10 +32,59 @@ $activites-table-of-contents-height: calc(
     - 2rem
     - 2rem
 );
+.activity-navbar{
+    position: fixed;
+    width: 100%;
+    margin-bottom: 1vh;
+    height: 3.4rem;
+    z-index: 4;
+    background-color: white;
+    --tw-border-opacity: 1;
+    border-color: rgba(210,210,214,var(--tw-border-opacity));
+    border-style: solid;
+    border-width: 0;
+    border-bottom-width: 1px;
+}
+.activity-navbar-exit-sidebar-btn{
+    @include remove-btn-default;
+    color: $darkest-gray;
+    padding: 0.1rem 0.4rem;
+    margin-left: 0.5rem;
+    font-size: 1.4rem;
+    text-align: center;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    @include border-radius(0.3rem);
+    @include transition(all 0.3s ease-out);
+}
+.activity-navbar-exit-sidebar-btn:hover{
+    transform: scale(1.05);
+}
+
+.activity-navbar-company-title{
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-left: 1rem;
+    a{
+        color: rgb(8, 40, 109) ;
+        line-height: 100%;
+    }
+    a:hover{
+        opacity: 0.8;
+    }
+}
+.activity-navbar-visualum-logo{
+    margin-right: 0.5rem;
+    max-width: 2rem;
+    object-fit: contain;
+    object-position: center;
+}
+
 .activity-body{
     @include no-space;
     @include transition(all 0.3s ease-out);
-    background-color: $lightest-gray;
+    background-color: rgb(250, 250, 250);
     height: 100%;
     position: relative;
     min-height: calc(max(100vh, 40rem));
@@ -45,10 +94,14 @@ $activites-table-of-contents-height: calc(
     margin-left: calc(min(16rem, 300px)); 
 }
 
-
 .activities-sidebar{
-    padding-bottom: 4vh;
+    background-color: $lightest-gray;
+    z-index: 3;
+    .secondary-sidebar-header{
+        margin-top: 1rem;
+    }
     .secondary-sidebar-link-container{
+        margin-top: $activity-navbar-outer-height;
         flex-grow: 1;
         align-items: center;
     }
@@ -56,14 +109,30 @@ $activites-table-of-contents-height: calc(
         align-self: start;
     }
 }
-.activities-sidebar-user-profile{
+.activities-sidebar-activity-name{
     width: 65%;
-    min-height: 10rem;
-    height: calc(min(12rem, 30vh));;
-    margin-top: calc(3vh - 0.6rem);
-    background-color: $light-blue;
-    @include border-radius(0.75rem);
-    font-size: 0.8rem;
+    text-align: center;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-top: 3vh;
+}
+.activity-progress-bar-container{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: end;
+    font-size: 0.72rem;
+    width: 70%;
+    margin-bottom: calc(max(1.5rem, 3vh));
+    .progress-bar{
+        background-color: $light-blue;
+    }
+    .progress-bar-fill-bar{
+        background-color: $dark-blue
+    }
 }
 .activities-sidebar-btn{
     @include remove-btn-default;
@@ -71,8 +140,11 @@ $activites-table-of-contents-height: calc(
     padding: 0.5rem;
     background-color: $dark-blue;
     color: white;
+    //color: black;
     width: 55%;
-    margin-bottom: calc(min(1.5rem, 3vh));
+    //width: 100%;
+
+    margin: calc(max(1.5rem, 3vh)) 0;
     @include transition(all 0.3s ease-out);
     border: 1px solid transparent;
     span{
@@ -83,10 +155,12 @@ $activites-table-of-contents-height: calc(
         color: $dark-blue;
         border: 1px solid $dark-blue;
         background-color: white;
+        //background-color: $dark-gray;
     }
 }
 
 .activities-table-of-contents{
+    position: relative;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -95,8 +169,7 @@ $activites-table-of-contents-height: calc(
     overflow-x: hidden;
     width: 100%;
     height: $activites-table-of-contents-height;
-    min-height: calc(max(18vh, 6.5rem));
-    margin-bottom: calc(min(1.5rem, 3vh));
+    min-height: calc(max(35vh, 6.5rem));
     &::-webkit-scrollbar{
         width: 0.5rem;
         @include border-radius(7px);
@@ -104,6 +177,17 @@ $activites-table-of-contents-height: calc(
     &::-webkit-scrollbar-thumb{
         @include border-radius(7px);
         background-color: $dark-blue;
+    }
+    .activity-table-of-contents-header{
+        font-size: 1.2rem;
+        position:sticky;
+        top: 0;
+        background-color: $lightest-gray;
+        width: 100%;
+        text-align: center;
+        min-height: 2rem;
+        margin: 0;
+        padding: 0;
     }
 }
 
@@ -124,7 +208,7 @@ $activites-table-of-contents-height: calc(
 .activities-sidebar-table-btns{
     @include remove-btn-default();
     //@include border-radius(0.5rem);
-    height: 2.7rem;
+    height: 3rem;
     padding: 0;
     display: flex;
     justify-content: center;
@@ -146,8 +230,14 @@ $activites-table-of-contents-height: calc(
     }
     .table-btns-inner-container{
         display: flex;
-        width: 55%;
+        width: 70%;
         height: 100%;
+        section{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: 0.5rem;
+        }
     }
 }
 .activities-sidebar-table-btns.question-active{
@@ -170,7 +260,7 @@ $activites-table-of-contents-height: calc(
 
 .activity-walkthrough-instructions{
     background-color: white;
-    z-index: 2;
+    z-index: 4;
     min-width: 310px;
     overflow-wrap: break-word;
     word-break: break-word;
@@ -233,6 +323,12 @@ $activites-table-of-contents-height: calc(
 
     }
 }
+.activity-header{
+    position: relative;
+    margin-top: 0.2rem;
+    margin-bottom: 1vh;
+    height: 3.4rem;
+}
 
 .activity-type-container{
     position: relative;
@@ -240,7 +336,7 @@ $activites-table-of-contents-height: calc(
     text-align: center;
     min-height: calc(max(calc(95vh - 2rem), calc(40rem - 7vh - 2rem) ));
     z-index: 1;
-    max-width: 1300px;
+    max-width: 1400px;
     min-width: 310px; 
     &::-webkit-scrollbar{
         width: 0rem;
@@ -304,12 +400,11 @@ $activites-table-of-contents-height: calc(
 } 
 
 .nav-activity-btns{
-    max-width: 1300px;
+    max-width: 1400px;
 }
 .nav-activity-btn{
     @include border-radius(5px);
     color: $main-font-color;
-    //background-color: $purple;
     background-color: $blue;
     padding: 0.4rem 1.2rem;
     margin-bottom: 1.5vh;
@@ -332,12 +427,11 @@ $activites-table-of-contents-height: calc(
     font-size: 0.9rem;
     background-color: $white;
     min-width: fit-content;
-    width: 30%;
-    height: 95%;
-    @include border-radius(8px);
-    @include box-shadow(rgba(0,0,0,0.1) 0px 0 10px);
-    padding: 1rem 0.5rem;
-
+    width: 55%;
+    @include border-radius(1rem);
+    padding: 0.5rem 0;
+    //border: 1px solid $dark-blue;
+    margin-top: calc(max(1.5rem, 3vh));
     .timer-counter{
         @include border-radius(10px);
         color: $dark-gray;
@@ -347,16 +441,16 @@ $activites-table-of-contents-height: calc(
         margin-left: 2px;
         margin-right: 2px;
         padding: 0.1rem 0px;
-        font-size: 0.75rem;
+        font-size: 0.85rem;
         overflow: hidden;
         min-width: 3rem;
         z-index: 1;
-        margin-top: 0.1rem;
+        //margin-top: 0.1rem;
     }
 
     .timer-btns{
         @include remove-btn-default;
-        font-size: 0.8rem;
+        font-size: 1rem;
         color: $secondary-font-color;
     }
 }
@@ -379,7 +473,4 @@ $activites-table-of-contents-height: calc(
     margin-top: 0.2rem;
     margin-bottom: 1vh;
     height: 3.4rem;
-}
-.activity-header-btns{
-    height: 85%;
 }

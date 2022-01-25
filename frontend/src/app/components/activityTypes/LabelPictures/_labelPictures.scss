@@ -23,7 +23,7 @@
 @mixin label-pic-activity-containers{
     position: relative;
     margin-top: 1.5rem;
-    background-color: $light-blue;
+    background-color: $lighter-blue;
     @include border-radius(7px);
     min-width: 280px;
     overflow-x: hidden;
@@ -90,10 +90,10 @@ $label-pic-column-height: calc(
 .label-pic-activity-container::before{
     position: absolute;
     content: "";
-    top: 5%;
+    top: 1.5%;
     left: 1%;
     width: 98%;
-    height: calc(95%);
+    height: calc(98.5%);
     @include box-shadow(rgba(0, 0, 0, 0.425) 0px -2px 23px 2px);
     z-index: -1;
 }
@@ -112,7 +112,7 @@ $label-pic-column-height: calc(
     left: 0;
     height: 3.5rem;
     z-index: 3;
-    background-color: $light-blue;
+    background-color: $lighter-blue;
     color: $dark-blue;
 }
 //resizable container
@@ -167,7 +167,7 @@ $label-pic-column-height: calc(
 .label-pic-activity-question-container{
     min-width: 0;
     margin-top: 0;
-    background-color: $light-blue;
+    background-color: $lighter-blue;
     width: calc(100% * (2 / 3) - 1.5rem);
     min-height: calc(max(#{$label-pic-column-min-height}, #{$label-pic-column-height}));
     height: 100%;
@@ -402,7 +402,7 @@ $label-pic-column-height: calc(
 }
 
 .label-pic-activity-dragging{
-    background-color: $light-blue;
+    background-color: $lighter-blue;
     border: 1px solid $black;
 }
 

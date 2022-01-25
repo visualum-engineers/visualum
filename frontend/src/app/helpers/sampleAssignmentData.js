@@ -6,11 +6,11 @@ const sortActivityChoices = (numChoices) =>{
 const assignmentData = {
     activityID: "unique",
     activityName: "7C Week2 HW Assignment",
+    activityTimer: {hours: 1, minutes: 1, seconds: 1},
     questions: [
         //matching
         {
             type: "matching",
-            timer: {hours: 1, minutes: 1, seconds: 1},
             keyPairs: [
                 {categoryID: 1, name: "Arky"},
                 {categoryID: 2, name: "Luis"},
@@ -35,7 +35,6 @@ const assignmentData = {
         //multiple choice
         {
             type: "radio",
-            timer: false,
             question: "What faces this world?",
     
             imgDescription: "",
@@ -59,7 +58,6 @@ const assignmentData = {
         //sorting
         {
             type: "sort",
-            timer: false,
             categories: [
                 {categoryId: 1, name: "Good"},
                 {categoryId: 2, name: "Medium"},
@@ -73,7 +71,6 @@ const assignmentData = {
         },
         //short answer
         {
-            timer:false,
             type: "shortAnswer",
             question: "What faces this world?",
             imageURL: "images/homePage/mountain-home-bg.jpg",
@@ -82,7 +79,6 @@ const assignmentData = {
         //label pictures
         {
             type: "labelPictures",
-            timer: false,
             questions: [
                 {id: 1, content: "What faces this world? What faces this world? What faces this world? What faces this world?What faces this world? What faces this world? What faces this world? What faces this world? What faces this world? What faces this world? What faces this world? What faces this world? What faces this world? What faces this world? What faces this world? What faces this world? What faces this world?What faces this world? What faces this world? What faces this world? What faces this world? What faces this world? What faces this world? What faces this world? What faces this world? What faces this world? What faces this world? What faces this world? What faces this world? What faces this world?What faces this world? What faces this world? What faces this world? What faces this world? What faces this world? What faces this world? What faces this world? What faces this world? What faces this world? What faces this world? What faces this world? What faces this world? What faces this world?What faces this world? What faces this world? What faces this world?"}, 
                 {id: 2, content:"What's your name?"},
@@ -119,7 +115,6 @@ const assignmentData = {
         //checkbox
         {
             type: "checkbox",
-            timer: false,
             question: "What faces this world?",
             imageURL : "images/homePage/mountain-home-bg.jpg",
             imgDescription: "",

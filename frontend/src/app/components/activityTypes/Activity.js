@@ -1,7 +1,3 @@
-import ActivityQuestions from "./ActivityQuestions"
-import ActivityInstructions from "./ActivityInstructions"
-import ActivityBtns from "./ActivityBtns"
-import ActivityHeader from "./ActivityHeader"
 import DnDActivities from "./DnDActivities"
 import useWindowWidth from "../../hooks/use-window-width"
 import SecondarySideBar from "../sideBar/SecondarySideBar"
@@ -10,10 +6,6 @@ import { unstable_batchedUpdates } from "react-dom"
 import {CSSTransition} from "react-transition-group"
 import { useSelector, useDispatch } from 'react-redux'
 import {updateActivityData} from "../../../redux/features/activityTypes/activitiesData"
-import ActivityResetPopUp from './ActivityResetPopUp'
-import UserProfile from "../utilities/userProfile/UserProfile";
-import calculatePercentage from "../../helpers/calculatePercentage";
-import capitalizeFirstLetter from "../../helpers/capitalizeFirstLetter"
 import {
     enableDnD,
     enableTap, 
@@ -24,7 +16,13 @@ import {
     activitySecondarySideBarData, 
     activitySecondarySidebarFooterData 
 } from "./ActivitySidebarData"
-
+import {  
+    ActivityInstructions,  
+    ActivityBtns, 
+    ActivityQuestions, 
+    ActivityNavbar,
+    ActivityResetPopUp
+} from "./index"
 
 const duration = 375
 const inPropDuration = duration * 2
@@ -34,9 +32,9 @@ const defaultTransition = {
 }
 
 //for testing. remove after
-const imageURL = "images/homePage/mountain-home-bg.jpg";
+//const imageURL = "images/homePage/mountain-home-bg.jpg";
 
-let Activity = () =>{
+const Activity = () =>{
     //redux states
     const activityData = useSelector((state) => state.activities.data.present.activityData)
     const dndEnabled = useSelector((state) => state.activities.settings.dndEnabled)
@@ -172,15 +170,25 @@ let Activity = () =>{
         position: "fixed",
         top: "0",
         height: "calc(max(100%, 100vh))",
-        zIndex: "2",
-        //left and width are conditional 
-        //to adjust for a toggled sidebar
-        left: sidebarToggle && mediumWindowWidth ? "16rem":"0" ,
-        width: sidebarToggle && mediumWindowWidth ? "calc(100% - 16rem)":"100%",
+        zIndex: "4",
+        left: "0",
+        width: "100%",
         transition: "all 0.3s ease-out",
     }
     return(
     <>
+        <ActivityNavbar 
+            mediumWindowWidth={mediumWindowWidth}
+            smallWindowWidth = {smallWindowWidth}
+            data ={activityData.questions[questionNum]}
+            resetBtnOnClick ={resetBtnOnClick} 
+            questionNum={questionNum}
+            disableDnD ={disableDnD}
+            toggleTap = {toggleTap}
+            type={activityData.questions[questionNum].type in DnDActivities ? "DnD" : null}
+            sidebarToggle={sidebarToggle}
+            handleSideBar={handleSideBar}
+        />
         <SecondarySideBar 
             data={sideBarData}
             footerData = {sidebarFooterData}
@@ -188,20 +196,9 @@ let Activity = () =>{
             handleSideBar = {handleSideBar}
             windowWidth = {mediumWindowWidth}
             customSidebarClass={"activities-sidebar"}
-            userProfile = {
-                <UserProfile
-                    userContainerClass={"activities-sidebar-user-profile d-flex flex-column align-items-center justify-content-center"}
-                    avatar={<img src={imageURL} alt = {"user-avatar"}/>}
-                    name = {"Arky Asmal"} 
-                    accountType={capitalizeFirstLetter("student")}
-                    progressBar={{
-                        percentage: calculatePercentage(questionNum, (activityData.questions.length-1)) + "%",
-                        ariaLabel:"activity-progress-bar"
-                    }}
-                />
-            }     
+            logo ={false}
+            exitSideBarBtn = {false}
         />
-
         <div 
             className = {`${sidebarToggle && mediumWindowWidth ? "secondary-sidebar-open ": ""}activity-body d-flex flex-column align-items-center justify-content-center`}>
             {moreInfoBtn && 
@@ -224,16 +221,8 @@ let Activity = () =>{
                 className = "activity-type-container col-12 col-md-11 d-flex flex-column" 
                 style={inProp ? {overflow: "hidden"}: null}
             >
-                <ActivityHeader 
-                    mediumWindowWidth={mediumWindowWidth}
-                    smallWindowWidth = {smallWindowWidth}
-                    data ={activityData.questions[questionNum]}
-                    resetBtnOnClick ={resetBtnOnClick} 
-                    questionNum={questionNum}
-                    disableDnD ={disableDnD}
-                    toggleTap = {toggleTap}
-                    type={activityData.questions[questionNum].type in DnDActivities ? "DnD" : null}
-                />
+                <div className="activity-header"></div>
+
                 {/*generate entire form data*/}
                 {question.type ?
                     activityData.questions.map((question, index)=>{

@@ -62,10 +62,10 @@ $match-column-height: calc(
 .match-activity-container::before{
     position: absolute;
     content: "";
-    top: 5%;
+    top: 1.5%;
     left: 1%;
     width: 98%;
-    height: calc(95%);
+    height: calc(98.5%);
     @include box-shadow(rgba(0, 0, 0, 0.425) 0px -2px 23px 2px);
     z-index: -1;
 }
@@ -116,7 +116,7 @@ $match-column-height: calc(
     left: 0;
     height: 3.5rem;
     z-index: 3;
-    background-color: $light-blue;
+    background-color: $lighter-blue;
     color: $dark-blue;
 }
 
@@ -131,7 +131,7 @@ $match-column-height: calc(
 .match-activity-itemBank{
     position: relative;
     margin-top: 1.5rem;
-    background-color: $light-blue;
+    background-color: $lighter-blue;
     @include border-radius(7px);
     min-width: 300px;
     overflow-x: hidden;
@@ -205,7 +205,7 @@ $match-column-height: calc(
     @include border-radius(7px);
     min-height: $match-column-min-height;
     height: $match-column-height;
-    background-color: $light-blue;
+    background-color: $lighter-blue;
     .match-activity-inner-droppable::after{
         position: absolute;
         text-align: center;
@@ -222,7 +222,7 @@ $match-column-height: calc(
         font-size: 0.85rem;
     }
     &::-webkit-scrollbar{
-        background-color: $light-blue;
+        background-color: $lighter-blue;
         width: 0.5rem;
         @include border-radius(7px);
     }
@@ -236,7 +236,7 @@ $match-column-height: calc(
    
     .match-activity-answers-column,
     .match-activity-keys-column{
-        background-color: $light-blue;
+        background-color: $lighter-blue;
         min-height: 100%;
     }
 }
@@ -255,12 +255,12 @@ $match-column-height: calc(
     margin-right: 0;
 }
 .match-activity-keys-column{
-    background-color: $light-blue;
+    background-color: $lighter-blue;
     padding-left: 0.75rem;
 }
 .match-activity-answers-column{
     @include border-radius(7px 7px 7px 0);
-    background-color: $light-blue;
+    background-color: $lighter-blue;
     padding-right: 0.25rem;
     .match-activity-inner-droppable{
         padding-top: 0.25rem;
@@ -333,7 +333,7 @@ $match-column-height: calc(
         background-color: $dark-blue;
     }
     &:hover{
-        background-color: $light-blue;
+        background-color: $lighter-blue;
         border: 1px solid $black;
     }
     div{
@@ -345,7 +345,7 @@ $match-column-height: calc(
 }
 
 .match-activity-dragging{
-    background-color: $light-blue;
+    background-color: $lighter-blue;
     border: 1px solid $black;
 }
 .match-activity-draggables.hide-draggable{

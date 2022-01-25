@@ -72,10 +72,10 @@ html.sortActivityActive{
 .sort-activity-container::before{
     position: absolute;
     content: "";
-    top: 5%;
+    top: 1.5%;
     left: 1%;
     width: 98%;
-    height: calc(95%);
+    height: calc(98.5%);
     @include box-shadow(rgba(0, 0, 0, 0.425) 0px -2px 23px 2px);
     z-index: -1;
 }
@@ -92,7 +92,7 @@ html.sortActivityActive{
 }
 .sort-activity-itemBank{
     position: relative;
-    background-color: $light-blue;
+    background-color: $lighter-blue;
     @include border-radius(0.5rem);
     margin-top: 1.5rem;
     overflow-y: scroll;
@@ -125,7 +125,7 @@ html.sortActivityActive{
     height: fit-content;
 }
 .sort-activity-categories{
-    background-color: $light-blue;
+    background-color: $lighter-blue;
     @include border-radius(0.5rem);
     min-width: 300px;
     overflow-y: scroll;
@@ -152,7 +152,7 @@ html.sortActivityActive{
     height: 3.5rem;
     color: $dark-blue;
     z-index: 5;
-    background-color: $light-blue;
+    background-color: $lighter-blue;
     margin: 0;
     padding-left: 0.5rem;
 }
@@ -276,7 +276,7 @@ html.sortActivityActive{
 
 .sort-activity-is-dragging{
     opacity: 0.5;
-    background-color: $light-blue;
+    background-color: $lighter-blue;
     border: 1px solid $black;
 }
 

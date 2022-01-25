@@ -1,5 +1,6 @@
 
 import {useContext, createContext} from "react";
+import { createPortal } from "react-dom";
 import useZoomState from "../../../hooks/use-zoom-state";
 import PopUpBg from "../popUp/PopUpBackground";
 
@@ -25,18 +26,22 @@ const ImageContainer = ({
                 {children}
             </div> 
             {zoomState && 
-                <PopUpBg 
-                    onClick = {onLocalClick}
-                    ariaLabel = {"zoom-out-image"}
-                    containerStyles = {popUpBgStyles}
-                >
-                    <div className={
-                        zoomState && zoomContainerClass ? zoomContainerClass
-                        : defaultContainerClass
-                    }>
-                        {popUpEl}
-                    </div> 
-                </PopUpBg>
+                createPortal(
+                    <PopUpBg 
+                        onClick = {onLocalClick}
+                        ariaLabel = {"zoom-out-image"}
+                        containerStyles = {popUpBgStyles}
+                    >
+                        <div className={
+                            zoomState && zoomContainerClass ? zoomContainerClass
+                            : defaultContainerClass
+                        }>
+                            {popUpEl}
+                        </div> 
+                    </PopUpBg>,
+                    document.body
+                )
+                
             }
         </ImgContainerContext.Provider>
     )

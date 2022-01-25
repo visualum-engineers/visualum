@@ -28,16 +28,16 @@ $sa-activity-container-min-height: calc(
 .sa-activity-container::before{
     position: absolute;
     content: "";
-    top: 5%;
+    top: 1.5%;
     left: 1%;
     width: 98%;
-    height: calc(95%);
+    height: calc(98.5%);
     @include box-shadow(rgba(0, 0, 0, 0.425) 0px -2px 23px 2px);
     z-index: -1;
 }
 .sa-activity-inner-container{
     @include border-radius(0.5rem);
-    background-color: $light-blue;
+    background-color: $lighter-blue;
     padding: 1rem;
     width: 100%;
 }

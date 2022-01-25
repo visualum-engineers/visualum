@@ -7,7 +7,7 @@ const Logo = "./images/VisualumLogo.png"
 const SecondarySideBar = (props) =>{
     return (
     <>
-        <button 
+        {props.exitSideBarBtn && <button 
             className={`secondary-exit-sidebar-btn${props.sidebarToggle ?" sidebar-open":" sidebar-close"}`} 
             aria-label="exit-sidebar"
             onClick={props.handleSideBar}
@@ -15,7 +15,8 @@ const SecondarySideBar = (props) =>{
             <FontAwesomeIcon 
                 icon= {props.sidebarToggle ? faTimes : faBars}
             />
-        </button>
+        </button>}
+        
         <nav 
             aria-label ="sidebar" 
             aria-hidden ={!props.sidebarToggle}
@@ -24,15 +25,15 @@ const SecondarySideBar = (props) =>{
                         + `${props.customSidebarClass ? " "+props.customSidebarClass: ""}` 
                     }
         >
-        
-            <div className="secondary-sidebar-header d-flex justify-content-center align-items-center">
-                <a href="/" aria-hidden ={!props.sidebarToggle} tabIndex ={!props.sidebarToggle?"-1": "0"}>
-                    <img className="secondary-sidebar-visualum-logo" 
+            {props.logo && <div className="secondary-sidebar-header d-flex justify-content-center align-items-center">
+                    <a href="/" aria-hidden ={!props.sidebarToggle} tabIndex ={!props.sidebarToggle?"-1": "0"}>
+                        <img className="secondary-sidebar-visualum-logo" 
                         src={Logo} 
                         alt="Visualum logo"/>
-                </a>
-                <a href="/" aria-hidden ={!props.sidebarToggle} tabIndex ={!props.sidebarToggle?"-1": "0"}>visualum</a>
-            </div>
+                    </a>
+                    <a href="/" aria-hidden ={!props.sidebarToggle} tabIndex ={!props.sidebarToggle?"-1": "0"}>visualum</a>
+                </div> 
+            }
             
             <div className="secondary-sidebar-link-container d-flex flex-column">
                 {props.data.map((navItem, index)=>{

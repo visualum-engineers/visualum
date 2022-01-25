@@ -24,15 +24,15 @@ $mc-activity-container-min-height: calc(
 .controlled-inputs-activity-container::before{
     position: absolute;
     content: "";
-    top: 5%;
+    top: 1.5%;
     left: 1%;
     width: 98%;
-    height: calc(95%);
+    height: calc(98.5%);
     @include box-shadow(rgba(0, 0, 0, 0.425) 0px -2px 23px 2px);
     z-index: -1;
 }
 .controlled-inputs-activity{
-    background-color: $light-blue;
+    background-color: $lighter-blue;
     @include border-radius(0.5rem);
     padding: 1rem;
 }

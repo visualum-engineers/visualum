@@ -1,0 +1,20 @@
+.progress-bar-container{
+    margin-top: 7%;
+    width: 70%;
+    font-size: 0.7rem;
+}
+.progress-bar{
+    margin-top: 4%;
+    @include border-radius(10rem);
+    background: $light-purple;
+    height: 0.45rem;
+}
+.progress-bar-fill-bar{
+    @include border-radius(10rem);
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: $purple;
+    z-index: 1;
+    @include transition(all 0.3s ease-out)
+}
