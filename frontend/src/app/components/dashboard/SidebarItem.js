@@ -5,7 +5,7 @@ import { useResolvedPath, useMatch } from 'react-router-dom';
 export default function SidebarItem(props) {
     let navigate = useNavigate();
     let resolved = useResolvedPath(props.value);
-    let match = useMatch({ path: resolved.pathname, end: true });
+    let match = useMatch({ path: resolved.pathname, end: false });
 
     function handleClick() {
         navigate(`${props.value}`);

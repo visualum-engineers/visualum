@@ -4,8 +4,14 @@ import sidebarValues from './sidebarValues';
 const Logo = "./images/VisualumLogo.png";
 
 export default function DashboardSidebar(props) {
+
     const items = sidebarValues.map(item =>
-        <SidebarItem name={item.name} value={item.value} selected={props.page === item.value} key={item.value} />
+        <SidebarItem
+            name={item.name}
+            value={item.value}
+            selected={props.page === item.value}
+            key={item.value}
+        />
     )
 
     return (
