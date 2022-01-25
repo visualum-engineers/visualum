@@ -1,5 +1,5 @@
 import GeneralBtn from "../utilities/generalBtn/GeneralBtn"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DrapAndDropToggler from "../utilities/dragAndDrop/DrapAndDropToggler"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSyncAlt, faUndoAlt, faRedoAlt, faBars } from "@fortawesome/free-solid-svg-icons";
@@ -26,12 +26,28 @@ const ActivityNavbar = ({
     const dispatch = useDispatch()
     const pastLength = useSelector((state) => state.activities.data.clientData.future.length)
     const futureLength = useSelector((state) => state.activities.data.clientData.past.length)
-    const onUndoClick = () => {
+
+    //keyboard shortcuts for undo and redo
+    useEffect(() => {
+        const listenToShortcuts = (e) =>{
+
+        }
+        window.addEventListener("keydown", listenToShortcuts)
+        return () => window.removeEventListener("keydown", listenToShortcuts)
+    }, [])
+    const editPointFocus =(e) =>{
+        e.preventDefault()
+        if(e.currentTarget.contains(e.relatedTarget)) return
+        setEditDropdown(false)
+    }
+    const onUndoClick = (e) => {
+        e.preventDefault()
         undoHistory({
             dispatch: dispatch
         })
     }
-    const onRedoClick = () =>{
+    const onRedoClick = (e) =>{
+        e.preventDefault()
         redoHistory({
             dispatch: dispatch
         })
@@ -58,6 +74,7 @@ const ActivityNavbar = ({
         <div className="d-flex align-items-center justify-content-end activity-header-btns col-4 flex-grow-1">
             <div 
                 style={{position: "relative", zIndex: "1"}}
+                onBlur = {editPointFocus}
             >
                 <button 
                     onMouseEnter={() => setEditPointer(true)}
@@ -85,7 +102,7 @@ const ActivityNavbar = ({
                             customClassName = {"d-flex align-items-center"}
                             customIcon = {<FontAwesomeIcon icon={faUndoAlt} />}
                             textContent = {<><div>Undo</div><div className="key-shortcut">Ctrl+Z</div></>}
-                            onClick = {onUndoClick}
+                            onClick={onUndoClick}
                             customAriaLabel = {"reset-question"}
                             questionNum = {questionNum}
                             disabled = {pastLength > 0}
@@ -94,7 +111,7 @@ const ActivityNavbar = ({
                             customClassName = {"d-flex align-items-center"}
                             customIcon = {<FontAwesomeIcon icon={faRedoAlt} />}
                             textContent = {<><div>Redo</div><div className="key-shortcut">Ctrl+Y</div></>}
-                            onClick = {onRedoClick}
+                            onClick={onRedoClick}
                             customAriaLabel = {"reset-question"}
                             questionNum = {questionNum}
                             disabled = {futureLength > 0}
@@ -104,7 +121,7 @@ const ActivityNavbar = ({
                             customClassName = {"d-flex align-items-center"}
                             customIcon = {<FontAwesomeIcon icon={faSyncAlt} />}
                             textContent = {<><div>Reset</div><div className="key-shortcut">Ctrl+Alt+Del</div></>}
-                            onClick = {resetBtnOnClick}
+                            onClick={resetBtnOnClick}
                             customAriaLabel = {"reset-question"}
                             questionNum = {questionNum}
                         />

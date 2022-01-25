@@ -264,7 +264,6 @@ const Activity = () =>{
                 />
             </div>
         </div>
-        
     </>
     )
 }
