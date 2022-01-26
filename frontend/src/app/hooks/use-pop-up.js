@@ -10,9 +10,13 @@ const usePopUp = ({
     }
     //on mount, pop up should appear, but then disappear after 5 seconds
     useEffect(()=>{
-        if(setTimeoutOnMount) setTimeout(() => setPopUpToggled(false), setTimeoutOnMount)
+        let isMounted = true
+        if(setTimeoutOnMount && isMounted) setTimeout(() => {
+            if(isMounted) setPopUpToggled(false)
+        }, setTimeoutOnMount)
+        
+        return () => {isMounted = false}
     }, [setTimeoutOnMount])
-    
     
     return [popUpToggled, handleBtn]
 }

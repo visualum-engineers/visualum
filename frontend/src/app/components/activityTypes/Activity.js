@@ -51,9 +51,9 @@ const Activity = () =>{
     const timerEndTime = useSelector((state) => state.activities.data.clientData.present.clientAnswerData.activityEndTime)
     const timerData = timerStartTime && timerEndTime ? convertTimeDiff(timerStartTime, timerEndTime) : null
     useEffect(() =>{
-        if(timerStartTime) return
+        if(timerEndTime) return
         dispatch(updateActivityTimer())
-    }, [dispatch, timerStartTime])
+    }, [dispatch, timerEndTime])
     //component specific state
     let currQuestion = 0
     const [prevQuestion, setPrevQuestion] = useState(0)
@@ -72,28 +72,39 @@ const Activity = () =>{
     const [moreInfoBtn, setMoreInfoBtn] = useState(false)
     const mediumWindowWidth = useWindowWidth(992)
     const smallWindowWidth = useWindowWidth(576)
-
     useEffect(() => {
+        let isMounted = true
         //hide overflow on mount
-        setInProp(true)
-        setTimeout(() =>{
-            setInProp(false)
-        }, inPropDuration)
+        if(isMounted){
+            setInProp(true)
+            setTimeout(() =>{
+                if(isMounted) setInProp(false)
+            }, inPropDuration)
+        }
+        return () => { isMounted = false }
     }, [questionNum])
     //when window width < 992, sidebar automatically closes
     //it can still be opened though
     useEffect(()=>{ 
-        if(!mediumWindowWidth) setSidebarToggle(false)
-        else setSidebarToggle(true)
+        let isMounted = true
+        if(isMounted) {
+            if(!mediumWindowWidth) setSidebarToggle(false)
+            else setSidebarToggle(true)
+        }
+        return () => {isMounted = false}
     },[mediumWindowWidth])
 
     useEffect(()=>{
-        const questionType = question.type
-        const updateDnD = !smallWindowWidth && (questionType in DnDActivities)
-        if(updateDnD) {
-            dispatch(enableTap())
-            setMoreInfoBtn(true)
+        let isMounted = true
+        if(isMounted) {
+            const questionType = question.type
+            const updateDnD = !smallWindowWidth && (questionType in DnDActivities)
+            if(updateDnD) {
+                dispatch(enableTap())
+                setMoreInfoBtn(true)
+            }
         }
+        return () => {isMounted = false}
     }, [dispatch, smallWindowWidth, question.type])
 
     const onNavBtnClick = (e) =>{

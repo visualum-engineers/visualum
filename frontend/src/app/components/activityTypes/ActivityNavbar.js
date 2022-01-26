@@ -38,7 +38,7 @@ const ActivityNavbar = ({
     const dispatch = useDispatch()
     const pastLength = useSelector((state) => state.activities.data.clientData.past.length)
     const futureLength = useSelector((state) => state.activities.data.clientData.future.length)
-    
+
     //keyboard shortcuts for undo and redo
     const editPointFocus =(e) =>{
         e.preventDefault()
@@ -85,9 +85,7 @@ const ActivityNavbar = ({
         }, 
         { overrideSystem: false }
     )
-    /*
-    
-    */
+
     return(
         <nav className={`d-flex activity-navbar justify-content-between align-items-center px-1`}>
             <div className="d-flex col-4">
@@ -117,7 +115,7 @@ const ActivityNavbar = ({
                         />
                     </div>
             }
-            <div className="d-flex align-items-center justify-content-end activity-header-btns col-4">
+            <div className="d-flex align-items-center justify-content-end activity-header-btns col-8 col-sm-4">
                 <div 
                     style={{position: "relative", zIndex: "1"}}
                     onBlur = {editPointFocus}
