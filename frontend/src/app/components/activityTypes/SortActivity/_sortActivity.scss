@@ -252,8 +252,11 @@ html.sortActivityActive{
 
 .sort-activity-is-dragging{
     opacity: 0.5;
-    background-color: $lighter-blue;
     border: 1px solid $black;
+}
+.sort-activity-draggables-tap-active{
+    background-color: rgb(255, 218, 77);
+    border: 1px solid $dark-gray;
 }
 
 .sort-activity-dragging-over{

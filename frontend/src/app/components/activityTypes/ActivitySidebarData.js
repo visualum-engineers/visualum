@@ -26,12 +26,12 @@ export const activitySecondarySideBarData = ({
                     percentage = {roundPercentToInt(currQuestion, (activityData.questions.length-1)) + "%"}
                     containerClassName={"activity-progress-bar-container"}
                     ariaLabel = "activity-progress-bar"
-                    additionalContent={" completed"}
+                    additionalContent={`${currQuestion+1}/${activityData.questions.length} completed`}
+                    showContent={true}
                 />
                 <hr style={{width: "70%", marginTop:"0"}}/>
             </div>
         },
-    
         {
             type: "custom",
             content: <ActivityTableOfContents 

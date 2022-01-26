@@ -131,7 +131,6 @@
     top: 0.4rem;
     left: calc(min(13.5rem, 300px));
     color: $darkest-gray;
-    //background: $white;
     background: $lightest-gray;
     font-size: 1.5rem;
     padding: 0.15rem 0.35rem;
@@ -156,7 +155,6 @@
 }
 .secondary-exit-sidebar-btn.sidebar-open{
     color: $light-gray;
-    //opacity: 0.8;
 }
 .secondary-exit-sidebar-btn.sidebar-open:hover{
     color: $white;

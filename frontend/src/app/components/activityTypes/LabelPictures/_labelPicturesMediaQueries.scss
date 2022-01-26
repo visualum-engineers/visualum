@@ -59,6 +59,12 @@
         cursor: pointer;
         background-color: $darkest-gray;
     }
+    .label-pic-activity-draggables{
+        &:hover{
+            background-color: rgb(255, 218, 77);
+            border: 1px solid $dark-gray;
+        }
+    }
     .label-pic-question-header{
         .label-pic-answers-overview-btn:hover{
             transform: scale(1.05);

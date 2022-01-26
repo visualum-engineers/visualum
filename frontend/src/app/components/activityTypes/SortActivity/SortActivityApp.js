@@ -376,7 +376,7 @@ const SortActivityApp = ({
                 {!mediumWindowWidth && <WordBank 
                     data ={data}
                     firstElTap = {firstElTap}
-                    isDraggingClass = {"sort-activity-is-dragging"}
+                    isDraggingClass = {!disableDnD ? "sort-activity-draggables-tap-active" : "sort-activity-is-dragging"}
                     onTap = {!disableDnD ? onTap : null}
                     resizeContainerClass = {`sort-activity-itemBank-container ${mediumWindowWidth ? "full-size":"w-100"} d-flex flex-column`}
                     overallContainerClass = {`sort-activity-itemBank ${mediumWindowWidth ? "full-size":"w-100"}`} 
@@ -385,7 +385,7 @@ const SortActivityApp = ({
                     columnClass = "sort-activity-itemBank-column"
                     droppableClassName ={`sort-activity-itemBank-droppables${!mediumWindowWidth?" small-screen w-100": ""}`}
                     innerDroppableClassName = {`${!disableDnD && firstElTap? "sort-activity-tap-active ": ""}sort-activity-inner-droppable d-flex flex-column align-items-center w-100`}
-                    draggingOverClass = {"sort-activity-dragging-over"}
+                    draggingOverClass = {`sort-activity-dragging-over`}
                     draggableClassName = {"sort-activity-draggables d-flex align-items-center justify-content-center"}
                     isOver = {isOver}
                     disableDnD = {!disableDnD}

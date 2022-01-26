@@ -9,7 +9,7 @@
     background-color: $lightest-gray;
 }
 @mixin activities-sidebar-table-btn-active{
-    background-color: $light-gray;
+    background-color: #e4e3e3;
     .activities-question-circle-indicator{
         circle{
             fill: $dark-blue;
@@ -261,7 +261,8 @@ $activites-table-of-contents-height: calc(
     display: flex;
     flex-direction: column;
     justify-content: end;
-    font-size: 0.72rem;
+    font-size: 0.8rem;
+    font-weight: 500;
     width: 70%;
     .progress-bar{
         background-color: $light-blue;
@@ -497,4 +498,3 @@ $activites-table-of-contents-height: calc(
     @include transition(all 0.3s ease-out);
 } 
 
-@import "./activityMediaQueries";

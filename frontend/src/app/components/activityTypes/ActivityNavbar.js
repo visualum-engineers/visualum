@@ -1,12 +1,21 @@
 import GeneralBtn from "../utilities/generalBtn/GeneralBtn"
-import { useState} from "react";
-import useKeyboardShortcut from "../../hooks/use-keyboard-shortcuts";
-//import DrapAndDropToggler from "../utilities/dragAndDrop/DrapAndDropToggler"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSyncAlt, faUndoAlt, faRedoAlt, faBars, faCog, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 import TrianglePointer from "../utilities/trianglePointer/TrianglePointer";
 import { undoHistory, redoHistory } from "./activityHistoryFunc";
 import { useDispatch, useSelector } from "react-redux";
+import useKeyboardShortcut from "../../hooks/use-keyboard-shortcuts";
+import { resetPopUpOn } from "../../../redux/features/activityTypes/activitiesSettings";
+//import DrapAndDropToggler from "../utilities/dragAndDrop/DrapAndDropToggler"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { 
+    faSyncAlt, 
+    faUndoAlt, 
+    faRedoAlt, 
+    faBars, 
+    faCog, 
+    faChevronDown 
+} from "@fortawesome/free-solid-svg-icons";
+
 const Logo = "./images/VisualumLogo.png"
 const ActivityNavbar = ({
     smallWindowWidth,
@@ -50,9 +59,9 @@ const ActivityNavbar = ({
     useKeyboardShortcut(
         ['Control', 'Alt', 'Delete'], 
         () => {
-            if (inProp) return
-            if(!(futureLength > 0)) return
-            redoHistory({dispatch: dispatch})
+            dispatch(
+                resetPopUpOn({ questionNum : questionNum, confirmed: false})
+            )
         }, 
         { overrideSystem: false }
     )  
@@ -67,7 +76,11 @@ const ActivityNavbar = ({
     )
     useKeyboardShortcut(
         ['Control', "Y"], 
-        () => redoHistory({dispatch: dispatch}), 
+        () => {
+            if (inProp) return
+            if(!(futureLength > 0)) return
+            redoHistory({dispatch: dispatch})
+        }, 
         { overrideSystem: false }
     )
     
@@ -101,7 +114,6 @@ const ActivityNavbar = ({
                     onClick={() => setEditDropdown((state) => !state)}
                     className="activity-edit-btn"
                 >
-                    {/* <FontAwesomeIcon icon={faEdit}/> */}
                     <span>Edit</span> <FontAwesomeIcon icon={faChevronDown}/>
                     {!editDropdownOpen &&
                         <TrianglePointer 

@@ -2,6 +2,8 @@
     .sort-activity-draggables{
         &:hover{
             cursor: grab;
+            background-color: rgb(255, 218, 77);
+            border: 1px solid $dark-gray;
         }
     }
     .sort-activity-tap-active:hover{

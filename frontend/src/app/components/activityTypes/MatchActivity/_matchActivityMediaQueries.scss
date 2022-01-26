@@ -40,8 +40,8 @@
     }
     .match-activity-draggables{
         &:hover{
-            background-color: $lighter-blue;
-            border: 1px solid $black;
+            background-color: rgb(255, 218, 77);
+            border: 1px solid $dark-gray;
         }
     }
     .match-activity-tap-active:hover{

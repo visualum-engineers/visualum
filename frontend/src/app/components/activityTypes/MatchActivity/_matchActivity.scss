@@ -309,8 +309,8 @@ $match-column-height: calc(
 }
 
 .match-activity-dragging{
-    background-color: $lighter-blue;
-    border: 1px solid $black;
+    background-color: rgb(255, 218, 77);
+    border: 1px solid $dark-gray;
 }
 .match-activity-draggables.hide-draggable{
     position: absolute !important;

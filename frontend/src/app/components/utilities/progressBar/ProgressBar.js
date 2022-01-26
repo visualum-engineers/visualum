@@ -2,9 +2,11 @@ const ProgressBar = ({
     containerClassName,
     progressBarClassName, 
     fillBarClassName,
+    showPercentage,
     percentage,
     ariaLabel,
     additionalContent,
+    showContent,
 }) =>{
     return (
         <div 
@@ -14,7 +16,8 @@ const ProgressBar = ({
             <div 
                 className="d-flex justify-content-start"
             >
-                <span>{percentage}{additionalContent}</span>
+                {showPercentage && <span>{percentage}{additionalContent}</span>}
+                {showContent && <span>{additionalContent}</span>}
             </div> 
             <div 
                 className={progressBarClassName ? progressBarClassName : "progress-bar"}
