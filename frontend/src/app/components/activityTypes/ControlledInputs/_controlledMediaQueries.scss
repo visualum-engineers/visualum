@@ -1,0 +1,30 @@
+@mixin controlled-inputs-activity-hover {
+    .controlled-inputs-activity-image{
+        &:hover{
+            cursor: zoom-in;
+        }
+    }
+    .controlled-inputs-activity-image.zoomed-in{
+        &:hover{
+            cursor: zoom-out;
+        }
+    }
+    .controlled-inputs-radio-item{
+        .radio-answer-choice-group:hover{
+            .radio-answer-label{
+                background-color: $white;
+            }
+        }
+    }
+    .controlled-inputs-checkbox-item{
+        .checkbox-answer-choice-group:hover{
+            .checkbox-answer-label{
+                background-color: $white;
+            }
+            .checkbox-icon{
+                background-color: $dark-gray;
+                opacity: 1;
+            }
+        }
+    }
+}

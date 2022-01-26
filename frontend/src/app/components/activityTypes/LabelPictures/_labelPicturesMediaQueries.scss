@@ -1,0 +1,92 @@
+@mixin label-pic-activity-lg{
+    .label-pic-activity-question-column{
+        .label-pic-activity-draggables{
+            //calculated based of col classes
+            width: 74.2%;
+        }
+    }
+    .label-pic-activity-droppables-placeholder{
+        padding-left: 13.6% !important;
+    }
+}
+@mixin label-pic-activity-md {
+    .label-pic-activity-question-column{
+        .label-pic-activity-draggables{
+            width: 100%;
+        }
+    }
+    .label-pic-activity-droppables-placeholder{
+        padding: 0.5% !important;
+    }
+}
+@mixin label-pic-activity-sm {
+    .label-pic-activity-question-column{
+        .label-pic-activity-draggables{
+            width: 100%;
+        }
+    }
+    
+}
+
+@mixin label-pic-activity-hover {
+    .label-pic-activity-instructions{
+        button:hover{
+            color: $white;
+            background: $black;
+        }
+    }
+    .label-pic-activity-image{
+        &:hover{
+            cursor: zoom-in;
+        }
+    }
+    .label-pic-activity-image.zoomed-in{
+        &:hover{
+            cursor: zoom-out;
+        }
+    }
+    .label-pic-activity-question-nav-btns{
+        button:hover{
+            transform: scale(1.1);
+            //color: $purple;
+            color: $dark-blue;
+            background-color: $white;
+            //border: 1px solid $purple;
+            border: 1px solid $dark-blue;        
+        }
+    }
+    .label-pic-activity-tap-active:hover{
+        cursor: pointer;
+        background-color: $darkest-gray;
+    }
+    .label-pic-question-header{
+        .label-pic-answers-overview-btn:hover{
+            transform: scale(1.05);
+            background-color: $white;
+            color: $dark-blue;
+            border: 1px solid $dark-blue;
+        }
+    }
+
+    .label-pic-question-caro-indicators{
+        button:hover{
+            transform: scale(1.6);
+            circle{
+                fill: $dark-blue;
+            }
+        }
+    }
+    .label-pic-answer-overview-header{
+        button:hover{
+            background-color: rgb(185, 0, 0);
+            color: white;
+            transform: scale(1.1)
+        }
+    }
+    .label-pic-answer-overview-card{
+        &:hover{
+            cursor: pointer;
+            transform: translateY(-0.3rem);
+        }
+    }
+}

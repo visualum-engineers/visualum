@@ -23,6 +23,7 @@
     padding: 0.4rem;
     flex-grow: 1;
 }
+
 $activity-container-height: calc(94vh - 2rem);
 $activity-container-min-height: calc(40rem - 7vh - 2rem);
 $sort-activity-container-height: calc(
@@ -63,11 +64,16 @@ html.sortActivityActive{
     position: relative;
     padding: 1rem;
     background-color: $white;
-    min-height: calc(max(#{$sort-activity-container-min-height}, #{$sort-activity-container-height}));
+    min-height: calc(max(
+        #{$sort-activity-container-min-height}, 
+        #{$sort-activity-container-height}
+    ));
     @include border-radius(0.5rem);
 }
 .sort-activity-container.portrait-size{
-    min-height: calc(max(calc(#{$sort-activity-container-min-height} * 2), calc(#{$sort-activity-container-height} * 2)));
+    min-height: calc(max(
+        calc(#{$sort-activity-container-min-height} * 2), 
+        calc(#{$sort-activity-container-height} * 2)));
 }
 .sort-activity-container::before{
     position: absolute;
@@ -105,9 +111,11 @@ html.sortActivityActive{
     }
     
 }
+
 .sort-activity-itemBank.full-size{
     margin-top: 0;
 }
+
 //container is for resizable handles
 .sort-activity-categories-containers{
     width: calc(200% / 3);
@@ -232,16 +240,14 @@ html.sortActivityActive{
 .sort-activity-draggables{
     @include sort-activity-draggable-styles();
     @include activity-scrollbar-styles();
+    cursor: grabbing;
     div{
         margin: auto;
         width: 100%;
         @include transition(transform 0.2s ease-out);
         @include unselectable;
     }
-    &:hover{
-        cursor: grab;
-    }
-    cursor: grabbing;
+
 }
 
 .sort-activity-is-dragging{
@@ -251,9 +257,5 @@ html.sortActivityActive{
 }
 
 .sort-activity-dragging-over{
-    background-color: $darkest-gray;
-}
-.sort-activity-tap-active:hover{
-    cursor: pointer;
     background-color: $darkest-gray;
 }

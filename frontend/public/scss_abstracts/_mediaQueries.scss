@@ -3,7 +3,7 @@
 @import "../../src/app/components/homePage/homeBreakPoints";
 @import "../../src/app/components/forms/formsBreakpoints";
 @import "../../src/app/components/footer/footerBreakPoints";
-
+@import "../../src/app/components/activityTypes/activityMediaQueries";
 @media (min-width: 992px) {
     @include navbar-lg;
     @include entry-form-lg;
@@ -35,4 +35,13 @@
     @include homepage-xs;
     @include label-pic-activity-sm;
     @include sa-activity-sm;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    @include activities-hover;
+    @include controlled-inputs-activity-hover;
+    @include label-pic-activity-hover;
+    @include match-activity-hover;
+    @include sa-activity-hover;
+    @include sort-activity-hover;
 }

@@ -31,12 +31,6 @@
         border: 1px solid transparent;
         @include unselectable;
     }
-    .radio-answer-choice-group:hover{
-        .radio-answer-label{
-            background-color: $white;
-        }
-    }
-    
     input[type="radio"]{
         @include hidden;
     }

@@ -19,7 +19,7 @@
 @import "../src/app/components/avatarCreator/avatar";
 
 //responsive stylesheet
-@import "./scss_abstracts/breakPoints"; 
+@import "./scss_abstracts/mediaQueries"; 
 
 body{
     font-family: $main-font;

@@ -1,0 +1,11 @@
+@mixin sort-activity-hover {
+    .sort-activity-draggables{
+        &:hover{
+            cursor: grab;
+        }
+    }
+    .sort-activity-tap-active:hover{
+        cursor: pointer;
+        background-color: $darkest-gray;
+    }
+}

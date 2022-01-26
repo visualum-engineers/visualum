@@ -19,3 +19,15 @@
         width: 100%;
     }
 }
+@mixin sa-activity-hover {
+    .sa-activity-image{
+        &:hover{
+            cursor: zoom-in;
+        }
+    }
+    .sa-activity-image.zoomed-in{
+        &:hover{
+            cursor: zoom-out;
+        }
+    }
+}

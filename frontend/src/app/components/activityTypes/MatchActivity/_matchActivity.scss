@@ -1,4 +1,3 @@
-@import "./matchActivityBreakpoints";
 @mixin match-activity-keypair-styles {
     list-style-type: none;
     min-height: 4rem;
@@ -79,10 +78,6 @@ $match-column-height: calc(
     color: $main-font-color;
     button{
         color: $dark-blue;
-    }
-    button:hover{
-        color: $white;
-        background: $black;
     }
     
     .triangle-pointer-container{
@@ -269,12 +264,6 @@ $match-column-height: calc(
         color: $secondary-font-color;
         cursor: auto;
     }
-    p:hover{
-        color: $secondary-font-color;
-        opacity: 1 !important;
-        background-color: $lightest-gray;
-        border: 1px solid rgba(0, 0,0,0) !important;
-    }
 }
 .match-activity-key-arrows{
     height: 4.5rem;
@@ -311,10 +300,6 @@ $match-column-height: calc(
     @include box-shadow(rgba(0, 0, 0, 0.082) 0px 5px 11px 0.1px);
     z-index: 2;
     @include activity-scrollbar-styles();
-    &:hover{
-        background-color: $lighter-blue;
-        border: 1px solid $black;
-    }
     div{
         margin: auto;
         width: 100%;
@@ -338,8 +323,3 @@ $match-column-height: calc(
 .match-activity-inner-droppable.match-activity-draggable-over{
     background-color: $darkest-gray;
 }
-.match-activity-tap-active:hover{
-    cursor: pointer;
-    background-color: $darkest-gray;
-}
-

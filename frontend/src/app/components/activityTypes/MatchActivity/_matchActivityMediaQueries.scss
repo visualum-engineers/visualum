@@ -1,0 +1,51 @@
+@mixin match-activity-lg{
+    .match-activity-keys-column, 
+    .match-activity-answers-column, 
+    .match-activity-itemBank-column-1,
+    .match-activity-itemBank-column-2{
+        font-size: 0.75rem;
+    }
+}
+@mixin match-activity-md {
+
+    .match-activity-keys-column, 
+    .match-activity-answers-column, 
+    .match-activity-itemBank-column-1,
+    .match-activity-itemBank-column-2{
+        font-size: 0.7rem;
+    }
+}
+@mixin match-activity-sm{
+    .match-activity-keys-column, 
+    .match-activity-answers-column, 
+    .match-activity-itemBank-column-1,
+    .match-activity-itemBank-column-2{
+        font-size: 0.7rem;
+    }
+}
+@mixin match-activity-hover {
+    .match-activity-instructions{
+        button:hover{
+            color: $white;
+            background: $black;
+        }
+    }
+    .match-activity-keys{
+        p:hover{
+            color: $secondary-font-color;
+            opacity: 1 !important;
+            background-color: $lightest-gray;
+            border: 1px solid rgba(0, 0,0,0) !important;
+        }
+    }
+    .match-activity-draggables{
+        &:hover{
+            background-color: $lighter-blue;
+            border: 1px solid $black;
+        }
+    }
+    .match-activity-tap-active:hover{
+        cursor: pointer;
+        background-color: $darkest-gray;
+    }
+}

@@ -98,9 +98,6 @@
         color: rgb(8, 40, 109) ;
         line-height: 100%;
     }
-    a:hover{
-        opacity: 0.8;
-    }
 }
 .secondary-sidebar-visualum-logo{
     margin-left: -0.8rem;
@@ -122,9 +119,6 @@
     @include border-radius(5px)
 }
 
-.secondary-sidebar-link:hover{
-    @include sidebar-navItems-hover()
-}
 .secondary-sidebar-footer{
     @include transition(all 0.25s ease-out);
     color: $secondary-font-color;

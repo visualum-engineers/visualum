@@ -36,16 +36,6 @@
             display: none;
         }
     }
-
-    .checkbox-answer-choice-group:hover{
-        .checkbox-answer-label{
-            background-color: $white;
-        }
-        .checkbox-icon{
-            background-color: $dark-gray;
-            opacity: 1;
-        }
-    }
     
     input[type="checkbox"]{
         @include hidden;

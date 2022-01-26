@@ -3,7 +3,6 @@
 @import "./ControlledInputs/controlledInputs";
 @import "./ShortAnswer/shortAnswer";
 @import "./LabelPictures/labelPictures";
-@import "./activityBreakpoints";
 
 @mixin activities-nav-navItems-hover{
     transform: scale(1.1);
@@ -17,6 +16,7 @@
         }
     }
 }
+
 $activity-navbar-outer-height: calc(3.4rem + 1vh + 0.2rem);
 $sidebar-visualum-logo-height: 6.5rem;
 $activities-sidebar-instructions-btn-height: 4.5rem;
@@ -64,9 +64,7 @@ $activites-table-of-contents-height: calc(
     @include border-radius(0.3rem);
     @include transition(all 0.3s ease-out);
 }
-.activity-navbar-exit-sidebar-btn:hover{
-    transform: scale(1.05);
-}
+
 
 .activity-navbar-company-title{
     font-size: 1.3rem;
@@ -75,9 +73,6 @@ $activites-table-of-contents-height: calc(
     a{
         color: rgb(8, 40, 109) ;
         line-height: 100%;
-    }
-    a:hover{
-        opacity: 0.8;
     }
 }
 .activity-navbar-visualum-logo{
@@ -97,9 +92,6 @@ $activites-table-of-contents-height: calc(
     width: 2rem;
     margin-right: 0.5rem; 
     @include transition(transform 0.2s ease-out);
-    &:hover{
-        transform: scale(1.1);
-    }
     span{
         font-size: 0.9rem;
         font-weight: 500;
@@ -119,7 +111,7 @@ $activites-table-of-contents-height: calc(
     @include border-radius(0.2rem);
     .triangle-pointer, .triangle-pointer-2{
         top: -0.4rem;
-        left: 0.4rem;
+        left: 0.5rem;
         border-left: 0.5rem solid transparent;
         border-right: 0.5rem solid transparent;
         border-bottom: 0.5rem solid #3d3d3d;
@@ -129,7 +121,7 @@ $activites-table-of-contents-height: calc(
     position: absolute;
     background-color: #3d3d3d;
     color: white;
-    top: 100%;
+    top: 165%;
     width: 10rem;
     left: -4rem;
     padding: 0.5rem 0;
@@ -152,9 +144,6 @@ $activites-table-of-contents-height: calc(
             justify-content: space-between;
             align-items: center;
             width: 100%;
-        }
-        &:hover{
-            background-color: rgb(0, 110, 255)
         }
     }
 }
@@ -236,7 +225,6 @@ $activites-table-of-contents-height: calc(
         overflow: hidden;
         min-width: 3rem;
         z-index: 1;
-        //margin-top: 0.1rem;
     }
 
     .timer-btns{
@@ -263,26 +251,15 @@ $activites-table-of-contents-height: calc(
     background-color: $dark-blue;
     color: white;
     width: 45%;
-    //margin: calc(max(1.5rem, 3vh)) 0;
     @include transition(all 0.3s ease-out);
     border: 1px solid transparent;
     span{
         font-size: 0.9rem;
     }
-    &:hover{
-        transform: scale(1.1);
-        color: $dark-blue;
-        border: 1px solid $dark-blue;
-        background-color: white;
-        //background-color: $dark-gray;
-    }
 }
 .activity-progress-bar-container{
     display: flex;
     flex-direction: column;
-    //flex-grow: 1;
-    //margin-bottom: calc(max(1.5rem, 3vh));
-
     justify-content: end;
     font-size: 0.72rem;
     width: 70%;
@@ -352,9 +329,6 @@ $activites-table-of-contents-height: calc(
         margin: 0;
         font-weight: 400;
     }
-    &:hover{
-        @include activities-sidebar-table-btn-active()
-    }
     .table-btns-inner-container{
         display: flex;
         width: 70%;
@@ -416,11 +390,6 @@ $activites-table-of-contents-height: calc(
         color: rgba(122, 122, 122, 0.431);
         @include transition(all 0.2s linear)
     }
-    button:hover{
-        background-color: rgb(185, 0, 0);
-        color: white;
-        transform: scale(1.1)
-    }
 }
 .activity-reset-popup{
     @extend .activity-walkthrough-instructions;
@@ -442,12 +411,6 @@ $activites-table-of-contents-height: calc(
             color: $white;
             border: 1px transparent solid;
         }
-        .reset-cancel-btn:hover{
-            background-color: $white;
-            color: $dark-blue;
-            border: 1px $dark-blue solid;
-        }
-
     }
 }
 .activity-header{
@@ -532,11 +495,6 @@ $activites-table-of-contents-height: calc(
     border: 1px transparent solid;
     font-size: 1rem;
     @include transition(all 0.3s ease-out);
-}  
+} 
 
-.nav-activity-btn:hover{
-    @include activities-nav-navItems-hover;
-    border: 1px solid $blue;
-    color: $blue;
-}
-
+@import "./activityMediaQueries";

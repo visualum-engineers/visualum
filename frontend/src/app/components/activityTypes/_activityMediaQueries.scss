@@ -1,0 +1,76 @@
+
+@import "./ControlledInputs/controlledMediaQueries";
+@import "./LabelPictures/labelPicturesMediaQueries";
+@import "./MatchActivity/matchActivityMediaQueries";
+@import "./ShortAnswer/shortAnswerMediaQueries";
+@import "./SortActivity/sortMediaQueries";
+
+@mixin activity-lg{
+    
+}
+@mixin activity-md {
+    
+}
+
+@mixin activity-sm{
+    .activity-type-container{
+        padding: 0rem;
+        margin-top: 3rem;
+    }
+}
+@mixin activities-hover{
+    .activity-navbar-exit-sidebar-btn:hover{
+        transform: scale(1.05);
+    }
+    .activity-navbar-company-title{
+        a:hover{
+            opacity: 0.8;
+        }
+    }
+    .activity-edit-btn{
+        &:hover{
+            transform: scale(1.1);
+        }
+    }
+    .activity-edit-btn-dropdown{
+        button{
+            &:hover{
+                background-color: rgb(0, 110, 255)
+            }
+        }
+    }
+    .activities-sidebar-btn{
+        &:hover{
+            transform: scale(1.1);
+            color: $dark-blue;
+            border: 1px solid $dark-blue;
+            background-color: white;
+        }
+    }
+    .activities-sidebar-table-btns{
+        &:hover{
+            @include activities-sidebar-table-btn-active()
+        }
+    }
+    .activity-walkthrough-instructions-header{
+        button:hover{
+            background-color: rgb(185, 0, 0);
+            color: white;
+            transform: scale(1.1)
+        }
+    }
+    .activity-reset-popup{
+        .reset-popup-btn-container{
+            .reset-cancel-btn:hover{
+                background-color: $white;
+                color: $dark-blue;
+                border: 1px $dark-blue solid;
+            }
+        }
+    }
+    .nav-activity-btn:hover{
+        @include activities-nav-navItems-hover;
+        border: 1px solid $blue;
+        color: $blue;
+    }    
+}
