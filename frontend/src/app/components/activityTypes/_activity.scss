@@ -48,7 +48,7 @@ $activites-table-of-contents-height: calc(
 .activity-header{
     position: relative;
     margin-top: 0.2rem;
-    margin-bottom: 1vh;
+    margin-bottom: 0.2rem;
     height: 3.4rem;
 }
 .activity-navbar-exit-sidebar-btn{
@@ -121,7 +121,7 @@ $activites-table-of-contents-height: calc(
     position: absolute;
     background-color: #3d3d3d;
     color: white;
-    top: 165%;
+    top: 130%;
     width: 10rem;
     left: -4rem;
     padding: 0.5rem 0;
@@ -145,6 +145,16 @@ $activites-table-of-contents-height: calc(
             align-items: center;
             width: 100%;
         }
+    }
+    //triangle pointer
+    &::before{
+        position: absolute;
+        content: "";
+        top: -0.35rem;
+        left: calc(50% - 0.3rem);
+        border-left: 0.5rem solid transparent;
+        border-right: 0.5rem solid transparent;
+        border-bottom: solid 0.45rem #3d3d3d;
     }
 }
 .activity-navbar-setting-btn{
@@ -202,26 +212,30 @@ $activites-table-of-contents-height: calc(
 }
 .activity-timer{
     position: relative;
-    color: $dark-gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $lighter-gray;
+    width: 8rem;
+    color: $darkest-gray;
     font-weight: 500;
-    font-size: 0.9rem;
-    background-color: $white;
+    font-size: 1rem;
     min-width: fit-content;
-    width: 55%;
     @include border-radius(1rem);
-    padding: 0.5rem 0;
-    //border: 1px solid $dark-blue;
-    margin-top: calc(max(1.5rem, 3vh));
+    padding: 0.5rem 0.6rem;
+    @include unselectable;
+    text-align: start;
     .timer-counter{
-        @include border-radius(10px);
-        color: $dark-gray;
+        @include border-radius(0.5rem);
+        color: $darkest-gray;
         font-weight: 600;
-        text-align: center;
+        text-align: start;
         position: relative;
-        margin-left: 2px;
+        margin-top: 0.1rem;
+        margin-left: 0.5rem;
         margin-right: 2px;
         padding: 0.1rem 0px;
-        font-size: 0.85rem;
+        font-size: 0.9rem;
         overflow: hidden;
         min-width: 3rem;
         z-index: 1;

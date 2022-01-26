@@ -1,5 +1,4 @@
 import {ActivityTableOfContents} from './index';
-//import Timer from '../utilities/timer/Timer';
 import ProgressBar from '../utilities/progressBar/ProgressBar';
 import { roundPercentToInt } from '../../helpers/calculatePercentage';
 import GeneralBtn from '../utilities/generalBtn/GeneralBtn';

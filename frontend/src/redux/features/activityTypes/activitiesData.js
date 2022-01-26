@@ -94,13 +94,33 @@ const clientAnswerData = createSlice({
                 payload: action.payload,  
                 newState: newState
             })
+        },
+        updateActivityTimer: (state, action) =>{
+            if(!state.clientAnswerData.activityTimer) return
+            //if no timer do update this action
+            const startTime = new Date()
+            const timerDuration = state.clientAnswerData.activityTimer
+            const addHours = (timerDuration.hours * 60 * 60 * 1000)
+            const addMintues = (timerDuration.minutes * 60 * 1000)
+            const addSeconds = (timerDuration.seconds * 1000)
+            const endTime = new Date(startTime.getTime() + addHours + addMintues + addSeconds)
+            const newState = {...state.clientAnswerData, activityStartTime: startTime, activityEndTime: endTime}
+            state.clientAnswerData.activityStartTime = newState.activityStartTime.toString()
+            state.clientAnswerData.activityEndTime = newState.activityEndTime.toString()
+            
+            throttledSaveToStorage({
+                state: state.clientAnswerData,
+                payload: "updateTime",  
+                newState: newState
+            })
         }
     },
 })
 export const {
     updateActivityData,
     updateActivityDragActive,
-    updateActivityDataLayout
+    updateActivityDataLayout,
+    updateActivityTimer
 } = clientAnswerData.actions
 
 const undoableData = undoable(clientAnswerData.reducer, {
@@ -108,7 +128,8 @@ const undoableData = undoable(clientAnswerData.reducer, {
     redoType: "activities/data/redo",
     filter: excludeAction([
         "clientAnswerActivitiesData/updateActivityDragActive",
-        "clientAnswerActivitiesData/updateActivityDataLayout"
+        "clientAnswerActivitiesData/updateActivityDataLayout",
+        "clientAnswerActivitiesData/updateActivityTimer"
     ]),
 
     limit: 100,

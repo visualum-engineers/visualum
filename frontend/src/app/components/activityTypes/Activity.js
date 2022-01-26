@@ -5,7 +5,8 @@ import { useEffect, useState } from "react"
 import { unstable_batchedUpdates } from "react-dom"
 import {CSSTransition} from "react-transition-group"
 import { useSelector, useDispatch } from 'react-redux'
-import {updateActivityData} from "../../../redux/features/activityTypes/activitiesData"
+import {updateActivityData, updateActivityTimer} from "../../../redux/features/activityTypes/activitiesData"
+import convertTimeDiff from "../../helpers/convertTimeDiff";
 import {
     enableDnD,
     enableTap, 
@@ -23,6 +24,7 @@ import {
     ActivityNavbar,
     ActivityResetPopUp
 } from "./index"
+import Timer from "../utilities/timer/Timer"
 
 const duration = 375
 const inPropDuration = duration * 2
@@ -43,6 +45,15 @@ const Activity = () =>{
 
     const dispatch = useDispatch()
 
+    //on mount, we issue a time stamp, 
+    //and an expected end time stamp
+    const timerStartTime = new Date().toString()
+    const timerEndTime = useSelector((state) => state.activities.data.clientData.present.clientAnswerData.activityEndTime)
+    const timerData = timerStartTime && timerEndTime ? convertTimeDiff(timerStartTime, timerEndTime) : null
+    useEffect(() =>{
+        if(timerStartTime) return
+        dispatch(updateActivityTimer())
+    }, [dispatch, timerStartTime])
     //component specific state
     let currQuestion = 0
     const [prevQuestion, setPrevQuestion] = useState(0)
@@ -190,6 +201,7 @@ const Activity = () =>{
             handleSideBar={handleSideBar}
             avatar={<img src={imageURL} alt={"user-avatar"}/>}
             inProp = {inProp}
+            timerData={timerData}
         />
         <SecondarySideBar 
             data={sideBarData}
@@ -223,7 +235,16 @@ const Activity = () =>{
                 className = "activity-type-container col-12 col-md-11 d-flex flex-column" 
                 style={inProp ? {overflow: "hidden"}: null}
             >
-                <div className="activity-header"></div>
+                <div className="activity-header d-flex align-items-center justify-content-center">
+                    {timerData && !smallWindowWidth && <div className={`activity-timer`}>
+                            <span>TIME:</span>
+                            <Timer
+                                timer={timerData}
+                                autoStart={true}
+                            />
+                        </div>
+                    }
+                </div>
 
                 {/*generate entire form data*/}
                 {question.type ?
