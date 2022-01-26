@@ -1,10 +1,9 @@
 import GeneralBtn from "../utilities/generalBtn/GeneralBtn"
 import { useState} from "react";
 import useKeyboardShortcut from "../../hooks/use-keyboard-shortcuts";
-import DrapAndDropToggler from "../utilities/dragAndDrop/DrapAndDropToggler"
+//import DrapAndDropToggler from "../utilities/dragAndDrop/DrapAndDropToggler"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSyncAlt, faUndoAlt, faRedoAlt, faBars, faCog, faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import {faEdit} from "@fortawesome/free-regular-svg-icons"
 import TrianglePointer from "../utilities/trianglePointer/TrianglePointer";
 import { undoHistory, redoHistory } from "./activityHistoryFunc";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +14,7 @@ const ActivityNavbar = ({
     handleSideBar,
     resetBtnOnClick, 
     questionNum,
+    inProp,
     //below are for drag and drop 
     disableDnD = null,
     toggleTap = null,
@@ -50,6 +50,7 @@ const ActivityNavbar = ({
     useKeyboardShortcut(
         ['Control', 'Alt', 'Delete'], 
         () => {
+            if (inProp) return
             if(!(futureLength > 0)) return
             redoHistory({dispatch: dispatch})
         }, 
@@ -58,6 +59,7 @@ const ActivityNavbar = ({
     useKeyboardShortcut(
         ['Control', "Z"], 
         () => {
+            if(inProp) return
             if(!(pastLength>0)) return
             undoHistory({dispatch: dispatch})
         }, 

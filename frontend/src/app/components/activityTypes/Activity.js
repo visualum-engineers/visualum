@@ -189,6 +189,7 @@ const Activity = () =>{
             sidebarToggle={sidebarToggle}
             handleSideBar={handleSideBar}
             avatar={<img src={imageURL} alt={"user-avatar"}/>}
+            inProp = {inProp}
         />
         <SecondarySideBar 
             data={sideBarData}
