@@ -9,15 +9,7 @@
     overflow-y: auto;
     overflow: overlay;
     overflow-x: hidden;
-    &::-webkit-scrollbar{
-        width: 0.6rem;
-        @include border-radius(7px);
-    }
-    &::-webkit-scrollbar-thumb{
-        @include border-radius(7px);
-        //background-color: $dark-blue;
-        background-color: $dark-blue;
-    }
+    @include activity-scrollbar-styles();
 }
 .sidebar-right{
     @include transition(all 0.3s ease-out);

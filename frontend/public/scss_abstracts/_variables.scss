@@ -127,7 +127,8 @@ $new-light-purple: #e0e5ff;
     }
     &::-webkit-scrollbar-thumb{
         @include border-radius(7px);
-        background-color: $dark-blue;
+        background-color: rgba(0, 0, 0, 0.198);
+        //border: 1px solid rgba(0, 0, 0, 0.527);
     }
 }
 @mixin transparent-scrollbar-styles {
