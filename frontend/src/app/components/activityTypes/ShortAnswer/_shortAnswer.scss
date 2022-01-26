@@ -69,14 +69,7 @@ $sa-activity-container-min-height: calc(
         max-height: calc(max(25vh, 200px));
         overflow: auto;
         overflow-x: hidden;
-        &::-webkit-scrollbar{
-            width: 0.5rem;
-            @include border-radius(1rem);
-        }
-        &::-webkit-scrollbar-thumb{
-            @include border-radius(7px);
-            background-color: $dark-blue;
-        }
+        @include activity-scrollbar-styles();
     }
 }
 

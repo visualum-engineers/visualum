@@ -28,14 +28,8 @@
     min-width: 280px;
     overflow-x: hidden;
     overflow-y: scroll;
-    &::-webkit-scrollbar{
-        width: 0.5rem;
-        @include border-radius(7px);
-    }
-    &::-webkit-scrollbar-thumb{
-        @include border-radius(7px);
-        background-color: $dark-blue;
-    }
+    @include activity-scrollbar-styles();
+
 }
 @mixin label-pic-activity-droppables{
     border: 1px solid rgba(0,0,0,0);
@@ -172,17 +166,11 @@ $label-pic-column-height: calc(
     min-height: calc(max(#{$label-pic-column-min-height}, #{$label-pic-column-height}));
     height: 100%;
     @include border-radius(7px);
+    @include transparent-scrollbar-styles();
     .label-pic-activity-column-titles{
         position: relative;
         @include border-radius(7px);
         padding-left: 0;
-    }
-    &::-webkit-scrollbar{
-        width: 0rem;
-        height: 0rem;
-    }
-    &::-webkit-scrollbar-thumb{
-        background-color: transparent;
     }
 }
 .label-pic-activity-question-container.portrait-size{
@@ -268,14 +256,8 @@ $label-pic-column-height: calc(
     overflow: scroll;
     overflow-x: hidden;
     @include border-radius(6px);
-    &::-webkit-scrollbar{
-        width: 0.5rem;
-        @include border-radius(7px);
-    }
-    &::-webkit-scrollbar-thumb{
-        @include border-radius(7px);
-        background-color: $dark-blue;
-    }
+    @include activity-scrollbar-styles();
+
     h2{
         overflow-wrap: break-word;
         word-break: break-word;
@@ -382,16 +364,8 @@ $label-pic-column-height: calc(
 
 .label-pic-activity-draggables{
     @include label-pic-activity-draggable-styles();
+    @include activity-scrollbar-styles();
 
-    &::-webkit-scrollbar{
-        width: 0.5rem;
-        @include border-radius(7px);
-        background-color: rgba(201, 201, 201, 0);
-    }
-    &::-webkit-scrollbar-thumb{
-        @include border-radius(7px);
-        background-color: $dark-blue;
-    }
     div{
         margin: auto;
         width: 100%;
@@ -521,15 +495,8 @@ $label-pic-column-height: calc(
     margin-top: 2%;
     margin-bottom: 0;
     height: 100%;
-    &::-webkit-scrollbar{
-        width: 0.5rem;
-        @include border-radius(7px);
-        background-color: transparent;
-    }
-    &::-webkit-scrollbar-thumb{
-        @include border-radius(7px);
-        background-color: $dark-blue;
-    }
+    @include activity-scrollbar-styles();
+
     ol{
         padding: 0;
     }
@@ -561,15 +528,7 @@ $label-pic-column-height: calc(
         overflow-x: hidden;
         width: 100%;
         padding: 0;
-        &::-webkit-scrollbar{
-            width: 0.5rem;
-            @include border-radius(7px);
-            background-color: transparent;
-        }
-        &::-webkit-scrollbar-thumb{
-            @include border-radius(7px);
-            background-color: $dark-blue;
-        }
+        @include activity-scrollbar-styles();
         h2{
             line-height: 1.1rem;
             text-align: start;

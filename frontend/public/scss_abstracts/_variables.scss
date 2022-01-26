@@ -15,8 +15,8 @@ $black: black;
 $white: white;
 
 
-$lightest-gray: #f3f3f3;
-$lighter-gray: #f0f0f0;
+$lightest-gray: rgb(250, 250, 250) ;
+$lighter-gray:#f0f0f0;
 $light-gray: rgb(214, 214, 214);
 $gray: rgb(201, 201, 201);
 $dark-gray: rgb(179, 179, 179);
@@ -120,3 +120,25 @@ $new-light-purple: #e0e5ff;
     -ms-user-select: none;
     user-select: none;
 }
+@mixin activity-scrollbar-styles {
+    &::-webkit-scrollbar{
+        width: 0.5rem;
+        @include border-radius(7px);
+    }
+    &::-webkit-scrollbar-thumb{
+        @include border-radius(7px);
+        background-color: $dark-blue;
+    }
+}
+@mixin transparent-scrollbar-styles {
+    &::-webkit-scrollbar{
+        width: 0rem;
+        height: 0rem;
+    }
+    &::-webkit-scrollbar-thumb{
+        background-color: transparent;
+    } 
+}
+// @mixin activity-resizable-handles {
+    
+// }

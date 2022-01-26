@@ -89,22 +89,27 @@ $activites-table-of-contents-height: calc(
 
 .activity-edit-btn{
     position: relative;
+    display: flex;
+    align-items: center;
     @include remove-btn-default();
-    font-size: 1.3rem;
+    font-size: 0.55rem;
     height: 90%;
     width: 2rem;
+    margin-right: 0.5rem; 
     @include transition(transform 0.2s ease-out);
     &:hover{
         transform: scale(1.1);
     }
     span{
-        margin-left: 0.2rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-right: 0.2rem;
     }
 }
 .activity-edit-dropdown-pointer{
     width: 100%;
-    top: 2.1rem;
-    left: 0rem;
+    top: 1.5rem;
+    left: 0.5rem;
     background-color: #3d3d3d;
     color: $white;
     padding: 0.2rem 0.3rem;
@@ -153,10 +158,35 @@ $activites-table-of-contents-height: calc(
         }
     }
 }
+.activity-navbar-setting-btn{
+    @include remove-btn-default();
+    display: flex;
+    align-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 1.2rem;
+    margin-left: 1rem;
+    margin-right: 1.3rem;
+}
+.activity-profile-avatar-container {
+    margin-right: 0.8rem;
+    position: relative;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: transparent;
+    overflow: hidden;
+    @include border-radius(20rem);
+    img{
+        width: 100%;
+        height: 100%;
+        object-position: center;
+    }
+}
+
 .activity-body{
     @include no-space;
     @include transition(all 0.3s ease-out);
-    background-color: rgb(250, 250, 250);
+    background-color: $lighter-gray;
     height: 100%;
     position: relative;
     min-height: calc(max(100vh, 40rem));
@@ -224,38 +254,20 @@ $activites-table-of-contents-height: calc(
     margin: 0;
     font-size: 1.2rem;
     font-weight: 500;
-    margin-top: 3vh;
-}
-.activity-progress-bar-container{
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    justify-content: end;
-    font-size: 0.72rem;
-    width: 70%;
-    margin-bottom: calc(max(1.5rem, 3vh));
-    .progress-bar{
-        background-color: $light-blue;
-    }
-    .progress-bar-fill-bar{
-        background-color: $dark-blue
-    }
+    margin-top: 1vh;
 }
 .activities-sidebar-btn{
     @include remove-btn-default;
-    @include border-radius(7px);
-    padding: 0.5rem;
+    @include border-radius(2rem);
+    padding: 0.3rem;
     background-color: $dark-blue;
     color: white;
-    //color: black;
-    width: 55%;
-    //width: 100%;
-
-    margin: calc(max(1.5rem, 3vh)) 0;
+    width: 45%;
+    //margin: calc(max(1.5rem, 3vh)) 0;
     @include transition(all 0.3s ease-out);
     border: 1px solid transparent;
     span{
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
     &:hover{
         transform: scale(1.1);
@@ -263,6 +275,22 @@ $activites-table-of-contents-height: calc(
         border: 1px solid $dark-blue;
         background-color: white;
         //background-color: $dark-gray;
+    }
+}
+.activity-progress-bar-container{
+    display: flex;
+    flex-direction: column;
+    //flex-grow: 1;
+    //margin-bottom: calc(max(1.5rem, 3vh));
+
+    justify-content: end;
+    font-size: 0.72rem;
+    width: 70%;
+    .progress-bar{
+        background-color: $light-blue;
+    }
+    .progress-bar-fill-bar{
+        background-color: $dark-blue
     }
 }
 
@@ -277,14 +305,7 @@ $activites-table-of-contents-height: calc(
     width: 100%;
     height: $activites-table-of-contents-height;
     min-height: calc(max(35vh, 6.5rem));
-    &::-webkit-scrollbar{
-        width: 0.5rem;
-        @include border-radius(7px);
-    }
-    &::-webkit-scrollbar-thumb{
-        @include border-radius(7px);
-        background-color: $dark-blue;
-    }
+    @include activity-scrollbar-styles();
     .activity-table-of-contents-header{
         font-size: 1.2rem;
         position:sticky;
@@ -314,7 +335,6 @@ $activites-table-of-contents-height: calc(
 
 .activities-sidebar-table-btns{
     @include remove-btn-default();
-    //@include border-radius(0.5rem);
     height: 3rem;
     padding: 0;
     display: flex;
@@ -445,13 +465,7 @@ $activites-table-of-contents-height: calc(
     z-index: 1;
     max-width: 1400px;
     min-width: 310px; 
-    &::-webkit-scrollbar{
-        width: 0rem;
-        height: 0rem;
-    }
-    &::-webkit-scrollbar-thumb{
-        background-color: transparent;
-    } 
+    @include transparent-scrollbar-styles()
 }
 
 .question-transition-container{

@@ -32,7 +32,7 @@ const defaultTransition = {
 }
 
 //for testing. remove after
-//const imageURL = "images/homePage/mountain-home-bg.jpg";
+const imageURL = "images/homePage/mountain-home-bg.jpg";
 
 const Activity = () =>{
     //redux states
@@ -188,6 +188,7 @@ const Activity = () =>{
             toggleTap = {toggleTap}
             sidebarToggle={sidebarToggle}
             handleSideBar={handleSideBar}
+            avatar={<img src={imageURL} alt={"user-avatar"}/>}
         />
         <SecondarySideBar 
             data={sideBarData}

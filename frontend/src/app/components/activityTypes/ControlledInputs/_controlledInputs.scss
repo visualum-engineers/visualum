@@ -60,14 +60,8 @@ $mc-activity-container-min-height: calc(
     max-height: calc(max(25vh, 200px));
     overflow: auto;
     overflow-x: hidden;
-    &::-webkit-scrollbar{
-        width: 0.5rem;
-        @include border-radius(1rem);
-    }
-    &::-webkit-scrollbar-thumb{
-        @include border-radius(7px);
-        background-color: $dark-blue;
-    }
+    @include activity-scrollbar-styles();
+
 }
 .controlled-inputs-activity-question.portrait-mode{
     width: 100%;
@@ -131,14 +125,8 @@ $mc-activity-container-min-height: calc(
     background-color: $white;
     padding: 1rem;
     @include border-radius(7px);
-    &::-webkit-scrollbar{
-        width: 0.5rem;
-        @include border-radius(1rem);
-    }
-    &::-webkit-scrollbar-thumb{
-        @include border-radius(7px);
-        background-color: $dark-blue;
-    }
+    @include activity-scrollbar-styles();
+
 }
 .controlled-inputs-activity-answer-container.portrait-mode{
     padding: 0.5rem;

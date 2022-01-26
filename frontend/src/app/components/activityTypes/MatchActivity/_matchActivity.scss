@@ -139,15 +139,8 @@ $match-column-height: calc(
     min-height: $match-column-min-height;
     height: $match-column-height;
     padding-left: 0.5rem;
-    //resize: vertical;
-    &::-webkit-scrollbar{
-        width: 0.5rem;
-        @include border-radius(7px);
-    }
-    &::-webkit-scrollbar-thumb{
-        @include border-radius(7px);
-        background-color: $dark-blue;
-    }
+    @include activity-scrollbar-styles();
+
     .match-activity-column-titles{
         padding-left: 0.5rem;
     }
@@ -206,6 +199,7 @@ $match-column-height: calc(
     min-height: $match-column-min-height;
     height: $match-column-height;
     background-color: $lighter-blue;
+    @include activity-scrollbar-styles();
     .match-activity-inner-droppable::after{
         position: absolute;
         text-align: center;
@@ -221,15 +215,8 @@ $match-column-height: calc(
         color: $dark-gray;
         font-size: 0.85rem;
     }
-    &::-webkit-scrollbar{
-        background-color: $lighter-blue;
-        width: 0.5rem;
-        @include border-radius(7px);
-    }
-    &::-webkit-scrollbar-thumb{
-        @include border-radius(7px);
-        background-color: $dark-blue;
-    }
+    
+
 }
 
 .match-activity-columns.full-size{
@@ -323,15 +310,7 @@ $match-column-height: calc(
     cursor: pointer;
     @include box-shadow(rgba(0, 0, 0, 0.082) 0px 5px 11px 0.1px);
     z-index: 2;
-    &::-webkit-scrollbar{
-        width: 0.5rem;
-        @include border-radius(7px);
-        background-color: rgba(201, 201, 201, 0);
-    }
-    &::-webkit-scrollbar-thumb{
-        @include border-radius(7px);
-        background-color: $dark-blue;
-    }
+    @include activity-scrollbar-styles();
     &:hover{
         background-color: $lighter-blue;
         border: 1px solid $black;

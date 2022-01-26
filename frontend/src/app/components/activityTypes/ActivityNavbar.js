@@ -3,7 +3,7 @@ import { useState} from "react";
 import useKeyboardShortcut from "../../hooks/use-keyboard-shortcuts";
 import DrapAndDropToggler from "../utilities/dragAndDrop/DrapAndDropToggler"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSyncAlt, faUndoAlt, faRedoAlt, faBars } from "@fortawesome/free-solid-svg-icons";
+import { faSyncAlt, faUndoAlt, faRedoAlt, faBars, faCog, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import {faEdit} from "@fortawesome/free-regular-svg-icons"
 import TrianglePointer from "../utilities/trianglePointer/TrianglePointer";
 import { undoHistory, redoHistory } from "./activityHistoryFunc";
@@ -18,6 +18,8 @@ const ActivityNavbar = ({
     //below are for drag and drop 
     disableDnD = null,
     toggleTap = null,
+    //img container with avatar img
+    avatar = null
 }) =>{
     //local states
     const [editPointer, setEditPointer] =  useState(false)
@@ -97,7 +99,8 @@ const ActivityNavbar = ({
                     onClick={() => setEditDropdown((state) => !state)}
                     className="activity-edit-btn"
                 >
-                    <FontAwesomeIcon icon={faEdit}/>
+                    {/* <FontAwesomeIcon icon={faEdit}/> */}
+                    <span>Edit</span> <FontAwesomeIcon icon={faChevronDown}/>
                     {!editDropdownOpen &&
                         <TrianglePointer 
                             customClassName={"activity-edit-dropdown-pointer"}
@@ -140,17 +143,23 @@ const ActivityNavbar = ({
                             customAriaLabel = {"reset-question"}
                             questionNum = {questionNum}
                         />
-                        
                     </div>
                 }
             </div>
-            
-            {
+            <button className="activity-navbar-setting-btn">
+                <FontAwesomeIcon icon={faCog} />
+            </button>
+            <div 
+                className="activity-profile-avatar-container d-flex justify-content-center align-items-center"
+            >
+                {avatar}
+            </div> 
+            {/* {
                  <DrapAndDropToggler 
                     disableDnD = {disableDnD}
                     toggleTap = {toggleTap}
                 />
-            }
+            } */}
             
         </div>
         

@@ -99,18 +99,11 @@ html.sortActivityActive{
     overflow-x: hidden;
     min-height:calc(#{$sort-activity-container-min-height} - 2rem);
     height: calc(#{$sort-activity-container-height} - 2rem);
+    @include activity-scrollbar-styles();
     .sort-activity-itemBank-column-1{
         min-height: calc(#{$sort-activity-container-height} - 6rem)
     }
-    &::-webkit-scrollbar{
-        width: 0.5rem;
-        @include border-radius(7px);
-        background-color: rgba(201, 201, 201, 0);
-    }
-    &::-webkit-scrollbar-thumb{
-        @include border-radius(7px);
-        background-color: $dark-blue;
-    }
+    
 }
 .sort-activity-itemBank.full-size{
     margin-top: 0;
@@ -132,15 +125,7 @@ html.sortActivityActive{
     overflow-x: hidden;
     min-height:calc(#{$sort-activity-container-min-height} - 2rem);
     height: calc(#{$sort-activity-container-height} - 2rem);
-    &::-webkit-scrollbar{
-        width: 0.5rem;
-        @include border-radius(7px);
-        background-color: rgba(201, 201, 201, 0);
-    }
-    &::-webkit-scrollbar-thumb{
-        @include border-radius(7px);
-        background-color: $dark-blue;
-    }
+    @include activity-scrollbar-styles();
 }
 
 .sort-activity-column-titles{
@@ -196,15 +181,9 @@ html.sortActivityActive{
     @include border-radius(0.5rem);
     overflow-y: scroll;
     overflow-x: hidden;
+    @include activity-scrollbar-styles();
     &::-webkit-scrollbar{
         width: 0.4rem;
-        @include border-radius(7px);
-        background-color: rgba(201, 201, 201, 0);
-    }
-  
-    &::-webkit-scrollbar-thumb{
-        @include border-radius(7px);
-        background-color: $dark-blue;
     }
     .sort-activity-droppable-header{
         height: 2rem;
@@ -252,16 +231,7 @@ html.sortActivityActive{
 }
 .sort-activity-draggables{
     @include sort-activity-draggable-styles();
-
-    &::-webkit-scrollbar{
-        width: 0.5rem;
-        @include border-radius(7px);
-        background-color: rgba(201, 201, 201, 0);
-    }
-    &::-webkit-scrollbar-thumb{
-        @include border-radius(7px);
-        background-color: $dark-blue;
-    }
+    @include activity-scrollbar-styles();
     div{
         margin: auto;
         width: 100%;

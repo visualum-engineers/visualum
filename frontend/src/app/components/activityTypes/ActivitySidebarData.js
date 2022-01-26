@@ -2,6 +2,7 @@ import {ActivityTableOfContents} from './index';
 import Timer from '../utilities/timer/Timer';
 import ProgressBar from '../utilities/progressBar/ProgressBar';
 import { roundPercentToInt } from '../../helpers/calculatePercentage';
+import GeneralBtn from '../utilities/generalBtn/GeneralBtn';
 
 export const activitySecondarySideBarData = ({
     activityData,
@@ -12,41 +13,25 @@ export const activitySecondarySideBarData = ({
     const sidebarData = [
         {
             type: "custom",
-            content: activityData.activityTimer && 
-                <div className={`activity-timer d-flex justify-content-center align-items-center`}>
-                    <span>TIME:</span>
-                    <Timer
-                        timer={activityData.activityTimer}
-                        autoStart={false}
-                    />
+            content: <div className='flex-grow-1 d-flex flex-column align-items-center justify-content-around w-100'>
+                <div className="activities-sidebar-activity-name">
+                    {activityData.activityName}
                 </div>
+                <GeneralBtn 
+                    customClassName={"activities-sidebar-btn"}
+                    onClick={onInstructionsClick}
+                    textContent = {"Instructions"} 
+                />
+                <ProgressBar 
+                    percentage = {roundPercentToInt(currQuestion, (activityData.questions.length-1)) + "%"}
+                    containerClassName={"activity-progress-bar-container"}
+                    ariaLabel = "activity-progress-bar"
+                    additionalContent={" completed"}
+                />
+                <hr style={{width: "70%", marginTop:"0"}}/>
+            </div>
         },
-        {
-            type: "custom",
-            content: <div className="activities-sidebar-activity-name">{activityData.activityName}</div>
-        },
-        {
-            type:"btn", 
-            customClass:"activities-sidebar-btn", 
-            content: "Instructions", 
-            onClick: onInstructionsClick
-        },
-        
-        {   
-            type: "custom",
-            content: <ProgressBar 
-                        percentage = {roundPercentToInt(currQuestion, (activityData.questions.length-1)) + "%"}
-                        containerClassName={"activity-progress-bar-container"}
-                        ariaLabel = "activity-progress-bar"
-                        additionalContent={" completed"}
-                    />
-        },
-        
-        
-        {
-            type:"custom",
-            content: <hr style={{width: "70%", marginTop:"0"}}/>,
-        },
+    
         {
             type: "custom",
             content: <ActivityTableOfContents 
@@ -71,36 +56,3 @@ export const activitySecondarySideBarData = ({
 export const activitySecondarySidebarFooterData = () => [
     
 ]
-
-/*
-{
-        type:"link", 
-        url: "/", 
-        customClass:"activities-sidebar-link", 
-        content: 
-        <>
-            <span className="icon-container"><FontAwesomeIcon icon = {faCommentDots}/></span>
-            <span className="ms-1">Feedback</span>
-        </>
-    },
-    {
-        type: "link",
-        url: "/",
-        customClass:'activities-sidebar-link',
-        content: <>
-            <span className="icon-container"><FontAwesomeIcon icon = {faCog}/></span>
-            <span className="ms-1">Settings</span>
-        </> ,
-        
-    },
-    {
-        type: "link",
-        customClass: 'activities-sidebar-link',
-        url: "/", 
-        content: <>
-            <span className="icon-container"><FontAwesomeIcon icon = {faCircleQuestion}/></span>
-            <span className="ms-1">Help Center</span>
-        </>,
-        
-    },
-*/
