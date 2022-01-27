@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import useKeyboardShortcut from "../../hooks/use-keyboard-shortcuts";
 import { resetPopUpOn } from "../../../redux/features/activityTypes/activitiesSettings";
 import Timer from '../utilities/timer/Timer';
-//import DrapAndDropToggler from "../utilities/dragAndDrop/DrapAndDropToggler"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { 
     faSyncAlt, 
@@ -16,25 +15,25 @@ import {
     faCog, 
     faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
+import ActivitySettings from "./ActivitySettings";
 
 const Logo = "./images/VisualumLogo.png"
 const ActivityNavbar = ({
     smallWindowWidth,
     sidebarToggle,
     handleSideBar,
-    resetBtnOnClick, 
+    resetBtnOnClick,
+    moreInfoOnClick, 
     questionNum,
     inProp,
-    //below are for drag and drop 
-    disableDnD = null,
-    toggleTap = null,
     //img container with avatar img
     avatar = null,
     timerData = null
 }) =>{
     //local states
     const [editPointer, setEditPointer] =  useState(false)
-    const [editDropdownOpen, setEditDropdown] = useState(false)    
+    const [editDropdownOpen, setEditDropdown] = useState(false)  
+    const [settingsOpen, setSettingsOpen] = useState(false)  
     const dispatch = useDispatch()
     const pastLength = useSelector((state) => state.activities.data.clientData.past.length)
     const futureLength = useSelector((state) => state.activities.data.clientData.future.length)
@@ -172,22 +171,55 @@ const ActivityNavbar = ({
                         </div>
                     }
                 </div>
-                <button className="activity-navbar-setting-btn">
-                    <FontAwesomeIcon icon={faCog} />
-                </button>
+                <div>
+                    <button 
+                        className="activity-navbar-setting-btn"
+                        onClick={() => setSettingsOpen(state =>!state)}
+                    >
+                        <FontAwesomeIcon icon={faCog} />
+                    </button>
+                    {settingsOpen && 
+                        <ActivitySettings 
+                            onExitPopUp={() => setSettingsOpen(false)}
+                            moreInfoOnClick={moreInfoOnClick}
+                        />
+                    }
+                </div>
+                
                 <div 
-                    className="activity-profile-avatar-container d-flex justify-content-center align-items-center"
+                    className="activity-profile-avatar-container"
                 >
                     {avatar}
                 </div> 
-                {/* {
-                    <DrapAndDropToggler 
-                        disableDnD = {disableDnD}
-                        toggleTap = {toggleTap}
-                    />
-                } */}
+                
             </div>
         </nav>
     )
 }
 export default ActivityNavbar
+
+/*
+import SecondarySideBar from "../sideBar/SecondarySideBar";
+
+const settingsSidebarData = [
+        {
+            type: "custom",
+            content: <div>Hello</div>
+        },
+        { <DrapAndDropToggler 
+                            disableDnD = {disableDnD}
+                            toggleTap = {toggleTap}
+                        /> }
+                    ]
+
+<SecondarySideBar 
+        data = {settingsSidebarData}
+        logo = {true}
+        windowWidth = {smallWindowWidth}
+        customSidebarClass = {"activities-settings-sidebar"}
+        sidebarToggle = {true}
+        exitSideBarBtn={true}
+        handleSideBar={() => setSettingsOpen(false)}
+        exitSideBarBtnClass = {"activities-settings-exit-sidebar-btn"}
+    />
+*/

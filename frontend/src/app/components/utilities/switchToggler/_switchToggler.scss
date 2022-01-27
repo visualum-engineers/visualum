@@ -1,5 +1,8 @@
-.enable-tap-mode{
+.switch-toggler-container{
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     top: 0;
     right:0;
     font-size: 0.8rem;
@@ -11,6 +14,6 @@
         height: 1.5rem;
     }
 }
-.enable-tap-mode.form-switch{
+.switch-toggler-container.form-switch{
     padding: 0;
 }

@@ -167,7 +167,94 @@ $activites-table-of-contents-height: calc(
     margin-left: 1rem;
     margin-right: 1.3rem;
 }
+.activity-settings-pop-up{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    height: min-content;
+    background-color: $lightest-gray;
+    z-index: 6;
+    @include border-radius(0.3rem);
+    @include activity-scrollbar-styles;
+    overflow: auto;
+}
+.activity-settings-pop-up-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 3rem;
+    min-height: 3rem;
+    background-color: $lighter-gray;
+    @include box-shadow(0px 0px 1px 1px rgba(0, 0, 0, 0.123));
+    @include border-radius(0.3rem 0.3rem 0 0);
+    h2{
+        margin: 0;
+        margin-left: 2rem;
+        padding: 0;
+        font-weight: 400;
+        font-size: 0.95rem;
+    }
+    .settings-exit-btn{
+        @include remove-btn-default();
+        @include border-radius(0.2rem);
+        @include transition(0.2s all ease-out);
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        right: 0.7rem;
+        padding: 0.3rem;
+    }
+    .exit-icon{
+        width: 1rem;
+        height: 1rem;
+        line{
+            stroke: $darkest-gray;
+            stroke-linecap: round;
+            stroke-width: 0.4rem;
+        }
+    }
+}
+.activity-settings-pop-up-body{
+    display: flex;
+    flex-direction: column;
+    //justify-content: space-evenly;
+    padding: calc(max(2rem, 2.5vw));
+    height: 100%;
+    .settings-save-btn{
+        @include remove-btn-default();
+        width: 100%;
+        color: $white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.7rem;
+        @include border-radius(0.2rem);
+        font-size: 0.9rem;
+        background-color: $blue;
+    }
+    .settings-body-row{
+        padding-bottom: calc(max(1.3rem, 2vw));
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.9rem;
+        .settings-option-text{
+            overflow-wrap: break-word;
+            word-break: break-word;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            .settings-option-note{
+                font-size: 0.65rem;
+            }
+        }
+    }
+}
 .activity-profile-avatar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-right: 0.8rem;
     position: relative;
     width: 2.5rem;
@@ -196,6 +283,9 @@ $activites-table-of-contents-height: calc(
 }
 
 .activities-sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
     background-color: $lightest-gray;
     z-index: 3;
     .secondary-sidebar-header{
@@ -441,7 +531,7 @@ $activites-table-of-contents-height: calc(
     text-align: center;
     min-height: calc(max(calc(95vh - 2rem), calc(40rem - 7vh - 2rem) ));
     z-index: 1;
-    max-width: 1400px;
+    max-width: 1500px;
     min-width: 310px; 
     @include transparent-scrollbar-styles()
 }
@@ -499,7 +589,7 @@ $activites-table-of-contents-height: calc(
 } 
 
 .nav-activity-btns{
-    max-width: 1400px;
+    max-width: 1500px;
 }
 .nav-activity-btn{
     @include border-radius(5px);
@@ -512,3 +602,19 @@ $activites-table-of-contents-height: calc(
     @include transition(all 0.3s ease-out);
 } 
 
+// .activities-settings-sidebar{
+//     position: fixed;
+//     width: 20rem;
+//     max-width: unset;
+// }
+// .activities-settings-sidebar.sidebar-right{
+//     left: unset;
+//     right: 0;
+//     @include box-shadow(-1px 0px 9px -2px rgba(0,0,0,0.78))
+// }
+// .activities-settings-exit-sidebar-btn{
+//     left: unset;
+//     top: 0.5rem;
+//     right: 17.7rem;
+//     background-color: transparent;
+// }

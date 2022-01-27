@@ -43,7 +43,7 @@ const ControlledInputsApp = ({
     //reset answer
     const isMount = useRef(false)
     useEffect(() =>{
-        if(!isMount.current || !data.clientAnswer){
+        if(!isMount.current && !data.clientAnswer){
             isMount.current = true
             //reset all state values to default
             dispatch(updateActivityDataLayout({
@@ -104,7 +104,7 @@ const ControlledInputsApp = ({
         }))
     }
     
-    if(!isMount.current) return <div></div>
+    if(!isMount.current && !data.clientAnswer) return <div></div>
     return(
         <>
         <form className = "controlled-inputs-activity-container d-flex">

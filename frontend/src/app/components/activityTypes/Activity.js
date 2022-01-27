@@ -8,7 +8,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import {updateActivityData, updateActivityTimer} from "../../../redux/features/activityTypes/activitiesData"
 import convertTimeDiff from "../../helpers/convertTimeDiff";
 import {
-    enableDnD,
     enableTap, 
     resetPopUpOn, 
     resetPopUpOff,
@@ -39,9 +38,7 @@ const imageURL = "images/homePage/mountain-home-bg.jpg";
 const Activity = () =>{
     //redux states
     const activityData = useSelector((state) => state.activities.data.originalData.activityData)
-    const dndEnabled = useSelector((state) => state.activities.settings.dndEnabled)
     const resetPopUp = useSelector((state) => state.activities.settings.resetPopUp)
-    const disableDnD = useSelector((state) => !state.activities.settings.dndEnabled) 
 
     const dispatch = useDispatch()
 
@@ -173,15 +170,7 @@ const Activity = () =>{
                 return
         }
     }
-    //toggle dnd and tap mode based on btn
-    const toggleTap = (e) => {
-        if (e.type ==="click" || (e.type ==="keydown" && e.key === "Enter")) {
-            //update redux store so instructions can dynamically change
-            if (disableDnD) dispatch(enableDnD())
-            else dispatch(enableTap())
-            moreInfoOnClick()
-        }
-    }
+    
     const sideBarData = activitySecondarySideBarData({
         activityData: activityData,
         onInstructionsClick: moreInfoOnClick,
@@ -206,13 +195,16 @@ const Activity = () =>{
             data ={activityData.questions[questionNum]}
             resetBtnOnClick ={resetBtnOnClick} 
             questionNum={questionNum}
-            disableDnD ={disableDnD}
-            toggleTap = {toggleTap}
             sidebarToggle={sidebarToggle}
             handleSideBar={handleSideBar}
-            avatar={<img src={imageURL} alt={"user-avatar"}/>}
+            moreInfoOnClick ={moreInfoOnClick}
             inProp = {inProp}
             timerData={timerData}
+            avatar={<img 
+                        src={imageURL} 
+                        alt={"user-avatar"}
+                    />}
+
         />
         <SecondarySideBar 
             data={sideBarData}
@@ -230,7 +222,6 @@ const Activity = () =>{
                 <ActivityInstructions 
                     activityType = {question.type}
                     activityInstructions ={null}
-                    dndEnabled = {dndEnabled}
                     moreInfoOnClick ={moreInfoOnClick}
                     popUpBgStyles = {popUpBgStyles}
                 />

@@ -7,13 +7,14 @@ import LabelActivityInstructions from "./LabelPictures/LabelActivityInstructions
 import PopUp from "../utilities/popUp/PopUpBackground"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTimes } from "@fortawesome/free-solid-svg-icons"
+import { useSelector } from "react-redux"
 const ActivityInstructions = ({
     activityType, 
     activityInstructions, 
-    dndEnabled, 
     moreInfoOnClick,
     popUpBgStyles,
 }) => {
+    const dndEnabled = useSelector((state) => state.activities.settings.dndEnabled)
     const newProps = {
         dndEnabled: dndEnabled, 
         activityInstructions: activityInstructions

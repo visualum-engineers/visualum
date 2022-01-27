@@ -15,7 +15,7 @@ const PopUpBg = (props) =>{
             style={props.containerStyles ? props.containerStyles : popUpBgStyles}
         >
             <button 
-                style={{...popUpBgStyles, backgroundColor: "rgba(0, 0, 0, 0.541)"}}
+                style={{...popUpBgStyles, backgroundColor: "rgba(0, 0, 0, 0.44)"}}
                 aria-label={props.ariaLabel}
                 onClick={props.onClick}
                 onKeyDown = {props.onKeyDown}

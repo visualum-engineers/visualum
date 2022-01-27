@@ -17,6 +17,28 @@
         padding: 0rem;
         margin-top: 4rem;
     }
+    .activity-settings-pop-up-body{
+        .settings-save-btn{
+            padding: 0.5rem;
+            font-size: 0.8rem;
+        }
+        .settings-body-row{
+            font-size: 0.8rem;
+            .settings-option-text{
+                .settings-option-note{
+                    font-size: 0.6rem;
+                }
+            }
+        }
+    }
+    // .activities-settings-sidebar.secondary-sidebar-nav{
+    //     max-width: unset;
+    //     width: 100%;
+    // }
+    // .activities-settings-exit-sidebar-btn{
+    //     right: calc(100% - 2.4rem);
+    //     background-color: transparent;
+    // }
 }
 @mixin activities-hover{
     .activity-navbar-exit-sidebar-btn:hover{
@@ -72,5 +94,19 @@
         @include activities-nav-navItems-hover;
         border: 1px solid $blue;
         color: $blue;
-    }    
+    }   
+    .activity-settings-pop-up-header{
+        .settings-exit-btn:hover{
+            background-color: rgb(219, 74, 74);
+            transform: scale(1.1);
+            line{
+                stroke: $white;
+            }
+        } 
+    }
+    .activity-settings-pop-up-body{
+        .settings-save-btn:hover{
+            background-color: $dark-blue;
+        }
+    }
 }
