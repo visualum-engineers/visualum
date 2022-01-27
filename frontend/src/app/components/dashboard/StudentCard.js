@@ -9,7 +9,7 @@ export default function StudentCard(props) {
                 <h6 className="card-subtitle mb-2 text-muted">Average: {props.data.average}</h6>
             </div>
             <div className='student-avatar'>
-                <Avatar style={{ height: "100%" }} />
+                <Avatar avatarStyle='Circle' style={{ height: "80%", marginBottom: ".5rem" }} />
             </div>
         </div>
     )
