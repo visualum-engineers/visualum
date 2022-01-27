@@ -23,7 +23,6 @@ const ActivityNavbar = ({
     sidebarToggle,
     handleSideBar,
     resetBtnOnClick,
-    moreInfoOnClick, 
     questionNum,
     inProp,
     //img container with avatar img
@@ -181,7 +180,6 @@ const ActivityNavbar = ({
                     {settingsOpen && 
                         <ActivitySettings 
                             onExitPopUp={() => setSettingsOpen(false)}
-                            moreInfoOnClick={moreInfoOnClick}
                         />
                     }
                 </div>

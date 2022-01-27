@@ -107,8 +107,11 @@ const clientAnswerData = createSlice({
             const newState = {...state.clientAnswerData, activityStartTime: startTime, activityEndTime: endTime}
             state.clientAnswerData.activityStartTime = newState.activityStartTime.toString()
             state.clientAnswerData.activityEndTime = newState.activityEndTime.toString()
-            
-            throttledSaveToStorage({
+
+            //call the non-throttled function, 
+            //because this update must be immediate
+            //to keep timer persisted
+            saveToLocalStorage({
                 state: state.clientAnswerData,
                 payload: "updateTime",  
                 newState: newState

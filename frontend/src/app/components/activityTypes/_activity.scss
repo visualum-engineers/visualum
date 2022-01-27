@@ -219,7 +219,6 @@ $activites-table-of-contents-height: calc(
 .activity-settings-pop-up-body{
     display: flex;
     flex-direction: column;
-    //justify-content: space-evenly;
     padding: calc(max(2rem, 2.5vw));
     height: 100%;
     .settings-save-btn{
@@ -246,6 +245,7 @@ $activites-table-of-contents-height: calc(
             display: flex;
             flex-direction: column;
             .settings-option-note{
+                color: $darkest-gray;
                 font-size: 0.65rem;
             }
         }
@@ -492,8 +492,12 @@ $activites-table-of-contents-height: calc(
         width: 1.7rem;
         @include border-radius(5px);
         font-size: 1.3rem;
-        color: rgba(122, 122, 122, 0.431);
-        @include transition(all 0.2s linear)
+        @include transition(all 0.2s linear);
+        line{
+            stroke: $darkest-gray;
+            stroke-linecap: round;
+            stroke-width: 0.4rem;
+        }
     }
 }
 .activity-reset-popup{

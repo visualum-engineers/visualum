@@ -3,14 +3,22 @@ const activitiesSettingsSlice = createSlice({
     name: "activitiesSettingsSlice",
     initialState: {
         dndEnabled: true,
+        timeRemindersEnabled: true,
+        autoPopUpsEnabled: true,
         resetPopUp: null,
     },
     reducers:{
-        enableTap: state =>{
-            state.dndEnabled = false
+        enableSettings: (state, action) =>{
+            if(!Array.isArray(action.payload)) state[action.payload] = true
+            else {
+                for(let i of action.payload) state[i] = true
+            }
         },
-        enableDnD: state =>{
-            state.dndEnabled = true
+        disableSettings: (state, action) =>{
+            if(!Array.isArray(action.payload)) state[action.payload] = false
+            else{
+                for(let i of action.payload) state[i] = false
+            }
         },
         resetPopUpOn: (state, action) => {
             state.resetPopUp = action.payload
@@ -22,8 +30,8 @@ const activitiesSettingsSlice = createSlice({
 })
 //export reducer meant for store       
 export const {
-    enableTap, 
-    enableDnD, 
+    enableSettings, 
+    disableSettings, 
     resetPopUpOn, 
     resetPopUpOff,
 } = activitiesSettingsSlice.actions

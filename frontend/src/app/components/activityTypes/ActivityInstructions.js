@@ -5,8 +5,6 @@ import RadioInstructions from "./ControlledInputs/Radio/RadioInstructions"
 import CheckboxInstructions from "./ControlledInputs/Checkbox/CheckboxInstructions"
 import LabelActivityInstructions from "./LabelPictures/LabelActivityInstructions"
 import PopUp from "../utilities/popUp/PopUpBackground"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTimes } from "@fortawesome/free-solid-svg-icons"
 import { useSelector } from "react-redux"
 const ActivityInstructions = ({
     activityType, 
@@ -42,7 +40,11 @@ const ActivityInstructions = ({
                         aria-label="exit-more-info" 
                         className="d-flex align-items-center justify-content-center"
                     >
-                        <FontAwesomeIcon icon={faTimes}/>
+                        <svg className="exit-icon" viewBox="0 0 100 100">
+                            <line x1="10" x2="90" y1="10" y2="90"/>
+                            <line x1="90" x2="10" y1="10" y2="90"/>
+                        </svg>
+                        
                     </button>
                 </header>
                 {//load specific activity instructions

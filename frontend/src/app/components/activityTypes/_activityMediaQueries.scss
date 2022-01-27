@@ -76,9 +76,11 @@
     }
     .activity-walkthrough-instructions-header{
         button:hover{
-            background-color: rgb(185, 0, 0);
-            color: white;
-            transform: scale(1.1)
+            background-color: rgb(219, 74, 74);
+            transform: scale(1.1);
+            line{
+                stroke: $white;
+            }
         }
     }
     .activity-reset-popup{

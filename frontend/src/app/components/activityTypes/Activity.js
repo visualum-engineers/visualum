@@ -1,4 +1,4 @@
-import DnDActivities from "./DnDActivities"
+//import DnDActivities from "./DnDActivities"
 import useWindowWidth from "../../hooks/use-window-width"
 import SecondarySideBar from "../sideBar/SecondarySideBar"
 import { useEffect, useState } from "react"
@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import {updateActivityData, updateActivityTimer} from "../../../redux/features/activityTypes/activitiesData"
 import convertTimeDiff from "../../helpers/convertTimeDiff";
 import {
-    enableTap, 
+    disableSettings, 
     resetPopUpOn, 
     resetPopUpOff,
 } from '../../../redux/features/activityTypes/activitiesSettings'
@@ -94,15 +94,17 @@ const Activity = () =>{
     useEffect(()=>{
         let isMounted = true
         if(isMounted) {
-            const questionType = question.type
-            const updateDnD = !smallWindowWidth && (questionType in DnDActivities)
+            //const questionType = question.type
+            //&& (questionType in DnDActivities)
+            //question.type
+            const updateDnD = !smallWindowWidth
             if(updateDnD) {
-                dispatch(enableTap())
+                dispatch(disableSettings("dndEnabled"))
                 setMoreInfoBtn(true)
             }
         }
         return () => {isMounted = false}
-    }, [dispatch, smallWindowWidth, question.type])
+    }, [dispatch, smallWindowWidth])
 
     const onNavBtnClick = (e) =>{
         //means it was just clicked. 
@@ -197,7 +199,6 @@ const Activity = () =>{
             questionNum={questionNum}
             sidebarToggle={sidebarToggle}
             handleSideBar={handleSideBar}
-            moreInfoOnClick ={moreInfoOnClick}
             inProp = {inProp}
             timerData={timerData}
             avatar={<img 
