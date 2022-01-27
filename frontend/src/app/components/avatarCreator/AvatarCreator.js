@@ -14,6 +14,7 @@ import {
 	clotheColor
 } from './types'
 import AttributeSelector from './AttributeSelector';
+import PopUpBackground from '../utilities/popUp/PopUpBackground'
 
 const hairstyleLength = hairstyle.length;
 const accessoryLength = accessory.length;
@@ -91,7 +92,7 @@ export default function AvatarCreator(props) {
 	}
 
 	return (
-		<div className='avatar-creator-container'>
+		<PopUpBackground onClick={props.onCancel}>
 			<div className='avatar-creator'>
 				<Avatar
 					style={{ width: '150px', height: '150px' }}
@@ -226,6 +227,6 @@ export default function AvatarCreator(props) {
 					<button className='btn btn-danger ms-3' onClick={props.onCancel}>Cancel</button>
 				</div>
 			</div>
-		</div>
+		</PopUpBackground>
 	)
 }

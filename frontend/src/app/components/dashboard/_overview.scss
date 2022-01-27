@@ -1,0 +1,32 @@
+.overview-card {
+    @include card();
+    .overview-icon {
+        transition: color 200ms ease-in-out;
+    }
+    &:hover {
+        h6 {
+            color: inherit !important;
+        }
+        .overview-icon {
+            color: $highlight-color;
+        }
+    }
+    min-height: 15rem;
+    margin: auto;
+    overflow: hidden;
+}
+
+.overview-center {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overview-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+

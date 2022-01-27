@@ -1,0 +1,30 @@
+.dashboard-modal {
+    min-width: 50%;
+    @include border-radius(15px);
+    background-color: white;
+    padding: 2rem;
+    z-index: 3;
+    @media (max-width:992px) {
+        width: 95%;
+    }
+    .form-label {
+        font-weight: 500;
+        font-size: 1.2rem;
+    }
+    .buttons {
+        align-self: flex-end;
+        display: flex;
+        justify-content: flex-end;
+        .btn {
+            margin-left: .7rem;
+            @include border-radius(15px);
+            border: none;
+        }
+        .btn-primary {
+            background-color: $blue !important;
+        }
+        .btn-danger {
+            background-color: $highlight-color;
+        }
+    }
+}

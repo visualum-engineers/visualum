@@ -1,6 +1,6 @@
 import React from 'react'
 import DashboardSidebar from './DashboardSidebar';
-import { useNavigate, Outlet, Link } from 'react-router-dom';
+import { useNavigate, Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import useWindowWidth from '../../hooks/use-window-width'
 import sidebarValues from './sidebarValues';
@@ -17,38 +17,30 @@ export default function Dashboard(props) {
 
     const widthBigger = useWindowWidth(992);
 
-    const dropDownItems = widthBigger ?
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-                <button className="btn back-button" onClick={handleClick}>
-                    Back to Homepage
-                </button>
-            </li>
-        </ul>
-        :
+    const dropDownItems =
         <ul className="navbar-nav me-auto">
             {sidebarValues.map(item => {
                 return (
-                    <li className="nav-item">
-                        <Link className={(navData) => `${navData.isActive ? 'selected' : ''} nav-link`} to={`${item.value}`}>{item.name}</Link>
+                    <li className="nav-item dropdown-nav-link" key={item.value}>
+                        <a href={`/dashboard/${item.value}`}>{item.name}</a>
                     </li>
                 )
             })}
         </ul>
-
     const nav =
-        <nav className="navbar navbar-light sticky-top navbar-expand-lg dashboard-nav">
+        <nav className="navbar navbar-light fixed-top navbar-expand-lg dashboard-nav">
+            <div className='center-logo'>
+                <img className="mobile-floating-logo"
+                    src={Logo}
+                    alt="Visualum logo"
+                    onClick={handleClick}
+                />
+            </div>
             <div className="container-fluid">
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse mt-3 mt-lg-0" id="navbarTogglerDemo01">
-                    <a className="navbar-brand" href="/">
-                        <img className="secondary-sidebar-visualum-logo dashboard-logo"
-                            src={Logo}
-                            alt="Visualum logo" />
-                        visualum
-                    </a>
                     {dropDownItems}
                 </div>
             </div>
@@ -56,8 +48,11 @@ export default function Dashboard(props) {
 
     return (
         <div className="dashboard vh-100">
-            {widthBigger ? <></> : nav}
-            <div className="dashboard-container">
+            {widthBigger ? <></> :
+                <>
+                    {nav}
+                </>}
+            <div className={`dashboard-container ${widthBigger ? '' : 'mt-5'}`}>
                 {widthBigger ? <DashboardSidebar page={props.page} /> : <></>}
                 <div className={`main-content ${state.collapsed ? "main-content-full" : ""}`}>
                     <Outlet />

@@ -1,0 +1,16 @@
+.settings-page {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    @include box-shadow-dash();
+    height: 96%;
+}
+
+.settings-module {
+    padding: 1rem 0;
+}
+
+.settings-card {
+    @include card();
+    min-height: 7rem;
+}

@@ -21,7 +21,7 @@ export default function DashboardClass() {
 
     const cards = classes.map(item => {
         return (
-            <div className="col-md-4 col-12 p-2">
+            <div className="col-md-4 col-12 p-2" key={item.name}>
                 <ClassCard title={item.name} subtitle={item.description} value={item.id} />
             </div>
         )

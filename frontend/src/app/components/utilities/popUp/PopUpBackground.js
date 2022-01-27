@@ -1,5 +1,3 @@
-
-
 const popUpBgStyles = {
     position: "fixed",
     top: "0",
