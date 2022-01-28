@@ -24,7 +24,8 @@ $activities-sidebar-user-profile-height: calc(12rem + 3vh - 0.6rem);
 $activites-sidebar-links-height: calc(1.8rem * 3);
 $activites-sidebar-padding: 4vh;
 $activites-table-of-contents-height: calc(
-    100vh - #{$sidebar-visualum-logo-height} 
+    100vh 
+    - #{$sidebar-visualum-logo-height} 
     - #{$activities-sidebar-instructions-btn-height}
     - #{$activities-sidebar-user-profile-height}
     - #{$activites-sidebar-links-height}
@@ -249,8 +250,34 @@ $activites-table-of-contents-height: calc(
                 font-size: 0.65rem;
             }
         }
+        .settings-option-toggler{
+            display: flex;
+            flex-direction: column;
+            align-items: end;
+        }
     }
+    .activity-settings-time{
+        padding-bottom: 0;
+    }
+    .activity-settings-time-options{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-top: 0.4rem;
+        background-color: rgb(235, 235, 235);
+        margin-bottom: calc(max(1.3rem, 2vw));
+        padding: 1rem 1.8rem;
+        font-size: 0.8rem;
+
+    }
+    .activity-settings-time-interval-input{
+        height: 1.4rem;
+        margin-right: 0.5rem;
+        width: 3rem;
+    }
+    
 }
+
 .activity-profile-avatar-container {
     display: flex;
     align-items: center;
@@ -605,7 +632,11 @@ $activites-table-of-contents-height: calc(
     font-size: 1rem;
     @include transition(all 0.3s ease-out);
 } 
-
+g#Circle{
+    g{
+        fill: black !important;
+    }
+}
 // .activities-settings-sidebar{
 //     position: fixed;
 //     width: 20rem;

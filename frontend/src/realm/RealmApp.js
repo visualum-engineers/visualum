@@ -1,8 +1,5 @@
 import React from "react";
 import * as Realm from "realm-web";
-//import { useDispatch } from "react-redux";
-//only needed upon app initialization
-const appId = process.env["REACT_APP_REALM_APP_ID"]
 const RealmAppContext = React.createContext();
 
 export const useRealmApp = () => {
@@ -16,11 +13,12 @@ export const useRealmApp = () => {
 };
 
 
-export const RealmAppProvider = ({children}) => {  
+export const RealmAppProvider = ({children, appId}) => {  
   const [app, setApp] = React.useState(new Realm.App(appId));
+  
   React.useEffect(() => {
     setApp(new Realm.App(appId));
-  }, []);
+  }, [appId]);
   //const dispatch = useDispatch()
   // Wrap the Realm.App object's user state with React state
   const [currentUser, setCurrentUser] = React.useState(app.currentUser);
@@ -38,11 +36,6 @@ export const RealmAppProvider = ({children}) => {
      setCurrentUser(app.currentUser);
   }
 
-
-  //update redux store with userInfo
-  // function getUserInfo(){
-  //     //dispatch(getUserInfo())
-  // }
   const wrapped = {...app, currentUser, logIn, logOut };
 
   return (

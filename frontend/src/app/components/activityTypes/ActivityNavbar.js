@@ -195,29 +195,3 @@ const ActivityNavbar = ({
     )
 }
 export default ActivityNavbar
-
-/*
-import SecondarySideBar from "../sideBar/SecondarySideBar";
-
-const settingsSidebarData = [
-        {
-            type: "custom",
-            content: <div>Hello</div>
-        },
-        { <DrapAndDropToggler 
-                            disableDnD = {disableDnD}
-                            toggleTap = {toggleTap}
-                        /> }
-                    ]
-
-<SecondarySideBar 
-        data = {settingsSidebarData}
-        logo = {true}
-        windowWidth = {smallWindowWidth}
-        customSidebarClass = {"activities-settings-sidebar"}
-        sidebarToggle = {true}
-        exitSideBarBtn={true}
-        handleSideBar={() => setSettingsOpen(false)}
-        exitSideBarBtnClass = {"activities-settings-exit-sidebar-btn"}
-    />
-*/

@@ -4,6 +4,7 @@ const activitiesSettingsSlice = createSlice({
     initialState: {
         dndEnabled: true,
         timeRemindersEnabled: true,
+        timeIntervalDuration: 20*60*1000,
         autoPopUpsEnabled: true,
         resetPopUp: null,
     },
@@ -20,6 +21,9 @@ const activitiesSettingsSlice = createSlice({
                 for(let i of action.payload) state[i] = false
             }
         },
+        changeTimeDuration: (state, action) =>{
+            state.timeIntervalDuration = action.payload
+        },
         resetPopUpOn: (state, action) => {
             state.resetPopUp = action.payload
         },
@@ -34,6 +38,7 @@ export const {
     disableSettings, 
     resetPopUpOn, 
     resetPopUpOff,
+    changeTimeDuration
 } = activitiesSettingsSlice.actions
 
 export default activitiesSettingsSlice.reducer

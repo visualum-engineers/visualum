@@ -14,11 +14,13 @@ Notes on whats missing:
                 - star twinkling animation on background on signup form. 
                 - Can be built with css 
 */
-
+/*global google */
 import React, { Component } from 'react';
 import Buttons from '../buttons';
 import InputCode from '../inputCode';
-
+import { useEffect } from 'react';
+import { useRealmApp } from '../../../../../realm/RealmApp';
+import { googleLogin } from '../../../../../realm/authFunc/googleAuth'
 const emailRegex = /.+@.+[.]{1}.+/;
 const numberRegex =/[0-9]{6,}/;
 
@@ -29,6 +31,7 @@ const passwordLowerCase = /^(?=.*[a-z]).*$/
 const passwordNumbers = /^(?=.*[0-9]).*$/
 const passwordSymbols = /^(?=.*[!@#$%^&*]).*$/
 const passwordRegexCollection = [passwordLength, passwordUpperCase, passwordLowerCase, passwordNumbers, passwordSymbols]
+const googleClientID = process.env.REACT_APP_GOOGLE_CLIENT_ID
 
 function passwordCheck(statePW, passwordRegexCollection, btnCheck=false){
     let passwordCheckArr = [...passwordRegexCollection]
@@ -52,38 +55,45 @@ const initialState = {
     error: false,
 }
 
-class GoogleLogin extends Component {
-    //Google button library
-    componentDidMount() {
-        const script = document.createElement("script");
-        script.src = "https://accounts.google.com/gsi/client";
+const GoogleLogin = () => {
+    const app = useRealmApp()
+    useEffect(() => {
+        const initializeGsi = () => {
+            google.accounts.id.initialize({
+                client_id: googleClientID,
+                callback: (res) => googleLogin(res, app)
+            });
+            google.accounts.id.prompt(notification => {
+                if (notification.isNotDisplayed()) {
+                    console.log(notification.getNotDisplayedReason())
+                } else if (notification.isSkippedMoment()) {
+                    console.log(notification.getSkippedReason())
+                } else if(notification.isDismissedMoment()) {
+                    console.log(notification.getDismissedReason())
+                }
+            });
+        }
+        const script = document.createElement('script')
+        script.src = 'https://accounts.google.com/gsi/client'
+        script.onload = initializeGsi()
         script.async = true;
-        document.body.appendChild(script);
-    }
-
-    render() {
-        return (
-            <div className="mt-4 align-self-center">
-                <button className="mb-2 entry-google-btn">
-                    <div id="g_id_onload"
-                        data-client_id="297543839155-cclc3bsf6m26pfaj1bmrfb1l4bgpcin7.apps.googleusercontent.com"
-                        data-context="signin"
-                        data-ux_mode="popup"
-                        data-login_uri="http://localhost:3001">
-                    </div>
-
-                    <div className="g_id_signin entry-g_id_signin"
-                        data-type="standard"
-                        data-shape="rectangular"
-                        data-theme="outline"
-                        data-text="signin_with"
-                        data-size="large"
-                        data-logo_alignment="left">
-                    </div>
-                </button>
-            </div>
-        )
-    }
+        document.querySelector('body').appendChild(script)
+    }, [app])
+    console.log(app)
+    return (
+        <div  style={{marginTop: "10vh"}}>
+            <button className="mb-2 entry-google-btn">
+                <div className="g_id_signin entry-g_id_signin"
+                    data-type="standard"
+                    data-shape="rectangular"
+                    data-theme="outline"
+                    data-text="signin_with"
+                    data-size="large"
+                    data-logo_alignment="left">
+                </div>
+            </button>
+        </div>
+    )
 }
 
 class ManualLogin extends Component {
@@ -162,7 +172,7 @@ class CurrentLogInPage extends Component {
     }
 }
 
-export default class LogInForm extends Component {
+export class LogInForm extends Component {
     constructor(props) {
         super(props);
         this.state = initialState
@@ -296,3 +306,4 @@ export default class LogInForm extends Component {
         )
     }
 }
+export default GoogleLogin

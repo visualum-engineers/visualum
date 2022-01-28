@@ -134,8 +134,7 @@ const undoableData = undoable(clientAnswerData.reducer, {
         "clientAnswerActivitiesData/updateActivityDataLayout",
         "clientAnswerActivitiesData/updateActivityTimer"
     ]),
-
-    limit: 100,
+    limit: 60,
 })
 const rootReducer = combineReducers({
     originalData: activitiesData.reducer,

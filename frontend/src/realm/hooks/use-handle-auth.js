@@ -1,26 +1,23 @@
 import { useState } from "react";
 import { unstable_batchedUpdates } from "react-dom";
+import { useRealmApp } from "../RealmApp";
 import validateEmailFormat from "../../app/helpers/validateEmailFormat";
+import { handleEmailAndPWLogin } from "../authFunc/emailAndPassword";
+import useGoogleOnTapLogin from "../realm/googleWrapper/index"
+const googleClientID = process.env.REACT_APP_GOOGLE_CLIENT_ID
 
 const useHandleAuth = () =>{
+    const app = useRealmApp()
     const [isLoggingIn, setIsLoggingIn] = useState(false) 
     const [error, setError] = useState(null)
-    const handleEmailAndPWLogin = async ({
-        email, 
-        password
-    }) => {
-        const isValidEmailAddress = validateEmailFormat(email);
-        if(!isValidEmailAddress) return unstable_batchedUpdates(() =>{
-            setError((err) => ({ ...err, email: "Email is invalid." }));
-            setIsLoggingIn(false);
-        })
-        try {  
-          await app.logIn(Realm.Credentials.emailPassword(email, password));
-        } catch (err) {
-          handleAuthenticationError(err, setError);
-        }
-      };
-    
+
+    useGoogleOnTapLogin({
+        onError: error => console.log(error),
+        onSuccess: response => console.log(response),
+        googleAccountConfigs: {
+          client_id: googleClientID// Your google client id here !!!
+        },
+    })
     const handleRegistrationAndLogin = async ({
         email, 
         password,
@@ -40,9 +37,10 @@ const useHandleAuth = () =>{
                     })
                     // Register the user and, if successful, log them in
                     await app.emailPasswordAuth.registerUser(email, password);
-                    await handleEmailAndPWLogin({email: email, password: password});
+                    await handleEmailAndPWLogin({email: email, password: password, app: app});
                     break;
                 case "googleAuth":
+
                     break
                 default:
                     throw new Error ("auth type is invalid")
@@ -54,15 +52,14 @@ const useHandleAuth = () =>{
                 setError(null);
             })
         } catch (err) {
-            handleAuthenticationError(err, setError);
+            setError(err, setError);
             setIsLoggingIn(false);
         }
     };
     return {
         isLoggingIn: isLoggingIn,
         error: error,
-        handleEmailAndPWLogin: handleEmailAndPWLogin,
-        handleRegistrationAndLogin: handleRegistrationAndLogin
+        handleRegistrationAndLogin: handleRegistrationAndLogin,
     }
 }
 export default useHandleAuth
