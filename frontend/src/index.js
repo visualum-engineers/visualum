@@ -11,7 +11,7 @@ import {RealmAppProvider} from './realm/RealmApp'
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RealmAppProvider >
+      <RealmAppProvider appId={process.env["REACT_APP_REALM_APP_ID"]}>
         <App />
       </RealmAppProvider>
     </Provider>
