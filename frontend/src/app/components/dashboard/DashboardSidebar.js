@@ -9,6 +9,7 @@ export default function DashboardSidebar(props) {
         <SidebarItem
             name={item.name}
             value={item.value}
+            icon={item.icon}
             selected={props.page === item.value}
             key={item.value}
         />
