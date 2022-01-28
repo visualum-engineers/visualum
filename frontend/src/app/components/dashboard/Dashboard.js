@@ -1,5 +1,6 @@
 import React from 'react'
 import DashboardSidebar from './DashboardSidebar';
+import DashboardNav from './DashboardNav';
 import { useNavigate, Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import useWindowWidth from '../../hooks/use-window-width'
@@ -47,17 +48,21 @@ export default function Dashboard(props) {
         </nav>
 
     return (
-        <div className="dashboard vh-100">
-            {widthBigger ? <></> :
+        <div className='d-flex flex-column'>
+            {widthBigger ?
+                <DashboardNav></DashboardNav>
+                :
                 <>
                     {nav}
                 </>}
-            <div className={`dashboard-container ${widthBigger ? '' : 'mt-5'}`}>
-                {widthBigger ? <DashboardSidebar page={props.page} /> : <></>}
-                <div className={`main-content ${state.collapsed ? "main-content-full" : ""}`}>
-                    <Outlet />
+            <div className="dashboard vh-100">
+                <div className={`dashboard-container ${widthBigger ? '' : 'mt-5'}`}>
+                    {widthBigger ? <DashboardSidebar page={props.page} /> : <></>}
+                    <div className={`main-content ${widthBigger ? "main-content-full" : "pt-3"}`}>
+                        <Outlet />
+                    </div>
                 </div>
             </div>
-        </div >
+        </div>
     )
 }

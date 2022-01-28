@@ -1,7 +1,7 @@
 import React from 'react'
 import SidebarItem from './SidebarItem';
 import sidebarValues from './sidebarValues';
-const Logo = "./images/VisualumLogo.png";
+// const Logo = "./images/VisualumLogo.png";
 
 export default function DashboardSidebar(props) {
 
@@ -17,14 +17,14 @@ export default function DashboardSidebar(props) {
 
     return (
         <div className="dashboard-sidebar">
-            <a className="dashboard-sidebar-brand" href="/">
+            {/* <a className="dashboard-sidebar-brand" href="/">
                 <img className="dashboard-logo"
                     src={Logo}
                     alt="Visualum logo" />
                 <span className="dashboard-sidebar-name">
                     visualum
                 </span>
-            </a>
+            </a> */}
             {items}
         </div>
     )
