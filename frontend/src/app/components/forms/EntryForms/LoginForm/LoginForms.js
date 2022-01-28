@@ -14,13 +14,11 @@ Notes on whats missing:
                 - star twinkling animation on background on signup form. 
                 - Can be built with css 
 */
-/*global google */
+
 import React, { Component } from 'react';
 import Buttons from '../buttons';
 import InputCode from '../inputCode';
-import { useEffect } from 'react';
-import { useRealmApp } from '../../../../../realm/RealmApp';
-import { googleLogin } from '../../../../../realm/authFunc/googleAuth'
+import GoogleLogin from './GoogleSignInBtn';
 const emailRegex = /.+@.+[.]{1}.+/;
 const numberRegex =/[0-9]{6,}/;
 
@@ -31,7 +29,6 @@ const passwordLowerCase = /^(?=.*[a-z]).*$/
 const passwordNumbers = /^(?=.*[0-9]).*$/
 const passwordSymbols = /^(?=.*[!@#$%^&*]).*$/
 const passwordRegexCollection = [passwordLength, passwordUpperCase, passwordLowerCase, passwordNumbers, passwordSymbols]
-const googleClientID = process.env.REACT_APP_GOOGLE_CLIENT_ID
 
 function passwordCheck(statePW, passwordRegexCollection, btnCheck=false){
     let passwordCheckArr = [...passwordRegexCollection]
@@ -53,47 +50,6 @@ const initialState = {
     twoFactorLogin: "",
     rememberMe:false,
     error: false,
-}
-
-const GoogleLogin = () => {
-    const app = useRealmApp()
-    useEffect(() => {
-        const initializeGsi = () => {
-            google.accounts.id.initialize({
-                client_id: googleClientID,
-                callback: (res) => googleLogin(res, app)
-            });
-            google.accounts.id.prompt(notification => {
-                if (notification.isNotDisplayed()) {
-                    console.log(notification.getNotDisplayedReason())
-                } else if (notification.isSkippedMoment()) {
-                    console.log(notification.getSkippedReason())
-                } else if(notification.isDismissedMoment()) {
-                    console.log(notification.getDismissedReason())
-                }
-            });
-        }
-        const script = document.createElement('script')
-        script.src = 'https://accounts.google.com/gsi/client'
-        script.onload = initializeGsi()
-        script.async = true;
-        document.querySelector('body').appendChild(script)
-    }, [app])
-    console.log(app)
-    return (
-        <div  style={{marginTop: "10vh"}}>
-            <button className="mb-2 entry-google-btn">
-                <div className="g_id_signin entry-g_id_signin"
-                    data-type="standard"
-                    data-shape="rectangular"
-                    data-theme="outline"
-                    data-text="signin_with"
-                    data-size="large"
-                    data-logo_alignment="left">
-                </div>
-            </button>
-        </div>
-    )
 }
 
 class ManualLogin extends Component {
@@ -172,7 +128,7 @@ class CurrentLogInPage extends Component {
     }
 }
 
-export class LogInForm extends Component {
+export default class LogInForm extends Component {
     constructor(props) {
         super(props);
         this.state = initialState
@@ -306,4 +262,3 @@ export class LogInForm extends Component {
         )
     }
 }
-export default GoogleLogin
