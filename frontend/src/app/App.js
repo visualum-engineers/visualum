@@ -7,7 +7,7 @@ import TestBackend from "./components/testBackend/test"
 import DashboardNothingFound from './components/dashboard/DashboardNothingFound';
 //import { useRealmApp } from '../realm/RealmApp';
 //lazy loaded components for performance
-const DashboardHome = React.lazy(() => import("./components/dashboard/DashboardHome"))
+const DashboardHome = React.lazy(() => import("./components/dashboard/DashboardOverview"))
 const DashboardClasses = React.lazy(() => import("./components/dashboard/DashboardClasses"))
 const DashboardClass = React.lazy(() => import("./components/dashboard/DashboardClass"))
 const DashboardSettings = React.lazy(() => import("./components/dashboard/DashboardSettings"))
@@ -40,7 +40,7 @@ function App() {
             <Route path="/activity" element={<Activity />} />
             <Route path="/activity-creation" element={<ActivityCreation />} />
             <Route path="/dashboard" element={<Dashboard />}>
-              <Route index path="home" element={<DashboardHome />} />
+              <Route index path="overview" element={<DashboardHome />} />
               <Route index element={<DashboardHome />} />
               <Route path="assignments" element={<DashboardAssignments />} />
               <Route path="classes/:class_id" element={<DashboardClass />} />

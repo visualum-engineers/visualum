@@ -1,5 +1,6 @@
 import React from 'react'
 import { useLocation, useMatch, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default function SidebarItem(props) {
     let navigate = useNavigate();
@@ -21,7 +22,10 @@ export default function SidebarItem(props) {
             <div className={`tab-button ${toHighlight ? 'selected' : ''} `}
                 onClick={handleClick}
             >
-                <p>{props.name}</p>
+                <span className='sidebar-item-text'>{props.name}</span>
+                <div className={`sidebar-item-icon ${toHighlight ? 'icon-selected' : ''}`}>
+                    <FontAwesomeIcon icon={props.icon} />
+                </div>
             </div>
         </div>
     )

@@ -23,11 +23,11 @@ $highlight-color: #FF8000;
     border: none;
     @include border-radius(15px);
     h5 {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         font-weight: 600;
     }
     h6 {
-        font-size: 1rem;
+        font-size: .9rem;
         transition: color .25s ease-in-out;
     }
     @include box-shadow-dash();
@@ -179,4 +179,8 @@ $highlight-color: #FF8000;
     margin-left: 1rem;
     padding: .4rem;
     font-size: 1.4rem;
+}
+
+#Color\/Palette\/Blue-01 {
+    fill: $light-blue;
 }
