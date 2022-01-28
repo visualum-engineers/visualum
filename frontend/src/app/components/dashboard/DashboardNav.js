@@ -1,4 +1,7 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell } from '@fortawesome/free-regular-svg-icons';
+import Avatar from 'avataaars'
 
 export default function DashboardNav() {
 	return (
@@ -7,6 +10,15 @@ export default function DashboardNav() {
 				<img class="dashboard-navbar-logo" src="./images/VisualumLogo.png" alt="Visualum logo" />
 				<div className='dashboard-navbar-title'>
 					visualum
+				</div>
+			</div>
+			<div className='dashboard-navbar-buttons'>
+				<div className='dashboard-navbar-button'>
+					<FontAwesomeIcon icon={faBell} />
+				</div>
+				<div className='dashboard-navbar-button'>
+					<Avatar style={{ width: '80%' }}
+						avatarStyle='Circle' />
 				</div>
 			</div>
 		</nav>
