@@ -661,11 +661,7 @@ $activites-table-of-contents-height: calc(
     font-size: 1rem;
     @include transition(all 0.3s ease-out);
 } 
-g#Circle{
-    g{
-        fill: black !important;
-    }
-}
+
 // .activities-settings-sidebar{
 //     position: fixed;
 //     width: 20rem;

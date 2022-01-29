@@ -91,136 +91,144 @@ export default function AvatarCreator(props) {
 		})
 	}
 
+	const tabs = <div className="tab-content" id="myTabContent">
+		<div class="tab-pane fade show active" id="hair" role="tabpanel" aria-labelledby="hair-tab">
+			<div className='row p-3'>
+				<div className='col-12'>
+					<h5 className="text-center unselectable">Hair</h5>
+					<AttributeSelector
+						title={hairstyle[options.topType][1]}
+						handleIncrement={() => changeValue("topType", "inc")}
+						handleDecrement={() => { changeValue("topType", "dec") }}
+					/>
+				</div>
+				<div className='col-12'>
+					<h5 className="text-center unselectable">Hair Color</h5>
+					<AttributeSelector
+						title={hairColor[options.hairColor][1]}
+						handleIncrement={() => changeValue("hairColor", "inc")}
+						handleDecrement={() => { changeValue("hairColor", "dec") }}
+					/>
+				</div>
+				<div className='col-12'>
+					<h5 className="text-center unselectable">Facial Hair</h5>
+					<AttributeSelector
+						title={facialHair[options.facialHairType][1]}
+						handleIncrement={() => changeValue("facialHairType", "inc")}
+						handleDecrement={() => { changeValue("facialHairType", "dec") }}
+					/>
+				</div>
+				<div className='col-12'>
+					<h5 className="text-center unselectable">Facial Hair Color</h5>
+					<AttributeSelector
+						title={facialHairColor[options.facialHairColor][1]}
+						handleIncrement={() => changeValue("facialHairColor", "inc")}
+						handleDecrement={() => { changeValue("facialHairColor", "dec") }}
+					/>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane fade" id="face" role="tabpanel" aria-labelledby="face-tab">
+			<div className='row p-3'>
+				<div className='col-12'>
+					<h5 className="text-center unselectable">Skin Color</h5>
+					<AttributeSelector
+						title={skinColor[options.skinColor][1]}
+						handleIncrement={() => changeValue("skinColor", "inc")}
+						handleDecrement={() => { changeValue("skinColor", "dec") }}
+					/>
+				</div>
+				<div className='col-12'>
+					<h5 className="text-center unselectable">Eyes</h5>
+					<AttributeSelector
+						title={eyes[options.eyeType][1]}
+						handleIncrement={() => changeValue("eyeType", "inc")}
+						handleDecrement={() => { changeValue("eyeType", "dec") }}
+					/>
+				</div>
+				<div className='col-12'>
+					<h5 className="text-center unselectable">Eyebrows</h5>
+					<AttributeSelector
+						title={eyebrow[options.eyebrowType][1]}
+						handleIncrement={() => changeValue("eyebrowType", "inc")}
+						handleDecrement={() => { changeValue("eyebrowType", "dec") }}
+					/>
+				</div>
+				<div className='col-12'>
+					<h5 className="text-center unselectable">Mouth</h5>
+					<AttributeSelector
+						title={mouth[options.mouthType][1]}
+						handleIncrement={() => changeValue("mouthType", "inc")}
+						handleDecrement={() => { changeValue("mouthType", "dec") }}
+					/>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane fade" id="clothes" role="tabpanel" aria-labelledby="clothes-tab">
+			<div className='row p-3'>
+				<div className='col-12'>
+					<h5 className="text-center unselectable">Clothes</h5>
+					<AttributeSelector
+						title={clothes[options.clotheType][1]}
+						handleIncrement={() => changeValue("clotheType", "inc")}
+						handleDecrement={() => { changeValue("clotheType", "dec") }}
+					/>
+				</div>
+				<div className='col-12'>
+					<h5 className="text-center unselectable">Clothes Color</h5>
+					<AttributeSelector
+						title={clotheColor[options.clotheColor][1]}
+						handleIncrement={() => changeValue("clotheColor", "inc")}
+						handleDecrement={() => { changeValue("clotheColor", "dec") }}
+					/>
+				</div>
+				<div className='col-12'>
+					<h5 className="text-center unselectable">Accessory</h5>
+					<AttributeSelector
+						title={accessory[options.accessoriesType][1]}
+						handleIncrement={() => changeValue("accessoriesType", "inc")}
+						handleDecrement={() => { changeValue("accessoriesType", "dec") }}
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	return (
 		<PopUpBackground onClick={props.onCancel}>
 			<div className='avatar-creator'>
-				<Avatar
-					style={{ width: '150px', height: '150px' }}
-					avatarStyle='Circle'
-					topType={hairstyle[options.topType][0]}
-					accessoriesType={accessory[options.accessoriesType][0]}
-					hairColor={hairColor[options.hairColor][0]}
-					facialHairType={facialHair[options.facialHairType][0]}
-					facialHairColor={facialHairColor[options.facialHairColor][0]}
-					clotheType={clothes[options.clotheType][0]}
-					clotheColor={clotheColor[options.clotheColor][0]}
-					eyeType={eyes[options.eyeType][0]}
-					eyebrowType={eyebrow[options.eyebrowType][0]}
-					mouthType={mouth[options.mouthType][0]}
-					skinColor={skinColor[options.skinColor][0]}
-				/>
-				<ul class="nav nav-pills mt-3" id="myTab" role="tablist">
-					<li class="nav-item" role="presentation">
-						<button class="nav-link active unselectable" id="hair-tab" data-bs-toggle="tab" data-bs-target="#hair" type="button" role="tab" aria-controls="home" aria-selected="true">Hair</button>
-					</li>
-					<li class="nav-item" role="presentation">
-						<button class="nav-link unselectable" id="face-tab" data-bs-toggle="tab" data-bs-target="#face" type="button" role="tab" aria-controls="profile" aria-selected="false">Face</button>
-					</li>
-					<li class="nav-item" role="presentation">
-						<button class="nav-link unselectable" id="clothes-tab" data-bs-toggle="tab" data-bs-target="#clothes" type="button" role="tab" aria-controls="contact" aria-selected="false">Clothes</button>
-					</li>
-				</ul>
-				<div className="tab-content" id="myTabContent">
-					<div class="tab-pane fade show active" id="hair" role="tabpanel" aria-labelledby="hair-tab">
-						<div className='row p-3'>
-							<div className='col-12'>
-								<h5 className="text-center unselectable">Hair</h5>
-								<AttributeSelector
-									title={hairstyle[options.topType][1]}
-									handleIncrement={() => changeValue("topType", "inc")}
-									handleDecrement={() => { changeValue("topType", "dec") }}
-								/>
-							</div>
-							<div className='col-12'>
-								<h5 className="text-center unselectable">Hair Color</h5>
-								<AttributeSelector
-									title={hairColor[options.hairColor][1]}
-									handleIncrement={() => changeValue("hairColor", "inc")}
-									handleDecrement={() => { changeValue("hairColor", "dec") }}
-								/>
-							</div>
-							<div className='col-12'>
-								<h5 className="text-center unselectable">Facial Hair</h5>
-								<AttributeSelector
-									title={facialHair[options.facialHairType][1]}
-									handleIncrement={() => changeValue("facialHairType", "inc")}
-									handleDecrement={() => { changeValue("facialHairType", "dec") }}
-								/>
-							</div>
-							<div className='col-12'>
-								<h5 className="text-center unselectable">Facial Hair Color</h5>
-								<AttributeSelector
-									title={facialHairColor[options.facialHairColor][1]}
-									handleIncrement={() => changeValue("facialHairColor", "inc")}
-									handleDecrement={() => { changeValue("facialHairColor", "dec") }}
-								/>
-							</div>
+				<div className='avatar-creator-top-section d-flex'>
+					<div className='d-flex flex-column'>
+						<Avatar
+							style={{ width: '150px', height: '150px' }}
+							avatarStyle='Circle'
+							topType={hairstyle[options.topType][0]}
+							accessoriesType={accessory[options.accessoriesType][0]}
+							hairColor={hairColor[options.hairColor][0]}
+							facialHairType={facialHair[options.facialHairType][0]}
+							facialHairColor={facialHairColor[options.facialHairColor][0]}
+							clotheType={clothes[options.clotheType][0]}
+							clotheColor={clotheColor[options.clotheColor][0]}
+							eyeType={eyes[options.eyeType][0]}
+							eyebrowType={eyebrow[options.eyebrowType][0]}
+							mouthType={mouth[options.mouthType][0]}
+							skinColor={skinColor[options.skinColor][0]}
+						/>
+						<div className='d-flex flex-column align-items-center'>
+							<ul class="nav flex-column align-items-center nav-pills mt-3" id="myTab" role="tablist">
+								<li class="nav-item" role="presentation">
+									<button class="nav-link active unselectable" id="hair-tab" data-bs-toggle="tab" data-bs-target="#hair" type="button" role="tab" aria-controls="home" aria-selected="true">Hair</button>
+								</li>
+								<li class="nav-item" role="presentation">
+									<button class="nav-link unselectable" id="face-tab" data-bs-toggle="tab" data-bs-target="#face" type="button" role="tab" aria-controls="profile" aria-selected="false">Face</button>
+								</li>
+								<li class="nav-item" role="presentation">
+									<button class="nav-link unselectable" id="clothes-tab" data-bs-toggle="tab" data-bs-target="#clothes" type="button" role="tab" aria-controls="contact" aria-selected="false">Clothes</button>
+								</li>
+							</ul>
 						</div>
 					</div>
-					<div class="tab-pane fade" id="face" role="tabpanel" aria-labelledby="face-tab">
-						<div className='row p-3'>
-							<div className='col-12'>
-								<h5 className="text-center unselectable">Skin Color</h5>
-								<AttributeSelector
-									title={skinColor[options.skinColor][1]}
-									handleIncrement={() => changeValue("skinColor", "inc")}
-									handleDecrement={() => { changeValue("skinColor", "dec") }}
-								/>
-							</div>
-							<div className='col-12'>
-								<h5 className="text-center unselectable">Eyes</h5>
-								<AttributeSelector
-									title={eyes[options.eyeType][1]}
-									handleIncrement={() => changeValue("eyeType", "inc")}
-									handleDecrement={() => { changeValue("eyeType", "dec") }}
-								/>
-							</div>
-							<div className='col-12'>
-								<h5 className="text-center unselectable">Eyebrows</h5>
-								<AttributeSelector
-									title={eyebrow[options.eyebrowType][1]}
-									handleIncrement={() => changeValue("eyebrowType", "inc")}
-									handleDecrement={() => { changeValue("eyebrowType", "dec") }}
-								/>
-							</div>
-							<div className='col-12'>
-								<h5 className="text-center unselectable">Mouth</h5>
-								<AttributeSelector
-									title={mouth[options.mouthType][1]}
-									handleIncrement={() => changeValue("mouthType", "inc")}
-									handleDecrement={() => { changeValue("mouthType", "dec") }}
-								/>
-							</div>
-						</div>
-					</div>
-					<div class="tab-pane fade" id="clothes" role="tabpanel" aria-labelledby="clothes-tab">
-						<div className='row p-3'>
-							<div className='col-12'>
-								<h5 className="text-center unselectable">Clothes</h5>
-								<AttributeSelector
-									title={clothes[options.clotheType][1]}
-									handleIncrement={() => changeValue("clotheType", "inc")}
-									handleDecrement={() => { changeValue("clotheType", "dec") }}
-								/>
-							</div>
-							<div className='col-12'>
-								<h5 className="text-center unselectable">Clothes Color</h5>
-								<AttributeSelector
-									title={clotheColor[options.clotheColor][1]}
-									handleIncrement={() => changeValue("clotheColor", "inc")}
-									handleDecrement={() => { changeValue("clotheColor", "dec") }}
-								/>
-							</div>
-							<div className='col-12'>
-								<h5 className="text-center unselectable">Accessory</h5>
-								<AttributeSelector
-									title={accessory[options.accessoriesType][1]}
-									handleIncrement={() => changeValue("accessoriesType", "inc")}
-									handleDecrement={() => { changeValue("accessoriesType", "dec") }}
-								/>
-							</div>
-						</div>
-					</div>
+					{tabs}
 				</div>
 				<div className='avatar-save-button-container'>
 					<button className='btn btn-primary'>Save</button>

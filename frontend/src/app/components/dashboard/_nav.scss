@@ -1,0 +1,54 @@
+.dashboard-navbar{
+	position: absolute;
+	width: 100%;
+	z-index: 100;
+	background-color: white;
+	height: $dashboard-navbar-height;
+	--tw-border-opacity: 1;
+    border-color: rgba(210, 210, 214, var(--tw-border-opacity));
+    border-style: solid;
+    border-width: 0;
+    border-bottom-width: 1px;
+	padding: 0 1rem;
+	display: flex;
+	justify-content: space-between;
+}
+
+.dashboard-navbar-brand {
+	display: flex;
+	height: 100%;
+	padding: .5rem 1rem;
+	justify-content: center;
+	align-items: center;
+}
+
+.dashboard-navbar-logo {
+	height: 100%;
+	margin-right: 0.5rem;
+}
+
+.dashboard-navbar-title {
+	font-size: 1.3rem;
+    font-weight: 600;
+    color: rgb(8, 40, 109) ;
+    line-height: 100%;
+}
+
+.dashboard-navbar-buttons {
+	display: flex;
+	height: 100%;
+}
+
+.dashboard-navbar-button {
+	height: 100%;
+	width: 3rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.5rem;
+	transition: all 200ms ease-in-out;
+	&:hover {
+		background-color: $lighter-gray;
+		cursor: pointer;
+	}
+}
