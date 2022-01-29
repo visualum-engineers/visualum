@@ -15,7 +15,7 @@ import {
 import { 
     useActivitySecondarySideBarData, 
     activitySecondarySidebarFooterData 
-} from "./use-Activity-Sidebar-Data"
+} from "./activitySidebarData"
 import {  
     ActivityInstructions,  
     ActivityBtns, 
@@ -287,6 +287,7 @@ const Activity = () =>{
                 <ActivityBtns 
                     prevQuestion = {questionNum !== 0} 
                     lastQuestion = {activityData.questions.length-1 === questionNum}
+                    currQuestion={questionNum}
                     onNavBtnClick = {onNavBtnClick}
                 />
             </div>

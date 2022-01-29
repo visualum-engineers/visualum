@@ -11,10 +11,8 @@ export const useActivitySecondarySideBarData = ({
     currQuestion
 }) => {
     //progress data
-    const {completed, /*inProgress, neverOpened*/} = useSelector((state) => state.activities.data.clientData.present.trackCompletion)
+    const {completed, inProgress, neverOpened} = useSelector((state) => state.activities.data.clientData.present.trackCompletion)
     const completedLength = Object.keys(completed).length
-    // const inProgressLength = Object.keys(inProgress).length
-    // const neverOpenedLength = Object.keys(neverOpened). length
 
     const sidebarData = [
         {
@@ -48,10 +46,17 @@ export const useActivitySecondarySideBarData = ({
                 btnCustomClass = "activities-sidebar-table-btns"
                 btnActiveClass = {"question-active"}
                 btnInnerCustomClass={"table-btns-inner-container"}
+                btnIndicatorClass={"activities-question-circle-indicator"}
+                progressTracking = {{
+                        completed: completed, 
+                        inProgress: inProgress, 
+                        neverOpened: neverOpened
+                    }}
                 header = {
                     <>
                     <h3 className="activity-table-of-contents-header">
-                        Activity Questions</h3>
+                        Activity Questions
+                    </h3>
                     </>
             }
             />

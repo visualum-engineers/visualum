@@ -8,14 +8,6 @@
     transform: scale(1.1);
     background-color: $lightest-gray;
 }
-@mixin activities-sidebar-table-btn-active{
-    background-color: #e4e3e3;
-    .activities-question-circle-indicator{
-        circle{
-            fill: $dark-blue;
-        }
-    }
-}
 
 $activity-navbar-outer-height: calc(3.4rem + 1vh + 0.2rem);
 $sidebar-visualum-logo-height: 6.5rem;
@@ -407,6 +399,7 @@ $activites-table-of-contents-height: calc(
     }
 }
 
+
 .activities-table-of-contents{
     position: relative;
     display: flex;
@@ -437,9 +430,6 @@ $activites-table-of-contents-height: calc(
     margin-right: 0.5rem;
     height: 100%;
     width: 10%;
-    circle{
-        fill: orange;
-    }
     line{
         stroke: black;
         fill: black;
@@ -477,8 +467,38 @@ $activites-table-of-contents-height: calc(
         }
     }
 }
+@mixin activities-sidebar-table-btn-active{
+    background-color: #e4e3e3;
+    .activities-question-circle-indicator{
+        circle{
+            fill: $dark-blue;
+        }
+    }
+}
+
 .activities-sidebar-table-btns.question-active{
     @include activities-sidebar-table-btn-active()
+}
+.activities-sidebar-table-btns.question-completed{
+    .activities-question-circle-indicator{
+        circle{
+            fill: rgb(11, 255, 72);
+        }
+    }
+}
+.activities-sidebar-table-btns.question-in-progress{
+    .activities-question-circle-indicator{
+        circle{
+            fill: orange;
+        }
+    }
+}
+.activities-sidebar-table-btns.question-never-opened{
+    .activities-question-circle-indicator{
+        circle{
+            fill: $dark-gray;
+        }
+    }
 }
 .activities-sidebar-link{
     width: 60%;
