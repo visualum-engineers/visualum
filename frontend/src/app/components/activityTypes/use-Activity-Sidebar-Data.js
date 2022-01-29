@@ -1,14 +1,21 @@
 import {ActivityTableOfContents} from './index';
 import ProgressBar from '../utilities/progressBar/ProgressBar';
 import { roundPercentToInt } from '../../helpers/calculatePercentage';
+import { useSelector } from 'react-redux';
 import GeneralBtn from '../utilities/generalBtn/GeneralBtn';
 
-export const activitySecondarySideBarData = ({
+export const useActivitySecondarySideBarData = ({
     activityData,
     onInstructionsClick,
     onTableOfContentClick, 
     currQuestion
 }) => {
+    //progress data
+    const {completed, /*inProgress, neverOpened*/} = useSelector((state) => state.activities.data.clientData.present.trackCompletion)
+    const completedLength = Object.keys(completed).length
+    // const inProgressLength = Object.keys(inProgress).length
+    // const neverOpenedLength = Object.keys(neverOpened). length
+
     const sidebarData = [
         {
             type: "custom",
@@ -22,10 +29,10 @@ export const activitySecondarySideBarData = ({
                     textContent = {"Instructions"} 
                 />
                 <ProgressBar 
-                    percentage = {roundPercentToInt(currQuestion, (activityData.questions.length-1)) + "%"}
+                    percentage = {roundPercentToInt(completedLength, (activityData.questions.length-1)) + "%"}
                     containerClassName={"activity-progress-bar-container"}
                     ariaLabel = "activity-progress-bar"
-                    additionalContent={`${currQuestion+1}/${activityData.questions.length} completed`}
+                    additionalContent={`${completedLength}/${activityData.questions.length} completed`}
                     showContent={true}
                 />
                 <hr style={{width: "70%", marginTop:"0"}}/>

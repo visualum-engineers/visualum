@@ -9,6 +9,7 @@ const ActivityTableOfContents = ({
     btnActiveClass,
     header
 }) =>{
+    
     return(
         <div className={customClass}>
             <div style={{marignTop: "auto", width:"100%"}}>

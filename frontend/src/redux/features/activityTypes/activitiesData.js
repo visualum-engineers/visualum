@@ -1,41 +1,44 @@
+import assignmentData from "../../../app/helpers/sampleAssignmentData";
+import undoable, {excludeAction} from 'redux-undo';
 import { 
     createSlice, 
     combineReducers
     //createAsyncThunk,
 } from '@reduxjs/toolkit'
-import assignmentData from "../../../app/helpers/sampleAssignmentData";
-import {throttle} from "lodash"
-import undoable, {excludeAction} from 'redux-undo';
+import { 
+    getDataFromLocalStorage, 
+    throttledSaveToStorage,
+    saveToLocalStorage 
+} from './activitySaveToLocal';
+import {
+    controlledInputsValidation, 
+    sortActivityValidation,
+    matchActivityValidation, 
+    shortAnswerValidation, 
+    labelPicValidation
+} from "./activityValidationFunc/index"
 
 const activityData = assignmentData
+const initialClientAnswerData = getDataFromLocalStorage(activityData)
 
-const saveToLocalStorage = ({
-    state,
-    payload,
-    newState
-}) =>{
-    try{
-        let storedState
-        if(payload.type === "singleQuestionUpdate"){
-            storedState = {...state}
-            storedState.questions[payload.questionNum] = newState
-        } else storedState = {...state, ...newState}
-        const serizalizedState = JSON.stringify(storedState);
-        localStorage.setItem(storedState.activityID, serizalizedState)
-    } catch{
+const loadInitialTracking = (data) =>{
+    if(!data.trackCompletion) {
+        const initialTrackingData =  {completed: {}, inProgress: {}, neverOpened: {}}
+        for(let i in data.questions) initialTrackingData.neverOpened[i] = true
+        
+        //this only happens upon first load, so the first question is always in progress
+        delete initialTrackingData.neverOpened[0]
+        initialTrackingData.inProgress[0] = true
+        return initialTrackingData 
     }
+    const trackCompletion = {
+        completed: {...data.trackCompletion.completed},
+        inProgress: {...data.trackCompletion.inProgress},
+        neverOpened: {...data.trackCompletion.neverOpened},
+    }
+    return trackCompletion
 }
-const throttledSaveToStorage = throttle((newState) => saveToLocalStorage(newState), 2000)
 
-const getDataFromLocalStorage = (data) =>{
-    try{
-        const newData = JSON.parse(localStorage.getItem(data.activityID))
-        return newData
-    } catch{
-            console.log("activity not previously stored")
-        return
-    }
-}
 const singleQuestionUpdate = (state, action) =>{
     const questionData = state.clientAnswerData.questions[action.payload.questionNum]
     const newQuestionData = {
@@ -45,20 +48,23 @@ const singleQuestionUpdate = (state, action) =>{
     state.clientAnswerData.questions[action.payload.questionNum] = newQuestionData
     return newQuestionData
 }
-//seperate because only client Answer Data will be undoable. 
-//no need to store the same activity over and over again.
+//activity slices.
 const activitiesData = createSlice({
     name: "activitiesData",
     initialState:{
         activityData: activityData,
-    }
+    },
 })
+//seperate because only client Answer Data will be undoable. 
 const clientAnswerData = createSlice({
     name: "clientAnswerActivitiesData",
     initialState: {
-        clientAnswerData: getDataFromLocalStorage(activityData) ? 
-                          getDataFromLocalStorage(activityData)
+        clientAnswerData: initialClientAnswerData ? 
+                          initialClientAnswerData
                           :activityData,
+        trackCompletion: initialClientAnswerData ? 
+                         loadInitialTracking(initialClientAnswerData) 
+                        : loadInitialTracking(activityData)
     },
     reducers:{
         //this action is used to update data for the use
@@ -95,7 +101,7 @@ const clientAnswerData = createSlice({
                 newState: newState
             })
         },
-        updateActivityTimer: (state, action) =>{
+        updateActivityTimer: (state) =>{
             if(!state.clientAnswerData.activityTimer) return
             //if no timer do update this action
             const startTime = new Date()
@@ -116,6 +122,53 @@ const clientAnswerData = createSlice({
                 payload: "updateTime",  
                 newState: newState
             })
+        },
+        updateTrackCompletion: (state, action) =>{
+            const question = action.payload.question
+            const questionNum = action.payload.questionNum
+            const questionType = action.payload.question.type
+            let validation
+            const updateTrackCompletionKeys = (validation, trackCompletion) =>{
+                if(!validation) {
+                    trackCompletion.completed[questionNum] = true; 
+                    delete trackCompletion.inProgress[questionNum]
+                } else {
+                    trackCompletion.inProgress[questionNum] = validation
+                    delete trackCompletion.completed[questionNum] 
+                } 
+                delete trackCompletion.neverOpened[questionNum]
+            }
+            switch(questionType){
+                case "sort":
+                    validation = sortActivityValidation(question)
+                    updateTrackCompletionKeys(validation, state.trackCompletion)
+                    break;
+                case "radio":
+                    validation = controlledInputsValidation(question)
+                    updateTrackCompletionKeys(validation, state.trackCompletion)
+        
+                    break;
+                case "checkbox":
+                    validation = controlledInputsValidation(question)
+                    updateTrackCompletionKeys(validation, state.trackCompletion)
+        
+                    break;
+                case "shortAnswer":
+                    validation = shortAnswerValidation(question)
+                    updateTrackCompletionKeys(validation, state.trackCompletion)
+                    break;
+                case "labelPictures":
+                    validation = labelPicValidation(question)
+                    updateTrackCompletionKeys(validation, state.trackCompletion)
+                    break;
+                case "matching":
+                    validation = matchActivityValidation(question)
+                    updateTrackCompletionKeys(validation, state.trackCompletion)
+                    break;
+                default:
+                    console.log(questionType)
+                    break;
+            }
         }
     },
 })
@@ -123,7 +176,8 @@ export const {
     updateActivityData,
     updateActivityDragActive,
     updateActivityDataLayout,
-    updateActivityTimer
+    updateActivityTimer,
+    updateTrackCompletion,
 } = clientAnswerData.actions
 
 const undoableData = undoable(clientAnswerData.reducer, {
@@ -132,7 +186,8 @@ const undoableData = undoable(clientAnswerData.reducer, {
     filter: excludeAction([
         "clientAnswerActivitiesData/updateActivityDragActive",
         "clientAnswerActivitiesData/updateActivityDataLayout",
-        "clientAnswerActivitiesData/updateActivityTimer"
+        "clientAnswerActivitiesData/updateActivityTimer",
+        "clientAnswerActivitiesData/updateTrackCompletion"
     ]),
     limit: 60,
 })

@@ -297,6 +297,10 @@ $activites-table-of-contents-height: calc(
 }
 
 .activity-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     @include no-space;
     @include transition(all 0.3s ease-out);
     background-color: $lighter-gray;
@@ -550,6 +554,9 @@ $activites-table-of-contents-height: calc(
     }
 }
 .activity-header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     margin-top: 0.2rem;
     margin-bottom: 1vh;
@@ -557,6 +564,8 @@ $activites-table-of-contents-height: calc(
 }
 
 .activity-type-container{
+    display: flex;
+    flex-direction: column;
     position: relative;
     margin-top: 1.5vh;
     text-align: center;

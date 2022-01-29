@@ -13,9 +13,9 @@ import {
     resetPopUpOff,
 } from '../../../redux/features/activityTypes/activitiesSettings'
 import { 
-    activitySecondarySideBarData, 
+    useActivitySecondarySideBarData, 
     activitySecondarySidebarFooterData 
-} from "./ActivitySidebarData"
+} from "./use-Activity-Sidebar-Data"
 import {  
     ActivityInstructions,  
     ActivityBtns, 
@@ -173,7 +173,7 @@ const Activity = () =>{
         }
     }
     
-    const sideBarData = activitySecondarySideBarData({
+    const sideBarData = useActivitySecondarySideBarData({
         activityData: activityData,
         onInstructionsClick: moreInfoOnClick,
         onTableOfContentClick: onNavBtnClick,
@@ -218,7 +218,7 @@ const Activity = () =>{
             exitSideBarBtn = {false}
         />
         <div 
-            className = {`${sidebarToggle && mediumWindowWidth ? "secondary-sidebar-open ": ""}activity-body d-flex flex-column align-items-center justify-content-center`}>
+            className = {`${sidebarToggle && mediumWindowWidth ? "secondary-sidebar-open ": ""}activity-body`}>
             {moreInfoBtn && 
                 <ActivityInstructions 
                     activityType = {question.type}
@@ -235,10 +235,10 @@ const Activity = () =>{
                 />
             :null }
             <div 
-                className = "activity-type-container col-12 col-md-11 d-flex flex-column" 
+                className = "activity-type-container col-12 col-md-11" 
                 style={inProp ? {overflow: "hidden"}: null}
             >
-                <div className="activity-header d-flex align-items-center justify-content-center">
+                <div className="activity-header ">
                     {timerData && !smallWindowWidth && <div className={`activity-timer`}>
                             <span>TIME:</span>
                             <Timer
