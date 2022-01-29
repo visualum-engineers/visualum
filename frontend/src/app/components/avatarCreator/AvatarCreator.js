@@ -197,38 +197,46 @@ export default function AvatarCreator(props) {
 	return (
 		<PopUpBackground onClick={props.onCancel}>
 			<div className='avatar-creator'>
-				<div className='avatar-creator-top-section d-flex'>
-					<div className='d-flex flex-column'>
-						<Avatar
-							style={{ width: '150px', height: '150px' }}
-							avatarStyle='Circle'
-							topType={hairstyle[options.topType][0]}
-							accessoriesType={accessory[options.accessoriesType][0]}
-							hairColor={hairColor[options.hairColor][0]}
-							facialHairType={facialHair[options.facialHairType][0]}
-							facialHairColor={facialHairColor[options.facialHairColor][0]}
-							clotheType={clothes[options.clotheType][0]}
-							clotheColor={clotheColor[options.clotheColor][0]}
-							eyeType={eyes[options.eyeType][0]}
-							eyebrowType={eyebrow[options.eyebrowType][0]}
-							mouthType={mouth[options.mouthType][0]}
-							skinColor={skinColor[options.skinColor][0]}
-						/>
-						<div className='d-flex flex-column align-items-center'>
-							<ul class="nav flex-column align-items-center nav-pills mt-3" id="myTab" role="tablist">
-								<li class="nav-item" role="presentation">
-									<button class="nav-link active unselectable" id="hair-tab" data-bs-toggle="tab" data-bs-target="#hair" type="button" role="tab" aria-controls="home" aria-selected="true">Hair</button>
-								</li>
-								<li class="nav-item" role="presentation">
-									<button class="nav-link unselectable" id="face-tab" data-bs-toggle="tab" data-bs-target="#face" type="button" role="tab" aria-controls="profile" aria-selected="false">Face</button>
-								</li>
-								<li class="nav-item" role="presentation">
-									<button class="nav-link unselectable" id="clothes-tab" data-bs-toggle="tab" data-bs-target="#clothes" type="button" role="tab" aria-controls="contact" aria-selected="false">Clothes</button>
-								</li>
-							</ul>
+				<div className='avatar-creator-top-section'>
+					<div className='row'>
+						<div className='col-md-3 col-12'>
+							<div className='d-flex flex-column justify-content-center align-items-center'>
+								<div className='avatar-creator-avatar-container'>
+									<Avatar
+										style={{ width: '100%', height: '100%' }}
+										avatarStyle='Circle'
+										topType={hairstyle[options.topType][0]}
+										accessoriesType={accessory[options.accessoriesType][0]}
+										hairColor={hairColor[options.hairColor][0]}
+										facialHairType={facialHair[options.facialHairType][0]}
+										facialHairColor={facialHairColor[options.facialHairColor][0]}
+										clotheType={clothes[options.clotheType][0]}
+										clotheColor={clotheColor[options.clotheColor][0]}
+										eyeType={eyes[options.eyeType][0]}
+										eyebrowType={eyebrow[options.eyebrowType][0]}
+										mouthType={mouth[options.mouthType][0]}
+										skinColor={skinColor[options.skinColor][0]}
+									/>
+								</div>
+								<div className='d-flex flex-column align-items-center'>
+									<ul class="nav flex-column align-items-center nav-pills mt-3 avatar-tabs" id="myTab" role="tablist">
+										<li class="nav-item" role="presentation">
+											<button class="nav-link active unselectable" id="hair-tab" data-bs-toggle="tab" data-bs-target="#hair" type="button" role="tab" aria-controls="home" aria-selected="true">Hair</button>
+										</li>
+										<li class="nav-item" role="presentation">
+											<button class="nav-link unselectable" id="face-tab" data-bs-toggle="tab" data-bs-target="#face" type="button" role="tab" aria-controls="profile" aria-selected="false">Face</button>
+										</li>
+										<li class="nav-item" role="presentation">
+											<button class="nav-link unselectable" id="clothes-tab" data-bs-toggle="tab" data-bs-target="#clothes" type="button" role="tab" aria-controls="contact" aria-selected="false">Clothes</button>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div className='col-md-9 col-12'>
+							{tabs}
 						</div>
 					</div>
-					{tabs}
 				</div>
 				<div className='avatar-save-button-container'>
 					<button className='btn btn-primary'>Save</button>
