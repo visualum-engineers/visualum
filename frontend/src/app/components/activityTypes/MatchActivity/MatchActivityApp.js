@@ -57,7 +57,15 @@ const MatchActivityApp = ({
                     questionNum: questionNum,
                     data: transformData(data, columns.length)
             }))
-        }     
+        }
+         //if we undo and end up resetting the layout to before data was initially transformed
+        if(!data.itemBank){
+            dispatch(
+                updateActivityDataLayout({
+                    questionNum: questionNum,
+                    data: transformData(data, columns.length)
+            }))
+        }    
     }, [dispatch, mediumWindowWidth, columns.length, questionNum, data])
 
     //reset all state values to default
@@ -225,7 +233,7 @@ const MatchActivityApp = ({
     }
 
     //ensure redux state is transformed first
-    if(!onMount.current) return <div></div>
+    if(!onMount.current && !data.itemBank) return <div></div>
     return(
         <>
 

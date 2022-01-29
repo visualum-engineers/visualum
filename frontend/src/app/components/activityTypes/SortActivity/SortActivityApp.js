@@ -133,6 +133,15 @@ const SortActivityApp = ({
                     data: transformData(data, wordBankColumns.length)
             }))
         } 
+
+        //if we undo and end up resetting the layout to before data was initially transformed
+        if(!data.itemBank){
+            dispatch(
+                updateActivityDataLayout({
+                    questionNum: questionNum,
+                    data: transformData(data, wordBankColumns.length)
+            }))
+        }
     }, [dispatch, mediumWindowWidth, smallWindowWidth, wordBankColumns.length, questionNum, data])
 
     //cleanup collision data when component unmounts
@@ -329,7 +338,7 @@ const SortActivityApp = ({
         return intersectingContainer
     }
     //ensure redux state is transformed first
-    if(!onMount.current) return <div></div>
+    if(!onMount.current || !data.itemBank) return <div></div>
     return (
     <>  
         <div className={`sort-activity-container d-flex ${mediumWindowWidth ? "full-size":"portrait-size flex-column align-items-center"}`}>

@@ -34,7 +34,7 @@ const LabelPicturesApp = ({
     //we useRef to control only running 
     //on mount
     useEffect(() => { 
-        if(!onMount.current){
+        if(!onMount.current || !data.categories){
             dispatch(updateActivityDataLayout({
                 type: "singleQuestionUpdate",
                 questionNum: questionNum,
@@ -104,7 +104,7 @@ const LabelPicturesApp = ({
         })
     }
     //ensure redux state is transformed first
-    if(!onMount.current) return <div></div>
+    if(!onMount.current || !data.categories) return <div></div>
     return(
         <>
             <div className={`label-pic-activity-container d-flex${!mediumWindowWidth?" flex-column portrait-size":" full-size"}`}>
