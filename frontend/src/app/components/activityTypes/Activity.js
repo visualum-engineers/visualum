@@ -15,7 +15,7 @@ import {
 import { 
     useActivitySecondarySideBarData, 
     activitySecondarySidebarFooterData 
-} from "./ActivitySidebarData"
+} from "./ActivitySidebarData1"
 import {  
     ActivityInstructions,  
     ActivityBtns, 
