@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import { unstable_batchedUpdates } from "react-dom"
 import {CSSTransition} from "react-transition-group"
 import { useSelector, useDispatch } from 'react-redux'
-import {updateActivityData, updateActivityTimer} from "../../../redux/features/activityTypes/activitiesData"
+import {updateActivityData, updateActivityTimer} from "../../../redux/features/activityTypes/ActivitiesData"
 import convertTimeDiff from "../../helpers/convertTimeDiff";
 import {
     disableSettings, 
@@ -15,7 +15,7 @@ import {
 import { 
     useActivitySecondarySideBarData, 
     activitySecondarySidebarFooterData 
-} from "./activitySidebarData"
+} from "./ActivitySidebarData"
 import {  
     ActivityInstructions,  
     ActivityBtns, 
