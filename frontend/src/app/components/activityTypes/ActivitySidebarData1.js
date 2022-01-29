@@ -11,9 +11,8 @@ export const useActivitySecondarySideBarData = ({
     currQuestion
 }) => {
     //progress data
-    const {completed, inProgress, neverOpened} = useSelector((state) => state.activities.data.clientData.present.trackCompletion)
+    const {completed, inProgress, neverOpened} = useSelector((state) => state.activities.data.clientData.present.clientAnswerData.trackCompletion)
     const completedLength = Object.keys(completed).length
-
     const sidebarData = [
         {
             type: "custom",
