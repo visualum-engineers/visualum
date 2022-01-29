@@ -2,7 +2,7 @@ import React from 'react'
 import DashboardSidebar from './DashboardSidebar';
 import DashboardNav from './DashboardNav';
 import { useNavigate, Outlet } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import useWindowWidth from '../../hooks/use-window-width'
 import sidebarValues from './sidebarValues';
 const Logo = "./images/VisualumLogo.png"
@@ -10,7 +10,7 @@ const Logo = "./images/VisualumLogo.png"
 
 export default function Dashboard(props) {
     let navigate = useNavigate();
-    const state = useSelector((state) => state.dashboard)
+    // const state = useSelector((state) => state.dashboard)
 
     function handleClick() {
         navigate("/");
