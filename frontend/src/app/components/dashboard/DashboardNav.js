@@ -17,7 +17,7 @@ export default function DashboardNav() {
 					<FontAwesomeIcon icon={faBell} />
 				</div>
 				<div className='dashboard-navbar-button'>
-					<Avatar style={{ width: '80%' }}
+					<Avatar style={{ width: '80%', height: '100%' }}
 						avatarStyle='Circle' />
 				</div>
 			</div>

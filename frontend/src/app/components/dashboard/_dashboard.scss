@@ -1,4 +1,4 @@
-
+$dashboard-navbar-height: 3.4rem;
 $nav-color: #041F54;
 $highlight-color: #FF8000;
 
@@ -82,7 +82,7 @@ $highlight-color: #FF8000;
     flex-direction: column;
     flex: 1;
     height: 100%;
-    padding: .5rem 1.7rem;
+    padding: .7rem 1.7rem;
     overflow-y: scroll;
     @media (max-width: 992px) {
         padding-bottom: 5rem;
@@ -95,7 +95,7 @@ $highlight-color: #FF8000;
 }
 
 .main-content-full {
-    padding-top: 4rem;
+    margin-top: $dashboard-navbar-height;
 }
 
 .card-container {
