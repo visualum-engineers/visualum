@@ -3,7 +3,7 @@ export const links = {
 	teacher: [
 		{
 			name: "Dashboard",
-			value: "dashboard/home",
+			value: "dashboard/overview",
 			icon: faColumns
 		},
 		{
@@ -25,7 +25,7 @@ export const links = {
 	student: [
 		{
 			name: "Dashboard",
-			value: "dashboard/home",
+			value: "dashboard/overview",
 			icon: faColumns
 		},
 		{

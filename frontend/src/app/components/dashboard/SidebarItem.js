@@ -15,7 +15,7 @@ export default function SidebarItem(props) {
         navigate(`${props.value}`);
     }
 
-    const toHighlight = match || ((location.pathname === '/dashboard' || location.pathname === '/dashboard/') && (props.value) === 'home')
+    const toHighlight = match || ((location.pathname === '/dashboard' || location.pathname === '/dashboard/') && (props.value) === 'overview')
 
     return (
         <div className="sidebar-item">
