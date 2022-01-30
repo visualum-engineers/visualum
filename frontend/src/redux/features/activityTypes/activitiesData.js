@@ -191,7 +191,9 @@ const undoableData = undoable(clientAnswerData.reducer, {
         "clientAnswerActivitiesData/updateActivityDragActive",
         "clientAnswerActivitiesData/updateActivityDataLayout",
         "clientAnswerActivitiesData/updateActivityTimer",
-        "clientAnswerActivitiesData/updateTrackCompletion"
+        "clientAnswerActivitiesData/updateTrackCompletion",
+        "activitiesSettingsSlice/enableSettings",
+        "activitiesSettingsSlice/disableSettings"
     ]),
     limit: 60,
 })
