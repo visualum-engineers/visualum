@@ -40,7 +40,7 @@ $activites-table-of-contents-height: calc(
 }
 .activity-header{
     position: relative;
-    margin-top: 0.2rem;
+    margin-top: 1.5rem;
     margin-bottom: 0.2rem;
     height: 3.4rem;
 }
@@ -269,60 +269,6 @@ $activites-table-of-contents-height: calc(
     }
     
 }
-
-.activity-profile-avatar-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 0.8rem;
-    position: relative;
-    width: 2.5rem;
-    height: 2.5rem;
-    background-color: transparent;
-    overflow: hidden;
-    @include border-radius(20rem);
-    img{
-        width: 100%;
-        height: 100%;
-        object-position: center;
-    }
-}
-
-.activity-body{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    @include no-space;
-    @include transition(all 0.3s ease-out);
-    background-color: $lighter-gray;
-    height: 100%;
-    position: relative;
-    min-height: calc(max(100vh, 40rem));
-}
-
-.activity-body.secondary-sidebar-open{
-    margin-left: calc(min(16rem, 300px)); 
-}
-
-.activities-sidebar{
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: $lightest-gray;
-    z-index: 3;
-    .secondary-sidebar-header{
-        margin-top: 1rem;
-    }
-    .secondary-sidebar-link-container{
-        margin-top: $activity-navbar-outer-height;
-        flex-grow: 1;
-        align-items: center;
-    }
-    .activities-table-of-contents{
-        align-self: start;
-    }
-}
 .activity-timer{
     position: relative;
     display: flex;
@@ -360,7 +306,70 @@ $activites-table-of-contents-height: calc(
         color: $secondary-font-color;
     }
 }
+.activity-profile-avatar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.8rem;
+    position: relative;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: transparent;
+    overflow: hidden;
+    @include border-radius(20rem);
+    img{
+        width: 100%;
+        height: 100%;
+        object-position: center;
+    }
+}
 
+
+.activity-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    @include no-space;
+    @include transition(all 0.3s ease-out);
+    background-color: $lighter-gray;
+    height: 100%;
+    position: relative;
+    min-height: calc(max(100vh, 40rem));
+}
+
+.activity-body.secondary-sidebar-open{
+    margin-left: calc(min(16rem, 300px)); 
+}
+
+.activities-sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: $lightest-gray;
+    z-index: 3;
+    .secondary-sidebar-header{
+        margin-top: 1rem;
+    }
+    .secondary-sidebar-link-container{
+        margin-top: 3.6rem;
+        flex-grow: 1;
+        align-items: center;
+    }
+    .activities-table-of-contents{
+        align-self: start;
+    }
+}
+.activities-sidebar-top-half{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    flex-grow: 1;
+    // height: 40%;
+    // min-height: auto;
+}
 .activities-sidebar-activity-name{
     width: 65%;
     text-align: center;

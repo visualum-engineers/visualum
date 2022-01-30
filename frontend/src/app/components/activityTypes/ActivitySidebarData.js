@@ -16,9 +16,10 @@ export const useActivitySecondarySideBarData = ({
     const sidebarData = [
         {
             type: "custom",
-            content: <div className='flex-grow-1 d-flex flex-column align-items-center justify-content-around w-100'>
+            content: <div 
+                className='activities-sidebar-top-half'>
                 <div className="activities-sidebar-activity-name">
-                    {activityData.activityName}
+                    {activityData.activityName} gbygbyu bgy bgybb hnuiu jioji ijoj 
                 </div>
                 <GeneralBtn 
                     customClassName={"activities-sidebar-btn"}
@@ -32,7 +33,7 @@ export const useActivitySecondarySideBarData = ({
                     additionalContent={`${completedLength}/${activityData.questions.length} completed`}
                     showContent={true}
                 />
-                <hr style={{width: "70%", marginTop:"0"}}/>
+                <hr style={{width: "70%", margin:"0"}}/>
             </div>
         },
         {
