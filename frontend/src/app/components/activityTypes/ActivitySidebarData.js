@@ -19,7 +19,7 @@ export const useActivitySecondarySideBarData = ({
             content: <div 
                 className='activities-sidebar-top-half'>
                 <div className="activities-sidebar-activity-name">
-                    {activityData.activityName} gbygbyu bgy bgybb hnuiu jioji ijoj 
+                    {activityData.activityName} 
                 </div>
                 <GeneralBtn 
                     customClassName={"activities-sidebar-btn"}
