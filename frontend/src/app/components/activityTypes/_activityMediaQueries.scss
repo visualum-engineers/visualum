@@ -71,7 +71,12 @@
     }
     .activities-sidebar-table-btns{
         &:hover{
-            @include activities-sidebar-table-btn-active()
+            background-color: $light-gray;
+            .activities-question-circle-indicator{
+                circle{
+                    fill: $dark-blue;
+                }
+            }
         }
     }
     .activity-walkthrough-instructions-header{

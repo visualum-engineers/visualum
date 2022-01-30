@@ -15,7 +15,7 @@ import {
 import { 
     useActivitySecondarySideBarData, 
     activitySecondarySidebarFooterData 
-} from "./ActivitySidebarData1"
+} from "./ActivitySidebarData"
 import {  
     ActivityInstructions,  
     ActivityBtns, 
@@ -39,7 +39,6 @@ const Activity = () =>{
     //redux states
     const activityData = useSelector((state) => state.activities.data.originalData.activityData)
     const resetPopUp = useSelector((state) => state.activities.settings.resetPopUp)
-
     const dispatch = useDispatch()
 
     //on mount, we issue a time stamp, 
