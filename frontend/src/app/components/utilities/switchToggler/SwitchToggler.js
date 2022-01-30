@@ -4,7 +4,8 @@ const SwitchToggler = ({
     switchOnAriaLabel,
     switchOffAriaLabel,
     switchId,
-    switchActionLabel
+    switchActionLabel,
+    disabled
 }) =>{
     return(
         <div className="switch-toggler-container form-check form-switch">
@@ -19,6 +20,7 @@ const SwitchToggler = ({
                 id={switchId} 
                 value={switchOn}
                 checked={switchOn}
+                disabled={disabled}
                 readOnly
             />
         </div>

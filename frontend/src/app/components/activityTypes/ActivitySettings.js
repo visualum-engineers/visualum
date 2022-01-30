@@ -6,7 +6,8 @@ import { unstable_batchedUpdates } from "react-dom"
 import SwitchToggler from "../utilities/switchToggler/SwitchToggler"
 
 const ActivitySettings = ({
-    onExitPopUp, 
+    onExitPopUp,
+    smallWindowWidth 
 }) =>{
     const dispatch = useDispatch()
     const disableDnD = useSelector((state) => state.activities.settings.dndEnabled) 
@@ -40,6 +41,11 @@ const ActivitySettings = ({
             Object.keys(settingsActive).map((value)=>{
                 if(settingsActive[value]) enabledSettings.push(value)
                 if(!settingsActive[value]) disabledSettings.push(value)
+                //onyl if we arent on mobile, and we're dealing with dnd setting
+                if(value ==="dndEnabled" && smallWindowWidth) {
+                    if(settingsActive[value]) enabledSettings.push("userSetDnDEnabled")
+                    if(!settingsActive[value]) disabledSettings.push("userSetDnDEnabled")
+                }
                 return null
             })
             const checkTimeInterval = timeIntervalDuration !== timeDuration 
@@ -187,6 +193,7 @@ const ActivitySettings = ({
                                         switchOnAriaLabel={"disable-dragging"}
                                         switchOffAriaLabel={"enable-dragging"}
                                         switchOn = {!settingsActive.dndEnabled}
+                                        disabled={!smallWindowWidth}
                                     />
                                 </div>
                             </div>

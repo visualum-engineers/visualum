@@ -141,7 +141,7 @@ const ActivityNavbar = ({
                             onClick={() => setEditDropdown((state) => !state)}
                         >
                             <GeneralBtn 
-                                customClassName = {`d-flex align-items-center${pastLength > 0 ? " edit-btn-disabled":""}`}
+                                customClassName = {`d-flex align-items-center${!(pastLength > 0) ? " activity-edit-btn-disabled":""}`}
                                 customIcon = {<FontAwesomeIcon icon={faUndoAlt} />}
                                 textContent = {<><div>Undo</div><div className="key-shortcut">Ctrl+Z</div></>}
                                 onClick={onUndoClick}
@@ -150,7 +150,7 @@ const ActivityNavbar = ({
                                 disabled = {!(pastLength > 0)}
                             />
                             <GeneralBtn 
-                                customClassName = {`d-flex align-items-center${futureLength > 0 ? " edit-btn-disabled":""}`}
+                                customClassName = {`d-flex align-items-center${!(futureLength > 0) ? " activity-edit-btn-disabled":""}`}
                                 customIcon = {<FontAwesomeIcon icon={faRedoAlt} />}
                                 textContent = {<><div>Redo</div><div className="key-shortcut">Ctrl+Y</div></>}
                                 onClick={onRedoClick}
@@ -180,6 +180,7 @@ const ActivityNavbar = ({
                     {settingsOpen && 
                         <ActivitySettings 
                             onExitPopUp={() => setSettingsOpen(false)}
+                            smallWindowWidth={smallWindowWidth}
                         />
                     }
                 </div>

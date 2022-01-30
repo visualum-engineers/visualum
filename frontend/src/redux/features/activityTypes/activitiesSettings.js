@@ -3,6 +3,7 @@ const activitiesSettingsSlice = createSlice({
     name: "activitiesSettingsSlice",
     initialState: {
         dndEnabled: true,
+        userSetDnDEnabled: true,
         timeRemindersEnabled: true,
         timeIntervalDuration: 20*60*1000,
         autoPopUpsEnabled: true,

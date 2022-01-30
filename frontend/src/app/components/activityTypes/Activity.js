@@ -11,6 +11,7 @@ import {
     disableSettings, 
     resetPopUpOn, 
     resetPopUpOff,
+    enableSettings,
 } from '../../../redux/features/activityTypes/activitiesSettings'
 import { 
     useActivitySecondarySideBarData, 
@@ -39,6 +40,7 @@ const Activity = () =>{
     //redux states
     const activityData = useSelector((state) => state.activities.data.originalData.activityData)
     const resetPopUp = useSelector((state) => state.activities.settings.resetPopUp)
+    const userSetDnDEnabled = useSelector((state) => state.activities.settings.userSetDnDEnabled)
     const dispatch = useDispatch()
 
     //on mount, we issue a time stamp, 
@@ -93,17 +95,12 @@ const Activity = () =>{
     useEffect(()=>{
         let isMounted = true
         if(isMounted) {
-            //const questionType = question.type
-            //&& (questionType in DnDActivities)
-            //question.type
             const updateDnD = !smallWindowWidth
-            if(updateDnD) {
-                dispatch(disableSettings("dndEnabled"))
-                setMoreInfoBtn(true)
-            }
+            if (updateDnD) dispatch(disableSettings("dndEnabled"))
+            else if (userSetDnDEnabled) dispatch(enableSettings("dndEnabled"))
         }
         return () => {isMounted = false}
-    }, [dispatch, smallWindowWidth])
+    }, [dispatch, smallWindowWidth, userSetDnDEnabled])
 
     const onNavBtnClick = (e) =>{
         //means it was just clicked. 

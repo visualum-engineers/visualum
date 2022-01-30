@@ -139,6 +139,9 @@ $activites-table-of-contents-height: calc(
             width: 100%;
         }
     }
+    .activity-edit-btn-disabled{
+        color: $dark-gray;
+    }
     //triangle pointer
     &::before{
         position: absolute;
