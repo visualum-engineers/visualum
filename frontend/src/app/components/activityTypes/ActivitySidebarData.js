@@ -3,6 +3,7 @@ import ProgressBar from '../utilities/progressBar/ProgressBar';
 import { roundPercentToInt } from '../../helpers/calculatePercentage';
 import { useSelector } from 'react-redux';
 import GeneralBtn from '../utilities/generalBtn/GeneralBtn';
+import ActivityIndicatorKey from "./ActivityIndicatorKey"
 
 export const useActivitySecondarySideBarData = ({
     activityData,
@@ -19,7 +20,8 @@ export const useActivitySecondarySideBarData = ({
             content: <div 
                 className='activities-sidebar-top-half'>
                 <div className="activities-sidebar-activity-name">
-                    {activityData.activityName} 
+                    {activityData.activityName}
+
                 </div>
                 <GeneralBtn 
                     customClassName={"activities-sidebar-btn"}
@@ -34,6 +36,9 @@ export const useActivitySecondarySideBarData = ({
                     showContent={true}
                 />
                 <hr style={{width: "70%", margin:"0"}}/>
+                <ActivityIndicatorKey 
+                    btnIndicatorClass = {"activities-question-circle-indicator"}
+                />
             </div>
         },
         {

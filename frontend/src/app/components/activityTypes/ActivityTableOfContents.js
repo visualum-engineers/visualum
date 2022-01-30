@@ -1,7 +1,7 @@
 import spaceOutCamelCase from "../../helpers/spaceOutCamelCase"
 import { useSelector, useDispatch } from "react-redux"
 import { updateTrackCompletion } from "../../../redux/features/activityTypes/activitiesData"
-import ActivityIndicatorKey from "./ActivityIndicatorKey"
+//import ActivityIndicatorKey from "./ActivityIndicatorKey"
 const ActivityTableOfContents = ({
     data,
     header,
@@ -28,9 +28,6 @@ const ActivityTableOfContents = ({
         <div className={customClass}>
             <div style={{marignTop: "auto", width:"100%"}}>
             {header}
-            <ActivityIndicatorKey 
-                btnIndicatorClass = {btnIndicatorClass}
-            />
             {data.questions.map((question, index) => {
                 const first = index === 0
                 const last = index === data.questions.length-1

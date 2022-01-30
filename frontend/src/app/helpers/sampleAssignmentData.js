@@ -5,7 +5,7 @@ const sortActivityChoices = (numChoices) =>{
 }
 const assignmentData = {
     activityID: "unique",
-    activityName: "7C Week2 HW Assignment",
+    activityName: "7C Week 2 HW Assignment  uyifsdh sdf odfpofkofeifeee",
     activityTimer: {hours: 1, minutes: 1, seconds: 1},
     questions: [
         //matching

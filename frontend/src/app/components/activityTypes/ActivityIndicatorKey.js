@@ -9,7 +9,9 @@ const ActivityIndicatorKey = ({
     ]
     return(
         <div className="activity-indicator-key-container">
+            
             <div className="activity-indicator-key">
+                <span>Key: </span> 
             {indicators.map((indicator) =>{
                 return(
                     <div

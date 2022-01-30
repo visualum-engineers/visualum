@@ -355,7 +355,7 @@ $activites-table-of-contents-height: calc(
         margin-top: 1rem;
     }
     .secondary-sidebar-link-container{
-        margin-top: 3.6rem;
+        margin-top: 3.4rem;
         flex-grow: 1;
         align-items: center;
     }
@@ -367,11 +367,10 @@ $activites-table-of-contents-height: calc(
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    //justify-content: space-evenly;
+    justify-content: space-around;
     width: 100%;
     flex-grow: 1;
-    // height: 40%;
-    // min-height: auto;
 }
 .activities-sidebar-activity-name{
     width: 65%;
@@ -422,7 +421,7 @@ $activites-table-of-contents-height: calc(
     overflow-x: hidden;
     width: 100%;
     height: $activites-table-of-contents-height;
-    min-height: calc(max(35vh, 6.5rem));
+    min-height: calc(max(45vh, 6.5rem));
     @include activity-scrollbar-styles();
     .activity-table-of-contents-header{
         font-size: 1.2rem;
@@ -508,24 +507,29 @@ $activites-table-of-contents-height: calc(
 }
 .activity-indicator-key-container{
     position: sticky;
-    top: 2rem;
+    //top: 2rem;
+    top: 0;
     background-color: #fafafa;
     display: flex;
     justify-content: center;
     font-size: 0.6rem;
     color: $darkest-gray;
     padding-top: 3rem;
-    padding-bottom: 0.5rem;
+    //padding-bottom: 0.5rem;
     .activity-indicator-key{
         display: flex;
         width: 70%;
-        margin-left: 4.6rem;
+        margin-left: 3rem;
+        span{
+            font-size: 0.7rem;
+            margin-right: 0.4rem;
+        }
     }
 
     .indicator-key-value{
         position: relative;
         width: 5.5%;
-        margin-right: 0.8rem;
+        margin-right: 0.6rem;
         label{
             position: absolute;
             display: flex;
@@ -535,8 +539,8 @@ $activites-table-of-contents-height: calc(
             margin: 0;
             width: 3.4rem;
             top: -1.9rem;
-            left: 0rem;
-            transform: rotate(-50deg);
+            left: -0.1rem;
+            transform: rotate(-53deg);
 
         }
         .activities-question-circle-indicator{
