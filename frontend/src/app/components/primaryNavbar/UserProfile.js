@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { links } from './DropdownLinks'
 import { useNavigate } from 'react-router-dom';
 
-export default function UserProfile(props) {
+export default function UserProfile() {
     const [isMouseOverButton, setIsMouseOverButton] = useState(false);
     const [isMouseOverMenu, setIsMouseOverMenu] = useState(false);
     const windowScrollY = useScrollPos()

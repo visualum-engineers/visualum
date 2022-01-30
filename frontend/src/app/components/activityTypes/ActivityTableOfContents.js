@@ -1,6 +1,7 @@
 import spaceOutCamelCase from "../../helpers/spaceOutCamelCase"
 import { useSelector, useDispatch } from "react-redux"
 import { updateTrackCompletion } from "../../../redux/features/activityTypes/activitiesData"
+import ActivityIndicatorKey from "./ActivityIndicatorKey"
 const ActivityTableOfContents = ({
     data,
     header,
@@ -27,6 +28,9 @@ const ActivityTableOfContents = ({
         <div className={customClass}>
             <div style={{marignTop: "auto", width:"100%"}}>
             {header}
+            <ActivityIndicatorKey 
+                btnIndicatorClass = {btnIndicatorClass}
+            />
             {data.questions.map((question, index) => {
                 const first = index === 0
                 const last = index === data.questions.length-1
@@ -37,15 +41,15 @@ const ActivityTableOfContents = ({
                     <button
                         key={question.type + index}
                         className={`${btnCustomClass}`
-                                    +` ${currQuestion===index ? " " + btnActiveClass: questionProgress}`
-                                }
+                                 +` ${currQuestion===index ? " " + btnActiveClass: questionProgress}`}
                         onClick = {onTableOfBtnsClick}
                         data-btn-type = {"tableOfContents"}
                         data-question-num = {index}
                     >
                         <div className={btnInnerCustomClass}>
                             <svg 
-                                className={btnIndicatorClass}
+                                className={`${btnIndicatorClass}`
+                                +` ${currQuestion===index ? " " + btnActiveClass: questionProgress}`}
                                 viewBox="0 0 10 100"
                             >
                                 {!first && <line x1="5" x2="5" y1="0" y2="40"></line>}

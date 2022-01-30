@@ -4,8 +4,10 @@
     height: 100%;
     width: 16rem;
     background-color: white;
-    box-shadow: 4px 0px 7px -8px #000000;
+    padding-top: $dashboard-navbar-height;
     -webkit-box-shadow: 4px 0px 7px -8px #000000;
+    -ms-box-shadow: 4px 0px 7px -8px #000000;
+    box-shadow: 4px 0px 7px -8px #000000;
 }
 
 .sidebar-item {

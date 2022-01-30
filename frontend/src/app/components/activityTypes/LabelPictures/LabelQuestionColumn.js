@@ -25,9 +25,13 @@ const LabelPicturesQuestion = (props) =>{
     //fix before leaving
     const [overviewPopUp, setOverViewPopUp] = useState(false)
     useEffect(() =>{
-        setTimeout(() =>{
-            setInProp(false)
-        }, inPropDuration)
+        let isMounted = true
+        if(isMounted){
+            setTimeout(() =>{
+                if(isMounted) setInProp(false)
+            }, inPropDuration)
+        }
+        return () => {isMounted = false}
     }, [])
     const updateQuestionNumByOne = (target)=>{
         switch(target.dataset.actionLabel){
