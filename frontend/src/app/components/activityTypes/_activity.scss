@@ -604,6 +604,10 @@ $activites-table-of-contents-height: calc(
 }
 .activity-reset-popup{
     @extend .activity-walkthrough-instructions;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     height: min-content;
     padding: 2rem;
     @include border-radius(0.5rem);

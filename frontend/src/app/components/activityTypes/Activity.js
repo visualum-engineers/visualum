@@ -22,7 +22,8 @@ import {
     ActivityBtns, 
     ActivityQuestions, 
     ActivityNavbar,
-    ActivityResetPopUp
+    ActivityResetPopUp,
+    ActivityTimeReminder
 } from "./index"
 import Timer from "../utilities/timer/Timer"
 
@@ -41,6 +42,8 @@ const Activity = () =>{
     const activityData = useSelector((state) => state.activities.data.originalData.activityData)
     const resetPopUp = useSelector((state) => state.activities.settings.resetPopUp)
     const userSetDnDEnabled = useSelector((state) => state.activities.settings.userSetDnDEnabled)
+    const timeRemindersEnabled = useSelector((state) => state.activities.settings.timeRemindersEnabled)
+
     const dispatch = useDispatch()
 
     //on mount, we issue a time stamp, 
@@ -52,10 +55,10 @@ const Activity = () =>{
         if(timerEndTime) return
         dispatch(updateActivityTimer())
     }, [dispatch, timerEndTime])
+
     //component specific state
     let currQuestion = 0
     const [prevQuestion, setPrevQuestion] = useState(0)
-
     //question data
     const questionNumber = useSelector((state) => state.activities.data.clientData.present.clientAnswerData.lastQuestionSeen)
     const questionNum = questionNumber ? questionNumber : 0
@@ -185,6 +188,7 @@ const Activity = () =>{
         width: "100%",
         transition: "all 0.3s ease-out",
     }
+
     return(
     <>
         <ActivityNavbar 
@@ -223,13 +227,19 @@ const Activity = () =>{
                     popUpBgStyles = {popUpBgStyles}
                 />
             }
-
-            {resetPopUp ? 
+            {timeRemindersEnabled && 
+                 <ActivityTimeReminder 
+                    popUpBgStyles={popUpBgStyles}
+                />
+            }
+            
+            {resetPopUp && 
                 <ActivityResetPopUp
                     popUpBgStyles = {popUpBgStyles}
                     onClick = {resetBtnOnClick} 
                 />
-            :null }
+            }
+
             <div 
                 className = "activity-type-container col-12 col-md-11" 
                 style={inProp ? {overflow: "hidden"}: null}

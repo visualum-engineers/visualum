@@ -65,9 +65,6 @@ const clientAnswerData = createSlice({
                             ...activityData, 
                             trackCompletion: loadInitialTracking(activityData)
                           },
-        // trackCompletion: initialClientAnswerData ? 
-        //                  loadInitialTracking(initialClientAnswerData) 
-        //                 : loadInitialTracking(activityData)
     },
     reducers:{
         //this action is used to update data for the use
@@ -193,7 +190,8 @@ const undoableData = undoable(clientAnswerData.reducer, {
         "clientAnswerActivitiesData/updateActivityTimer",
         "clientAnswerActivitiesData/updateTrackCompletion",
         "activitiesSettingsSlice/enableSettings",
-        "activitiesSettingsSlice/disableSettings"
+        "activitiesSettingsSlice/disableSettings",
+        "activitiesSettingsSlice/changeTimeDuration"
     ]),
     limit: 60,
 })
