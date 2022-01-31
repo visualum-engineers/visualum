@@ -1,11 +1,10 @@
-const ActivityCreationForm = ({
-    activityName
-}) =>{
-    
+import ActivityCreationOverallPopUp from "./ActivityCreationOverallPopUp"
+const ActivityCreationForm = () =>{
     return(
         <div>
-            <div>
-
+            <ActivityCreationOverallPopUp />
+            <div>   
+            
             </div>
             <div>
 

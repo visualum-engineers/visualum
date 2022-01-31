@@ -10,10 +10,20 @@ const activityCreationData = createSlice({
     name: "activityCreationData",
     initialState:{
         activityName: "",
+        activityDescription: "",
         activityTimer: null,
         questions: []
     },
     reducers:{
+        updateActivityTimer: (state, action) =>{
+            state.activityTimer = action.payload
+        },
+        updateActivityName:(state, action) =>{
+            state.activityName = action.payload
+        },
+        updateActivityDescription: (state, action) =>{
+            state.activityDescription = action.payload
+        },
         updateQuestionData: (state, action) =>{
             const questionNum = action.payload.questionNum
             state.questions[questionNum] = action.payload.data
@@ -38,11 +48,23 @@ const activityCreationData = createSlice({
     }
 
 })
+export const {
+    updateActivityName,
+    updateActivityDescription,
+    updateActivityTimer,
+    updateQuestionData,
+    addQuestion,
+    deleteQuestion,
+    changeQuestionPos
+} = activityCreationData.actions
+
 const  undoableData = undoable(activityCreationData.reducer,{
     undoType: "activityCreationData/undo",
     redoType: "activityCreationData/redo",
     filter: excludeAction([
-
+        "activityCreationData/updateActivityName",
+        "activityCreationData/updateActivityDescription",
+        "activityCreationData/updateActivityTimer"
     ])
 })
 export default undoableData
