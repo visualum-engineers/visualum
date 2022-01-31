@@ -5,6 +5,7 @@ const popUpBgStyles = {
     width: "100%",
     height: "calc(max(100%, 100vh))",
     zIndex: "2",
+    border: 'none',
 }
 const PopUpBg = (props) =>{
     return (
