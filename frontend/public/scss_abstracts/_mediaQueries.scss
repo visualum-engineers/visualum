@@ -37,7 +37,7 @@
     @include sa-activity-sm;
 }
 
-@media (hover: hover) and (pointer: fine) {
+@media (any-hover: hover) {
     @include activities-hover;
     @include controlled-inputs-activity-hover;
     @include label-pic-activity-hover;

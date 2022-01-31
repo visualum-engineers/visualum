@@ -3,6 +3,7 @@ import ProgressBar from '../utilities/progressBar/ProgressBar';
 import { roundPercentToInt } from '../../helpers/calculatePercentage';
 import { useSelector } from 'react-redux';
 import GeneralBtn from '../utilities/generalBtn/GeneralBtn';
+import ActivityIndicatorKey from "./ActivityIndicatorKey"
 
 export const useActivitySecondarySideBarData = ({
     activityData,
@@ -11,15 +12,16 @@ export const useActivitySecondarySideBarData = ({
     currQuestion
 }) => {
     //progress data
-    const {completed, inProgress, neverOpened} = useSelector((state) => state.activities.data.clientData.present.trackCompletion)
+    const {completed, inProgress, neverOpened} = useSelector((state) => state.activities.data.clientData.present.clientAnswerData.trackCompletion)
     const completedLength = Object.keys(completed).length
-
     const sidebarData = [
         {
             type: "custom",
-            content: <div className='flex-grow-1 d-flex flex-column align-items-center justify-content-around w-100'>
+            content: <div 
+                className='activities-sidebar-top-half'>
                 <div className="activities-sidebar-activity-name">
                     {activityData.activityName}
+
                 </div>
                 <GeneralBtn 
                     customClassName={"activities-sidebar-btn"}
@@ -33,7 +35,10 @@ export const useActivitySecondarySideBarData = ({
                     additionalContent={`${completedLength}/${activityData.questions.length} completed`}
                     showContent={true}
                 />
-                <hr style={{width: "70%", marginTop:"0"}}/>
+                <hr style={{width: "70%", margin:"0"}}/>
+                <ActivityIndicatorKey 
+                    btnIndicatorClass = {"activities-question-circle-indicator"}
+                />
             </div>
         },
         {

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 
-const calculateTimeLeft = (endTime) => {
+export const calculateTimeLeft = (endTime) => {
     const difference = +endTime - +new Date();
     let timeLeft = {};
     if (difference > 0) {
@@ -27,7 +27,6 @@ const CountDownTimer = ({
     const [endTime, setEndTime] = useState(+new Date() + (1000 * timer.seconds) + (1000*60*timer.minutes) + (1000*60*60*timer.hours))
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(endTime));
     const [timerStarted, setTimerStarted] = useState(autoStart)
-
     const startTimer = () =>{
         setEndTime(+new Date() + (1000 * timeLeft.seconds) + (1000*60*timeLeft.minutes) + (1000*60*60*timeLeft.hours))
         setTimerStarted(true)

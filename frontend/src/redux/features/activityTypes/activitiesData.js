@@ -60,11 +60,11 @@ const clientAnswerData = createSlice({
     name: "clientAnswerActivitiesData",
     initialState: {
         clientAnswerData: initialClientAnswerData ? 
-                          initialClientAnswerData
-                          :activityData,
-        trackCompletion: initialClientAnswerData ? 
-                         loadInitialTracking(initialClientAnswerData) 
-                        : loadInitialTracking(activityData)
+                          initialClientAnswerData:
+                          {
+                            ...activityData, 
+                            trackCompletion: loadInitialTracking(activityData)
+                          },
     },
     reducers:{
         //this action is used to update data for the use
@@ -141,34 +141,35 @@ const clientAnswerData = createSlice({
             switch(questionType){
                 case "sort":
                     validation = sortActivityValidation(question)
-                    updateTrackCompletionKeys(validation, state.trackCompletion)
+                    updateTrackCompletionKeys(validation, state.clientAnswerData.trackCompletion)
                     break;
                 case "radio":
                     validation = controlledInputsValidation(question)
-                    updateTrackCompletionKeys(validation, state.trackCompletion)
+                    updateTrackCompletionKeys(validation, state.clientAnswerData.trackCompletion)
         
                     break;
                 case "checkbox":
                     validation = controlledInputsValidation(question)
-                    updateTrackCompletionKeys(validation, state.trackCompletion)
+                    updateTrackCompletionKeys(validation, state.clientAnswerData.trackCompletion)
         
                     break;
                 case "shortAnswer":
                     validation = shortAnswerValidation(question)
-                    updateTrackCompletionKeys(validation, state.trackCompletion)
+                    updateTrackCompletionKeys(validation, state.clientAnswerData.trackCompletion)
                     break;
                 case "labelPictures":
                     validation = labelPicValidation(question)
-                    updateTrackCompletionKeys(validation, state.trackCompletion)
+                    updateTrackCompletionKeys(validation, state.clientAnswerData.trackCompletion)
                     break;
                 case "matching":
                     validation = matchActivityValidation(question)
-                    updateTrackCompletionKeys(validation, state.trackCompletion)
+                    updateTrackCompletionKeys(validation, state.clientAnswerData.trackCompletion)
                     break;
                 default:
                     console.log(questionType)
                     break;
             }
+            
         }
     },
 })
@@ -187,7 +188,10 @@ const undoableData = undoable(clientAnswerData.reducer, {
         "clientAnswerActivitiesData/updateActivityDragActive",
         "clientAnswerActivitiesData/updateActivityDataLayout",
         "clientAnswerActivitiesData/updateActivityTimer",
-        "clientAnswerActivitiesData/updateTrackCompletion"
+        "clientAnswerActivitiesData/updateTrackCompletion",
+        "activitiesSettingsSlice/enableSettings",
+        "activitiesSettingsSlice/disableSettings",
+        "activitiesSettingsSlice/changeTimeDuration"
     ]),
     limit: 60,
 })

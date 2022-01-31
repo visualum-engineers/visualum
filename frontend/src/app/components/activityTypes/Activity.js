@@ -11,17 +11,19 @@ import {
     disableSettings, 
     resetPopUpOn, 
     resetPopUpOff,
+    enableSettings,
 } from '../../../redux/features/activityTypes/activitiesSettings'
 import { 
     useActivitySecondarySideBarData, 
     activitySecondarySidebarFooterData 
-} from "./ActivitySidebarData1"
+} from "./ActivitySidebarData"
 import {  
     ActivityInstructions,  
     ActivityBtns, 
     ActivityQuestions, 
     ActivityNavbar,
-    ActivityResetPopUp
+    ActivityResetPopUp,
+    ActivityTimeReminder
 } from "./index"
 import Timer from "../utilities/timer/Timer"
 
@@ -39,6 +41,8 @@ const Activity = () =>{
     //redux states
     const activityData = useSelector((state) => state.activities.data.originalData.activityData)
     const resetPopUp = useSelector((state) => state.activities.settings.resetPopUp)
+    const userSetDnDEnabled = useSelector((state) => state.activities.settings.userSetDnDEnabled)
+    const timeRemindersEnabled = useSelector((state) => state.activities.settings.timeRemindersEnabled)
 
     const dispatch = useDispatch()
 
@@ -51,10 +55,10 @@ const Activity = () =>{
         if(timerEndTime) return
         dispatch(updateActivityTimer())
     }, [dispatch, timerEndTime])
+
     //component specific state
     let currQuestion = 0
     const [prevQuestion, setPrevQuestion] = useState(0)
-
     //question data
     const questionNumber = useSelector((state) => state.activities.data.clientData.present.clientAnswerData.lastQuestionSeen)
     const questionNum = questionNumber ? questionNumber : 0
@@ -94,17 +98,12 @@ const Activity = () =>{
     useEffect(()=>{
         let isMounted = true
         if(isMounted) {
-            //const questionType = question.type
-            //&& (questionType in DnDActivities)
-            //question.type
             const updateDnD = !smallWindowWidth
-            if(updateDnD) {
-                dispatch(disableSettings("dndEnabled"))
-                setMoreInfoBtn(true)
-            }
+            if (updateDnD) dispatch(disableSettings("dndEnabled"))
+            else if (userSetDnDEnabled) dispatch(enableSettings("dndEnabled"))
         }
         return () => {isMounted = false}
-    }, [dispatch, smallWindowWidth])
+    }, [dispatch, smallWindowWidth, userSetDnDEnabled])
 
     const onNavBtnClick = (e) =>{
         //means it was just clicked. 
@@ -189,6 +188,7 @@ const Activity = () =>{
         width: "100%",
         transition: "all 0.3s ease-out",
     }
+
     return(
     <>
         <ActivityNavbar 
@@ -227,13 +227,19 @@ const Activity = () =>{
                     popUpBgStyles = {popUpBgStyles}
                 />
             }
-
-            {resetPopUp ? 
+            {timeRemindersEnabled && 
+                 <ActivityTimeReminder 
+                    popUpBgStyles={popUpBgStyles}
+                />
+            }
+            
+            {resetPopUp && 
                 <ActivityResetPopUp
                     popUpBgStyles = {popUpBgStyles}
                     onClick = {resetBtnOnClick} 
                 />
-            :null }
+            }
+
             <div 
                 className = "activity-type-container col-12 col-md-11" 
                 style={inProp ? {overflow: "hidden"}: null}

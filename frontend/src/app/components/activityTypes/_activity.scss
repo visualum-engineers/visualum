@@ -40,7 +40,7 @@ $activites-table-of-contents-height: calc(
 }
 .activity-header{
     position: relative;
-    margin-top: 0.2rem;
+    margin-top: 1.5rem;
     margin-bottom: 0.2rem;
     height: 3.4rem;
 }
@@ -139,6 +139,9 @@ $activites-table-of-contents-height: calc(
             width: 100%;
         }
     }
+    .activity-edit-btn-disabled{
+        color: $dark-gray;
+    }
     //triangle pointer
     &::before{
         position: absolute;
@@ -165,6 +168,7 @@ $activites-table-of-contents-height: calc(
     flex-direction: column;
     position: absolute;
     height: min-content;
+    max-height: 100vh;
     background-color: $lightest-gray;
     z-index: 6;
     @include border-radius(0.3rem);
@@ -212,7 +216,7 @@ $activites-table-of-contents-height: calc(
 .activity-settings-pop-up-body{
     display: flex;
     flex-direction: column;
-    padding: calc(max(2rem, 2.5vw));
+    padding: calc(max(1.5rem, 2.5vw));
     height: 100%;
     .settings-save-btn{
         @include remove-btn-default();
@@ -269,60 +273,6 @@ $activites-table-of-contents-height: calc(
     }
     
 }
-
-.activity-profile-avatar-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 0.8rem;
-    position: relative;
-    width: 2.5rem;
-    height: 2.5rem;
-    background-color: transparent;
-    overflow: hidden;
-    @include border-radius(20rem);
-    img{
-        width: 100%;
-        height: 100%;
-        object-position: center;
-    }
-}
-
-.activity-body{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    @include no-space;
-    @include transition(all 0.3s ease-out);
-    background-color: $lighter-gray;
-    height: 100%;
-    position: relative;
-    min-height: calc(max(100vh, 40rem));
-}
-
-.activity-body.secondary-sidebar-open{
-    margin-left: calc(min(16rem, 300px)); 
-}
-
-.activities-sidebar{
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: $lightest-gray;
-    z-index: 3;
-    .secondary-sidebar-header{
-        margin-top: 1rem;
-    }
-    .secondary-sidebar-link-container{
-        margin-top: $activity-navbar-outer-height;
-        flex-grow: 1;
-        align-items: center;
-    }
-    .activities-table-of-contents{
-        align-self: start;
-    }
-}
 .activity-timer{
     position: relative;
     display: flex;
@@ -360,7 +310,69 @@ $activites-table-of-contents-height: calc(
         color: $secondary-font-color;
     }
 }
+.activity-profile-avatar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.8rem;
+    position: relative;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: transparent;
+    overflow: hidden;
+    @include border-radius(20rem);
+    img{
+        width: 100%;
+        height: 100%;
+        object-position: center;
+    }
+}
 
+
+.activity-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    @include no-space;
+    @include transition(all 0.3s ease-out);
+    background-color: $lighter-gray;
+    height: 100%;
+    position: relative;
+    min-height: calc(max(100vh, 40rem));
+}
+
+.activity-body.secondary-sidebar-open{
+    margin-left: calc(min(16rem, 300px)); 
+}
+
+.activities-sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: $lightest-gray;
+    z-index: 3;
+    .secondary-sidebar-header{
+        margin-top: 1rem;
+    }
+    .secondary-sidebar-link-container{
+        margin-top: 3.4rem;
+        flex-grow: 1;
+        align-items: center;
+    }
+    .activities-table-of-contents{
+        align-self: start;
+    }
+}
+.activities-sidebar-top-half{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    //justify-content: space-evenly;
+    justify-content: space-around;
+    width: 100%;
+    flex-grow: 1;
+}
 .activities-sidebar-activity-name{
     width: 65%;
     text-align: center;
@@ -410,11 +422,11 @@ $activites-table-of-contents-height: calc(
     overflow-x: hidden;
     width: 100%;
     height: $activites-table-of-contents-height;
-    min-height: calc(max(35vh, 6.5rem));
+    min-height: calc(max(45vh, 6.5rem));
     @include activity-scrollbar-styles();
     .activity-table-of-contents-header{
         font-size: 1.2rem;
-        position:sticky;
+        position: sticky;
         top: 0;
         background-color: $lightest-gray;
         width: 100%;
@@ -422,6 +434,7 @@ $activites-table-of-contents-height: calc(
         min-height: 2rem;
         margin: 0;
         padding: 0;
+        line-height: unset;
     }
 }
 
@@ -467,39 +480,77 @@ $activites-table-of-contents-height: calc(
         }
     }
 }
-@mixin activities-sidebar-table-btn-active{
-    background-color: #e4e3e3;
-    .activities-question-circle-indicator{
-        circle{
-            fill: $dark-blue;
+.activities-sidebar-table-btns.question-active{
+    background-color: $light-gray;
+}
+.activities-question-circle-indicator.question-active{
+    circle{
+        fill: $dark-blue;
+    }
+}
+
+.activities-question-circle-indicator.question-completed{
+    circle{
+        fill: rgb(11, 255, 72);
+    }
+}
+
+.activities-question-circle-indicator.question-in-progress{
+    circle{
+        fill: orange;
+    }
+}
+
+.activities-question-circle-indicator.question-never-opened{
+    circle{
+        fill: $dark-gray;
+    }
+}
+.activity-indicator-key-container{
+    position: sticky;
+    //top: 2rem;
+    top: 0;
+    background-color: #fafafa;
+    display: flex;
+    justify-content: center;
+    font-size: 0.6rem;
+    color: $darkest-gray;
+    padding-top: 3rem;
+    //padding-bottom: 0.5rem;
+    .activity-indicator-key{
+        display: flex;
+        width: 70%;
+        margin-left: 3rem;
+        span{
+            font-size: 0.7rem;
+            margin-right: 0.4rem;
+        }
+    }
+
+    .indicator-key-value{
+        position: relative;
+        width: 5.5%;
+        margin-right: 0.6rem;
+        label{
+            position: absolute;
+            display: flex;
+            justify-content: start;
+            text-align: start;
+            padding: 0;
+            margin: 0;
+            width: 3.4rem;
+            top: -1.9rem;
+            left: -0.1rem;
+            transform: rotate(-53deg);
+
+        }
+        .activities-question-circle-indicator{
+            width: 100%;
+            height: 100%;
         }
     }
 }
 
-.activities-sidebar-table-btns.question-active{
-    @include activities-sidebar-table-btn-active()
-}
-.activities-sidebar-table-btns.question-completed{
-    .activities-question-circle-indicator{
-        circle{
-            fill: rgb(11, 255, 72);
-        }
-    }
-}
-.activities-sidebar-table-btns.question-in-progress{
-    .activities-question-circle-indicator{
-        circle{
-            fill: orange;
-        }
-    }
-}
-.activities-sidebar-table-btns.question-never-opened{
-    .activities-question-circle-indicator{
-        circle{
-            fill: $dark-gray;
-        }
-    }
-}
 .activities-sidebar-link{
     width: 60%;
     min-width: 60%;
@@ -553,6 +604,10 @@ $activites-table-of-contents-height: calc(
 }
 .activity-reset-popup{
     @extend .activity-walkthrough-instructions;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     height: min-content;
     padding: 2rem;
     @include border-radius(0.5rem);
@@ -661,20 +716,3 @@ $activites-table-of-contents-height: calc(
     font-size: 1rem;
     @include transition(all 0.3s ease-out);
 } 
-
-// .activities-settings-sidebar{
-//     position: fixed;
-//     width: 20rem;
-//     max-width: unset;
-// }
-// .activities-settings-sidebar.sidebar-right{
-//     left: unset;
-//     right: 0;
-//     @include box-shadow(-1px 0px 9px -2px rgba(0,0,0,0.78))
-// }
-// .activities-settings-exit-sidebar-btn{
-//     left: unset;
-//     top: 0.5rem;
-//     right: 17.7rem;
-//     background-color: transparent;
-// }
