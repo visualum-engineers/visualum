@@ -20,8 +20,6 @@ const SignUpForm = React.lazy(() => import('./components/forms/EntryForms/SignUp
 const LoginForm = React.lazy(() => import('./components/forms/EntryForms/LoginForm/LoginForms'))
 const CreateGame = React.lazy(() => import('./components/createGame/CreateGame'))
 const Activity = React.lazy(() => import('./components/activityTypes/Activity'))
-
-//const Activity = React.lazy(() => import('../redux/containers/ActivityContainer'))
 const ActivityCreation = React.lazy(() => import("./components/forms/ActivityCreationForm/ActivityCreationForm"))
 
 function App() {
