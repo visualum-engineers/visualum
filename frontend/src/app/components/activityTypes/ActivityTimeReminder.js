@@ -48,7 +48,7 @@ const ActivityTimeReminder = ({
                 >
                     <div className="activity-reset-popup col-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
                         <span>
-                            You have {timeLeft.hours + " hr and " + timeLeft.minutes + " mins left"}
+                            You have {timeLeft.hours + " hrs and " + timeLeft.minutes + " mins left"}
                         </span>
                         <button
                             className="btn btn-danger"
