@@ -18,19 +18,23 @@ const ActivitySettings = ({
     const [timeDurationErr, setTimeDurationErr] = useState(null)
     const [settingsActive, setSettingsActive] = useState({
         dndEnabled : disableDnD,
-        timeRemindersEnabled : disableAutoPopUps,
-        autoPopUpsEnabled : disableTimeReminders, 
+        timeRemindersEnabled : disableTimeReminders,
+        autoPopUpsEnabled : disableAutoPopUps, 
     })
     //to save changes upon re-opening settings pop up again
     useEffect(() => {
         let isMounted = true
         if(isMounted){
-            setSettingsActive({
-                dndEnabled : disableDnD,
-                timeRemindersEnabled : disableAutoPopUps,
-                autoPopUpsEnabled : disableTimeReminders, 
+            unstable_batchedUpdates(()=>{
+                if(!isMounted) return
+                setSettingsActive({
+                    dndEnabled : disableDnD,
+                    timeRemindersEnabled : disableTimeReminders,
+                    autoPopUpsEnabled : disableAutoPopUps , 
+                })
+                setTimeDuration(timeIntervalDuration)
             })
-            setTimeDuration(timeIntervalDuration)
+            
         }
         return () => {isMounted = false}
     }, [disableDnD, disableTimeReminders, disableAutoPopUps, timeIntervalDuration])
