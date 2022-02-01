@@ -6,6 +6,7 @@ import CheckboxInstructions from "./ControlledInputs/Checkbox/CheckboxInstructio
 import LabelActivityInstructions from "./LabelPictures/LabelActivityInstructions"
 import PopUp from "../utilities/popUp/PopUpBackground"
 import { useSelector } from "react-redux"
+import ExitIcon from "../utilities/exitIcon/ExitIcon"
 const ActivityInstructions = ({
     activityType, 
     activityInstructions, 
@@ -40,11 +41,7 @@ const ActivityInstructions = ({
                         aria-label="exit-more-info" 
                         className="d-flex align-items-center justify-content-center"
                     >
-                        <svg className="exit-icon" viewBox="0 0 100 100">
-                            <line x1="10" x2="90" y1="10" y2="90"/>
-                            <line x1="90" x2="10" y1="10" y2="90"/>
-                        </svg>
-                        
+                        <ExitIcon />
                     </button>
                 </header>
                 {//load specific activity instructions

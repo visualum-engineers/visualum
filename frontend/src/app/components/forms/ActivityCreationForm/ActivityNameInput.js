@@ -13,6 +13,7 @@ const ActivityNameInput = () =>{
                 id = ""
                 value = {activityName}
                 onChange={onActivityNameChange}
+                autoFocus
             />
         </>
     )

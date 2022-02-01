@@ -423,7 +423,6 @@ $label-pic-column-height: calc(
     height: 3.7rem;
     background-color: rgba(236, 236, 236, 0.822);
     color: $black;
-
     @include border-radius(7px 7px 0 0);
     position: relative;
     h1{
@@ -439,8 +438,7 @@ $label-pic-column-height: calc(
         height: 1.7rem;
         width: 1.7rem;
         @include border-radius(5px);
-        font-size: 1.3rem;
-        color: rgba(122, 122, 122, 0.431);
+        stroke: $darkest-gray;
         @include transition(all 0.2s linear)
     }
 }

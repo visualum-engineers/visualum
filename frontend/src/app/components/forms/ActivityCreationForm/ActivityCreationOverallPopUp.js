@@ -1,9 +1,11 @@
 import { useSelector } from "react-redux"
 import { useState } from "react"
 import PopUpBg from "../../utilities/popUp/PopUpBackground"
+import ExitIcon from "../../utilities/exitIcon/ExitIcon"
 import { 
     ActivityNameInput,
     ActivityDescription,
+    ActivityTimerInput,
 } from "./index"
 
 const ActivityCreationOverallPopUp = () =>{
@@ -29,10 +31,19 @@ const ActivityCreationOverallPopUp = () =>{
                 > 
                     <div className="activity-creation-edit-pop-up">
                         <div className="activity-creation-edit-pop-up-header">
+                            <span>Edit Activity Details</span>
+                            <button
+                                onClick={()=> setActivityPopUp(false)}
+                            >
+                                <ExitIcon />
+                            </button>
                         </div>
-                        <div className="activity-creation-edit-pop-up-body"> 
-                            <ActivityNameInput />
-                            <ActivityDescription />
+                        <div className="activity-creation-edit-pop-up-body-container"> 
+                            <div className="activity-creation-edit-pop-up-body">
+                                <ActivityNameInput />
+                                <ActivityDescription />
+                                <ActivityTimerInput />
+                            </div>
                         </div>
                     </div>
 
