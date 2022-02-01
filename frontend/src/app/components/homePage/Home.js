@@ -4,6 +4,7 @@ import MarketingHomeIntro from "./FeaturesHome"
 // const starsWebM = "images/homePage/stars.webm"
 // const starsMov = "images/homePage/stars.mov"
 import SignIn from '../forms/SignIn/SignIn'
+import SignUp from '../forms/SignIn/SignUp'
 
 const HomePage = () => {
     // useEffect(()=>{
@@ -17,6 +18,7 @@ const HomePage = () => {
                 <source src={starsWebM} type="video/webm"/>
             </video> */}
             {/* <SignIn /> */}
+            <SignUp />
             <IntroHome />
             <MarketingHomeIntro />
         </>

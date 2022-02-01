@@ -8,14 +8,14 @@ export default function SignIn() {
 	return (
 		<PopUpBackground>
 			<div className='auth-modal'>
+				<div className='auth-close'>
+					<FontAwesomeIcon icon={faTimes} />
+				</div>
 				<div className='auth-header'>
 					<img className="auth-logo"
 						src={logo}
 						alt="Visualum logo"
 					/>
-				</div>
-				<div className='auth-close'>
-					<FontAwesomeIcon icon={faTimes} />
 				</div>
 				<div className='auth-body'>
 					<h3 className='auth-title mb-3'>Sign In</h3>

@@ -1,6 +1,6 @@
 .auth-modal {
 	background-color: rgb(255, 255, 255);
-	width: 30rem;
+	width: 25rem;
 	z-index: 3;
 	@include border-radius(15px);
 	-webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.3); 
@@ -20,7 +20,7 @@
 }
 
 .auth-body {
-	margin-top: -1rem;
+	margin-top: -2rem;
 	height: 100%;
 	width: 100%;
 	font-size: .9rem;
@@ -51,6 +51,17 @@
 	display: flex;
 	justify-content:flex-end;
 	padding: 0 1rem;
-	margin-top: -2rem;
+	margin-top: 1rem;
 	color: $darkest-gray;
+}
+
+.auth-signup {
+	font-size: .85rem;
+	color: rgb(48, 48, 48);
+	background-color: white;
+	border-color: $light-gray;
+	&:hover {
+		color: white;
+		background-color: $blue;
+	}
 }
