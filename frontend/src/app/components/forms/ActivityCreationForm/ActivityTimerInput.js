@@ -12,7 +12,6 @@ const ActivityTimerInput = () =>{
         seconds: "",
     }
     const activityTimer = useSelector(state => state.activityCreation.data.present.activityTimer)
-    console.log(activityTimer)
     const dispatch = useDispatch()
     const [localActivityTimer, setLocalActivityTimer] = useState(activityTimer)
     //update local state to reflect redux
@@ -62,6 +61,8 @@ const ActivityTimerInput = () =>{
                 !activityTimer && 
                 <button 
                     onClick = {() => dispatch(updateActivityTimer(initialState))}
+                    aria-label = {"add-activity-timer"}
+                    className={"activity-creation-timer-add"}
                 >
                     <FontAwesomeIcon icon={faPlus} />
                 </button>
@@ -96,6 +97,9 @@ const ActivityTimerInput = () =>{
                         dispatch(updateActivityTimer(null))
                         setLocalActivityTimer(null)
                     }}
+                    aria-label = {"remove-activity-timer"}
+                    className={"activity-creation-timer-remove"}
+                    
                 >
                     <FontAwesomeIcon icon ={faMinus} />
                 </button>

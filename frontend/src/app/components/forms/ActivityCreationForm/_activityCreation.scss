@@ -48,9 +48,26 @@
         height: calc(85vh - 2.5rem);
         @include border-radius(0 0 0.5rem 0.5rem);
         @include activity-scrollbar-styles();
+
         .activity-creation-edit-pop-up-body{
             height: min-content;
-        }
-        
+        } 
+    }
+    .activity-creation-timer-add, 
+    .activity-creation-timer-remove{
+        @include remove-btn-default();
+        @include border-radius(0.3rem);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        color: $white;
+    }
+    .activity-creation-timer-add{
+        background-color: $dark-green;
+    }
+    .activity-creation-timer-remove{
+        background-color: red;
     }
 }

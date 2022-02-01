@@ -86,7 +86,7 @@
     }
     .activity-walkthrough-instructions-header{
         button:hover{
-            background-color: rgb(219, 74, 74);
+            background-color: $red;
             transform: scale(1.1);
             line{
                 stroke: $white;
@@ -109,7 +109,7 @@
     }   
     .activity-settings-pop-up-header{
         .settings-exit-btn:hover{
-            background-color: rgb(219, 74, 74);
+            background-color: $red;
             transform: scale(1.1);
             line{
                 stroke: $white;
