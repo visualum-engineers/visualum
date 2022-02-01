@@ -45,7 +45,9 @@ export default function SignUp() {
 		<PopUpBg>
 			<div className='auth-modal'>
 				<div className='auth-close'>
-					<FontAwesomeIcon icon={faTimes} />
+					<div className='close-button'>
+						<FontAwesomeIcon icon={faTimes} />
+					</div>
 				</div>
 				<div className='auth-body'>
 					<h3 className='auth-title mb-3 text-center'>Join Us</h3>

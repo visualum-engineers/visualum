@@ -24,12 +24,16 @@ export default function NavWrapper(props) {
             //where sidebar will not be present
         }
     }
+
+    console.log('inside navwrapper. props:', props)
+
     return (
         <>
             <Navbar
                 windowWidth={windowWidth}
                 sidebarToggle={sidebarToggle}
                 handleSideBar={handleSideBar}
+                openSignUp={props.toggleSignUp}
             />
             {!windowWidth ? null : <PrimarySideBar
                 sidebarToggle={sidebarToggle}

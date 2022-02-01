@@ -7,6 +7,8 @@ import useScrollPos from '../../hooks/use-scroll-pos';
 export default function Navbar(props) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const windowScrollY = useScrollPos()
+    console.log('inside navbar. props:', props)
+
     return (
         <>
             <div
@@ -42,9 +44,10 @@ export default function Navbar(props) {
                             <div className="d-flex justify-content-end align-self-stretch m-0">
                                 <Login
                                     windowWidth={props.windowWidth}
-                                    signedIn={true}
+                                    signedIn={false}
                                     dropdownOpen={dropdownOpen}
                                     toggleDropdownOpen={() => { setDropdownOpen(!dropdownOpen) }}
+                                    openSignUp={props.openSignUp}
                                 />
                             </div>
                         </div>

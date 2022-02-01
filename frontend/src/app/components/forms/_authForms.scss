@@ -50,9 +50,20 @@
 	width: 100%;
 	display: flex;
 	justify-content:flex-end;
-	padding: 0 1rem;
-	margin-top: 1rem;
+	padding: 0 0.5rem;
+	margin-top: 0.5rem;
 	color: $darkest-gray;
+	.close-button {
+		width: 1.5rem;
+		height: 1.5rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		@include border-radius(0.3rem);
+		&:hover {
+			background-color: $lighter-gray;
+		}	
+	}
 }
 
 .auth-signup {

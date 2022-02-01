@@ -14,11 +14,11 @@ const DashboardSettings = React.lazy(() => import("./components/dashboard/Dashbo
 const Dashboard = React.lazy(() => import("./components/dashboard/Dashboard"))
 
 const NavWrapper = React.lazy(() => import("./components/primaryNavbar/NavWrapper"))
-const Settings = React.lazy(() => import('./components/settingsPage/Settings'))
+// const Settings = React.lazy(() => import('./components/settingsPage/Settings'))
 const HomeContent = React.lazy(() => import('./components/homePage/Home'))
-const SignUpForm = React.lazy(() => import('./components/forms/EntryForms/SignUpForm/SignUpForm'))
-const LoginForm = React.lazy(() => import('./components/forms/EntryForms/LoginForm/LoginForms'))
-const CreateGame = React.lazy(() => import('./components/createGame/CreateGame'))
+// const SignUpForm = React.lazy(() => import('./components/forms/EntryForms/SignUpForm/SignUpForm'))
+// const LoginForm = React.lazy(() => import('./components/forms/EntryForms/LoginForm/LoginForms'))
+// const CreateGame = React.lazy(() => import('./components/createGame/CreateGame'))
 const Activity = React.lazy(() => import('./components/activityTypes/Activity'))
 
 //const Activity = React.lazy(() => import('../redux/containers/ActivityContainer'))
@@ -32,11 +32,8 @@ function App() {
           <LoadingIcon entireViewport={true} />
         }>
           <Routes>
-            <Route path="/" element={<NavWrapper><HomeContent /></NavWrapper>} />
-            <Route path="/signup" element={<NavWrapper><SignUpForm /></NavWrapper>} />
-            <Route path="/login" element={<NavWrapper><LoginForm /></NavWrapper>} />
-            <Route path="/settings" element={<NavWrapper><Settings /></NavWrapper>} />
-            <Route path="/create-game" element={<NavWrapper><CreateGame /></NavWrapper>} />
+            <Route path="/" element={<HomeContent />} />
+            {/* <Route path="/create-game" element={<NavWrapper><CreateGame /></NavWrapper>} /> */}
             <Route path="/activity" element={<Activity />} />
             <Route path="/activity-creation" element={<ActivityCreation />} />
             <Route path="/dashboard" element={<Dashboard />}>
