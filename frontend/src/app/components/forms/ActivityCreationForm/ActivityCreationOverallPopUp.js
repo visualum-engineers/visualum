@@ -40,9 +40,25 @@ const ActivityCreationOverallPopUp = () =>{
                         </div>
                         <div className="activity-creation-edit-pop-up-body-container"> 
                             <div className="activity-creation-edit-pop-up-body">
-                                <ActivityNameInput />
+                                <div className="d-flex w-100">
+                                    <div 
+                                        className="activity-creation-img-upload"
+                                    >
+                                        <input
+                                            id={"activity-creation-img-upload-btn"}
+                                            htmlFor = {"activity-creation-img-file-input"}
+                                            onClick={(e) => e.target.closest("input").nextElementSibling.click()} 
+                                            type={"button"}
+                                        />
+                                        <input 
+                                            id={"activity-creation-img-file-input"}
+                                            type={"file"}
+                                        />
+                                    </div>
+                                    <ActivityNameInput />
+                                    <ActivityTimerInput />
+                                </div>
                                 <ActivityDescription />
-                                <ActivityTimerInput />
                             </div>
                         </div>
                     </div>

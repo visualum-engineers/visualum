@@ -39,6 +39,7 @@
 
 @media (any-hover: hover) {
     @include activities-hover;
+    @include activity-creation-hover;
     @include controlled-inputs-activity-hover;
     @include label-pic-activity-hover;
     @include match-activity-hover;
