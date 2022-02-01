@@ -3,14 +3,18 @@ import { useDispatch, useSelector } from "react-redux"
 import onlyNumInput from "../../../helpers/onlyNumInput"
 import { updateActivityTimer } from "../../../../redux/features/activityCreation/activityCreationData"
 import {debounce} from "lodash"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons"
 const ActivityTimerInput = () =>{
-    const activityTimer = useSelector(state => state.activityCreation.data.activityTimer)
-    const dispatch = useDispatch()
-    const [localActivityTimer, setLocalActivityTimer] = useState({
+    const initialState = {
         hours: "",
         minutes: "", 
         seconds: "",
-    })
+    }
+    const activityTimer = useSelector(state => state.activityCreation.data.present.activityTimer)
+    console.log(activityTimer)
+    const dispatch = useDispatch()
+    const [localActivityTimer, setLocalActivityTimer] = useState(activityTimer)
     //update local state to reflect redux
     useEffect(() => {
         let isMouted = true
@@ -54,7 +58,16 @@ const ActivityTimerInput = () =>{
     }
     return(
         <>
-            {activityTimer &&
+            {//btn for adding a timer
+                !activityTimer && 
+                <button 
+                    onClick = {() => dispatch(updateActivityTimer(initialState))}
+                >
+                    <FontAwesomeIcon icon={faPlus} />
+                </button>
+            }
+            {activityTimer && localActivityTimer &&
+                <>
                 <div className="activity-timer-inputs">
                     <input
                         type={'number'}
@@ -78,6 +91,15 @@ const ActivityTimerInput = () =>{
                         onKeyDown={onlyNumInput}
                     />
                 </div>
+                <button
+                    onClick = {() => {
+                        dispatch(updateActivityTimer(null))
+                        setLocalActivityTimer(null)
+                    }}
+                >
+                    <FontAwesomeIcon icon ={faMinus} />
+                </button>
+                </>
             }
         </>
     )

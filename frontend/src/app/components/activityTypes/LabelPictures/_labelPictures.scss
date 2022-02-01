@@ -438,8 +438,7 @@ $label-pic-column-height: calc(
         height: 1.7rem;
         width: 1.7rem;
         @include border-radius(5px);
-        font-size: 1.3rem;
-        color: rgba(122, 122, 122, 0.431);
+        stroke: $darkest-gray;
         @include transition(all 0.2s linear)
     }
 }

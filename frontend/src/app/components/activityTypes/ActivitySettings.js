@@ -5,6 +5,7 @@ import { enableSettings, disableSettings, changeTimeDuration } from "../../../re
 import { unstable_batchedUpdates } from "react-dom"
 import SwitchToggler from "../utilities/switchToggler/SwitchToggler"
 import onlyNumInput from "../../helpers/onlyNumInput"
+import ExitIcon from "../utilities/exitIcon/ExitIcon"
 const ActivitySettings = ({
     onExitPopUp,
     smallWindowWidth 
@@ -88,12 +89,8 @@ const ActivitySettings = ({
                             className="settings-exit-btn"
                             onClick={onExitPopUp}
                         >
-                            <svg className="exit-icon" viewBox="0 0 100 100">
-                                <line x1="10" x2="90" y1="10" y2="90"/>
-                                <line x1="90" x2="10" y1="10" y2="90"/>
-                            </svg>
+                           <ExitIcon />
                         </button>
-                        
                     </div>
                     <div className="activity-settings-pop-up-body">
                             <div className={`settings-body-row`

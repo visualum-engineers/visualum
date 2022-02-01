@@ -1,8 +1,7 @@
 
 import PopUpBg from "../../utilities/popUp/PopUpBackground"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTimes } from "@fortawesome/free-solid-svg-icons"
 import LabelAnswerOverviewCard from "./LabelAnswersOverviewCard"
+import ExitIcon from "../../utilities/exitIcon/ExitIcon"
 
 const LabelAnswerOverview = ({
     data,
@@ -26,7 +25,7 @@ const LabelAnswerOverview = ({
                         className="d-flex align-items-center justify-content-center"
                         data-action-label = "exit-answers-overview"
                     >
-                        <FontAwesomeIcon icon={faTimes}/>
+                        <ExitIcon />
                     </button>
                 </header>
                 <div className="label-pic-answer-overview-body container">

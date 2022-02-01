@@ -34,24 +34,22 @@
             svg{
                 width: 100%;
                 stroke: $darkest-gray;
-                stroke-width: 0.3rem;
-                stroke-linecap: round;
             }
         }
         
     }
     .activity-creation-edit-pop-up-body-container{
-        background-color: $white;
+        background-color: $lightest-gray;
         padding-top: 3%;
         padding-left: 3% ;
         padding-right: calc(3% - 0.5rem);
         overflow: scroll;
         overflow-x: hidden;
-        height: 100%;
+        height: calc(85vh - 2.5rem);
         @include border-radius(0 0 0.5rem 0.5rem);
         @include activity-scrollbar-styles();
         .activity-creation-edit-pop-up-body{
-
+            height: min-content;
         }
         
     }
