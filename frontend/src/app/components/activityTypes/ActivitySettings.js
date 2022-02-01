@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { enableSettings, disableSettings, changeTimeDuration } from "../../../redux/features/activityTypes/activitiesSettings"
 import { unstable_batchedUpdates } from "react-dom"
 import SwitchToggler from "../utilities/switchToggler/SwitchToggler"
-
+import onlyNumInput from "../../helpers/onlyNumInput"
 const ActivitySettings = ({
     onExitPopUp,
     smallWindowWidth 
@@ -128,6 +128,7 @@ const ActivitySettings = ({
                                                 type={"number"}
                                                 className="activity-settings-time-interval-input"
                                                 value={timeDuration/60/1000 === 0 ? "" : timeDuration/60/1000}
+                                                onKeyDown={onlyNumInput}
                                                 onChange={(e)=>{
                                                     const target = e.target.closest("input")                                                
                                                     const value = target.value
@@ -136,9 +137,6 @@ const ActivitySettings = ({
                                                     setTimeDurationErr(null)
                                                     //for validation
                                                     if(value.length === 0 || value==="0") setTimeDurationErr("You must set a time, or disable time reminders") 
-                                                }}
-                                                onKeyDown={(e) =>{
-                                                    if(/[e+-]/gi.test(e.key) && e.key.length<=1) e.preventDefault()
                                                 }}
                                             />
                                             <span>mins</span>
