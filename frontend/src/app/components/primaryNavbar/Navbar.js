@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
-import Login from './LoginBtn';
+import UserProfile from './UserProfile'
 import NavToggler from './NavTogglerBtn';
 import NavItem from '../utilities/navItems/NavItems';
 import SearchBar from './SearchBar';
 import useScrollPos from '../../hooks/use-scroll-pos';
 export default function Navbar(props) {
-    const [dropdownOpen, setDropdownOpen] = useState(false);
+
     const windowScrollY = useScrollPos()
+
+    //REPLACE THIS WITH AUTH LOGIC LATER
+    const [isSignedIn, setIsSignedIn] = useState(false);
+
     return (
         <>
             <div
@@ -15,38 +19,31 @@ export default function Navbar(props) {
             >
                 <nav
                     id="navbar"
-                    className={
-                        `navbar home-page-nav navbar-expand-lg 
-                            ${props.sidebarToggle ? null : "sidebar-close"}
-                            ${windowScrollY ? "navbarScrollActive" : ""}
-                        `}>
+                    className={`navbar home-page-nav navbar-expand-lg ${props.sidebarToggle ? null : "sidebar-close"} ${windowScrollY ? "navbarScrollActive" : ""}`}>
                     <a href="/" className="nav-brand">
                         visualum
                     </a>
-
                     {props.windowWidth ? null : <NavToggler />}
-
                     <div id="navbarSupportedContent" className="collapse navbar-collapse home-page-nav">
-                        <div className="navbar-nav w-100 justify-content-start">
-                            <NavItem
-                                textContent={"Discover"}
-                                handleSideBar={props.handleSideBar} />
-                            <NavItem
-                                textContent={"Subjects"}
-                                handleSideBar={props.handleSideBar} />
-                            <NavItem textContent={"Help"}
-                                handleSideBar={props.handleSideBar} />
-                        </div>
                         <div className="navbar-nav w-100 justify-content-end">
                             <SearchBar />
-                            <div className="d-flex justify-content-end align-self-stretch m-0">
-                                <Login
-                                    windowWidth={props.windowWidth}
-                                    signedIn={false}
-                                    dropdownOpen={dropdownOpen}
-                                    toggleDropdownOpen={() => { setDropdownOpen(!dropdownOpen) }}
-                                    openSignUp={props.openSignUp}
-                                />
+                            <div className="d-flex justify-content-end">
+                                {isSignedIn ? <UserProfile /> :
+                                    <>
+                                        <button
+                                            className="btn btn-primary btn-home-auth justify-content-end me-2"
+                                            onClick={props.openSignUp}
+                                        >
+                                            Sign Up
+                                        </button>
+                                        <button
+                                            className="btn btn-primary btn-home-auth justify-content-end"
+                                            onClick={props.openSignUp}
+                                        >
+                                            Log In
+                                        </button>
+                                    </>
+                                }
                             </div>
                         </div>
                     </div>

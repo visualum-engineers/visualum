@@ -1,22 +1,21 @@
 import { React } from 'react'
 import IntroHome from "./IntroHome"
 import MarketingHomeIntro from "./FeaturesHome"
-import NavWrapper from '../primaryNavbar/NavWrapper'
+import Navbar from '../primaryNavbar/Navbar'
 import SignIn from '../forms/SignIn/SignIn'
 import SignUp from '../forms/SignIn/SignUp'
 import useModal from '../../hooks/useModal'
 
-const HomePage = (props) => {
+export default function HomePage() {
 
     const { isShowing: signUpOpen, toggle: toggleSignUp } = useModal();
 
     return (
-        <NavWrapper toggleSignUp={toggleSignUp}>
-            {/* <SignIn /> */}
+        <>
+            <Navbar />
             {signUpOpen && <SignUp toggle={toggleSignUp} />}
             <IntroHome />
             <MarketingHomeIntro />
-        </NavWrapper>
+        </>
     )
 }
-export default HomePage;

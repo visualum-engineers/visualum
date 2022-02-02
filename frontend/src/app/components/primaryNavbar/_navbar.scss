@@ -59,6 +59,34 @@
     }
 }
 
+.btn-home-auth {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-weight: 500;
+    font-size: 1.1rem;
+    &:hover {
+        border: none;
+        background-color: rgba(0,0,0,.35);
+        box-shadow: none;
+    }
+    &:focus {
+        border: none;
+        background-color: transparent;
+        box-shadow: none;
+    }
+    &:active {
+        border: none;
+        background-color: rgba(0,0,0,.35);
+        box-shadow: none;
+    }
+    &:active:focus {
+        border: none;
+        background-color: rgba(0,0,0,.35);
+        box-shadow: none;
+    }
+}
+
 #search-box{
     padding: 0;
     align-self: stretch;
@@ -162,6 +190,7 @@
 .user-student-name {
     padding: 0 0.5rem;
     font-weight: 500;
+    font-size: 1.1rem;
     transition: color ease-in-out 125ms;
 }
 
@@ -174,11 +203,11 @@
     padding: .7rem;
     position: absolute;
     background-color: rgba(0,0,0,.6);
-    top: 70px;
+    top: 75px;
     right: 30px;
     transition: top 250ms ease-out;
     &.navbarScrollActive {
-        top: 50px;
+        top: 55px;
         background-color: $main-color;
     }
 }

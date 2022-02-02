@@ -12,13 +12,7 @@ const DashboardClasses = React.lazy(() => import("./components/dashboard/Dashboa
 const DashboardClass = React.lazy(() => import("./components/dashboard/DashboardClass"))
 const DashboardSettings = React.lazy(() => import("./components/dashboard/DashboardSettings"))
 const Dashboard = React.lazy(() => import("./components/dashboard/Dashboard"))
-
-const NavWrapper = React.lazy(() => import("./components/primaryNavbar/NavWrapper"))
-// const Settings = React.lazy(() => import('./components/settingsPage/Settings'))
 const HomeContent = React.lazy(() => import('./components/homePage/Home'))
-// const SignUpForm = React.lazy(() => import('./components/forms/EntryForms/SignUpForm/SignUpForm'))
-// const LoginForm = React.lazy(() => import('./components/forms/EntryForms/LoginForm/LoginForms'))
-// const CreateGame = React.lazy(() => import('./components/createGame/CreateGame'))
 const Activity = React.lazy(() => import('./components/activityTypes/Activity'))
 
 //const Activity = React.lazy(() => import('../redux/containers/ActivityContainer'))

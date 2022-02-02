@@ -1,12 +1,18 @@
+
+
+// DEPRECATED FOR NOW. NAVBAR MOVED TO HOME.JS
+
+
+
 import React, { useState } from 'react'
 import PrimarySideBar from '../sideBar/PrimarySidebar';
 import Navbar from './Navbar'
 import useWindowWidth from '../../hooks/use-window-width';
 
 export default function NavWrapper(props) {
-    const [sidebarToggle, setSidebarToggle] = useState(false)
-    const [sidebarBtnType, setBtnType] = useState("")
-    const windowWidth = useWindowWidth(992)
+    const [sidebarToggle, setSidebarToggle] = useState(false);
+    const [sidebarBtnType, setBtnType] = useState("");
+    const windowWidth = useWindowWidth(992);
     const exitSideBar = () => {
         setSidebarToggle(false)
     }
