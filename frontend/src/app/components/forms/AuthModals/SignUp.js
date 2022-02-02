@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PopUpBg from '../../utilities/popUp/PopUpBackground';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import ExitIcon from '../../utilities/exitIcon/ExitIcon';
 import GoogleSignInButton from '../EntryForms/LoginForm/GoogleSignInBtn'
 import ReactDOM from 'react-dom';
 
@@ -75,7 +74,7 @@ export default function SignUp({ toggle, toggleOther }) {
 			<div className='auth-modal'>
 				<div className='auth-close'>
 					<div className='close-button' onClick={toggle}>
-						<FontAwesomeIcon icon={faTimes} />
+						<ExitIcon />
 					</div>
 				</div>
 				<div className='auth-body'>

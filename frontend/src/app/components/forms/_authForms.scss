@@ -53,13 +53,16 @@
 	justify-content:flex-end;
 	padding: 0 0.5rem;
 	margin-top: 0.5rem;
-	color: $darkest-gray;
 	.close-button {
 		width: 1.5rem;
 		height: 1.5rem;
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		padding: .2rem;
+		svg {
+			stroke: $darkest-gray;
+		}
 		@include border-radius(0.3rem);
 		cursor: pointer;
 		&:hover {
