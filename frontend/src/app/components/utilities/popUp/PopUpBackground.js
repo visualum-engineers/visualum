@@ -9,6 +9,7 @@ export default function PopUpBg(props) {
         height: "calc(max(100%, 100vh))",
         zIndex: props.zIndex != null ? props.zIndex : "2",
         border: 'none',
+        cursor: "auto"
     }
     return (
         <div

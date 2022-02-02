@@ -44,6 +44,7 @@
 	border: none;
 	@include border-radius(10px);
 	margin-top: .5rem;
+	width: 100%;
 }
 
 .auth-close {
@@ -60,19 +61,18 @@
 		justify-content: center;
 		align-items: center;
 		@include border-radius(0.3rem);
+		cursor: pointer;
 		&:hover {
 			background-color: $lighter-gray;
 		}	
 	}
 }
 
-.auth-signup {
-	font-size: .85rem;
-	color: rgb(48, 48, 48);
-	background-color: white;
-	border-color: $light-gray;
-	&:hover {
-		color: white;
-		background-color: $blue;
-	}
+.auth-signup-form {
+	width: 100%;
+	margin-top: 1rem;
+}
+
+.acct-type {
+	width: 100%;
 }
