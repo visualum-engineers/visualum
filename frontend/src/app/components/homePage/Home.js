@@ -14,9 +14,9 @@ export default function HomePage() {
     return (
         <>
             <Navbar openSignUp={toggleSignUp} openSignIn={toggleSignIn} />
-            {signUpOpen && <SignUp toggle={toggleSignUp} />}
-            {signInOpen && <SignIn toggle={toggleSignIn} />}
-            <IntroHome />
+            {signUpOpen && <SignUp toggle={toggleSignUp} toggleOther={toggleSignIn} />}
+            {signInOpen && <SignIn toggle={toggleSignIn} toggleOther={toggleSignUp} />}
+            <IntroHome toggleSignUp={toggleSignUp}/>
             <MarketingHomeIntro />
         </>
     )

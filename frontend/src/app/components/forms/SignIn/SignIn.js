@@ -6,7 +6,22 @@ import ReactDOM from 'react-dom';
 import GoogleSignInButton from '../EntryForms/LoginForm/GoogleSignInBtn';
 const logo = "./images/VisualumLogo.png"
 
-export default function SignIn({ toggle }) {
+export default function SignIn({ toggle, toggleOther }) {
+
+	const switchMethod = () => {
+		toggle()
+		toggleOther()
+	}
+
+	const otherOptions =
+		<div className='mt-3 text-center'>
+			<div className='forgot-password'>
+				Forgot your password?
+			</div>
+			<div className='no-account'>
+				Don't have an account? <span className='sign-up-link' onClick={switchMethod}>Sign Up.</span>
+			</div>
+		</div>
 
 	return ReactDOM.createPortal(
 		<PopUpBg onClick={toggle} zIndex={1031}>
@@ -42,6 +57,9 @@ export default function SignIn({ toggle }) {
 					</div>
 					<div className='col-12'>
 						<button className='btn btn-primary mt-4 auth-submit'>Submit</button>
+					</div>
+					<div className='col-12'>
+						{otherOptions}
 					</div>
 				</div>
 			</div>

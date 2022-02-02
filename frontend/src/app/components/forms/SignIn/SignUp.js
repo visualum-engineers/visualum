@@ -6,9 +6,21 @@ import GoogleSignInButton from '../EntryForms/LoginForm/GoogleSignInBtn'
 import ReactDOM from 'react-dom';
 const logo = "./images/VisualumLogo.png"
 
-export default function SignUp({ toggle }) {
+export default function SignUp({ toggle, toggleOther }) {
 
 	const [stage, setStage] = useState("acctType");
+
+	const switchMethod = () => {
+		toggle()
+		toggleOther()
+	}
+
+	const otherOptions =
+		<div className='mt-3 text-center'>
+			<div className='no-account'>
+				Already have an account? <span className='sign-up-link' onClick={switchMethod}>Log In.</span>
+			</div>
+		</div>
 
 	const acctType =
 		<div className='acct-type'>
@@ -86,6 +98,11 @@ export default function SignUp({ toggle }) {
 							:
 							acctType
 						}
+					</div>
+					<div className='row'>
+						<div className='col-12'>
+							{otherOptions}
+						</div>
 					</div>
 				</div>
 			</div>

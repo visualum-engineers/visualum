@@ -96,3 +96,17 @@
 		padding-left: 1rem;
 	}
 }
+
+.forgot-password {
+	color: $blue;
+	cursor: pointer;
+	margin-bottom: .5rem;
+}
+
+.no-account {
+	cursor: default;
+	.sign-up-link {
+		color: $blue;
+		cursor: pointer;
+	}
+}
