@@ -76,3 +76,23 @@
 .acct-type {
 	width: 100%;
 }
+
+.auth-divider {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	.line {
+		width: 100%;
+		text-decoration: line-through;
+		font-weight: 700;
+	}
+	.left {
+		width: 100%;
+		padding-right: 1rem;
+	}
+	.right {
+		width: 100%;
+		padding-left: 1rem;
+	}
+}

@@ -8,8 +8,6 @@ const logo = "./images/VisualumLogo.png"
 
 export default function SignIn({ toggle }) {
 
-
-
 	return ReactDOM.createPortal(
 		<PopUpBg onClick={toggle} zIndex={1031}>
 			<div className='auth-modal'>
@@ -22,6 +20,15 @@ export default function SignIn({ toggle }) {
 					<h3 className='auth-title text-center mb-3'>Log In</h3>
 					<div className='d-flex justify-content-center'>
 						<GoogleSignInButton />
+					</div>
+					<div className='auth-divider'>
+						<div className='line left'>
+							<hr />
+						</div>
+						<span> or </span>
+						<div className='line right'>
+							<hr />
+						</div>
 					</div>
 					<div className='row'>
 						<div className='col-12'>

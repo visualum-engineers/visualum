@@ -72,6 +72,15 @@ export default function SignUp({ toggle }) {
 					<div className='d-flex flex-column justify-content-center align-items-center'>
 						{stage != "acctType" ? <>
 							<GoogleSignInButton />
+							<div className='auth-divider'>
+								<div className='line left'>
+									<hr />
+								</div>
+								<span> or </span>
+								<div className='line right'>
+									<hr />
+								</div>
+							</div>
 							{form}
 						</>
 							:
