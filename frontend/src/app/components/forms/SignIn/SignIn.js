@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import ReactDOM from 'react-dom';
 import GoogleSignInButton from '../EntryForms/LoginForm/GoogleSignInBtn';
-const logo = "./images/VisualumLogo.png"
 
 export default function SignIn({ toggle, toggleOther }) {
 

@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import GoogleSignInButton from '../EntryForms/LoginForm/GoogleSignInBtn'
 import ReactDOM from 'react-dom';
-const logo = "./images/VisualumLogo.png"
 
 export default function SignUp({ toggle, toggleOther }) {
 
@@ -82,7 +81,7 @@ export default function SignUp({ toggle, toggleOther }) {
 				<div className='auth-body'>
 					<h3 className='auth-title mb-3 text-center'>Join Us</h3>
 					<div className='d-flex flex-column justify-content-center align-items-center'>
-						{stage != "acctType" ? <>
+						{stage !== "acctType" ? <>
 							<GoogleSignInButton />
 							<div className='auth-divider'>
 								<div className='line left'>

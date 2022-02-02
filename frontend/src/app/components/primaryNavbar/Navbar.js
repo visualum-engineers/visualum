@@ -12,6 +12,8 @@ export default function Navbar(props) {
 
     //REPLACE THIS WITH AUTH LOGIC LATER
     const [isSignedIn, setIsSignedIn] = useState(false);
+    setIsSignedIn(false);
+    
     return (
         <>
             <div
