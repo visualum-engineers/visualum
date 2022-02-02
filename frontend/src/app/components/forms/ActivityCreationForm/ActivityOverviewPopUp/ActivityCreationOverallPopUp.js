@@ -1,14 +1,20 @@
 import { useSelector } from "react-redux"
 import { useState } from "react"
-import PopUpBg from "../../utilities/popUp/PopUpBackground"
-import ExitIcon from "../../utilities/exitIcon/ExitIcon"
+import PopUpBg from "../../../utilities/popUp/PopUpBackground"
+import ExitIcon from "../../../utilities/exitIcon/ExitIcon"
 import { 
     ActivityNameInput,
     ActivityDescription,
     ActivityTimerInput,
+    ActivityCreationImgInput,
+    ActivityShareSettings,
+    ActivityTopicLabels
 } from "./index"
 
-const ActivityCreationOverallPopUp = () =>{
+const ActivityCreationOverallPopUp = ({
+    smallWindowWidth,
+    mediumWindowWidth
+}) =>{
     const activityName = useSelector(state => state.activityCreation.data.activityName)
     const [activityPopUp, setActivityPopUp] = useState(!activityName)
 
@@ -40,24 +46,24 @@ const ActivityCreationOverallPopUp = () =>{
                         </div>
                         <div className="activity-creation-edit-pop-up-body-container"> 
                             <div className="activity-creation-edit-pop-up-body">
-                                <div className="d-flex w-100">
-                                    <div 
-                                        className="activity-creation-img-upload"
-                                    >
-                                        <input
-                                            id={"activity-creation-img-upload-btn"}
-                                            htmlFor = {"activity-creation-img-file-input"}
-                                            onClick={(e) => e.target.closest("input").nextElementSibling.click()} 
-                                            type={"button"}
-                                        />
-                                        <input 
-                                            id={"activity-creation-img-file-input"}
-                                            type={"file"}
-                                        />
+                                <div className={`d-flex w-100 ${!mediumWindowWidth? "flex-column align-items-center" : ""}`}>
+                                    <ActivityCreationImgInput />
+                                    <div className={`d-flex flex-column flex-grow-1 justify-content-between ${!mediumWindowWidth? "w-100" : ""}`}>
+                                        <ActivityNameInput />
+                                        <div className="d-flex align-items-end flex-grow-1">
+                                            <ActivityTimerInput 
+                                                smallWindowWidth={smallWindowWidth}
+                                            />
+                                           <ActivityTopicLabels />
+                                        </div>
+                                        
+
                                     </div>
-                                    <ActivityNameInput />
-                                    <ActivityTimerInput />
                                 </div>
+                                <ActivityShareSettings 
+                                    smallWindowWidth={smallWindowWidth}
+                                    mediumWindowWidth={mediumWindowWidth}
+                                />
                                 <ActivityDescription />
                             </div>
                         </div>

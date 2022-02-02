@@ -23,8 +23,13 @@
     }
     button{
         @include remove-btn-default();
-        width: 1.2rem;
-        padding: 0;
+        @include transition(0.2s ease-in all);
+        @include border-radius(0.3rem);
+        display: flex;
+        align-items: center;
+        width: 1.7rem;
+        height: 1.7rem;
+        padding: 0.3rem;
         svg{
             width: 100%;
             stroke: $darkest-gray;
@@ -54,6 +59,8 @@
     position: relative;
     height: 10rem;
     width: 10rem;
+    min-width: 10rem;
+    margin-right: 3%;
     &::after{
         pointer-events: none;
         touch-action: none;
@@ -86,7 +93,19 @@
 .activity-name-edit{
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    label{
+        margin-bottom: 0.3rem;
+    }
+    input{
+        font-size: 1.3rem;
+        border: none;
+        border-bottom: 2px $dark-gray solid;
+        outline: none;
+        background-color: transparent;
+    }
+    input:focus{
+        border-bottom: 2px $dark-blue solid;
+    }
 }
 .activity-name-edit-limit{
     display: flex;
@@ -96,6 +115,36 @@
     margin-right: 0.1rem;
     margin-top: 0.2rem;
 }
+.activity-timer-creation-label{
+    margin-bottom: 0.3rem;
+}
+.activity-timer-inputs{
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    input{
+        width: 50%;
+        text-align: center;
+        height: 100%;
+        flex-grow: 1;
+        font-size: 1rem;
+        margin: 0 0.3rem;
+        @include border-radius(0.3rem);
+        border : 1px solid $dark-gray;
+        font-size: 0.9rem;
+        outline: none;
+        &:focus{
+            border: 1px solid $dark-blue;
+        }
+        &::placeholder{
+            font-size: 0.7rem;
+        }
+    }
+    input:first-child{
+        margin-left: 0;
+    }
+}
 .activity-creation-timer-add, 
 .activity-creation-timer-remove{
     @include remove-btn-default();
@@ -103,22 +152,93 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2rem;
-    height: 2rem;
     color: $white;
 }
 .activity-creation-timer-add{
     background-color: $dark-green;
+    height: 3.5rem;
+    width: 100%;
+    font-size: 1.2rem;
+    span{
+        margin-left: 0.5rem;
+    }
 }
 .activity-creation-timer-remove{
     background-color: $red;
+    padding: 0 1rem;
+    height: 2.5rem;
+    margin-left: 0.5rem;
+    span {
+        margin-left: 0.5rem;
+
+    }
+}
+.activity-creation-assign-inputs{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    .select-input{
+        font-size: 0.85rem;
+        width: 90%;
+    }
+}
+.activity-creation-share-settings{
+    display: flex;
+    margin-top: 4%;
+    .settings-share-public-btn,
+    .settings-keep-private-btn{
+        @include remove-btn-default();
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        @include border-radius(0.5rem);
+        border: 1px solid $dark-gray;
+        height: 3.5rem;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        .icon-container{
+            span{
+                margin-left: 0.5rem;
+                color: $black;
+                font-size: 1rem;
+            }
+        }
+        .btn-description{
+            font-size: 0.8rem;
+            color: $darkest-gray;
+        }
+    }
+    .settings-share-public-btn{
+        @include border-radius(0.5rem 0 0 0.5rem)
+
+    }
+    .settings-keep-private-btn{
+        @include border-radius(0 0.5rem 0.5rem 0)
+    }
+    
+}
+.activity-creation-share-settings-upgrade{
+    display: flex; 
+    justify-content: end; 
+    width:100%; 
+    font-size: 0.75rem; 
+    margin-top: 0.5rem;
+    a{
+        font-weight: 500;
+        color: $dark-blue;
+    }
+    a:visited{
+        color: $purple;
+    }
 }
 .activity-creation-activity-description-edit{
     margin-top: 3%;
     width: 100%;
     height: 100%;
     .description-edit-textarea{
-        min-height: 40%;
+        min-height: 11rem;
         width: 100%;        
         display: grid;
         &::after{

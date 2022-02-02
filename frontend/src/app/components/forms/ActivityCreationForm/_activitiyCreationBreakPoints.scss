@@ -2,5 +2,13 @@
     
 }
 @mixin activity-creation-hover {
-    
+    .activity-creation-edit-pop-up-header{
+        button:hover{
+            background-color: $red;
+            svg{
+                stroke: $white;
+            }
+        }
+        
+    }
 }

@@ -1,5 +1,5 @@
-import { updateActivityDescription } from "../../../../redux/features/activityCreation/activityCreationData"
-import useReduxTextInputs from "../../../hooks/use-redux-text-inputs"
+import { updateActivityDescription } from "../../../../../redux/features/activityCreation/activityCreationData"
+import useReduxTextInputs from "../../../../hooks/use-redux-text-inputs"
 const ActivityDescription = () =>{
     const charLimit = 1000
     const [activityDescription, onDescriptionChange] = useReduxTextInputs({
