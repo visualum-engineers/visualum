@@ -7,8 +7,6 @@ import useScrollPos from '../../hooks/use-scroll-pos';
 export default function Navbar(props) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const windowScrollY = useScrollPos()
-    console.log('inside navbar. props:', props)
-
     return (
         <>
             <div

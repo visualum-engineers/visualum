@@ -10,8 +10,6 @@ const HomePage = (props) => {
 
     const { isShowing: signUpOpen, toggle: toggleSignUp } = useModal();
 
-    console.log('inside home. toggleSignUp:', toggleSignUp)
-
     return (
         <NavWrapper toggleSignUp={toggleSignUp}>
             {/* <SignIn /> */}

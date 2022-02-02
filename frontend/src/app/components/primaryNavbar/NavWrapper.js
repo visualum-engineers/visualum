@@ -25,8 +25,6 @@ export default function NavWrapper(props) {
         }
     }
 
-    console.log('inside navwrapper. props:', props)
-
     return (
         <>
             <Navbar

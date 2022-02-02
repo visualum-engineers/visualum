@@ -1,7 +1,6 @@
 import UserProfile from './UserProfile';
 const Login = (props) => {
     const { signedIn, openSignUp } = props;
-    console.log('inside loginbtn. props:', props)
     return (
         signedIn ? props.windowWidth ?
             <UserProfile rewardNum={200} dropdownOpen={props.dropdownOpen} toggleDropdownOpen={props.toggleDropdownOpen} /> : null
