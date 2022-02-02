@@ -1,12 +1,13 @@
 import React from 'react';
-import PopUpBackground from '../../utilities/popUp/PopUpBackground'
+import PopUpBg from '../../utilities/popUp/PopUpBackground'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import ReactDOM from 'react-dom';
 const logo = "./images/VisualumLogo.png"
 
-export default function SignIn() {
-	return (
-		<PopUpBackground>
+export default function SignIn({ toggle }) {
+	return ReactDOM.createPortal(
+		<PopUpBg onClick={toggle} zIndex={1031}>
 			<div className='auth-modal'>
 				<div className='auth-close'>
 					<FontAwesomeIcon icon={faTimes} />
@@ -43,6 +44,5 @@ export default function SignIn() {
 					<button className='btn btn-primary auth-submit'>Submit</button>
 				</div>
 			</div>
-		</PopUpBackground>
-	);
+		</PopUpBg>, document.getElementById('portal'));
 }

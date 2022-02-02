@@ -1,7 +1,7 @@
 .auth-modal {
 	background-color: rgb(255, 255, 255);
 	width: 25rem;
-	z-index: 3;
+	z-index: inherit;
 	@include border-radius(15px);
 	-webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.3); 
 	box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.3);

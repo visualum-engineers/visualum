@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import UserProfile from './UserProfile'
 import NavToggler from './NavTogglerBtn';
-import NavItem from '../utilities/navItems/NavItems';
 import SearchBar from './SearchBar';
 import useScrollPos from '../../hooks/use-scroll-pos';
+
 export default function Navbar(props) {
 
     const windowScrollY = useScrollPos()
 
+    const { openSignIn, openSignUp } = props;
+
     //REPLACE THIS WITH AUTH LOGIC LATER
     const [isSignedIn, setIsSignedIn] = useState(false);
-
     return (
         <>
             <div
@@ -32,13 +33,13 @@ export default function Navbar(props) {
                                     <>
                                         <button
                                             className="btn btn-primary btn-home-auth justify-content-end me-2"
-                                            onClick={props.openSignUp}
+                                            onClick={openSignUp}
                                         >
                                             Sign Up
                                         </button>
                                         <button
                                             className="btn btn-primary btn-home-auth justify-content-end"
-                                            onClick={props.openSignUp}
+                                            onClick={openSignIn}
                                         >
                                             Log In
                                         </button>

@@ -6,7 +6,7 @@ import GoogleSignInButton from '../EntryForms/LoginForm/GoogleSignInBtn'
 import ReactDOM from 'react-dom';
 const logo = "./images/VisualumLogo.png"
 
-export default function SignUp() {
+export default function SignUp({ toggle }) {
 
 	const [signUpType, setSignUpType] = useState(null);
 
@@ -42,7 +42,7 @@ export default function SignUp() {
 	}
 
 	return ReactDOM.createPortal(
-		<PopUpBg>
+		<PopUpBg onClick={toggle} zIndex={1031}>
 			<div className='auth-modal'>
 				<div className='auth-close'>
 					<div className='close-button'>
