@@ -2,8 +2,8 @@ import { React } from 'react'
 import IntroHome from "./IntroHome"
 import MarketingHomeIntro from "./FeaturesHome"
 import Navbar from '../primaryNavbar/Navbar'
-import SignIn from '../forms/SignIn/SignIn'
-import SignUp from '../forms/SignIn/SignUp'
+import SignIn from '../forms/AuthModals/SignIn'
+import SignUp from '../forms/AuthModals/SignUp'
 import useModal from '../../hooks/useModal'
 
 export default function HomePage() {
