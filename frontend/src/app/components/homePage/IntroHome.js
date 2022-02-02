@@ -1,6 +1,6 @@
 const background = "images/homePage/background.jpeg"
 
-const IntroHome = () => {
+const IntroHome = (props) => {
     return (
         <div className="intro">
             <div className="intro-homepage" style={{ backgroundImage: background }}>
@@ -11,7 +11,11 @@ const IntroHome = () => {
                     <h3 className="intro-subtitle">
                         Join Visualum to start your journey.
                     </h3>
-                    <a className="btn btn-priamry intro-button" href="/signup">Sign Up</a>
+                    <button
+                        className="btn btn-priamry intro-button"
+                        onClick={props.toggleSignUp}
+                    >Sign Up
+                    </button>
                 </div>
             </div>
             <div className="intro-explore">
@@ -21,4 +25,4 @@ const IntroHome = () => {
         </div>
     )
 }
-export default IntroHome
+export default IntroHome;

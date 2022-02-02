@@ -1,25 +1,23 @@
 import { React } from 'react'
 import IntroHome from "./IntroHome"
 import MarketingHomeIntro from "./FeaturesHome"
-// const starsWebM = "images/homePage/stars.webm"
-// const starsMov = "images/homePage/stars.mov"
-import SignIn from '../forms/SignIn/SignIn'
+import Navbar from '../primaryNavbar/Navbar'
+import SignIn from '../forms/AuthModals/SignIn'
+import SignUp from '../forms/AuthModals/SignUp'
+import useModal from '../../hooks/useModal'
 
-const HomePage = () => {
-    // useEffect(()=>{
-    //     document.querySelector(".home-page-stars").playbackRate = 0.45;
-    // }, [])
+export default function HomePage() {
+
+    const { isShowing: signUpOpen, toggle: toggleSignUp } = useModal();
+    const { isShowing: signInOpen, toggle: toggleSignIn } = useModal();
+
     return (
         <>
-            {/*works for chrome*/}
-            {/* <video loop muted autoPlay className="home-page-stars">
-                <source src ={starsMov} type="video/mov"/>
-                <source src={starsWebM} type="video/webm"/>
-            </video> */}
-            {/* <SignIn /> */}
-            <IntroHome />
+            <Navbar openSignUp={toggleSignUp} openSignIn={toggleSignIn} />
+            {signUpOpen && <SignUp toggle={toggleSignUp} toggleOther={toggleSignIn} />}
+            {signInOpen && <SignIn toggle={toggleSignIn} toggleOther={toggleSignUp} />}
+            <IntroHome toggleSignUp={toggleSignUp}/>
             <MarketingHomeIntro />
         </>
     )
 }
-export default HomePage;
