@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import UserProfile from './UserProfile'
 import NavToggler from './NavTogglerBtn';
 import SearchBar from './SearchBar';
@@ -11,9 +11,8 @@ export default function Navbar(props) {
     const { openSignIn, openSignUp } = props;
 
     //REPLACE THIS WITH AUTH LOGIC LATER
-    const [isSignedIn, setIsSignedIn] = useState(false);
-    setIsSignedIn(false);
-    
+    const isSignedIn = false;
+
     return (
         <>
             <div
