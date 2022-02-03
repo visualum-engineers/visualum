@@ -14,7 +14,7 @@ export const userInfoSlice = createSlice({
         verifiedEmailCode: "",
         classCode: "",
         schoolCode: "",
-        subscriptionType: "",
+        subscriptionType: "free",
         school: "",
         payment: "",
         rememberMe: false,

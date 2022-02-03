@@ -11,7 +11,9 @@ const ActivityShareSettings = ({
         <>
         <div className="activity-creation-share-settings">
             <button 
-                className={`settings-share-public-btn ${shareSettings==="public"? "active": ""}`}
+                className={`settings-share-public-btn` 
+                            + `${shareSettings==="public" || subscriptionType === "free" ? " active-btn": ""}`
+                        }
             >
                 <div className="icon-container">
                     <FontAwesomeIcon icon={faGlobeAmericas}/>
@@ -26,8 +28,11 @@ const ActivityShareSettings = ({
                 }
             </button>
             <button 
-                className={`settings-keep-private-btn ${shareSettings==="private"? "active": ""}`}
-                disabled={subscriptionType}
+                className={`settings-keep-private-btn` 
+                         + `${shareSettings==="private"? " active-btn": ""}`
+                         + `${subscriptionType === "free" ? " disabled-btn" : ""}`
+                        }
+                disabled={subscriptionType === "free"}
             >
                 <div className="icon-container">
                     <FontAwesomeIcon icon={faLock}/>
@@ -40,7 +45,7 @@ const ActivityShareSettings = ({
                 }
             </button>
         </div>
-        {!subscriptionType &&
+        {subscriptionType ==="free" &&
             <div className="activity-creation-share-settings-upgrade">
                 <span>{`Note: Make your activity private by upgrading your subscription `} 
                     <a

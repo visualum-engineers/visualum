@@ -51,13 +51,13 @@ const ActivityCreationOverallPopUp = ({
                                     <div className={`d-flex flex-column flex-grow-1 justify-content-between ${!mediumWindowWidth? "w-100" : ""}`}>
                                         <ActivityNameInput />
                                         <div className={`d-flex align-items-end flex-grow-1 ${!smallWindowWidth ? "flex-column":""}`}>
+                                            <ActivityTopicLabels 
+                                               smallWindowWidth={smallWindowWidth}
+                                            />
                                             <ActivityTimerInput 
                                                 smallWindowWidth={smallWindowWidth}
                                             />
-                                           <ActivityTopicLabels 
-                                               smallWindowWidth={smallWindowWidth}
-
-                                           />
+                                           
                                         </div>
                                         
 

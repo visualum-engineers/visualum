@@ -21,6 +21,7 @@
     @include homepage-sm;
     @include label-pic-activity-md;
     @include sa-activity-md;
+    @include activity-creation-md;
 }
 
 @media(max-width: 768px){
@@ -35,6 +36,7 @@
     @include homepage-xs;
     @include label-pic-activity-sm;
     @include sa-activity-sm;
+    @include activity-creation-sm;
 }
 
 @media (any-hover: hover) {

@@ -3,11 +3,14 @@ import { useRealmApp } from '../../../../../realm/RealmApp';
 import { googleLogin } from '../../../../../realm/authFunc/googleAuth'
 /*global google */
 const googleClientID = process.env.REACT_APP_GOOGLE_CLIENT_ID
-const GoogleLoginBtn = () => {
+const GoogleBtn = ({
+    btnType = "login"   
+}) => {
     const app = useRealmApp()
     useEffect(() => {
         const initializeGsi = () => {
             google.accounts.id.initialize({
+                context: btnType==="signup" ? "signup": "signin",
                 client_id: googleClientID,
                 callback: (res) => googleLogin(res, app)
             });
@@ -30,7 +33,7 @@ const GoogleLoginBtn = () => {
         //cleanup script
         return () => document.getElementById("googleLoginIdScript").remove()
 
-    }, [app])
+    }, [app, btnType])
     return (
         <div>
             <button className="mb-2 entry-google-btn">
@@ -38,7 +41,7 @@ const GoogleLoginBtn = () => {
                     data-type="standard"
                     data-shape="rectangular"
                     data-theme="outline"
-                    data-text="signin_with"
+                    data-text={btnType ==="signUp" ? "signup_with": "signin_with"}
                     data-size="large"
                     data-logo_alignment="left">
                 </div>
@@ -46,4 +49,4 @@ const GoogleLoginBtn = () => {
         </div>
     )
 }
-export default GoogleLoginBtn
+export default GoogleBtn
