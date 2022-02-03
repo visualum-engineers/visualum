@@ -1,14 +1,20 @@
 import { useSelector } from "react-redux"
 import { useState } from "react"
-import PopUpBg from "../../utilities/popUp/PopUpBackground"
-import ExitIcon from "../../utilities/exitIcon/ExitIcon"
+import PopUpBg from "../../../utilities/popUp/PopUpBackground"
+import ExitIcon from "../../../utilities/exitIcon/ExitIcon"
 import { 
     ActivityNameInput,
     ActivityDescription,
     ActivityTimerInput,
+    ActivityCreationImgInput,
+    ActivityShareSettings,
+    ActivityTopicLabels
 } from "./index"
 
-const ActivityCreationOverallPopUp = () =>{
+const ActivityCreationOverallPopUp = ({
+    smallWindowWidth,
+    mediumWindowWidth
+}) =>{
     const activityName = useSelector(state => state.activityCreation.data.activityName)
     const [activityPopUp, setActivityPopUp] = useState(!activityName)
 
@@ -40,9 +46,28 @@ const ActivityCreationOverallPopUp = () =>{
                         </div>
                         <div className="activity-creation-edit-pop-up-body-container"> 
                             <div className="activity-creation-edit-pop-up-body">
-                                <ActivityNameInput />
+                                <div className={`d-flex w-100 ${!mediumWindowWidth? "flex-column align-items-center" : ""}`}>
+                                    <ActivityCreationImgInput />
+                                    <div className={`d-flex flex-column flex-grow-1 justify-content-between ${!mediumWindowWidth? "w-100" : ""}`}>
+                                        <ActivityNameInput />
+                                        <div className={`d-flex align-items-end flex-grow-1 ${!smallWindowWidth ? "flex-column":""}`}>
+                                            <ActivityTopicLabels 
+                                               smallWindowWidth={smallWindowWidth}
+                                            />
+                                            <ActivityTimerInput 
+                                                smallWindowWidth={smallWindowWidth}
+                                            />
+                                           
+                                        </div>
+                                        
+
+                                    </div>
+                                </div>
+                                <ActivityShareSettings 
+                                    smallWindowWidth={smallWindowWidth}
+                                    mediumWindowWidth={mediumWindowWidth}
+                                />
                                 <ActivityDescription />
-                                <ActivityTimerInput />
                             </div>
                         </div>
                     </div>

@@ -12,9 +12,13 @@ const activityCreationData = createSlice({
         activityName: "",
         activityDescription: "",
         activityTimer: null,
+        activityTopicLabels: [],
         questions: []
     },
     reducers:{
+        updateTopicLabels: (state, action) =>{
+            state.activityTopicLabels = action.payload
+        },
         updateActivityTimer: (state, action) =>{
             state.activityTimer = action.payload
         },
@@ -52,6 +56,7 @@ export const {
     updateActivityName,
     updateActivityDescription,
     updateActivityTimer,
+    updateTopicLabels,
     updateQuestionData,
     addQuestion,
     deleteQuestion,
@@ -64,7 +69,9 @@ const  undoableData = undoable(activityCreationData.reducer,{
     filter: excludeAction([
         "activityCreationData/updateActivityName",
         "activityCreationData/updateActivityDescription",
-        "activityCreationData/updateActivityTimer"
+        "activityCreationData/updateActivityTimer",
+        "activityCreationData/updateTopicLabels"
+
     ])
 })
 export default undoableData

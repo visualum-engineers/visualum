@@ -1,8 +1,14 @@
-import ActivityCreationOverallPopUp from "./ActivityCreationOverallPopUp"
+import ActivityCreationOverallPopUp from "./ActivityOverviewPopUp/ActivityCreationOverallPopUp"
+import { useWindowWidth } from "../../../hooks"
 const ActivityCreationForm = () =>{
+    const smallWindowWidth = useWindowWidth(576) 
+    const mediumWindowWidth = useWindowWidth(992)
     return(
         <div>
-            <ActivityCreationOverallPopUp />
+            <ActivityCreationOverallPopUp 
+                smallWindowWidth={smallWindowWidth}
+                mediumWindowWidth={mediumWindowWidth}
+            />
             <div>   
             
             </div>

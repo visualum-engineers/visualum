@@ -5,7 +5,8 @@ import {debounce} from "lodash"
 const useReduxTextInputs = ({
     reduxUpdateFunc,
     selectorFunc, 
-    inputType
+    inputType,
+    charLimit,
 }) =>{
     const reduxTextInput = useSelector(selectorFunc)
     const dispatch = useDispatch()
@@ -33,7 +34,8 @@ const useReduxTextInputs = ({
     const onTextInputChange = (e) =>{
         const target = e.target
         const value = target.closest(inputType).value
-        setLocalTextInput(e.value)
+        if(charLimit && value.length > charLimit) return
+        setLocalTextInput(value)
         debouncedUpdateTextInput(
             value, 
             dispatch, 
