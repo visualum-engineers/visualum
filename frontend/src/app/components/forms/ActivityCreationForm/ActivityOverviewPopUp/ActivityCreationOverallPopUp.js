@@ -1,8 +1,15 @@
-import { useSelector, useDispatch } from "react-redux"
+import {useSelector, useDispatch } from "react-redux"
 import PopUpBg from "../../../utilities/popUp/PopUpBackground"
 import ExitIcon from "../../../utilities/exitIcon/ExitIcon"
 import { createPortal } from "react-dom"
 import { updateActivityEditPopUp } from "../../../../../redux/features/activityCreation/activityCreationSettings"
+import { unstable_batchedUpdates } from "react-dom"
+import {
+    updateActivityName,
+    updateActivityTimer,
+    updateTopicLabels,
+    updateActivityDescription
+} from "../../../../../redux/features/activityCreation/activityCreationData"
 import { 
     ActivityNameInput,
     ActivityDescription,
@@ -11,14 +18,32 @@ import {
     ActivityShareSettings,
     ActivityTopicLabels
 } from "./index"
+import { useEffect, useState } from "react"
 
 const ActivityCreationOverallPopUp = ({
     smallWindowWidth,
     mediumWindowWidth
 }) =>{
+    const [activitySave, setOnSave] = useState(false)
     const activityPopUp = useSelector(state => state.activityCreation.settings.activityEditPopUp)
     const dispatch = useDispatch()
-
+    //selector will only cause re-render when on save changes
+    const unsavedData = useSelector(state => state.activityCreation.data.unsaved, ()=>!activitySave)
+    console.log(activitySave)
+    useEffect(()=>{
+        let isMounted = true
+        if(activitySave && isMounted){
+            unstable_batchedUpdates(()=>{
+                dispatch(updateActivityName(unsavedData.activityName))
+                dispatch(updateActivityTimer(unsavedData.activityTimer))
+                dispatch(updateTopicLabels(unsavedData.activityTopicLabels))
+                dispatch(updateActivityDescription(unsavedData.activityDescription))
+                dispatch(updateActivityEditPopUp(false))
+                setOnSave(false)
+            })
+        }
+        return () => {isMounted = false}
+    }, [dispatch, unsavedData, activitySave])
     const popUpBgStyles = {
         position: "fixed",
         top: "0",
@@ -28,6 +53,7 @@ const ActivityCreationOverallPopUp = ({
         width: "100%",
         transition: "all 0.3s ease-out",
     }
+
     return(
         <>
             {activityPopUp &&
@@ -67,7 +93,14 @@ const ActivityCreationOverallPopUp = ({
                                         smallWindowWidth={smallWindowWidth}
                                         mediumWindowWidth={mediumWindowWidth}
                                     />
-                                    <ActivityDescription />
+                                    <ActivityDescription 
+                                    
+                                    />
+                                    <button
+                                        onClick = {()=>setOnSave(true)}
+                                    >
+                                        Save
+                                    </button>
                                 </div>
                             </div>
                         </div>

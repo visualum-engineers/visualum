@@ -15,7 +15,7 @@
     padding-left: 1.5rem;
     padding-right: 1rem;
     height: 3.7rem;
-    background-color: rgba(236, 236, 236, 0.822);
+    background-color: $light-gray;
     color: $black;
     @include border-radius(7px 7px 0 0);
     span{

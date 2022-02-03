@@ -18,7 +18,7 @@ const MiniScreenSideBar = ({
                             <div className="mini-screen-container">
                                 {value.slide}
                             </div>
-                            <div className="mini-screen-textContent">
+                            <div className="mini-screen-text-content">
                                 {value.textContent}
                             </div>
                             <div className="dragHandle">

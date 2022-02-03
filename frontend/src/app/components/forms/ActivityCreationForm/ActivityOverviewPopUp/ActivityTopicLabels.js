@@ -1,8 +1,7 @@
 import makeAnimated from 'react-select/animated';
 import AsyncCreatableSelect from 'react-select/async-creatable';
-
 import { useDispatch, useSelector } from "react-redux";
-import { updateTopicLabels } from '../../../../../redux/features/activityCreation/activityCreationData';
+import { updateUnsavedTopicLabels } from '../../../../../redux/features/activityCreation/activityCreationData';
 import useSearchTopicLabels from '../../../../hooks/use-search-topic-labels';
 const animatedComponents = makeAnimated();
 
@@ -10,11 +9,9 @@ const ActivityTopicLabels = ({
     smallWindowWidth, 
 }) =>{
     const [topicLabels, searchLabels] = useSearchTopicLabels()
-    const activityTopics = useSelector(state => state.activityCreation.data.present.activityTopicLabels)
+    const activityTopics = useSelector(state => state.activityCreation.data.unsaved.activityTopicLabels)
     const dispatch = useDispatch()
-    const defaultLabels = activityTopics.map((topicLabel) =>{
-        return({value: topicLabel.id, label: topicLabel.content})
-    })
+
     const defaultOptions = topicLabels.map((topicLabel) => {
         return({value: topicLabel.id, label: topicLabel.content})
     })
@@ -32,7 +29,7 @@ const ActivityTopicLabels = ({
     }
 
     const onSelectChange = (arr) =>{
-        dispatch(updateTopicLabels(arr))
+        dispatch(updateUnsavedTopicLabels(arr))
     }
     const customStyles = {
 
@@ -56,7 +53,7 @@ const ActivityTopicLabels = ({
             <label>Topics</label>
             <AsyncCreatableSelect 
                 onChange={onSelectChange}
-                defaultValue={defaultLabels.length>0 ? defaultLabels: null}
+                defaultValue={activityTopics ? activityTopics: null}
                 closeMenuOnSelect={false}
                 components={animatedComponents}
                 className={"select-input"}

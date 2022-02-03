@@ -3,22 +3,22 @@ import { updateActivityEditPopUp } from "../../../../../redux/features/activityC
 import { useDispatch, useSelector } from "react-redux"
 const useActivityMiniScreenData = () =>{
     const dispatch = useDispatch()
-    const questions = useSelector(state => state.activityCreation.data.present.questions)
-    const activityName = useSelector(state => state.activityCreation.data.present.activityName)
+    const questions = useSelector(state => state.activityCreation.data.saved.present.questions)
+    const activityName = useSelector(state => state.activityCreation.data.saved.present.activityName)
     const miniScreenHeader = <>
         <h1>{activityName}</h1>
         <button
             onClick={() => dispatch(updateActivityEditPopUp(true))}
-        >Edit Name</button>
+        >edit name</button>
     </>
 
     const miniScreenData = questions.map((question, index) =>{
         return ({
             textContent: <> 
-                            <h2 className="mini-screen-header">
+                            <h2 className="mini-screen-slide-header">
                                 {`Question ${parseInt(index)+1}`}
                             </h2>
-                            <h3 className="mini-screen-sub-text">
+                            <h3 className="mini-screen-slide-sub-text">
                                 {question.type}
                             </h3>
                         </> 

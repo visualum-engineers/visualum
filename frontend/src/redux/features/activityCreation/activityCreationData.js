@@ -1,19 +1,48 @@
 import undoable, {excludeAction} from 'redux-undo';
+import { combineReducers } from 'redux';
 import questionFormat from './questionFormat';
 import { 
     createSlice, 
     //combineReducers
     //createAsyncThunk,
 } from '@reduxjs/toolkit'
-
-const activityCreationData = createSlice({
-    name: "activityCreationData",
+const activityCreationDataUnsaved = createSlice({
+    name: "activityCreationDataUnsaved",
     initialState:{
         activityName: "",
         activityDescription: "",
         activityTimer: null,
         activityTopicLabels: [],
-        questions: []
+    },
+    reducers:{
+        updateUnsavedTopicLabels: (state, action) =>{
+            state.activityTopicLabels = action.payload
+        },
+        updateUnsavedActivityTimer: (state, action) =>{
+            state.activityTimer = action.payload
+        },
+        updateUnsavedActivityName:(state, action) =>{
+            state.activityName = action.payload
+        },
+        updateUnsavedActivityDescription: (state, action) =>{
+            state.activityDescription = action.payload
+        },
+    }
+})
+export const {
+    updateUnsavedTopicLabels,
+    updateUnsavedActivityTimer,
+    updateUnsavedActivityName,
+    updateUnsavedActivityDescription
+} = activityCreationDataUnsaved.actions
+const activityCreationData = createSlice({
+    name: "activityCreationData",
+    initialState:{
+        activityName: null,
+        activityDescription: null,
+        activityTimer: null,
+        activityTopicLabels: null,
+        questions: [],
     },
     reducers:{
         updateTopicLabels: (state, action) =>{
@@ -48,7 +77,7 @@ const activityCreationData = createSlice({
             let newState = [...state.questions]
             newState.splice(startIndex, 1)
             newState.splice(endIndex, 0, questionData)
-        }
+        },
     }
 
 })
@@ -70,11 +99,20 @@ const  undoableData = undoable(activityCreationData.reducer,{
         "activityCreationData/updateActivityName",
         "activityCreationData/updateActivityDescription",
         "activityCreationData/updateActivityTimer",
-        "activityCreationData/updateTopicLabels"
-
+        "activityCreationData/updateTopicLabels",
+        "activityCreationDataUnsaved/updateUnsavedActivityName",
+        "activityCreationDataUnsaved/updateUnsavedActivityDescription",
+        "activityCreationDataUnsaved/updateUnsavedActivityTimer",
+        "activityCreationDataUnsaved/updateUnsavedTopicLabels",
+        "activityCreationSettingsSlice/updateActivityEditPopUp"
     ])
 })
-export default undoableData
+
+const rootReducer = combineReducers({
+    unsaved: activityCreationDataUnsaved.reducer,
+    saved: undoableData
+})
+export default rootReducer
 // const rootReducer = combineReducers({
     
 // })

@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import onlyNumInput from "../../../../helpers/onlyNumInput"
-import { updateActivityTimer } from "../../../../../redux/features/activityCreation/activityCreationData"
+import { updateUnsavedActivityTimer } from "../../../../../redux/features/activityCreation/activityCreationData"
 import {debounce} from "lodash"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons"
@@ -13,7 +13,7 @@ const ActivityTimerInput = ({
         minutes: "", 
         seconds: "",
     }
-    const activityTimer = useSelector(state => state.activityCreation.data.present.activityTimer)
+    const activityTimer = useSelector(state => state.activityCreation.data.unsaved.activityTimer)
     const dispatch = useDispatch()
     const [localActivityTimer, setLocalActivityTimer] = useState(activityTimer)
     //update local state to reflect redux
@@ -28,10 +28,10 @@ const ActivityTimerInput = ({
     const updateTimerRedux = (
         newState, 
         dispatch, 
-        updateActivityTimer
+        updateUnsavedActivityTimer
     ) =>{
         dispatch(
-            updateActivityTimer(newState)
+            updateUnsavedActivityTimer(newState)
         )
     }
     const debouncedTimerChange = useMemo(
@@ -52,7 +52,7 @@ const ActivityTimerInput = ({
             debouncedTimerChange(
                 newState,
                 dispatch,
-                updateActivityTimer
+                updateUnsavedActivityTimer
             )
             return newState
         })
@@ -62,7 +62,7 @@ const ActivityTimerInput = ({
             {//btn for adding a timer
                 !activityTimer && 
                 <button 
-                    onClick = {() => dispatch(updateActivityTimer(initialState))}
+                    onClick = {() => dispatch(updateUnsavedActivityTimer(initialState))}
                     aria-label = {"add-activity-timer"}
                     className={`activity-creation-timer-add ${!smallWindowWidth? "w-100": ""}`}
                 >
@@ -110,7 +110,7 @@ const ActivityTimerInput = ({
                         </div>
                         <button
                             onClick = {() => {
-                                dispatch(updateActivityTimer(null))
+                                dispatch(updateUnsavedActivityTimer(null))
                                 setLocalActivityTimer(null)
                             }}
                             aria-label = {"remove-activity-timer"}

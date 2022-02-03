@@ -1,10 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faLock, faGlobeAmericas } from "@fortawesome/free-solid-svg-icons"
 import { useSelector } from "react-redux"
+
 const ActivityShareSettings = ({
     smallWindowWidth
 }) => {
-    const shareSettings = useSelector(state=>state.activityCreation.data.present.activityShareSettings)
+    const shareSettings = useSelector(state=>state.activityCreation.data.unsaved.activityShareSettings)
     const subscriptionType = useSelector(state => state.userInfo.subscriptionType)
     return(
         <>

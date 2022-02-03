@@ -1,7 +1,10 @@
-import { useEffect, useState, useMemo } from "react"
+/* use this hook when you want to control the timing of
+* the redux update during a text input. For example
+* In the use of a pop up where inputs must be saved first
+* before an update to the redux store 
+*/
+import { useEffect, useState } from "react"
 import {useSelector, useDispatch} from "react-redux"
-import {debounce} from "lodash"
-
 const useReduxTextInputs = ({
     reduxUpdateFunc,
     selectorFunc, 
@@ -16,32 +19,20 @@ const useReduxTextInputs = ({
     useEffect(()=>{
         setLocalTextInput(reduxTextInput)
     }, [reduxTextInput])
-
+    
     //updates redux text input
-    const updateTextInput = (
+    const updateReduxInput = (
         newInput,
-        dispatch, 
-        reduxUpdateFunc,
     ) => dispatch(
         reduxUpdateFunc(newInput)
     )
-    //we debounce redux update to prevent 
-    //expensive calls to local storage AND,
-    //to maintain a more accurate history stack
-    const debouncedUpdateTextInput = useMemo(
-        () => debounce(updateTextInput, 1000)
-    , [])
+
     const onTextInputChange = (e) =>{
         const target = e.target
         const value = target.closest(inputType).value
         if(charLimit && value.length > charLimit) return
         setLocalTextInput(value)
-        debouncedUpdateTextInput(
-            value, 
-            dispatch, 
-            reduxUpdateFunc
-        )
     }
-    return [localTextInput, onTextInputChange]
+    return [localTextInput, onTextInputChange, updateReduxInput]
 }
 export default useReduxTextInputs

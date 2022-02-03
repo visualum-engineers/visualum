@@ -1,10 +1,10 @@
-import { updateActivityDescription } from "../../../../../redux/features/activityCreation/activityCreationData"
-import useReduxTextInputs from "../../../../hooks/use-redux-text-inputs"
+import { updateUnsavedActivityDescription } from "../../../../../redux/features/activityCreation/activityCreationData"
+import { useReduxControlledTextInputs } from "../../../../hooks"
 const ActivityDescription = () =>{
     const charLimit = 1000
-    const [activityDescription, onDescriptionChange] = useReduxTextInputs({
-        reduxUpdateFunc: updateActivityDescription,
-        selectorFunc: (state) => state.activityCreation.data.present.activityDescription,
+    const [activityDescription, onDescriptionChange] = useReduxControlledTextInputs({
+        reduxUpdateFunc: updateUnsavedActivityDescription,
+        selectorFunc: (state) => state.activityCreation.data.unsaved.activityDescription,
         inputType: "textarea",
         charLimit: 1000
     })
