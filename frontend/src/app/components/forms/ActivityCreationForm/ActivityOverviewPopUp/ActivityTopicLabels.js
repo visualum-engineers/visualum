@@ -6,10 +6,12 @@ import { updateTopicLabels } from '../../../../../redux/features/activityCreatio
 import useSearchTopicLabels from '../../../../hooks/use-search-topic-labels';
 const animatedComponents = makeAnimated();
 
-const ActivityTopicLabels = () =>{
+const ActivityTopicLabels = ({
+    smallWindowWidth, 
+}) =>{
     const [topicLabels, searchLabels] = useSearchTopicLabels()
     const activityTopics = useSelector(state => state.activityCreation.data.present.activityTopicLabels)
-    //const activityName = useSelector(state=>state.activityCreation.data.present.activityName)
+
     const dispatch = useDispatch()
     const defaultLabels = activityTopics.map((topicLabel) =>{
         return({value: topicLabel.id, label: topicLabel.content})
@@ -35,7 +37,8 @@ const ActivityTopicLabels = () =>{
     }
 
     return(
-        
+        <div className={`activity-creation-topic-label-input ${smallWindowWidth ? "w-50":"w-100"}`}>
+            <label>Topics</label>
             <AsyncCreatableSelect 
                 onChange={onSelectChange}
                 defaultValue={defaultLabels.length>0 ? defaultLabels: null}
@@ -46,10 +49,12 @@ const ActivityTopicLabels = () =>{
                 isSearchable={true}
                 loadOptions={options}
                 isMulti={true}
-                placeholder={"Topic"}
+                placeholder={"Add Topics"}
                 noOptionsMessage={({inputValue: string}) => "No Topics Found"}
                 allowCreateWhileLoading={true}
             />
+        </div>
+            
         
     )
 }

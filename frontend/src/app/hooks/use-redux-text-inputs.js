@@ -36,7 +36,6 @@ const useReduxTextInputs = ({
         const value = target.closest(inputType).value
         if(charLimit && value.length > charLimit) return
         setLocalTextInput(value)
-        console.log(debouncedUpdateTextInput)
         debouncedUpdateTextInput(
             value, 
             dispatch, 
