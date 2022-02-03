@@ -11,7 +11,6 @@ const ActivityTopicLabels = ({
 }) =>{
     const [topicLabels, searchLabels] = useSearchTopicLabels()
     const activityTopics = useSelector(state => state.activityCreation.data.present.activityTopicLabels)
-
     const dispatch = useDispatch()
     const defaultLabels = activityTopics.map((topicLabel) =>{
         return({value: topicLabel.id, label: topicLabel.content})

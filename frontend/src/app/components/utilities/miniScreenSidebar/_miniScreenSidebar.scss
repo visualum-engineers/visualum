@@ -1,0 +1,20 @@
+.mini-screen-sidebar{
+    display: flex;
+    justify-content: center;
+    top:0;
+    left: 0;
+    margin-top: 0;
+    padding: 0;
+    width: calc(max(19rem, 300px));
+    background-color: $lighter-gray;
+    @include box-shadow(4px 0px 7px -8px #000000);
+    height: 100vh;
+    padding: 1rem;
+}
+.mini-screen-sidebar-header{
+    display: flex;
+    justify-content: space-between;
+    height: 3rem;
+    width: 100%;
+    padding: 0.5rem;
+}

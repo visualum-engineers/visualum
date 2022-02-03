@@ -6,7 +6,6 @@ const googleClientID = process.env.REACT_APP_GOOGLE_CLIENT_ID
 const GoogleBtn = ({
     btnType = "login"   
 }) => {
-    console.log(btnType==="signup")
     const app = useRealmApp()
     useEffect(() => {
         const initializeGsi = () => {
