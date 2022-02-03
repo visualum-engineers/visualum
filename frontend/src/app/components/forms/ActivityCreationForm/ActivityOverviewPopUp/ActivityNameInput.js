@@ -1,8 +1,6 @@
 import { useReduxControlledTextInputs } from "../../../../hooks"
 import { updateUnsavedActivityName } from "../../../../../redux/features/activityCreation/activityCreationData"
-// import { useEffect } from "react"
-// import removeAddedWhiteSpace from "../../../../helpers/removeWhiteSpace"
-//import { useDispatch } from "react-redux"
+
 const ActivityNameInput = () =>{
     const charLimit = 100
     const [activityName, onActivityNameChange] = useReduxControlledTextInputs({
@@ -11,17 +9,7 @@ const ActivityNameInput = () =>{
         inputType: "input",
         charLimit: charLimit
     })
-    //const dispatch = useDispatch()
-    // useEffect(() =>{
-    //     const checkEmpty = () =>{
-    //         if(removeAddedWhiteSpace(activityName).length <= 0){
-    //             dispatch(updateUnsavedActivityName("Untitled"))
-    //         }
-    //     }
-    //     checkEmpty()
-    //     return () => checkEmpty()
-    // }, [activityName, dispatch])
-    
+
     return(
         <>
             <div className="activity-name-edit">

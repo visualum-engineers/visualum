@@ -4,7 +4,10 @@ import ExitIcon from "../../../utilities/exitIcon/ExitIcon"
 import { createPortal } from "react-dom"
 import { updateActivityEditPopUp } from "../../../../../redux/features/activityCreation/activityCreationSettings"
 import { unstable_batchedUpdates } from "react-dom"
+import removeAddedWhiteSpace from "../../../../helpers/removeWhiteSpace"
 import {
+    updateUnsavedActivityDescription,
+    updateUnsavedActivityName,
     updateActivityName,
     updateActivityTimer,
     updateTopicLabels,
@@ -29,15 +32,18 @@ const ActivityCreationOverallPopUp = ({
     const dispatch = useDispatch()
     //selector will only cause re-render when on save changes
     const unsavedData = useSelector(state => state.activityCreation.data.unsaved, ()=>!activitySave)
-    console.log(activitySave)
     useEffect(()=>{
         let isMounted = true
         if(activitySave && isMounted){
+            const filteredName = removeAddedWhiteSpace(unsavedData.activityName)
+            const filteredDescription =  removeAddedWhiteSpace(unsavedData.activityDescription)
             unstable_batchedUpdates(()=>{
-                dispatch(updateActivityName(unsavedData.activityName))
+                dispatch(updateActivityName(filteredName))
+                dispatch(updateActivityDescription(filteredDescription))
+                dispatch(updateUnsavedActivityName(filteredName))
+                dispatch(updateUnsavedActivityDescription(filteredDescription))
                 dispatch(updateActivityTimer(unsavedData.activityTimer))
                 dispatch(updateTopicLabels(unsavedData.activityTopicLabels))
-                dispatch(updateActivityDescription(unsavedData.activityDescription))
                 dispatch(updateActivityEditPopUp(false))
                 setOnSave(false)
             })
