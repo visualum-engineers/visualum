@@ -1,45 +1,11 @@
-@mixin activity-creation-md {
-    .activity-creation-img-upload{
-        margin-right: 0;
-    }
+@import "./ActivityOverviewPopUp/activityCreationPopUpBreakPoints";
 
+@mixin activity-creation-md {
+    @include activity-creation-overview-pop-up-md;
 }
 @mixin activity-creation-sm {
-    
-    .activity-name-edit{
-        margin-top: 1rem;
-    }
-    .activity-creation-timer-add,
-    .activity-timer-inputs, 
-    .activity-timer-creation-label{
-        margin-left: 0;
-    }
-    .activity-creation-timer-add{
-        margin-top: 1.5rem;
-    }
-    .activity-timer-creation-label{
-        margin-top: 1rem;
-
-    }
-    .activity-creation-topic-label-input{
-        margin-right: 0;
-    }
-    .activity-creation-share-settings{
-        margin-top: 1.5rem;
-
-    }
-    .activity-creation-activity-description-edit{
-        margin-top: 1.2rem;
-    }
+    @include activity-creation-overview-pop-up-sm;
 }
 @mixin activity-creation-hover {
-    .activity-creation-edit-pop-up-header{
-        button:hover{
-            background-color: $red;
-            svg{
-                stroke: $white;
-            }
-        }
-        
-    }
+    @include activity-creation-overview-pop-up-hover;
 }

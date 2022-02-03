@@ -7,20 +7,14 @@
 @media (min-width: 992px) {
     @include navbar-lg;
     @include entry-form-lg;
-    @include match-activity-lg;
-    @include label-pic-activity-lg;
     @include activity-lg;
-    @include sa-activity-lg;
 }
 
 @media (max-width: 992px){
     @include navbar-md;
     @include entry-form-md;
-    @include match-activity-md;
     @include activity-md;
     @include homepage-sm;
-    @include label-pic-activity-md;
-    @include sa-activity-md;
     @include activity-creation-md;
 }
 
@@ -31,20 +25,13 @@
 @media (max-width: 575px) { 
     @include navbar-sm;
     @include entry-form-sm;
-    @include match-activity-sm;
     @include activity-sm;
     @include homepage-xs;
-    @include label-pic-activity-sm;
-    @include sa-activity-sm;
     @include activity-creation-sm;
 }
 
 @media (any-hover: hover) {
     @include activities-hover;
     @include activity-creation-hover;
-    @include controlled-inputs-activity-hover;
-    @include label-pic-activity-hover;
-    @include match-activity-hover;
-    @include sa-activity-hover;
-    @include sort-activity-hover;
+    
 }

@@ -1,0 +1,296 @@
+.activity-creation-edit-pop-up{
+    position: relative;
+    display: flex; 
+    flex-direction: column;
+    z-index: 3;
+    width: 85vw;
+    height: 85vh;
+}
+.activity-creation-edit-pop-up-header{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 1.5rem;
+    padding-right: 1rem;
+    height: 3.7rem;
+    background-color: rgba(236, 236, 236, 0.822);
+    color: $black;
+    @include border-radius(7px 7px 0 0);
+    span{
+        font-size: 1.2rem
+    }
+    button{
+        @include remove-btn-default();
+        @include transition(0.2s ease-in all);
+        @include border-radius(0.3rem);
+        display: flex;
+        align-items: center;
+        width: 1.7rem;
+        height: 1.7rem;
+        padding: 0.3rem;
+        svg{
+            width: 100%;
+            stroke: $darkest-gray;
+        }
+    }
+    
+}
+.activity-creation-edit-pop-up-body-container{
+    background-color: $lightest-gray;
+    padding-top: 3%;
+    padding-left: 3% ;
+    padding-right: calc(3% - 0.5rem);
+    overflow: scroll;
+    overflow-x: hidden;
+    height: calc(85vh - 2.5rem);
+    @include border-radius(0 0 0.5rem 0.5rem);
+    @include activity-scrollbar-styles();
+    .activity-creation-edit-pop-up-body{
+        //height: min-content;
+        display: flex;
+        flex-direction: column;
+        min-height: calc(100%);
+        padding-bottom: 3%;
+    } 
+}
+.activity-creation-img-upload{
+    cursor: pointer;
+    position: relative;
+    height: 10rem;
+    width: 10rem;
+    min-width: 10rem;
+    margin-right: 2rem;
+    &::after{
+        pointer-events: none;
+        touch-action: none;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        content: "Upload An Activity Image";
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        padding: 2rem;
+        font-size: 0.9rem;
+        color: $darkest-gray;
+        z-index: 1;
+    }
+    #activity-creation-img-upload-btn{
+        @include remove-btn-default();
+        background-color: $lighter-gray;
+        position: relative;
+        height: 100%;
+        width: 100%;
+    }
+    #activity-creation-img-file-input{
+        display: none;
+    }
+}
+.activity-name-edit{
+    display: flex;
+    flex-direction: column;
+    
+    input{
+        font-size: 1.3rem;
+        border: none;
+        border-bottom: 2px $dark-gray solid;
+        outline: none;
+        background-color: transparent;
+    }
+    input:focus{
+        border-bottom: 2px $dark-blue solid;
+    }
+}
+.activity-name-edit-limit{
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    font-size: 0.7rem;
+    margin-right: 0.1rem;
+    margin-top: 0.2rem;
+}
+.activity-timer-creation-label{
+    margin-bottom: 0.3rem;
+    margin-left: 1rem;
+}
+.activity-timer-inputs{
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    margin-left: 1rem;
+    input{
+        width: 50%;
+        text-align: center;
+        height: 100%;
+        flex-grow: 1;
+        font-size: 1rem;
+        margin: 0 0.3rem;
+        @include border-radius(0.3rem);
+        border : 1px solid $dark-gray;
+        font-size: 0.9rem;
+        outline: none;
+        &:focus{
+            border: 1px solid $dark-blue;
+        }
+        &::placeholder{
+            font-size: 0.7rem;
+        }
+    }
+    input:first-child{
+        margin-left: 0;
+    }
+}
+.activity-creation-timer-add, 
+.activity-creation-timer-remove{
+    @include remove-btn-default();
+    @include border-radius(0.3rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $white;
+}
+.activity-creation-timer-add{
+    background-color: $dark-green;
+    height: 3.5rem;
+    width: 100%;
+    font-size: 1.2rem;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    span{
+        margin-left: 0.5rem;
+    }
+}
+.activity-creation-timer-remove{
+    background-color: $red;
+    padding: 0 1rem;
+    height: 2.5rem;
+    margin-left: 0.5rem;
+    span {
+        margin-left: 0.5rem;
+
+    }
+}
+.activity-creation-topic-label-input{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    margin-right: 1rem;
+    label{
+        margin-top: 1rem;
+        margin-bottom: 0.3rem;
+    }
+    .select-input{
+        font-size: 0.85rem;
+        width: 100%;
+    }
+}
+.activity-creation-share-settings{
+    display: flex;
+    margin-top: 2.5rem;
+    .settings-share-public-btn,
+    .settings-keep-private-btn{
+        @include remove-btn-default();
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        @include border-radius(0.5rem);
+        border: 1px solid $dark-gray;
+        height: 3.5rem;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        background-color: white;
+        .icon-container{
+            color: $black;
+            span{
+                margin-left: 0.2rem;
+            }
+        }
+        .btn-description{
+            font-size: 0.8rem;
+            color: $darkest-gray;
+        }
+    }
+    .settings-share-public-btn{
+        @include border-radius(0.5rem 0 0 0.5rem)
+
+    }
+    .settings-keep-private-btn{
+        @include border-radius(0 0.5rem 0.5rem 0)
+    }
+    .settings-share-public-btn.active-btn,
+    .settings-share-private-btn.active-btn{
+        background-color: rgba(71, 130, 185, 0.931);
+        border-color: rgba(71, 130, 185, 0.931);        ;
+        .icon-container{
+            color: $white;
+        }
+        .btn-description{
+            color: $white;
+        }
+    }
+    .settings-keep-private-btn.disabled-btn{
+        opacity: 0.5;
+    }
+    
+}
+.activity-creation-share-settings-upgrade{
+    display: flex; 
+    justify-content: end; 
+    width:100%; 
+    font-size: 0.75rem; 
+    margin-top: 0.5rem;
+    a{
+        font-weight: 500;
+        color: $dark-blue;
+    }
+    a:visited{
+        color: $purple;
+    }
+}
+.activity-creation-activity-description-edit{
+    margin-top: 0.5rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    .description-edit-textarea{
+        flex-grow: 1;
+        min-height: 100%;
+        width: 100%;        
+        display: grid;
+        &::after{
+            content: attr(data-replicated-value) " ";
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            /* Hidden from view, clicks, and screen readers */
+            visibility: hidden;
+        }
+        textarea{
+            resize: none;
+            overflow: hidden;
+        }
+        textarea, &::after {
+            width: 100%;
+            /* Identical styling required!! */
+            border: 1px solid $dark-gray;
+            @include border-radius(0.3rem);
+            padding: 0.5rem;
+            font: inherit;
+            /* Place on top of each other */
+            grid-area: 1 / 1 / 2 / 2;
+        }
+    }
+    .activity-description-edit-limit{
+        @extend .activity-name-edit-limit;
+    }
+}
