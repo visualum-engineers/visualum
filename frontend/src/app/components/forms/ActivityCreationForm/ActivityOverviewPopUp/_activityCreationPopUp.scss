@@ -48,7 +48,6 @@
     @include border-radius(0 0 0.5rem 0.5rem);
     @include activity-scrollbar-styles();
     .activity-creation-edit-pop-up-body{
-        //height: min-content;
         display: flex;
         flex-direction: column;
         min-height: calc(100%);
@@ -119,7 +118,7 @@
     margin-left: 1rem;
 }
 .activity-timer-inputs{
-    height: 2.5rem;
+    height: 3.4rem;
     display: flex;
     align-items: center;
     width: fit-content;
@@ -139,7 +138,7 @@
             border: 1px solid $dark-blue;
         }
         &::placeholder{
-            font-size: 0.7rem;
+            font-size: 0.9rem;
         }
     }
     input:first-child{
@@ -169,7 +168,7 @@
 .activity-creation-timer-remove{
     background-color: $red;
     padding: 0 1rem;
-    height: 2.5rem;
+    height: 3.4rem;
     margin-left: 0.5rem;
     span {
         margin-left: 0.5rem;
@@ -182,7 +181,6 @@
     justify-content: end;
     margin-right: 1rem;
     label{
-        margin-top: 1rem;
         margin-bottom: 0.3rem;
     }
     .select-input{

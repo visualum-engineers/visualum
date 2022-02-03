@@ -35,7 +35,23 @@ const ActivityTopicLabels = ({
     const onSelectChange = (arr) =>{
         dispatch(updateTopicLabels(arr))
     }
+    const customStyles = {
 
+        indicatorsContainer:(provided, state) =>({
+            ...provided,
+            height: "3.3rem"
+        }),
+        valueContainer: (provided, state) =>({
+            ...provided,
+            paddingTop: 0,
+            paddingBottom: 0
+        }),
+        multiValueLabel: (provided, state) =>({
+            ...provided,
+            fontSize: "0.6rem",
+           
+        })
+    }
     return(
         <div className={`activity-creation-topic-label-input ${smallWindowWidth ? "w-50":"w-100"}`}>
             <label>Topics</label>
@@ -52,6 +68,7 @@ const ActivityTopicLabels = ({
                 placeholder={"Add Topics"}
                 noOptionsMessage={({inputValue: string}) => "No Topics Found"}
                 allowCreateWhileLoading={true}
+                styles = {customStyles}
             />
         </div>
             

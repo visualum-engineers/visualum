@@ -71,9 +71,6 @@ const ActivityCreationOverallPopUp = ({
                             </div>
                         </div>
                     </div>
-
-                   
-                    
                 </PopUpBg>
             }
         </>
