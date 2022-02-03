@@ -33,7 +33,9 @@ export default function SignIn({ toggle, toggleOther }) {
 				<div className='auth-body'>
 					<h3 className='auth-title text-center mb-3'>Log In</h3>
 					<div className='d-flex justify-content-center'>
-						<GoogleSignInButton />
+						<GoogleSignInButton 
+							btnType={"signup"}
+						/>
 					</div>
 					<div className='auth-divider'>
 						<div className='line left'>
