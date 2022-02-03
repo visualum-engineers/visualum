@@ -1,6 +1,6 @@
-import spaceOutCamelCase from "../../helpers/spaceOutCamelCase"
+import spaceOutCamelCase from "../../../helpers/spaceOutCamelCase"
 import { useSelector, useDispatch } from "react-redux"
-import { updateTrackCompletion } from "../../../redux/features/activityTypes/activitiesData"
+import { updateTrackCompletion } from "../../../../redux/features/activityTypes/activitiesData"
 //import ActivityIndicatorKey from "./ActivityIndicatorKey"
 const ActivityTableOfContents = ({
     data,

@@ -1,11 +1,11 @@
-import GeneralBtn from "../utilities/generalBtn/GeneralBtn"
+import GeneralBtn from "../../utilities/generalBtn/GeneralBtn"
 import { useState } from "react";
-import TrianglePointer from "../utilities/trianglePointer/TrianglePointer";
-import { undoHistory, redoHistory } from "./activityHistoryFunc";
+import TrianglePointer from "../../utilities/trianglePointer/TrianglePointer";
+import { undoHistory, redoHistory } from "../activityHistoryFunc";
 import { useDispatch, useSelector } from "react-redux";
-import useKeyboardShortcut from "../../hooks/use-keyboard-shortcuts";
-import { resetPopUpOn } from "../../../redux/features/activityTypes/activitiesSettings";
-import Timer from '../utilities/timer/Timer';
+import useKeyboardShortcut from "../../../hooks/use-keyboard-shortcuts";
+import { resetPopUpOn } from "../../../../redux/features/activityTypes/activitiesSettings";
+import Timer from '../../utilities/timer/Timer';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { 
     faSyncAlt, 
@@ -15,7 +15,7 @@ import {
     faCog, 
     faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
-import ActivitySettings from "./ActivitySettings";
+import {ActivitySettings} from "../index";
 
 const Logo = "./images/VisualumLogo.png"
 const ActivityNavbar = ({

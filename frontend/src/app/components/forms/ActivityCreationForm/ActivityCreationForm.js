@@ -1,4 +1,4 @@
-import ActivityCreationOverallPopUp from "./ActivityOverviewPopUp/ActivityCreationOverallPopUp"
+import ActivityCreationOverallPopUp from "./ActivityComponents/ActivityOverviewPopUp/ActivityCreationOverallPopUp"
 import MiniScreenSideBar from "../../utilities/miniScreenSidebar/MiniScreenSiderbar"
 import useActivityMiniScreenData from "./hooks/use-activity-miniscreen-data"
 

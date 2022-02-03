@@ -1,4 +1,4 @@
-@import "./ActivityOverviewPopUp/activityCreationPopUpBreakPoints";
+@import "./ActivityComponents/ActivityOverviewPopUp/activityCreationPopUpBreakPoints";
 
 @mixin activity-creation-md {
     @include activity-creation-overview-pop-up-md;

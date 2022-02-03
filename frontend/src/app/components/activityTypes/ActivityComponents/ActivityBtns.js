@@ -1,6 +1,6 @@
 import NavActivityBtn from "./NavActivityBtn";
 import { useDispatch, useSelector } from "react-redux";
-import { updateTrackCompletion } from "../../../redux/features/activityTypes/activitiesData";
+import { updateTrackCompletion } from "../../../../redux/features/activityTypes/activitiesData";
 const ActivityBtns = ({
     onNavBtnClick, 
     lastQuestion, 

@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import onlyNumInput from "../../../../helpers/onlyNumInput"
-import { updateUnsavedActivityTimer } from "../../../../../redux/features/activityCreation/activityCreationData"
+import onlyNumInput from "../../../../../helpers/onlyNumInput"
+import { updateUnsavedActivityTimer } from "../../../../../../redux/features/activityCreation/activityCreationData"
 import {debounce} from "lodash"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons"

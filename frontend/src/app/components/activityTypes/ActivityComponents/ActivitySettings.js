@@ -1,11 +1,15 @@
-import PopUpBg from "../utilities/popUp/PopUpBackground"
+import PopUpBg from "../../utilities/popUp/PopUpBackground"
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { enableSettings, disableSettings, changeTimeDuration } from "../../../redux/features/activityTypes/activitiesSettings"
+import { 
+    enableSettings, 
+    disableSettings, 
+    changeTimeDuration 
+} from "../../../../redux/features/activityTypes/activitiesSettings"
 import { unstable_batchedUpdates } from "react-dom"
-import SwitchToggler from "../utilities/switchToggler/SwitchToggler"
-import onlyNumInput from "../../helpers/onlyNumInput"
-import ExitIcon from "../utilities/exitIcon/ExitIcon"
+import SwitchToggler from "../../utilities/switchToggler/SwitchToggler"
+import onlyNumInput from "../../../helpers/onlyNumInput"
+import ExitIcon from "../../utilities/exitIcon/ExitIcon"
 const ActivitySettings = ({
     onExitPopUp,
     smallWindowWidth 

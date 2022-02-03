@@ -1,8 +1,8 @@
 import makeAnimated from 'react-select/animated';
 import AsyncCreatableSelect from 'react-select/async-creatable';
 import { useDispatch, useSelector } from "react-redux";
-import { updateUnsavedTopicLabels } from '../../../../../redux/features/activityCreation/activityCreationData';
-import useSearchTopicLabels from '../../../../hooks/use-search-topic-labels';
+import { updateUnsavedTopicLabels } from '../../../../../../redux/features/activityCreation/activityCreationData';
+import useSearchTopicLabels from '../../../../../hooks/use-search-topic-labels';
 const animatedComponents = makeAnimated();
 
 const ActivityTopicLabels = ({

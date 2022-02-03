@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux"
 import { useState, useEffect } from "react"
 import { unstable_batchedUpdates } from "react-dom"
-import { calculateTimeLeft } from "../utilities/timer/Timer"
-import PopUpBg from "../utilities/popUp/PopUpBackground"
+import { calculateTimeLeft } from "../../utilities/timer/Timer"
+import PopUpBg from "../../utilities/popUp/PopUpBackground"
 const ActivityTimeReminder = ({
     popUpBgStyles
 }) =>{

@@ -1,12 +1,12 @@
-import ShortAnswerInstructions from "./ShortAnswer/ShortAnswerInstructions"
-import SortActivityInstructions from "./SortActivity/SortActivityInstructions"
-import MatchActivityInstructions from "./MatchActivity/MatchActivityInstructions"
-import RadioInstructions from "./ControlledInputs/Radio/RadioInstructions"
-import CheckboxInstructions from "./ControlledInputs/Checkbox/CheckboxInstructions"
-import LabelActivityInstructions from "./LabelPictures/LabelActivityInstructions"
-import PopUp from "../utilities/popUp/PopUpBackground"
+import ShortAnswerInstructions from "../ShortAnswer/ShortAnswerInstructions"
+import SortActivityInstructions from "../SortActivity/SortActivityInstructions"
+import MatchActivityInstructions from "../MatchActivity/MatchActivityInstructions"
+import RadioInstructions from "../ControlledInputs/Radio/RadioInstructions"
+import CheckboxInstructions from "../ControlledInputs/Checkbox/CheckboxInstructions"
+import LabelActivityInstructions from "../LabelPictures/LabelActivityInstructions"
+import PopUp from "../../utilities/popUp/PopUpBackground"
 import { useSelector } from "react-redux"
-import ExitIcon from "../utilities/exitIcon/ExitIcon"
+import ExitIcon from "../../utilities/exitIcon/ExitIcon"
 const ActivityInstructions = ({
     activityType, 
     activityInstructions, 

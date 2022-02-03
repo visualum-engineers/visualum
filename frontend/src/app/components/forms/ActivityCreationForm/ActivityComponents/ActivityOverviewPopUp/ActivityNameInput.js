@@ -1,5 +1,5 @@
-import { useReduxControlledTextInputs } from "../../../../hooks"
-import { updateUnsavedActivityName } from "../../../../../redux/features/activityCreation/activityCreationData"
+import { useReduxControlledTextInputs } from "../../../../../hooks"
+import { updateUnsavedActivityName } from "../../../../../../redux/features/activityCreation/activityCreationData"
 
 const ActivityNameInput = () =>{
     const charLimit = 100

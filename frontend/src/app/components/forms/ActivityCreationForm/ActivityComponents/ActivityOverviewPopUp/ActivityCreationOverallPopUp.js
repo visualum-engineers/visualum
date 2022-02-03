@@ -1,10 +1,10 @@
 import {useSelector, useDispatch } from "react-redux"
-import PopUpBg from "../../../utilities/popUp/PopUpBackground"
-import ExitIcon from "../../../utilities/exitIcon/ExitIcon"
+import PopUpBg from "../../../../utilities/popUp/PopUpBackground"
+import ExitIcon from "../../../../utilities/exitIcon/ExitIcon"
 import { createPortal } from "react-dom"
-import { updateActivityEditPopUp } from "../../../../../redux/features/activityCreation/activityCreationSettings"
+import { updateActivityEditPopUp } from "../../../../../../redux/features/activityCreation/activityCreationSettings"
 import { unstable_batchedUpdates } from "react-dom"
-import removeAddedWhiteSpace from "../../../../helpers/removeWhiteSpace"
+import removeAddedWhiteSpace from "../../../../../helpers/removeWhiteSpace"
 import {
     updateUnsavedActivityDescription,
     updateUnsavedActivityName,
@@ -12,7 +12,7 @@ import {
     updateActivityTimer,
     updateTopicLabels,
     updateActivityDescription
-} from "../../../../../redux/features/activityCreation/activityCreationData"
+} from "../../../../../../redux/features/activityCreation/activityCreationData"
 import { 
     ActivityNameInput,
     ActivityDescription,

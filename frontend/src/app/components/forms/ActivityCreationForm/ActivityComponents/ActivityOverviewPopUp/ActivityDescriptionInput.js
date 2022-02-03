@@ -1,5 +1,5 @@
-import { updateUnsavedActivityDescription } from "../../../../../redux/features/activityCreation/activityCreationData"
-import { useReduxControlledTextInputs } from "../../../../hooks"
+import { updateUnsavedActivityDescription } from "../../../../../../redux/features/activityCreation/activityCreationData"
+import { useReduxControlledTextInputs } from "../../../../../hooks"
 const ActivityDescription = () =>{
     const charLimit = 1000
     const [activityDescription, onDescriptionChange] = useReduxControlledTextInputs({

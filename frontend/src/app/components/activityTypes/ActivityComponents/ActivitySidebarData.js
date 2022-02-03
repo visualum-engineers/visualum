@@ -1,9 +1,11 @@
-import {ActivityTableOfContents} from './index';
-import ProgressBar from '../utilities/progressBar/ProgressBar';
-import { roundPercentToInt } from '../../helpers/calculatePercentage';
+import {
+    ActivityTableOfContents, 
+    ActivityIndicatorKey
+} from '../index';
+import ProgressBar from '../../utilities/progressBar/ProgressBar';
+import { roundPercentToInt } from '../../../helpers/calculatePercentage';
 import { useSelector } from 'react-redux';
-import GeneralBtn from '../utilities/generalBtn/GeneralBtn';
-import ActivityIndicatorKey from "./ActivityIndicatorKey"
+import GeneralBtn from '../../utilities/generalBtn/GeneralBtn';
 
 export const useActivitySecondarySideBarData = ({
     activityData,
