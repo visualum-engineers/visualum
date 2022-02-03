@@ -5,14 +5,14 @@
     top:0;
     left: 0;
     margin-top: 0;
-    padding: 0;
     width: calc(max(19rem, 300px));
     background-color: $lighter-gray;
     @include box-shadow(4px 0px 7px -8px #000000);
     height: 100vh;
-    padding: 1rem;
+    padding: 0.5rem;
     overflow: auto;
     overflow-x: hidden;
+    @include activity-scrollbar-styles()
 }
 .mini-screen-sidebar-header{
     display: flex;
@@ -20,6 +20,7 @@
     height: 4rem;
     width: 100%;
     padding: 0.5rem;
+    padding-right: 0;
     h1{
         margin: auto;
         flex-grow: 1;
@@ -39,34 +40,61 @@
     }
 }
 .mini-screen-slideshow-screens{
-    padding: 0.5rem;
+    padding: 1rem 0;
     flex-grow: 1;
     height: min-content;
     width: 100%;
-    background-color: black;
+    //background-color: black;
 }
 
 .mini-screen-slide{
+    @include remove-btn-default();
     display: flex;
+    align-items: center;
     width: 100%;
+    margin-bottom: 1rem;
+    &:last-child{
+        margin-bottom: 0;
+    }
 }
 .mini-screen-container{
-    width: calc(max(9.5rem, 150px));
-    height: 5rem;
+    width: calc(max(7rem, 110px));
+    height: 4rem;
     background-color: blue;
+    @include border-radius(0.3rem);
 }
 .mini-screen-text-content{
-    flex-grow: 1;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 0.5rem;
+    height: 100%;
     h2{
-        font-size: 1rem;
+        font-size: 0.9rem;
         font-weight: 500;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        margin-top: 0;
+        margin-bottom: 0.2rem;
     }
     h3{
-        font-size: 0.75rem;
+        font-size: 0.65rem;
+        margin-bottom: 0;
     }
 }
+.mini-screen-drag-handle{
+    flex-grow: 1;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    svg{
+        width: 1.3rem;
+        height: 1.4rem;
+        stroke: $darkest-gray;
+        stroke-width: 1.2rem;
+        stroke-linecap: round;
+    }
+}
+    
+
