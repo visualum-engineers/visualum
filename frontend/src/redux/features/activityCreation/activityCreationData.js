@@ -35,6 +35,14 @@ export const {
     updateUnsavedActivityName,
     updateUnsavedActivityDescription
 } = activityCreationDataUnsaved.actions
+//mock data
+const mockData = Array(10).fill(0)
+const miniScreenData = mockData.map((questions, index)=>{
+    return{
+        key: index,
+        questionType: "Label Pictures",
+    }
+})
 const activityCreationData = createSlice({
     name: "activityCreationData",
     initialState:{
@@ -42,7 +50,8 @@ const activityCreationData = createSlice({
         activityDescription: null,
         activityTimer: null,
         activityTopicLabels: null,
-        questions: [],
+        //questions: [],
+        questions: miniScreenData
     },
     reducers:{
         updateTopicLabels: (state, action) =>{
@@ -77,6 +86,7 @@ const activityCreationData = createSlice({
             let newState = [...state.questions]
             newState.splice(startIndex, 1)
             newState.splice(endIndex, 0, questionData)
+            state.questions = newState
         },
     }
 
@@ -113,7 +123,3 @@ const rootReducer = combineReducers({
     saved: undoableData
 })
 export default rootReducer
-// const rootReducer = combineReducers({
-    
-// })
-//export default rootReducer
