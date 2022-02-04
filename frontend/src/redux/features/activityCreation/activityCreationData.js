@@ -40,7 +40,7 @@ const mockData = Array(10).fill(0)
 const miniScreenData = mockData.map((questions, index)=>{
     return{
         key: index,
-        questionType: "Label Pictures",
+        slideType: "Label Pictures",
     }
 })
 const activityCreationData = createSlice({
@@ -82,7 +82,7 @@ const activityCreationData = createSlice({
         changeQuestionPos: (state, action) =>{
             const startIndex = action.payload.startIndex
             const endIndex = action.payload.endIndex
-            const questionData = action.payload.questionData
+            const questionData = action.payload.slideData
             let newState = [...state.questions]
             newState.splice(startIndex, 1)
             newState.splice(endIndex, 0, questionData)

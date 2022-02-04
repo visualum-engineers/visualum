@@ -57,9 +57,11 @@ $activites-table-of-contents-height: calc(
     @include border-radius(0.3rem);
     @include transition(all 0.3s ease-out);
 }
-
-
 .activity-navbar-company-title{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
     font-size: 1.3rem;
     font-weight: 600;
     margin-left: 1rem;
@@ -83,7 +85,7 @@ $activites-table-of-contents-height: calc(
     font-size: 0.55rem;
     height: 90%;
     width: 2rem;
-    margin-right: 0.5rem; 
+    margin-right: 1.5rem; 
     @include transition(transform 0.2s ease-out);
     span{
         font-size: 0.9rem;
@@ -109,6 +111,11 @@ $activites-table-of-contents-height: calc(
         border-right: 0.5rem solid transparent;
         border-bottom: 0.5rem solid #3d3d3d;
     }
+}
+.activity-header-btns{
+    display: flex;
+    align-items: center;
+    justify-content: end;
 }
 .activity-edit-btn-dropdown{
     position: absolute;
@@ -160,7 +167,7 @@ $activites-table-of-contents-height: calc(
     width: 1.5rem;
     height: 1.5rem;
     font-size: 1.2rem;
-    margin-left: 1rem;
+    //margin-left: 1rem;
     margin-right: 1.3rem;
 }
 .activity-settings-pop-up{

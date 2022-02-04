@@ -1,9 +1,9 @@
-// import {
-//     //ActivityCreationOverallPopUp,
-//     ActivityCreationNavbar
-// } from "./ActivityComponents/index"
-import MiniScreenSideBar from "../../utilities/miniScreenSidebar/MiniScreenSiderbar"
-import useActivityMiniScreenData from "./hooks/use-activity-miniscreen-data"
+import {
+    ActivityCreationOverallPopUp,
+    ActivityCreationNavbar,
+    ActivityCreationSidebar
+} from "./ActivityComponents/index"
+
 
 import { useWindowWidth } from "../../../hooks"
 import { useSelector, useDispatch } from "react-redux"
@@ -13,7 +13,6 @@ import { updateActivityName } from "../../../../redux/features/activityCreation/
 const ActivityCreationForm = () =>{
     const smallWindowWidth = useWindowWidth(576) 
     const mediumWindowWidth = useWindowWidth(992)
-    const miniScreenData = useActivityMiniScreenData()
     const dispatch = useDispatch()
     const activityName = useSelector(state=>state.activityCreation.data.saved.present.activityName)
     
@@ -27,15 +26,15 @@ const ActivityCreationForm = () =>{
     }, [dispatch, activityName])
     return(
         <div>
-            {/* <ActivityCreationOverallPopUp
+            <ActivityCreationOverallPopUp
                 smallWindowWidth={smallWindowWidth}
                 mediumWindowWidth={mediumWindowWidth}
-            /> */}
-            {/* <ActivityCreationNavbar 
-            
-            /> */}
-            <MiniScreenSideBar 
-                {...miniScreenData}
+            /> 
+            <ActivityCreationNavbar 
+                smallWindowWidth={smallWindowWidth}
+            /> 
+            <ActivityCreationSidebar 
+                smallWindowWidth={smallWindowWidth}
             />
             <div>   
             

@@ -2,7 +2,7 @@ import { useReduxControlledTextInputs } from "../../../../../hooks"
 import { updateUnsavedActivityName } from "../../../../../../redux/features/activityCreation/activityCreationData"
 
 const ActivityNameInput = () =>{
-    const charLimit = 100
+    const charLimit = 75
     const [activityName, onActivityNameChange] = useReduxControlledTextInputs({
         reduxUpdateFunc: updateUnsavedActivityName,
         selectorFunc: (state) => state.activityCreation.data.unsaved.activityName,

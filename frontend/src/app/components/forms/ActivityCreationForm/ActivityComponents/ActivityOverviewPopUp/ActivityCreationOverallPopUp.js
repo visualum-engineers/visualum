@@ -20,7 +20,7 @@ import {
     ActivityCreationImgInput,
     ActivityShareSettings,
     ActivityTopicLabels
-} from "./index"
+} from "../index"
 import { useEffect, useState } from "react"
 
 const ActivityCreationOverallPopUp = ({
@@ -54,7 +54,7 @@ const ActivityCreationOverallPopUp = ({
         position: "fixed",
         top: "0",
         height: "calc(max(100%, 100vh))",
-        zIndex: "4",
+        zIndex: "5",
         left: "0",
         width: "100%",
         transition: "all 0.3s ease-out",
@@ -67,7 +67,7 @@ const ActivityCreationOverallPopUp = ({
                     <PopUpBg
                         aria-label="activity-description-pop-up"
                         onClick = {() => dispatch(updateActivityEditPopUp(false))}
-                        containerStyle = {popUpBgStyles}
+                        containerStyles = {popUpBgStyles}
                     > 
                         <div className="activity-creation-edit-pop-up">
                             <div className="activity-creation-edit-pop-up-header">

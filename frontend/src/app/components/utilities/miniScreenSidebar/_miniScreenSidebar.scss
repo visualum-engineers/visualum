@@ -10,6 +10,10 @@
     background-color: $lightest-gray;
     @include box-shadow(4px 0px 7px -8px #000000);
     height: calc(100vh - 3.3rem);
+    @include transition(0.4s ease-out all);
+}
+.mini-screen-sidebar-container.sidebar-closed{
+    left: calc(min(-10.5rem, -290px));
 }
 .mini-screen-sidebar{
     display: flex;
@@ -20,39 +24,51 @@
     padding: 0.5rem;
     padding-top: 0;
     padding-left: 1rem;
+    padding-right: 0.3rem;
     overflow: auto;
     overflow-x: hidden;
     @include activity-scrollbar-styles()
 }
 
-.mini-screen-sidebar-header{
-    position: sticky;
-    top: 0;
-    left: 0;
+.mini-screen-sidebar-header-container{
     display: flex;
     justify-content: space-between;
-    height: 4rem;
-    width: 100%;
-    padding: 0.5rem;
-    padding-top: 1rem;
+    align-items: flex-start;
+    height: 3.5rem;
+    padding: 0 0.5rem;
+    width: max-content;
     padding-right: 0;
-    background-color: $lightest-gray;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    
+}
+.mini-screen-sidebar-header{
+    margin-top: 0.5rem;
+    display: flex;
+    height: 1.5rem;
     h1{
+        cursor: pointer;
         margin: auto;
-        flex-grow: 1;
-        font-weight: 500;
+        font-weight: 400;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
-        font-size: 1.5rem;
+        font-size: 1rem;
     }
     button{
         @include remove-btn-default();
+        display: flex;
+        justify-content: center;
+        align-items: center;
         text-align: center;
         color: $blue;
-        width: 4rem;
-        font-size: 0.85rem;
+        font-size: 0.7rem;
         line-height: 0.9rem;
+        margin-left: 0.3rem;
+        span{
+            margin-left: 0.2rem;
+        }
     }
 }
 .mini-screen-slideshow-screens{
@@ -75,7 +91,7 @@
     height: 1.2rem;
     padding: 0.2rem;
     top: 0.1rem;
-    left: 4.6rem;
+    left: 5.1rem;
     display: flex;
     align-items: center;
     @include border-radius(0.2rem);
@@ -98,6 +114,7 @@
     align-items: center;
     width: 100%;
     padding-left: 0;
+    padding-right: 0;
     @include border-radius(0.3rem)
 }
 .mini-screen-slide.is-dragging{
@@ -105,7 +122,7 @@
 }
 .mini-screen-container{
     position: relative;
-    width: calc(min(6rem, 94px));
+    width: calc(min(6.5rem, 101px));
     height: 4rem;
     background-color: $white;
     border: 1px solid $darkest-gray;
@@ -144,9 +161,11 @@
     display: flex;
     justify-content: end;
     align-items: center;
+    width: 0.8rem;
+    height: 1.2rem;
     svg{
-        width: 1.3rem;
-        height: 1.4rem;
+        width: 100%;
+        height: 100%;
         stroke: $darkest-gray;
         stroke-width: 1.2rem;
         stroke-linecap: round;

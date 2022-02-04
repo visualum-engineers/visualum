@@ -6,8 +6,9 @@ import ActivityCreationImgInput from "./ActivityOverviewPopUp/ActivityCreationIm
 import ActivityShareSettings from "./ActivityOverviewPopUp/ActivityShareSetting";
 import ActivityTopicLabels from "./ActivityOverviewPopUp/ActivityTopicLabels";
 import ActivityCreationQuestion from "./ActivityCreationQuestion";
-import ActivityCreationSidebar from "./ActivityCreationSidebar"
+import ActivityCreationSidebar from "./ActivityCreationSidebar";
 import ActivityCreationNavbar from "./ActivityCreationNavbar";
+
 export {
     ActivityCreationOverallPopUp,
     ActivityCreationNavbar,

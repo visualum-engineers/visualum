@@ -11,8 +11,9 @@ import ExitIcon from "../exitIcon/ExitIcon"
 const MiniScreenSideBar = ({
     data = [],
     // header,
-    mediumWindowWidth, 
+    //mediumWindowWidth, 
     // smallWindowWidth,
+    sidebarToggle,
     onRemoveClick,
     onAddNewClick,
     onDragEnd,
@@ -22,7 +23,10 @@ const MiniScreenSideBar = ({
         <DragDropContext
             onDragEnd = {onDragEnd}
         >
-            <div className="mini-screen-sidebar-container" style={{position: "fixed"}}>
+            <div 
+                className={`mini-screen-sidebar-container ${sidebarToggle ? "sidebar-closed": "sidebar-open"}`} 
+                style={{position: "fixed"}}
+            >
                 <div className="mini-screen-sidebar">
                     {/* <div className="mini-screen-sidebar-header"> 
                         {header}
@@ -54,6 +58,7 @@ const MiniScreenSideBar = ({
                                                 <button 
                                                     className="mini-screen-remove-slide"
                                                     onClick = {onRemoveClick}
+                                                    disabled = {sidebarToggle}
                                                 >
                                                     <ExitIcon 
                                                         customStrokeWidth={"0.6rem"}
@@ -61,6 +66,7 @@ const MiniScreenSideBar = ({
                                                 </button>
                                                 <button key = {value.key} 
                                                     className={`mini-screen-slide ${snapshot.isDragging ? "is-dragging":""}`}
+                                                    disabled = {sidebarToggle}
                                                 >
                                                     <div className="mini-screen-container">
                                                         <span 
@@ -77,11 +83,23 @@ const MiniScreenSideBar = ({
                                                         className="mini-screen-drag-handle"
                                                         {...provided.dragHandleProps}
                                                     >
-                                                        <svg viewBox="0 0 120 140">
+                                                        <svg viewBox="0 0 100 150">
+                                                            <g>
+                                                                <circle cx="25" cy="25" r="6"/>
+                                                                <circle cx="25" cy="75" r="6"/>
+                                                                <circle cx="25" cy="125" r="6"/>
+                                                            </g>
+                                                            <g>
+                                                                <circle cx="75" cy="25" r="6"/>
+                                                                <circle cx="75" cy="75" r="6"/>
+                                                                <circle cx="75" cy="125" r="6"/>
+                                                            </g>
+                                                        </svg>
+                                                        {/* <svg viewBox="0 0 120 140">
                                                             <line y1="25" y2="25" x1="5" x2="115"></line>
                                                             <line y1="70" y2="70" x1="5" x2="115"></line>
                                                             <line y1="115" y2 ="115" x1="5" x2="115"></line>
-                                                        </svg>
+                                                        </svg> */}
                                                     </div>
                                                 </button>
                                             </div>
@@ -98,6 +116,7 @@ const MiniScreenSideBar = ({
                     <button 
                         onClick={onAddNewClick}
                         className="mini-screen-sticky-btn"
+                        disabled = {sidebarToggle}
                     >   
                         <div className="mini-screen-container">
                             <FontAwesomeIcon icon={faPlus}/>

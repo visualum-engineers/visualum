@@ -1,4 +1,3 @@
-//import DnDActivities from "./DnDActivities"
 import useWindowWidth from "../../hooks/use-window-width"
 import SecondarySideBar from "../sideBar/SecondarySideBar"
 import { useEffect, useState } from "react"
