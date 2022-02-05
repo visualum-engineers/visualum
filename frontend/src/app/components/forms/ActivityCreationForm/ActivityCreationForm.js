@@ -1,7 +1,8 @@
 import {
     ActivityCreationOverallPopUp,
     ActivityCreationNavbar,
-    ActivityCreationSidebar
+    ActivityCreationSidebar, 
+    ActivityCreationQuestion,
 } from "./ActivityComponents/index"
 
 
@@ -25,24 +26,27 @@ const ActivityCreationForm = () =>{
         return() => {isMounted = false}
     }, [dispatch, activityName])
     return(
-        <div>
-            <ActivityCreationOverallPopUp
-                smallWindowWidth={smallWindowWidth}
-                mediumWindowWidth={mediumWindowWidth}
-            /> 
-            <ActivityCreationNavbar 
-                smallWindowWidth={smallWindowWidth}
-            /> 
-            <ActivityCreationSidebar 
-                smallWindowWidth={smallWindowWidth}
-            />
-            <div>   
+        <>
+        <ActivityCreationNavbar 
+            smallWindowWidth={smallWindowWidth}
+        /> 
+        <ActivityCreationOverallPopUp
+            smallWindowWidth={smallWindowWidth}
+            mediumWindowWidth={mediumWindowWidth}
+        /> 
+        <ActivityCreationSidebar 
+            smallWindowWidth={smallWindowWidth}
+        />
+        <div className="activity-creation-body">
             
+            <div>   
+                Hello
             </div>
             <div>
 
             </div>
         </div>
+        </>
     )
 }
 

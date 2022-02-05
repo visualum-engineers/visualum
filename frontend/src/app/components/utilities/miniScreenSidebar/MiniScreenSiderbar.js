@@ -11,9 +11,6 @@ import ExitIcon from "../exitIcon/ExitIcon"
 const MiniScreenSideBar = ({
     data = [],
     customClass,
-    // header,
-    //mediumWindowWidth, 
-    // smallWindowWidth,
     sidebarToggle,
     onRemoveClick,
     onAddNewClick,
@@ -29,9 +26,6 @@ const MiniScreenSideBar = ({
                 style={{position: "fixed"}}
             >
                 <div className="mini-screen-sidebar">
-                    {/* <div className="mini-screen-sidebar-header"> 
-                        {header}
-                    </div> */}
                     <Droppable 
                         droppableId="mini-screen-slideshow-screen"
                         direction="vertical"
@@ -55,6 +49,7 @@ const MiniScreenSideBar = ({
                                                 key = {value.key}
                                                 ref={provided.innerRef}
                                                 {...provided.draggableProps}
+                                                {...provided.dragHandleProps}
                                             >
                                                 <button 
                                                     className="mini-screen-remove-slide"
@@ -65,11 +60,16 @@ const MiniScreenSideBar = ({
                                                         customStrokeWidth={"0.6rem"}
                                                     />    
                                                 </button>
-                                                <button key = {value.key} 
+                                                <div 
                                                     className={`mini-screen-slide ${snapshot.isDragging ? "is-dragging":""}`}
+                                                    onClick ={(e) => e.preventDefault()}
                                                     disabled = {sidebarToggle}
+                                                    tabIndex = {sidebarToggle ? null : 0}
+                                                    aria-label={value.slideAriaLabel}
                                                 >
-                                                    <div className="mini-screen-container">
+                                                    <div 
+                                                        className="mini-screen-container"
+                                                    >
                                                         <span 
                                                             className="mini-screen-slide-num">
                                                                 {index+1}
@@ -77,32 +77,7 @@ const MiniScreenSideBar = ({
                                                         
                                                         {value.slide}
                                                     </div>
-                                                    {/* <div className="mini-screen-text-content">
-                                                        {value.textContent}
-                                                    </div> */}
-                                                    <div 
-                                                        className="mini-screen-drag-handle"
-                                                        {...provided.dragHandleProps}
-                                                    >
-                                                        <svg viewBox="0 0 100 150">
-                                                            <g>
-                                                                <circle cx="25" cy="25" r="6"/>
-                                                                <circle cx="25" cy="75" r="6"/>
-                                                                <circle cx="25" cy="125" r="6"/>
-                                                            </g>
-                                                            <g>
-                                                                <circle cx="75" cy="25" r="6"/>
-                                                                <circle cx="75" cy="75" r="6"/>
-                                                                <circle cx="75" cy="125" r="6"/>
-                                                            </g>
-                                                        </svg>
-                                                        {/* <svg viewBox="0 0 120 140">
-                                                            <line y1="25" y2="25" x1="5" x2="115"></line>
-                                                            <line y1="70" y2="70" x1="5" x2="115"></line>
-                                                            <line y1="115" y2 ="115" x1="5" x2="115"></line>
-                                                        </svg> */}
-                                                    </div>
-                                                </button>
+                                                </div>
                                             </div>
                                         )}
                                     </Draggable>
@@ -123,9 +98,6 @@ const MiniScreenSideBar = ({
                             <FontAwesomeIcon icon={faPlus}/>
                             <span>Add New...</span>
                         </div>
-                        {/* <div className="mini-screen-sticky-btn-text">
-                            <span>Add New...</span>
-                        </div> */}
                     </button>
                 </div>
             </div>
@@ -133,3 +105,34 @@ const MiniScreenSideBar = ({
     ) 
 }
 export default MiniScreenSideBar
+
+/*
+<div 
+    className="mini-screen-drag-handle"
+    //{...provided.dragHandleProps}
+>
+    <svg viewBox="0 0 100 150">
+        <g>
+            <circle cx="25" cy="25" r="6"/>
+            <circle cx="25" cy="75" r="6"/>
+            <circle cx="25" cy="125" r="6"/>
+        </g>
+        <g>
+            <circle cx="75" cy="25" r="6"/>
+            <circle cx="75" cy="75" r="6"/>
+            <circle cx="75" cy="125" r="6"/>
+        </g>
+    </svg>
+     
+
+
+
+    </div>
+*/
+/*
+<svg viewBox="0 0 120 140">
+        <line y1="25" y2="25" x1="5" x2="115"></line>
+        <line y1="70" y2="70" x1="5" x2="115"></line>
+        <line y1="115" y2 ="115" x1="5" x2="115"></line>
+    </svg> }
+*/

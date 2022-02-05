@@ -5,14 +5,14 @@
     top: 3.3rem;
     left: 0;
     margin-top: 0;
-    width: calc(min(10.5rem, 290px));
+    width: calc(min(9.2rem, 148px));
     background-color: $lightest-gray;
     @include box-shadow(4px 0px 7px -8px #000000);
     height: calc(100vh - 3.3rem);
     @include transition(0.4s ease-out all);
 }
 .mini-screen-sidebar-container.sidebar-closed{
-    left: calc(min(-10.5rem, -290px));
+    left: calc(min(-9.2rem, -148px));;
 }
 .mini-screen-sidebar{
     display: flex;
@@ -40,7 +40,9 @@
 .mini-screen-slide-container{
     position: relative;
     height: fit-content;
-    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+    //for now
+    width: calc(min(7rem, 110px));
 }
 .mini-screen-remove-slide{
     position: absolute;
@@ -49,8 +51,8 @@
     width: 1.2rem;
     height: 1.2rem;
     padding: 0.2rem;
-    top: 0.1rem;
-    left: 5.1rem;
+    top: 0.2rem;
+    left: 5.5rem;
     display: flex;
     align-items: center;
     @include border-radius(0.2rem);
@@ -69,6 +71,7 @@
 }
 .mini-screen-slide{
     @include remove-btn-default();
+    cursor: pointer;
     display: flex;
     align-items: center;
     width: 100%;
@@ -81,8 +84,8 @@
 }
 .mini-screen-container{
     position: relative;
-    width: calc(min(6.5rem, 101px));
-    height: 4rem;
+    width: calc(min(7rem, 110px));
+    height: 4.5rem;
     background-color: $white;
     border: 1px solid $darkest-gray;
     @include border-radius(0.3rem);
@@ -137,7 +140,7 @@
     flex-direction: column;
     min-height: 5rem;
     background-color: $lightest-gray;
-    width: calc(min(calc(10.5rem - 0.5rem), calc(290px - 0.5rem)));
+    width: calc(min(calc(9.2rem - 0.5rem), calc(148px - 0.5rem)));
     padding: 0 0.5rem;
     padding-bottom: 0.5rem;
     bottom: 0;

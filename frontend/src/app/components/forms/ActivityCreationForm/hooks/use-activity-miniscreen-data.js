@@ -19,15 +19,16 @@ const useActivityMiniScreenData = ({
                     {slide.slideType}
                 </h3> 
             </>,
-            slide: <div></div>
+            slide: <div></div>,
+            slideAriaLabel: `go-to-slide-${parseInt(index)+1}`,
         }
     })
-    const onAddNewClick = () =>{
-
+    const onAddNewClick = (e) =>{
+        //e.preventDefault()
     }
     
-    const onRemoveClick =() =>{
-
+    const onRemoveClick =(e) =>{
+        //e.preventDefault()
     }
 
     const onDragEnd = (result) =>{

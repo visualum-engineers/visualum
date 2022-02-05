@@ -1,8 +1,21 @@
 @import "./ActivityComponents/ActivityOverviewPopUp/activityCreationPopUp";
 
+
 //note for future
 //Navbar has 2 different heights (2.5rem at small screens)
 // and 3.5rem at everything else
+.activity-creation-navbar{
+    .activity-creation-nav-edit-options{
+        margin-bottom: 0.2rem;
+        .activity-edit-btn{
+            span{
+                font-size: 0.8rem;
+                font-weight: 400;
+            }
+        }
+    }
+}
+
 .activity-creation-nav-activity-name-container{
     display: flex;
     flex-direction: column;
@@ -46,6 +59,7 @@
         }
     }
 }
+
 .activity-creation-nav-edit-options{
     position: absolute;
     bottom: 0;
@@ -100,4 +114,19 @@
         border-left: 1px solid $dark-gray;
         padding: 0.3rem 0.4rem;
     }
+}
+.activity-creation-sidebar{
+    z-index: 2;
+}
+.activity-creation-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    @include no-space;
+    @include transition(all 0.3s ease-out);
+    background-color: $lighter-gray;
+    height: 100%;
+    position: relative;
+    min-height: calc(max(100vh, 40rem));
 }
