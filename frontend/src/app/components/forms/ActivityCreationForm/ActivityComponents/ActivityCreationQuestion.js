@@ -31,4 +31,5 @@ const ActivityCreationQuestion = (props) =>{
         </div>
     )
 }
+
 export default ActivityCreationQuestion

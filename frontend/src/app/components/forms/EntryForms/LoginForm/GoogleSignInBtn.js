@@ -5,7 +5,8 @@ import { googleLogin } from '../../../../../realm/authFunc/googleAuth'
 const googleClientID = process.env.REACT_APP_GOOGLE_CLIENT_ID
 const GoogleBtn = ({
     btnType = "login",
-    customCallback = null,
+    customSuccessCallback = null,
+    customErrorFunc = null,
 }) => {
     const app = useRealmApp()
     useEffect(() => {
@@ -15,10 +16,11 @@ const GoogleBtn = ({
                 client_id: googleClientID,
                 callback: async (res) => {
                     try{
-                        await googleLogin(res, app)
-                        if(customCallback) customCallback()
+                        const user = await googleLogin(res, app, customErrorFunc)
+                        if(customSuccessCallback  && user) customSuccessCallback(user)
                     } catch(e){
                         console.error(e)
+                        if(customErrorFunc) customErrorFunc(e)
                     }
                 }
             });
@@ -41,7 +43,7 @@ const GoogleBtn = ({
         //cleanup script
         return () => document.getElementById("googleLoginIdScript").remove()
 
-    }, [app, btnType, customCallback])
+    }, [app, btnType, customSuccessCallback , customErrorFunc])
     return (
         <div>
             <button className="mb-2 entry-google-btn">
