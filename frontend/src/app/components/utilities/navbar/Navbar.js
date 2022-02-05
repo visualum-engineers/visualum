@@ -26,6 +26,8 @@ const Navbar = ({
     settings = null,
     //img container with avatar img
     avatar = null,
+    children,
+    editOptions,
 }) =>{
 
 return(
@@ -61,24 +63,32 @@ return(
         }
 
         <div className={`activity-header-btns ${!centerHeader ? "col-8 col-sm-4" : ""}`}>
-            <EditOptions 
-                pastSelectorFunc={pastSelectorFunc}
-                futureSelectorFunc={futureSelectorFunc}
-                resetPopUpOn = {resetPopUpOn}
-                undoHistory = {undoHistory}
-                redoHistory = {redoHistory}
-                resetBtnOnClick = {resetBtnOnClick}
-                questionNum = {questionNum}
-                inProp = {inProp}
-            />
+            {editOptions &&
+                <EditOptions 
+                    pastSelectorFunc={pastSelectorFunc}
+                    futureSelectorFunc={futureSelectorFunc}
+                    resetPopUpOn = {resetPopUpOn}
+                    undoHistory = {undoHistory}
+                    redoHistory = {redoHistory}
+                    resetBtnOnClick = {resetBtnOnClick}
+                    questionNum = {questionNum}
+                    inProp = {inProp}
+                />
+            }
             {/*optional settings*/
                settings
             }
-            <div 
-                className="activity-profile-avatar-container"
-            >
-                {avatar}
-            </div> 
+            {children}
+            {
+                avatar && 
+                <div 
+                    className="activity-profile-avatar-container"
+                >
+                    {avatar}
+                </div> 
+            }
+            
+
         </div>
     </nav>
 )}

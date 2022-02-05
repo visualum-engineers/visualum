@@ -1,1 +1,101 @@
 @import "./ActivityComponents/ActivityOverviewPopUp/activityCreationPopUp";
+.activity-creation-nav-activity-name-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 3.5rem;
+    padding: 0 0.5rem;
+    width: max-content;
+    padding-right: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    .activity-navbar-company-title{
+        width: calc(100% - 3.5rem);
+    }
+}
+
+.activity-creation-nav-activity-name{
+    margin-top: 0.5rem;
+    display: flex;
+    height: 1.5rem;
+
+    h1{
+        cursor: pointer;
+        margin: auto;
+        font-weight: 400;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        font-size: 1rem;
+    }
+    button{
+        @include remove-btn-default();
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: $blue;
+        font-size: 0.7rem;
+        line-height: 0.9rem;
+        margin-left: 0.3rem;
+        span{
+            margin-left: 0.2rem;
+        }
+    }
+}
+.activity-creation-nav-edit-options{
+    position: absolute;
+    bottom: 0;
+    .activity-edit-btn{
+        padding-left: 0;
+    }
+    .activity-edit-dropdown-pointer{
+        left: 0;
+    }
+}
+.activity-creation-nav-preview-btn{
+    display: flex;
+        align-items: center;
+        justify-content: center;
+    @include remove-btn-default();
+    border: 1px solid $dark-blue;
+    font-size: 0.9rem;
+    color: $dark-blue;
+    padding: 0.3rem 0.5rem;
+    @include border-radius(0.3rem);
+    height: 2rem;
+    span{
+        margin-left: 0.3rem;
+    }
+}
+.activity-creation-nav-publish-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.5rem;
+    button{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @include remove-btn-default();
+        background-color: $dark-blue;
+        font-size: 0.9rem;
+        color: $white;
+        height: 2rem;
+        
+    }
+    button:first-child{
+        @include border-radius(0.3rem 0 0 0.3rem);
+        padding: 0.3rem 0.5rem;
+        span{
+            margin-left: 0.3rem;
+        }
+    }
+    button:last-child{
+        font-size: 0.8rem;
+        @include border-radius(0 0.3rem 0.3rem 0);
+        border-left: 1px solid $white;
+        padding: 0.3rem 0.4rem;
+    }
+}

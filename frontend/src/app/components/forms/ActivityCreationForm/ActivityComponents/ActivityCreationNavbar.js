@@ -7,7 +7,9 @@ import {
     updateSidebarToggle
 } from "../../../../../redux/features/activityCreation/activityCreationSettings";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit } from "@fortawesome/free-regular-svg-icons";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faEye, faArrowAltCircleUp } from "@fortawesome/free-regular-svg-icons";
+import EditOptions from "../../../utilities/navbar/EditOptions";
 //for testing. remove after
 const imageURL = "images/homePage/mountain-home-bg.jpg";
 const ActivityCreationNavbar = ({
@@ -49,8 +51,8 @@ const ActivityCreationNavbar = ({
         }
     }
     const activityNameHeader = <>
-    <div className="mini-screen-sidebar-header-container">
-        <div className="mini-screen-sidebar-header">
+    <div className="activity-creation-nav-activity-name-container">
+        <div className="activity-creation-nav-activity-name">
             <h1
                 onClick={() => dispatch(updateActivityEditPopUp(true))} 
             >
@@ -63,7 +65,18 @@ const ActivityCreationNavbar = ({
                 {/* <span>Rename</span> */}
             </button>
         </div>
-        
+        <div className="activity-creation-nav-edit-options">
+            <EditOptions 
+                pastSelectorFunc={pastSelectorFunc}
+                futureSelectorFunc={futureSelectorFunc}
+                resetPopUpOn = {updateResetPopUp}
+                undoHistory = {undoHistory}
+                redoHistory = {redoHistory}
+                resetBtnOnClick = {resetBtnOnClick}
+                questionNum = {questionNum}
+                inProp = {inProp}
+            />
+        </div>
     </div>
         
    </>
@@ -83,7 +96,22 @@ const ActivityCreationNavbar = ({
             centerHeader = {activityNameHeader}
             //img container with avatar img
             avatar = {avatar}
-        />
+        >
+            <button className="activity-creation-nav-preview-btn">
+                <FontAwesomeIcon icon={faEye}/>
+                {smallWindowWidth && <span>Preview</span> }
+            </button>
+            <div className="activity-creation-nav-publish-btn">   
+                <button>
+                    <FontAwesomeIcon icon={faArrowAltCircleUp}/>
+                    {smallWindowWidth && <span>Publish</span> }
+                </button>
+                <button>
+                    <FontAwesomeIcon icon={faChevronDown }/>
+                </button>
+            </div>
+           
+        </Navbar>
     )
 }
 export default ActivityCreationNavbar

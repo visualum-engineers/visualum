@@ -61,7 +61,7 @@ $activites-table-of-contents-height: calc(
     display: flex;
     justify-content: start;
     align-items: center;
-    width: 100%;
+    width: calc(100% - 3.5rem);
     font-size: 1.3rem;
     font-weight: 600;
     margin-left: 1rem;

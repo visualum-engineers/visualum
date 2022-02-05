@@ -54,6 +54,7 @@ const ActivityNavbar = ({
                 settings = {settings}
                 //img container with avatar img
                 avatar = {avatar}
+                editOptions={true}
             />       
         )
     }
