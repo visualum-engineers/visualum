@@ -2,7 +2,7 @@ import {
     ActivityCreationOverallPopUp,
     ActivityCreationNavbar,
     ActivityCreationSidebar, 
-    ActivityCreationQuestion,
+    ActivityCreationBody,
 } from "./ActivityComponents/index"
 
 
@@ -37,15 +37,10 @@ const ActivityCreationForm = () =>{
         <ActivityCreationSidebar 
             smallWindowWidth={smallWindowWidth}
         />
-        <div className="activity-creation-body">
-            
-            <div>   
-                Hello
-            </div>
-            <div>
-
-            </div>
-        </div>
+        <ActivityCreationBody 
+            smallWindowWidth = {smallWindowWidth}
+            mediumWindowWidth ={mediumWindowWidth}
+        />
         </>
     )
 }

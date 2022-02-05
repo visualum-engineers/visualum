@@ -1,26 +1,29 @@
 @import "./ActivityComponents/ActivityOverviewPopUp/activityCreationPopUp";
 
-
-//note for future
-//Navbar has 2 different heights (2.5rem at small screens)
-// and 3.5rem at everything else
+$activity-creation-navbar-small-height: 2.5rem;
+$activity-creation-navbar-height: 2.5rem; 
+$activity-creation-question-header-height: 3.5rem;
+$activity-creation-question-top-margin: 0.5rem;
+$activity-creation-question-container-padding-top: 0.5rem;
 .activity-creation-navbar{
-    .activity-creation-nav-edit-options{
-        margin-bottom: 0.2rem;
-        .activity-edit-btn{
-            span{
-                font-size: 0.8rem;
-                font-weight: 400;
-            }
-        }
+    height: $activity-creation-navbar-height;
+    .activity-navbar-visualum-logo{
+        max-width: 1.7rem;
+    }
+    .activity-profile-avatar-container{
+        width: 2rem;
+        height: 2rem;
     }
 }
-
+.activity-creation-sidebar{
+    top: calc(#{$activity-creation-navbar-height} - 0.1rem);
+    height: calc(100vh - #{$activity-creation-navbar-height} - 0.1rem)
+}
 .activity-creation-nav-activity-name-container{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 3.5rem;
+    height: $activity-creation-navbar-height;
     padding: 0 0.5rem;
     width: max-content;
     padding-right: 0;
@@ -31,7 +34,7 @@
 }
 
 .activity-creation-nav-activity-name{
-    margin-top: 0.5rem;
+    //margin-top: 0.5rem;
     display: flex;
     height: 1.5rem;
 
@@ -42,7 +45,8 @@
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
-        font-size: 1rem;
+        font-size: 0.8rem;
+        //font-size: 1rem;
     }
     button{
         @include remove-btn-default();
@@ -63,8 +67,14 @@
 .activity-creation-nav-edit-options{
     position: absolute;
     bottom: 0;
+    //margin-bottom: 0.2rem;
     .activity-edit-btn{
         padding-left: 0;
+        span{
+            //font-size: 0.8rem;
+            font-size: 0.7rem;
+            font-weight: 400;
+        }
     }
     .activity-edit-dropdown-pointer{
         left: 0;
@@ -121,12 +131,55 @@
 .activity-creation-body{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: end;
     justify-content: center;
     @include no-space;
-    @include transition(all 0.3s ease-out);
+    @include transition(all 0.4s ease-out);
     background-color: $lighter-gray;
     height: 100%;
-    position: relative;
     min-height: calc(max(100vh, 40rem));
+    width: 100%;
 }
+.activity-creation-question-container{
+    margin-top: $activity-creation-navbar-small-height;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 1rem;
+    padding-top: $activity-creation-question-container-padding-top;
+    padding-bottom: 0;
+    @include transition(all 0.4s ease-out);
+}
+
+.activity-creation-question-container.move-left{
+    left: calc(min(9.2rem, 148px));
+    width: calc(100% - calc(min(9.2rem, 148px)));
+}
+.activity-creation-question-container.move-down{
+    margin-top: $activity-creation-navbar-height;
+}
+.activity-creation-question{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-height: 100%;
+    width: 100%;
+}
+.activity-creation-question-header{
+    width: 100%;
+    height: $activity-creation-question-header-height;
+    background-color: black;
+}
+.activity-creation-question-body{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    flex-grow: 1;
+    margin-top: $activity-creation-question-top-margin;
+}
+//will use variables defined above
+@import "./SortActivity/sortActivityCreation";

@@ -4,7 +4,8 @@ import { googleLogin } from '../../../../../realm/authFunc/googleAuth'
 /*global google */
 const googleClientID = process.env.REACT_APP_GOOGLE_CLIENT_ID
 const GoogleBtn = ({
-    btnType = "login"   
+    btnType = "login",
+    customCallback = null,
 }) => {
     const app = useRealmApp()
     useEffect(() => {
@@ -12,7 +13,14 @@ const GoogleBtn = ({
             google.accounts.id.initialize({
                 context: btnType==="signup" ? "signup": "signin",
                 client_id: googleClientID,
-                callback: (res) => googleLogin(res, app)
+                callback: async (res) => {
+                    try{
+                        await googleLogin(res, app)
+                        if(customCallback) customCallback()
+                    } catch(e){
+                        console.error(e)
+                    }
+                }
             });
             google.accounts.id.prompt(notification => {
                 if (notification.isNotDisplayed()) {
@@ -33,7 +41,7 @@ const GoogleBtn = ({
         //cleanup script
         return () => document.getElementById("googleLoginIdScript").remove()
 
-    }, [app, btnType])
+    }, [app, btnType, customCallback])
     return (
         <div>
             <button className="mb-2 entry-google-btn">
