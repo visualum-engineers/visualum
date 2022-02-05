@@ -10,6 +10,7 @@ import ExitIcon from "../exitIcon/ExitIcon"
 
 const MiniScreenSideBar = ({
     data = [],
+    customClass,
     // header,
     //mediumWindowWidth, 
     // smallWindowWidth,
@@ -24,7 +25,7 @@ const MiniScreenSideBar = ({
             onDragEnd = {onDragEnd}
         >
             <div 
-                className={`mini-screen-sidebar-container ${sidebarToggle ? "sidebar-closed": "sidebar-open"}`} 
+                className={`mini-screen-sidebar-container${customClass ? " "+customClass: ""}${sidebarToggle ? " sidebar-closed": " sidebar-open"}`} 
                 style={{position: "fixed"}}
             >
                 <div className="mini-screen-sidebar">

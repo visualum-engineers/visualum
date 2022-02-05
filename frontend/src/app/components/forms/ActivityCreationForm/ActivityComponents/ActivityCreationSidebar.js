@@ -18,6 +18,7 @@ const ActivityCreationSidebar = () =>{
     return(
         <MiniScreenSideBar 
             sidebarToggle={!sidebarToggled}
+            customClass = "activity-creation-sidebar"
             {...miniScreenData}
         /> 
     )

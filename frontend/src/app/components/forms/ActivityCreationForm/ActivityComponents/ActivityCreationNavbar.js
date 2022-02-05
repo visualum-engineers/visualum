@@ -64,6 +64,7 @@ const ActivityCreationNavbar = ({
                 <FontAwesomeIcon icon={faEdit}/>
                 {/* <span>Rename</span> */}
             </button>
+            
         </div>
         <div className="activity-creation-nav-edit-options">
             <EditOptions 
@@ -94,6 +95,7 @@ const ActivityCreationNavbar = ({
             questionNum = {questionNum}
             inProp = {inProp}
             centerHeader = {activityNameHeader}
+            customNavClass = {"activity-creation-navbar"}
             //img container with avatar img
             avatar = {avatar}
         >

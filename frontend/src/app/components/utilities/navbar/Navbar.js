@@ -9,6 +9,7 @@ import {
 const Logo = "./images/VisualumLogo.png"
 
 const Navbar = ({
+    customNavClass,
     displayCompanyName,
     pastSelectorFunc,
     futureSelectorFunc,
@@ -31,7 +32,7 @@ const Navbar = ({
 }) =>{
 
 return(
-    <nav className={`d-flex activity-navbar justify-content-between align-items-center px-1`}>
+    <nav className={`d-flex activity-navbar justify-content-between align-items-center px-1 ${customNavClass ? customNavClass: ""}`}>
         <div className={`d-flex justify-content-between ${!centerHeader ? "col-4" : "col-6 col-sm-8"}`}>
             <button 
                 className={`activity-navbar-exit-sidebar-btn${sidebarToggle ?" sidebar-open":" sidebar-close"}`} 
