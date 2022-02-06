@@ -38,7 +38,8 @@
     "realm-web": "=1.5.1",
     "redux": "=4.1.1",
     "redux-devtools-extension": "=2.13.9",
-    "redux-undo": "^1.0.1"
+    "redux-undo": "^1.0.1",
+    "uuid": "^8.3.2"
   },
   "scripts": {
     "secrets": "doppler secrets download --no-file --format env > .env",

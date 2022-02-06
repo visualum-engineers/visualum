@@ -24,11 +24,16 @@ const useActivityMiniScreenData = ({
         }
     })
     const onAddNewClick = (e) =>{
-        //e.preventDefault()
+
+        dispatch(addQuestion(true))
     }
     
     const onRemoveClick =(e) =>{
-        //e.preventDefault()
+        const target = e.target.closest("button")
+        if(!target) return
+        const value = target.dataset.questionNum
+        if(!value) return
+        dispatch(deleteQuestion({questionNum : value}))
     }
 
     const onDragEnd = (result) =>{

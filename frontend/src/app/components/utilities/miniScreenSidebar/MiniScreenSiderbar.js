@@ -55,6 +55,7 @@ const MiniScreenSideBar = ({
                                                     className="mini-screen-remove-slide"
                                                     onClick = {onRemoveClick}
                                                     disabled = {sidebarToggle}
+                                                    data-question-num = {index}
                                                 >
                                                     <ExitIcon 
                                                         customStrokeWidth={"0.6rem"}

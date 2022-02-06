@@ -50,8 +50,8 @@ const activityCreationData = createSlice({
         activityDescription: null,
         activityTimer: null,
         activityTopicLabels: null,
-        //questions: [],
-        questions: miniScreenData
+        questions: [],
+        //questions: miniScreenData
     },
     reducers:{
         updateTopicLabels: (state, action) =>{
@@ -71,13 +71,17 @@ const activityCreationData = createSlice({
             state.questions[questionNum] = action.payload.data
         },
         addQuestion: (state, action) =>{
-            const questionType = action.payload.questionNum
+            const questionType = action.payload.questionType
             const initialQuestionData = questionFormat(questionType)
-            state.questions.push(initialQuestionData)
+            let newState = [...state.questions]
+            newState.push(initialQuestionData)
+            state.questions = newState
         },
         deleteQuestion: (state, action) =>{
-            const questionNum = action.payload.questionNum
-            state.questions.splice(questionNum, 1)
+            const questionNum = parseInt(action.payload.questionNum)
+            let newState = [...state.questions]
+            newState.splice(questionNum, 1)
+            state.questions = newState
         },
         changeQuestionPos: (state, action) =>{
             const startIndex = action.payload.startIndex

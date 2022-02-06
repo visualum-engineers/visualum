@@ -14,7 +14,6 @@ const SortActivityCategory = ({
                         <button className="sort-creation-droppable-name">   
                             Hello the world is coming to an end the wolrd  ihfvuhuhui
                             jojiji ji  iojoi  io jiojio  ij o i ioj io  
-                            
                         </button>
                         <button
                             className="sort-creation-category-edit"
