@@ -7,6 +7,7 @@ $sort-creation-category-container-height: calc(
     - #{$activity-creation-question-container-padding-top}
     - #{$sort-creation-question-add-category-height}
 );
+
 .sort-creation-question{
     position: relative;
     display: flex;
@@ -17,6 +18,7 @@ $sort-creation-category-container-height: calc(
     background-color: $dark-gray;
 }
 .sort-creation-overall-categories-container{
+    position: relative;
     height: $sort-creation-category-container-height;
     width: 100%;
     display: flex;
@@ -27,30 +29,119 @@ $sort-creation-category-container-height: calc(
     padding-left: 0.75rem;
     padding-right: 0.25rem;
     @include activity-scrollbar-styles();
+    &:empty:after{
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        content: "Add a category to get started";
+    }
 }
 .sort-creation-categories-row{
     display: flex;
-    justify-content: center;
     align-items: stretch;
     flex-grow: 1;
-    min-height: $sort-creation-category-container-height;
-    //height: 100%;
+    //justify-content: center;
+    //min-height: $sort-creation-category-container-height;
 }
 .sort-creation-category-container{
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 33%;
-    padding: 0.75rem 0.25rem;
-    //background-color: red;
-
+    padding: 0.75rem 0.75rem;
+    padding-right: 0rem;
 }
+
 .sort-creation-category{
+    position: relative;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     width: 100%;
+    height: calc(#{$sort-creation-category-container-height} - 1.5rem);
+    background-color: $white;
+    @include border-radius(0.3rem);
+    overflow: auto;
+    overflow-x: hidden;
+    @include activity-scrollbar-styles();
+}
+.sort-creation-droppable-header{
+    position: relative;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    left: 0;
+    color: $white;
+    width: 100%;
+    min-height: 3.5rem;
+    padding: 0.5rem;
+}
+.sort-creation-droppable-header-inner{
+    display: flex;
+    position: relative;
+    width: 100%;
     height: 100%;
-    background-color: blue;
+    background-color: $light-blue;
+    .sort-creation-droppable-name{
+        @include remove-btn-default();
+        width: 100%;
+        height: 100%;
+        font-weight: 500;
+        font-size: 0.9rem;
+        margin: auto;
+        max-height: 6rem;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        overflow: auto;
+        @include activity-scrollbar-styles;
+
+    }
+}
+.sort-creation-category-edit{
+     @include remove-btn-default();
+     background-color: $blue;
+     color: $white;
+     width: 2rem;
+}
+.sort-creation-category-delete{
+    @include remove-btn-default();
+    background-color: $red;
+    height: 100%;
+    width: 2rem;
+    font-size: 0.8rem;
+    color: $white;
+}
+.sort-creation-droppable{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-height: min-content;
+}
+.sort-creation-droppable-add-draggable{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    width: calc(100% - 2.25rem);
+    bottom: 0.75rem;
+    left: 1.5rem;
+    height: 3rem;
+    padding-bottom:  0.5rem;
+    button{
+        @include remove-btn-default();
+        width: 100%;
+        height: 100%;
+        background-color: $green;
+        font-size: 0.85rem;
+        span{
+            margin-left: 0.3rem;
+        }
+    }
 }
 .sort-creation-question-add-category{
     position: sticky;
@@ -72,10 +163,8 @@ $sort-creation-category-container-height: calc(
         font-weight: 500;
         span{
             margin-left: 0.3rem;
+            overflow-wrap: break-word;
+            word-break: break-word;
         }
     }
 }
-
-
-
-

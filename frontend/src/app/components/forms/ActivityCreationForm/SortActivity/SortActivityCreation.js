@@ -1,5 +1,6 @@
+import SortActivityCategory from "./SortActivityCreationCategory"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlus } from "@fortawesome/free-solid-svg-icons"
+import { faPlus} from "@fortawesome/free-solid-svg-icons"
 
 const SortActivityCreation = ({
     smallWindowWidth,
@@ -12,36 +13,40 @@ const SortActivityCreation = ({
             <div className="sort-creation-overall-categories-container">
                 {/* map over this*/}
                 <div className="sort-creation-categories-row row">
-                    <div className="sort-creation-category-container col-4">
-                        <div className="sort-creation-category">
-                            
-                        </div>
-                    </div>
-                    <div className="sort-creation-category-container col-4">
-                        <div className="sort-creation-category">
-                            
-                        </div>
-                    </div>
-                    <div className="sort-creation-category-container col-4">
-                        <div className="sort-creation-category">
-                            
-                        </div>
-                    </div>
-                </div>
-                <div className="sort-creation-categories-row row">
-                    <div className="sort-creation-category-container col-4">
-                        <div className="sort-creation-category">
-                            
-                        </div>
-                    </div>
+                    <SortActivityCategory
+                        //data = {data}
+                        preview={preview}
+                    />
+                    <SortActivityCategory
+                        //data = {data}
+                        preview={preview}
+                    />
+                    <SortActivityCategory
+                        //data = {data}
+                        preview={preview}
+                    />
+                    <SortActivityCategory
+                        //data = {data}
+                        preview={preview}
+                    />
+                    <SortActivityCategory
+                        //data = {data}
+                        preview={preview}
+                    />
+                    <SortActivityCategory
+                        //data = {data}
+                        preview={preview}
+                    />
                 </div>
             </div>
-            <div className="sort-creation-question-add-category">
-                <button className="add-category-btn">
-                    <FontAwesomeIcon icon={faPlus}/>
-                    <span>Add Category</span>
-                </button>
-            </div>
+            {!preview &&
+                <div className="sort-creation-question-add-category">
+                    <button className="add-category-btn">
+                        <FontAwesomeIcon icon={faPlus}/>
+                        <span>Add Category</span>
+                    </button>
+                </div>
+            }
         </div>
     )
 }

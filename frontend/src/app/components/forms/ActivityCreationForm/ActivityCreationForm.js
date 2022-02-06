@@ -4,13 +4,10 @@ import {
     ActivityCreationSidebar, 
     ActivityCreationBody,
 } from "./ActivityComponents/index"
-
-
 import { useWindowWidth } from "../../../hooks"
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { updateActivityName } from "../../../../redux/features/activityCreation/activityCreationData"
-
 const ActivityCreationForm = () =>{
     const smallWindowWidth = useWindowWidth(576) 
     const mediumWindowWidth = useWindowWidth(992)
@@ -25,22 +22,23 @@ const ActivityCreationForm = () =>{
         }
         return() => {isMounted = false}
     }, [dispatch, activityName])
+
     return(
         <>
-        <ActivityCreationNavbar 
-            smallWindowWidth={smallWindowWidth}
-        /> 
-        <ActivityCreationOverallPopUp
-            smallWindowWidth={smallWindowWidth}
-            mediumWindowWidth={mediumWindowWidth}
-        /> 
-        <ActivityCreationSidebar 
-            smallWindowWidth={smallWindowWidth}
-        />
-        <ActivityCreationBody 
-            smallWindowWidth = {smallWindowWidth}
-            mediumWindowWidth ={mediumWindowWidth}
-        />
+            <ActivityCreationNavbar 
+                smallWindowWidth={smallWindowWidth}
+            /> 
+            <ActivityCreationOverallPopUp
+                smallWindowWidth={smallWindowWidth}
+                mediumWindowWidth={mediumWindowWidth}
+            /> 
+            <ActivityCreationSidebar 
+                mediumWindowWidth={mediumWindowWidth}
+            />
+            <ActivityCreationBody 
+                smallWindowWidth = {smallWindowWidth}
+                mediumWindowWidth ={mediumWindowWidth}
+            />
         </>
     )
 }

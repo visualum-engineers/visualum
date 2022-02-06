@@ -9,7 +9,7 @@
     background-color: $lightest-gray;
     @include box-shadow(4px 0px 7px -8px #000000);
     height: calc(100vh - 3.3rem);
-    @include transition(0.4s ease-out all);
+    @include transition(0.3s ease-out all);
 }
 .mini-screen-sidebar-container.sidebar-closed{
     left: calc(min(-9.2rem, -148px));;

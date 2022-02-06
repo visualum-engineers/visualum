@@ -5,11 +5,10 @@
     mediumWindowWidth,
  }) =>{
     const sidebarToggle = useSelector(state => state.activityCreation.settings.sidebarToggled)
-
     return(
         <div className={`activity-creation-body`}>
             <div className={`activity-creation-question-container`
-                            + `${sidebarToggle ? " move-left": ""}`
+                            + `${sidebarToggle && mediumWindowWidth ? " move-left": ""}`
                             + `${smallWindowWidth ? " move-down": ""}`
                         }>
                 <ActivityCreationQuestion

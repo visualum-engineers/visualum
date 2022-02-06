@@ -28,7 +28,8 @@ const ActivityCreationNavbar = ({
     const activityName = useSelector(state => state.activityCreation.data.saved.present.activityName)
     const resetPopUp = useSelector((state) => state.activityCreation.settings.resetPopUp)
     const handleSideBar = () =>{
-        dispatch(updateSidebarToggle())
+        if(sidebarToggled) dispatch(updateSidebarToggle(false))
+        else dispatch(updateSidebarToggle(true))
     }
     const resetBtnOnClick = (e) =>{
         //when being used in forms, it prevents a refresh

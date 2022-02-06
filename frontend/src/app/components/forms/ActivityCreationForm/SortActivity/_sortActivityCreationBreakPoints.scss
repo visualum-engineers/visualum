@@ -1,0 +1,13 @@
+@mixin sort-activity-creation-lg {
+    
+}
+@mixin sort-activity-creation-md {
+    .sort-creation-category-container{
+        width: calc(50% - 0.5rem);
+    }
+}
+@mixin sort-activity-creation-sm {
+    .sort-creation-category-container{
+        width: calc(100% - 0.75rem);
+    }
+}

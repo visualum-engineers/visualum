@@ -1,7 +1,8 @@
 @import "./ActivityComponents/ActivityOverviewPopUp/activityCreationPopUpBreakPoints";
-
+@import "./SortActivity/sortActivityCreationBreakPoints";
 @mixin activity-creation-md {
     @include activity-creation-overview-pop-up-md;
+    @include sort-activity-creation-md;
 }
 @mixin activity-creation-sm {
     @include activity-creation-overview-pop-up-sm;
@@ -25,6 +26,7 @@
             max-width: 1.7rem;
         }
         .activity-creation-nav-activity-name{
+            margin-top: 0.5rem;
             h1{
                 font-size: 0.8rem;
             }
@@ -57,6 +59,7 @@
             }
         }
         .activity-creation-nav-edit-options{
+            margin-bottom: 0;
             .activity-edit-btn{
                 span{
                     font-size: 0.7rem;
@@ -68,6 +71,14 @@
         top: 2.4rem;
         height: calc(100vh - 2.4rem)
     }
+    .activity-creation-question-description{
+        button{
+            span{
+                width: min-content;
+            }
+        }
+    }
+    @include sort-activity-creation-sm;
 }
 @mixin activity-creation-hover {
     @include activity-creation-overview-pop-up-hover;

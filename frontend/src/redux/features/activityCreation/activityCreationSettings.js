@@ -17,8 +17,8 @@ const activityCreationSettings = createSlice({
         updateResetPopUp: (state, action) =>{
             state.resetPopUp = action.payload
         },
-        updateSidebarToggle: (state) =>{
-            state.sidebarToggled = !state.sidebarToggled
+        updateSidebarToggle: (state, action) =>{
+            state.sidebarToggled = action.payload
         }
     }
 })
