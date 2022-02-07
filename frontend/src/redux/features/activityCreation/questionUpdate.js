@@ -6,6 +6,16 @@ const questionUpdate = ({
     newData
 }) =>{
     let updatedData
+    if(newData.actionType === "update-points"){
+        updatedData = {...oldData}
+        updatedData.pointValue = newData.value
+        return updatedData
+    }
+    if(newData.actionType === "update-instructions"){
+        updatedData = {...oldData}
+        updatedData.instructions = newData.value
+        return updatedData 
+    }
     switch(type){
         case "sort":
             let categoryIndex, category, answerIndex, answers, newAnswers, categories, newCategory
@@ -88,7 +98,7 @@ const questionUpdate = ({
                     }
                     break
                 default:
-                    console.log(oldData, newData)
+                    console.error("action type does not match")
                     break
             }
             return updatedData

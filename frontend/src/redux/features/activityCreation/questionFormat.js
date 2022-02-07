@@ -8,8 +8,8 @@ const questionFormat = (type) =>{
                 questionType: "sort",
                 slideType: "sort",
                 categories:[newSortCategory()],
-                pointValue: null,
-                instructions: null,
+                pointValue: "",
+                instructions: "",
             }
         case "matching":
             return {
@@ -23,8 +23,8 @@ const questionFormat = (type) =>{
                         answer: ""
                     }
                 ],
-                pointValue: null,
-                instructions: null,
+                pointValue: "",
+                instructions: "",
             }
         case "radio":
             return{
@@ -32,13 +32,13 @@ const questionFormat = (type) =>{
                 questionType: "radio",
                 slideType: "radio",
                 question: "",
-                imgDescription: null,
-                imageURL: null,
+                imgDescription: "",
+                imageURL: "",
                 answerChoices: [
                     {id: uuidv4(), content: ""}
                 ],
-                pointValue: null,
-                instructions: null,
+                pointValue: "",
+                instructions: "",
             }
         case "checkbox":
             return{
@@ -46,22 +46,22 @@ const questionFormat = (type) =>{
                 questionType: "checkbox",
                 slideType: "checkbox",
                 question: "",
-                imageURL: null, 
-                imgDescription: null,
+                imageURL: "", 
+                imgDescription: "",
                 answerChoices: [],
-                correctAnswer: null,
-                pointValue: null,
-                instructions: null,
+                correctAnswer: "",
+                pointValue: "",
+                instructions: "",
             }   
         case "shortAnswer":
             return{
                 key: uuidv4(),
                 questionType: "shortAnswer",
                 slideType: "shortAnswer",
-                imgURL: null,
+                imgURL: "",
                 question: "",
-                pointValue: null,
-                instructions: null,
+                pointValue: "",
+                instructions: "",
             }
         case "labelPictures":
             return{
@@ -73,8 +73,8 @@ const questionFormat = (type) =>{
                 imgSize: {},
                 imgLabels:[],
                 answerChoices: [],
-                pointValue: null,
-                instructions: null,
+                pointValue: "",
+                instructions: "",
             }
         default:
             return

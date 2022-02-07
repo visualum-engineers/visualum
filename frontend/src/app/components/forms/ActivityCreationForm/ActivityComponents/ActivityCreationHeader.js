@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
-//import { useState } from "react"
 import { useReduxDebouncedTextInputs } from "../../../../hooks"
 import { updateQuestionData } from "../../../../../redux/features/activityCreation/activityCreationData"
-import { useLayoutEffect, useState } from "react"
+import { useLayoutEffect, useState, useRef} from "react"
+import onlyNumInput from "../../../../helpers/onlyNumInput"
 const ActivityQuestionHeader = ({
     currQuestion,
     mediumWindowWidth,
@@ -12,7 +12,8 @@ const ActivityQuestionHeader = ({
 }) =>{
     const [pointActive, setPointActive] = useState(false)
     const [instructionsActive, setInstructionsActive] = useState(false)
-    
+    const [textareaHeight, setAreaHeight] = useState(null)
+    const storedResize = useRef(null)
     const [pointValue, setPointValue] = useReduxDebouncedTextInputs({
         selectorFunc:(state => state.activityCreation.data.saved.present.questions[currQuestion].pointValue),
         reduxUpdateFunc: updateQuestionData, 
@@ -29,7 +30,7 @@ const ActivityQuestionHeader = ({
         selectorFunc: (state) => state.activityCreation.data.saved.present.questions[currQuestion].instructions,
         reduxUpdateFunc: updateQuestionData, 
         inputType: "textarea",
-        charLimit: 300,
+        charLimit: 400,
         addedPayload:{
             type: questionType,
             questionNum: currQuestion,
@@ -44,9 +45,17 @@ const ActivityQuestionHeader = ({
         <div className={`activity-creation-question-header`}>
             <div className="activity-creation-question-points">
                 {pointActive ?
-                    <textarea 
-                        onChange={setPointValue}
-                    />
+                    <div className="activity-creation-point-input">
+                        <label htmlFor="question-points-input">Points:</label>
+                        <input 
+                            id = {"question-points-input"}
+                            onChange={setPointValue}
+                            value = {pointValue}
+                            type={"number"}
+                            onKeyDown = {onlyNumInput}
+                            autoFocus={true}
+                        />
+                    </div>
                 :   <button
                         aria-label = {"add-question-points"}
                         onClick = {() => setPointActive(true)}
@@ -60,7 +69,18 @@ const ActivityQuestionHeader = ({
             <div className="activity-creation-question-instructions">
                 {instructionsActive ? 
                     <textarea 
+                        style = {{height : textareaHeight && storedResize.current ? textareaHeight: ""}}
                         onChange={setInstructionValue}
+                        value = {instructionValue}
+                        autoFocus={true}
+                        onFocus = {(e)=>{
+                            if(storedResize.current) setAreaHeight(storedResize.current)
+                        }}
+                        onBlur = {(e) => {
+                            if(e.target.style.height) storedResize.current = e.target.style.height
+                            e.target.style.height = ""
+                            setAreaHeight(null)
+                        }}
                     />
                 : 
                 <button

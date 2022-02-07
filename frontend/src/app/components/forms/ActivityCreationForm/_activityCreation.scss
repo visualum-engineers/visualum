@@ -153,7 +153,7 @@ $activity-creation-question-container-padding-top: 0.5rem;
     padding: 0 1rem;
     padding-top: $activity-creation-question-container-padding-top;
     padding-bottom: 0;
-    @include transition(all 0.3s ease-out);
+    @include transition(all 10s ease-out);
 }
 
 .activity-creation-question-container.move-left{
@@ -178,7 +178,6 @@ $activity-creation-question-container-padding-top: 0.5rem;
 }
 .activity-creation-question-points{
     display: flex;
-    background-color: $green;
     align-items: center;
     justify-content: center;
     width: 8rem;
@@ -192,17 +191,35 @@ $activity-creation-question-container-padding-top: 0.5rem;
         height: 100%;
         font-weight: 500;
         font-size: 0.9rem;
+        background-color: $green;
     }
     span{
         margin-left: 0.5rem;
     }
 }
-
+.activity-creation-point-input{
+    display: flex;
+    //flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0.3rem;
+    label{
+        text-align: center;
+        width: 100%;
+        font-size: 0.8rem;
+    }
+    input{
+        flex-grow: 1;
+        text-align: center;
+        width: 100%
+    }
+}
 .activity-creation-question-instructions{
     display: flex;
     flex-grow: 1;
     width: calc(100% - 8rem);
-    background-color: $green;
     button{
         @include remove-btn-default();
         display: flex;
@@ -212,6 +229,8 @@ $activity-creation-question-container-padding-top: 0.5rem;
         height: 100%;
         font-weight: 500;
         font-size: 0.9rem;
+        background-color: $green;
+
         span{
             display: flex;
             justify-content: center;
@@ -219,6 +238,11 @@ $activity-creation-question-container-padding-top: 0.5rem;
             margin-left: 0.3rem;
             text-align: center;
         }
+    }
+    textarea{
+        width: 100%;
+        font-size: 0.8rem;
+        z-index: 2;
     }
 }
 .activity-creation-question-body{
@@ -278,7 +302,7 @@ $activity-creation-question-container-padding-top: 0.5rem;
         @include remove-btn-default;
         @include box-shadow(0 4px 11px rgba(33,33,33,0.1));
         @include border-radius(1rem);
-        @include transition(0.3s all ease-out);
+       @include transition(0.3s all ease-out);
         display: flex;
         align-items: space-between;
         justify-content: center;

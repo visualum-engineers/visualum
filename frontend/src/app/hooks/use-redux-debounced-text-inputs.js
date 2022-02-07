@@ -13,7 +13,8 @@ const useReduxDebouncedTextInputs = ({
     selectorFunc, 
     inputType,
     charLimit,
-    addedPayload
+    addedPayload,
+    restrictNumbers, 
 }) =>{
     const reduxTextInput = useSelector(selectorFunc)
     const dispatch = useDispatch()
