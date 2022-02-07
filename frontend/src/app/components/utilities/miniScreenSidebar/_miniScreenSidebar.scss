@@ -21,9 +21,9 @@
     width: 100%;
     height: calc(100vh - 3.3rem);
     padding: 0.5rem;
-    padding-top: 0;
-    padding-left: 1rem;
-    padding-right: 0.3rem;
+    // padding-top: 0;
+    // padding-left: 1rem;
+    // padding-right: 0.3rem;
     overflow: auto;
     overflow-x: hidden;
     @include activity-scrollbar-styles()
@@ -31,6 +31,9 @@
 
 
 .mini-screen-slideshow-screens{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 1rem 0;
     flex-grow: 1;
     height: min-content;
@@ -46,7 +49,7 @@
 }
 .mini-screen-remove-slide{
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     @include remove-btn-default();
     width: 1.2rem;
     height: 1.2rem;
@@ -73,11 +76,20 @@
     @include remove-btn-default();
     cursor: pointer;
     display: flex;
-    align-items: center;
+    // align-items: center;
+    // justify-content: center;
     width: 100%;
     padding-left: 0;
     padding-right: 0;
-    @include border-radius(0.3rem)
+    @include border-radius(0.3rem);
+    //prevent any click inside preview
+    &:after{
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        z-index: 1;  
+    }
 }
 .mini-screen-slide.is-dragging{
     background-color: $light-gray;
@@ -99,7 +111,7 @@
 .mini-screen-text-content{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
     margin-left: 0.5rem;
     height: 100%;
     text-align: start;

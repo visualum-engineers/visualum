@@ -15,6 +15,7 @@ const MiniScreenSideBar = ({
     onRemoveClick,
     onAddNewClick,
     onDragEnd,
+    onSlideClick
 }) =>{
 
     return (
@@ -63,10 +64,11 @@ const MiniScreenSideBar = ({
                                                 </button>
                                                 <div 
                                                     className={`mini-screen-slide ${snapshot.isDragging ? "is-dragging":""}`}
-                                                    onClick ={(e) => e.preventDefault()}
+                                                    onClick ={onSlideClick}
                                                     disabled = {sidebarToggle}
                                                     tabIndex = {sidebarToggle ? null : 0}
                                                     aria-label={value.slideAriaLabel}
+                                                    data-slide-num = {index}
                                                 >
                                                     <div 
                                                         className="mini-screen-container"

@@ -33,8 +33,7 @@ const ActivityCreationQuestion = (props) =>{
                 </div>
             </div>
             <div className="activity-creation-question-body">
-                {activityMap["sort"]}
-                
+                {activityMap[props.questionType]}
             </div>
         </div>
     )

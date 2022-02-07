@@ -1,17 +1,17 @@
 import {createPortal} from "react-dom"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch, useSelector, batch } from "react-redux"
 import { useEffect } from "react"
 import MiniScreenSideBar from "../../../utilities/miniScreenSidebar/MiniScreenSiderbar"
 import useActivityMiniScreenData from "../hooks/use-activity-miniscreen-data"
 import PopUpBg from "../../../utilities/popUp/PopUpBackground"
 import {updateAddQuestionPopUp} from "../../../../../redux/features/activityCreation/activityCreationSettings"
-import { updateSidebarToggle } from "../../../../../redux/features/activityCreation/activityCreationSettings"
+import { updateSidebarToggle, updateCurrQuestion } from "../../../../../redux/features/activityCreation/activityCreationSettings"
 import {
     changeQuestionPos, 
     addQuestion, 
     deleteQuestion,
  } from "../../../../../redux/features/activityCreation/activityCreationData"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import ExitIcon from "../../../utilities/exitIcon/ExitIcon"
 const ActivityCreationSidebar = ({
     mediumWindowWidth
@@ -19,11 +19,13 @@ const ActivityCreationSidebar = ({
     const dispatch = useDispatch()
     const sidebarToggled = useSelector((state) => state.activityCreation.settings.sidebarToggled)
     const addQuestionPopUp = useSelector((state) => state.activityCreation.settings.addQuestionPopUp)
+    const questionsLength = useSelector(state => state.activityCreation.data.saved.present.questions.length)
     const miniScreenData = useActivityMiniScreenData({
         reduxSelectorFunc: state => state.activityCreation.data.saved.present.questions,
         changeQuestionPos: changeQuestionPos,
         addQuestion: updateAddQuestionPopUp,
-        deleteQuestion: deleteQuestion
+        deleteQuestion: deleteQuestion,
+        changeCurrQuestion: updateCurrQuestion
     })
     useEffect(() =>{
         if(!mediumWindowWidth) dispatch(updateSidebarToggle(false))
@@ -31,21 +33,25 @@ const ActivityCreationSidebar = ({
     }, [dispatch, mediumWindowWidth])
     
     const questionTypes = [
-        {type: "radio", icon: <FontAwesomeIcon />, description: "Multiple Choice"},
-        {type: "checkbox", icon: <FontAwesomeIcon />, description: "Checkbox"},
-        {type: "shortAnswer", icon: <FontAwesomeIcon />, description: "Short Answer"},
-        {type: "sort", icon: <FontAwesomeIcon />, description: "Sort Items"},
-        {type: "matching", icon: <FontAwesomeIcon />, description: "Match Items"},
-        {type: "labelPictures", icon: <FontAwesomeIcon />, description: "Label a Picture"},
+        {type: "radio", icon: null, description: "Multiple Choice"},
+        {type: "checkbox", icon: null, description: "Checkbox"},
+        {type: "shortAnswer", icon: null, description: "Short Answer"},
+        {type: "sort", icon: null, description: "Sort Items"},
+        {type: "matching", icon: null, description: "Match Items"},
+        {type: "labelPictures", icon: null, description: "Label a Picture"},
     ]
     const onAddQuestionClick = (e) =>{
         const target = e.target.closest("button")
         if(!target) return
         const value = target.dataset.questionType
         if(!value) return
-        dispatch(addQuestion({questionType : value}))
-        dispatch(updateAddQuestionPopUp(false))
+        batch(()=>{
+            dispatch(addQuestion({questionType : value}))
+            dispatch(updateAddQuestionPopUp(false))
+            dispatch(updateCurrQuestion(questionsLength.toString()))
+        })
     }
+   
     return(
         <>
             {!mediumWindowWidth && sidebarToggled && <PopUpBg

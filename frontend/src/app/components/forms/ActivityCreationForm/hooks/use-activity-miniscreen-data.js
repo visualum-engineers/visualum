@@ -1,10 +1,10 @@
-//import ActivityCreationQuestion from "../ActivityCreationQuestion"
 import { useDispatch, useSelector } from "react-redux"
 const useActivityMiniScreenData = ({
     reduxSelectorFunc,
     changeQuestionPos,
     addQuestion,
     deleteQuestion,
+    changeCurrQuestion
 }) =>{
     const dispatch = useDispatch()
     const slides = useSelector(reduxSelectorFunc)
@@ -23,8 +23,14 @@ const useActivityMiniScreenData = ({
             slideAriaLabel: `go-to-slide-${parseInt(index)+1}`,
         }
     })
+    const onSlideClick = (e) =>{
+        const target = e.target.closest(".mini-screen-slide");
+        if(!target) return
+        const value = target.dataset.slideNum
+        if(!value) return 
+        dispatch(changeCurrQuestion(value))
+    }
     const onAddNewClick = (e) =>{
-
         dispatch(addQuestion(true))
     }
     
@@ -54,7 +60,8 @@ const useActivityMiniScreenData = ({
         data: miniScreenData,
         onDragEnd: onDragEnd,
         onAddNewClick: onAddNewClick,
-        onRemoveClick: onRemoveClick
+        onRemoveClick: onRemoveClick,
+        onSlideClick: onSlideClick,
     }
 }
 export default useActivityMiniScreenData

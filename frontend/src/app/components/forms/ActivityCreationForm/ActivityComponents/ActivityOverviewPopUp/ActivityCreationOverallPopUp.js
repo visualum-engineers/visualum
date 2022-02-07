@@ -1,9 +1,8 @@
-import {useSelector, useDispatch } from "react-redux"
+import {useSelector, useDispatch, batch } from "react-redux"
 import PopUpBg from "../../../../utilities/popUp/PopUpBackground"
 import ExitIcon from "../../../../utilities/exitIcon/ExitIcon"
 import { createPortal } from "react-dom"
 import { updateActivityEditPopUp } from "../../../../../../redux/features/activityCreation/activityCreationSettings"
-import { unstable_batchedUpdates } from "react-dom"
 import removeAddedWhiteSpace from "../../../../../helpers/removeWhiteSpace"
 import {
     updateUnsavedActivityDescription,
@@ -37,7 +36,7 @@ const ActivityCreationOverallPopUp = ({
         if(activitySave && isMounted){
             const filteredName = removeAddedWhiteSpace(unsavedData.activityName)
             const filteredDescription =  removeAddedWhiteSpace(unsavedData.activityDescription)
-            unstable_batchedUpdates(()=>{
+            batch(()=>{
                 dispatch(updateActivityName(filteredName))
                 dispatch(updateActivityDescription(filteredDescription))
                 dispatch(updateUnsavedActivityName(filteredName))

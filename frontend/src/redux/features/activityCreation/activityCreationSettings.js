@@ -7,6 +7,8 @@ const activityCreationSettings = createSlice({
         resetPopUp: false,
         sidebarToggled: true,
         addQuestionPopUp: false,
+        //currQuestion: null,
+        currQuestion: 0,
     },
     reducers:{
         updatePreviewState : (state, action) =>{
@@ -23,6 +25,9 @@ const activityCreationSettings = createSlice({
         },
         updateAddQuestionPopUp: (state, action) =>{
             state.addQuestionPopUp = action.payload
+        },
+        updateCurrQuestion: (state, action) =>{
+            state.currQuestion = action.payload
         }
     }
 })
@@ -31,6 +36,7 @@ export const {
     updateActivityEditPopUp,
     updateResetPopUp,
     updateSidebarToggle,
-    updateAddQuestionPopUp
+    updateAddQuestionPopUp,
+    updateCurrQuestion
 } = activityCreationSettings.actions
 export default activityCreationSettings.reducer

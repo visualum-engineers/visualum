@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-
+import { newSortCategory } from './dataFormats';
 const questionFormat = (type) =>{
     switch(type){
         case "sort":
@@ -7,16 +7,20 @@ const questionFormat = (type) =>{
                 key: uuidv4(),
                 questionType: "sort",
                 slideType: "sort",
-                categories:[],
-                answerChoices: []
+                categories:[newSortCategory()],
             }
         case "matching":
             return {
                 key: uuidv4(),
                 questionType: "matching",
                 slideType: "matching",
-                keyPairs: [],
-                answerChoices: []
+                keyPairs: [
+                    {
+                        id: uuidv4(), 
+                        key: "", 
+                        answer: ""
+                    }
+                ],
             }
         case "radio":
             return{
@@ -26,7 +30,9 @@ const questionFormat = (type) =>{
                 question: "",
                 imgDescription: null,
                 imageURL: null,
-                answerChoices: [],
+                answerChoices: [
+                    {id: uuidv4(), content: ""}
+                ],
             }
         case "checkbox":
             return{
@@ -37,6 +43,7 @@ const questionFormat = (type) =>{
                 imageURL: null, 
                 imgDescription: null,
                 answerChoices: [],
+                correctAnswer: null,
             }   
         case "shortAnswer":
             return{

@@ -6,6 +6,7 @@ import {
     //combineReducers
     //createAsyncThunk,
 } from '@reduxjs/toolkit'
+import questionUpdate from './questionUpdate';
 const activityCreationDataUnsaved = createSlice({
     name: "activityCreationDataUnsaved",
     initialState:{
@@ -35,14 +36,7 @@ export const {
     updateUnsavedActivityName,
     updateUnsavedActivityDescription
 } = activityCreationDataUnsaved.actions
-//mock data
-const mockData = Array(10).fill(0)
-const miniScreenData = mockData.map((questions, index)=>{
-    return{
-        key: index,
-        slideType: "Label Pictures",
-    }
-})
+
 const activityCreationData = createSlice({
     name: "activityCreationData",
     initialState:{
@@ -50,7 +44,7 @@ const activityCreationData = createSlice({
         activityDescription: null,
         activityTimer: null,
         activityTopicLabels: null,
-        questions: [],
+        questions: [questionFormat("sort")],
         //questions: miniScreenData
     },
     reducers:{
@@ -67,8 +61,15 @@ const activityCreationData = createSlice({
             state.activityDescription = action.payload
         },
         updateQuestionData: (state, action) =>{
-            const questionNum = action.payload.questionNum
-            state.questions[questionNum] = action.payload.data
+            const questionType = action.payload.questionType
+            const questionNum = parseInt(action.payload.questionNum)
+            const updateData = questionUpdate({
+                type: questionType,
+                oldData: {...state.questions[questionNum]},
+                newData: action.payload
+            })
+            if(!updateData) return
+            state.questions[questionNum] = updateData
         },
         addQuestion: (state, action) =>{
             const questionType = action.payload.questionType
