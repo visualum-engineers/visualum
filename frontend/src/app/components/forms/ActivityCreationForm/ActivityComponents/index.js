@@ -9,8 +9,9 @@ import ActivityCreationQuestion from "./ActivityCreationQuestion";
 import ActivityCreationSidebar from "./ActivityCreationSidebar";
 import ActivityCreationNavbar from "./ActivityCreationNavbar";
 import ActivityCreationBody from "./ActivityCreationBody";
-
+import ActivityQuestionHeader from "./ActivityCreationHeader";
 export {
+    ActivityQuestionHeader,
     ActivityCreationBody,
     ActivityCreationOverallPopUp,
     ActivityCreationNavbar,

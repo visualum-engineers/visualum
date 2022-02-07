@@ -8,6 +8,8 @@ const questionFormat = (type) =>{
                 questionType: "sort",
                 slideType: "sort",
                 categories:[newSortCategory()],
+                pointValue: null,
+                instructions: null,
             }
         case "matching":
             return {
@@ -21,6 +23,8 @@ const questionFormat = (type) =>{
                         answer: ""
                     }
                 ],
+                pointValue: null,
+                instructions: null,
             }
         case "radio":
             return{
@@ -33,6 +37,8 @@ const questionFormat = (type) =>{
                 answerChoices: [
                     {id: uuidv4(), content: ""}
                 ],
+                pointValue: null,
+                instructions: null,
             }
         case "checkbox":
             return{
@@ -44,6 +50,8 @@ const questionFormat = (type) =>{
                 imgDescription: null,
                 answerChoices: [],
                 correctAnswer: null,
+                pointValue: null,
+                instructions: null,
             }   
         case "shortAnswer":
             return{
@@ -52,6 +60,8 @@ const questionFormat = (type) =>{
                 slideType: "shortAnswer",
                 imgURL: null,
                 question: "",
+                pointValue: null,
+                instructions: null,
             }
         case "labelPictures":
             return{
@@ -62,7 +72,9 @@ const questionFormat = (type) =>{
                 imageURL: "",
                 imgSize: {},
                 imgLabels:[],
-                answerChoices: []
+                answerChoices: [],
+                pointValue: null,
+                instructions: null,
             }
         default:
             return

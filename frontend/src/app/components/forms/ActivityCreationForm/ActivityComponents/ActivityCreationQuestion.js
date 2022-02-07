@@ -3,9 +3,9 @@ import MatchActivityCreation from "../MatchActivity/MatchActivityCreation"
 import ShortAnswerCreation from "../ShortAnswer/ShortAnswerCreation"
 import ControlledInputsCreation from "../ControlledInputs/ControlledInputsCreation"
 import LabelPicturesCreation from "../LabelPictures/LabelPicturesCreation"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlus } from "@fortawesome/free-solid-svg-icons"
+import { ActivityQuestionHeader } from "./"
 const ActivityCreationQuestion = (props) =>{
+
     const activityMap = {
         sort: <SortActivityCreation {...props} />,
         matching: <MatchActivityCreation {...props} />,
@@ -18,20 +18,9 @@ const ActivityCreationQuestion = (props) =>{
         <div className={`activity-creation-question` 
                     +`${props.preview ? " preview-slide":""}`
                 }>
-            <div className={`activity-creation-question-header`}>
-                <div className="activity-creation-question-points">
-                    <button>
-                        <FontAwesomeIcon icon={faPlus}/>
-                        <span>Points</span>
-                    </button>
-                </div>
-                <div className="activity-creation-question-description">
-                    <button>
-                        <FontAwesomeIcon icon ={faPlus}/>
-                        <span>Question Instructions</span>
-                    </button>
-                </div>
-            </div>
+            <ActivityQuestionHeader 
+                {...props}
+            />
             <div className="activity-creation-question-body">
                 {activityMap[props.questionType]}
             </div>

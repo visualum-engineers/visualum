@@ -71,6 +71,7 @@ const activityCreationData = createSlice({
             if(!updateData) return
             state.questions[questionNum] = updateData
         },
+
         addQuestion: (state, action) =>{
             const questionType = action.payload.questionType
             const initialQuestionData = questionFormat(questionType)

@@ -13,6 +13,7 @@ const useReduxDebouncedTextInputs = ({
     selectorFunc, 
     inputType,
     charLimit,
+    addedPayload
 }) =>{
     const reduxTextInput = useSelector(selectorFunc)
     const dispatch = useDispatch()
@@ -42,8 +43,9 @@ const useReduxDebouncedTextInputs = ({
         const value = target.closest(inputType).value
         if(charLimit && value.length > charLimit) return
         setLocalTextInput(value)
+        const reduxPayload = !addedPayload ? value: {...addedPayload,value:value}
         debouncedUpdateTextInput(
-            value, 
+            reduxPayload, 
             dispatch, 
             reduxUpdateFunc
         )
