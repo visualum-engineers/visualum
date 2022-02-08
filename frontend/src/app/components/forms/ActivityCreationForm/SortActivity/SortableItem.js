@@ -7,7 +7,7 @@ function SortableItem(props) {
       setNodeRef,
       transform,
       transition,
-      isDragging
+      isDragging,
     } = useSortable({
         id: props.id,
         disabled: props.disabled,
@@ -18,13 +18,13 @@ function SortableItem(props) {
             tapDraggableId : props.id,
             tapDroppableId: props.droppableId,
             index: props.index,
+            categoryIndex: props.categoryIndex,
         }
     });
     const style = {
       transform: CSS.Transform.toString(transform),
       transition,
     };
-
     return (
       <div 
         id={"dragItem"+props.id}

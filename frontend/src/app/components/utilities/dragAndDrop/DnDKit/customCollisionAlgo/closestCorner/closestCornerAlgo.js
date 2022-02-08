@@ -22,7 +22,6 @@ export const closestCorners = ({
   let minDistanceToCorners = Infinity;
   let minDistanceContainer = null;
   const dragOverlayContainer = isOver
-
   const collisionCorners = cornersOfRectangle(
     collisionRect,
     collisionRect.left,
@@ -40,7 +39,6 @@ export const closestCorners = ({
     //grab origin container
     const droppableColumnId = id in containers ? id 
                             : droppableContainer.data.current.sortable.containerId
-
     const droppableNode = droppableContainer.node.current
     if(!droppableNode) continue
 
@@ -76,6 +74,7 @@ export const closestCorners = ({
       if (effectiveDistance < minDistanceToCorners) {
         minDistanceToCorners = effectiveDistance;
         minDistanceContainer = droppableContainer.id;
+        //console.log(minDistanceContainer, effectiveDistance)
       }
     }
   }

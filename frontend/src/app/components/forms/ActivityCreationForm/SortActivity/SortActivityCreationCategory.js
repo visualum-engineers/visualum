@@ -156,6 +156,7 @@ const SortActivityCategory = ({
                     draggingOverClass = {"is-dragging-over"}
                     isOver={isOver}
                     isDisabled = {dndDisabled}
+                    categoryIndex = {categoryIndex}
                 >
                     {data.answers.map((answer, index)=>{
                         return(<SortActivityCategoryItem

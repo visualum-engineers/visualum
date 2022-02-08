@@ -11,6 +11,7 @@ function Droppable(props) {
         node: droppableRef.current,
         parentNode: props.parentNode,
         customParentNode: props.customParentNode ? props.customParentNode.node : null,
+        categoryIndex: props.categoryIndex,
       }
     });
     return (
@@ -21,6 +22,7 @@ function Droppable(props) {
         onKeyDown = {props.firstElTap? props.onTap: null}
         tabIndex = {props.firstElTap ? 0: -1}
         data-tap-droppable-id = {props.id.toString()}
+        data-tap-category-index = {props.categoryIndex}
       >
         {props.children}
       </div>

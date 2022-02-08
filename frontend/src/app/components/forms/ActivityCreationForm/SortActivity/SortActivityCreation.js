@@ -1,17 +1,20 @@
 import SortActivityCategory from "./SortActivityCreationCategory"
+import SortDragOverlay from "./SortDragOverlay"
+import useDnDKitDrag from "./use-dnd-kit-drag"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus} from "@fortawesome/free-solid-svg-icons"
 import { useDispatch } from "react-redux"
-import { updateQuestionData } from "../../../../../redux/features/activityCreation/activityCreationData"
+import { 
+    updateQuestionData,
+    updateQuestionDataIgnore
+} from "../../../../../redux/features/activityCreation/activityCreationData"
 import {
     DndContext, 
     DragOverlay, 
-    defaultDropAnimation
+    defaultDropAnimation,
 } from '@dnd-kit/core';
-import SortDragOverlay from "./SortDragOverlay"
-//pos and collision func
 
-import useDnDKitDrag from "./use-dnd-kit-drag"
+
 const dropAnimation = {
     ...defaultDropAnimation,
     dragSourceOpacity: 0.5,
@@ -31,10 +34,16 @@ const SortActivityCreation = ({
             updateType:"add-category",
         }))
     }
-    const onOverStateUpdate = (e, over) =>{
-        console.log(e, over)
+    const onOverStateUpdate = (e) =>{
+        dispatch(updateQuestionDataIgnore({
+            updateType: "update-sortable-lists",
+            questionType: "sort",
+            questionNum: currQuestion,
+            newData: e
+        }))
     }
     const onDragEndStateUpdate= (e) =>{
+        if(!e) return
         console.log(e)
     }
     const {
@@ -46,13 +55,13 @@ const SortActivityCreation = ({
         onDragEnd,
         onDragCancel,
         collisionAlgoWrapper,
-        dragOverlayItem
+        dragOverlayItem,
+        sensors
     } = useDnDKitDrag({
             reduxSelector: (state) => state.activityCreation.data.saved.present.questions[parseInt(currQuestion)],
             onOverStateUpdate: onOverStateUpdate,
             onDragEndStateUpdate: onDragEndStateUpdate
     })
-
     return (
         <div className="sort-creation-question">
             <div className="sort-creation-overall-categories-container">
@@ -62,6 +71,7 @@ const SortActivityCreation = ({
                      onDragEnd = {onDragEnd}
                      onDragCancel={onDragCancel}
                      collisionDetection={collisionAlgoWrapper}
+                     sensors={sensors}
                 >
                     {/* map over this*/}
                     <div className="sort-creation-categories-row row">
@@ -87,9 +97,9 @@ const SortActivityCreation = ({
                             <SortDragOverlay 
                                 ref = {dragOverlayItem}
                                 activeId = {activeId}
-                                draggableClassName = {"sort-activity-draggables d-flex align-items-center justify-content-center"}
+                                draggableClassName = {"sort-creation-category-item"}
                                 data = {data}
-                                isDraggingClass = {"sort-activity-is-dragging"}
+                                isDraggingClass = {"is-dragging"}
                             />
                     ) : null}
                     </DragOverlay>

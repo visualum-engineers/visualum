@@ -1,13 +1,20 @@
 import { useState, useRef, useEffect } from "react"
 import { unstable_batchedUpdates } from "react-dom"
 import {
-    getBoundingClientRect, 
+    getBoundingClientRect,
+    KeyboardSensor,
+    PointerSensor,
+    useSensor,
+    useSensors,
 } from '@dnd-kit/core';
+//pos and collision func
 import {
     closestCorners, 
     rectIntersection,
     cleanUpCollisionData
 } from '../../../utilities/dragAndDrop/DnDKit/customCollisionAlgo/algoIndex';
+import {addToTop} from '../../../utilities/dragAndDrop/DnDKit/positionFunctions/index';
+import _ from "lodash"
 import { useWindowWidth } from "../../../../hooks";
 import { useSelector } from "react-redux";
 const useDnDKitDrag = ({
@@ -15,6 +22,23 @@ const useDnDKitDrag = ({
     onOverStateUpdate,
     onDragEndStateUpdate
 }) =>{
+    const pointerSensor = useSensor(PointerSensor, {
+        activationConstraint: {
+            distance: 10,
+        },
+    })
+    const keyboardSensor = useSensor(KeyboardSensor,{
+        keyboardCodes:{
+            start: ['Space'],
+            cancel: ['Escape'],
+            end: ['Space', 'Enter'],
+        }
+        
+    });
+    const sensors = useSensors(
+        pointerSensor,
+        keyboardSensor,
+      );
     const mediumWindowWidth = useWindowWidth(992)
     const data = useSelector(reduxSelector)
     //manage drag and drop of items
@@ -35,33 +59,34 @@ const useDnDKitDrag = ({
             if(recentlyMovedToNewContainer.current) recentlyMovedToNewContainer.current = false;
         });
     }, [isOver]);
-        //overall wrapper function
-        const customCollisionAlgo = ({
-            e, 
-            isOver, 
-            categories,
-            mediumWindowWidth, 
-            dragOverlayItem,
-            recentlyMovedToNewContainer
-        }) =>{
-            if(recentlyMovedToNewContainer.current) return
-            if(!dragOverlayItem.current) return
-            const overlayRect = getBoundingClientRect(dragOverlayItem.current)
-            switch (true){
-                case mediumWindowWidth:
-                    return closestCorners(e, {
-                        overlayRect: overlayRect, 
-                        containers: categories,
-                        isOver: isOver, 
-                    })
-                default:
-                    return rectIntersection(e, {
-                        overlayRect: overlayRect, 
-                        containers: categories,
-                        isOver: isOver
-                    })
-            }
+    //overall wrapper function
+    const customCollisionAlgo = ({
+        e, 
+        isOver, 
+        categories,
+        mediumWindowWidth, 
+        dragOverlayItem,
+        recentlyMovedToNewContainer
+    }) =>{
+        if(recentlyMovedToNewContainer.current) return
+        if(!dragOverlayItem.current) return
+        const overlayRect = getBoundingClientRect(dragOverlayItem.current)
+        switch (true){
+            case mediumWindowWidth:
+                return closestCorners(e, {
+                    overlayRect: overlayRect, 
+                    containers: categories,
+                    isOver: isOver, 
+                })
+            default:
+                return rectIntersection(e, {
+                    overlayRect: overlayRect, 
+                    containers: categories,
+                    isOver: isOver
+                })
         }
+    }
+    
     const collisionAlgoWrapper = (e) => {
         const categoriesMap = {}
         //convert categories to object look up table for collision algo
@@ -78,6 +103,48 @@ const useDnDKitDrag = ({
         })
         return intersectingContainer
     } 
+    const resultValues = (e, finishContainer) => {
+        if(!e) return
+        const finish = finishContainer
+        const start = e.active.data.current.tapDroppableId
+        const startIndex = e.active.data.current.index
+        //use when we have a array data structure to render element
+        const startCategoryIndex = parseInt(e.active.data.current.categoryIndex)
+        const endCategoryIndex = parseInt(e.over.data.current.categoryIndex)
+        const isObj = _.isObject(data.categories)
+        const isArray = Array.isArray(data.categories)
+
+        const finishAnswersList = isArray && !endCategoryIndex ? [] 
+                                : isArray ? data.categories[endCategoryIndex].answers
+                                : isObj ? data.categories[finish] 
+                                : []
+        
+        //determine if position is at start or end. if not, we use the index provided in data
+        const endIndex = !e.over.data.current.sortable
+            ? addToTop(
+                getBoundingClientRect(e.over.data.current.node), 
+                getBoundingClientRect(dragOverlayItem.current), 
+                finishAnswersList.length
+            )
+            : e.over.data.current.index
+
+        const source = {
+            droppableId: start,
+            index: startIndex,
+            startCategoryIndex: startCategoryIndex
+        }
+        const destination = {
+            droppableId: finish,
+            index: endIndex,
+            endCategoryIndex: endCategoryIndex,
+        }
+        const result={
+            source: source,
+            destination: destination,
+            draggableId: e.active.id
+        }
+        return result
+    }
     //this is used to check if in this drag cycle, 
     //the original position on drag start, changed on drag end
     //this is more accurate calling of redux store ONLY
@@ -88,7 +155,7 @@ const useDnDKitDrag = ({
         document.querySelector("html").classList.add("sortActivityActive")
         onDragStartOver.current.start = e.active.data.current.sortable.containerId
         unstable_batchedUpdates(()=>{
-            setActiveId(e.active.id);
+            setActiveId({draggable: e.active.id, container: e.active.data.current.sortable.containerId});
             setIsOver(e.active.data.current.sortable.containerId)
         })
     }
@@ -98,13 +165,13 @@ const useDnDKitDrag = ({
         if(recentlyMovedToNewContainer.current) return
         //prevent updating if already null, and set to null if not being sorted
         if(!e.over && !isOver) return
-        if(!e.over) return setIsOver(undefined)
+        if(!e.over) return 
         const currElOver = e.over.data.current.sortable
         const activeElOver = e.active.data.current.sortable
         //when over an empty sortable container (not a draggable item)
         if(!currElOver && isOver === e.over.id) return 
         if(!currElOver) {
-            const newState = onOverStateUpdate(e, e.over.id)
+            const newState = onOverStateUpdate(resultValues(e, e.over.id))
             recentlyMovedToNewContainer.current = true
             onDragStartOver.current.end = e.over.id
             onDragStartOver.current.newData = newState
@@ -120,7 +187,7 @@ const useDnDKitDrag = ({
 
         //different starting and ending containers
         if(currElOver.containerId !== activeElOver.containerId) {
-            const newState = onOverStateUpdate(e, currElOver.containerId) 
+            const newState = onOverStateUpdate(resultValues(e, currElOver.containerId)) 
             recentlyMovedToNewContainer.current = true
             onDragStartOver.current.end = currElOver.containerId
             onDragStartOver.current.newData = newState
@@ -151,7 +218,8 @@ const useDnDKitDrag = ({
         const endElIndex = e.over.data.current.index
 
         if(isOver === endElOver.containerId && endElIndex === startElIndex) return
-        onOverStateUpdate(e, endElOver.containerId)
+
+        onOverStateUpdate(resultValues(e, endElOver.containerId))
     };
     const onDragCancel = (e) =>{
         unstable_batchedUpdates(()=>{
@@ -162,12 +230,13 @@ const useDnDKitDrag = ({
     return {
         data: data,
         activeId: activeId,
-        isOver: isOver, 
+        isOver: isOver,
         onDragStart: onDragStart,
         onDragEnd: onDragEnd,
         onDragOver: onDragOver,
         onDragCancel: onDragCancel,
         collisionAlgoWrapper: collisionAlgoWrapper,
+        sensors: sensors,
         dragOverlayItem: dragOverlayItem
     }
 }

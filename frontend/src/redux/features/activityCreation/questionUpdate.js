@@ -1,5 +1,6 @@
 import { newSortCategory, newSortAnswer } from './dataFormats';
 import removeWhiteSpace from "../../../app/helpers/removeWhiteSpace"
+import updateSortableLists from './utilityFunc/updateSortableLists';
 const questionUpdate = ({
     type,
     oldData,
@@ -20,7 +21,13 @@ const questionUpdate = ({
     //updating custom props of each question type
     switch(type){
         case "sort":
-            let categoryIndex, category, answerIndex, answers, newAnswers, categories, newCategory
+            let categoryIndex, 
+            category, 
+            answerIndex, 
+            answers, 
+            newAnswers, 
+            categories, 
+            newCategory
             switch(newData.updateType){
                 case "add-answer":
                     categoryIndex = parseInt(newData.categoryIndex)
@@ -98,6 +105,12 @@ const questionUpdate = ({
                         ...oldData, 
                         categories: categories
                     }
+                    break
+                case "update-sortable-lists":
+                    updatedData = updateSortableLists({
+                        oldData: oldData, 
+                        newData: newData
+                    })
                     break
                 default:
                     console.error("action type does not match")
