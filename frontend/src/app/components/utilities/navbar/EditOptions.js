@@ -21,6 +21,7 @@ const EditOptions = ({
     resetBtnOnClick,
     questionNum,
     inProp,
+    reset
 }) =>{
     const [editPointer, setEditPointer] =  useState(false)
     const [editDropdownOpen, setEditDropdown] = useState(false)  
@@ -49,12 +50,14 @@ const EditOptions = ({
     useKeyboardShortcut(
         ['Control', 'Alt', 'Delete'], 
         () => {
+            if(!reset) return
             dispatch(
                 resetPopUpOn({ questionNum : questionNum, confirmed: false})
             )
         }, 
         { overrideSystem: false }
     )  
+
     useKeyboardShortcut(
         ['Control', "Z"], 
         () => {
@@ -119,14 +122,17 @@ const EditOptions = ({
                         disabled = {!(futureLength > 0)}
                     />
                     {/* resetbtn*/}
-                    <GeneralBtn 
-                        customClassName = {"d-flex align-items-center"}
-                        customIcon = {<FontAwesomeIcon icon={faSyncAlt} />}
-                        textContent = {<><div>Reset</div><div className="key-shortcut">Ctrl+Alt+Del</div></>}
-                        onClick={resetBtnOnClick}
-                        customAriaLabel = {"reset-question"}
-                        questionNum = {questionNum}
-                    />
+                    {reset && 
+                        <GeneralBtn 
+                            customClassName = {"d-flex align-items-center"}
+                            customIcon = {<FontAwesomeIcon icon={faSyncAlt} />}
+                            textContent = {<><div>Reset</div><div className="key-shortcut">Ctrl+Alt+Del</div></>}
+                            onClick={resetBtnOnClick}
+                            customAriaLabel = {"reset-question"}
+                            questionNum = {questionNum}
+                        />
+                    }
+                    
                 </div>
             }
         </div>

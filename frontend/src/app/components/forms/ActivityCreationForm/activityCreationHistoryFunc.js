@@ -20,10 +20,10 @@ export const resetHistory = ({
 export const undoHistory = ({
     dispatch
 }) =>{
-    dispatch({type: "activities/data/undo"})
+    dispatch({type: "activityCreationData/undo"})
 }
 export const redoHistory = ({
     dispatch
 }) =>{
-    dispatch({type: "activities/data/redo"})
+    dispatch({type: "activityCreationData/redo"})
 }

@@ -219,7 +219,7 @@ const useDnDKitDrag = ({
 
         if(isOver === endElOver.containerId && endElIndex === startElIndex) return
 
-        onOverStateUpdate(resultValues(e, endElOver.containerId))
+        onDragEndStateUpdate(resultValues(e, endElOver.containerId))
     };
     const onDragCancel = (e) =>{
         unstable_batchedUpdates(()=>{
