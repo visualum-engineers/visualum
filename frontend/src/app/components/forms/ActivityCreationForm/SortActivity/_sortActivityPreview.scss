@@ -1,0 +1,93 @@
+.activity-creation-question.preview-slide{
+    .activity-creation-question-body{
+        margin-top: 0;
+        padding: 0;
+        z-index: 0;
+    }
+    .sort-creation-question{
+        @include border-radius(0)
+    }
+    .sort-creation-overall-categories-container{
+        padding: 0 0.2rem;
+        overflow: hidden;
+        height: 4rem;
+    }
+    .sort-creation-categories-row{
+        padding-bottom: 0.1rem;
+        padding: 0.1rem 0.5rem;
+    }
+    .sort-creation-category-container{
+        padding: 0 0.2rem;
+    }
+    .sort-creation-category{
+        height: 3.5rem;
+        padding-left: 0;
+        overflow: hidden;
+        @include border-radius(0rem);
+    }
+    .sort-creation-droppable-header{
+        min-height: 0.5rem;
+        padding: 0.1rem;
+    }
+    .sort-creation-droppable-header-inner{
+        .sort-creation-droppable-name{
+            padding: 0.1rem;
+            min-height: 0.4rem;
+            font-weight: 500;
+            font-size: 0.2rem;
+        }
+    }
+    .sort-creation-droppable-name-container{
+        padding: 0.1rem;
+    }
+    
+    .sort-creation-category-edit,
+    .sort-creation-category-delete{
+        padding: 0;
+        min-width: 0.2rem;
+        font-size: 0.15rem;
+   }
+    .sort-creation-droppable{
+            padding: 0.1rem;
+            padding-bottom: 1rem;
+        }
+    .sort-creation-droppable-add-draggable{
+        width: calc(100% - 0.4rem);
+        bottom: 0;
+        left: 0.2rem;
+        height: 0.5rem;
+        padding: 0.1rem 0.1rem;
+        button{
+            font-size: 0.1rem;
+            span{
+                margin-left: 0.1rem;
+            }
+        }
+    }
+    .sort-creation-category-item{
+        height: 0.4rem;
+        padding-right: 0.1rem;
+        margin-bottom: 0.1rem;
+    }
+    .sort-creation-category-item-content{
+        padding: 0 0.1rem;
+    }
+    .sort-creation-category-item-content-inner{
+        padding: 0.1rem;
+        font-size: 0.2rem;
+        max-height: 0.4rem;
+        overflow: hidden;
+    }
+    
+    .sort-creation-category-item-btn-container{
+        height: 100%;
+        min-width: 0.2rem;
+    }
+    .sort-creation-category-item-edit,
+    .sort-creation-category-item-remove{
+        padding: 0;
+        font-size: 0.2rem;
+        height: 0.4rem;
+        width: 0.2rem;
+    }
+}

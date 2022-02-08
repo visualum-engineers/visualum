@@ -1,3 +1,4 @@
+
 $sort-creation-question-add-category-height: 3.5rem;
 $sort-creation-category-container-height: calc(
     100vh
@@ -222,9 +223,11 @@ $sort-creation-category-container-height: calc(
     font-weight: 500;
     font-size: 0.8rem;
     margin: auto;
+    overflow: auto;
     max-height: 3rem;
     overflow-wrap: break-word;
     word-break: break-word;
+    @include activity-scrollbar-styles;
 }
 .sort-creation-category-item-content-textarea{
     font-size: 0.8rem;        
@@ -290,22 +293,6 @@ textarea.sort-creation-category-item-content-inner{
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .sort-creation-question-add-category{
     position: sticky;
     width: 100%;
@@ -331,3 +318,5 @@ textarea.sort-creation-category-item-content-inner{
         }
     }
 }
+
+@import "./sortActivityPreview"

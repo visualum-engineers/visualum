@@ -6,6 +6,7 @@ const questionUpdate = ({
     newData
 }) =>{
     let updatedData
+    //updating general props of each question type
     if(newData.actionType === "update-points"){
         updatedData = {...oldData}
         updatedData.pointValue = newData.value
@@ -16,6 +17,7 @@ const questionUpdate = ({
         updatedData.instructions = newData.value
         return updatedData 
     }
+    //updating custom props of each question type
     switch(type){
         case "sort":
             let categoryIndex, category, answerIndex, answers, newAnswers, categories, newCategory

@@ -4,22 +4,20 @@ const useActivityMiniScreenData = ({
     changeQuestionPos,
     addQuestion,
     deleteQuestion,
-    changeCurrQuestion
+    changeCurrQuestion,
+    //this a component
+    SlideComponent
 }) =>{
     const dispatch = useDispatch()
     const slides = useSelector(reduxSelectorFunc)
     const miniScreenData = slides.map((slide, index)=>{
         return{
             key: slide.key,
-            textContent:<>
-                <h2 className="mini-screen-slide-header">
-                    {`Question ${parseInt(index)+1}`}
-                </h2>
-                <h3 className="mini-screen-slide-sub-text">
-                    {slide.slideType}
-                </h3> 
-            </>,
-            slide: <div></div>,
+            slide: <SlideComponent
+                        currQuestion = {index} 
+                        questionType = {slide.questionType}
+                        preview={true}
+                    />,
             slideAriaLabel: `go-to-slide-${parseInt(index)+1}`,
         }
     })

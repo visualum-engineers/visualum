@@ -153,7 +153,7 @@ $activity-creation-question-container-padding-top: 0.5rem;
     padding: 0 1rem;
     padding-top: $activity-creation-question-container-padding-top;
     padding-bottom: 0;
-    @include transition(all 10s ease-out);
+    @include transition(all 0.3s ease-out);
 }
 
 .activity-creation-question-container.move-left{
@@ -320,5 +320,6 @@ $activity-creation-question-container-padding-top: 0.5rem;
         }
     }
 }
+
 //will use variables defined above
 @import "./SortActivity/sortActivityCreation";

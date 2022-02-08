@@ -14,11 +14,14 @@ const ActivityQuestionHeader = ({
     const [instructionsActive, setInstructionsActive] = useState(false)
     const [textareaHeight, setAreaHeight] = useState(null)
     const storedResize = useRef(null)
+    const pointsActiveMaxChar = 3
+    const instructionsMaxChar = 400;
+
     const [pointValue, setPointValue] = useReduxDebouncedTextInputs({
         selectorFunc:(state => state.activityCreation.data.saved.present.questions[currQuestion].pointValue),
         reduxUpdateFunc: updateQuestionData, 
         inputType: "input",
-        charLimit: 3,
+        charLimit: pointsActiveMaxChar,
         addedPayload: {
             type: questionType,
             questionNum: currQuestion,
@@ -30,7 +33,7 @@ const ActivityQuestionHeader = ({
         selectorFunc: (state) => state.activityCreation.data.saved.present.questions[currQuestion].instructions,
         reduxUpdateFunc: updateQuestionData, 
         inputType: "textarea",
-        charLimit: 400,
+        charLimit: instructionsMaxChar,
         addedPayload:{
             type: questionType,
             questionNum: currQuestion,
@@ -54,6 +57,7 @@ const ActivityQuestionHeader = ({
                             type={"number"}
                             onKeyDown = {onlyNumInput}
                             autoFocus={true}
+                            maxLength={pointsActiveMaxChar}
                         />
                     </div>
                 :   <button
@@ -81,6 +85,7 @@ const ActivityQuestionHeader = ({
                             e.target.style.height = ""
                             setAreaHeight(null)
                         }}
+                        maxLength = {instructionsMaxChar}
                     />
                 : 
                 <button

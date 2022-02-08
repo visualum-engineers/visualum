@@ -1,9 +1,8 @@
 import undoable, {excludeAction} from 'redux-undo';
-import { combineReducers } from 'redux';
 import questionFormat from './questionFormat';
 import { 
     createSlice, 
-    //combineReducers
+    combineReducers
     //createAsyncThunk,
 } from '@reduxjs/toolkit'
 import questionUpdate from './questionUpdate';
@@ -120,7 +119,13 @@ const  undoableData = undoable(activityCreationData.reducer,{
         "activityCreationDataUnsaved/updateUnsavedActivityDescription",
         "activityCreationDataUnsaved/updateUnsavedActivityTimer",
         "activityCreationDataUnsaved/updateUnsavedTopicLabels",
-        "activityCreationSettingsSlice/updateActivityEditPopUp"
+        //have to ignore these setting actions because when we combine reducers
+        //these will still be added to the history stack
+        "activityCreationSettingsSlice/updateActivityEditPopUp",
+        "activityCreationSettingsSlice/updatePreviewState",
+        "activityCreationSettingsSlice/updateResetPopUp",
+        "activityCreationSettingsSlice/updateSidebarToggle",
+        "activityCreationSettingsSlice/updateAddQuestionPopUp",
     ])
 })
 

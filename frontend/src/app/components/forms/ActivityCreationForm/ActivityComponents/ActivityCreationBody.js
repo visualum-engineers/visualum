@@ -34,7 +34,7 @@
                                 mediumWindowWidth={mediumWindowWidth}
                                 questionType = {question.questionType}
                                 style ={{...defaultTransition}}
-                                currQuestion = {currQuestion}
+                                currQuestion = {index}
                             />
                         </CSSTransition>
                     )

@@ -2,7 +2,7 @@ import {createPortal} from "react-dom"
 import { useDispatch, useSelector, batch } from "react-redux"
 import { useEffect } from "react"
 import MiniScreenSideBar from "../../../utilities/miniScreenSidebar/MiniScreenSiderbar"
-import useActivityMiniScreenData from "../hooks/use-activity-miniscreen-data"
+import useActivityMiniScreenData from "../../../utilities/miniScreenSidebar/hooks/use-activity-miniscreen-data"
 import PopUpBg from "../../../utilities/popUp/PopUpBackground"
 import {updateAddQuestionPopUp} from "../../../../../redux/features/activityCreation/activityCreationSettings"
 import { updateSidebarToggle, updateCurrQuestion } from "../../../../../redux/features/activityCreation/activityCreationSettings"
@@ -11,7 +11,7 @@ import {
     addQuestion, 
     deleteQuestion,
  } from "../../../../../redux/features/activityCreation/activityCreationData"
-//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { ActivityCreationQuestion } from "./"
 import ExitIcon from "../../../utilities/exitIcon/ExitIcon"
 const ActivityCreationSidebar = ({
     mediumWindowWidth
@@ -25,7 +25,8 @@ const ActivityCreationSidebar = ({
         changeQuestionPos: changeQuestionPos,
         addQuestion: updateAddQuestionPopUp,
         deleteQuestion: deleteQuestion,
-        changeCurrQuestion: updateCurrQuestion
+        changeCurrQuestion: updateCurrQuestion,
+        SlideComponent: ActivityCreationQuestion,
     })
     useEffect(() =>{
         if(!mediumWindowWidth) dispatch(updateSidebarToggle(false))
