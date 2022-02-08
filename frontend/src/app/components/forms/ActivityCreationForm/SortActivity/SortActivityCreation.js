@@ -74,7 +74,7 @@ const SortActivityCreation = ({
                      sensors={sensors}
                 >
                     {/* map over this*/}
-                    <div className="sort-creation-categories-row row">
+                    <div className="sort-creation-categories-row row gx-0">
                         {data.categories.map((category, index) =>{
                             return(
                                 <SortActivityCategory
@@ -111,6 +111,7 @@ const SortActivityCreation = ({
                         className="add-category-btn"
                         aria-label = "add-new-category"
                         onClick = {onAddCategory}
+                        disabled = {preview}
                     >
                         <FontAwesomeIcon icon={faPlus}/>
                         <span>Add Category</span>

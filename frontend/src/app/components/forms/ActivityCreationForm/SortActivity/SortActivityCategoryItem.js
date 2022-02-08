@@ -15,6 +15,7 @@ export const SortableItemBody = ({
     onSaveClick = null,
     index,
     onDeleteClick = null,
+    preview,
 }) => {
     return(
         <>
@@ -23,6 +24,7 @@ export const SortableItemBody = ({
                     <button 
                         className="sort-creation-category-item-content-inner"
                         onDoubleClick = {setEditActive ? (e) => setEditActive(true): null}
+                        disabled = {preview}
                     >
                         {data.content}
                     </button>
@@ -47,6 +49,7 @@ export const SortableItemBody = ({
                     aria-label={`${!editActive ? "edit": "save"}-category-answer`}
                     data-answer-index={index}
                     data-action-label = {"update-answer"}
+                    disabled = {preview}
                     onClick = {!editActive && setEditActive ? () => setEditActive(true) 
                                 : onSaveClick
                     }
@@ -59,6 +62,7 @@ export const SortableItemBody = ({
                     aria-label="remove-category-answer"
                     data-answer-index = {index}
                     onClick = {onDeleteClick}
+                    disabled = {preview}
                 >
                     <FontAwesomeIcon icon={faTrash}/>
                 </button>   
@@ -75,6 +79,7 @@ const SortActivityCategoryItem = ({
     categoryIndex,
     currQuestion,
     dndDisabled,
+    preview
 }) =>{
     const dispatch = useDispatch()
     const [editActive, setEditActive] = useState(false)
@@ -139,6 +144,7 @@ const SortActivityCategoryItem = ({
             disabled ={editActive ? true: dndDisabled}
             draggableClassName = {"sort-creation-category-item"}
             categoryIndex = {categoryIndex}
+            preview = {preview}
         >
             <SortableItemBody 
                 editActive = {editActive}
@@ -149,6 +155,7 @@ const SortActivityCategoryItem = ({
                 onSaveClick = {onSaveClick}
                 index = {index}
                 onDeleteClick ={onDeleteClick}
+                preview = {preview}
             />
         </SortableItem>
     ) 

@@ -14,6 +14,14 @@ function Droppable(props) {
         categoryIndex: props.categoryIndex,
       }
     });
+    let previewProps = {}
+    if(props.preview){
+      previewProps  = {
+        onClick: null, 
+        onKeyDown: null,
+        tabIndex: -1,
+      }
+    }
     return (
       <div 
         ref={mergeRefs([setNodeRef, droppableRef])} 
@@ -23,6 +31,7 @@ function Droppable(props) {
         tabIndex = {props.firstElTap ? 0: -1}
         data-tap-droppable-id = {props.id.toString()}
         data-tap-category-index = {props.categoryIndex}
+        {...previewProps}
       >
         {props.children}
       </div>

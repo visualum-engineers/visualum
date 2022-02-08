@@ -10,9 +10,9 @@ function SortableItem(props) {
       isDragging,
     } = useSortable({
         id: props.id,
-        disabled: props.disabled,
+        disabled: props.preview? props.preview : props.disabled,
         attributes:{
-            tabIndex : 0,
+            tabIndex : props.preview? 0: -1,
         },
         data:{
             tapDraggableId : props.id,
@@ -25,6 +25,12 @@ function SortableItem(props) {
       transform: CSS.Transform.toString(transform),
       transition,
     };
+    let previewProps = {}
+    if(props.preview) previewProps = {
+        onClick : null,
+        onKeyDown : null,
+        tabIndex : -1,
+    }
     return (
       <div 
         id={"dragItem"+props.id}
@@ -38,6 +44,7 @@ function SortableItem(props) {
         onKeyDown = {props.onTap ? props.onTap:null}
         {...attributes} 
         {...listeners}
+        {...previewProps}
       >
          {props.children}
       </div>

@@ -64,6 +64,7 @@ const SortActivityCategoryHeader = ({
             <button 
                 className="sort-creation-droppable-name"
                 onDoubleClick = {() => setEditActive(true)}
+                disabled = {preview}
             >   
                 {data.title}  
             </button>
@@ -87,10 +88,13 @@ const SortActivityCategoryHeader = ({
         <button
             className="sort-creation-category-edit"
             aria-label = {`${!editActive ? "edit":"save"}-category-title`}
+            data-action-label = {`update-category`}
+            disabled = {preview}
             onClick = {!editActive ? () => setEditActive(true) 
                 : onSaveCategory
-    }
-            data-action-label = {`update-category`}
+            }
+            
+
         >
             <FontAwesomeIcon icon={!editActive ? faEdit: faSave}/>
         </button>
@@ -98,6 +102,7 @@ const SortActivityCategoryHeader = ({
             className="sort-creation-category-delete"
             aria-label ={"delete-category"}
             onClick = {onDeleteCategory}
+            disabled = {preview}
         >
             <FontAwesomeIcon icon={faTrash} />
         </button>
@@ -155,8 +160,9 @@ const SortActivityCategory = ({
                     innerDroppableClassName = {"sort-creation-droppable"}
                     draggingOverClass = {"is-dragging-over"}
                     isOver={isOver}
-                    isDisabled = {dndDisabled}
+                    disabled = {preview ? preview : dndDisabled}
                     categoryIndex = {categoryIndex}
+                    preview = {preview}
                 >
                     {data.answers.map((answer, index)=>{
                         return(<SortActivityCategoryItem
@@ -169,6 +175,7 @@ const SortActivityCategory = ({
                             categoryIndex = {categoryIndex}
                             currQuestion = {currQuestion}
                             dndDisabled = {dndDisabled}
+                            preview = {preview}
                         />)
                     })}
                 </Droppable>
@@ -178,6 +185,7 @@ const SortActivityCategory = ({
                 <button
                     onClick = {onAddCategoryItem}
                     aria-label={"add-new-answer"}
+                    disabled = {preview}
                 >
                     <FontAwesomeIcon icon={faPlus}/>
                     <span>Add Answer</span>
