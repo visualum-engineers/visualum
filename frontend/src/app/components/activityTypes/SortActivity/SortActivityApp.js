@@ -212,7 +212,7 @@ const SortActivityApp = ({
         if(recentlyMovedToNewContainer.current) return
         //prevent updating if already null, and set to null if not being sorted
         if(!e.over && !isOver) return
-        if(!e.over) return //setIsOver(undefined)
+        if(!e.over) return
         const currElOver = e.over.data.current.sortable
         const activeElOver = e.active.data.current.sortable
         //when over an empty sortable container (not a draggable item)

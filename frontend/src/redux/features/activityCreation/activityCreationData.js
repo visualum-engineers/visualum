@@ -70,7 +70,7 @@ const activityCreationData = createSlice({
             if(!updateData) return
             state.questions[questionNum] = updateData
         },
-
+        
         addQuestion: (state, action) =>{
             const questionType = action.payload.questionType
             const initialQuestionData = questionFormat(questionType)
@@ -93,6 +93,22 @@ const activityCreationData = createSlice({
             newState.splice(endIndex, 0, questionData)
             state.questions = newState
         },
+        //this reducer is to update data in redux, but
+        //it will be ignored by the history stack meaning
+        //changes will not be recorded in undo, and redo actions
+        // use this carefully and only when no other
+        // option exists
+        updateQuestionDataIgnore: (state, action) =>{
+            const questionType = action.payload.questionType
+            const questionNum = parseInt(action.payload.questionNum)
+            const updateData = questionUpdate({
+                type: questionType,
+                oldData: {...state.questions[questionNum]},
+                newData: action.payload
+            })
+            if(!updateData) return
+            state.questions[questionNum] = updateData
+        },
     }
 
 })
@@ -104,7 +120,8 @@ export const {
     updateQuestionData,
     addQuestion,
     deleteQuestion,
-    changeQuestionPos
+    changeQuestionPos,
+    updateQuestionDataIgnore,
 } = activityCreationData.actions
 
 const  undoableData = undoable(activityCreationData.reducer,{
@@ -115,6 +132,9 @@ const  undoableData = undoable(activityCreationData.reducer,{
         "activityCreationData/updateActivityDescription",
         "activityCreationData/updateActivityTimer",
         "activityCreationData/updateTopicLabels",
+        "activityCreationData/updateQuestionDataIgnore",
+        //have to ignore these, since using combine reducers will add them
+        //to the history stack if not managed 
         "activityCreationDataUnsaved/updateUnsavedActivityName",
         "activityCreationDataUnsaved/updateUnsavedActivityDescription",
         "activityCreationDataUnsaved/updateUnsavedActivityTimer",

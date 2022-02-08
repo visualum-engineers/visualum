@@ -4,11 +4,82 @@ import { faEdit, faSave } from "@fortawesome/free-regular-svg-icons"
 import { useDispatch } from "react-redux"
 import {updateQuestionData} from "../../../../../redux/features/activityCreation/activityCreationData"
 import { useState, useEffect } from "react"
+import SortableItem from "./SortableItem";
+
+export const SortableItemBody = ({
+    editActive = false,
+    setEditActive = null,
+    data,
+    inputValue = null,
+    setInputValue = null,
+    onSaveClick = null,
+    index,
+    onDeleteClick = null,
+    preview,
+}) => {
+    return(
+        <>
+            <div className="sort-creation-category-item-content">
+                {!editActive ? 
+                    <button 
+                        className="sort-creation-category-item-content-inner"
+                        onDoubleClick = {setEditActive ? (e) => setEditActive(true): null}
+                        disabled = {preview}
+                    >
+                        {data.content}
+                    </button>
+                : <div
+                    className="sort-creation-category-item-content-textarea"
+                    data-replicated-value = {inputValue}
+                >
+                    <textarea
+                        value={inputValue}
+                        onChange = {setInputValue ? (e) => setInputValue(e.target.value): null}
+                        onBlur = {onSaveClick}
+                        data-answer-index={index}
+                        autoFocus={true}
+                    />
+                </div>
+                }
+                
+            </div>
+            <div className="sort-creation-category-item-btn-container">
+                <button 
+                    className="sort-creation-category-item-edit"
+                    aria-label={`${!editActive ? "edit": "save"}-category-answer`}
+                    data-answer-index={index}
+                    data-action-label = {"update-answer"}
+                    disabled = {preview}
+                    onClick = {!editActive && setEditActive ? () => setEditActive(true) 
+                                : onSaveClick
+                    }
+                >
+                    <FontAwesomeIcon icon={!editActive ? faEdit : faSave}/>
+                    
+                </button>
+                <button 
+                    className="sort-creation-category-item-remove"
+                    aria-label="remove-category-answer"
+                    data-answer-index = {index}
+                    onClick = {onDeleteClick}
+                    disabled = {preview}
+                >
+                    <FontAwesomeIcon icon={faTrash}/>
+                </button>   
+            </div>
+        </>
+    )
+}
 const SortActivityCategoryItem = ({
+    id,
+    droppableId,
     data,
     index,
+    isDraggingClass,
     categoryIndex,
     currQuestion,
+    dndDisabled,
+    preview
 }) =>{
     const dispatch = useDispatch()
     const [editActive, setEditActive] = useState(false)
@@ -65,8 +136,33 @@ const SortActivityCategoryItem = ({
         }))
     }
     return(
-        <div className="sort-creation-category-item">
-            <div className="sort-creation-category-item-content">
+        <SortableItem
+            id = {id}
+            isDraggingClass={isDraggingClass}
+            index = {index}
+            droppableId = {droppableId}
+            disabled ={editActive ? true: dndDisabled}
+            draggableClassName = {"sort-creation-category-item"}
+            categoryIndex = {categoryIndex}
+            preview = {preview}
+        >
+            <SortableItemBody 
+                editActive = {editActive}
+                setEditActive = {setEditActive}
+                data = {data}
+                inputValue = {inputValue}
+                setInputValue = {setInputValue}
+                onSaveClick = {onSaveClick}
+                index = {index}
+                onDeleteClick ={onDeleteClick}
+                preview = {preview}
+            />
+        </SortableItem>
+    ) 
+}
+export default SortActivityCategoryItem
+/*
+<div className="sort-creation-category-item-content">
                 {!editActive ? 
                     <button 
                         className="sort-creation-category-item-content-inner"
@@ -111,7 +207,4 @@ const SortActivityCategoryItem = ({
                     <FontAwesomeIcon icon={faTrash}/>
                 </button>   
             </div>
-        </div>
-    ) 
-}
-export default SortActivityCategoryItem
+*/
