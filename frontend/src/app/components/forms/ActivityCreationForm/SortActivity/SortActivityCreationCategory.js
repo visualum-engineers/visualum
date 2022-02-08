@@ -4,7 +4,10 @@ import { faEdit, faSave } from "@fortawesome/free-regular-svg-icons"
 import SortActivityCategoryItem from "./SortActivityCategoryItem"
 import { useDispatch } from "react-redux"
 import { updateQuestionData } from "../../../../../redux/features/activityCreation/activityCreationData"
-import {useState} from "react"
+import {useState, useRef} from "react"
+import Droppable from "../../../utilities/dragAndDrop/DnDKit/NonSortableDnD/Droppable"
+import {SortableContext, verticalListSortingStrategy} from '@dnd-kit/sortable';
+
 const SortActivityCategoryHeader = ({
     data, 
     categoryIndex,
@@ -103,12 +106,15 @@ const SortActivityCategoryHeader = ({
 }
 
 const SortActivityCategory = ({
+    id,
     data,
     categoryIndex,
     preview,
     currQuestion,
+    isOver,
+    dndDisabled,
 }) =>{
-
+    const defaultParentNode = useRef()
     const dispatch = useDispatch()
     const onAddCategoryItem = () =>{
         dispatch(updateQuestionData({
@@ -120,7 +126,18 @@ const SortActivityCategory = ({
     }
 
     return (
-        <div className="sort-creation-category-container">
+        <SortableContext 
+            items={data.answers}
+            strategy = {verticalListSortingStrategy}
+            id={id}
+        >
+        <div 
+            className="sort-creation-category-container"
+            id={id}
+            data-container-id={id}
+            data-tap-droppable-id = {id}
+            ref={defaultParentNode}
+        >
             <div className="sort-creation-category">
                 <div className="sort-creation-droppable-header">
                     <div className="sort-creation-droppable-header-inner">
@@ -132,17 +149,28 @@ const SortActivityCategory = ({
                         />
                     </div>
                 </div>
-                <div className="sort-creation-droppable">
+                <Droppable 
+                    id={id.toString()}
+                    parentNode = {defaultParentNode.current}
+                    innerDroppableClassName = {"sort-creation-droppable"}
+                    draggingOverClass = {"is-dragging-over"}
+                    isOver={isOver}
+                    isDisabled = {dndDisabled}
+                >
                     {data.answers.map((answer, index)=>{
                         return(<SortActivityCategoryItem
-                            key={answer.id} 
+                            key={answer.id}
+                            id={answer.id}
+                            droppableId = {id.toString()}
                             data = {answer}
                             index = {index}
+                            isDraggingClass={"draggable-is-dragging"}
                             categoryIndex = {categoryIndex}
                             currQuestion = {currQuestion}
+                            dndDisabled = {dndDisabled}
                         />)
                     })}
-                </div>
+                </Droppable>
             </div>
 
             <div className="sort-creation-droppable-add-draggable">
@@ -156,7 +184,7 @@ const SortActivityCategory = ({
             </div>
 
         </div>
-
+        </SortableContext>
     )
 }
 export default SortActivityCategory

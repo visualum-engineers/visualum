@@ -1,17 +1,28 @@
 import SortActivityCategory from "./SortActivityCreationCategory"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus} from "@fortawesome/free-solid-svg-icons"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { updateQuestionData } from "../../../../../redux/features/activityCreation/activityCreationData"
+import {
+    DndContext, 
+    DragOverlay, 
+    defaultDropAnimation
+} from '@dnd-kit/core';
+import SortDragOverlay from "./SortDragOverlay"
+//pos and collision func
 
+import useDnDKitDrag from "./use-dnd-kit-drag"
+const dropAnimation = {
+    ...defaultDropAnimation,
+    dragSourceOpacity: 0.5,
+  };
 const SortActivityCreation = ({
     // smallWindowWidth,
-    // mediumWindowWidth,
+    //mediumWindowWidth,
     currQuestion,
     //if true, data will be rendered for a preview
     preview,
 }) =>{
-    const data = useSelector((state)=> state.activityCreation.data.saved.present.questions[parseInt(currQuestion)])
     const dispatch = useDispatch()
     const onAddCategory = () =>{
         dispatch(updateQuestionData({
@@ -20,23 +31,69 @@ const SortActivityCreation = ({
             updateType:"add-category",
         }))
     }
+    const onOverStateUpdate = (e, over) =>{
+        console.log(e, over)
+    }
+    const onDragEndStateUpdate= (e) =>{
+        console.log(e)
+    }
+    const {
+        data,
+        activeId,
+        isOver, 
+        onDragStart,
+        onDragOver,
+        onDragEnd,
+        onDragCancel,
+        collisionAlgoWrapper,
+        dragOverlayItem
+    } = useDnDKitDrag({
+            reduxSelector: (state) => state.activityCreation.data.saved.present.questions[parseInt(currQuestion)],
+            onOverStateUpdate: onOverStateUpdate,
+            onDragEndStateUpdate: onDragEndStateUpdate
+    })
+
     return (
         <div className="sort-creation-question">
             <div className="sort-creation-overall-categories-container">
-                {/* map over this*/}
-                <div className="sort-creation-categories-row row">
-                    {data.categories.map((category, index) =>{
-                        return(
-                            <SortActivityCategory
-                                key={category.id}
-                                data = {category}
-                                preview={preview}
-                                categoryIndex = {index}
-                                currQuestion = {currQuestion}
+                <DndContext 
+                     onDragStart={onDragStart}
+                     onDragOver={onDragOver}
+                     onDragEnd = {onDragEnd}
+                     onDragCancel={onDragCancel}
+                     collisionDetection={collisionAlgoWrapper}
+                >
+                    {/* map over this*/}
+                    <div className="sort-creation-categories-row row">
+                        {data.categories.map((category, index) =>{
+                            return(
+                                <SortActivityCategory
+                                    key={category.id}
+                                    id= {category.id}
+                                    data = {category}
+                                    preview={preview}
+                                    categoryIndex = {index}
+                                    currQuestion = {currQuestion}
+                                    isOver = {isOver}
+                                />
+                            )
+                        })}
+                    </div>
+                    {/*Current element being dragged*/}
+                    <DragOverlay
+                        dropAnimation={dropAnimation}
+                    >
+                    {activeId ? (
+                            <SortDragOverlay 
+                                ref = {dragOverlayItem}
+                                activeId = {activeId}
+                                draggableClassName = {"sort-activity-draggables d-flex align-items-center justify-content-center"}
+                                data = {data}
+                                isDraggingClass = {"sort-activity-is-dragging"}
                             />
-                        )
-                    })}
-                </div>
+                    ) : null}
+                    </DragOverlay>
+                </DndContext>
             </div>
             {!preview &&
                 <div className="sort-creation-question-add-category">

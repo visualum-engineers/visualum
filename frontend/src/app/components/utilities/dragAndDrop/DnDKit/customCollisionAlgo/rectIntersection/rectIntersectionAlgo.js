@@ -34,7 +34,8 @@ import getIntersectionRatio from "./getIntersectionRatio";
       if(id in containers) {
           const exposedNodes = droppableContainer.data.current
           if(exposedNodes.customParentNode) currentDroppablePostion = updateDroppableRect(exposedNodes.customParentNode)
-          currentDroppablePostion = updateDroppableRect(exposedNodes.parentNode)
+          if(exposedNodes.parentNode) currentDroppablePostion = updateDroppableRect(exposedNodes.parentNode)
+          else continue
       }
       else currentDroppablePostion = updateDroppableRect(droppableNode);
 

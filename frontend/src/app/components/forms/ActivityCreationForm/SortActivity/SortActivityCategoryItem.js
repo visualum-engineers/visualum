@@ -4,11 +4,16 @@ import { faEdit, faSave } from "@fortawesome/free-regular-svg-icons"
 import { useDispatch } from "react-redux"
 import {updateQuestionData} from "../../../../../redux/features/activityCreation/activityCreationData"
 import { useState, useEffect } from "react"
+import SortableItem from "./SortableItem"
 const SortActivityCategoryItem = ({
+    id,
+    droppableId,
     data,
     index,
+    isDraggingClass,
     categoryIndex,
     currQuestion,
+    dndDisabled,
 }) =>{
     const dispatch = useDispatch()
     const [editActive, setEditActive] = useState(false)
@@ -65,7 +70,14 @@ const SortActivityCategoryItem = ({
         }))
     }
     return(
-        <div className="sort-creation-category-item">
+        <SortableItem
+            id = {id}
+            isDraggingClass={isDraggingClass}
+            index = {index}
+            droppableId = {droppableId}
+            dndDisabled ={dndDisabled}
+            draggableClassName = {"sort-creation-category-item"}
+        >
             <div className="sort-creation-category-item-content">
                 {!editActive ? 
                     <button 
@@ -111,7 +123,7 @@ const SortActivityCategoryItem = ({
                     <FontAwesomeIcon icon={faTrash}/>
                 </button>   
             </div>
-        </div>
+        </SortableItem>
     ) 
 }
 export default SortActivityCategoryItem

@@ -50,10 +50,12 @@ export const closestCorners = ({
     if(id in containers) {
         const exposedNodes = droppableContainer.data.current
         if(exposedNodes.customParentNode) currentDroppablePostion = updateDroppableRect(exposedNodes.customParentNode)
-        currentDroppablePostion = updateDroppableRect(exposedNodes.parentNode)
+        if(exposedNodes.parentNode) currentDroppablePostion = updateDroppableRect(exposedNodes.parentNode)
+        else continue
     }
-    else currentDroppablePostion = updateDroppableRect(droppableNode);
-    
+    else {
+      currentDroppablePostion = updateDroppableRect(droppableNode);
+    }
     const rect = currentDroppablePostion[id]
     if(rect) { 
       //skip if container is a draggable, 
