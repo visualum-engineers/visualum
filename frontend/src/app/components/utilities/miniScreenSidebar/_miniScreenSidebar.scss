@@ -89,6 +89,15 @@
 }
 .mini-screen-slide.is-dragging{
     background-color: $light-gray;
+    opacity: 0.8;
+}
+.mini-screen-slide.slide-active{
+    .mini-screen-container{
+        border: orange 1px solid;
+    }
+    &::after{
+        background-color: rgba(255, 166, 0, 0.062);
+    }
 }
 .mini-screen-container{
     position: relative;
@@ -116,6 +125,7 @@
     }
     z-index: 0;
 }
+
 .mini-screen-text-content{
     display: flex;
     flex-direction: column;

@@ -14,14 +14,16 @@ import {
 import { ActivityCreationQuestion } from "./"
 import ExitIcon from "../../../utilities/exitIcon/ExitIcon"
 const ActivityCreationSidebar = ({
-    mediumWindowWidth
+    mediumWindowWidth, 
 }) =>{
     const dispatch = useDispatch()
     const sidebarToggled = useSelector((state) => state.activityCreation.settings.sidebarToggled)
     const addQuestionPopUp = useSelector((state) => state.activityCreation.settings.addQuestionPopUp)
     const questionsLength = useSelector(state => state.activityCreation.data.saved.present.questions.length)
+
     const miniScreenData = useActivityMiniScreenData({
         reduxSelectorFunc: state => state.activityCreation.data.saved.present.questions,
+        currQuestionSelector : state => state.activityCreation.settings.currQuestion,
         changeQuestionPos: changeQuestionPos,
         addQuestion: updateAddQuestionPopUp,
         deleteQuestion: deleteQuestion,

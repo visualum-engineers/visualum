@@ -44,7 +44,7 @@ const SortActivityCreation = ({
     }
     const onDragEndStateUpdate= (e) =>{
         if(!e) return
-        console.log(e)
+        console.error(e)
     }
     const {
         data,

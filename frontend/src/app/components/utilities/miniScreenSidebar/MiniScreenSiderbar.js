@@ -15,7 +15,8 @@ const MiniScreenSideBar = ({
     onRemoveClick,
     onAddNewClick,
     onDragEnd,
-    onSlideClick
+    onSlideClick,
+    currQuestion
 }) =>{
 
     return (
@@ -38,6 +39,7 @@ const MiniScreenSideBar = ({
                             {...provided.droppableProps}
                         >
                             {data.map((value, index) =>{
+                                const active = parseInt(currQuestion) === index
                                 return (
                                     <Draggable 
                                         key={value.key}
@@ -63,7 +65,9 @@ const MiniScreenSideBar = ({
                                                     />    
                                                 </button>
                                                 <div 
-                                                    className={`mini-screen-slide ${snapshot.isDragging ? "is-dragging":""}`}
+                                                    className={`mini-screen-slide` 
+                                                            + `${snapshot.isDragging ? " is-dragging":""}`
+                                                            + `${active ? " slide-active": ""}`}
                                                     onClick ={onSlideClick}
                                                     disabled = {sidebarToggle}
                                                     tabIndex = {sidebarToggle ? null : 0}
@@ -71,7 +75,8 @@ const MiniScreenSideBar = ({
                                                     data-slide-num = {index}
                                                 >
                                                     <div 
-                                                        className="mini-screen-container"
+                                                        className={`mini-screen-container`}
+
                                                     >
                                                         <span 
                                                             className="mini-screen-slide-num">
