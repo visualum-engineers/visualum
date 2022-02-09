@@ -45,6 +45,12 @@ const SortActivityCreation = ({
     const onDragEndStateUpdate= (e) =>{
         if(!e) return
         console.error(e)
+        dispatch(updateQuestionData({
+            updateType: "update-sortable-lists",
+            questionType: "sort",
+            questionNum: currQuestion,
+            newData: e
+        }))
     }
     const {
         data,

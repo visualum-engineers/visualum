@@ -74,6 +74,7 @@ return(
                     resetBtnOnClick = {resetBtnOnClick}
                     questionNum = {questionNum}
                     inProp = {inProp}
+                    reset ={true}
                 />
             }
             {/*optional settings*/

@@ -23,34 +23,15 @@ const ActivityCreationNavbar = ({
                 />
     const dispatch = useDispatch()
     const sidebarToggled = useSelector((state) => state.activityCreation.settings.sidebarToggled)
-    const pastSelectorFunc = (state) => state.activityCreation.data.saved.present.length
+    const pastSelectorFunc = (state) => state.activityCreation.data.saved.past.length
     const futureSelectorFunc = (state) => state.activityCreation.data.saved.future.length
     const activityName = useSelector(state => state.activityCreation.data.saved.present.activityName)
-    const resetPopUp = useSelector((state) => state.activityCreation.settings.resetPopUp)
+    //const resetPopUp = useSelector((state) => state.activityCreation.settings.resetPopUp)
     const handleSideBar = () =>{
         if(sidebarToggled) dispatch(updateSidebarToggle(false))
         else dispatch(updateSidebarToggle(true))
     }
-    const resetBtnOnClick = (e) =>{
-        //when being used in forms, it prevents a refresh
-        e.preventDefault()
-        //for keydown events, only accept enter
-        if(e.type === "keydown" && e.key !== "Enter") return  
-        
-        const node = e.target.closest("button")
-        const questionNum = node.dataset.questionNum
-        const action = node.dataset.actionLabel
-        switch(action){
-            case "reset-question" : 
-                return dispatch(updateResetPopUp({ questionNum : questionNum, confirmed: false}))
-            case "exit-reset-question": 
-                return dispatch(updateResetPopUp(null))
-            case "confirm-reset-question":
-                return dispatch(updateResetPopUp({...resetPopUp, confirmed: true}))
-            default:
-                return
-        }
-    }
+
     const activityNameHeader = <>
     <div className="activity-creation-nav-activity-name-container">
         <div className="activity-creation-nav-activity-name">
@@ -74,7 +55,7 @@ const ActivityCreationNavbar = ({
                 resetPopUpOn = {updateResetPopUp}
                 undoHistory = {undoHistory}
                 redoHistory = {redoHistory}
-                resetBtnOnClick = {resetBtnOnClick}
+                //resetBtnOnClick = {resetBtnOnClick}
                 questionNum = {questionNum}
                 inProp = {inProp}
             />
@@ -92,7 +73,7 @@ const ActivityCreationNavbar = ({
             smallWindowWidth = {smallWindowWidth}
             sidebarToggle = {sidebarToggled}
             handleSideBar = {handleSideBar}
-            resetBtnOnClick = {resetBtnOnClick}
+            //resetBtnOnClick = {resetBtnOnClick}
             questionNum = {questionNum}
             inProp = {inProp}
             centerHeader = {activityNameHeader}
@@ -118,4 +99,23 @@ const ActivityCreationNavbar = ({
     )
 }
 export default ActivityCreationNavbar
-    
+        // const resetBtnOnClick = (e) =>{
+    //     //when being used in forms, it prevents a refresh
+    //     e.preventDefault()
+    //     //for keydown events, only accept enter
+    //     if(e.type === "keydown" && e.key !== "Enter") return  
+        
+    //     const node = e.target.closest("button")
+    //     const questionNum = node.dataset.questionNum
+    //     const action = node.dataset.actionLabel
+    //     switch(action){
+    //         case "reset-question" : 
+    //             return dispatch(updateResetPopUp({ questionNum : questionNum, confirmed: false}))
+    //         case "exit-reset-question": 
+    //             return dispatch(updateResetPopUp(null))
+    //         case "confirm-reset-question":
+    //             return dispatch(updateResetPopUp({...resetPopUp, confirmed: true}))
+    //         default:
+    //             return
+    //     }
+    // }
