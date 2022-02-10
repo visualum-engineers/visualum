@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { newSortCategory } from './dataFormats';
+import { newSortCategory, newMatchKeyPair } from './dataFormats';
 const questionFormat = (type) =>{
     switch(type){
         case "sort":
@@ -16,13 +16,7 @@ const questionFormat = (type) =>{
                 key: uuidv4(),
                 questionType: "matching",
                 slideType: "matching",
-                keyPairs: [
-                    {
-                        id: uuidv4(), 
-                        key: "", 
-                        answer: ""
-                    }
-                ],
+                keyPairs: [newMatchKeyPair()],
                 pointValue: "",
                 instructions: "",
             }

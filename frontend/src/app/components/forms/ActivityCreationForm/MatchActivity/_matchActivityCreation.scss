@@ -1,0 +1,137 @@
+.match-creation-activity-container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background-color: $light-gray;
+    width: 100%;
+}
+.match-creation-key-pairs-container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 0.75rem;
+}
+.match-creation-key-pair-headers{
+    position: sticky;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    h2{
+        font-size: 1.2rem;
+        background-color: $white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        padding: 0.75rem 0;
+    }
+}
+.match-creation-single-key-pair{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem;
+    padding: 0.25rem;
+    margin: 0.75rem 0;
+    background-color: $white;
+    width: 100%;
+}
+.match-creation-key,
+.match-creation-answer{
+    display: flex;
+    justify-content: center;
+    height: 3.5rem;
+    padding: 0.25rem;
+    button{
+        @include remove-btn-default;
+        font-weight: 500;
+        font-size: 0.8rem;
+        max-height: 3.25rem;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        overflow: auto;
+        margin: auto;
+        @include activity-scrollbar-styles;
+    }
+}
+.match-creation-key{
+    background-color: $light-blue;
+}
+.match-creation-answer{
+    background-color: orange;
+}
+.match-creation-arrows{
+    position: relative;
+    height: 100%;
+    padding: 0.25rem;
+    .right-arrow,.left-arrow{
+        width: 100%;
+        height: 100%;
+        path, polyline {
+            fill: none;
+            stroke: $dark-blue;
+            stroke-width: 0.5px;
+            stroke-linecap: round;
+        }
+
+        polyline{
+            stroke-width: 0.5px;
+        }
+    }
+    .left-arrow{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top:0;
+        left: 0;
+        padding: 0.25rem;
+    }
+}
+.match-creation-key-pair-btns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+    padding: 0 0.5rem;
+    button{
+        @include remove-btn-default;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 50%;
+        color: $white;
+    }
+    button:first-child{
+        background-color: $blue;
+    }
+    button:last-child{
+        background-color: $red;
+    }
+}
+.match-creation-sticky-add-pair{
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    width: 100%;
+    background-color: $lighter-gray;
+    align-items: center;
+    justify-content: center;
+    height: 4rem;
+    padding: 0.5rem 0;
+    button{
+        @include remove-btn-default;
+        width: 100%;
+        height: 100%;
+        background-color: $green;
+        span{
+            margin-left: 0.3rem;
+        }
+    }
+}

@@ -43,7 +43,7 @@ const activityCreationData = createSlice({
         activityDescription: null,
         activityTimer: null,
         activityTopicLabels: null,
-        questions: [questionFormat("sort")],
+        questions: [questionFormat("matching")],
         //questions: miniScreenData
     },
     reducers:{
