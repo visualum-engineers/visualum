@@ -7,6 +7,7 @@ const updateMatchQuestion = ({
 }) =>{
     //console.log(oldData)
     let updatedData,
+    oldKeyPair,
     keyPairs,
     keyPair,
     keyPairsIndex,
@@ -23,14 +24,19 @@ const updateMatchQuestion = ({
             }
             break;
         case "update-key-pair":
-            keyPairsIndex = parseInt(newData.newData.keyPairsIndex)
-            keyPair = {...oldData.keyPairs[keyPairsIndex]}
-
-            if(keyPair.id !== newData.newData.id) return
-            
             //update with new content
             newKeyValue = removeWhiteSpace(newData.newData.keyValue)
             newAnswerValue = removeWhiteSpace(newData.newData.answerValue)
+            keyPairsIndex = parseInt(newData.newData.keyPairsIndex)
+
+            oldKeyPair = oldData.keyPairs[keyPairsIndex]
+
+            //means nothing has changed
+            //this also maintains history stack
+            if(newKeyValue === oldKeyPair.key.content && newAnswerValue === oldKeyPair.answer.content) return
+
+            keyPair = {...oldKeyPair}
+            if(keyPair.id !== newData.newData.id) return
             keyPair.key.content = newKeyValue
             keyPair.answer.content = newAnswerValue
 

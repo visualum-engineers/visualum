@@ -78,7 +78,7 @@ const MatchActivityKeyPairs = ({
                             {data.key.content}
                         </button>
                     : <div>
-                            <input 
+                            <textarea 
                                 onBlur={onSaveKeyPair}
                                 value = {keyValue}
                                 onChange = {(e) =>{
@@ -160,7 +160,7 @@ const MatchActivityKeyPairs = ({
                             {data.answer.content}
                         </button>
                     : <div>
-                        <input 
+                        <textarea 
                             onBlur={onSaveKeyPair}
                             value={answerValue}
                             onChange = {(e) =>{
