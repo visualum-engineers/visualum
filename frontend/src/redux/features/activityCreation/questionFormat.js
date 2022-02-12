@@ -1,41 +1,74 @@
+import { v4 as uuidv4 } from 'uuid';
+import { newSortCategory, newMatchKeyPair } from './dataFormats';
 const questionFormat = (type) =>{
     switch(type){
         case "sort":
             return{
-                type: "sort",
-                categories:[],
-                answerChoices: []
+                key: uuidv4(),
+                questionType: "sort",
+                slideType: "sort",
+                categories:[newSortCategory()],
+                pointValue: "",
+                instructions: "",
             }
         case "matching":
             return {
-                type: "matching",
-                keyPairs: [],
-                answerChoices: []
+                key: uuidv4(),
+                questionType: "matching",
+                slideType: "matching",
+                keyPairs: [newMatchKeyPair()],
+                pointValue: "",
+                instructions: "",
             }
         case "radio":
             return{
-                type: "radio",
+                key: uuidv4(),
+                questionType: "radio",
+                slideType: "radio",
                 question: "",
-                imgDescription: null,
-                imageURL: null,
-                answerChoices: [],
+                imgDescription: "",
+                imageURL: "",
+                answerChoices: [
+                    {id: uuidv4(), content: ""}
+                ],
+                pointValue: "",
+                instructions: "",
             }
         case "checkbox":
             return{
-                type: "checkbox",
+                key: uuidv4(),
+                questionType: "checkbox",
+                slideType: "checkbox",
                 question: "",
-                imageURL: null, 
-                imgDescription: null,
+                imageURL: "", 
+                imgDescription: "",
                 answerChoices: [],
+                correctAnswer: "",
+                pointValue: "",
+                instructions: "",
             }   
+        case "shortAnswer":
+            return{
+                key: uuidv4(),
+                questionType: "shortAnswer",
+                slideType: "shortAnswer",
+                imgURL: "",
+                question: "",
+                pointValue: "",
+                instructions: "",
+            }
         case "labelPictures":
             return{
-                type: "labelPictures",
+                key: uuidv4(),
+                questionType: "labelPictures",
+                slideType: "labelPictures",
                 questions: [],
                 imageURL: "",
                 imgSize: {},
                 imgLabels:[],
-                answerChoices: []
+                answerChoices: [],
+                pointValue: "",
+                instructions: "",
             }
         default:
             return

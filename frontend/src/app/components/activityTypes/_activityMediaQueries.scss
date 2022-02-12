@@ -6,10 +6,15 @@
 @import "./SortActivity/sortMediaQueries";
 
 @mixin activity-lg{
-    
+    @include match-activity-lg;
+    @include label-pic-activity-lg;
+    @include sa-activity-lg;
 }
 @mixin activity-md {
-    
+    @include label-pic-activity-md;
+    @include sa-activity-md;
+    @include match-activity-md;
+
 }
 
 @mixin activity-sm{
@@ -31,14 +36,9 @@
             }
         }
     }
-    // .activities-settings-sidebar.secondary-sidebar-nav{
-    //     max-width: unset;
-    //     width: 100%;
-    // }
-    // .activities-settings-exit-sidebar-btn{
-    //     right: calc(100% - 2.4rem);
-    //     background-color: transparent;
-    // }
+    @include match-activity-sm;
+    @include label-pic-activity-sm;
+    @include sa-activity-sm;
 }
 @mixin activities-hover{
     .activity-navbar-exit-sidebar-btn:hover{
@@ -121,4 +121,9 @@
             background-color: $dark-blue;
         }
     }
+    @include controlled-inputs-activity-hover;
+    @include label-pic-activity-hover;
+    @include match-activity-hover;
+    @include sa-activity-hover;
+    @include sort-activity-hover;
 }

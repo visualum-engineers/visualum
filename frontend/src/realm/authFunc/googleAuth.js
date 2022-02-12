@@ -1,11 +1,12 @@
 import * as Realm from "realm-web";
 
-export const googleLogin = async(res, app) =>{
-    const credentials = Realm.Credentials.google(res.credential)
+export const googleLogin = async(res, app, customErrorFunc = null) =>{
     try{
-        await app.logIn(credentials)
+        const credentials = Realm.Credentials.google(res.credential)
+        const currentUser = await app.logIn(credentials, customErrorFunc)
+        return currentUser
     } catch(err){
-        console.log(err)
-        //throw new Error({err : err})
+        console.error(err)
+        if(customErrorFunc) customErrorFunc(err)
     }
 }

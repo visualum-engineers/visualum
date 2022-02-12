@@ -1,73 +1,326 @@
-// .activity-creation-question-view{
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     height: 100vh;
-// }
+@import "./ActivityComponents/ActivityOverviewPopUp/activityCreationPopUp";
 
-.activity-creation-edit-pop-up{
-    position: relative;
-    display: flex; 
+$activity-creation-navbar-small-height: 2.5rem;
+$activity-creation-navbar-height: 3.5rem; 
+$activity-creation-question-header-height: 3rem;
+$activity-creation-question-top-margin: 0.5rem;
+$activity-creation-question-container-padding-top: 0.5rem;
+
+.activity-creation-navbar{
+    height: $activity-creation-navbar-height;
+    .activity-navbar-visualum-logo{
+        max-width: 2rem;
+    }
+    .activity-profile-avatar-container{
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+}
+.activity-creation-sidebar{
+    top: calc(#{$activity-creation-navbar-height} - 0.1rem);
+    height: calc(100vh - #{$activity-creation-navbar-height})
+}
+
+.activity-creation-nav-activity-name-container{
+    display: flex;
     flex-direction: column;
-    z-index: 3;
-    width: 85vw;
-    height: 85vh;
-    .activity-creation-edit-pop-up-header{
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        padding-left: 1.5rem;
-        padding-right: 1rem;
-        height: 3.7rem;
-        background-color: rgba(236, 236, 236, 0.822);
-        color: $black;
-        @include border-radius(7px 7px 0 0);
-        span{
-            font-size: 1.2rem
-        }
-        button{
-            @include remove-btn-default();
-            width: 1.2rem;
-            padding: 0;
-            svg{
-                width: 100%;
-                stroke: $darkest-gray;
-            }
-        }
-        
-    }
-    .activity-creation-edit-pop-up-body-container{
-        background-color: $lightest-gray;
-        padding-top: 3%;
-        padding-left: 3% ;
-        padding-right: calc(3% - 0.5rem);
-        overflow: scroll;
-        overflow-x: hidden;
-        height: calc(85vh - 2.5rem);
-        @include border-radius(0 0 0.5rem 0.5rem);
-        @include activity-scrollbar-styles();
+    justify-content: space-between;
+    height: $activity-creation-navbar-height;
+    padding: 0 0.5rem;
+    width: max-content;
+    padding-right: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 
-        .activity-creation-edit-pop-up-body{
-            height: min-content;
-        } 
+}
+
+.activity-creation-nav-activity-name{
+    margin-top: 0.3rem;
+    display: flex;
+    height: 1.5rem;
+
+    h1{
+        cursor: pointer;
+        margin: auto;
+        font-weight: 400;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        //font-size: 0.9rem;
+        font-size: 1rem;
     }
-    .activity-creation-timer-add, 
-    .activity-creation-timer-remove{
+    button{
         @include remove-btn-default();
-        @include border-radius(0.3rem);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: $blue;
+        font-size: 0.7rem;
+        line-height: 0.9rem;
+        margin-left: 0.3rem;
+        span{
+            margin-left: 0.2rem;
+        }
+    }
+}
+
+.activity-creation-nav-edit-options{
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 0.3rem;
+    .activity-edit-btn{
+        padding-left: 0;
+        span{
+            font-size: 0.8rem;
+            //font-size: 0.7rem;
+            font-weight: 400;
+        }
+    }
+    .activity-edit-dropdown-pointer{
+        left: 0;
+    }
+}
+.activity-creation-nav-preview-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include remove-btn-default();
+    border: 1px solid $dark-blue;
+    font-size: 0.9rem;
+    color: $dark-blue;
+    padding: 0.3rem 0.5rem;
+    @include border-radius(0.3rem);
+    height: 2rem;
+    span{
+        margin-left: 0.3rem;
+    }
+}
+.activity-creation-nav-publish-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0.5rem;
+    button{
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 2rem;
-        height: 2rem;
+        @include remove-btn-default();
+        background-color: $dark-blue;
+        font-size: 0.9rem;
         color: $white;
+        height: 2rem;
+        
     }
-    .activity-creation-timer-add{
-        background-color: $dark-green;
+    button:first-child{
+        @include border-radius(0.3rem 0 0 0.3rem);
+        padding: 0.3rem 0.5rem;
+        span{
+            margin-left: 0.3rem;
+        }
     }
-    .activity-creation-timer-remove{
-        background-color: red;
+    button:last-child{
+        font-size: 0.8rem;
+        @include border-radius(0 0.3rem 0.3rem 0);
+        border-left: 1px solid $dark-gray;
+        padding: 0.3rem 0.4rem;
     }
 }
+.activity-creation-sidebar{
+    z-index: 2;
+}
+.activity-creation-body{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+    @include no-space;
+    @include transition(all 0.3s ease-out);
+    background-color: $lighter-gray;
+    height: 100%;
+    min-height: calc(max(100vh, 40rem));
+    width: 100%;
+}
+.activity-creation-question-container{
+    margin-top: $activity-creation-navbar-small-height;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 1rem;
+    padding-top: $activity-creation-question-container-padding-top;
+    padding-bottom: 0;
+    @include transition(all 0.3s ease-out);
+}
+
+.activity-creation-question-container.move-left{
+    left: calc(min(9.2rem, 148px));
+    width: calc(100% - calc(min(9.2rem, 148px)));
+}
+.activity-creation-question-container.move-down{
+    margin-top: $activity-creation-navbar-height;
+}
+
+.activity-creation-question{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-height: 100%;
+    width: 100%;
+}
+.activity-creation-question-header{
+    display: flex;
+    width: 100%;
+    height: $activity-creation-question-header-height;
+}
+.activity-creation-question-points{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 8rem;
+    margin-right: 1rem;
+    button{
+        @include remove-btn-default();
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        font-weight: 500;
+        font-size: 0.9rem;
+        background-color: $green;
+    }
+    span{
+        margin-left: 0.5rem;
+    }
+}
+.activity-creation-point-input{
+    display: flex;
+    //flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0.3rem;
+    label{
+        text-align: center;
+        width: 100%;
+        font-size: 0.8rem;
+    }
+    input{
+        flex-grow: 1;
+        text-align: center;
+        width: 100%
+    }
+}
+.activity-creation-question-instructions{
+    display: flex;
+    flex-grow: 1;
+    width: calc(100% - 8rem);
+    button{
+        @include remove-btn-default();
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        font-weight: 500;
+        font-size: 0.9rem;
+        background-color: $green;
+
+        span{
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            margin-left: 0.3rem;
+            text-align: center;
+        }
+    }
+    textarea{
+        width: 100%;
+        font-size: 0.8rem;
+        z-index: 2;
+    }
+}
+.activity-creation-question-body{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    flex-grow: 1;
+    margin-top: $activity-creation-question-top-margin;
+}
+.activity-creation-add-question-pop-up{
+    position: relative;
+    cursor: auto;
+    width: 85vw;
+    height: 85vh;
+    overflow: auto;
+    @include activity-scrollbar-styles;
+    @include border-radius(0.5rem);
+    background-color: $lighter-gray;
+    z-index: 6;
+    padding: 5%;
+    padding-right: calc(5% - 0.5rem);
+    .activity-creation-add-question-exit-btn{
+        @include remove-btn-default;
+        position: absolute;
+        top:0.5rem;
+        right: 0.5rem;
+        width: 1.6rem;
+        height: 1.6rem;
+        stroke: $dark-gray;
+        padding: 0.25rem;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @include border-radius(0.2rem);
+        &:hover{
+            stroke: $white;
+            background-color: $red;
+        }
+    }
+    .add-question-pop-up-container{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        margin:0;
+    }
+    .add-question-type-btn-container{
+        display: flex;
+        justify-content: center;
+        width: calc(max(15rem, 16vw));
+        height: calc(max(15rem, 16vw));
+        padding: 0.5rem;
+    }
+    .add-question-type-btn{
+        @include remove-btn-default;
+        @include box-shadow(0 4px 11px rgba(33,33,33,0.1));
+        @include border-radius(1rem);
+       @include transition(0.3s all ease-out);
+        display: flex;
+        align-items: space-between;
+        justify-content: center;
+        background-color: $white;
+        border: 1px solid $white;
+        width: 100%;
+        height: 100%;
+        span{
+            font-size: 0.95rem;
+        }
+        &:hover{
+            transform: translateY(-0.2rem);
+            background-color: $blue;
+            color: $white;
+        }
+    }
+}
+
+//will use variables defined above
+@import "./SortActivity/sortActivityCreation";
+@import "./MatchActivity/matchActivityCreation"

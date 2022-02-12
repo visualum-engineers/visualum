@@ -1,12 +1,14 @@
-//import DnDActivities from "./DnDActivities"
 import useWindowWidth from "../../hooks/use-window-width"
 import SecondarySideBar from "../sideBar/SecondarySideBar"
 import { useEffect, useState } from "react"
 import { unstable_batchedUpdates } from "react-dom"
 import {CSSTransition} from "react-transition-group"
 import { useSelector, useDispatch } from 'react-redux'
-import {updateActivityData, updateActivityTimer} from "../../../redux/features/activityTypes/activitiesData"
 import convertTimeDiff from "../../helpers/convertTimeDiff";
+import {
+    updateActivityData, 
+    updateActivityTimer
+} from "../../../redux/features/activityTypes/activitiesData"
 import {
     disableSettings, 
     resetPopUpOn, 
@@ -16,7 +18,7 @@ import {
 import { 
     useActivitySecondarySideBarData, 
     activitySecondarySidebarFooterData 
-} from "./ActivitySidebarData"
+} from "./ActivityComponents/ActivitySidebarData"
 import {  
     ActivityInstructions,  
     ActivityBtns, 

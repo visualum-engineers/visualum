@@ -22,11 +22,16 @@ export const RealmAppProvider = ({children, appId}) => {
   //const dispatch = useDispatch()
   // Wrap the Realm.App object's user state with React state
   const [currentUser, setCurrentUser] = React.useState(app.currentUser);
-  async function logIn(credentials) {
-    await app.logIn(credentials);
-    
-    // If successful, app.currentUser is the user that just logged in
-    setCurrentUser(app.currentUser);
+  async function logIn(credentials, errorCallBack = null) {
+    try{
+        await app.logIn(credentials);
+        // If successful, app.currentUser is the user that just logged in
+        setCurrentUser(app.currentUser);
+        return app.currentUser
+      } catch(e){
+      console.error(e)
+      if(errorCallBack) errorCallBack(e)
+    }
   }
   async function logOut() {
      // Log out the currently active user

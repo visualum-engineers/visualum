@@ -14,10 +14,11 @@ export const userInfoSlice = createSlice({
         verifiedEmailCode: "",
         classCode: "",
         schoolCode: "",
-        subscriptionType: "",
+        subscriptionType: "free",
         school: "",
         payment: "",
-        rememberMe: false
+        rememberMe: false,
+        classes: [{id:"afg", content:"7C Science"}, {id:"hui", content:"7B Science"}],
     },
     reducers: {
         updated: (state, action) => {

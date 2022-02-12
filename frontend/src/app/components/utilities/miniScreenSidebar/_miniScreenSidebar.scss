@@ -1,0 +1,207 @@
+.mini-screen-sidebar-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 3.3rem;
+    left: 0;
+    margin-top: 0;
+    width: calc(min(9.2rem, 148px));
+    background-color: $lightest-gray;
+    @include box-shadow(4px 0px 7px -8px #000000);
+    height: calc(100vh - 3.3rem);
+    @include transition(0.3s ease-out all);
+}
+.mini-screen-sidebar-container.sidebar-closed{
+    left: calc(min(-9.2rem, -148px));;
+}
+.mini-screen-sidebar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: calc(100vh - 3.3rem);
+    padding: 0.5rem;
+    overflow: auto;
+    overflow-x: hidden;
+    @include activity-scrollbar-styles()
+}
+
+
+.mini-screen-slideshow-screens{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0;
+    flex-grow: 1;
+    height: min-content;
+    width: 100%;
+    padding-bottom: 4.5rem;
+}
+.mini-screen-slide-container{
+    position: relative;
+    height: fit-content;
+    margin-bottom: 0.5rem;
+    //for now
+    width: calc(min(7rem, 110px));
+}
+.mini-screen-remove-slide{
+    position: absolute;
+    z-index: 2;
+    @include remove-btn-default();
+    width: 1.2rem;
+    height: 1.2rem;
+    padding: 0.2rem;
+    top: 0.2rem;
+    left: 5.4rem;
+    display: flex;
+    align-items: center;
+    background-color: $white;
+    @include border-radius(0.2rem);
+    svg{
+        stroke: $darkest-gray;
+        width: 100%;
+        height: 100%;
+    }     
+    &:hover{
+        background-color: $red;
+        svg{
+            stroke: $white;
+        }
+    }
+      
+}
+.mini-screen-slide{
+    @include remove-btn-default();
+    cursor: pointer;
+    display: flex;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    @include border-radius(0.3rem);
+    //prevent any click inside preview
+    &:after{
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        z-index: 1;  
+    }
+}
+.mini-screen-slide.is-dragging{
+    background-color: $light-gray;
+    opacity: 0.8;
+}
+.mini-screen-slide.slide-active{
+    .mini-screen-container{
+        border: orange 1px solid;
+    }
+    &::after{
+        background-color: rgba(255, 166, 0, 0.062);
+    }
+}
+.mini-screen-container{
+    position: relative;
+    width: calc(min(7rem, 110px));
+    height: 4.5rem;
+    background-color: $white;
+    border: 1px solid $darkest-gray;
+    @include border-radius(0.3rem);
+    overflow: hidden;
+    @include unselectable;
+    .mini-screen-slide-num{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 0;
+        left: 0rem;
+        font-size: 0.6rem;
+        font-weight: 600;
+        z-index: 1;
+        height: 1rem;
+        width: 1rem;
+        @include border-radius(0.3rem);
+        background-color: white;
+    }
+    z-index: 0;
+}
+
+.mini-screen-text-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0.5rem;
+    height: 100%;
+    text-align: start;
+    h2{
+        font-size: 0.9rem;
+        font-weight: 500;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        margin-top: 0;
+        margin-bottom: 0.2rem;
+    }
+    h3{
+        font-size: 0.65rem;
+        margin-bottom: 0;
+    }
+}
+.mini-screen-drag-handle{
+    cursor: grab;
+    flex-grow: 1;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 0.8rem;
+    height: 1.2rem;
+    svg{
+        width: 100%;
+        height: 100%;
+        stroke: $darkest-gray;
+        stroke-width: 1.2rem;
+        stroke-linecap: round;
+    }
+}
+    
+.mini-screen-sticky-btn-container{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    min-height: 5rem;
+    background-color: $lightest-gray;
+    width: calc(min(calc(9.2rem - 0.5rem), calc(148px - 0.5rem)));
+    padding: 0 0.5rem;
+    padding-right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+}
+.mini-screen-sticky-btn{
+    @include remove-btn-default();
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: space-between;
+    background-color: $lightest-gray;
+    width: 100%;
+    .mini-screen-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: $light-gray;
+        width: 100%;
+        span{
+            font-size: 0.9rem;
+            margin-left: 0.5rem;
+        }
+    }
+}
+.mini-screen-sticky-btn-text{
+    margin-left: 0.5rem;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    
+}
