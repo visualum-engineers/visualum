@@ -24,6 +24,7 @@
 //responsive stylesheet
 @import "./scss_abstracts/mediaQueries"; 
 
+
 body{
     font-family: $main-font;
     min-height: 40rem;
@@ -34,7 +35,7 @@ body{
 
 .App{
     position: relative;
-    min-height: 100vh;
+    // min-height: 100vh;
 }
 
 p{
@@ -62,3 +63,7 @@ input::-webkit-inner-spin-button {
 //     font-size: 14px;
 //     -moz-appearance: textfield;
 // }
+
+html, body, #root, .App {
+	height: 100%;
+}

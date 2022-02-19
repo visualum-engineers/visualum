@@ -63,7 +63,7 @@ export default function Store() {
 		</>
 
 	return (
-		<div className='store vh-100'>
+		<div className='store'>
 			<DashboardNav />
 			<div className='store-content container'>
 				{specificStore}
