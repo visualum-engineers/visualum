@@ -15,6 +15,7 @@ const Dashboard = React.lazy(() => import("./components/dashboard/Dashboard"))
 const HomeContent = React.lazy(() => import('./components/homePage/Home'))
 const Activity = React.lazy(() => import('./components/activityTypes/Activity'))
 const ActivityCreation = React.lazy(() => import("./components/forms/ActivityCreationForm/ActivityCreationForm"))
+const Store = React.lazy(() => import("./components/store/Store"))
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
               <Route path="settings" element={<DashboardSettings />} />
               <Route path="*" element={<DashboardNothingFound />} />
             </Route>
+            <Route path="/store" element={<Store />} />
             <Route path="/testBackend" element={<TestBackend />} />
           </Routes>
         </Suspense>
