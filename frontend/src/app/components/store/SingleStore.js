@@ -20,7 +20,7 @@ export default function SingleStore() {
 
 	return (
 		<>
-			<h2 className='fw-bold'>Teacher Person's Store</h2>
+			<h2 className='fw-bold'>{store.name}</h2>
 			<div className='store-main-reward-container mt-3'>
 				<h3 className='fw-bold'>Class Prize</h3>
 				<h4>{store.class_goal.name}</h4>
