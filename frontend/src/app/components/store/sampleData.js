@@ -2,6 +2,11 @@ const stores = [
 	{
 		class_id: 0,
 		name: "Mrs. Teacher's Store",
+		class_goal: {
+			name: "Pizza Party",
+			goal: 100,
+			progress: 50
+		},
 		items: [
 			{ name: "Homework Pass", price: 50, id: 0 },
 			{ name: "Outdoor Class", price: 80, id: 1 },
@@ -14,6 +19,11 @@ const stores = [
 	{
 		class_id: 1,
 		name: "Mr. Math's Store",
+		class_goal: {
+			name: "Pizza Party",
+			goal: 100,
+			progress: 50
+		},
 		items: [
 			{ name: "Homework Pass", price: 50, id: 0 },
 			{ name: "Outdoor Class", price: 80, id: 1 },
@@ -26,6 +36,11 @@ const stores = [
 	{
 		class_id: 2,
 		name: "Ms. History's Store",
+		class_goal: {
+			name: "Pizza Party",
+			goal: 100,
+			progress: 50
+		},
 		items: [
 			{ name: "Homework Pass", price: 50, id: 0 },
 			{ name: "Outdoor Class", price: 80, id: 1 },
@@ -38,6 +53,11 @@ const stores = [
 	{
 		class_id: 3,
 		name: "Snr. Spanish's Store",
+		class_goal: {
+			name: "Pizza Party",
+			goal: 100,
+			progress: 50
+		},
 		items: [
 			{ name: "Homework Pass", price: 50, id: 0 },
 			{ name: "Outdoor Class", price: 80, id: 1 },
@@ -48,3 +68,5 @@ const stores = [
 		]
 	}, 
 ]
+
+export default stores;
