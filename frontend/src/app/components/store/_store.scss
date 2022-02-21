@@ -1,6 +1,7 @@
 .store {
 	background-color: $lighter-gray;
 	width: 100%;
+	min-height: 100%;
 	display: flex;
 	flex-direction: column;
 	.store-content {
@@ -31,7 +32,7 @@
 .store-item-container {
 	display: flex;
 	width: 100%;
-	overflow-x: scroll;
+	// overflow-x: scroll;
 	overflow-y: auto;
 	padding: 1rem;
 }
@@ -39,8 +40,8 @@
 .store-item {
 	height: 250px;
 	min-width: 250px;
-	max-width: 250px;
-	margin-right: 1rem;
+	max-width: 100%;
+	width: 100%;
 	padding: 1rem;
 	background-color: white;
 	@include box-shadow-dash();
@@ -48,7 +49,6 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: end;
-
 	.item-title {
 		width: 250px;
 		display: inline-block;
@@ -56,6 +56,12 @@
 		white-space: nowrap;
 		text-overflow: ellipsis;
 	}
+}
+
+.store-carousel-item {
+	max-width: 250px;
+	width: 250px;
+	margin-right: 1rem;
 }
 
 .carousel-button-container {
