@@ -5,6 +5,9 @@ import data from './sampleData'
 import { useParams } from 'react-router-dom'
 
 export default function SingleStore() {
+
+	const percentage = 50;
+
 	const params = useParams();
 	const store = data.filter(store => store["class_id"] === parseInt(params["store_id"]))[0]
 	let store_items = null;
@@ -24,10 +27,15 @@ export default function SingleStore() {
 			<div className='store-main-reward-container mt-3'>
 				<h3 className='fw-bold'>Class Prize</h3>
 				<h4>{store.class_goal.name}</h4>
-				<ProgressBar
-					containerClassName="main-reward-progress-bar-container"
-					percentage={"50%"}
-				/>
+				<div className='mt-auto d-flex flex-column align-items-end'>
+					<h5>{percentage}/100</h5>
+					<ProgressBar
+						percentage={`${percentage}%`}
+						containerClassName="store-progress-bar-container"
+						progressBarClassName="store-progress-bar"
+						fillBarClassName="store-progress-bar-fill-bar"
+					/>
+				</div>
 			</div>
 			<div className='mt-4 h-100 row'>
 				{store_items}
