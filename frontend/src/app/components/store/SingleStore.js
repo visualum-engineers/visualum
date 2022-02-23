@@ -14,7 +14,7 @@ export default function SingleStore() {
 	if (store) {
 		store_items = store.items.map(item =>
 			<>
-				<div className='col-xl-3 col-lg-4 col-md-6 col-12 mb-4 d-flex justify-content-center align-items-center'>
+				<div className='col-lg-4 col-md-6 col-12 mb-4 d-flex justify-content-center align-items-center'>
 					<StoreItem title={item.name} price={item.price} />
 				</div>
 			</>
@@ -37,7 +37,7 @@ export default function SingleStore() {
 					/>
 				</div>
 			</div>
-			<div className='mt-4 h-100 row'>
+			<div className='mt-4 h-100 row gx-4 gy-3'>
 				{store_items}
 			</div>
 		</>

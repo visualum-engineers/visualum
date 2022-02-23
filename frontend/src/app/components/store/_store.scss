@@ -38,11 +38,10 @@
 }
 
 .store-item {
-	height: 250px;
+	height: 400px;
 	min-width: 250px;
 	max-width: 100%;
 	width: 100%;
-	padding: 1rem;
 	background-color: white;
 	@include box-shadow-dash();
 	@include border-radius(10px);
@@ -50,20 +49,17 @@
 	flex-direction: column;
 	justify-content: end;
 	.item-title {
-		width: 250px;
-		display: inline-block;
 		overflow: hidden;
 		white-space: nowrap;
 		text-overflow: ellipsis;
 	}
+	overflow: hidden;
 }
 
 .store-item-img {
 	background-color: $dark-gray;
 	width: 100%;
 	height: 100%;
-	border-radius: 10px;
-	margin-bottom: .5rem;
 }
 
 .store-carousel-item {
@@ -96,20 +92,21 @@
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	height: 200px;
+	height: 300px;
 	border-radius: 15px;
-	padding: 1.5rem;
+	padding: 2rem;
 }
 
 .store-progress-bar {
     @include border-radius(10rem);
     background: $light-purple;
-    height: 0.45rem;
+    height: 1rem;
 }
 
 .store-progress-bar-container {
     width: 100%;
     font-size: 0.7rem;
+	margin-bottom: .5rem;
 }
 
 .store-progress-bar-fill-bar{
@@ -120,4 +117,14 @@
     background: $purple;
     z-index: 1;
     @include transition(all 0.3s ease-out)
+}
+
+.store-item-button {
+	background-color: $dark-blue;
+	border: none;
+	height: 45px;
+	font-size: 1.1rem;
+	.icon {
+		color: $yellow;
+	}
 }

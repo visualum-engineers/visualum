@@ -1,6 +1,7 @@
 import React from 'react'
 import StoreCarouselItem from './StoreCarouselItem'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faDollarSign } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import sampleData from './sampleData'
@@ -12,9 +13,12 @@ export default function Store() {
 			<div className='col-12 mb-5'>
 				<div className='mb-2'>
 					<div className='row'>
-						<div className='col-lg-8 col-12'><h2>{store.name}</h2></div>
+						<div className='col-lg-8 col-12'><h2 className='fw-bold'>{store.name}</h2></div>
 						<div className='col-lg-4 col-12 d-flex justify-content-lg-end justify-content-between align-items-center'>
-							<span className='h6 mb-0'>209 points remaining</span>
+							<span className='h6 mb-0'>
+								<FontAwesomeIcon icon={faDollarSign} className="icon me-2" />
+								209 points remaining
+							</span>
 							<Link to={`${store.class_id}`} className='btn btn-sm btn-primary ms-3'>
 								Show More
 							</Link>
@@ -44,6 +48,7 @@ export default function Store() {
 
 	return (
 		<>
+			<h1 className='fw-bold mb-5'>All Stores</h1>
 			<div className='row'>
 				{/* <div className='col-12'>
 					<div className='d-flex align-items-center mb-2'>
