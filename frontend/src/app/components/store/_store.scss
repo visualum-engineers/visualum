@@ -65,7 +65,15 @@
 .store-carousel-item {
 	max-width: 250px;
 	width: 250px;
+	height: 250px;
 	margin-right: 1rem;
+	padding: 1rem;
+}
+
+.show-more-item {
+	background-color: $light-blue;
+	cursor: pointer;
+	font-size: 1.2rem;
 }
 
 .carousel-button-container {
