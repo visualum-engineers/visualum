@@ -35,6 +35,11 @@
 	// overflow-x: scroll;
 	overflow-y: auto;
 	padding: 1rem;
+	-ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
 
 .store-item {
