@@ -9,7 +9,7 @@ var AssignmentSchema = new Schema({
       type: mongoose.Schema.Types.ObjectId
   }
   });
-  var SchoolSchema = new Schema({
+var SchoolSchema = new Schema({
     Name: {type: String, required: true},
     Address : {Street: String, Apartment: String, 
         State: String, Country: String, 
@@ -31,10 +31,10 @@ const UserSchema = new Schema({
     CompletedAssignments : [AssignmentSchema]
     
 });
-// the USer class and User mdodel 
+
 const User = mongoose.model('user',UserSchema );
 //const Assignment = mongoose.model('assignment',AssignmentSchema );
-
+// the USer class and User mdodel 
 module.exports = User;
 //module.exports = Assignment;
 
