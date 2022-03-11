@@ -19,9 +19,11 @@
 @import "../src/app/components/activityTypes/activity";
 @import "../src/app/components/dashboard/dashboard";
 @import "../src/app/components/avatarCreator/avatar";
+@import "../src/app/components/store/store";
 
 //responsive stylesheet
 @import "./scss_abstracts/mediaQueries"; 
+
 
 body{
     font-family: $main-font;
@@ -33,7 +35,7 @@ body{
 
 .App{
     position: relative;
-    min-height: 100vh;
+    // min-height: 100vh;
 }
 
 p{
@@ -61,3 +63,7 @@ input::-webkit-inner-spin-button {
 //     font-size: 14px;
 //     -moz-appearance: textfield;
 // }
+
+html, body, #root, .App {
+	height: 100%;
+}

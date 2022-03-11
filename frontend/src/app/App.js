@@ -5,6 +5,7 @@ import LoadingIcon from './components/utilities/loadingIcon/LoadingIcon';
 import DashboardAssignments from './components/dashboard/DashboardAssignments';
 import TestBackend from "./components/testBackend/test"
 import DashboardNothingFound from './components/dashboard/DashboardNothingFound';
+import SingleStore from './components/store/SingleStore';
 //import { useRealmApp } from '../realm/RealmApp';
 //lazy loaded components for performance
 const DashboardHome = React.lazy(() => import("./components/dashboard/DashboardOverview"))
@@ -15,6 +16,8 @@ const Dashboard = React.lazy(() => import("./components/dashboard/Dashboard"))
 const HomeContent = React.lazy(() => import('./components/homePage/Home'))
 const Activity = React.lazy(() => import('./components/activityTypes/Activity'))
 const ActivityCreation = React.lazy(() => import("./components/forms/ActivityCreationForm/ActivityCreationForm"))
+const StoreOverview = React.lazy(() => import("./components/store/StoreOverview"))
+const Store = React.lazy(() => import("./components/store/Store"))
 
 function App() {
   return (
@@ -36,6 +39,10 @@ function App() {
               <Route path="classes" element={<DashboardClasses />} />
               <Route path="settings" element={<DashboardSettings />} />
               <Route path="*" element={<DashboardNothingFound />} />
+            </Route>
+            <Route path="/store" element={<Store />} >
+              <Route path="" element={<StoreOverview />} />
+              <Route path='/store/:store_id' element={<SingleStore />} />
             </Route>
             <Route path="/testBackend" element={<TestBackend />} />
           </Routes>

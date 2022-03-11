@@ -1,0 +1,143 @@
+.store {
+	background-color: $lighter-gray;
+	width: 100%;
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
+	.store-content {
+		width: 100%;
+		height: 100%;
+		padding-top: calc(#{$dashboard-navbar-height} + 3rem);
+		padding-bottom: 0;
+	}
+}
+
+.store-section {
+	background-color: $lightest-gray;
+	@include border-radius(15px);
+	@include box-shadow-dash();
+	min-height: 10rem;
+	width: 100%;
+}
+
+.store-item-carousel {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	.row {
+		margin: 0;
+	}
+}
+
+.store-item-container {
+	display: flex;
+	width: 100%;
+	// overflow-x: scroll;
+	overflow-y: auto;
+	padding: 1rem;
+	-ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+.store-item {
+	height: 400px;
+	min-width: 250px;
+	max-width: 100%;
+	width: 100%;
+	background-color: white;
+	@include box-shadow-dash();
+	@include border-radius(10px);
+	display: flex;
+	flex-direction: column;
+	justify-content: end;
+	.item-title {
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+	overflow: hidden;
+}
+
+.store-item-img {
+	background-color: $dark-gray;
+	width: 100%;
+	height: 100%;
+}
+
+.store-carousel-item {
+	max-width: 250px;
+	width: 250px;
+	height: 250px;
+	margin-right: 1rem;
+	padding: 1rem;
+}
+
+.show-more-item {
+	background-color: $light-blue;
+	cursor: pointer;
+	font-size: 1.2rem;
+}
+
+.carousel-button-container {
+	width: 75px;
+	justify-content: center;
+	align-items: center;
+}
+
+.carousel-button {
+	height: 40px;
+	width: 40px;
+	font-size: 1.7rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 100%;
+	background-color: $light-gray;
+	margin: 0 auto;
+}
+
+.store-main-reward-container {
+	background-color: white;
+	@include box-shadow-dash();
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 300px;
+	border-radius: 15px;
+	padding: 2rem;
+}
+
+.store-progress-bar {
+    @include border-radius(10rem);
+    background: $light-purple;
+    height: 1rem;
+}
+
+.store-progress-bar-container {
+    width: 100%;
+    font-size: 0.7rem;
+	margin-bottom: .5rem;
+}
+
+.store-progress-bar-fill-bar{
+    @include border-radius(10rem);
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: $purple;
+    z-index: 1;
+    @include transition(all 0.3s ease-out)
+}
+
+.store-item-button {
+	background-color: $dark-blue;
+	border: none;
+	height: 45px;
+	font-size: 1.1rem;
+	.icon {
+		color: $yellow;
+	}
+}
