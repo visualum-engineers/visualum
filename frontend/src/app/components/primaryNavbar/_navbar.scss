@@ -5,7 +5,7 @@
     padding: 30px 30px;
     padding-bottom: 0px;
     margin: 0;
-    color: $main-font-color;
+    color: black;
     border: none;
     z-index:3;
 }
@@ -22,7 +22,19 @@
     font-size: 1.2rem;
     font-weight: 600;
     letter-spacing: 0.1rem;
-    margin: 0 2rem;
+    margin: 0 1rem;
+}
+
+.navbar-logo {
+    height: 40px;
+}
+
+.nav-divider {
+    height: 100%;
+    width: 2px;
+    margin: 0 10px;
+    margin-right: 25px;
+    background-color: black;
 }
 
 .nav-btn.home-page-nav{
@@ -30,7 +42,7 @@
     @include border-radius(10px);
     @include remove-btn-default;
     position: relative;
-    color: $main-font-color;
+    color: black;
     padding: 8px;
     text-align: center;
     font-size: 1em;
@@ -60,30 +72,28 @@
 }
 
 .btn-home-auth {
-    background-color: transparent;
+    background-color: $cta-blue;
     border: none;
     color: white;
     font-weight: 500;
-    font-size: 1.1rem;
+    font-size: 1rem;
+    padding: 0px 25px;
+    border-radius: 10px;
+    &:hover, :active, :focus, :active:focus {
+        border: none;
+        background-color: $blue;
+        box-shadow: none;
+    }
+}
+
+.btn-about-us {
+    color: black;
+    background-color: transparent;
+    border: none;
+    transition: all 125ms ease-in-out;
     &:hover {
-        border: none;
-        background-color: rgba(0,0,0,.35);
-        box-shadow: none;
-    }
-    &:focus {
-        border: none;
         background-color: transparent;
-        box-shadow: none;
-    }
-    &:active {
-        border: none;
-        background-color: rgba(0,0,0,.35);
-        box-shadow: none;
-    }
-    &:active:focus {
-        border: none;
-        background-color: rgba(0,0,0,.35);
-        box-shadow: none;
+        font-weight: 500;
     }
 }
 
