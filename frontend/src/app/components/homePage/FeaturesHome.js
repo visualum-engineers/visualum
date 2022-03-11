@@ -2,7 +2,7 @@ import React from "react"
 
 const MarketingHomeIntro = () => {
     return (
-        <div className="d-flex flex-column align-items-center features-home">
+        <div className="d-flex flex-column align-items-center container features-home">
             <div className="row w-100">
                 <div className="col-12 home-feature-module">
                     <div className="row h-100 px-5">

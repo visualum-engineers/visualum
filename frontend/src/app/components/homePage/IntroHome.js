@@ -2,7 +2,7 @@ const background = "images/homePage/background.jpeg"
 
 const IntroHome = (props) => {
     return (
-        <div className="intro">
+        <div className="intro container">
             <div className="intro-homepage" style={{ backgroundImage: background }}>
                 <div className="intro-blurb">
                     <h2 className="intro-tagline">
