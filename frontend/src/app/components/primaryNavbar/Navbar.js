@@ -1,14 +1,14 @@
 import React, { Fragment } from 'react'
 import UserProfile from './UserProfile'
 import NavToggler from './NavTogglerBtn';
-import SearchBar from './SearchBar';
+// import SearchBar from './SearchBar';
 import useScrollPos from '../../hooks/use-scroll-pos';
 
 export default function Navbar(props) {
 
     const windowScrollY = useScrollPos()
 
-    const { openSignIn, openSignUp } = props;
+    const { openSignIn } = props;
 
     //REPLACE THIS WITH AUTH LOGIC LATER
     const isSignedIn = false;
@@ -32,7 +32,7 @@ export default function Navbar(props) {
                 <nav
                     id="navbar"
                     className={`navbar home-page-nav navbar-expand-lg ${props.sidebarToggle ? null : "sidebar-close"} ${windowScrollY ? "navbarScrollActive" : ""}`}>
-                    <img src='images/VisualumLogo.png' className='navbar-logo' />
+                    <img src='images/VisualumLogo.png' className='navbar-logo' alt='' />
                     <a href="/" className="nav-brand">
                         visualum
                     </a>

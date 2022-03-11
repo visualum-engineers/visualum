@@ -20,7 +20,7 @@ const IntroHome = (props) => {
                     </div>
                 </div>
                 <div className="intro-image">
-                    <img src="images/homepageRocket.png" />
+                    <img src="images/homepageRocket.png" alt="" />
                 </div>
             </div>
             {/* <div className="intro-explore">
