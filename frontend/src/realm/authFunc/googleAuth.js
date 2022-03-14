@@ -10,13 +10,13 @@ export const googleLogin = async(
 ) =>{
     try{
         const credentials = Realm.Credentials.google(res.credential)
+        const payload = {
+          custom_data: customData,
+          token: res.credential,
+        };
         const currentUser = await app.logIn(credentials, customErrorFunc)
         const functionName = "user_google_auth"
-        const payload = {
-            ...customData,
-            token: res.credential
-        }
-
+        
         //check if new user and create approriate data template for them
         const newUser = await currentUser.callFunction(functionName, payload)
         if(newUser.error) {
