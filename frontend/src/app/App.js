@@ -29,7 +29,7 @@ function App() {
               path="/"
               element={
                 <NavWrapper>
-                  <HomeContent/>
+                  <HomeContent />
                 </NavWrapper>
               }
             />
@@ -45,7 +45,14 @@ function App() {
               <Route path="settings" element={<DashboardSettings />} />
               <Route path="*" element={<DashboardNothingFound />} />
             </Route>
-            <Route path="/about" element={<About />} />
+            <Route
+              path="/about"
+              element={
+                <NavWrapper>
+                  <About />
+                </NavWrapper>
+              }
+            />
 
             <Route path="/store" element={<Store />}>
               <Route path="" element={<StoreOverview />} />

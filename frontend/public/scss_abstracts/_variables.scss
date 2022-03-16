@@ -24,8 +24,11 @@ $darkest-gray: rgb(112, 112, 112);
 
 $lighter-blue: #eff7ff;
 $light-blue: #bcdcfd;
-$blue: rgb(9, 63, 179); 
-$dark-blue: rgb(15, 60, 158);
+$aqua-blue: #C7E4FF;
+$blue: #3277F7;
+$dark-blue: rgb(9, 63, 179); 
+$darker-blue: rgb(15, 60, 158);
+
 $cta-blue: #3D86F2;
 
 $green: rgb(38, 201, 114);
@@ -39,7 +42,7 @@ $light-purple: rgba(58,19,208,0.25);
 $off-white: #f4f4f4;
 $yellow: #ffda4d;
 $light-yellow: #fde06c;
-
+$orange: #FAAB36;
 $new-purple: #b5c1f6;
 $new-light-purple: #e0e5ff;
 @mixin remove-btn-default {
