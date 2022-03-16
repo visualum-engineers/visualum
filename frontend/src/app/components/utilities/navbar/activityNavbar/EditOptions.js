@@ -1,8 +1,8 @@
-import GeneralBtn from "../generalBtn/GeneralBtn"
+import GeneralBtn from "../../generalBtn/GeneralBtn"
 import { useState } from "react";
-import TrianglePointer from "../trianglePointer/TrianglePointer";
+import TrianglePointer from "../../trianglePointer/TrianglePointer";
 import { useDispatch, useSelector } from "react-redux";
-import useKeyboardShortcut from "../../../hooks/use-keyboard-shortcuts";
+import useKeyboardShortcut from "../../../../hooks/use-keyboard-shortcuts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { 

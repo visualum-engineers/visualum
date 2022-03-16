@@ -1,7 +1,7 @@
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import EditOptions from "./EditOptions";
-import Timer from "../timer/Timer"
+import Timer from "../../timer/Timer"
 import { 
     faBars, 
 } from "@fortawesome/free-solid-svg-icons";

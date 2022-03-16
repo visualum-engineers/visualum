@@ -3,7 +3,6 @@ import { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import LoadingIcon from './components/utilities/loadingIcon/LoadingIcon';
 import DashboardAssignments from './components/dashboard/DashboardAssignments';
-import TestBackend from "./components/testBackend/test"
 import DashboardNothingFound from './components/dashboard/DashboardNothingFound';
 import SingleStore from './components/store/SingleStore';
 //import { useRealmApp } from '../realm/RealmApp';
@@ -18,14 +17,12 @@ const Activity = React.lazy(() => import('./components/activityTypes/Activity'))
 const ActivityCreation = React.lazy(() => import("./components/forms/ActivityCreationForm/ActivityCreationForm"))
 const StoreOverview = React.lazy(() => import("./components/store/StoreOverview"))
 const Store = React.lazy(() => import("./components/store/Store"))
-
+const About = React.lazy(() => import("./components/about/About"))
 function App() {
   return (
     <Router>
       <div className="App">
-        <Suspense fallback={
-          <LoadingIcon entireViewport={true} />
-        }>
+        <Suspense fallback={<LoadingIcon entireViewport={true} />}>
           <Routes>
             <Route path="/" element={<HomeContent />} />
             {/* <Route path="/create-game" element={<NavWrapper><CreateGame /></NavWrapper>} /> */}
@@ -40,15 +37,16 @@ function App() {
               <Route path="settings" element={<DashboardSettings />} />
               <Route path="*" element={<DashboardNothingFound />} />
             </Route>
-            <Route path="/store" element={<Store />} >
+            <Route path="/about" element={<About/>} />
+
+            <Route path="/store" element={<Store />}>
               <Route path="" element={<StoreOverview />} />
-              <Route path='/store/:store_id' element={<SingleStore />} />
+              <Route path="/store/:store_id" element={<SingleStore />} />
             </Route>
-            <Route path="/testBackend" element={<TestBackend />} />
           </Routes>
         </Suspense>
-      </div >
-    </Router >
+      </div>
+    </Router>
   );
 }
 export default App;

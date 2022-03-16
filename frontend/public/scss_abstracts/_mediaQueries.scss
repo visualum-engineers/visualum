@@ -1,8 +1,11 @@
 //responsive stylesheets as mixins
-@import "../../src/app/components/primaryNavbar/navbarBreakPoints";
+//utilities
+@import "../../src/app/components/utilities/navbar/primaryNavbar/navbarBreakPoints";
+@import "../../src/app/components/utilities/footer/footerBreakPoints";
+
+//pages
 @import "../../src/app/components/homePage/homeBreakPoints";
 @import "../../src/app/components/forms/formsBreakpoints";
-@import "../../src/app/components/footer/footerBreakPoints";
 @import "../../src/app/components/activityTypes/activityMediaQueries";
 @media (min-width: 992px) {
     @include navbar-lg;

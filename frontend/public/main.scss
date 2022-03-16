@@ -8,14 +8,15 @@
 @import "../src/app/components/utilities/resizable/resizableHandle";
 @import "../src/app/components/utilities/progressBar/progressBar";
 @import "../src/app/components/utilities/miniScreenSidebar/miniScreenSidebar";
-@import "../src/app/components/utilities/navbar/navbar";
-//General Styles
-@import "../src/app/components/sideBar/sidebar";
-@import "../src/app/components/carousel/singleSlideCarousel";
-@import "../src/app/components/primaryNavbar/navbar";
+@import "../src/app/components/utilities/navbar/activityNavbar/navbar";
+@import "../src/app/components/utilities/navbar/primaryNavbar/navbar";
+@import "../src/app/components/utilities/sideBar/sidebar";
+@import "../src/app/components/utilities/footer/footer";
+@import "../src/app/components/utilities/carousel/singleSlideCarousel";
+
+//Page Styles
 @import "../src/app/components/homePage/home";
 @import "../src/app/components/forms/forms";
-@import "../src/app/components/footer/footer";
 @import "../src/app/components/activityTypes/activity";
 @import "../src/app/components/dashboard/dashboard";
 @import "../src/app/components/avatarCreator/avatar";

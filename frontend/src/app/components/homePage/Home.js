@@ -1,7 +1,7 @@
 import { React } from 'react'
 import IntroHome from "./IntroHome"
 import MarketingHomeIntro from "./FeaturesHome"
-import Navbar from '../primaryNavbar/Navbar'
+import Navbar from '../utilities/navbar/primaryNavbar/Navbar'
 import SignIn from '../forms/AuthModals/SignIn'
 import SignUp from '../forms/AuthModals/SignUp'
 import useModal from '../../hooks/useModal'

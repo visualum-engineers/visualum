@@ -6,7 +6,7 @@ import {
     faCog, 
 } from "@fortawesome/free-solid-svg-icons";
 import {ActivitySettings} from "../index";
-import Navbar from "../../utilities/navbar/Navbar";
+import Navbar from "../../utilities/navbar/activityNavbar/Navbar";
 
 const ActivityNavbar = ({
         smallWindowWidth,

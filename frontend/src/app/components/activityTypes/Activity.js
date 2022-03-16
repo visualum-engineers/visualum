@@ -1,5 +1,5 @@
 import useWindowWidth from "../../hooks/use-window-width"
-import SecondarySideBar from "../sideBar/SecondarySideBar"
+import SecondarySideBar from "../utilities/sideBar/SecondarySideBar";
 import { useEffect, useState } from "react"
 import { unstable_batchedUpdates } from "react-dom"
 import {CSSTransition} from "react-transition-group"

@@ -1,4 +1,4 @@
-import Navbar from "../../../utilities/navbar/Navbar"
+import Navbar from "../../../utilities/navbar/activityNavbar/Navbar"
 import { undoHistory, redoHistory } from "../activityCreationHistoryFunc";
 import { updateResetPopUp } from "../../../../../redux/features/activityCreation/activityCreationSettings";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { faEdit, faEye, faArrowAltCircleUp } from "@fortawesome/free-regular-svg-icons";
-import EditOptions from "../../../utilities/navbar/EditOptions";
+import EditOptions from "../../../utilities/navbar/activityNavbar/EditOptions";
 //for testing. remove after
 const imageURL = "images/homePage/mountain-home-bg.jpg";
 const ActivityCreationNavbar = ({

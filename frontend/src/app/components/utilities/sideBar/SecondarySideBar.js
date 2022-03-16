@@ -1,4 +1,4 @@
-import NavItem from "../utilities/navItems/NavItems"
+import NavItem from "../navItems/NavItems"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faBars, faTimes} from '@fortawesome/free-solid-svg-icons';
 

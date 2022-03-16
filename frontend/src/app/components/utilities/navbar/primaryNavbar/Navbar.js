@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import UserProfile from './UserProfile'
 import NavToggler from './NavTogglerBtn';
 // import SearchBar from './SearchBar';
-import useScrollPos from '../../hooks/use-scroll-pos';
+import useScrollPos from '../../../../hooks/use-scroll-pos';
 
 export default function Navbar(props) {
 
