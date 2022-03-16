@@ -1,16 +1,13 @@
 import { React } from "react";
 import IntroHome from "./IntroHome";
 import MarketingHomeIntro from "./FeaturesHome";
-import Navbar from "../utilities/navbar/primaryNavbar/Navbar";
-import { useAuthModal } from "../../hooks";
+import { useNavWrapperContext } from "../utilities/navbar/primaryNavbar/NavWrapper";
 export default function HomePage() {
-  const { toggleSignUp, toggleSignIn, authModal } = useAuthModal();
+    const {toggleSignUp} = useNavWrapperContext()
   return (
     <>
-      <Navbar openSignUp={toggleSignUp} openSignIn={toggleSignIn} />
-        {authModal}
-      <IntroHome toggleSignUp={toggleSignUp} />
-      <MarketingHomeIntro />
+        <IntroHome toggleSignUp={toggleSignUp} />
+        <MarketingHomeIntro />   
     </>
   );
 }

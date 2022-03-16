@@ -5,6 +5,7 @@ import LoadingIcon from './components/utilities/loadingIcon/LoadingIcon';
 import DashboardAssignments from './components/dashboard/DashboardAssignments';
 import DashboardNothingFound from './components/dashboard/DashboardNothingFound';
 import SingleStore from './components/store/SingleStore';
+import NavWrapper from './components/utilities/navbar/primaryNavbar/NavWrapper';
 //import { useRealmApp } from '../realm/RealmApp';
 //lazy loaded components for performance
 const DashboardHome = React.lazy(() => import("./components/dashboard/DashboardOverview"))
@@ -24,7 +25,14 @@ function App() {
       <div className="App">
         <Suspense fallback={<LoadingIcon entireViewport={true} />}>
           <Routes>
-            <Route path="/" element={<HomeContent />} />
+            <Route
+              path="/"
+              element={
+                <NavWrapper>
+                  <HomeContent/>
+                </NavWrapper>
+              }
+            />
             {/* <Route path="/create-game" element={<NavWrapper><CreateGame /></NavWrapper>} /> */}
             <Route path="/activity" element={<Activity />} />
             <Route path="/activity-creation" element={<ActivityCreation />} />
@@ -37,7 +45,7 @@ function App() {
               <Route path="settings" element={<DashboardSettings />} />
               <Route path="*" element={<DashboardNothingFound />} />
             </Route>
-            <Route path="/about" element={<About/>} />
+            <Route path="/about" element={<About />} />
 
             <Route path="/store" element={<Store />}>
               <Route path="" element={<StoreOverview />} />
