@@ -11,6 +11,7 @@ import useKeyboardShortcut from "./use-keyboard-shortcuts";
 import useShuffleArray from "./use-shuffle-array"
 import useReduxTextInputs from "./use-redux-text-inputs";
 import useReduxControlledTextInputs from "./use-redux-controlled-text-inputs";
+import useAuthModal from "./use-auth-modal";
 export{
     useBodyAreaResizable,  
     useDetectSwipe, 
@@ -25,4 +26,5 @@ export{
     useZoomState,
     useKeyboardShortcut,
     useShuffleArray,
+    useAuthModal
 }
