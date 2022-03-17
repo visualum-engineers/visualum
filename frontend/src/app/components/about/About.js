@@ -3,7 +3,7 @@ import IntroRow from "./IntroRow";
 import GroupImage from "./GroupImage";
 import OurStory from "./OurStory";
 import LearnMore from "./LearnMore";
-const AboutPage = () => {
+const AboutPage = (props) => {
   return (
     <div className="about-pg-body">
       <IntroRow />

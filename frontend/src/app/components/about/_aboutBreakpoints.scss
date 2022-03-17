@@ -1,4 +1,10 @@
 @mixin about-pg-lg {
+  .about-pg-group-image-container {
+    .about-pg-group-image {
+      height: 36vw;
+      width: 60vw;
+    }
+  }
   .about-pg-our-story-row {
     padding: 3rem;
   }
@@ -69,79 +75,92 @@
       }
     }
   }
-};
+}
 @mixin about-pg-md {
-.about-pg-intro-text {
-  padding: 2rem 4%;
-}
-.about-pg-intro-column{
-  h2 {
-    font-size: 1.7rem;
-    margin-top: 1rem;
+  .about-pg-intro-text {
+    padding: 2rem 4%;
   }
-  p {
-    font-size: 1.1rem;
-    line-height: 250%;
+  .about-pg-intro-column {
+    h2 {
+      font-size: 1.7rem;
+      margin-top: 1rem;
+    }
+    p {
+      font-size: 1.1rem;
+      line-height: 250%;
+    }
   }
-}
   .about-pg-mission-statement {
     padding: 4.5rem 7%;
-    
   }
   .about-pg-mission-text {
-      h2 {
-        font-size: 3rem;
-        line-height: 4rem;
-        margin-bottom: 3rem;
-      }
-      p {
-        font-size: 1.3rem;
-        line-height: 3.5rem;
-        letter-spacing: 0px;
+    h2 {
+      font-size: 3rem;
+      line-height: 4rem;
+      margin-bottom: 3rem;
+      span::after {
+        bottom: 0.7rem;
+        height: 3.5rem;
       }
     }
-};
+    p {
+      font-size: 1.3rem;
+      line-height: 3.5rem;
+      letter-spacing: 0px;
+    }
+  }
+}
 
 @mixin about-pg-sm {
-.about-pg-intro-text {
-  flex-direction: column;
-}
-.about-pg-intro-column{
-  &:last-child::before{
-        top: 0;
-        left: 35%;
-        width: 30%;
-        height: 1px;
+  .about-pg-intro-text {
+    flex-direction: column;
   }
-  &:first-child{
-    margin-bottom: 1.5rem;
+  .about-pg-intro-column {
+    &:last-child::before {
+      top: 0;
+      left: 35%;
+      width: 30%;
+      height: 1px;
+    }
+    &:first-child {
+      margin-bottom: 1.5rem;
+    }
+    &:last-child {
+      padding-top: 1.5rem;
+    }
   }
-  &:last-child{
-    padding-top: 1.5rem;
-  }
-}
   .about-pg-mission-statement {
     padding: 4.5rem 7%;
-    
   }
   .about-pg-mission-text {
-      h2 {
-        font-size: 2rem;
-        line-height: 3rem;
-        margin-bottom: 2rem;
-      }
-      p {
-        font-size: 1.1rem;
-        line-height: 2.2rem;
+    h2 {
+      font-size: 2rem;
+      line-height: 3rem;
+      margin-bottom: 2rem;
+      span::after {
+        bottom: 0.6rem;
+        height: 2rem;
+        width: 0.2rem;
       }
     }
+    p {
+      font-size: 1.1rem;
+      line-height: 2.2rem;
+    }
+  }
+  .about-pg-group-image-container {
+    .about-pg-group-image {
+      height: 48vw;
+      width: 80vw;
+    }
+  }
   .about-pg-our-story-row {
     padding: 1.2rem;
     padding-top: 3rem;
   }
 
   .about-pg-our-story-title {
-    font-size: 4rem;
+    font-size: 3.5rem;
   }
   .about-pg-our-story-body {
     padding: 0 2%;
@@ -166,9 +185,10 @@
       }
     }
   }
+
   .about-pg-learn-more {
     h2 {
-      font-size: 2rem;
+      font-size: 1.7rem;
     }
   }
   .learn-more-items-row {
@@ -180,4 +200,18 @@
     margin: 1rem 0.5rem;
   }
 }
-
+@mixin about-pg-hover {
+  .about-pg-our-story-join-us {
+    button:hover {
+      background-color: $white;
+      color: $blue;
+      transform: scale(1.1);
+    }
+  }
+  .learn-more-item-container{
+    a:hover{
+        transform: scale(1.1);
+      }
+  }
+    
+}

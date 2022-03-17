@@ -1,7 +1,7 @@
 import FoundersColumnItem from "./FounderColumnItem";
 import { useNavWrapperContext } from "../utilities/navbar/primaryNavbar/NavWrapper";
 import { useWindowWidth } from "../../hooks";
-const OurStory = () => {
+const OurStory = (props) => {
   const founders = ["Emilio Samaniego", "Derek Widmer", "Arky Asmal"];
   const mediumWindowWidth = useWindowWidth(992);
   const { toggleSignUp } = useNavWrapperContext();

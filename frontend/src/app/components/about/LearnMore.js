@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-const LearnMore = () => {
+const LearnMore = (props) => {
   const items = [
     {
       title: "Getting Started",
