@@ -1,12 +1,12 @@
 import MissionStatement from "./MissionStatement";
-import VisionStatement from "./VisionStatement";
+import IntroRow from "./IntroRow";
 import GroupImage from "./GroupImage";
 import OurStory from "./OurStory";
 import LearnMore from "./LearnMore";
 const AboutPage = () => {
   return (
     <div className="about-pg-body">
-      <VisionStatement />
+      <IntroRow />
       <MissionStatement />
       <GroupImage />
       <OurStory />

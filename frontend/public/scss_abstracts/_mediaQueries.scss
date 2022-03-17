@@ -6,6 +6,7 @@
 //pages
 @import "../../src/app/components/homePage/homeBreakPoints";
 @import "../../src/app/components/forms/formsBreakpoints";
+@import "../../src/app/components/about/aboutBreakpoints";
 @import "../../src/app/components/activityTypes/activityMediaQueries";
 @media (min-width: 992px) {
     @include navbar-lg;
@@ -19,10 +20,11 @@
     @include activity-md;
     @include homepage-sm;
     @include activity-creation-md;
+    @include about-pg-lg;
 }
 
-@media(max-width: 768px){
-
+@media (max-width: 768px){
+    @include about-pg-md;
 }
 
 @media (max-width: 575px) { 
@@ -31,6 +33,7 @@
     @include activity-sm;
     @include homepage-xs;
     @include activity-creation-sm;
+    @include about-pg-sm;
 }
 
 @media (any-hover: hover) {

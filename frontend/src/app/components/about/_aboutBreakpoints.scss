@@ -1,0 +1,183 @@
+@mixin about-pg-lg {
+  .about-pg-our-story-row {
+    padding: 3rem;
+  }
+  .about-pg-our-story-body {
+    flex-direction: column;
+    padding: 0 3%;
+  }
+  .about-pg-our-story-title {
+    font-size: 5rem;
+    margin-bottom: 2rem;
+  }
+  .about-pg-our-story-text {
+    font-size: 1rem;
+    padding-right: 0;
+    p {
+      margin-bottom: 3rem;
+      line-height: 2.5rem;
+    }
+    p:last-child {
+      margin: 0;
+    }
+  }
+  .about-pg-our-story-founder-column {
+    width: 100%;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 4rem;
+    .founder-column-item,
+    .founder-column-item:last-child {
+      margin: 0 1.5rem;
+      width: 8rem;
+      margin-bottom: 0;
+    }
+    .founder-pic-container {
+      .founder-image {
+        width: 8rem;
+        height: 10rem;
+        @include border-radius(4rem);
+      }
+      svg {
+        height: 8rem;
+        width: 8rem;
+      }
+    }
+  }
+  .about-pg-our-story-join-us {
+    margin-top: 4rem;
+  }
+  .about-pg-learn-more {
+    padding: 0 1.5rem;
+  }
+  .learn-more-item-container {
+    margin: 0 0.5rem;
+    .item-text {
+      padding: 1rem 1.5rem;
+      h3 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+      }
+      p {
+        font-size: 0.7rem;
+        margin-bottom: 0.5rem;
+      }
+      a {
+        font-size: 0.6rem;
+      }
+    }
+  }
+};
+@mixin about-pg-md {
+.about-pg-intro-text {
+  padding: 2rem 4%;
+}
+.about-pg-intro-column{
+  h2 {
+    font-size: 1.7rem;
+    margin-top: 1rem;
+  }
+  p {
+    font-size: 1.1rem;
+    line-height: 250%;
+  }
+}
+  .about-pg-mission-statement {
+    padding: 4.5rem 7%;
+    
+  }
+  .about-pg-mission-text {
+      h2 {
+        font-size: 3rem;
+        line-height: 4rem;
+        margin-bottom: 3rem;
+      }
+      p {
+        font-size: 1.3rem;
+        line-height: 3.5rem;
+        letter-spacing: 0px;
+      }
+    }
+};
+
+@mixin about-pg-sm {
+.about-pg-intro-text {
+  flex-direction: column;
+}
+.about-pg-intro-column{
+  &:last-child::before{
+        top: 0;
+        left: 35%;
+        width: 30%;
+        height: 1px;
+  }
+  &:first-child{
+    margin-bottom: 1.5rem;
+  }
+  &:last-child{
+    padding-top: 1.5rem;
+  }
+}
+  .about-pg-mission-statement {
+    padding: 4.5rem 7%;
+    
+  }
+  .about-pg-mission-text {
+      h2 {
+        font-size: 2rem;
+        line-height: 3rem;
+        margin-bottom: 2rem;
+      }
+      p {
+        font-size: 1.1rem;
+        line-height: 2.2rem;
+      }
+    }
+  .about-pg-our-story-row {
+    padding: 1.2rem;
+    padding-top: 3rem;
+  }
+
+  .about-pg-our-story-title {
+    font-size: 4rem;
+  }
+  .about-pg-our-story-body {
+    padding: 0 2%;
+  }
+  .about-pg-our-story-founder-column {
+    margin-bottom: 4rem;
+    .founder-column-item,
+    .founder-column-item:last-child {
+      margin: 0 1.2rem;
+      width: 7rem;
+      margin-bottom: 0;
+    }
+    .founder-pic-container {
+      .founder-image {
+        width: 7rem;
+        height: 9rem;
+        @include border-radius(3.5rem);
+      }
+      svg {
+        height: 7rem;
+        width: 7rem;
+      }
+    }
+  }
+  .about-pg-learn-more {
+    h2 {
+      font-size: 2rem;
+    }
+  }
+  .learn-more-items-row {
+    flex-direction: column;
+    align-items: center;
+  }
+  .learn-more-item-container {
+    max-width: 320px;
+    margin: 1rem 0.5rem;
+  }
+}
+

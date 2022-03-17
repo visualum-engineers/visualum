@@ -3,8 +3,8 @@ const LearnMore = () => {
   const items = [
     {
       title: "Getting Started",
-      description: "Start creating content with just a few clicks",
-      linkContent: "Get started with Visualum >",
+      description: "Start creating with just a few clicks",
+      linkContent: "Get started >",
       link: "/",
     },
     {
