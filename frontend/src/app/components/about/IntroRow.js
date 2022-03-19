@@ -19,7 +19,7 @@ const IntroRow = (props) => {
               Visualum is a NY based company for educators. We understand that
               educators wear many hats for the sake of their students. So when
               it comes to creating interactive content, they shouldn't need to
-              wear another one. We are here to simply the process, and bring
+              wear another one. We are here to simplify the process, and bring
               interactive and rewarding content, to the classroom.
             </p>
           </div>

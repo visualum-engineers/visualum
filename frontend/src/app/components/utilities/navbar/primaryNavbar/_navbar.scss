@@ -1,23 +1,20 @@
-.navbar.home-page-nav{
+    .navbar.home-page-nav{
     @include border-radius(0);
     @include fillContainer;
     @include transition(all 0.25s ease-out);
-    padding: 30px 30px;
-    padding-bottom: 0px;
+    padding: 0.7rem 1.5rem;
     margin: 0;
     color: black;
     border: none;
     z-index:3;
-}
-//when scrolled, padding is reduced to make navbar smaller
-//vertical height when scrolled: vertical height when not scrolled:
-.navbar.navbarScrollActive{
-    padding: 5px 30px;
-}
-.navbar.navbarScrollActive.sidebar-close{
-    background: $main-color;
-}
+    font-family: "Lato", "sans-serif";
+    border-bottom: 2px transparent solid;
 
+}
+.navbar.scroll-active{
+    background: rgba(255,255,255, 0.8);
+    border-bottom: 2px $lighter-gray solid;
+}
 .nav-brand {
     font-size: 1.2rem;
     font-weight: 600;
@@ -29,13 +26,6 @@
     height: 40px;
 }
 
-.nav-divider {
-    height: 100%;
-    width: 2px;
-    margin: 0 10px;
-    margin-right: 25px;
-    background-color: black;
-}
 
 .nav-btn.home-page-nav{
     @include center;
@@ -72,73 +62,63 @@
 }
 
 .btn-home-auth {
+    position: relative;
     background-color: $cta-blue;
     border: none;
     color: white;
     font-weight: 500;
     font-size: 1rem;
-    padding: 0px 25px;
-    border-radius: 10px;
+    height: 2.3rem;
+    width: 6rem;
+    border-radius: 0.6rem;
     &:hover, :active, :focus, :active:focus {
         border: none;
         background-color: $blue;
         box-shadow: none;
     }
 }
-
-.btn-about-us {
-    color: black;
-    background-color: transparent;
-    border: none;
-    transition: all 125ms ease-in-out;
-    &:hover {
-        background-color: transparent;
-        font-weight: 500;
+.about-us-nav-item{
+    position: relative;
+    display: flex;
+    &::after{
+        content: "";
+        right: 0;
+        height: 100%;
+        width: 1.5px;
+        margin: 0 1rem;
+        background-color: $orange;
     }
 }
 
-#search-box{
-    padding: 0;
-    align-self: stretch;
-}
-
-#search-bar{
-    @include transition(width ease 0.3s);
-    padding: 0;
-    align-self: stretch;
-    width: 0px;
-    border: 0;
+.link-about-us {
+    display: flex;
+    align-items: center;
+    color: black;
+    border: none;
     height: 100%;
-}
-
-#search-bar.expand{
-    @include transition(all width ease 0.3s);
-    margin: 0 0.5rem 0 0;
-    padding-left: 10px;
-    border: 0px;
-}
-
-#search-icon{
-    @include border-radius(5px);
-    font-size: 20px;
-}
-/* Right arrow icon on search toggle */
-#search-icon.fa-arrow-left{
-    @include transition(all ease 0.2s);
-    padding-bottom: 2px;
-    transform: rotate(180deg);
-}
-#search-btn{
-    @include border-radius(5px);
-    @include remove-btn-default;
-    height: 100%;
-    width: 50px;
+    span{
+        position: relative;
+        height: min-content;
+    }
+    span::after{
+        position: absolute;
+        content: "";
+        background-color: black;
+        bottom: -2px;
+        left: 0;
+        height: 2px;
+        width: 0%;
+        @include transition(0.25s ease-out all)
+    }
+    &:hover>span::after{
+        width: 100%;
+    }
 }
 
 #nav-toggler.home-page-nav{
     @include center;
-    height: 40px;
-    width: 40px;
+    height: 2rem;
+    width: 2rem;
 }
 
 #nav-toggler.home-page-nav, #search-btn{
@@ -149,12 +129,9 @@
     @include center;
     @include fillContainer;
     @include transition(all 0.3s ease-out);
-    color: $main-font-color;
+    color: black
 }
 
-#nav-icon:hover, #search-icon:hover{
-    @include hover-color;
-}
 
 #nav-icon.home-page-nav.fa-arrow-down{
     @include transition(all ease 0.2s);
@@ -164,12 +141,7 @@
 #nav-icon.home-page-nav.fa-bars{
     @include transition(all ease 0.2s);
     transform: rotate(180deg);
-    font-size: 28px;
-}
-
-/* this is to control the drop animation of navbar */
-.home-page-nav.collapsing{
-    @include transition(height 0.15s ease !important);
+    font-size: 1.7rem;
 }
 
 .user {
@@ -186,14 +158,10 @@
         background-color: rgba(0,0,0,.35);
         cursor: pointer;
     }
-    &.navbarScrollActive {
-        background-color: rgba(255,255,255,.3);
-    }
 }
 
 .user-active {
     background-color: rgba(0,0,0,.35);
-    // color: rgba(10, 10, 10, 0.75);
     text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
 }
 
@@ -216,10 +184,6 @@
     top: 75px;
     right: 30px;
     transition: top 250ms ease-out;
-    &.navbarScrollActive {
-        top: 55px;
-        background-color: $main-color;
-    }
 }
 
 .user-dropdown-button {
@@ -270,3 +234,4 @@
     opacity: 0;
     transform: scale(0.9);
 }
+

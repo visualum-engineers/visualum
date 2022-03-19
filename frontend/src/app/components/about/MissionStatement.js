@@ -1,9 +1,14 @@
 import { useEffect, useState, useRef } from "react";
+import { useInView } from "react-intersection-observer";
+
 const TeacherAdjective = (props) => {
   const [currWord, setCurrWord] = useState("");
   const wordIndex = useRef(0);
   const letterIndex = useRef(currWord.length);
   const wordSpelled = useRef(false);
+  const { ref, inView } = useInView({
+    threshold: 0.1
+  });
   useEffect(() => {
     let isMounted = true;
     const replacePhrases = [
@@ -16,7 +21,6 @@ const TeacherAdjective = (props) => {
       " stimulating",
       "n amazing",
     ];
-    //const letterIdx = letterIndex.current;
     const current = replacePhrases[wordIndex.current];
     const wordComplete = wordSpelled.current;
     const wordIdx = wordIndex.current;
@@ -26,14 +30,17 @@ const TeacherAdjective = (props) => {
       const firstRun = letterIndex.current <= 1;
 
       const newWord = replacePhrases[wordIdx].substring(0, letterIndex.current);
-      setTimeout(() => {
-        if (isMounted) setCurrWord(newWord);
-      }, firstRun ? 500:100);
+      setTimeout(
+        () => {
+          if (isMounted) setCurrWord(newWord);
+        },
+        firstRun ? 500 : 100
+      );
       if (letterIndex.current >= current.length) {
         wordSpelled.current = true;
       }
     } else {
-      const firstRun = current.length <= letterIndex.current ;
+      const firstRun = current.length <= letterIndex.current;
       letterIndex.current--;
       const newWord = replacePhrases[wordIdx].substring(0, letterIndex.current);
       setTimeout(
@@ -54,10 +61,16 @@ const TeacherAdjective = (props) => {
         wordIndex.current = 0;
       }
     }
-    return () => {isMounted = false}
+    return () => {
+      isMounted = false;
+    };
   }, [currWord]);
 
-  return <span className="about-pg-mission-adjective">{currWord}</span>;
+  return (
+    <span ref={ref} className="about-pg-mission-adjective">
+      {inView && currWord}
+    </span>
+  );
 };
 const MissionStatement = (props) => {
   return (

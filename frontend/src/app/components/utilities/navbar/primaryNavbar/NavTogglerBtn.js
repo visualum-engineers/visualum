@@ -22,20 +22,20 @@ const NavToggler = () => {
         setDisabled(true);
     }
     return (
-        <button
-            disabled={disabled}
-            id="nav-toggler"
-            className="container-fluid navbar-toggler home-page-nav"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="true"
-            aria-label="Toggle navigation"
-            onClick={handleClick}
-        >
-            <NavIcon toggled={toggled} />
-        </button>
-    )
+      <button
+        disabled={disabled}
+        id="nav-toggler"
+        className="container-fluid navbar-toggler home-page-nav"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbar-nav-items-content"
+        aria-controls="navbar-nav-items-content"
+        aria-expanded="true"
+        aria-label="Toggle navigation"
+        onClick={handleClick}
+      >
+        <NavIcon toggled={toggled} />
+      </button>
+    );
 }
 export default NavToggler

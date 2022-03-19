@@ -1,45 +1,43 @@
 @mixin navbar-sm{
     .title{
-        font-size: 1.5em !important;
+        font-size: 2rem !important;
     }
 }
 
 @mixin navbar-md{
     .navbar.home-page-nav{
-        padding: 15px 25px !important;
-        background: $main-color;
+        background: rgba(255,255,255, 0.8);
     }
     .nav-brand {
         margin-left: 0.5rem;
     }
-    #search-box{
-        margin-top: 0.7rem;
+    .about-us-nav-item{
+        &::after{
+            width: 0;
+            margin: 0;
+        }
     }
-    #search-btn{
-        height: 50px !important ;
+    .link-about-us{
+        display: flex;
+        justify-content: center;
     }
-    #search-bar{
-        height: 50px !important ;
-    }
-    #search-bar.expand{
-        width: calc(100% - 60px);
-        height: 50px;
+    .navbar-nav{
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &>div{
+            margin-bottom: 1rem
+        }
+        &>div:last-child{
+            margin-bottom: 0
+        }
     }
 }
 
 @mixin navbar-lg{
     #nav-icon{
         @include hidden;
-    }
-    #search-box{
-        margin-left: 1.7rem
-    }
-    #search-bar.expand{
-        width: 150px;
-        transition: width ease 0.3s;
-    }
-    .signout-btn{
-        margin-left: 1.7rem;
     }
 }
 

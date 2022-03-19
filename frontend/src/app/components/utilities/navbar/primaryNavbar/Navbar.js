@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import UserProfile from './UserProfile'
 import NavToggler from './NavTogglerBtn';
-// import SearchBar from './SearchBar';
+import { Link } from 'react-router-dom';
 import useScrollPos from '../../../../hooks/use-scroll-pos';
 
 export default function Navbar(props) {
@@ -16,43 +16,55 @@ export default function Navbar(props) {
     const signIn =
         <Fragment>
             <button
-                className="btn btn-primary btn-home-auth justify-content-end"
+                className="btn-home-auth justify-content-end"
                 onClick={openSignIn}
+                aria-label = "Login to visualum"
             >
-                Sign In
+                Login
             </button>
         </Fragment>
 
     return (
-        <>
+      <>
+        <div
+          id="filter-navbar-container"
+          className="navbar-expand-lg fixed-top"
+        >
+          <nav
+            id="navbar"
+            className={`navbar home-page-nav navbar-expand-lg ${
+              windowScrollY ? "scroll-active" : ""
+            }`}
+          >
+            <Link to="/">
+              <img
+                src="images/Visualum Logo.svg"
+                className="navbar-logo"
+                alt="visualum-logo"
+              />
+            </Link>
+            <Link to="/" className="nav-brand">
+              visualum
+            </Link>
+            {props.windowWidth ? null : <NavToggler />}
             <div
-                id="filter-navbar-container"
-                className="navbar-expand-lg fixed-top"
+              id="navbar-nav-items-content"
+              className="collapse navbar-collapse"
             >
-                <nav
-                    id="navbar"
-                    className={`navbar home-page-nav navbar-expand-lg ${props.sidebarToggle ? null : "sidebar-close"} ${windowScrollY ? "navbarScrollActive" : ""}`}>
-                    <img src='images/VisualumLogo.png' className='navbar-logo' alt='' />
-                    <a href="/" className="nav-brand">
-                        visualum
-                    </a>
-                    {props.windowWidth ? null : <NavToggler />}
-                    <div id="navbarSupportedContent" className="collapse navbar-collapse home-page-nav">
-                        <div className="navbar-nav w-100 justify-content-end">
-                            <div className='nav-item'>
-                                <button className='btn btn-about-us'>About Us</button>
-                            </div>
-                            <div className='nav-item'>
-                                <div className='nav-divider' />
-                            </div>
-                            {/* <SearchBar /> */}
-                            <div className="d-flex justify-content-end">
-                                {isSignedIn ? <UserProfile /> : signIn}
-                            </div>
-                        </div>
-                    </div>
-                </nav>
+              <div className="navbar-nav w-100 justify-content-end">
+                <div className="about-us-nav-item">
+                  <Link to="/about" className="link-about-us">
+                    <span>About Us</span>
+                  </Link>
+                </div>
+
+                <div className="d-flex justify-content-end">
+                  {isSignedIn ? <UserProfile /> : signIn}
+                </div>
+              </div>
             </div>
-        </>
-    )
+          </nav>
+        </div>
+      </>
+    );
 }

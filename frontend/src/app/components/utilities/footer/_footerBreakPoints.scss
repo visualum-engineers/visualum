@@ -1,0 +1,31 @@
+@mixin footer-md{
+    #footer{
+        padding: 0 2rem;
+        padding-top: 3.5rem;
+        padding-bottom: 1rem;
+    }
+    .footer-column {
+        text-align: center;
+        align-items: center;
+        width: 100%;
+        margin: 0;
+        margin-bottom: 1.5rem;
+        div{
+            align-items: center;
+        }
+    }
+    .footer-social-media{
+        align-items: center;
+        div{
+            align-items: center;
+        }
+    }
+    .footer-copyright{
+        .navbar-logo{
+            width: 2rem;
+        };
+        p {
+            font-size: 0.65rem;
+        }
+    }
+}
