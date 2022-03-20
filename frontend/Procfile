@@ -1,2 +1,1 @@
-web: npm run scss
-web: npm run deploy
+web: npm run scss & npm run deploy
