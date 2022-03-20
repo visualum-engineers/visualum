@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faInstagram, faLinkedinIn, faFacebookF} from "@fortawesome/free-brands-svg-icons"
 const SocialMedia = ({mediumWidth}) => {
