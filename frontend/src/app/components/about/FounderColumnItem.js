@@ -1,4 +1,4 @@
-const FoundersColumnItem = ({ name }) => {
+const FoundersColumnItem = ({ name, title }) => {
   return (
     <div key={name} className="founder-column-item">
       <div className="founder-pic-container">
@@ -8,6 +8,7 @@ const FoundersColumnItem = ({ name }) => {
         </svg>
       </div>
       <div className="founder-pic-name">{name}</div>
+      <span className="founder-sub-title">{title}</span>
     </div>
   );
 };

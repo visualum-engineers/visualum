@@ -181,12 +181,12 @@
   flex-direction: column;
   justify-content: center;
   font-family: "Lato", "sans-serif";
-  font-size: 1.2rem;
+  font-size: 1rem;
   padding-right: 6rem;
   font-weight: 300;
   p {
     margin-bottom: 3rem;
-    line-height: 2.5rem;
+    line-height: 2rem;
   }
   p:last-child {
     margin: 0;
@@ -225,10 +225,19 @@
     }
   }
   .founder-pic-name {
-    font-family: "Poppins", "sans-serif";
-    font-weight: 500;
-    letter-spacing: 0.03rem;
-    font-size: 0.9rem;
+    //font-family: "Poppins", "sans-serif";
+    font-family: "DM Sans", "sans-serif";
+    font-weight: 700;
+    letter-spacing: -0.02rem;
+    font-size: 1.1rem;
+    //line-height: 1.2rem;
+  }
+  .founder-sub-title{
+    font-size: 0.95rem;
+    font-family: "Lato", "sans-serif";
+    letter-spacing: 0.01rem;
+    font-weight: 600;
+    color: $darker-gray;
   }
 }
 .about-pg-our-story-join-us {

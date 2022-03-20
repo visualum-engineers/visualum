@@ -7,15 +7,28 @@ const SocialMedia = ({mediumWidth}) => {
       <div>
         <h5>Social Media</h5>
         <div className="footer-social-media-icons">
-          <Link to="/" className="footer-facebook-icon">
+          <a
+            href="https://www.facebook.com/Visualum-106637744846949/"
+            target={"_blank"}
+            rel={"noopener noreferrer"}
+            className="footer-facebook-icon"
+          >
             <FontAwesomeIcon icon={faFacebookF} />
-          </Link>
-          <Link to="/">
+          </a>
+          <a
+            href="https://www.instagram.com/visualum_/"
+            target={"_blank"}
+            rel={"noopener noreferrer"}
+          >
             <FontAwesomeIcon icon={faInstagram} />
-          </Link>
-          <Link to="/">
+          </a>
+          <a
+            href="https://www.linkedin.com/company/visualum/"
+            target={"_blank"}
+            rel={"noopener noreferrer"}
+          >
             <FontAwesomeIcon icon={faLinkedinIn} />
-          </Link>
+          </a>
         </div>
         <p className="footer-social-media-support">Show your support with:</p>
         <div className="footer-hashtags">
