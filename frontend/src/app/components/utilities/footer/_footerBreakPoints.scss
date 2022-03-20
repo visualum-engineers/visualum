@@ -4,6 +4,9 @@
         padding-top: 3.5rem;
         padding-bottom: 1rem;
     }
+    .footer-columns-container{
+        width: 100%;
+    }
     .footer-column {
         text-align: center;
         align-items: center;
@@ -15,8 +18,11 @@
         }
     }
     .footer-social-media{
+        width: 100%;
         align-items: center;
-        div{
+        &>div{
+            display: flex;
+            flex-direction: column;
             align-items: center;
         }
     }

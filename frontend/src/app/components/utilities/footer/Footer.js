@@ -1,4 +1,3 @@
-import React, { Component } from 'react'
 import FooterColumns from './FooterColumns';
 import SocialMedia from './SocialMedia';
 import Copyright from "./Copyright"

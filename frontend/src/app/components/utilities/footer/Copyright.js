@@ -9,7 +9,7 @@ const Copyright = ({ mediumWidth }) => {
   return (
     <div className="footer-copyright">
       <div>
-        <Link to="/">
+        <Link to="/" className="navbar-logo">
           <img
             src="images/Visualum Logo.svg"
             className="navbar-logo"

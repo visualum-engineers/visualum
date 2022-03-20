@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const FooterColumns = ({mediumWidth}) => {
   return (
-    <div className="col-md-10 col-12 d-flex flex-wrap">
+    <div className="col-md-9 col-12 d-flex flex-wrap footer-columns-container">
       <div className="d-flex flex-column footer-column">
         <h5>Explore</h5>
         <div className="d-flex flex-column">
