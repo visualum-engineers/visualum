@@ -1,12 +1,12 @@
 #footer {
   padding: 0 4rem;
   padding-top: 3.5rem;
-  padding-bottom: 1rem;
+  padding-bottom: 0.75rem;
   background-color: $blue;
   h5 {
     font-family: "Roboto", "sans-serif";
     font-weight: 500;
-    font-size: 1.9rem;
+    font-size: 1.7rem;
     margin-bottom: 1.2rem;
     color: $white;
   }
@@ -128,28 +128,31 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   color: $white;
   width: 100%;
   padding: 0.5rem 0;
   a {
     position: relative;
   }
+  .footer-logo{
+    margin-left: 0.7rem;
+  }
   .nav-brand {
-    margin-left: 1.5rem;
+    margin-left: 1rem;
   }
   .navbar-logo {
     position: relative;
-    width: 2rem;
-    height: 2rem;
+    width: 1.8rem;
+    height: 1.8rem;
     z-index: 1;
     &::after {
       content: "";
       position: absolute;
-      width: 3rem;
-      height: 3rem;
-      top: -0.75rem;
-      left: -0.45rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      top: -0.55rem;
+      left: -0.3rem;
       background-color: $white;
       z-index: 0;
       @include border-radius(3rem);

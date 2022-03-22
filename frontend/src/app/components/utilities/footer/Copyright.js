@@ -8,7 +8,7 @@ let time = d.getFullYear()
 const Copyright = ({ mediumWidth }) => {
   return (
     <div className="footer-copyright">
-      <div>
+      <div className="footer-logo">
         <Link to="/" className="navbar-logo">
           <img
             src="images/Visualum Logo.svg"
