@@ -69,8 +69,8 @@
   align-items: center;
   background-color:rgba(4, 28, 84, 0.872);
   width: 100%;
-  padding: 5rem 10%;
-  padding-top: 8rem;
+  height: calc(max(20vw, 10rem));
+  max-height: 299px;
 }
 .about-pg-our-story-title {
   font-family: "Lato", "sans-serif";
@@ -79,6 +79,8 @@
   text-align: center;
   margin: 0;
   color: $white;
+  padding-top: 3rem;
+  padding-bottom: 2rem;
 }
 .about-pg-group-image-container {
   position: relative;
@@ -86,6 +88,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
   &::after {
     position: absolute;
     height: 50%;
@@ -113,8 +116,10 @@
     }
     position: relative;
     background-color: gray;
-    height: 30vw;
-    width: 50vw;
+    height: 40vw;
+    width: 69vw;
+    max-width: calc(1000px - 2rem);
+    max-height: 598px;
     z-index: 1;
     animation: move-image-up 0.8s ease-out;
     animation-iteration-count: 1;
@@ -126,21 +131,20 @@
   }
 }
 .about-pg-our-story-row {
-  margin-top: 2rem;
-  padding: 4rem;
+  margin-top: 1rem;
+  padding: 4rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   min-height: 100vh;
+  max-width: 1000px;
 }
 
 .about-pg-our-story-body {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 0 7%;
-  max-width: 1300px;
   height: 100%;
 }
 .about-pg-our-story-text {
@@ -149,12 +153,12 @@
   justify-content: center;
   font-family: "Lato", "sans-serif";
   font-size: 1rem;
-  padding-right: 6rem;
+  padding-right: 5rem;
   font-weight: 400;
   p {
     font-family: "Lato", "sans-serif";
     margin-bottom: 3rem;
-    line-height: 2.3rem;
+    line-height: 1.9rem;
     font-size: 1.15rem;
     color: $black;
   }
@@ -243,7 +247,7 @@
   padding: 0 3rem;
   flex-direction: column;
   justify-content: center;
-  max-width: 1300px;
+  max-width: 1200px;
   h2 {
     font-family: "Lato", "sans-serif";
     font-size: 2.5rem;
@@ -275,7 +279,7 @@
   .item-image {
     @include border-radius(1.5rem 1.5rem 0 0);
     background-color: #faac3684;
-    min-height: 10rem;
+    min-height: 11.5rem;
   }
   .item-text {
     flex-grow: 1;
