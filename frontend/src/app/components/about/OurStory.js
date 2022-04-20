@@ -3,15 +3,14 @@ import { useNavWrapperContext } from "../utilities/navbar/primaryNavbar/NavWrapp
 import { useWindowWidth } from "../../hooks";
 const OurStory = (props) => {
   const founders = [
-    { name: "Emilio Samaniego", title: "Co-Founder" },
-    { name: "Derek Widmer", title: "Co-Founder" },
     { name: "Arky Asmal", title: "Co-Founder" },
+    { name: "Derek Widmer", title: "Co-Founder" },
+    { name: "Emilio Samaniego", title: "Co-Founder" }
   ];
   const mediumWindowWidth = useWindowWidth(992);
   const { toggleSignUp } = useNavWrapperContext();
   return (
     <div className="about-pg-our-story-row">
-      <h2 className="about-pg-our-story-title">Our Story</h2>
       <div className="about-pg-our-story-body">
         {!mediumWindowWidth && (
           <div className="about-pg-our-story-founder-column">

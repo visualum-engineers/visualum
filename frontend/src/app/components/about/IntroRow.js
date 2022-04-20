@@ -23,6 +23,7 @@ const IntroRow = (props) => {
               interactive and rewarding content, to the classroom.
             </p>
           </div>
+          <div className="about-pg-intro-line"></div>
           <div className="about-pg-intro-column">
             <h2>Our Vision</h2>
             {circleUnderline}

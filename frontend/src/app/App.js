@@ -6,7 +6,6 @@ import DashboardAssignments from './components/dashboard/DashboardAssignments';
 import DashboardNothingFound from './components/dashboard/DashboardNothingFound';
 import SingleStore from './components/store/SingleStore';
 import NavWrapper from './components/utilities/navbar/primaryNavbar/NavWrapper';
-//import { useRealmApp } from '../realm/RealmApp';
 //lazy loaded components for performance
 const DashboardHome = React.lazy(() => import("./components/dashboard/DashboardOverview"))
 const DashboardClasses = React.lazy(() => import("./components/dashboard/DashboardClasses"))

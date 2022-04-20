@@ -7,6 +7,8 @@
 @mixin navbar-md{
     .navbar.home-page-nav{
         background: rgba(255,255,255, 0.8);
+        color: $dark-purple;
+
     }
     .nav-brand {
         margin-left: 0.5rem;
@@ -20,6 +22,10 @@
     .link-about-us{
         display: flex;
         justify-content: center;
+        color: $dark-purple;
+        span::after{
+            background-color: $dark-purple;
+        }
     }
     .navbar-nav{
         padding: 1rem;

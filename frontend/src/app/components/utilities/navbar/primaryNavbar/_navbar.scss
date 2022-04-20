@@ -1,19 +1,15 @@
-    .navbar.home-page-nav{
+.navbar.home-page-nav{
     @include border-radius(0);
     @include fillContainer;
     @include transition(all 0.25s ease-out);
     padding: 0.7rem 1.5rem;
     margin: 0;
-    color: black;
+    color: $white;
     border: none;
     z-index:3;
     font-family: "Lato", "sans-serif";
     border-bottom: 2px transparent solid;
 
-}
-.navbar.scroll-active{
-    background: rgba(255,255,255, 0.8);
-    border-bottom: 2px $lighter-gray solid;
 }
 .nav-brand {
     font-size: 1.2rem;
@@ -32,7 +28,6 @@
     @include border-radius(10px);
     @include remove-btn-default;
     position: relative;
-    color: black;
     padding: 8px;
     text-align: center;
     font-size: 1em;
@@ -63,8 +58,8 @@
 
 .btn-home-auth {
     position: relative;
-    background-color: $cta-blue;
-    border: none;
+    background-color: $dark-purple;
+    border: 1px solid $dark-purple;
     color: white;
     font-weight: 500;
     font-size: 1rem;
@@ -72,9 +67,9 @@
     width: 6rem;
     border-radius: 0.6rem;
     &:hover, :active, :focus, :active:focus {
-        border: none;
-        background-color: $blue;
+        background-color: $white;
         box-shadow: none;
+        color: $dark-purple;
     }
 }
 .about-us-nav-item{
@@ -93,7 +88,7 @@
 .link-about-us {
     display: flex;
     align-items: center;
-    color: black;
+    color: $white;
     border: none;
     height: 100%;
     span{
@@ -103,7 +98,7 @@
     span::after{
         position: absolute;
         content: "";
-        background-color: black;
+        background-color: $white;
         bottom: -2px;
         left: 0;
         height: 2px;
@@ -129,7 +124,7 @@
     @include center;
     @include fillContainer;
     @include transition(all 0.3s ease-out);
-    color: black
+    //color: $white;
 }
 
 
@@ -235,3 +230,14 @@
     transform: scale(0.9);
 }
 
+.navbar.scroll-active{
+    color: $dark-purple;
+    background: rgba(255,255,255, 0.8);
+    border-bottom: 2px $lighter-gray solid;
+    .link-about-us{
+        color: $dark-purple;
+        span::after{
+            background-color: $dark-purple;
+        }
+    }
+}
