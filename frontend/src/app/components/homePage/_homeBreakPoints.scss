@@ -2,18 +2,25 @@
     .intro-blurb {
         width: 50%;
     }
+
     .feature-module-desc {
         width: 100%;
     }
 }
 
+// for mobile
 @mixin homepage-xs {
     .intro-blurb {
         width: 100%;
     }
+
     .intro-homepage {
         padding: 100px 2rem;
+        flex-direction: column;
+    }
+
+    .intro-background {
+        width: 200%;
+        left: -50%;
     }
 }
-
-
