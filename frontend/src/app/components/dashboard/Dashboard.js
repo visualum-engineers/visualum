@@ -3,8 +3,12 @@ import DashboardSidebar from './DashboardSidebar';
 import DashboardNav from './DashboardNav';
 import { useNavigate, Outlet } from 'react-router-dom';
 // import { useSelector } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCog } from '@fortawesome/free-solid-svg-icons';
 import useWindowWidth from '../../hooks/use-window-width'
 import sidebarValues from './sidebarValues';
+import useModal from '../../hooks/useModal';
+import SettingsModal from '../settingsModal/SettingsModal';
 const Logo = "./images/VisualumLogo.png"
 
 
@@ -15,6 +19,7 @@ export default function Dashboard(props) {
     function handleClick() {
         navigate("/");
     }
+    const { isShowing, toggle } = useModal();
 
     const widthBigger = useWindowWidth(992);
 
@@ -44,11 +49,15 @@ export default function Dashboard(props) {
                 <div className="collapse navbar-collapse mt-3 mt-lg-0" id="navbarTogglerDemo01">
                     {dropDownItems}
                 </div>
+                <div className='dashboard-navbar-button' style={{ padding: "5px", borderRadius: "5px" }} onClick={toggle}>
+                    <FontAwesomeIcon icon={faCog} />
+                </div>
             </div>
         </nav>
 
     return (
         <div className='d-flex flex-column'>
+            {isShowing && <SettingsModal toggle={toggle} />}
             {widthBigger ?
                 <DashboardNav></DashboardNav>
                 :

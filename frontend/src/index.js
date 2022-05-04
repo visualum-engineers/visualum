@@ -6,7 +6,7 @@ import App from './app/App';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import * as serviceWorker from './serviceWorker';
-import {RealmAppProvider} from './realm/RealmApp'
+import { RealmAppProvider } from './realm/RealmApp'
 
 ReactDOM.render(
   <React.StrictMode>
