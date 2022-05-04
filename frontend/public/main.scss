@@ -25,10 +25,10 @@
 @import "../src/app/components/store/store";
 @import "../src/app/components/about/about";
 //responsive stylesheet
-@import "./scss_abstracts/mediaQueries"; 
+@import "./scss_abstracts/mediaQueries";
 
 
-body{
+body {
     font-family: $main-font;
     min-height: 40rem;
     @include fillContainer;
@@ -36,17 +36,20 @@ body{
     overflow-y: scroll;
 }
 
-.App{
+.App {
     position: relative;
-    // min-height: 100vh;
+    overflow-x: hidden;
 }
 
-p{
-    font-family:  $main-font;
+p {
+    font-family: $main-font;
     font-weight: 300;
     line-height: 1.7em;
 }
-a, a:hover, a:focus{
+
+a,
+a:hover,
+a:focus {
     color: inherit;
     text-decoration: none;
     transition: all 0.2s;
@@ -55,10 +58,10 @@ a, a:hover, a:focus{
 //styling for all inputs
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
 }
 
 // input[type="text"], input[type="password"], input[type="email"], input[type="number"]{
@@ -67,6 +70,9 @@ input::-webkit-inner-spin-button {
 //     -moz-appearance: textfield;
 // }
 
-html, body, #root, .App {
-	height: 100%;
+html,
+body,
+#root,
+.App {
+    height: 100%;
 }
