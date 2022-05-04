@@ -29,7 +29,7 @@ const IntroHome = (props) => {
                 <i className="fas fa-angle-down"></i>
             </div> */}
             </div>
-            <img src="images/homePage/introBackground.png" className="intro-background" />
+            <img src="images/homePage/introBackground.png" className="intro-background" alt="" />
         </>
     )
 }
