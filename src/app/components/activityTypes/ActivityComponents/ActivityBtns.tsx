@@ -1,14 +1,15 @@
 import NavActivityBtn from "./NavActivityBtn";
 import { useDispatch, useSelector } from "react-redux";
 import { updateTrackCompletion } from "../../../../redux/features/activityTypes/activitiesData";
+import { RootState } from "../../../../redux/store";
 
 const ActivityBtns = ({
     onNavBtnClick, 
     lastQuestion, 
     prevQuestion,
     currQuestion
-}) => {
-    const questionData = useSelector((state) => state.activities.data.clientData.present.clientAnswerData.questions[currQuestion])
+}: any) => {
+    const questionData = useSelector((state: RootState) => state.activities.data.clientData.present.clientAnswerData.questions[currQuestion])
     const dispatch = useDispatch()
     const onClick = (e: any) =>{
         dispatch(updateTrackCompletion({

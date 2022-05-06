@@ -8,7 +8,7 @@ import sampleData from './sampleData'
 
 export default function Store() {
 
-	const showMore = (id) => {
+	const showMore = (id: any) => {
 		return (
 			<Link to={`${id}`} className='store-item store-carousel-item show-more-item d-flex justify-content-center align-items-center'>
 				<span className='fw-bold'>Show More</span>

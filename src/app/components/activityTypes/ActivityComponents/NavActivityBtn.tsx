@@ -1,7 +1,6 @@
-const NavActivityBtn = ({onClick, last, prev}) => {
+const NavActivityBtn = ({onClick, last, prev}: any) => {
     return(
         <button 
-            btntype = {`${last ? "submit": prev ? "prev":"continue"}`}
             data-btn-type = {`${last ? "submit": prev ? "prev":"continue"}`}
             aria-label = {`${last ? "submit": prev ? "prev-question":"next-question"}`}
             className= "nav-activity-btn"
