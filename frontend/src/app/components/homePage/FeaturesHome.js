@@ -2,46 +2,15 @@ import React from "react"
 
 const MarketingHomeIntro = () => {
     return (
-        <div className="d-flex flex-column align-items-center container features-home">
+        <div className="d-flex flex-column align-items-center container-fluid features-home">
             <div className="row w-100">
-                <div className="col-12 home-feature-module">
-                    <div className="row h-100 px-5">
-                        <div className="col-md-6 col-12 order-1 d-flex flex-column justify-content-center">
-                            <h2 className="feature-module-title fw-bold">Submit Assignments in Seconds</h2>
-                            <p className="feature-module-desc">
-                                Just upload your content and we will take care of the rest.
-                            </p>
-                        </div>
-                        <div className="col-md-6 col-12 order-2">
-                            <div className="feature-module-image"></div>
-                        </div>
-                    </div>
+                <div className="col-md-6 col-12 home-feature-module">
+                    <h3>Assignments, made fun.</h3>
+                    <p>Create interactive activities for students and facilatate a learning environment filled with curosity and wonder, no matter where you are.</p>
                 </div>
-                <div className="col-12 home-feature-module">
-                    <div className="row h-100 px-5">
-                        <div className="col-md-6 col-12 order-2 d-flex flex-column justify-content-center">
-                            <h2 className="feature-module-title fw-bold">Submit Assignments in Seconds</h2>
-                            <p className="feature-module-desc">
-                                Just upload your content and we will take care of the rest.
-                            </p>
-                        </div>
-                        <div className="col-md-6 col-12 order-1">
-                            <div className="feature-module-image"></div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-12 home-feature-module">
-                    <div className="row h-100 px-5">
-                        <div className="col-md-6 col-12 order-1 d-flex flex-column justify-content-center">
-                            <h2 className="feature-module-title fw-bold">Submit Assignments in Seconds</h2>
-                            <p className="feature-module-desc">
-                                Just upload your content and we will take care of the rest.
-                            </p>
-                        </div>
-                        <div className="col-md-6 col-12 order-2">
-                            <div className="feature-module-image"></div>
-                        </div>
-                    </div>
+                <div className="col-md-6 col-12 home-feature-module">
+                    <h3>Reward students for achievements</h3>
+                    <p>Visualum understands that incentives are essential to the learning process. We provide educators with the tools to reward  their students.</p>
                 </div>
             </div>
         </div>

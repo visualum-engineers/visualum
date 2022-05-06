@@ -16,7 +16,7 @@ export default function PopUpBg({
         height: "calc(max(100%, 100vh))",
         zIndex: zIndex != null ? zIndex : "2",
         border: 'none',
-        cursor: "pointer"
+        cursor: "default"
     }
     return (
         <div

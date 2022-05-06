@@ -1,4 +1,4 @@
-.navbar.home-page-nav{
+.navbar.home-page-nav {
     @include border-radius(0);
     @include fillContainer;
     @include transition(all 0.25s ease-out);
@@ -6,11 +6,17 @@
     margin: 0;
     color: $white;
     border: none;
-    z-index:3;
+    z-index: 3;
     font-family: "Lato", "sans-serif";
     border-bottom: 2px transparent solid;
 
 }
+
+.navbar.scroll-active {
+    background: rgba(255, 255, 255, 0.8);
+    border-bottom: 2px $lighter-gray solid;
+}
+
 .nav-brand {
     font-size: 1.2rem;
     font-weight: 600;
@@ -23,7 +29,7 @@
 }
 
 
-.nav-btn.home-page-nav{
+.nav-btn.home-page-nav {
     @include center;
     @include border-radius(10px);
     @include remove-btn-default;
@@ -32,20 +38,22 @@
     text-align: center;
     font-size: 1em;
     transition: background-color ease-in-out 125ms;
+
     &:hover,
-    &:active{
+    &:active {
         @include hover-color;
     }
 }
 
-.nav-btn.home-page-nav>p{
+.nav-btn.home-page-nav>p {
     @include no-space;
     position: relative;
 }
 
-.nav-btn.home-page-nav{
+.nav-btn.home-page-nav {
+
     &:focus p::after,
-    &:active p::after{
+    &:active p::after {
         position: absolute;
         content: "";
         width: calc(100% - 2px);
@@ -72,10 +80,12 @@
         color: $dark-purple;
     }
 }
-.about-us-nav-item{
+
+.about-us-nav-item {
     position: relative;
     display: flex;
-    &::after{
+
+    &::after {
         content: "";
         right: 0;
         height: 100%;
@@ -91,11 +101,13 @@
     color: $white;
     border: none;
     height: 100%;
-    span{
+
+    span {
         position: relative;
         height: min-content;
     }
-    span::after{
+
+    span::after {
         position: absolute;
         content: "";
         background-color: $white;
@@ -105,22 +117,25 @@
         width: 0%;
         @include transition(0.25s ease-out all)
     }
-    &:hover>span::after{
+
+    &:hover>span::after {
         width: 100%;
     }
 }
 
-#nav-toggler.home-page-nav{
+#nav-toggler.home-page-nav {
     @include center;
     height: 2rem;
     width: 2rem;
 }
 
-#nav-toggler.home-page-nav, #search-btn{
+#nav-toggler.home-page-nav,
+#search-btn {
     @include no-space;
 }
 
-#nav-icon.home-page-nav, #search-icon{
+#nav-icon.home-page-nav,
+#search-icon {
     @include center;
     @include fillContainer;
     @include transition(all 0.3s ease-out);
@@ -128,12 +143,12 @@
 }
 
 
-#nav-icon.home-page-nav.fa-arrow-down{
+#nav-icon.home-page-nav.fa-arrow-down {
     @include transition(all ease 0.2s);
     transform: rotate(180deg);
 }
 
-#nav-icon.home-page-nav.fa-bars{
+#nav-icon.home-page-nav.fa-bars {
     @include transition(all ease 0.2s);
     transform: rotate(180deg);
     font-size: 1.7rem;
@@ -149,15 +164,16 @@
     height: 100%;
     padding: 5px 10px;
     background-color: transparent;
+
     &:hover {
-        background-color: rgba(0,0,0,.35);
+        background-color: rgba(0, 0, 0, .35);
         cursor: pointer;
     }
 }
 
 .user-active {
-    background-color: rgba(0,0,0,.35);
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+    background-color: rgba(0, 0, 0, .35);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
 .user-student-name {
@@ -175,7 +191,7 @@
     width: 15rem;
     padding: .7rem;
     position: absolute;
-    background-color: rgba(0,0,0,.6);
+    background-color: rgba(0, 0, 0, .6);
     top: 75px;
     right: 30px;
     transition: top 250ms ease-out;
@@ -191,9 +207,11 @@
     padding: .5rem 1rem;
     background-color: rgba(0, 0, 0, 0.25);
     margin-bottom: .5rem;
+
     &:last-child {
         margin-bottom: 0;
     }
+
     &:hover {
         @include hover-color;
         cursor: pointer;
@@ -216,14 +234,17 @@
     opacity: 0;
     transform: scale(0.9);
 }
+
 .dropdown-enter-active {
     @include transition(opacity 300ms, transform 300ms);
     opacity: 1;
     transform: translateX(0);
 }
+
 .dropdown-exit {
-    opacity: 1; 
+    opacity: 1;
 }
+
 .dropdown-exit-active {
     @include transition(opacity 300ms, transform 300ms);
     opacity: 0;
@@ -234,7 +255,7 @@
     color: $dark-purple;
     background: rgba(255,255,255, 0.8);
     border-bottom: 2px $lighter-gray solid;
-    .link-about-us{
+    .link-about-us {
         color: $dark-purple;
         span::after{
             background-color: $dark-purple;

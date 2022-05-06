@@ -1,0 +1,218 @@
+.settings-modal-container {
+	display: flex;
+	justify-content: center;
+}
+
+.settings-modal {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-width: 1000px;
+	z-index: 1032;
+	border-radius: 10px;
+	cursor: default;
+
+	.header {
+		margin-top: -40px;
+
+		h1 {
+			font-size: 2rem;
+			font-weight: 600;
+			margin-bottom: 0;
+		}
+	}
+
+	.body {
+		width: 100%;
+		flex-grow: 1;
+		display: flex;
+
+		@media (max-width: 992px) {
+			flex-direction: column;
+			margin-bottom: 0 !important;
+		}
+
+		.tabs {
+			width: 20%;
+			min-width: 200px;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+
+			@media (max-width: 992px) {
+				width: 100%;
+				flex-direction: row;
+				padding: 0 10px;
+				margin-bottom: 10px;
+			}
+
+			.tab {
+				width: 100%;
+				height: 60px;
+				display: flex;
+				align-items: center;
+				padding: 20px 40px;
+				transition: all 250ms ease-in-out;
+
+				&:hover {
+					background-color: $lighter-gray;
+					color: $blue;
+					cursor: pointer;
+				}
+
+				@media (max-width: 992px) {
+					width: auto;
+					height: fit-content;
+					min-width: 100px;
+					border-radius: 10px;
+					margin-right: 5px;
+					padding: 10px 20px;
+					justify-content: center;
+				}
+			}
+
+			.active {
+				background-color: $lighter-gray;
+				color: $blue;
+			}
+
+			.tab-text {
+				font-weight: 500;
+
+				@media (max-width: 992px) {
+					font-size: 14px;
+				}
+			}
+		}
+
+		.divider {
+			height: 100%;
+			width: 1px;
+			background-color: $light-gray;
+
+			@media (max-width: 992px) {
+				display: none;
+			}
+		}
+
+		.settings-body {
+			width: 80%;
+			flex-grow: 1;
+			padding: 10px;
+			display: flex;
+			flex-direction: column;
+
+			@media (max-width: 992px) {
+				font-size: .5rem !important;
+				width: 100%;
+			}
+
+			.deactivate-account-container {
+				width: 100%;
+				padding: 20px;
+				margin-top: auto;
+
+				@media (max-width: 992px) {
+					padding: 5px;
+				}
+			}
+
+			.deactivate-account {
+				width: 100%;
+				background-color: $lighter-gray;
+				border-radius: 10px;
+				border: 1px solid $light-gray;
+				display: flex;
+				flex-direction: column;
+				padding: 15px;
+
+				.title {
+					font-weight: 600;
+
+					@media (max-width: 992px) {
+						font-size: .9rem !important;
+					}
+				}
+
+				.subtitle {
+					font-size: .8rem;
+					margin-bottom: 10px;
+				}
+
+				.delete-button {
+					background-color: #EA3B03;
+					border-radius: 10px;
+					font-size: .8rem;
+					padding: 8px 20px;
+				}
+			}
+
+
+		}
+	}
+
+	.settings-control {
+		width: 100%;
+		height: 50px;
+		padding: 5px 40px;
+		margin-bottom: 15px;
+
+		@media (max-width: 992px) {
+			padding: 5px;
+			height: fit-content;
+			margin-bottom: 5px;
+		}
+
+		.title {
+			font-size: 1.2rem;
+			font-weight: 600;
+			margin-bottom: 5px;
+			display: inline;
+
+			@media (max-width: 992px) {
+				font-size: 1rem !important;
+			}
+		}
+
+		.value {
+			font-weight: 400;
+			font-size: 1.1rem;
+
+			@media (max-width: 992px) {
+				font-size: 1rem !important;
+			}
+		}
+
+		.subtitle {
+			font-weight: 500;
+			font-size: .7rem;
+			margin-left: 1px;
+			color: $darkest-gray;
+			margin-bottom: 0;
+		}
+
+		.link {
+			color: $blue;
+			cursor: pointer;
+			margin-left: 10px;
+			font-size: .9rem;
+
+			@media (max-width: 992px) {
+				font-size: .8rem;
+			}
+		}
+	}
+}
+
+.settings-modal-container-override {
+	@media (max-width: 992px) {
+		min-width: 300px !important;
+		width: 95%;
+
+		.header {
+			padding: 20px !important;
+		}
+	}
+
+	min-width: 1000px !important;
+}
