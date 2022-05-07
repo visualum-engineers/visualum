@@ -6,8 +6,8 @@ const InputInnerGridList = ({
     endSlice, 
     data,
     inputItemProps
-}) => <div className="d-flex w-100" >
-        {data.answerChoices.slice(startSlice, endSlice).map((choice, index)=>{
+}: any) => <div className="d-flex w-100" >
+        {data.answerChoices.slice(startSlice, endSlice).map((choice: any, index: number)=>{
             const checked = data.clientAnswer && choice.id.toString() in data.clientAnswer
             if(!choice) return <div key={index} className="w-100 grid-layout empty-mc-item"></div>
             if(inputType === "checkbox") return (
@@ -35,7 +35,7 @@ const InputInnerList = ({
     data, 
     inputType,
     inputItemProps
-}) => data.answerChoices.map((choice)=>{
+}: any) => data.answerChoices.map((choice: any)=>{
         const checked = data.clientAnswer && choice.id.toString() in data.clientAnswer
         if(!choice) return null
         if(inputType === "checkbox") return(
@@ -66,7 +66,7 @@ const ControlledInputsColumn = ({
     mediumWindowWidth,
     smallWindowWidth,
     updateAnswerChoice,
-}) =>{
+}: any) =>{
     const inputItemProps = {
         clientAnswer: data.clientAnswer,
         updateAnswerChoice: updateAnswerChoice,

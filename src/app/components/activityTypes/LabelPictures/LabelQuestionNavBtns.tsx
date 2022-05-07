@@ -8,7 +8,7 @@ const LabelQuestionNavBtns = ({
     currQuestion,
     smallWindowWidth,
     onClick,
-}) =>{
+}: any) =>{
     const [leftNavOver, setLeftNavOver] = usePopUp({})
     const [rightNavOver, setRightNavOver] = usePopUp({})
     const leftIcon = <FontAwesomeIcon icon={faChevronLeft}/> 

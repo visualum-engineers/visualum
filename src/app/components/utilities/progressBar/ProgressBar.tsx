@@ -7,7 +7,7 @@ const ProgressBar = ({
     ariaLabel,
     additionalContent,
     showContent,
-}) =>{
+}:any) =>{
     return (
         <div 
             className={containerClassName ? containerClassName :"progress-bar-container"} 

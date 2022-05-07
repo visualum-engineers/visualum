@@ -1,6 +1,6 @@
 import LabelQuestionNavBtns from "./LabelQuestionNavBtns"
 import GeneralBtn from "../../utilities/generalBtn/GeneralBtn"
-const LabelQuestionColumnHeader = (props) =>{
+const LabelQuestionColumnHeader = (props: any) =>{
     return(
             <div className="label-pic-question-header d-flex justify-content-between w-100">
                 <LabelQuestionNavBtns 

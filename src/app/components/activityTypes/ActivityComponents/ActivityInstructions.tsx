@@ -7,18 +7,19 @@ import LabelActivityInstructions from "../LabelPictures/LabelActivityInstruction
 import PopUp from "../../utilities/popUp/PopUpBackground"
 import { useSelector } from "react-redux"
 import ExitIcon from "../../utilities/exitIcon/ExitIcon"
+import { RootState } from "../../../../redux/store"
 const ActivityInstructions = ({
     activityType, 
     activityInstructions, 
     moreInfoOnClick,
     popUpBgStyles,
-}) => {
-    const dndEnabled = useSelector((state) => state.activities.settings.dndEnabled)
+}:any) => {
+    const dndEnabled = useSelector((state: RootState) => state.activities.settings.dndEnabled)
     const newProps = {
         dndEnabled: dndEnabled, 
         activityInstructions: activityInstructions
     }
-    const instructionsMap = {
+    const instructionsMap:any = {
         sort: <SortActivityInstructions {...newProps}/>,
         matching: <MatchActivityInstructions {...newProps}/>,
         shortAnswer: <ShortAnswerInstructions {...newProps} />,

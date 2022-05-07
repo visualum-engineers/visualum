@@ -1,4 +1,4 @@
-const SortActivityInstructions = () =>{
+const SortActivityInstructions = ({}:any) =>{
     return(
         <div>
             

@@ -12,7 +12,7 @@ const GeneralBtn = ({
     customIcon = null,
     textContent = null,
     disabled = false,
-}) =>{
+}: any) =>{
     
     return (
         <button

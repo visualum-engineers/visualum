@@ -1,4 +1,4 @@
-const CheckboxInstructions = () =>{
+const CheckboxInstructions = ({}:any) =>{
     return(
         <div>
             Checkbox

@@ -33,7 +33,7 @@ export const useBodyAreaResizable = ({
         east: false, 
         west: false
     }
-}) =>{
+}: any) =>{
     const smallWindowWidth = useWindowWidth(576)
     const [
         nodePos, 
@@ -41,8 +41,8 @@ export const useBodyAreaResizable = ({
         onResizeMove, 
         onResizeEnd
     ] = useResizable({})
-    const resizeStart = useRef()
-    const onResizeStartWrapper = (e) =>{
+    const resizeStart = useRef(false)
+    const onResizeStartWrapper = (e: any) =>{
         applyOnResizeStartStyles(smallWindowWidth)
         resizeStart.current = true
         onResizeStart({
@@ -56,14 +56,14 @@ export const useBodyAreaResizable = ({
                                 customClass={handleClassName}
                             />
     useEffect(()=>{
-        const onResizeEndWrapper = (e) =>{
+        const onResizeEndWrapper = (e: any) =>{
             //resize hasnt started
             if(!resizeStart.current) return
             applyOnResizeEndStyles(smallWindowWidth)
             resizeStart.current = false
             onResizeEnd(e)
         }
-        const textAreaHandleMove = (e) =>{
+        const textAreaHandleMove = (e: any) =>{
 
             if(!resizeStart.current) return 
             onResizeMove({

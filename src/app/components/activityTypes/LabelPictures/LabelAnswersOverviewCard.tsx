@@ -3,7 +3,7 @@ const LabelAnswerOverviewCard = ({
     question,
     index,
     onClick
-}) =>{
+}: any) =>{
     const questionID = question.id
     return(
         <li className="label-pic-answer-overview-card col flex-grow-1 d-flex flex-column">
@@ -17,10 +17,10 @@ const LabelAnswerOverviewCard = ({
                 <div className="unselectable overview-card-question-header"><h2>{index+1+". "+question.content}</h2></div>
                 <ul 
                     className="label-pic-answer-overview-answers w-100 unselectable" 
-                    style={!data.categories[questionID].length > 0 ? {padding: "0", height: "100%"}: null}
+                    style={data.categories[questionID].length > 0 ? {padding: "0", height: "100%"}: undefined}
                 >
                         {data.categories[questionID].length > 0 ?
-                            data.categories[questionID].map((answer) => {
+                            data.categories[questionID].map((answer: any) => {
                                 const answerID = answer.id
                                 return(
                                     <li

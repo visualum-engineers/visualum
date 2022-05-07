@@ -4,7 +4,7 @@ const RadioItem = ({
         choice, 
         updateAnswerChoice, 
         customContainerClass = null
-    }) =>{
+    }: any ) =>{
     return(
         <div className={`radio-answer-choice`
                         +`${customContainerClass ? " " + customContainerClass: ""}`}

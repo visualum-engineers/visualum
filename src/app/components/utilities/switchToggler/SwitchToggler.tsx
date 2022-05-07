@@ -6,7 +6,7 @@ const SwitchToggler = ({
     switchId,
     switchActionLabel,
     disabled
-}) =>{
+}: any) =>{
     return(
         <div className="switch-toggler-container form-check form-switch">
             <input 

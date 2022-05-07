@@ -1,5 +1,5 @@
 import MoreInfoBtn from "../../utilities/moreInfoBtn/MoreInfoBtn"
-const LabelQuestionColumnTitle = (props) =>{
+const LabelQuestionColumnTitle = (props: any) =>{
     return(
         <h2 className="label-pic-activity-column-titles">
             <span>Questions</span>

@@ -1,6 +1,6 @@
 const ActivityIndicatorKey = ({
     btnIndicatorClass,
-}) =>{
+}: any) =>{
     const indicators = [
         {label: "Current", class: " question-active"},
         {label: "Unopened", class: " question-never-opened"},

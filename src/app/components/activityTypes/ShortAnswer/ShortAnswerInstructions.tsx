@@ -1,4 +1,4 @@
-const ShortAnswerInstructions = () =>{
+const ShortAnswerInstructions = ({}:any) =>{
     return(
         <div>
             

@@ -10,18 +10,19 @@ import { unstable_batchedUpdates } from "react-dom"
 import SwitchToggler from "../../utilities/switchToggler/SwitchToggler"
 import onlyNumInput from "../../../helpers/onlyNumInput"
 import ExitIcon from "../../utilities/exitIcon/ExitIcon"
+import { RootState } from "../../../../redux/store"
 const ActivitySettings = ({
     onExitPopUp,
     smallWindowWidth 
-}) =>{
+}: any) =>{
     const dispatch = useDispatch()
-    const disableDnD = useSelector((state) => state.activities.settings.dndEnabled) 
-    const disableTimeReminders = useSelector((state) => state.activities.settings.timeRemindersEnabled)
-    const disableAutoPopUps = useSelector((state) => state.activities.settings.autoPopUpsEnabled)
-    const timeIntervalDuration = useSelector((state) => state.activities.settings.timeIntervalDuration)
+    const disableDnD = useSelector((state: RootState) => state.activities.settings.dndEnabled) 
+    const disableTimeReminders = useSelector((state: RootState) => state.activities.settings.timeRemindersEnabled)
+    const disableAutoPopUps = useSelector((state: RootState) => state.activities.settings.autoPopUpsEnabled)
+    const timeIntervalDuration = useSelector((state: RootState) => state.activities.settings.timeIntervalDuration)
     const [timeDuration, setTimeDuration] = useState(timeIntervalDuration)
-    const [timeDurationErr, setTimeDurationErr] = useState(null)
-    const [settingsActive, setSettingsActive] = useState({
+    const [timeDurationErr, setTimeDurationErr] = useState<any>(null)
+    const [settingsActive, setSettingsActive] = useState<any>({
         dndEnabled : disableDnD,
         timeRemindersEnabled : disableTimeReminders,
         autoPopUpsEnabled : disableAutoPopUps, 
@@ -45,8 +46,8 @@ const ActivitySettings = ({
     }, [disableDnD, disableTimeReminders, disableAutoPopUps, timeIntervalDuration])
     const onSaveBtnClick = () =>{
             if(timeDurationErr) return
-            let disabledSettings = []
-            let enabledSettings = []
+            let disabledSettings:any = []
+            let enabledSettings:any = []
             Object.keys(settingsActive).map((value)=>{
                 if(settingsActive[value]) enabledSettings.push(value)
                 if(!settingsActive[value]) disabledSettings.push(value)
@@ -59,7 +60,7 @@ const ActivitySettings = ({
             })
             const checkTimeInterval = timeIntervalDuration !== timeDuration 
                                         && settingsActive.timeRemindersEnabled 
-                                        && (timeDuration !== 0 || timeDuration!=="0") 
+                                        && (timeDuration.toString() !== "0" )
             //save time interval if this is enabled
             if(checkTimeInterval) dispatch(changeTimeDuration(timeDuration))
 
@@ -70,7 +71,7 @@ const ActivitySettings = ({
                 onExitPopUp()
             })
     }
-    const onSwitchClick = (e) =>{
+    const onSwitchClick = (e: any) =>{
         if (e.type ==="click" || (e.type ==="keydown" && e.key === "Enter")) {
             const target = e.target.closest("input")
             if(!target) return
@@ -130,7 +131,7 @@ const ActivitySettings = ({
                                                 className="activity-settings-time-interval-input"
                                                 value={timeDuration/60/1000 === 0 ? "" : timeDuration/60/1000}
                                                 onKeyDown={onlyNumInput}
-                                                onChange={(e)=>{
+                                                onChange={(e: any)=>{
                                                     const target = e.target.closest("input")                                                
                                                     const value = target.value
                                                     if(value.length > 2) return

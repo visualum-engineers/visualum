@@ -4,7 +4,7 @@ const TrianglePointer = ({
      customDropDownID = null,
      customClassName = "",
      pointerDown = null,
-}) =>{
+}: any) =>{
     return(
         <div 
             aria-hidden={!dropDownActive}

@@ -1,5 +1,5 @@
 import LabelQuestion from "./LabelQuestion"
-const LabelQuestionTransition = (props) =>{
+const LabelQuestionTransition = (props: any) =>{
     const questionID = props.data.questions[props.questionIndex].id
     const questionContent = props.data.questions[props.questionIndex].content
     const newProps = {

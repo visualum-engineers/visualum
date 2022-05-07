@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react"
 const usePopUp = ({
     setTimeoutOnMount = false
-}) =>{
+}: any):[
+    boolean,
+    (e: any) => void
+] =>{
     const [popUpToggled, setPopUpToggled] = useState(setTimeoutOnMount ? true : false)
-    const handleBtn = (e) => {           
+    const handleBtn = (e: any) => {           
         if(e.type ==="keydown" && e.key ==="Enter") setPopUpToggled(state => !state)
         else if(e.type === "mouseleave") setPopUpToggled(false)
         else if (e.type ==="mouseenter") setPopUpToggled(true)

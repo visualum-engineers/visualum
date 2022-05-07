@@ -5,7 +5,7 @@ const MultipleChoiceImage = ({
     data,
     customClass,
     popUpBgStyles
-}) =>{
+}: any) =>{
     return(
         <ZoomableContext>
             <ImageContainer 

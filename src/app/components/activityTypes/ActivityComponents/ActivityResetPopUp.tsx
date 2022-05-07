@@ -1,5 +1,5 @@
 import PopUpBg from "../../utilities/popUp/PopUpBackground";
-const ActivityResetPopUp = (props) => {
+const ActivityResetPopUp = (props: any) => {
     return (
         <PopUpBg
             ariaLabel="exit-reset-question"

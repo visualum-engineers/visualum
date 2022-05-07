@@ -4,7 +4,7 @@ const CheckboxItem = ({
     choice, 
     updateAnswerChoice, 
     customContainerClass = null
-}) =>{
+}:any) =>{
     return(
         <div className={`checkbox-answer-choice`
                         +`${customContainerClass ? " " + customContainerClass: ""}`}

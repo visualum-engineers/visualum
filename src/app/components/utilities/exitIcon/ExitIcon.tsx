@@ -1,6 +1,6 @@
 const ExitIcon = ({
     customStrokeWidth
-}) =>{
+}:any) =>{
     return(
         <svg 
             className="exit-icon" 

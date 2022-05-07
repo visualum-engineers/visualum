@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { RefObject, useRef } from "react"
 import DroppableArea from "../../utilities/dragAndDrop/ReactBeautifulDnD/DroppableArea"
 import useBodyAreaResizable from "../../../hooks/use-body-area-resizable"
 const LabelQuestion = ({
@@ -16,10 +16,10 @@ const LabelQuestion = ({
     draggableClassName,
     isDraggingClass,
     draggingOverClass,
-}) =>{
+}: any) =>{
     //nodes for resizable container
-    const questionRef = useRef()
-    const droppableAreaRef = useRef()
+    const questionRef = useRef() as RefObject<HTMLDivElement>
+    const droppableAreaRef = useRef() as RefObject<HTMLDivElement>
     //resizable hooks that make the body element the entire resizable area
     const {
         posData: questionAreaPos, 

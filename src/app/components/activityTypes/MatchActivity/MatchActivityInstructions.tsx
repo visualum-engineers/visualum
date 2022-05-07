@@ -1,4 +1,4 @@
-const MatchActivityInstructions = () =>{
+const MatchActivityInstructions = ({}:any) =>{
     return(
         <div>
             MatchActivity

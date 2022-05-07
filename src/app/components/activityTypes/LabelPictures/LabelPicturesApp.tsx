@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react"
 import { RootState } from "../../../../redux/store"
 import {unstable_batchedUpdates} from 'react-dom'
 import transformData from "./labelTransformData"
-import {DragDropContext} from "react-beautiful-dnd"
+import {DragDropContext, DropResult, ResponderProvided} from "react-beautiful-dnd"
 import WordBank from "../../utilities/dragAndDrop/ReactBeautifulDnD/WordBank"
 import LabelQuestionColumn from "./LabelQuestionColumn"
 import { useDispatch, useSelector } from "react-redux"
@@ -22,7 +22,9 @@ const LabelPicturesApp = ({
 }: any) =>{
     const [dragActive, setDragActive] = useState(false)
     //used for dnd and tap and drop actions
-    const [firstElTap, setFirstElTap] = useState(null)
+    const [firstElTap, setFirstElTap] = useState<{
+        node: HTMLElement
+    } | null>(null)
 
     //redux states
     const dispatch = useDispatch()
@@ -70,11 +72,11 @@ const LabelPicturesApp = ({
     
     const onDragStart = () =>{
         //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
-        document.querySelector("html").classList.add("sortActivityActive")
+        document.querySelector("html")?.classList.add("sortActivityActive")
         setDragActive(true)
     }
 
-    const onDragEnd = (result) =>{
+    const onDragEnd = (result: any) =>{
         const newState = updateMultipleSortableLists(data, result)
         if(!newState) return
         //update state
@@ -88,7 +90,7 @@ const LabelPicturesApp = ({
         })
     }
     
-    const onTap = (e) =>{
+    const onTap = (e: any) =>{
         const parm = {
             e: e, 
             firstElTap: firstElTap, 
@@ -110,8 +112,8 @@ const LabelPicturesApp = ({
         <>
             <div className={`label-pic-activity-container d-flex${!mediumWindowWidth?" flex-column portrait-size":" full-size"}`}>
                 <DragDropContext 
-                    onDragEnd = {disableDnD ? onDragEnd : null}
-                    onDragStart = {disableDnD ? onDragStart : null}
+                    onDragEnd = {disableDnD ? onDragEnd : () => {}}
+                    onDragStart = {disableDnD ? onDragStart : () => {}}
                 >
                     <LabelQuestionColumn 
                         data = {data}

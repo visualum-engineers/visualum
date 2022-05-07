@@ -8,7 +8,7 @@ const LabelAnswerOverview = ({
     onOverviewClick,
     popUpBgStyles,
     onOverviewCardClick
-}) =>{
+}: any) =>{
     const newPopUpStyles = {...popUpBgStyles, zIndex: 4}
     return (
         <PopUpBg 
@@ -30,7 +30,7 @@ const LabelAnswerOverview = ({
                 </header>
                 <div className="label-pic-answer-overview-body container">
                     <ol className="row row-cols-1 row-cols-sm-2 row-cols-md-3">
-                        {data.questions.map((question, index)=>{
+                        {data.questions.map((question: any, index: number)=>{
                             return(
                                 <LabelAnswerOverviewCard 
                                     key={question.id}

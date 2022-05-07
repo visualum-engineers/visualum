@@ -6,15 +6,16 @@ import ProgressBar from '../../utilities/progressBar/ProgressBar';
 import { roundPercentToInt } from '../../../helpers/calculatePercentage';
 import { useSelector } from 'react-redux';
 import GeneralBtn from '../../utilities/generalBtn/GeneralBtn';
+import { RootState } from '../../../../redux/store';
 
 export const useActivitySecondarySideBarData = ({
     activityData,
     onInstructionsClick,
     onTableOfContentClick, 
     currQuestion
-}) => {
+}: any) => {
     //progress data
-    const {completed, inProgress, neverOpened} = useSelector((state) => state.activities.data.clientData.present.clientAnswerData.trackCompletion)
+    const {completed, inProgress, neverOpened} = useSelector((state: RootState) => state.activities.data.clientData.present.clientAnswerData.trackCompletion)
     const completedLength = Object.keys(completed).length
     const sidebarData = [
         {

@@ -4,7 +4,7 @@ import ZoomableContext from "../../utilities/contexts/ZoomableContext"
 const LabelPicturesImage = ({
     popUpBgStyles, 
     data
-}) =>{
+}:any) =>{
     const newPopUpBgStyles = {
         ...popUpBgStyles,
         zIndex: 4

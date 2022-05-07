@@ -15,7 +15,7 @@ const defaultTransition = {
     transition: `all ${duration}ms ease-out`,
     transitionProperty: "opacity, transform, left",
 }
-const LabelPicturesQuestion = (props) =>{
+const LabelPicturesQuestion = (props: any) =>{
     //used for transitions between internal label questions
     const [currQuestion, setCurrQuestion] = useState(0)
     const [prevQuestion, setPrevQuestion] = useState(0)
@@ -33,7 +33,7 @@ const LabelPicturesQuestion = (props) =>{
         }
         return () => {isMounted = false}
     }, [])
-    const updateQuestionNumByOne = (target)=>{
+    const updateQuestionNumByOne = (target: any)=>{
         switch(target.dataset.actionLabel){
             case "prev-question":
                 if(currQuestion <= 0) return
@@ -41,7 +41,7 @@ const LabelPicturesQuestion = (props) =>{
                 break
             case "next-question":
                 if(currQuestion >= props.data.questions.length-1) return
-                setCurrQuestion(state => parseInt(state) + 1)
+                setCurrQuestion(state => state + 1)
                 break
             default:
                 break
@@ -55,13 +55,13 @@ const LabelPicturesQuestion = (props) =>{
             setInProp(false)
         }, inPropDuration)
     }
-    const onQuestionNavClick = (e) =>{
+    const onQuestionNavClick = (e: any) =>{
         const target = e.target.closest("button")
         if(!target || inProp) return
         return updateQuestionNumByOne(target)
     }
 
-    const onQuestionNavSwipe = (e) => {
+    const onQuestionNavSwipe = (e: any) => {
         //if a drag,tap or transition, is started, 
         //we dont want swipe interference
         if(props.dragActive || props.firstElTap || inProp) return
@@ -72,16 +72,16 @@ const LabelPicturesQuestion = (props) =>{
                 const direction = onOveviewTouchEnd(e, 60)
                 const target = {
                     dataset:{
-                        actionLabel: direction.right ? "prev-question" : "next-question"
+                        actionLabel: direction?.right ? "prev-question" : "next-question"
                     }
                 }
-                if(direction.right || direction.left) return updateQuestionNumByOne(target)
+                if(direction?.right || direction?.left) return updateQuestionNumByOne(target)
                 return
             default:
                 return
         }
     }
-    const onOverviewClick = (e) =>{
+    const onOverviewClick = (e: any) =>{
         const action = e.target.closest("button").dataset.actionLabel
         switch(action){
             case 'exit-answers-overview':
@@ -92,7 +92,7 @@ const LabelPicturesQuestion = (props) =>{
                 return
         }
     }
-    const onCaroIndicatorClick = (e) =>{
+    const onCaroIndicatorClick = (e: any) =>{
         const target = e.target.closest("button")
         if(inProp || !target) return
         const targetIndex = target.dataset.questionIndex
@@ -105,7 +105,7 @@ const LabelPicturesQuestion = (props) =>{
             setInProp(false)
         }, inPropDuration)
     }
-    const onOverviewCardClick=(e) =>{
+    const onOverviewCardClick=(e: any) =>{
         const target = e.target.closest("button")
         if(!target || inProp) return
         //close popup
@@ -121,7 +121,7 @@ const LabelPicturesQuestion = (props) =>{
         <div 
             className={`label-pic-activity-question-container d-flex flex-column align-items-center`
                         + `${!props.mediumWindowWidth ?" portrait-size":""}`}
-            style={inProp ? {overflow: "hidden"}: null}
+            style={inProp ? {overflow: "hidden"}: undefined}
         >
            <LabelQuestionColumnTitle 
                 moreInfoOnClick = {props.moreInfoOnClick}

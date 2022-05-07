@@ -3,11 +3,12 @@ import { useState, useEffect } from "react"
 import { unstable_batchedUpdates } from "react-dom"
 import { calculateTimeLeft } from "../../utilities/timer/Timer"
 import PopUpBg from "../../utilities/popUp/PopUpBackground"
+import { RootState } from "../../../../redux/store"
 const ActivityTimeReminder = ({
     popUpBgStyles
-}) =>{
-    const timerEndTime = useSelector((state) => state.activities.data.clientData.present.clientAnswerData.activityEndTime)
-    const timeIntervalDuration = useSelector((state) => state.activities.settings.timeIntervalDuration)
+}:any) =>{
+    const timerEndTime = useSelector((state: RootState) => state.activities.data.clientData.present.clientAnswerData.activityEndTime)
+    const timeIntervalDuration = useSelector((state: RootState) => state.activities.settings.timeIntervalDuration)
     const [timeReminderPopUp, setTimeReminderPopUp] = useState(false)
     const [currTime, setTimeLeft] = useState(timeIntervalDuration)
     //when time reminder settings change
@@ -48,7 +49,7 @@ const ActivityTimeReminder = ({
                 >
                     <div className="activity-reset-popup col-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
                         <span className="pb-4">
-                            You have {timeLeft.hours + " hrs and " + timeLeft.minutes + " mins left"}
+                            You have {(timeLeft ? timeLeft.hours : "0") + " hrs and " + (timeLeft ? timeLeft.minutes : "0") + " mins left"}
                         </span>
                         <button
                             className="btn btn-danger"

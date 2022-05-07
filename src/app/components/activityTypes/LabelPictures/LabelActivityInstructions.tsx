@@ -1,4 +1,4 @@
-const LabelActivityInstructions = () =>{
+const LabelActivityInstructions = ({}:any) =>{
     return(
         <div>
             LabelActivity

@@ -7,6 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {ActivitySettings} from "../index";
 import Navbar from "../../utilities/navbar/activityNavbar/Navbar";
+import { RootState } from "../../../../redux/store";
 
 const ActivityNavbar = ({
     smallWindowWidth,
@@ -20,8 +21,8 @@ const ActivityNavbar = ({
     timerData = null
 }: any) =>{
         const [settingsOpen, setSettingsOpen] = useState(false)  
-        const pastSelectorFunc= (state) => state.activities.data.clientData.past.length
-        const futureSelectorFunc= (state) => state.activities.data.clientData.future.length
+        const pastSelectorFunc= (state: RootState) => state.activities.data.clientData.past.length
+        const futureSelectorFunc= (state: RootState) => state.activities.data.clientData.future.length
         const settings = <div>
                 <button 
                     className="activity-navbar-setting-btn"

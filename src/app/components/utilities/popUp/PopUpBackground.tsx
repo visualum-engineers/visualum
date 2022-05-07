@@ -1,5 +1,3 @@
-import React from "react"
-
 export default function PopUpBg({
     zIndex,
     containerStyles,
@@ -7,8 +5,8 @@ export default function PopUpBg({
     onKeyDown,
     onClick,
     children
-}) {
-    const popUpBgStyles = {
+}: any) {
+    const popUpBgStyles:any = {
         position: "fixed",
         top: "0",
         left: "0",

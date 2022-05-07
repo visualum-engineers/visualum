@@ -1,4 +1,4 @@
-const RadioInstructions = () =>{
+const RadioInstructions = ({}:any) =>{
     return(
         <div>
             Radio

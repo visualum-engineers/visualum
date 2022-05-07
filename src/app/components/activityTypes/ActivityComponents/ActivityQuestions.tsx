@@ -3,14 +3,14 @@ import ShortAnswerApp from "../ShortAnswer/ShortAnswerApp"
 import SortActivityApp from "../SortActivity/SortActivityApp"
 import MatchActivityApp from "../MatchActivity/MatchActivityApp"
 import LabelPicturesApp from "../LabelPictures/LabelPicturesApp"
-const ActivityQuestions = (props) =>{
+const ActivityQuestions = (props: any) =>{
     const questionType = props.questions[props.activityKey].type
     const newProps = {
         ...props, 
         questionNum: props.activityKey,
     }
 
-    const activityMap = {
+    const activityMap:any = {
         sort: <SortActivityApp {...newProps} />,
         matching: <MatchActivityApp {...newProps} />,
         shortAnswer: <ShortAnswerApp {...newProps} />,

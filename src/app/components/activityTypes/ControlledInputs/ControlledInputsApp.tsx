@@ -4,6 +4,7 @@ import { updateActivityData, updateActivityDataLayout } from '../../../../redux/
 import ControlledInputsImage from './ControlledInputsImage';
 import ControlledInputsColumn from './ControlledInputsColumn';
 import { resetHistory } from '../activityHistoryFunc';
+import { RootState } from '../../../../redux/store';
 
 /*
     Frontend:
@@ -19,12 +20,12 @@ const ControlledInputsApp = ({
     mediumWindowWidth,
     popUpBgStyles,
     moreInfoOnClick, 
-}) => {
+}:any) => {
     //for updating redux store(data to be sent to backend)
-    const data = useSelector(state => state.activities.data.clientData.present.clientAnswerData.questions[questionNum])
+    const data = useSelector((state: RootState) => state.activities.data.clientData.present.clientAnswerData.questions[questionNum])
     //redux states
     const dispatch = useDispatch()
-    const resetPopUp = useSelector((state) => state.activities.settings.resetPopUp)
+    const resetPopUp = useSelector((state: RootState) => state.activities.settings.resetPopUp)
     //reset answer
     useEffect(() =>{
         if(resetPopUp && resetPopUp.confirmed){
@@ -68,10 +69,10 @@ const ControlledInputsApp = ({
         }))
     }
 
-    const updateRadioBtnChoice = (id) => {
+    const updateRadioBtnChoice = (id: any) => {
         return {[id.dataset.updateAnswerChoice]: true}
     }
-    const updateCheckboxChoice = (id) =>{
+    const updateCheckboxChoice = (id: any ) =>{
         const answserId = id.dataset.updateAnswerChoice
         if(!data.clientAnswer) return {[answserId] : true}
         const newData = {...data.clientAnswer}
@@ -79,7 +80,7 @@ const ControlledInputsApp = ({
         else newData[answserId] = true 
         return newData
     }
-    const updateAnswerChoice = (e) =>{
+    const updateAnswerChoice = (e: any) =>{
         if(e.type === "keydown" && e.key !=="Enter") return 
         if (!e.target.closest("input") && !e.target.closest("label"))  return 
         let id = e.target.closest("input")
