@@ -44,6 +44,7 @@ const activityCreationData = createSlice({
         activityTimer: null,
         activityTopicLabels: null,
         questions: [questionFormat("matching")],
+        assignedClasses: []
         //questions: miniScreenData
     },
     reducers:{

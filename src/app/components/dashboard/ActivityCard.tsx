@@ -2,7 +2,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
-export default function ActivityCard(props) {
+export default function ActivityCard(props: any) {
     console.log(props.data)
     return (
         <div className="activity-card card">

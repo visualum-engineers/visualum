@@ -2,7 +2,7 @@
 import { ActivityQuestionHeader } from "./"
 
 import activitiesMap from "./ActivityMap"
-const ActivityCreationQuestion = (props) =>{
+const ActivityCreationQuestion = (props: any) =>{
     const activityMap = activitiesMap(props)
     return (
         <div className={`activity-creation-question` 

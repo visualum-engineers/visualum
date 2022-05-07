@@ -3,7 +3,7 @@ import SidebarItem from './SidebarItem';
 import sidebarValues from './sidebarValues';
 // const Logo = "./images/VisualumLogo.png";
 
-export default function DashboardSidebar(props) {
+export default function DashboardSidebar(props: any) {
 
     const items = sidebarValues.map(item =>
         <SidebarItem

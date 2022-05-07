@@ -3,7 +3,7 @@ import MatchActivityCreation from "../MatchActivity/MatchActivityCreation"
 import ShortAnswerCreation from "../ShortAnswer/ShortAnswerCreation"
 import ControlledInputsCreation from "../ControlledInputs/ControlledInputsCreation"
 import LabelPicturesCreation from "../LabelPictures/LabelPicturesCreation"
-const activityMap = (props) =>{
+const activityMap = (props: any): {[key: string]: JSX.Element} =>{
     return {
         sort: <SortActivityCreation {...props} />,
         matching: <MatchActivityCreation {...props} />,

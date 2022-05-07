@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router';
 
 
-export default function AssignmentCard(props) {
+export default function AssignmentCard(props: any) {
     let navigate = useNavigate();
     function handleClick() {
         navigate(`/dashboard/assignments/${props.id}`);

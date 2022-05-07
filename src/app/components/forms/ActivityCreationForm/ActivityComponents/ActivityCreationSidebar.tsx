@@ -15,7 +15,7 @@ import { ActivityCreationQuestion } from "./"
 import ExitIcon from "../../../utilities/exitIcon/ExitIcon"
 const ActivityCreationSidebar = ({
     mediumWindowWidth, 
-}) =>{
+}: any) =>{
     const dispatch = useDispatch()
     const sidebarToggled = useSelector((state) => state.activityCreation.settings.sidebarToggled)
     const addQuestionPopUp = useSelector((state) => state.activityCreation.settings.addQuestionPopUp)

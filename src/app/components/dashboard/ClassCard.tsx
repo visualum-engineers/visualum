@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router';
 
-export default function ClassCard(props) {
+export default function ClassCard(props: any) {
     let navigate = useNavigate();
     function handleClick() {
         navigate(`/dashboard/classes/${props.id}`);

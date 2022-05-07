@@ -1,6 +1,7 @@
  import { ActivityCreationQuestion } from "./index"
  import { useSelector} from "react-redux"
  import {CSSTransition} from "react-transition-group"
+import { RootState } from "../../../../../redux/store"
  const duration = 375
  const defaultTransition = {
     transition: `all ${duration}ms ease-out`,
@@ -9,10 +10,10 @@
  const ActivityCreationBody = ({
     smallWindowWidth,
     mediumWindowWidth,
- }) =>{
-    const sidebarToggle = useSelector(state => state.activityCreation.settings.sidebarToggled)
-    const questions = useSelector(state => state.activityCreation.data.saved.present.questions)
-    const currQuestion = useSelector(state => state.activityCreation.settings.currQuestion)
+ }: any) =>{
+    const sidebarToggle = useSelector((state: RootState) => state.activityCreation.settings.sidebarToggled)
+    const questions = useSelector((state: RootState) => state.activityCreation.data.saved.present.questions)
+    const currQuestion = useSelector((state: RootState) => state.activityCreation.settings.currQuestion)
 
     return(
         <div className={`activity-creation-body`}>
@@ -24,7 +25,7 @@
                     return(
                         <CSSTransition 
                             key={`question-${index}`}
-                            in = {parseInt(currQuestion) === parseInt(index)}
+                            in = {parseInt(currQuestion.toString()) === parseInt(index.toString())}
                             timeout={duration}
                             mountOnEnter
                             unmountOnExit 
@@ -32,7 +33,7 @@
                             <ActivityCreationQuestion
                                 smallWindowWidth={smallWindowWidth}
                                 mediumWindowWidth={mediumWindowWidth}
-                                questionType = {question.questionType}
+                                questionType = {question?.questionType}
                                 style ={{...defaultTransition}}
                                 currQuestion = {index}
                             />

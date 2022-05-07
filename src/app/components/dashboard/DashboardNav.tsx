@@ -19,7 +19,7 @@ export default function DashboardNav() {
 			</a>
 			<div className='dashboard-navbar-buttons'>
 				<div className='dashboard-navbar-button'>
-					<FontAwesomeIcon icon={faBell} />
+						<FontAwesomeIcon icon={faBell} /> 
 				</div>
 				<div className='dashboard-navbar-button' onClick={toggle}>
 					<FontAwesomeIcon icon={faCog} />
