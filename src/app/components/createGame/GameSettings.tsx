@@ -1,6 +1,4 @@
-import React from 'react';
-
-export default function NewGameForm(props) {
+export default function NewGameForm(props: any) {
     return (
         <div className="row w-100 d-flex justify-content-center">
             <div className="col-12 text-center">
@@ -9,9 +7,9 @@ export default function NewGameForm(props) {
             <div className="col-12 row d-flex justify-content-center mt-3">
                 <div className="col-4">
                     <label className="form-label text-light">Competitive or Individual?</label>
-                    <select class="form-select" aria-label="Select Game Type">
-                        <option selected value={true}>Competitive</option>
-                        <option value={false}>Individual</option>
+                    <select className="form-select" aria-label="Select Game Type">
+                        <option selected>Competitive</option>
+                        <option value={undefined}>Individual</option>
                     </select>
                 </div>
             </div>

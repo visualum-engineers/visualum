@@ -5,7 +5,7 @@ import Tab from '@material-ui/core/Tab';
 
 import SettingsPanel from './SettingsPanel';
 
-function a11yProps(index) {
+function a11yProps(index: any) {
     return {
         id: `vertical-tab-${index}`,
         'aria-controls': `vertical-tabpanel-${index}`,
@@ -53,7 +53,7 @@ export default function VerticalTabs() {
     // THIS WILL INCLUDE AN AXIOS CALL TO THE BACKEND TO GRAB USER SETTINGS
 //    const [userSettings, updateUserSettings] = React.useState({});
 
-    const handleChange = (event, newValue) => {
+    const handleChange = (event: any, newValue: any) => {
         setValue(newValue);
     };
 
@@ -68,7 +68,7 @@ export default function VerticalTabs() {
                 <div className={classes.root}>
                     <Tabs
                         orientation="vertical"
-                        variant="fixed"
+                        //variant="fixed"
                         value={value}
                         onChange={handleChange}
                         aria-label="Vertical tabs example"

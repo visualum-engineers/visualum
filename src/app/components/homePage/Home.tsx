@@ -1,4 +1,3 @@
-import { React } from "react";
 import IntroHome from "./IntroHome";
 import FeaturesHome from "./FeaturesHome";
 import FeaturedActivities from "./FeaturedActivities";

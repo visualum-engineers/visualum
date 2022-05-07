@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function StoreCarouselItem(props) {
+export default function StoreCarouselItem(props: any) {
 	return (
 		<div className='store-item store-carousel-item'>
 			<div className='d-flex align-items-center justify-content-between mb-1'>

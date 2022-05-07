@@ -1,7 +1,7 @@
 import React from 'react'
 import ModalForm from '../utilities/modals/ModalForm'
 
-export default function IndividualSettingModal({ toggle, title }) {
+export default function IndividualSettingModal({ toggle, title }: any) {
 
 	const items = [
 		{

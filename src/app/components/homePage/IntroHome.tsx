@@ -1,6 +1,6 @@
 const background = "images/homePage/background.jpeg"
 
-const IntroHome = (props) => {
+const IntroHome = (props: any) => {
     return (
         <>
             <div className="intro container-fluid">
