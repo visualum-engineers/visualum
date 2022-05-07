@@ -21,16 +21,17 @@ import {
     ActivityTopicLabels
 } from "../index"
 import { useEffect, useState } from "react"
+import { RootState } from "../../../../../../redux/store"
 
 const ActivityCreationOverallPopUp = ({
     smallWindowWidth,
     mediumWindowWidth
-}) =>{
+}: any) =>{
     const [activitySave, setOnSave] = useState(false)
-    const activityPopUp = useSelector(state => state.activityCreation.settings.activityEditPopUp)
+    const activityPopUp = useSelector((state: RootState) => state.activityCreation.settings.activityEditPopUp)
     const dispatch = useDispatch()
     //selector will only cause re-render when on save changes
-    const unsavedData = useSelector(state => state.activityCreation.data.unsaved, ()=>!activitySave)
+    const unsavedData = useSelector((state: RootState) => state.activityCreation.data.unsaved, ()=>!activitySave)
     useEffect(()=>{
         let isMounted = true
         if(activitySave && isMounted){

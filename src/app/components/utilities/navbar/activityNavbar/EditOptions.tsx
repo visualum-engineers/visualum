@@ -22,25 +22,25 @@ const EditOptions = ({
     questionNum,
     inProp,
     reset
-}) =>{
+}: any) =>{
     const [editPointer, setEditPointer] =  useState(false)
     const [editDropdownOpen, setEditDropdown] = useState(false)  
     const dispatch = useDispatch()
-    const pastLength = useSelector(pastSelectorFunc)
-    const futureLength = useSelector(futureSelectorFunc)
+    const pastLength: any = useSelector(pastSelectorFunc)
+    const futureLength:any = useSelector(futureSelectorFunc)
     //keyboard shortcuts for undo and redo
-    const editPointFocus =(e) =>{
+    const editPointFocus =(e: any) =>{
         e.preventDefault()
         if(e.currentTarget.contains(e.relatedTarget)) return
         setEditDropdown(false)
     }
-    const onUndoClick = (e) => {
+    const onUndoClick = (e: any) => {
         e.preventDefault()
         undoHistory({
             dispatch: dispatch
         })
     }
-    const onRedoClick = (e) =>{
+    const onRedoClick = (e: any) =>{
         e.preventDefault()
         redoHistory({
             dispatch: dispatch

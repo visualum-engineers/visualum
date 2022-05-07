@@ -1,12 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faLock, faGlobeAmericas } from "@fortawesome/free-solid-svg-icons"
 import { useSelector } from "react-redux"
+import { RootState } from "../../../../../../redux/store"
 
 const ActivityShareSettings = ({
     smallWindowWidth
-}) => {
-    const shareSettings = useSelector(state=>state.activityCreation.data.unsaved.activityShareSettings)
-    const subscriptionType = useSelector(state => state.userInfo.subscriptionType)
+}: any) => {
+    const shareSettings = useSelector((state: RootState)=>state.activityCreation.data.unsaved.activityShareSettings)
+    const subscriptionType = useSelector((state: RootState) => state.userInfo.subscriptionType)
     return(
         <>
         <div className="activity-creation-share-settings">

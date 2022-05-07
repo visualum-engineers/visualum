@@ -2,7 +2,7 @@ import { useState } from "react";
 import { unstable_batchedUpdates } from "react-dom";
 import { useRealmApp } from "../RealmApp";
 import validateEmailFormat from "../../app/helpers/validateEmailFormat";
-import { handleEmailAndPWLogin } from "../authFunc/emailAndPassword";
+import { handleEmailAndPWLogin } from "../auth/emailAndPassword";
 import useGoogleOnTapLogin from "../realm/googleWrapper/index"
 const googleClientID = process.env.REACT_APP_GOOGLE_CLIENT_ID
 

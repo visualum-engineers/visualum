@@ -5,8 +5,8 @@ const ActivityCreationImgInput = () =>{
         >
             <input
                 id={"activity-creation-img-upload-btn"}
-                htmlFor = {"activity-creation-img-file-input"}
-                onClick={(e) => e.target.closest("input").nextElementSibling.click()} 
+                //htmlFor = {"activity-creation-img-file-input"}
+                onClick={(e:any) => e.currentTarget?.closest("input")?.nextElementSibling?.click()} 
                 type={"button"}
             />
             <input 

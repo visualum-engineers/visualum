@@ -8,11 +8,12 @@ import { useWindowWidth } from "../../../hooks"
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { updateActivityName } from "../../../../redux/features/activityCreation/activityCreationData"
+import { RootState } from "../../../../redux/store"
 const ActivityCreationForm = () =>{
     const smallWindowWidth = useWindowWidth(576) 
     const mediumWindowWidth = useWindowWidth(992)
     const dispatch = useDispatch()
-    const activityName = useSelector(state=>state.activityCreation.data.saved.present.activityName)
+    const activityName:any = useSelector((state: RootState)=>state.activityCreation.data.saved.present.activityName)
     
     useEffect(()=>{
         let isMounted = true

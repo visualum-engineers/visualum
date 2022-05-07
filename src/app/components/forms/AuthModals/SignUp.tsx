@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import PopUpBg from '../../utilities/popUp/PopUpBackground';
 import ExitIcon from '../../utilities/exitIcon/ExitIcon';
-import GoogleSignInButton from '../EntryForms/LoginForm/GoogleSignInBtn'
+import GoogleSignInButton from './GoogleSignInBtn'
 import ReactDOM from 'react-dom';
 
-export default function SignUp({ toggle, toggleOther }) {
+export default function SignUp({ toggle, toggleOther }: any) {
 
 	const [stage, setStage] = useState("acctType");
 
@@ -104,5 +104,5 @@ export default function SignUp({ toggle, toggleOther }) {
 					</div>
 				</div>
 			</div>
-		</PopUpBg>, document.getElementById('portal'))
+		</PopUpBg>, document.body)
 }

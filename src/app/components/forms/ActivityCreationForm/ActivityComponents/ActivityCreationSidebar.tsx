@@ -13,17 +13,18 @@ import {
  } from "../../../../../redux/features/activityCreation/activityCreationData"
 import { ActivityCreationQuestion } from "./"
 import ExitIcon from "../../../utilities/exitIcon/ExitIcon"
+import { RootState } from "../../../../../redux/store"
 const ActivityCreationSidebar = ({
     mediumWindowWidth, 
 }: any) =>{
     const dispatch = useDispatch()
-    const sidebarToggled = useSelector((state) => state.activityCreation.settings.sidebarToggled)
-    const addQuestionPopUp = useSelector((state) => state.activityCreation.settings.addQuestionPopUp)
-    const questionsLength = useSelector(state => state.activityCreation.data.saved.present.questions.length)
+    const sidebarToggled = useSelector((state: RootState) => state.activityCreation.settings.sidebarToggled)
+    const addQuestionPopUp = useSelector((state: RootState) => state.activityCreation.settings.addQuestionPopUp)
+    const questionsLength = useSelector((state: RootState) => state.activityCreation.data.saved.present.questions.length)
 
     const miniScreenData = useActivityMiniScreenData({
-        reduxSelectorFunc: state => state.activityCreation.data.saved.present.questions,
-        currQuestionSelector : state => state.activityCreation.settings.currQuestion,
+        reduxSelectorFunc: (state: RootState) => state.activityCreation.data.saved.present.questions,
+        currQuestionSelector : (state: RootState) => state.activityCreation.settings.currQuestion,
         changeQuestionPos: changeQuestionPos,
         addQuestion: updateAddQuestionPopUp,
         deleteQuestion: deleteQuestion,
@@ -43,7 +44,7 @@ const ActivityCreationSidebar = ({
         {type: "matching", icon: null, description: "Match Items"},
         {type: "labelPictures", icon: null, description: "Label a Picture"},
     ]
-    const onAddQuestionClick = (e) =>{
+    const onAddQuestionClick = (e: any) =>{
         const target = e.target.closest("button")
         if(!target) return
         const value = target.dataset.questionType

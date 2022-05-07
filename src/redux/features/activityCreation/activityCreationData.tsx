@@ -13,6 +13,7 @@ const activityCreationDataUnsaved = createSlice({
         activityDescription: "",
         activityTimer: null,
         activityTopicLabels: [],
+        activityShareSettings: {}
     },
     reducers:{
         updateUnsavedTopicLabels: (state, action) =>{

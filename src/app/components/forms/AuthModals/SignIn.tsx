@@ -2,9 +2,9 @@ import React from 'react';
 import PopUpBg from '../../utilities/popUp/PopUpBackground'
 import ExitIcon from '../../utilities/exitIcon/ExitIcon';
 import ReactDOM from 'react-dom';
-import GoogleSignInButton from '../EntryForms/LoginForm/GoogleSignInBtn';
+import GoogleSignInButton from './GoogleSignInBtn';
 
-export default function SignIn({ toggle, toggleOther }) {
+export default function SignIn({ toggle, toggleOther }: any) {
 
 	const switchMethod = () => {
 		toggle()
@@ -61,5 +61,5 @@ export default function SignIn({ toggle, toggleOther }) {
 					</div>
 				</div>
 			</div>
-		</PopUpBg>, document.getElementById('portal'));
+		</PopUpBg>, document.body);
 }

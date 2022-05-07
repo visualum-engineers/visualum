@@ -4,7 +4,7 @@ import { faEdit, faSave } from "@fortawesome/free-regular-svg-icons"
 import SortActivityCategoryItem from "./SortActivityCategoryItem"
 import { useDispatch } from "react-redux"
 import { updateQuestionData } from "../../../../../redux/features/activityCreation/activityCreationData"
-import {useState, useRef} from "react"
+import {useState, useRef, RefObject} from "react"
 import Droppable from "../../../utilities/dragAndDrop/DnDKit/NonSortableDnD/Droppable"
 import {SortableContext, verticalListSortingStrategy} from '@dnd-kit/sortable';
 
@@ -13,7 +13,7 @@ const SortActivityCategoryHeader = ({
     categoryIndex,
     preview,
     currQuestion,
-}) =>{
+}: any) =>{
     const [inputValue, setInputValue] = useState(data.title)
     const [editActive, setEditActive] = useState(false)
     const dispatch = useDispatch()
@@ -26,7 +26,7 @@ const SortActivityCategoryHeader = ({
             updateType:"delete-category",
         }))
     }
-    const onSaveCategory = (e) =>{
+    const onSaveCategory = (e: any) =>{
         let target, relatedTarget, action
         switch(e.type){
             case "blur":
@@ -118,8 +118,8 @@ const SortActivityCategory = ({
     currQuestion,
     isOver,
     dndDisabled,
-}) =>{
-    const defaultParentNode = useRef()
+}: any) =>{
+    const defaultParentNode = useRef() as RefObject<HTMLDivElement>
     const dispatch = useDispatch()
     const onAddCategoryItem = () =>{
         dispatch(updateQuestionData({
@@ -164,7 +164,7 @@ const SortActivityCategory = ({
                     categoryIndex = {categoryIndex}
                     preview = {preview}
                 >
-                    {data.answers.map((answer, index)=>{
+                    {data.answers.map((answer: any, index: number)=>{
                         return(<SortActivityCategoryItem
                             key={answer.id}
                             id={answer.id}

@@ -1,9 +1,12 @@
 import { useMemo, useState } from "react"
 import {debounce} from "lodash"
-const searchDataBase = async(string) =>{
+const searchDataBase = async(string: string) =>{
     return([{id: "3", content:"no"}, {id: "4", content: "yes"}])
 }
-const useSearchTopicLabels = () => {
+const useSearchTopicLabels = ():[
+    {id: string, content: string}[],
+    (e: any) => any
+] => {
     const initialState = [{id: "1", content:"science"}, {id: "2", content: "math"}]
     const [topicLabels, setTopicLabels] = useState(initialState)
 
@@ -11,7 +14,7 @@ const useSearchTopicLabels = () => {
     const searchDBLabels = async ({
         string,
         initialState
-    }) => {
+    }: any) => {
         try{
             const topicsRecieved = await searchDataBase(string)
 
@@ -32,7 +35,7 @@ const useSearchTopicLabels = () => {
             }, 500, {leading: true, trailing: true})
     , [])
 
-    const onSearch = async(string) => {
+    const onSearch = async(string: string) => {
             //const topics = 
             try{
                 const topics = debouncedSearchLabels({

@@ -16,14 +16,14 @@ export const SortableItemBody = ({
     index,
     onDeleteClick = null,
     preview,
-}) => {
+}: any) => {
     return(
         <>
             <div className="sort-creation-category-item-content">
                 {!editActive ? 
                     <button 
                         className="sort-creation-category-item-content-inner"
-                        onDoubleClick = {setEditActive ? (e) => setEditActive(true): null}
+                        onDoubleClick = {setEditActive ? (e) => setEditActive(true): () => {}}
                         disabled = {preview}
                     >
                         {data.content}
@@ -34,7 +34,7 @@ export const SortableItemBody = ({
                 >
                     <textarea
                         value={inputValue}
-                        onChange = {setInputValue ? (e) => setInputValue(e.target.value): null}
+                        onChange = {setInputValue ? (e) => setInputValue(e.target.value): () => {}}
                         onBlur = {onSaveClick}
                         data-answer-index={index}
                         autoFocus={true}
@@ -80,7 +80,7 @@ const SortActivityCategoryItem = ({
     currQuestion,
     dndDisabled,
     preview
-}) =>{
+}: any) =>{
     const dispatch = useDispatch()
     const [editActive, setEditActive] = useState(false)
     const [inputValue, setInputValue] = useState(data.content)
@@ -89,7 +89,7 @@ const SortActivityCategoryItem = ({
         setInputValue(data.content)
     }, [data.content])
     
-    const onSaveClick = (e) =>{
+    const onSaveClick = (e: any) =>{
         let target, relatedTarget, action
         switch(e.type){
             case "blur":
@@ -122,7 +122,7 @@ const SortActivityCategoryItem = ({
         }))
         setEditActive(false)
     }
-    const onDeleteClick = (e) =>{
+    const onDeleteClick = (e: any) =>{
         const target = e.target.closest("button")
         if(!target) return
         const answerIndex = target.dataset.answerIndex

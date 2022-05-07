@@ -3,23 +3,24 @@ import AsyncCreatableSelect from 'react-select/async-creatable';
 import { useDispatch, useSelector } from "react-redux";
 import { updateUnsavedTopicLabels } from '../../../../../../redux/features/activityCreation/activityCreationData';
 import useSearchTopicLabels from '../../../../../hooks/use-search-topic-labels';
+import { RootState } from '../../../../../../redux/store';
 const animatedComponents = makeAnimated();
 
 const ActivityTopicLabels = ({
     smallWindowWidth, 
-}) =>{
+}: any) =>{
     const [topicLabels, searchLabels] = useSearchTopicLabels()
-    const activityTopics = useSelector(state => state.activityCreation.data.unsaved.activityTopicLabels)
+    const activityTopics = useSelector((state: RootState) => state.activityCreation.data.unsaved.activityTopicLabels)
     const dispatch = useDispatch()
 
-    const defaultOptions = topicLabels.map((topicLabel) => {
+    const defaultOptions = topicLabels.map((topicLabel: any) => {
         return({value: topicLabel.id, label: topicLabel.content})
     })
-    const options = async(string) => {
+    const options = async(string: any) => {
         try{
             const topics = await searchLabels(string)
             return (
-                topics.map((topicLabel) => {
+                topics.map((topicLabel: any) => {
                 return({value: topicLabel.id, label: topicLabel.content})
             }))
         } 
@@ -28,21 +29,21 @@ const ActivityTopicLabels = ({
         }
     }
 
-    const onSelectChange = (arr) =>{
+    const onSelectChange = (arr: any) =>{
         dispatch(updateUnsavedTopicLabels(arr))
     }
     const customStyles = {
 
-        indicatorsContainer:(provided, state) =>({
+        indicatorsContainer:(provided: any, state: any) =>({
             ...provided,
             height: "3.3rem"
         }),
-        valueContainer: (provided, state) =>({
+        valueContainer: (provided: any, state: any) =>({
             ...provided,
             paddingTop: 0,
             paddingBottom: 0
         }),
-        multiValueLabel: (provided, state) =>({
+        multiValueLabel: (provided: any, state: any) =>({
             ...provided,
             fontSize: "0.6rem",
            

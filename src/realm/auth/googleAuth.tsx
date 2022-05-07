@@ -1,13 +1,13 @@
 import * as Realm from "realm-web";
 
-export const googleLogin = async(
+export const googleAuth = async({
     res, 
     app, 
     customErrorFunc = null,
     customData = {
         account_type: "student",
     }
-) =>{
+}:any) =>{
     try{
         const credentials = Realm.Credentials.google(res.credential)
         const payload = {

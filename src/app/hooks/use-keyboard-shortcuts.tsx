@@ -13,9 +13,12 @@ const DEFAULT_OPTIONS = {
 };
 
 const useKeyboardShortcut = (
-  shortcutKeys,
-  callback,
-  options = DEFAULT_OPTIONS
+  shortcutKeys: any,
+  callback: any,
+  options = DEFAULT_OPTIONS as {
+    overrideSystem?: boolean,
+    ignoreInputFields?: boolean
+  }
 ) => {
   if (!Array.isArray(shortcutKeys))
     throw new Error(
@@ -34,7 +37,7 @@ const useKeyboardShortcut = (
 
   // Normalizes the shortcut keys a deduplicated array of lowercased keys.
   const shortcutArray = useMemo(
-    () => uniq_fast(shortcutKeys).map((key) => String(key).toLowerCase()),
+    () => uniq_fast(shortcutKeys).map((key: any) => String(key).toLowerCase()),
     // While using JSON.stringify() is bad for most larger objects, this shortcut
     // array is fine as it's small, according to the answer below.
     // https://github.com/facebook/react/issues/14476#issuecomment-471199055
@@ -42,10 +45,10 @@ const useKeyboardShortcut = (
     [JSON.stringify(shortcutKeys)]
   );
   // useRef to avoid a constant re-render on keydown and keyup.
-  const heldKeys = useRef([]);
+  const heldKeys = useRef<any>([]);
 
   const keydownListener = useCallback(
-    (keydownEvent) => {
+    (keydownEvent: any) => {
       const loweredKey = String(keydownEvent.key).toLowerCase();
       if (!(shortcutArray.indexOf(loweredKey) >= 0)) return;
 
@@ -92,7 +95,7 @@ const useKeyboardShortcut = (
   );
 
   const keyupListener = useCallback(
-    (keyupEvent) => {
+    (keyupEvent: any) => {
       const raisedKey = String(keyupEvent.key).toLowerCase();
       if (!(shortcutArray.indexOf(raisedKey) >= 0)) return;
 

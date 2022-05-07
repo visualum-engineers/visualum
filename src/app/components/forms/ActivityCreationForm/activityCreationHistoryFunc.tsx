@@ -6,9 +6,9 @@ export const resetHistory = ({
     dispatch,
     questionNum,
     newState
-}) => {
+}: any) => {
     batch(()=>{
-        dispatch(updateResetPopUp())
+        dispatch(updateResetPopUp(false))
         //update current data in redux store
         dispatch(updateQuestionData({
             questionNum: questionNum,
@@ -19,11 +19,11 @@ export const resetHistory = ({
 
 export const undoHistory = ({
     dispatch
-}) =>{
+}: any) =>{
     dispatch({type: "activityCreationData/undo"})
 }
 export const redoHistory = ({
     dispatch
-}) =>{
+}: any) =>{
     dispatch({type: "activityCreationData/redo"})
 }

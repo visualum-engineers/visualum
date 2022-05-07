@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import { SortableItemBody } from './SortActivityCategoryItem';
 import { useState } from 'react';
-const Item = forwardRef(({...props}, ref) => {
+const Item = forwardRef(({...props}: any, ref:any ) => {
     //find proper draggable
     //this is O(n). To make look up O(1)
     //we would have to generate a hashmap/object

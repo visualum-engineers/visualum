@@ -1,4 +1,4 @@
-export const overrideSystemHandling = (e) => {
+export const overrideSystemHandling = (e: any) => {
     if (e) {
       if (e.preventDefault) e.preventDefault();
       if (e.stopPropagation) {
@@ -11,9 +11,9 @@ export const overrideSystemHandling = (e) => {
   
   // Function stolen from this Stack Overflow answer:
   // https: stackoverflow.com/a/9229821
-  export const uniq_fast = (a) => {
-    var seen = {};
-    var out = [];
+  export const uniq_fast = (a: any) => {
+    var seen: any = {};
+    var out: any = [];
     var len = a.length;
     var j = 0;
     for (var i = 0; i < len; i++) {
@@ -31,13 +31,13 @@ export const overrideSystemHandling = (e) => {
   // I.E if the shortcut array is ["Shift", "E", "A"], this function will ensure
   // that "E" is held down before "A", and "Shift" is held down before "E".
   export const checkHeldKeysRecursive = (
-    shortcutKey,
+    shortcutKey: any,
     // Tracks the call interation for the recursive function,
     // based on the previous index;
-    shortcutKeyRecursionIndex = 0,
-    shortcutArray,
-    heldKeysArray
-  ) => {
+    shortcutKeyRecursionIndex:any = 0,
+    shortcutArray: any,
+    heldKeysArray: any
+  ): any => {
     const shortcutIndexOfKey = shortcutArray.indexOf(shortcutKey);
     const keyPartOfShortCut = shortcutArray.indexOf(shortcutKey) >= 0;
   
