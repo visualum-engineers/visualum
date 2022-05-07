@@ -1,7 +1,7 @@
 const updateSortableLists = ({
     oldData,
     newData
-})=>{
+}: any)=>{
     let updatedData
     const {destination, draggableId, source} = newData.newData
     const startCategory = oldData.categories[source.startCategoryIndex]

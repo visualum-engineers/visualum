@@ -2,7 +2,7 @@ const ResizableHande = ({
     customClass,
     onResizeStartWrapper, 
     handleType
-}) =>{
+}: any) =>{
     let handleClass
     switch(handleType){
         case "N":

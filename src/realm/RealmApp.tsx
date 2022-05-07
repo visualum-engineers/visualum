@@ -1,6 +1,6 @@
 import React from "react";
 import * as Realm from "realm-web";
-const RealmAppContext = React.createContext();
+const RealmAppContext = React.createContext({});
 
 export const useRealmApp = () => {
   const app = React.useContext(RealmAppContext);
@@ -10,10 +10,12 @@ export const useRealmApp = () => {
     );
   }
   return app;
-};
+}
 
-
-export const RealmAppProvider = ({children, appId}) => {  
+export const RealmAppProvider = ({children, appId}: {
+  children: JSX.Element
+  appId: string
+}) => {  
   const [app, setApp] = React.useState(new Realm.App(appId));
   
   React.useEffect(() => {
@@ -22,7 +24,7 @@ export const RealmAppProvider = ({children, appId}) => {
   //const dispatch = useDispatch()
   // Wrap the Realm.App object's user state with React state
   const [currentUser, setCurrentUser] = React.useState(app.currentUser);
-  async function logIn(credentials, errorCallBack = null) {
+  async function logIn(credentials: any, errorCallBack: (e: any) => void | null ) {
     try{
         await app.logIn(credentials);
         // If successful, app.currentUser is the user that just logged in

@@ -1,6 +1,6 @@
 import DroppableArea from "./DroppableArea"
 import useBodyAreaResizable from "../../../../hooks/use-body-area-resizable"
-import { useRef } from "react"
+import { RefObject, useRef } from "react"
 const WordBank = ({
         data, 
         firstElTap, 
@@ -16,10 +16,10 @@ const WordBank = ({
         innerDroppableClassName,
         draggingOverClass,
         draggableClassName
-    }) => {
+    }: any) => {
         
     //word bank resizing
-    const wordBankRef = useRef()
+    const wordBankRef = useRef() as RefObject<HTMLDivElement>
     const {
         posData: wordBankPos, 
         handle: wordBankHandle

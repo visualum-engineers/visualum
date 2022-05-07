@@ -5,7 +5,7 @@ import PopUpBg from "../popUp/PopUpBackground";
 
 const ImgContainerContext = createContext<{
   zoomState: boolean;
-  onImgContainerClick: () => void;
+  onImgContainerClick: (e: any) => void;
 }>({
   zoomState: false,
   onImgContainerClick: () => {}

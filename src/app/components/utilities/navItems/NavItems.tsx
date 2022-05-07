@@ -9,14 +9,14 @@ const NavItem = ({
     hidden="false",
     onClick,
     navType
-}) =>{  
-    const navTypes = {
+}: any) =>{  
+    const navTypes: any = {
         link: <a
                 className={`${sidebar === "primary" ? "primary":"secondary"}-sidebar-link ${customClass? customClass:""}`} 
                 aria-label={ariaLabel ? ariaLabel: null}
                 href={url}
                 aria-hidden = {hidden}
-                tabIndex={`${hidden ? "-1":"0"}`}
+                tabIndex={hidden ? -1:0}
             >
                     <span className="nav-item-text">{content}</span>
             </a>,
@@ -25,7 +25,7 @@ const NavItem = ({
                 aria-label={ariaLabel ? ariaLabel: null}
                 data-action-label ={ariaLabel ? ariaLabel : null}
                 aria-hidden = {hidden}
-                tabIndex={`${hidden ? "-1":"0"}`}
+                tabIndex={hidden ? -1:0}
                 onClick={onClick}
             >
                 <span className="nav-item-text">{content}</span>
@@ -43,7 +43,8 @@ const NavItem = ({
                 aria-label={ariaLabel ? ariaLabel: null}
                 onClick={handleSideBar}
                 aria-hidden = {hidden}
-                tabIndex={`${hidden ? "-1":"0"}`}
+                tabIndex={hidden ? -1:0}
+
             >
                     <span className="nav-item-text">{content}</span>
             </button>

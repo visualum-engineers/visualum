@@ -1,6 +1,6 @@
 import { useRef } from "react"
 const useDetectSwipe = () =>{
-    const touchStartPos = useRef(null)
+    const touchStartPos = useRef<null | {x: any, y: any}>(null)
     const touchDirection = useRef({
         left: false,
         right: false,
@@ -8,7 +8,7 @@ const useDetectSwipe = () =>{
         down: false
     })
 
-    const onTouchStart = (e) => {
+    const onTouchStart = (e: any) => {
         touchDirection.current = {
             left: false,
             right: false,
@@ -18,7 +18,7 @@ const useDetectSwipe = () =>{
         touchStartPos.current = {x: e.touches[0].clientX, y: e.touches[0].clientY}
     }
     
-    const onTouchEnd = (e, threshold=0) => {
+    const onTouchEnd = (e: any, threshold=0) => {
         if(!touchStartPos.current) return touchDirection.current
         const {x, y} = touchStartPos.current
         touchStartPos.current = null

@@ -1,6 +1,6 @@
 import _ from "lodash"
-const sortActivityValidation = (data) =>{
-    let unfinished = {}
+const sortActivityValidation = (data: any) =>{
+    let unfinished: any = {}
     const categoriesArr = Object.keys(data.categories)
     for (let i in categoriesArr){
         //evaluate

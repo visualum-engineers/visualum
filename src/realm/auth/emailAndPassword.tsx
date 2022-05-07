@@ -5,12 +5,14 @@ export const handleEmailAndPWLogin = async ({
     email, 
     password,
     app
-}) => {
+}: any) => {
     const isValidEmailAddress = validateEmailFormat(email);
-    if(!isValidEmailAddress) throw new Error({err: "Email is invalid."})
+    if(!isValidEmailAddress) throw new Error("Email is invalid.")
     try {  
       await app.logIn(Realm.Credentials.emailPassword(email, password));
     } catch (err) {
-      throw new Error ({err: err})
+      const error: any = new Error("Could not login using email and password")
+      error.metadata = err
+      return error
     }
   };

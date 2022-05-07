@@ -8,11 +8,11 @@ const useActivityMiniScreenData = ({
     changeCurrQuestion,
     //this a component
     SlideComponent
-}) =>{
+}: any) =>{
     const dispatch = useDispatch()
-    const slides = useSelector(reduxSelectorFunc)
-    const currQuestion = useSelector(currQuestionSelector)
-    const miniScreenData = slides.map((slide, index)=>{
+    const slides: any = useSelector(reduxSelectorFunc)
+    const currQuestion: any = useSelector(currQuestionSelector)
+    const miniScreenData = slides.map((slide: any, index: number)=>{
         return{
             key: slide.key,
             slide: <SlideComponent
@@ -20,21 +20,21 @@ const useActivityMiniScreenData = ({
                         questionType = {slide.questionType}
                         preview={true}
                     />,
-            slideAriaLabel: `go-to-slide-${parseInt(index)+1}`,
+            slideAriaLabel: `go-to-slide-${parseInt(index.toString())+1}`,
         }
     })
-    const onSlideClick = (e) =>{
+    const onSlideClick = (e: any) =>{
         const target = e.target.closest(".mini-screen-slide");
         if(!target) return
         const value = target.dataset.slideNum
         if(!value) return 
         dispatch(changeCurrQuestion(value))
     }
-    const onAddNewClick = (e) =>{
+    const onAddNewClick = (e: any) =>{
         dispatch(addQuestion(true))
     }
     
-    const onRemoveClick =(e) =>{
+    const onRemoveClick =(e: any) =>{
         const target = e.target.closest("button")
         if(!target) return
         const value = target.dataset.questionNum
@@ -58,13 +58,13 @@ const useActivityMiniScreenData = ({
         })
     }
 
-    const onDragEnd = (result) =>{
+    const onDragEnd = (result: any) =>{
         const {draggableId, source, destination} = result
         if(!destination || !source) return
         const startIndex = source.index
         const endIndex = destination.index
         if(startIndex === endIndex) return
-        const slideData = slides.filter((slide) => slide.key.toString() === draggableId)[0]
+        const slideData = slides.filter((slide: any) => slide.key.toString() === draggableId)[0]
        
         dispatch(changeQuestionPos({
             startIndex: startIndex,

@@ -11,13 +11,13 @@ import {
 export const closestCorners = ({
   collisionRect,
   droppableContainers,
-}
+}: any
 , {
   containers,
   overlayRect,
   isOver,
   cleanup = false,
-}) => {
+}: any) => {
   if(cleanup) return updateDroppableRect(null, cleanup) 
   let minDistanceToCorners = Infinity;
   let minDistanceContainer = null;
@@ -43,7 +43,7 @@ export const closestCorners = ({
     if(!droppableNode) continue
 
     //grab all droppables bounding rects
-    let currentDroppablePostion
+    let currentDroppablePostion: any
 
     if(id in containers) {
         const exposedNodes = droppableContainer.data.current

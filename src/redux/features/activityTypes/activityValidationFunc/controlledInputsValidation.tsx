@@ -1,5 +1,5 @@
  import _ from "lodash"
- const controlledInputsValidation = (data) =>{
+ const controlledInputsValidation = (data: any) =>{
     //return true if unfinished
     return _.isEmpty(data.clientAnswer)
 }

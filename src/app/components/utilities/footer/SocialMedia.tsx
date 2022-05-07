@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faInstagram, faLinkedinIn, faFacebookF} from "@fortawesome/free-brands-svg-icons"
-const SocialMedia = ({mediumWidth}) => {
+const SocialMedia = ({mediumWidth}: any) => {
   return (
     <div className="col-md-3 col-12 footer-social-media">
       <div>

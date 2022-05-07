@@ -1,11 +1,11 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-export default function SlimNav(props) {
-    let history = useHistory();
+export default function SlimNav(props: any) {
+    let navigate = useNavigate();
 
     function handleClick() {
-        history.push("/");
+        navigate("/")
     }
     return (
         <nav className={`navbar-dark bg-light d-flex justify-content-between align-items-center ${props.type}`}>

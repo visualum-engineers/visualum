@@ -21,7 +21,7 @@ const MoreInfoBtn = ({
                 aria-labelledby={customDropDownID}
                 onMouseEnter = {handleInfoBtn}
                 onMouseLeave = {handleInfoBtn}
-                onClick = {onClick? onClick : null}
+                onClick = {onClick? onClick : undefined}
             >
                 <FontAwesomeIcon icon={faInfoCircle}/>   
             </button>

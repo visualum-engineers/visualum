@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { newSortCategory, newMatchKeyPair } from './dataFormats';
-const questionFormat = (type) =>{
+const questionFormat = (type: any) =>{
     switch(type){
         case "sort":
             return{

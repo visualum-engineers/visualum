@@ -4,7 +4,7 @@ const getResultOnTap = ({
     setFirstElTap, 
     listItemDraggableClass,
     listItemInnerDroppableClass,
-}) =>{
+}: any) =>{
     //means a selection hasnt happened so skip for keyboard
     if(e.type === "keydown" && e.key !=="Enter") return
     //update the first element

@@ -5,7 +5,7 @@
 // you should use CSS Transition, from React Transition Group
 // on the children and wrap this component around it 
 // in addition, in props, set ReactTransitionGroup to true 
-const SingleSlideCarousel = (props) =>{
+const SingleSlideCarousel = (props: any) =>{
     const carouselPosition = {transform: `translateX(${-(props.slideNum-1) * 100}%)`}
     return (
         <>  
@@ -22,7 +22,7 @@ const SingleSlideCarousel = (props) =>{
             : <div className = {"single-slide-carousel-nav-btns"}> </div>
             }
                 <div
-                    style={!props.ReactTransitionGroup ? carouselPosition : null} 
+                    style={!props.ReactTransitionGroup ? carouselPosition : undefined} 
                     className="single-slide-container w-100 d-flex">
                         {//should render slides inside
                             props.children
@@ -40,7 +40,7 @@ const SingleSlideCarousel = (props) =>{
                 : <div className = {"single-slide-carousel-nav-btns"}> </div>
                 }
                 <div className = {`${props.carouselIndicators} single-slide-carousel-indicators d-flex justify-content-center`}> 
-                    {props.slides.map((content, index) =>{
+                    {props.slides.map((content: any, index: number) =>{
                         return (<div
                             key = {index} 
                             className={`single-slide-caro-indicator${index+1 === props.slideNum? " active" : ""}`}> 

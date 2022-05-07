@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 //NavToggler Icon
-function NavIcon(props) {
+function NavIcon(props: any) {
     const { toggled } = props;
     return (
         <span id="nav-icon" className={`fa home-page-nav ${toggled ? 'fa-arrow-down' : 'fa-bars'}`} />

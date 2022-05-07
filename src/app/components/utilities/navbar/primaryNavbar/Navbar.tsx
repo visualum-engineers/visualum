@@ -4,7 +4,7 @@ import NavToggler from './NavTogglerBtn';
 import { Link } from 'react-router-dom';
 import useScrollPos from '../../../../hooks/use-scroll-pos';
 
-export default function Navbar(props) {
+export default function Navbar(props: any) {
 
   const windowScrollY = useScrollPos()
 

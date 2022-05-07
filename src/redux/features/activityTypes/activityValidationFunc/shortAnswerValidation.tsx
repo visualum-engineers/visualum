@@ -1,4 +1,4 @@
-const shortAnswerValidation = (data) =>{
+const shortAnswerValidation = (data: any) =>{
     if(!data.clientAnswer) return true
     //remove whitespace
     const answer = data.clientAnswer.replace(/\s/g, "");

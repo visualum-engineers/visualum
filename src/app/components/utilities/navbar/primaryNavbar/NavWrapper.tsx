@@ -6,7 +6,7 @@ import Footer from "../../footer/Footer"
 const NavWrapperContext = createContext<any>(null)
 const NavWrapper= ({
     children
-}) => {
+}: {children: JSX.Element}) => {
     const windowWidth = useWindowWidth(992);
     const { toggleSignUp, toggleSignIn, authModal } = useAuthModal();
     return (

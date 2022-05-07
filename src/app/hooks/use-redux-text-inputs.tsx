@@ -10,7 +10,7 @@ const useReduxTextInputs = ({
     selectorFunc, 
     inputType,
     charLimit,
-}) =>{
+}: any) =>{
     const reduxTextInput = useSelector(selectorFunc)
     const dispatch = useDispatch()
     const [localTextInput, setLocalTextInput] = useState(reduxTextInput)
@@ -22,12 +22,12 @@ const useReduxTextInputs = ({
     
     //updates redux text input
     const updateReduxInput = (
-        newInput,
+        newInput: any,
     ) => dispatch(
         reduxUpdateFunc(newInput)
     )
 
-    const onTextInputChange = (e) =>{
+    const onTextInputChange = (e: any) =>{
         const target = e.target
         const value = target.closest(inputType).value
         if(charLimit && value.length > charLimit) return

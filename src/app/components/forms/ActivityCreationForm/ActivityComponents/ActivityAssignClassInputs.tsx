@@ -6,11 +6,14 @@ import { RootState } from "../../../../../redux/store";
 const animatedComponents = makeAnimated();
 
 const ActivityAssignClassInputs = ({ smallWindowWidth }: any) => {
-  const currentUserClasses = useSelector((state: RootState) => state.userInfo.classes);
-  const activityAssignClassInputs = useSelector(
-    (state: RootState) => state.activityCreation.data.saved.present.assignedClasses
+  const currentUserClasses = useSelector(
+    (state: RootState) => state.userInfo.classes
   );
-  const options = currentUserClasses.map((teacherClass) => {
+  const activityAssignClassInputs = useSelector(
+    (state: RootState) =>
+      state.activityCreation.data.saved.present.assignedClasses
+  );
+  const options = currentUserClasses.map((teacherClass: any) => {
     return { value: teacherClass.id, label: teacherClass.content };
   });
   return (
@@ -35,4 +38,6 @@ const ActivityAssignClassInputs = ({ smallWindowWidth }: any) => {
     </div>
   );
 };
+
 export default ActivityAssignClassInputs;
+

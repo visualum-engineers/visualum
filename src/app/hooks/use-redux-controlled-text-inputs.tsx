@@ -13,7 +13,8 @@ const useReduxControlledTextInputs = ({
   const dispatch = useDispatch();
 
   //updates redux text input
-  const updateReduxInput = (newInput: any) => dispatch(reduxUpdateFunc(newInput));
+  const updateReduxInput = (newInput: any) =>
+    dispatch(reduxUpdateFunc(newInput));
 
   const onTextInputChange = (e: any) => {
     const target = e.target;
@@ -21,7 +22,10 @@ const useReduxControlledTextInputs = ({
     if (charLimit && value.length > charLimit) return;
     updateReduxInput(value);
   };
-  
-  return [typeof reduxTextInput === "string" ? reduxTextInput: '', onTextInputChange];
+
+  return [
+    typeof reduxTextInput === "string" ? reduxTextInput : "",
+    onTextInputChange,
+  ];
 };
 export default useReduxControlledTextInputs;

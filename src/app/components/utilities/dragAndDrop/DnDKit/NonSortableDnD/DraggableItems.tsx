@@ -8,7 +8,7 @@ const DraggableItems = ({
     isDraggingClass, 
     onTap=null, 
     droppableId
-}) =>{
+}: any) =>{
     return(
         <Draggable
             droppableId = {droppableId}

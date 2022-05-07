@@ -4,7 +4,7 @@ import updateSortableLists from '../utilityFunc/updateSortableLists';
 const updateSortQuestion = ({
     oldData,
     newData
-})=>{
+}: any)=>{
     let categoryIndex, 
     category, 
     answerIndex, 

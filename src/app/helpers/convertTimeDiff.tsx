@@ -1,5 +1,5 @@
 //uses a greedly algo to get difference
-const convertTimeDiff =(startTime, endTime) =>{
+const convertTimeDiff =(startTime: any, endTime: any) =>{
     let difference = new Date(endTime).getTime() - new Date(startTime).getTime()
     const hour = 60*60*1000
     const minutes = 60*1000

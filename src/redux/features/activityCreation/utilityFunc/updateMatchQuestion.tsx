@@ -4,7 +4,7 @@ import removeWhiteSpace from "../../../../app/helpers/removeWhiteSpace";
 const updateMatchQuestion = ({
     oldData,
     newData
-}) =>{
+}: any) =>{
     //console.log(oldData)
     let updatedData,
     oldKeyPair,

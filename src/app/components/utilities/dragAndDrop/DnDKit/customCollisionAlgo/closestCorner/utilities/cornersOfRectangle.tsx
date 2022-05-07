@@ -1,5 +1,5 @@
 export default function cornersOfRectangle(
-    rect,
+    rect: any,
     left = rect.offsetLeft,
     top = rect.offsetTop
   ) {
@@ -22,3 +22,4 @@ export default function cornersOfRectangle(
       },
     ];
   }
+  

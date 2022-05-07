@@ -1,6 +1,6 @@
 import _ from "lodash";
-const labelPicValidation = (data) =>{
-    let unfinished = {}
+const labelPicValidation = (data: any) =>{
+    let unfinished: any = {}
     const categoriesArr = Object.keys(data.categories)
     for (let i in categoriesArr){
         //evaluate

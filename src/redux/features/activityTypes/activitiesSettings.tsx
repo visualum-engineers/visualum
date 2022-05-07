@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit"
 type ActivitySettingsProps = {
-    dndEnabled: boolean,
-    userSetDnDEnabled: boolean,
-    timeRemindersEnabled: boolean,
-    timeIntervalDuration: number,
-    autoPopUpsEnabled: boolean,
+    [key: string]: any;
+    dndEnabled: boolean;
+    userSetDnDEnabled: boolean;
+    timeRemindersEnabled: boolean;
+    timeIntervalDuration: number;
+    autoPopUpsEnabled: boolean;
     resetPopUp: any
 }
 const activitiesSettingsSlice = createSlice({
@@ -19,10 +20,12 @@ const activitiesSettingsSlice = createSlice({
     } as ActivitySettingsProps,
     reducers:{
         enableSettings: (state, action) =>{
-            if(!Array.isArray(action.payload)) state[action.payload] = true
+            const newState = {...state}
+            if(!Array.isArray(action.payload)) newState[action.payload] = true
             else {
-                for(let i of action.payload) state[i] = true
+                for(let i of action.payload) newState[i] = true
             }
+            return newState
         },
         disableSettings: (state, action) =>{
             if(!Array.isArray(action.payload)) state[action.payload] = false

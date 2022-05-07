@@ -15,21 +15,21 @@ import html2canvas from 'html2canvas'
  * @returns {HookReturn}
  */
 
-const useScreenshot = ({ type, quality } = {}) => {
-  const [image, setImage] = useState(null)
+const useScreenshot = ({ type, quality }: any = {}) => {
+  const [image, setImage] = useState<null | string>(null)
   const [error, setError] = useState(null)
   /**
    * convert html node to image
    * @param {HTMLElement} node
    */
-  const takeScreenShot = (node) => {
+  const takeScreenShot = (node: any) => {
     if (!node) {
       throw new Error('You should provide correct html node.')
     }
     return html2canvas(node)
       .then((canvas) => {
         const croppedCanvas = document.createElement('canvas')
-        const croppedCanvasContext = croppedCanvas.getContext('2d')
+        const croppedCanvasContext: any = croppedCanvas.getContext('2d')
 
         // init data
         const cropPositionTop = 0
@@ -69,7 +69,7 @@ const useScreenshot = ({ type, quality } = {}) => {
  * @param {string} extension
  * @param  {string[]} parts of file name
  */
-const createFileName = (extension = '', ...names) => {
+const createFileName = (extension = '', ...names: any) => {
   if (!extension) {
     return ''
   }

@@ -1,5 +1,5 @@
 import { faColumns, faBookOpen, faGraduationCap, faSignOutAlt, faStore, faUsers } from '@fortawesome/free-solid-svg-icons'
-export const links = {
+export const links: any = {
 	teacher: [
 		{
 			name: "Dashboard",

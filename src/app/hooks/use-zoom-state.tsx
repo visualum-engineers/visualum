@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { useZoomed } from "../components/utilities/contexts/ZoomableContext"
-const useZoomState = ({onClick} = {}) =>{
+const useZoomState = ({onClick}:any): [boolean, (e: any) => void] =>{
     const [stateChange, setStateChange] = useState(false)
     const zoom = useZoomed()
-    const zoomState = zoom ? zoom.currZoomState : null
-    const onLocalClick = (e) => {
+    const zoomState = zoom ? zoom.currZoomState : false
+    const onLocalClick = (e: any) => {
         e.preventDefault()
         if(stateChange) return
         //prevent constant clicking, and allow animation to play

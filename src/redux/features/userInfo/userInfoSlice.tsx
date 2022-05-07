@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+
 export const userInfoSlice = createSlice({
     name: 'userInfo',
     initialState: {
@@ -19,7 +20,7 @@ export const userInfoSlice = createSlice({
         payment: "",
         rememberMe: false,
         classes: [{id:"afg", content:"7C Science"}, {id:"hui", content:"7B Science"}],
-    },
+    }as any,
     reducers: {
         updated: (state, action) => {
             state[action.payload[0]] = action.payload[1]

@@ -5,7 +5,7 @@ const questionUpdate = ({
     type,
     oldData,
     newData
-}) =>{
+}: any) =>{
     let updatedData
     //updating general props of each question type
     if(newData.actionType === "update-points"){

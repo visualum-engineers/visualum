@@ -1,8 +1,11 @@
 import React, { useContext, useState } from "react"
-const ZoomedContext = React.createContext(false)
+const ZoomedContext = React.createContext({
+    currZoomState: false, 
+    changeZoomState: (e: any) => {}
+})
 const ZoomableContext = ({
     children
-}) => {
+}: {children: JSX.Element}) => {
     const [zoomedIn, setZoomedIn] = useState(false)
 
     return(

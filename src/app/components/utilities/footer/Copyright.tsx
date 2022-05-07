@@ -5,7 +5,7 @@ import { faCopyright } from "@fortawesome/free-regular-svg-icons";
 let d = new Date()
 let time = d.getFullYear()
 
-const Copyright = ({ mediumWidth }) => {
+const Copyright = ({ mediumWidth }: any) => {
   return (
     <div className="footer-copyright">
       <div className="footer-logo">

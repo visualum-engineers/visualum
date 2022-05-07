@@ -61,14 +61,14 @@ export default function UserProfile() {
     );
 }
 
-function UserDropdown(props) {
+function UserDropdown(props: any) {
     let navigate = useNavigate();
 
-    const handleButtonClick = (val) => {
+    const handleButtonClick = (val: any) => {
         navigate(`/${val}`)
     }
 
-    const values = links[props.type].map(link => {
+    const values = links[props.type].map((link: any) => {
         return (
             <button className='user-dropdown-button' onClick={() => handleButtonClick(link.value)}>
                 <span className='user-dropdown-text'>{link.name}</span>

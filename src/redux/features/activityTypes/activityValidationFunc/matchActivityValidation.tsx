@@ -1,6 +1,6 @@
 import _ from "lodash"
-const matchActivityValidation = (data) =>{
-    let unfinished = {}
+const matchActivityValidation = (data: any) =>{
+    let unfinished: any = {}
     const categoriesArr = Object.keys(data.keyPairs)
     for (let i in categoriesArr){
         //evaluate

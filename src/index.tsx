@@ -7,10 +7,10 @@ import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import * as serviceWorker from './serviceWorker';
 import { RealmAppProvider } from './realm/RealmApp'
-
+const appId = process.env["REACT_APP_REALM_APP_ID"]
 ReactDOM.render(
   <React.StrictMode>
-    <RealmAppProvider appId={process.env["REACT_APP_REALM_APP_ID"]}>
+    <RealmAppProvider appId={appId ? appId : ""}>
       <Provider store={store}>
         <App />
       </Provider>

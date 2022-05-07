@@ -1,4 +1,4 @@
-const sortActivityChoices = (numChoices) =>{
+const sortActivityChoices = (numChoices: any) =>{
     let choices = []
     for(let i=0; i<numChoices; i++) choices.push({id: i+1, content:"choice" + (i + 1)})
     return choices

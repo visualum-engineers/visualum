@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const FooterColumns = ({mediumWidth}) => {
+const FooterColumns = ({mediumWidth}: any) => {
   return (
     <div className="col-md-9 col-12 d-flex flex-wrap footer-columns-container">
       <div className="d-flex flex-column footer-column">

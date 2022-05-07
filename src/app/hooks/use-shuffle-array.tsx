@@ -1,4 +1,4 @@
-const shuffleItems = (array) => {
+const shuffleItems = (array: []) => {
     let newArr = [...array]   
     let currentIndex = newArr.length,  randomIndex;
     // While there remain elements to shuffle...
