@@ -1,7 +1,7 @@
 import SortableArea from "../../utilities/dragAndDrop/DnDKit/SortableDnD/SortableArea"
 import MoreInfoBtn from "../../utilities/moreInfoBtn/MoreInfoBtn"
 import useBodyAreaResizable from "../../../hooks/use-body-area-resizable"
-import {useRef} from "react"
+import {RefObject, useRef} from "react"
 const SortActivityCategories = ({
         numCategories,
         data, 
@@ -13,8 +13,8 @@ const SortActivityCategories = ({
         moreInfoOnClick=null,
         disableDnD=null,
         smallWindowWidth
-    }) =>{
-    const categoriesResizableRef = useRef()
+    }: any) =>{
+    const categoriesResizableRef = useRef() as RefObject<HTMLDivElement>
     const {
         posData: categoriesContainerPos, 
         handle: categoriesResizeHandle,
@@ -57,7 +57,7 @@ const SortActivityCategories = ({
                         </div>
                     </div>
                     <div className="d-flex justify-content-center flex-wrap h-100 sort-activity-category-droppables">
-                        {numCategories.map((columnTitle, columnIndex)=> {
+                        {numCategories.map((columnTitle: any, columnIndex: number)=> {
                             const header = <p className="sort-activity-droppable-header">{columnTitle}</p>
                             const first = ((columnIndex) % 2) === 0 
                             return (

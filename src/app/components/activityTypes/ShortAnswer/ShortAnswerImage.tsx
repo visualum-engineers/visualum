@@ -5,7 +5,7 @@ const ShortAnswerImage = ({
     data,
     customClass,
     popUpBgStyles
-}) =>{
+}: any) =>{
     return(
         <ZoomableContext>
             <ImageContainer 

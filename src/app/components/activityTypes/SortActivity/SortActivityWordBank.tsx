@@ -21,7 +21,7 @@ const WordBank = ({
     draggingOverClass,
     draggableClassName,
 
-}) => {
+}: any) => {
     const parentNode= useRef()
     const wordBankResizableRef = useRef()
     const {

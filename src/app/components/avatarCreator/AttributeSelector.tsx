@@ -2,7 +2,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
-export default function AttributeSelector(props) {
+export default function AttributeSelector(props: any) {
 	return (
 		<div className='attribute-selector'>
 			<div className='attr-selector-button' onClick={props.handleDecrement}>

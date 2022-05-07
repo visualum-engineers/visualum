@@ -28,7 +28,7 @@ const hairColorLength = hairColor.length;
 const facialHairColorLength = facialHairColor.length;
 const clotheColorLength = clotheColor.length;
 
-export default function AvatarCreator(props) {
+export default function AvatarCreator(props: any) {
 
 	const [options, setOptions] = useState(
 		{
@@ -46,8 +46,8 @@ export default function AvatarCreator(props) {
 		}
 	)
 
-	const changeValue = (key, method = "inc") => {
-		setOptions(curr => {
+	const changeValue = (key: any, method = "inc") => {
+		setOptions((curr: any) => {
 			//set max length to detect overlap
 			let max_length = 0;
 			if (key === "topType") {
@@ -92,7 +92,7 @@ export default function AvatarCreator(props) {
 	}
 
 	const tabs = <div className="tab-content" id="myTabContent">
-		<div class="tab-pane fade show active" id="hair" role="tabpanel" aria-labelledby="hair-tab">
+		<div className="tab-pane fade show active" id="hair" role="tabpanel" aria-labelledby="hair-tab">
 			<div className='row p-3'>
 				<div className='col-12'>
 					<h5 className="text-center unselectable">Hair</h5>
@@ -128,7 +128,7 @@ export default function AvatarCreator(props) {
 				</div>
 			</div>
 		</div>
-		<div class="tab-pane fade" id="face" role="tabpanel" aria-labelledby="face-tab">
+		<div className="tab-pane fade" id="face" role="tabpanel" aria-labelledby="face-tab">
 			<div className='row p-3'>
 				<div className='col-12'>
 					<h5 className="text-center unselectable">Skin Color</h5>
@@ -164,7 +164,7 @@ export default function AvatarCreator(props) {
 				</div>
 			</div>
 		</div>
-		<div class="tab-pane fade" id="clothes" role="tabpanel" aria-labelledby="clothes-tab">
+		<div className="tab-pane fade" id="clothes" role="tabpanel" aria-labelledby="clothes-tab">
 			<div className='row p-3'>
 				<div className='col-12'>
 					<h5 className="text-center unselectable">Clothes</h5>
@@ -219,15 +219,15 @@ export default function AvatarCreator(props) {
 									/>
 								</div>
 								<div className='d-flex flex-column align-items-center'>
-									<ul class="nav flex-column align-items-center nav-pills mt-3 avatar-tabs" id="myTab" role="tablist">
-										<li class="nav-item" role="presentation">
-											<button class="nav-link active unselectable" id="hair-tab" data-bs-toggle="tab" data-bs-target="#hair" type="button" role="tab" aria-controls="home" aria-selected="true">Hair</button>
+									<ul className="nav flex-column align-items-center nav-pills mt-3 avatar-tabs" id="myTab" role="tablist">
+										<li className="nav-item" role="presentation">
+											<button className="nav-link active unselectable" id="hair-tab" data-bs-toggle="tab" data-bs-target="#hair" type="button" role="tab" aria-controls="home" aria-selected="true">Hair</button>
 										</li>
-										<li class="nav-item" role="presentation">
-											<button class="nav-link unselectable" id="face-tab" data-bs-toggle="tab" data-bs-target="#face" type="button" role="tab" aria-controls="profile" aria-selected="false">Face</button>
+										<li className="nav-item" role="presentation">
+											<button className="nav-link unselectable" id="face-tab" data-bs-toggle="tab" data-bs-target="#face" type="button" role="tab" aria-controls="profile" aria-selected="false">Face</button>
 										</li>
-										<li class="nav-item" role="presentation">
-											<button class="nav-link unselectable" id="clothes-tab" data-bs-toggle="tab" data-bs-target="#clothes" type="button" role="tab" aria-controls="contact" aria-selected="false">Clothes</button>
+										<li className="nav-item" role="presentation">
+											<button className="nav-link unselectable" id="clothes-tab" data-bs-toggle="tab" data-bs-target="#clothes" type="button" role="tab" aria-controls="contact" aria-selected="false">Clothes</button>
 										</li>
 									</ul>
 								</div>
@@ -246,3 +246,4 @@ export default function AvatarCreator(props) {
 		</PopUpBackground>
 	)
 }
+

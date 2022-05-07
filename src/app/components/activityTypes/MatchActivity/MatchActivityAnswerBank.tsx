@@ -1,7 +1,7 @@
 import MoreInfoBtn from '../../utilities/moreInfoBtn/MoreInfoBtn';
 import DroppableArea from "../../utilities/dragAndDrop/ReactBeautifulDnD/DroppableArea";
 import useBodyAreaResizable from '../../../hooks/use-body-area-resizable';
-import { useRef } from 'react';
+import { RefObject, useRef } from 'react';
 const AnswerBank = ({
     data, 
     firstElTap, 
@@ -11,9 +11,9 @@ const AnswerBank = ({
     onTap, 
     moreInfoBtn,
     removedEl
-}) => {
+}: any) => {
     //word bank resizing
-    const matchColumnRef = useRef()
+    const matchColumnRef = useRef() as RefObject<HTMLDivElement>
     const {
         posData: matchColumnPos, 
         handle: matchColumnHandle

@@ -53,7 +53,7 @@ const SortActivityApp = ({
     moreInfoBtn, 
     mediumWindowWidth,
     smallWindowWidth,
-}) => {
+}: any) => {
     //for updating redux store(data to be sent to backend)
     const wordBankColumns = mediumWindowWidth ? Array(1).fill(0) 
                             : smallWindowWidth ? Array(2).fill(0) 
@@ -62,7 +62,7 @@ const SortActivityApp = ({
     const data = useSelector((state:RootState) => state.activities.data.clientData.present.clientAnswerData.questions[questionNum])
     const [activeId, setActiveId] = useState(undefined)
     const [isOver, setIsOver] = useState(undefined)
-    const dragOverlayItem = useRef()
+    const dragOverlayItem = useRef<HTMLElement>()
     
     //redux states
     const dispatch = useDispatch()
@@ -70,7 +70,7 @@ const SortActivityApp = ({
     const resetPopUp = useSelector((state: RootState) => state.activities.settings.resetPopUp) 
     
     //used for tap and drop to track selected elements
-    const [firstElTap, setFirstElTap] = useState(null)
+    const [firstElTap, setFirstElTap] = useState<{node: any} | null>(null)
     const removedEl = useRef(null)
 
     /* When a draggable item moves to a new container, the layout may shift
@@ -153,7 +153,7 @@ const SortActivityApp = ({
     //determine how many categories there are
     const numCategories = Object.keys(data.categories)
 
-    const updateSortableLists = (result) =>{
+    const updateSortableLists = (result: any) =>{
         const newState = updateMultipleSortableLists(data, result)
         if(!newState) return
         //update state
@@ -164,15 +164,15 @@ const SortActivityApp = ({
         return newState
     }
     //used only for dnd, not tap. returns the result object that contains all neccessary info to update list
-    const resultValues = (e, finishContainer) => {
+    const resultValues = (e: any, finishContainer: any) => {
         const finish = finishContainer
         const start = e.active.data.current.tapDroppableId
         const startIndex = e.active.data.current.index
         const finishAnswersList = Array.from(answerChoiceTestEl(finish) ? data.itemBank[finish] : data.categories[finish])
         //determine if position is at start or end. if not, we use the index provided in data
-        const endIndex = !e.over.data.current.sortable
+        const endIndex = (!e.over.data.current.sortable && dragOverlayItem.current)
             ? addToTop(
-                getBoundingClientRect(e.over.data.current.node), 
+                getBoundingClientRect(e.over.data.current.node),
                 getBoundingClientRect(dragOverlayItem.current), 
                 finishAnswersList.length
             )
@@ -198,9 +198,9 @@ const SortActivityApp = ({
     //this is more accurate calling of redux store ONLY
     //since logic for drag and drop here is different
     const onDragStartOver = useRef({start: null, newData: null, end: null})
-    const onDragStart = (e) =>{
+    const onDragStart = (e: any) =>{
         //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
-        document.querySelector("html").classList.add("sortActivityActive")
+        document.querySelector("html")?.classList.add("sortActivityActive")
         onDragStartOver.current.start = e.active.data.current.sortable.containerId
         unstable_batchedUpdates(()=>{
             setActiveId(e.active.id);
@@ -208,7 +208,7 @@ const SortActivityApp = ({
         })
     }
     //pass all necessary values and re-rendered functions here 
-    const onDragOver = (e) =>{
+    const onDragOver = (e: any) =>{
         //if recently moved do not update
         if(recentlyMovedToNewContainer.current) return
         //prevent updating if already null, and set to null if not being sorted
@@ -244,9 +244,9 @@ const SortActivityApp = ({
         }
     }
     //handle state update when object stops
-    const onDragEnd = (e) => {
+    const onDragEnd = (e: any) => {
         //to re-enable smooth scrolling for the remainder of the pages
-        document.querySelector("html").classList.remove("sortActivityActive")
+        document.querySelector("html")?.classList.remove("sortActivityActive")
         unstable_batchedUpdates(()=>{
             setActiveId(undefined)
             setIsOver(undefined)
@@ -273,13 +273,13 @@ const SortActivityApp = ({
 
         updateSortableLists(resultValues(e, endElOver.containerId))
     };
-    const onDragCancel = (e) =>{
+    const onDragCancel = (e: any) =>{
         unstable_batchedUpdates(()=>{
             setActiveId(undefined)
             setIsOver(undefined)
         })
     }
-    const onTap = (e) =>{
+    const onTap = (e: any) =>{
         //in case there was a lag due to debouncing
         setIsOver(undefined)
         const parms = {
@@ -307,7 +307,7 @@ const SortActivityApp = ({
         mediumWindowWidth, 
         dragOverlayItem,
         recentlyMovedToNewContainer
-    }) =>{
+    }: any) =>{
         if(recentlyMovedToNewContainer.current) return
         if(!dragOverlayItem.current) return
         const overlayRect = getBoundingClientRect(dragOverlayItem.current)
@@ -327,7 +327,7 @@ const SortActivityApp = ({
         }
     }
     //overall wrapper function
-    const collisionAlgoWrapper = (e) => {
+    const collisionAlgoWrapper = (e: any) => {
         const intersectingContainer = customCollisionAlgo({
             e: e,
             isOver: isOver,
@@ -353,7 +353,7 @@ const SortActivityApp = ({
                 {/* Renders sort categories */}
                 <SortActivityCategories 
                     numCategories = {numCategories}
-                    onTap = {!disableDnD ? onTap : null}
+                    onTap = {!disableDnD ? onTap : () => {}}
                     data={data}
                     mediumWindowWidth = {mediumWindowWidth}
                     smallWindowWidth = {smallWindowWidth}

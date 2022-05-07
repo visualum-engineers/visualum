@@ -23,10 +23,10 @@ const MatchActivityApp = ({
     moreInfoOnClick,
     moreInfoBtn, 
     mediumWindowWidth
-}) => {
+}: any) => {
     const columns = mediumWindowWidth ? Array(1).fill(0) : Array(2).fill(0)
-    const [firstElTap, setFirstElTap] = useState(null)
-    const [removedEl, setRemovedEl] = useState(undefined)
+    const [firstElTap, setFirstElTap] = useState<{node: any}|null>(null)
+    const [removedEl, setRemovedEl] = useState<any>(undefined)
     
     //redux states
     const dispatch = useDispatch()
@@ -93,7 +93,7 @@ const MatchActivityApp = ({
     }, [firstElTap, disableDnD])
 
     //used because we need to keep only one answer in a key container at a time.
-    const customUpdateLists = (result) =>{
+    const customUpdateLists = (result: any) =>{
         //setup
         const {destination, source, draggableId} = result
         //means that nothing has changed
@@ -103,7 +103,7 @@ const MatchActivityApp = ({
 
 
         //start and end containers
-        const answerChoiceTestEl = (el) => /answerChoices.*/.test(el)
+        const answerChoiceTestEl = (el: any) => /answerChoices.*/.test(el)
         const start = answerChoiceTestEl(source.droppableId) ? source.droppableId : data.categoryIDs[source.droppableId]
         const finish = answerChoiceTestEl(destination.droppableId) ? destination.droppableId : data.categoryIDs[destination.droppableId]
 
@@ -116,7 +116,7 @@ const MatchActivityApp = ({
         let newState
         //will be used to detect whether an item was added back to word bank, after moving to 
         //key pair container
-        let addedToWordBank
+        let addedToWordBank:any
         startAnswersList.splice(source.index, 1)
 
         //deep clone since we're using redux and changing
@@ -177,12 +177,12 @@ const MatchActivityApp = ({
     }
 
     //when dragging starts
-    const onDragStart = (result) =>{
+    const onDragStart = (result:any) =>{
         //to prevent smooth scroll behavior from interfering with react-beautiful auto scroll
-        document.querySelector("html").classList.add("sortActivityActive")
+        document.querySelector("html")?.classList.add("sortActivityActive")
     }
     //while dragging
-    const onDragUpdate = (result) =>{
+    const onDragUpdate = (result:any) =>{
         const {destination, source} = result
         //when dragging outside droppable container
         if(!destination) {
@@ -193,7 +193,7 @@ const MatchActivityApp = ({
         //when dragging inside same container
         if(destination.droppableId === source.droppableId) return
         //when dragging between word bank
-        const answerChoiceTestEl = (el) => /answerChoices.*/.test(el)
+        const answerChoiceTestEl = (el:string) => /answerChoices.*/.test(el)
         //if dragging to another word bank container
         if(answerChoiceTestEl(destination.droppableId)) return
 
@@ -206,10 +206,10 @@ const MatchActivityApp = ({
     }
     
     //when dragging stops
-    const onDragEnd = (result) =>{
+    const onDragEnd = (result: any) =>{
         setRemovedEl(undefined)
         //to re-enable smooth scrolling for the remainder of the pages
-        document.querySelector("html").classList.remove("sortActivityActive")
+        document.querySelector("html")?.classList.remove("sortActivityActive")
         const newState = customUpdateLists(result)
         if(!newState) return
         //update state
@@ -219,7 +219,7 @@ const MatchActivityApp = ({
             data: newState
         }))
     }
-    const onTap = (e) =>{
+    const onTap = (e: any) =>{
         const parm = {
             e: e, 
             firstElTap: firstElTap, 
@@ -240,9 +240,9 @@ const MatchActivityApp = ({
 
         <div className={`match-activity-container${mediumWindowWidth ? " full-size":" portrait-size"}`}>
         <DragDropContext 
-            onDragEnd = {disableDnD ? onDragEnd: null} 
-            onDragUpdate={disableDnD ? onDragUpdate: null} 
-            onDragStart={disableDnD ? onDragStart: null}
+            onDragEnd = {disableDnD ? onDragEnd: () => {}} 
+            onDragUpdate={disableDnD ? onDragUpdate:() => {}} 
+            onDragStart={disableDnD ? onDragStart: () => {}}
         >
             <div className="d-flex justify-content-center w-100">
                 <AnswerBank 
