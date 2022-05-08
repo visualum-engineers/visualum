@@ -8,15 +8,15 @@
 @import "../../src/app/components/forms/formsBreakpoints";
 @import "../../src/app/components/about/aboutBreakpoints";
 @import "../../src/app/components/activityTypes/activityMediaQueries";
+
 @media (min-width: 992px) {
     @include navbar-lg;
-    @include entry-form-lg;
+    // @include entry-form-lg;
     @include activity-lg;
 }
-
 @media (max-width: 992px){
     @include navbar-md;
-    @include entry-form-md;
+    // @include entry-form-md;
     @include activity-md;
     @include homepage-sm;
     @include activity-creation-md;
@@ -30,7 +30,7 @@
 
 @media (max-width: 575px) { 
     @include navbar-sm;
-    @include entry-form-sm;
+    // @include entry-form-sm;
     @include activity-sm;
     @include homepage-xs;
     @include activity-creation-sm;
