@@ -8,10 +8,10 @@ export const dashboardSlice = createSlice({
         sidebarClass: "collapsable-sidebar"
     },
     reducers: {
-        updated: (state, action) => {
+        updated: (state: any, action: any) => {
             state.selected = action.payload
         },
-        toggledCollapsed: (state, action) => {
+        toggledCollapsed: (state: any, action: any) => {
             state.collapsed = !state.collapsed
         }
     },

@@ -76,7 +76,7 @@ const clientAnswerData = createSlice({
   reducers: {
     //this action is used to update data for the use
     // of reset, undo, and localStorage capabilities
-    updateActivityData: (state, action) => {
+    updateActivityData: (state: any, action: any) => {
       let newState;
       switch (action.payload.type) {
         case "singleQuestionUpdate":
@@ -96,11 +96,11 @@ const clientAnswerData = createSlice({
     },
     //we created a seperate reducer, to exclude this
     //from undo, redo history.
-    updateActivityDragActive: (state, action) => {
+    updateActivityDragActive: (state: any, action: any) => {
       singleQuestionUpdate(state, action);
       return;
     },
-    updateActivityDataLayout: (state, action) => {
+    updateActivityDataLayout: (state: any, action: any) => {
       const newState = singleQuestionUpdate(state, action);
       throttledSaveToStorage({
         state: state.clientAnswerData,
@@ -108,7 +108,7 @@ const clientAnswerData = createSlice({
         newState: newState,
       });
     },
-    updateActivityTimer: (state) => {
+    updateActivityTimer: (state: any) => {
       if (!state.clientAnswerData.activityTimer) return;
       //if no timer do update this action
       const startTime = new Date();
@@ -138,7 +138,7 @@ const clientAnswerData = createSlice({
         newState: newState,
       });
     },
-    updateTrackCompletion: (state, action) => {
+    updateTrackCompletion: (state: any, action: any) => {
       const question = action.payload.question;
       const questionNum = action.payload.questionNum;
       const questionType = action.payload.question.type;
