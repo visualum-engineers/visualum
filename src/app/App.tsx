@@ -56,14 +56,7 @@ function App() {
             </Route>
             <Route path="classes">
               <Route index element={<DashboardClasses />} />
-              <Route path=":class_id">
-                <Route index element={<Class pageType={"classwork"} />} />
-                <Route
-                  path="classwork"
-                  element={<Class pageType={"classwork"} />}
-                />
-                <Route path="people" element={<Class pageType={"people"} />} />
-                <Route path="store" element={<Class pageType={"store"} />} />
+              <Route path=":class_id" element={<Class />}>
               </Route>
             </Route>
             <Route

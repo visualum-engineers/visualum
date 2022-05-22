@@ -1,17 +1,34 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { ClassSchema } from "../../../types/ClassSchema";
 import fetchClassesData from "./asyncActions/fetchClassesData";
-
-const classesSlice = createSlice({
-    name: "classesSlice", 
-    initialState: {
-        data: null, 
-        status: "success"
-    },
-    reducers: {},
+import fetchClass from "./asyncActions/fetchClass";
+export type ClassState = {
+  data: { [Property in keyof ClassSchema]: ClassSchema[Property] };
+  status: "success" | "pending" | "rejected";
+};
+type ClassesSliceState = {
+  data:
+    | null
+    | ClassState[];
+  status: "success" | "pending" | "rejected";
+};
+export const classesSlice = createSlice({
+  name: "classesSlice",
+  initialState: {
+    data: null,
+    status: "success",
+  } as ClassesSliceState,
+  reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(fetchClassesData.pending, (state, action) => {});
-        builder.addCase(fetchClassesData.rejected, (state, action) => {});
-        builder.addCase(fetchClassesData.fulfilled, (state, action) => {});
-    }
-})
-export default classesSlice
+    //for all classes
+    builder.addCase(fetchClassesData.pending, (state, action) => {});
+    builder.addCase(fetchClassesData.rejected, (state, action) => {});
+    builder.addCase(fetchClassesData.fulfilled, (state, action) => { });
+    //for individual class
+    builder.addCase(fetchClass.pending, (state, action) => { });
+    builder.addCase(fetchClass.rejected, (state, action) => {});
+    builder.addCase(fetchClass.fulfilled, (state, action) => { });
+  },
+});
+export default classesSlice.reducer
+

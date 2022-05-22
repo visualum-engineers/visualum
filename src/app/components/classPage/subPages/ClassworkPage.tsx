@@ -1,4 +1,4 @@
 const ClassworkPage = () => {
-  return <div></div>;
+  return <div>Hello</div>;
 };
 export default ClassworkPage;

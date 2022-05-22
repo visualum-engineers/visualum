@@ -1,40 +1,18 @@
 import StorePage from "./subPages/StorePage";
 import ClassworkPage from "./subPages/ClassworkPage";
 import PeoplePage from "./subPages/PeoplePage";
-import ClassBanner, { ClassBannerProps } from "./utilities/classBanner/ClassBanner";
-const classBannerData: ClassBannerProps = {
-  color: "black",
-  teachers: ["Arky Asmal", "Derek Widmer"],
-  classCode: "32dkf92",
-  classGoals: [
-    {
-      _id: "1",
-      description: "Complete 20 assigments",
-      start_date: new Date(),
-      end_date: new Date(),
-      goal_type: "Assigment Completion",
-    },
-  ],
-};
-const Class = ({
-  pageType,
-}: {
-  pageType: "classwork" | "people" | "store";
-}) => {
-  const map: { [key: string]: JSX.Element } = {
-    classwork: <ClassworkPage />,
-    people: <PeoplePage />,
-    store: <StorePage />,
-  };
+import ClassBanner from "./utilities/classBanner/ClassBanner";
+import { Routes, Route } from "react-router-dom";
+const Class = () => {
   return (
     <div>
-      <ClassBanner
-        color={classBannerData.color}
-        teachers={classBannerData.teachers}
-        classCode={classBannerData.classCode}
-        classGoals={classBannerData.classGoals}
-      />
-      {map[pageType]}
+      <ClassBanner color="black" />
+      <Routes>
+        <Route index element={<ClassworkPage />} />
+        <Route path={"classwork"} element={<ClassworkPage />} />
+        <Route path={"store"} element={<StorePage />} />
+        <Route path={"people"} element={<PeoplePage />} />
+      </Routes>
     </div>
   );
 };
