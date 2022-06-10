@@ -1,21 +1,21 @@
 import React from "react";
 import PopUpBg from "../popUp/PopUpBackground";
 import ExitIcon from "../exitIcon/ExitIcon";
-
-export default function ModalContainer({
+import PropTypes from 'prop-types';
+function ModalContainer({
   children,
   zIndex = 10000,
   toggle,
   title,
   buttons,
   extraClasses,
+  clickOutToClose = true
 }: any) {
   return (
-    <PopUpBg zIndex={zIndex} onClick={toggle}>
+    <PopUpBg zIndex={zIndex} onClick={clickOutToClose ? toggle : () => { }}>
       <div
-        className={`modal-container ${
-          extraClasses ? extraClasses.join(" ") : ""
-        }`}
+        className={`modal-container ${extraClasses ? extraClasses.join(" ") : ""
+          }`}
         style={{ zIndex: zIndex + 1 }}
       >
         <div className="modal-close">
@@ -27,7 +27,7 @@ export default function ModalContainer({
             <ExitIcon />
           </div>
         </div>
-        <div className="header">
+        <div className="header px-4">
           <h2>{title}</h2>
         </div>
         <div className="body">{children}</div>
@@ -36,3 +36,25 @@ export default function ModalContainer({
     </PopUpBg>
   );
 }
+
+ModalContainer.propTypes = {
+  toggle: PropTypes.func.isRequired,
+  title: PropTypes.string,
+  zIndex: PropTypes.number,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]),
+  clickOutToClose: PropTypes.bool,
+  buttons: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]),
+  extraClasses: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.string
+  ]),
+}
+
+
+export default ModalContainer;
