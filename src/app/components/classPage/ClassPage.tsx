@@ -3,9 +3,9 @@ import ClassworkPage from "./subPages/ClassworkPage";
 import PeoplePage from "./subPages/PeoplePage";
 import ClassBanner from "./utilities/classBanner/ClassBanner";
 import { Routes, Route } from "react-router-dom";
-const Class = () => {
+const ClassPage = () => {
   return (
-    <div>
+    <>
       <ClassBanner color="black" />
       <Routes>
         <Route index element={<ClassworkPage />} />
@@ -13,7 +13,7 @@ const Class = () => {
         <Route path={"store"} element={<StorePage />} />
         <Route path={"people"} element={<PeoplePage />} />
       </Routes>
-    </div>
+    </>
   );
 };
-export default Class;
+export default ClassPage;

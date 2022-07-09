@@ -8,6 +8,7 @@
 @import "../../src/app/components/forms/formsBreakpoints";
 @import "../../src/app/components/about/aboutBreakpoints";
 @import "../../src/app/components/activityTypes/activityMediaQueries";
+@import "../../src/app/components/classPage/classPageMediaQueries";
 
 @media (min-width: 992px) {
     @include navbar-lg;

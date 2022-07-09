@@ -13,7 +13,7 @@ const DashboardHome = React.lazy(
 const DashboardClasses = React.lazy(
   () => import("./components/dashboard/DashboardClasses")
 );
-const Class = React.lazy(() => import("./components/classPage/Class"));
+const ClassPage = React.lazy(() => import("./components/classPage/ClassPage"));
 const DashboardSettings = React.lazy(
   () => import("./components/dashboard/DashboardSettings")
 );
@@ -56,8 +56,7 @@ function App() {
             </Route>
             <Route path="classes">
               <Route index element={<DashboardClasses />} />
-              <Route path=":class_id" element={<Class />}>
-              </Route>
+              <Route path=":class_id/*" element={<ClassPage />} />
             </Route>
             <Route
               path="/about"
