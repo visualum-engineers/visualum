@@ -1,0 +1,64 @@
+.class-page-header-carousel{
+  max-width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: 0 2rem !important;
+  margin-bottom: 2rem;
+  height: 3.2rem;
+  .swiper-button-prev, .swiper-button-next{
+    color: $darkest-gray;
+    height: 110%;
+    top: 0;
+    margin: 0;
+    width: 1rem;
+    background-color: $white;
+    &::after{
+        margin: 0;
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+  }
+   .swiper-button-prev{
+    left: 0rem;
+  }
+  .swiper-button-next{
+    right: 0;
+  }
+  .swiper-wrapper{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+  }
+  .carousel-items{
+    display: flex;
+    height: 100%;
+  }
+}
+.people-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 1px solid ;
+    font-size: 0.7rem;
+    aspect-ratio: 1/1;
+}
+.class-page-header-nav-link{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+    align-items: center;
+    background-color: white;
+    font-size: 1.15rem;
+    text-decoration: none;
+    color: $dark-blue;
+    font-weight: 600;
+    font-family: 'Poppins','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    @include link-underline-styles(2.5px, $dark-blue, $orange);
+    .people-icon{
+      height: 1.4rem;
+    }
+}

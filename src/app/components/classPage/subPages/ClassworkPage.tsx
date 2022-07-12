@@ -1,4 +1,6 @@
+
 import AssignmentItem from "../utilities/assignmentItem/AssignmentItem";
+
 
 const ClassworkPage = () => {
   const assignmentData = {
@@ -12,6 +14,13 @@ const ClassworkPage = () => {
       description: "hello",
     },
   };
-  return <AssignmentItem assignmentData={assignmentData} />;
+
+
+  return (
+    <>
+
+      <AssignmentItem assignmentData={assignmentData} />
+    </>
+  );
 };
 export default ClassworkPage;

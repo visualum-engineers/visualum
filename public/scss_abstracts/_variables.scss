@@ -151,3 +151,35 @@ $new-light-purple: #e0e5ff;
         background-color: transparent;
     } 
 }
+@mixin link-underline-styles(
+  $height: 2px,
+  $defaultColor: transparent,
+  $selectedColor: transparent,
+  $bottom: -1px
+) {
+  &::after {
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: $bottom;
+    height: $height;
+    width: 0;
+    border-radius: 1rem;
+    transition: all 0.2s ease-out;
+    background-color: $defaultColor;
+  }
+  &:hover {
+    color: $defaultColor;
+    &::after {
+      background-color: $defaultColor;
+      width: 100%;
+    }
+  }
+  &.selected {
+    color: $selectedColor;
+    &::after {
+      background-color: $selectedColor;
+      width: 100%;
+    }
+  }
+}
