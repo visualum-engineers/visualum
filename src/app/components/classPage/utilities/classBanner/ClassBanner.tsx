@@ -11,25 +11,29 @@ const ClassBanner = ({ color }: ClassBannerProps) => {
   const classId = params.classId;
   const app = useRealmApp();
   const dispatch = useDispatch();
-  const classData: ClassState | null = useSelector((state: RootState) => {
+  const classData = useSelector((state: RootState) => {
     const allData = state.classes.data;
     if (!allData) return null;
     const filterClass = allData.filter((a) => a.data._id === classId);
     return filterClass[0];
   });
   const className = classData?.data.name;
-  const teacherName = classData?.data.teachers.map((t) => {
+  const teacherNames = classData?.data.teachers.map((t) => {
     if (t.prefix) return t.prefix + " " + t.last_name;
     else return t.first_name + " " + t.last_name;
   });
   return (
     <div className="class-banner-container">
-      <div>
+      <div className="class-banner-header">
         <h1>{className}</h1>
-        <p>{teacherName}</p>
-        <div className="class-banner-additional">
-          <div></div>
-          <div></div>
+        <p>{teacherNames}</p>
+      </div>
+      <div className="class-banner-body">
+        <div className="class-banner-">
+          
+        </div>
+        <div>
+
         </div>
       </div>
     </div>

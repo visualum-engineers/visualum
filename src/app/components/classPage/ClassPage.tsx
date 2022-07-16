@@ -33,7 +33,11 @@ const ClassPage = () => {
   ];
   return (
     <>
-      <ClassPageHeader links={linkData} />
+      <ClassPageHeader
+        className={"class-page-overall-header-carousel"}
+        links={linkData}
+        linkClassName={"class-page-overall-header-nav-link"}
+      />
       <ClassBanner color="black" />
       <Routes>
         <Route index element={<ClassworkPage />} />

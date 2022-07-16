@@ -1,6 +1,6 @@
-
+import AssignmentGroupWrapper from "../utilities/assignmentGroupWrapper/AssignmentGroupWrapper";
 import AssignmentItem from "../utilities/assignmentItem/AssignmentItem";
-
+import ClassStoreItem from "../utilities/classStoreItem/classStoreItem";
 
 const ClassworkPage = () => {
   const assignmentData = {
@@ -14,12 +14,21 @@ const ClassworkPage = () => {
       description: "hello",
     },
   };
-
+  const storeData = {
+    _id: "32324",
+    name: "Homework Pass",
+    price: 80,
+    imgURL: "hello.jpg",
+    creation_date: new Date(),
+    num_available: 10,
+  };
 
   return (
     <>
-
-      <AssignmentItem assignmentData={assignmentData} />
+      <AssignmentGroupWrapper id={"hello"} groupName={"hello"}>
+        <AssignmentItem assignmentData={assignmentData} />
+      </AssignmentGroupWrapper>
+      <ClassStoreItem  data={storeData} />
     </>
   );
 };

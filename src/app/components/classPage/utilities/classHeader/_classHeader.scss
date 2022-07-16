@@ -1,4 +1,4 @@
-.class-page-header-carousel{
+.class-page-overall-header-carousel{
   max-width: 100%;
   position: relative;
   display: flex;
@@ -45,7 +45,7 @@
     font-size: 0.7rem;
     aspect-ratio: 1/1;
 }
-.class-page-header-nav-link{
+.class-page-overall-header-nav-link{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -54,10 +54,10 @@
     background-color: white;
     font-size: 1.15rem;
     text-decoration: none;
-    color: $dark-blue;
+    color: $dark-purple;
     font-weight: 600;
     font-family: 'Poppins','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    @include link-underline-styles(2.5px, $dark-blue, $orange);
+    @include link-underline-styles(2.5px, $dark-purple, $orange);
     .people-icon{
       height: 1.4rem;
     }

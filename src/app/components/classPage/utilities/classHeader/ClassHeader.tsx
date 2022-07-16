@@ -15,9 +15,11 @@ export interface LinkData {
 const ClassPageHeader = ({
   links,
   className,
+  linkClassName
 }: {
   links: LinkData[];
   className?: string;
+  linkClassName?: string;
 }) => {
   const location = useLocation();
   const routeIds = location.pathname.split("/");
@@ -27,7 +29,7 @@ const ClassPageHeader = ({
       navigation
       spaceBetween={40}
       slidesPerView={"auto"}
-      className={"class-page-header-carousel"}
+      className={className}
     >
       {links.map((item) => {
         return (
@@ -38,7 +40,7 @@ const ClassPageHeader = ({
           >
               <Link
                 to={`${item.link}`}
-                className={`class-page-header-nav-link ${
+                className={`${linkClassName ? linkClassName : ''} ${
                   routeIds.includes(item.idForRoute) ? "selected" : ""
                 }`}
               >
