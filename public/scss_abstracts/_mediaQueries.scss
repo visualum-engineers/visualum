@@ -27,6 +27,7 @@
 
 @media (max-width: 768px){
     @include about-pg-md;
+    @include class-page-md;
 }
 
 @media (max-width: 575px) { 
@@ -36,6 +37,7 @@
     @include homepage-xs;
     @include activity-creation-sm;
     @include about-pg-sm;
+    @include class-page-sm;
 }
 
 @media (any-hover: hover) {

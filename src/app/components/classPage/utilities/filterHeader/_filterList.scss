@@ -1,0 +1,35 @@
+.filter-list-container{
+  display: flex;
+  width: 100%;
+}
+.filter-column-container {
+  display: flex;
+  flex-direction: column;
+}
+.filter-column-header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid $dark-gray;
+  h2 {
+    color: $dark-gray;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin: 0;
+  }
+}
+.filter-item-btns {
+  margin-left: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  button{
+    @include remove-btn-default;
+  }
+}
+.filter-column-items {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}

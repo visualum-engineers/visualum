@@ -1,6 +1,7 @@
 import AssignmentGroupWrapper from "../utilities/assignmentGroupWrapper/AssignmentGroupWrapper";
 import AssignmentItem from "../utilities/assignmentItem/AssignmentItem";
-import ClassStoreItem from "../utilities/classStoreItem/classStoreItem";
+import ClassStoreItem from "../utilities/classStoreItem/ClassStoreItem";
+import FilterList from "../utilities/filterHeader/FilterList";
 
 const ClassworkPage = () => {
   const assignmentData = {
@@ -22,13 +23,30 @@ const ClassworkPage = () => {
     creation_date: new Date(),
     num_available: 10,
   };
-
+  const filterData = [{
+      title: string;
+  filterActive?: boolean;
+  customStyles?: { [key: string]: string };
+  customData?: {
+    ascending?: { [key: string]: string };
+    descending?: { [key: string]: string };
+  };
+  className?: string;
+  ascendingCallback: (
+    e?: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => void;
+  descendingCallback: (
+    e?: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => void;
+  children?: JSX.Element;
+  }]
   return (
     <>
       <AssignmentGroupWrapper id={"hello"} groupName={"hello"}>
         <AssignmentItem assignmentData={assignmentData} />
       </AssignmentGroupWrapper>
-      <ClassStoreItem  data={storeData} />
+      <ClassStoreItem data={storeData} />
+      <FilterList data={filterData}/>
     </>
   );
 };

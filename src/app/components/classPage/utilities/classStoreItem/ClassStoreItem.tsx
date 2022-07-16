@@ -14,15 +14,16 @@ const ClassStoreItem = ({ data }: { data: RewardStoreItem }) => {
           lines={1}
           ellipsis="..."
           innerElement="h5"
+          buttons={false}
         />
-        <div className="reward-store-item-value">{data.price}</div>
+        <div className="reward-store-item-value">{data.price} points</div>
         <div className="reward-store-item-btn-container">
           <button aria-label={`buy-reward-item-${data.name}`}>
-            Buy for <b>{data.price}pts</b>
+            Buy for <b>{data.price}</b>
           </button>
         </div>
       </div>
     </div>
   );
 };
-export default ClassStoreItem;
+export default ClassStoreItem
