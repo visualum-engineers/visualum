@@ -1,3 +1,5 @@
+import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, memo } from "react";
 
 export type FilterType = {
@@ -9,10 +11,10 @@ export type FilterType = {
     descending?: { [key: string]: string };
   };
   className?: string;
-  ascendingCallback: (
+  ascendingCallback?: (
     e?: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => void;
-  descendingCallback: (
+  descendingCallback?: (
     e?: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => void;
   children?: JSX.Element;
@@ -51,11 +53,13 @@ export const FilterColumn = memo(({ data }: { data: FilterType }) => {
               onClick={(e) => {
                 {
                   setFilterDirection("ascending");
-                  data.ascendingCallback(e);
+                  if (data.ascendingCallback) data.ascendingCallback(e);
                 }
               }}
               {...ascendingData}
-            ></button>
+            >
+              <FontAwesomeIcon icon={faCaretUp} />
+            </button>
             <button
               className={`descending-filter-btn ${
                 filterDirection === "descending" ? "selected" : ""
@@ -63,10 +67,12 @@ export const FilterColumn = memo(({ data }: { data: FilterType }) => {
               aria-label={`descending-${data.title}`}
               onClick={(e) => {
                 setFilterDirection("descending");
-                data.descendingCallback(e);
+                if (data.descendingCallback) data.descendingCallback(e);
               }}
               {...descendingData}
-            ></button>
+            >
+              <FontAwesomeIcon icon={faCaretDown} />
+            </button>
           </div>
         )}
       </div>

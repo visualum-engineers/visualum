@@ -23,30 +23,21 @@ const ClassworkPage = () => {
     creation_date: new Date(),
     num_available: 10,
   };
-  const filterData = [{
-      title: string;
-  filterActive?: boolean;
-  customStyles?: { [key: string]: string };
-  customData?: {
-    ascending?: { [key: string]: string };
-    descending?: { [key: string]: string };
-  };
-  className?: string;
-  ascendingCallback: (
-    e?: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => void;
-  descendingCallback: (
-    e?: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => void;
-  children?: JSX.Element;
-  }]
+  const filterData = [
+    {
+      title: "hello",
+      filterActive: true,
+      ascendingCallback: () => {},
+      descendingCallback: () => {},
+    },
+  ];
   return (
     <>
       <AssignmentGroupWrapper id={"hello"} groupName={"hello"}>
         <AssignmentItem assignmentData={assignmentData} />
       </AssignmentGroupWrapper>
       <ClassStoreItem data={storeData} />
-      <FilterList data={filterData}/>
+      <FilterList data={filterData} />
     </>
   );
 };

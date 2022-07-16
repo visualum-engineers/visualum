@@ -1,10 +1,11 @@
-.filter-list-container{
+.filter-list-container {
   display: flex;
   width: 100%;
 }
 .filter-column-container {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
 }
 .filter-column-header {
   display: flex;
@@ -12,20 +13,43 @@
   width: 100%;
   padding: 0.4rem 0;
   border-bottom: 1px solid $dark-gray;
+  align-items: center;
   h2 {
-    color: $dark-gray;
+    color: $darker-gray;
     font-weight: 600;
     font-size: 1.1rem;
     margin: 0;
   }
 }
 .filter-item-btns {
-  margin-left: 0.3rem;
+  margin-left: 0.2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  button{
+  justify-content: center;
+  position: relative;
+  height: 100%;
+  width: 1rem;
+  button {
     @include remove-btn-default;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    color: $dark-gray;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    &.selected {
+      color: $darkest-gray;
+    }
+  }
+  .descending-filter-btn{
+    bottom: 0;
+  }
+  .ascending-filter-btn{
+    top: 0;
   }
 }
 .filter-column-items {
