@@ -5,6 +5,12 @@
     .reward-store-item{
         width: 80%;
     }
+    .classroom-banner-body{
+        flex-direction: column;
+        .classroom-banner-class-goals:not(:first-child){
+            margin-top: 3rem;
+        }
+    }
 }
 @mixin class-page-sm {
     .reward-store-item{
