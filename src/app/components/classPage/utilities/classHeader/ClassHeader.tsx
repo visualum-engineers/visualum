@@ -29,7 +29,7 @@ const ClassPageHeader = ({
       navigation
       spaceBetween={40}
       slidesPerView={"auto"}
-      className={className}
+      className={`class-page-carousel-header ${className}`}
     >
       {links.map((item) => {
         return (
@@ -40,7 +40,7 @@ const ClassPageHeader = ({
           >
               <Link
                 to={`${item.link}`}
-                className={`${linkClassName ? linkClassName : ''} ${
+                className={`class-page-header-links ${linkClassName ? linkClassName : ''} ${
                   routeIds.includes(item.idForRoute) ? "selected" : ""
                 }`}
               >

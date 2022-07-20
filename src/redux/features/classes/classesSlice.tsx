@@ -2,14 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 import { ClassSchema } from "../../../types/ClassSchema";
 import fetchClassesData from "./asyncActions/fetchClassesData";
 import fetchClass from "./asyncActions/fetchClass";
-export type ClassState = {
+export type ClassroomState = {
   data: { [Property in keyof ClassSchema]: ClassSchema[Property] };
   status: "success" | "pending" | "rejected";
 };
 type ClassesSliceState = {
   data:
     | null
-    | ClassState[];
+    | ClassroomState[];
   status: "success" | "pending" | "rejected";
 };
 export const classesSlice = createSlice({

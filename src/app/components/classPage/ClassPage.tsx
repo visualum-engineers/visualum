@@ -2,7 +2,7 @@ import StorePage from "./subPages/StorePage";
 import ClassworkPage from "./subPages/ClassworkPage";
 import PeoplePage from "./subPages/PeoplePage";
 import ClassBanner from "./utilities/classBanner/ClassBanner";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import PeopleIcon from "./utilities/classHeader/PeopleIcon";
 import ClassPageHeader, { LinkData } from "./utilities/classHeader/ClassHeader";
 import { faBook, faStore } from "@fortawesome/free-solid-svg-icons";
@@ -38,9 +38,9 @@ const ClassPage = () => {
         links={linkData}
         linkClassName={"class-page-overall-header-nav-link"}
       />
-      <ClassBanner color="black" />
+      <ClassBanner styles={{backgroundColor: "#041C54", color: "white"}} />
       <Routes>
-        <Route index element={<ClassworkPage />} />
+        <Route index element={<Navigate to="classwork"/>} />
         <Route path={"classwork"} element={<ClassworkPage />} />
         <Route path={"store"} element={<StorePage />} />
         <Route path={"people"} element={<PeoplePage />} />

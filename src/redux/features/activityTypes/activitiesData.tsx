@@ -2,8 +2,7 @@ import assignmentData from "../../../app/helpers/sampleAssignmentData";
 import undoable, { excludeAction } from "redux-undo";
 import {
   createSlice,
-  combineReducers,
-  //createAsyncThunk,
+  combineReducers
 } from "@reduxjs/toolkit";
 import {
   getDataFromLocalStorage,

@@ -1,12 +1,9 @@
-.class-page-overall-header-carousel{
+.class-page-carousel-header{
   max-width: 100%;
   position: relative;
   display: flex;
-  justify-content: center;
   align-items: stretch;
   padding: 0 2rem !important;
-  margin-bottom: 2rem;
-  height: 3.2rem;
   .swiper-button-prev, .swiper-button-next{
     color: $darkest-gray;
     height: 110%;
@@ -45,18 +42,26 @@
     font-size: 0.7rem;
     aspect-ratio: 1/1;
 }
+.class-page-header-links{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  align-items: center;
+  background-color: white;
+  text-decoration: none;
+}
+//unique version of components
+.class-page-overall-carousel-header{
+  justify-content: center;
+  height: 3.2rem;
+  margin-bottom: 2rem
+}
 .class-page-overall-header-nav-link{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex-grow: 1;
-    align-items: center;
-    background-color: white;
+    font-family: 'Poppins','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 1.15rem;
-    text-decoration: none;
     color: $dark-purple;
     font-weight: 600;
-    font-family: 'Poppins','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     @include link-underline-styles(2.5px, $dark-purple, $orange);
     .people-icon{
       height: 1.4rem;

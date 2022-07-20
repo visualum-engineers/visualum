@@ -1,0 +1,41 @@
+$namespace: "copy-text-input";
+.#{$namespace}-container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  color: $dark-blue;
+  height: 2rem;
+}
+.#{$namespace} {
+  border-radius: 0.3rem 0 0 0.3rem;
+  display: flex;
+  align-items: center;
+  background-color: $white;
+  font-size: 0.9rem;
+  padding: 0.2rem 0.5rem;
+  flex-grow: 1;
+}
+.#{$namespace}-copy-btn{
+    position: relative;
+    border-radius: 0 0.3rem 0.3rem 0;
+    color: $dark-blue;
+    @include remove-btn-default;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid $dark-gray;
+    background-color: $lighter-gray;
+    &.copied{
+      background-color: $dark-green;
+      color: $white;
+    }
+}
+.#{$namespace}-success-container {
+  z-index: 1;
+  background-color: $dark-green;
+  font-size: 0.9rem;
+  .triangle-pointer-2, .triangle-pointer{
+    border-bottom-color: $dark-green;
+  }
+}

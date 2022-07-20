@@ -4,6 +4,7 @@ export interface ClassGoal {
   description: string;
   start_date: Date | string;
   end_date: Date | string;
+  progress: number;
   goal_type: "Assigment Completion" | "Grade Completion" | "Custom Goal";
 }
 export const isClassGoal = (e: any): e is ClassGoal => {
@@ -29,21 +30,27 @@ export type ClassSchema = {
   teachers: {
     first_name: string;
     last_name: string;
-    prefix: string;
+    prefix?: string;
+    user_id: string;
     _id: ObjectId | string;
   }[];
-  school: string | ObjectId;
+  school: {
+    name: string;
+    school_id: string | ObjectId;
+  };
   students: {
     first_name: string;
     last_name: string;
-    _id: ObjectId | string;
+    email: string;
+    user_id: ObjectId | string;
+    _id: string | ObjectId;
   }[];
   active_assignments: string[] | ObjectId[];
   creation_date: Date | string;
-  class_goals: ClassGoal[];
+  class_goals?: ClassGoal[];
   class_code: {
     expiration: Date | string;
-    code: number;
+    code: string;
   };
   class_reward_store: {
     _id: ObjectId | string;
