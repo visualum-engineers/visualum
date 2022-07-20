@@ -1,8 +1,8 @@
-import ClampLines, { ClampLinesState } from "../../../utilities/clampLines/ClampLines";
+import ClampLines, {
+} from "../../../utilities/clampLines/ClampLines";
 import { ClassGoal, ClassSchema } from "../../../../../types/ClassSchema";
 import splitArrByFactor from "../../../../helpers/splitArrByFactor";
 import { useWindowWidth } from "../../../../hooks";
-import { useState } from "react";
 
 import RadialLoadingDial from "../../../utilities/radialLoadingDial/RadialLoadingDial";
 const Goal = ({
@@ -12,32 +12,22 @@ const Goal = ({
   data: ClassGoal;
   btnStyles?: { [key: string]: string };
 }) => {
-  const [expanded, setExpanded] = useState(true);
   const namespace = "classroom-banner-goal";
   return (
     <div className={`${namespace} col`}>
-      {!expanded ? (
-        <div className={`${namespace}-description expanded`}>
-          <p>{data.description}</p>
-          <button className = {`${namespace}-expand-btn`} onClick={() => setExpanded(true)}> Collapse </button>
-        </div>
-      ) : (
-        <button onClick={() => setExpanded(false)}>
-          <ClampLines
-              className={`${namespace}-description ${!expanded ? "expanded" : ""}`}
-              id={data._id.toString()}
-              text={data.description}
-              lines={1}
-              ellipsis={"... See more"}
-              innerElement="p"
-              moreText=""
-              lessText="Collapse"
-              buttons={false}
-              customOnChange = {(e: ClampLinesState ) => setExpanded(e.expanded)}
-            />
-        </button>
-      )}
-
+      <ClampLines
+        className={`${namespace}-description`}
+        id={data._id.toString()}
+        text={data.description}
+        lines={3}
+        ellipsis={"... See more"}
+        innerElement="p"
+        moreText=""
+        lessText="Collapse"
+        wrapperBtn
+        buttons={false}
+        btnClassName={`${namespace}-expand-btn`}
+      />
       <RadialLoadingDial
         progressNum={data.progress}
         className={`${namespace}-progress`}

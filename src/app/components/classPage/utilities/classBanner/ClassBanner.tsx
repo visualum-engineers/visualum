@@ -54,7 +54,7 @@ const classroomData: ClassroomState["data"] = {
   creation_date: new Date(),
   class_goals: [
     {
-      description: "Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments",
+      description: "hi",
       goal_type: "Assigment Completion",
       _id: "324234twer",
       start_date: new Date(),

@@ -1,6 +1,8 @@
 import React, { PureComponent, Requireable } from "react";
 import PropTypes from "prop-types";
 import debounce from "lodash/debounce";
+import ConditionalWrapper from "../conditionalWrapper/ConditionalWrapper";
+
 export type ClampLinesState = {
   expanded: boolean;
   noClamp: boolean;
@@ -20,6 +22,8 @@ export interface ClampLinesProps {
   innerElement?: string;
   styles?: { [key: string]: string };
   btnStyles?: { [key: string]: string };
+  wrapperBtn?: boolean;
+  btnClassName?:string;
   customOnChange?: (e: ClampLinesState) => void;
 }
 type MapRequireable<T> = { [Property in keyof T]: Requireable<T[Property]> };
@@ -50,7 +54,7 @@ export default class ClampLines extends PureComponent<ClampLinesProps> {
     noClamp: false,
     text: "",
   };
-  clientHeight:number;
+  clientHeight: number;
   mounted = true;
   constructor(props: any) {
     super(props);
@@ -81,18 +85,20 @@ export default class ClampLines extends PureComponent<ClampLinesProps> {
       this.state.text = props.text.substring(0, 20);
     }
   }
-
   componentDidMount() {
     if (!this.ssr) {
       if (this.element) this.lineHeight = this.element.clientHeight;
       this.setState({
         text: this.props.text.substring(0, 20),
       });
-      this.clampLines();
+      const newState = this.action();
       if (this.watch) {
         window.addEventListener("resize", this.debounced);
       }
-      if (this.props.customOnChange) this.props.customOnChange(this.state);
+      if (this.props.customOnChange)
+        this.props.customOnChange(
+          newState ? { ...this.state, ...newState } : this.state
+        );
     }
   }
 
@@ -106,20 +112,25 @@ export default class ClampLines extends PureComponent<ClampLinesProps> {
   componentDidUpdate(prevProps: any) {
     if (prevProps.text !== this.props.text) {
       this.original = this.props.text;
-      this.clampLines();
+      this.action();
     }
     if (this.props.customOnChange) this.props.customOnChange(this.state);
   }
 
   action() {
+    let state = { ...this.state };
     if (this.watch && this.mounted) {
-      this.setState({
-        noClamp: false,
-      });
+      this.setState({ noClamp: false });
+      state.noClamp = false;
       const newState = this.clampLines();
-      if (newState && newState.noClamp)
-        this.setState({ expanded: !newState.noClamp });
+      if (newState && newState.noClamp) {
+        this.setState({
+          noClamp: newState.noClamp,
+        });
+        state.noClamp = newState.noClamp;
+      }
     }
+    return state;
   }
 
   clampLines() {
@@ -128,10 +139,12 @@ export default class ClampLines extends PureComponent<ClampLinesProps> {
     this.setState({
       text: "",
     });
+
     let maxHeight = this.lineHeight * this.props.lines;
     this.start = 0;
     this.middle = 0;
     this.end = this.original.length;
+
     while (this.start <= this.end) {
       this.middle = Math.floor((this.start + this.end) / 2);
       this.element.innerText = this.original.slice(0, this.middle);
@@ -147,10 +160,8 @@ export default class ClampLines extends PureComponent<ClampLinesProps> {
       }
       this.moveMarkers(maxHeight);
     }
-    if(this.element.clientHeight > maxHeight) this.middle = this.middle - 1
-    // const ellipsis = this.getEllipsis();
-    // const ellipsisLen = ellipsis ? ellipsis.length : 0;
-    // const btnText = this.props.moreText ? this.props.moreText.length : 0;
+
+    if (this.element.clientHeight > maxHeight) this.middle = this.middle - 1;
     const lengthOfClampedText = this.middle;
 
     this.element.innerText = this.original.slice(
@@ -161,10 +172,9 @@ export default class ClampLines extends PureComponent<ClampLinesProps> {
     this.setState({
       text: this.element.innerText,
     });
-
     return {
       text: this.element.innerText,
-      noClamp: false,
+      noClamp: this.element.innerText.length >= this.original.length,
     };
   }
 
@@ -222,9 +232,11 @@ export default class ClampLines extends PureComponent<ClampLinesProps> {
     if (!this.props.text) {
       return null;
     }
-    if (!this.props.innerElement) return null;
+    const ellipsisElement = (
+      <span className="clampLines_ellipsis">{this.getEllipsis()}</span>
+    );
     const innerClampElement = React.createElement(
-      this.props.innerElement,
+      this.props.innerElement ? this.props.innerElement : "div",
       {
         ref: (e) => {
           this.element = e;
@@ -234,17 +246,44 @@ export default class ClampLines extends PureComponent<ClampLinesProps> {
         style: this.props.styles,
         className: "clampLines_content",
       },
-      this.state.text
+      <>{this.state.text}</>
     );
-    const ellipsisElement = (
-      <div className="clampLines_ellipsis">{this.getEllipsis()}</div>
-    );
-    return (
+    const clampLinesEl = (
       <div className={this.getClassName()}>
         {innerClampElement}
-        {this.state.expanded ? ellipsisElement : null}
-        {this.getButton()}
+        {this.state.expanded && ellipsisElement}
       </div>
+    );
+    return (
+      <>
+      {this.state.expanded ? 
+      <ConditionalWrapper
+      wrapper={(children: any) => (
+        <button onClick={() => this.setState({ expanded: false })}>
+          {children}
+        </button>
+      )}
+      condition={this.props.wrapperBtn && !this.state.noClamp}
+    >
+      {clampLinesEl}
+    </ConditionalWrapper>
+    :
+    <div className={`${this.props.className} ${!this.state.noClamp ? "expanded":""}`}>
+          <p>{this.original}</p>
+          {!this.state.noClamp && (
+            <button
+              className={this.props.btnClassName}
+              onClick={() => this.setState({expanded: true})}
+            >
+              {this.props.lessText}
+            </button>
+          )}
+        </div>
+    }
+      
+
+      </>
+      
     );
   }
 }
