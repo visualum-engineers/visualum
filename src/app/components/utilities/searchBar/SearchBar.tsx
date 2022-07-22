@@ -6,10 +6,12 @@ const SearchBar = ({
   className,
   onChange,
   placeholder,
+  onSearch,
 }: {
   placeholder?: string;
   className?: string;
-  onChange: (e: string) => void;
+  onChange?: (e: string) => void;
+  onSearch?: (e: string) => void;
 }) => {
   const [toggled, setToggle] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -30,7 +32,9 @@ const SearchBar = ({
           (e) => {
             const target = e.currentTarget;
             const nextElement = target.nextElementSibling as HTMLElement;
-            const newFocus = nextElement?.focus();
+            //trigger on search func
+            if (onSearch) onSearch(inputValue);
+            nextElement?.focus();
           }
         }
       >
@@ -45,6 +49,9 @@ const SearchBar = ({
         value={inputValue}
         placeholder={placeholder ? placeholder : "Search"}
         onChange={(e) => setInputValue(e.currentTarget.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && onSearch) onSearch(inputValue);
+        }}
       />
     </div>
   );

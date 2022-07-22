@@ -36,8 +36,9 @@ const ClassworkPage = () => {
     <>
       <SearchBar
         onChange={(e) => {
-          console.log(e);
+          //console.log(e);
         }}
+        onSearch={(e) => {console.log(e)}}
       />
 
       <AssignmentGroupWrapper id={"hello"} groupName={"hello"}>
