@@ -59,31 +59,34 @@ const classroomData: ClassroomState["data"] = {
       _id: "324234twer",
       start_date: new Date(),
       end_date: setDate(new Date(), 3),
-      progress: 80
+      progress: 80,
     },
     {
-      description: "Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments",
+      description:
+        "Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments",
       goal_type: "Assigment Completion",
       _id: "rfreref",
       start_date: new Date(),
       end_date: setDate(new Date(), 3),
-      progress: 80
+      progress: 80,
     },
     {
-      description: "Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments",
+      description:
+        "Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments",
       goal_type: "Assigment Completion",
       _id: "freferf",
       start_date: new Date(),
       end_date: setDate(new Date(), 3),
-      progress: 80
+      progress: 80,
     },
     {
-      description: "Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments",
+      description:
+        "Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments Finish 100 HW assignments",
       goal_type: "Assigment Completion",
       _id: "fervrev",
       start_date: new Date(),
       end_date: setDate(new Date(), 3),
-      progress: 80
+      progress: 80,
     },
   ],
   class_code: {

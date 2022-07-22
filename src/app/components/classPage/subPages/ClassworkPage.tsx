@@ -1,7 +1,8 @@
+import SearchBar from "../../utilities/searchBar/SearchBar";
 import AssignmentGroupWrapper from "../utilities/assignmentGroupWrapper/AssignmentGroupWrapper";
 import AssignmentItem from "../utilities/assignmentItem/AssignmentItem";
 import ClassStoreItem from "../utilities/classStoreItem/ClassStoreItem";
-import FilterList from "../utilities/filterHeader/FilterList";
+import FilterList from "../utilities/filterList/FilterList";
 
 const ClassworkPage = () => {
   const assignmentData = {
@@ -33,6 +34,12 @@ const ClassworkPage = () => {
   ];
   return (
     <>
+      <SearchBar
+        onChange={(e) => {
+          console.log(e);
+        }}
+      />
+
       <AssignmentGroupWrapper id={"hello"} groupName={"hello"}>
         <AssignmentItem assignmentData={assignmentData} />
       </AssignmentGroupWrapper>

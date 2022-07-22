@@ -1,5 +1,4 @@
-import ClampLines, {
-} from "../../../utilities/clampLines/ClampLines";
+import ClampLines from "../../../utilities/clampLines/ClampLines";
 import { ClassGoal, ClassSchema } from "../../../../../types/ClassSchema";
 import splitArrByFactor from "../../../../helpers/splitArrByFactor";
 import { useWindowWidth } from "../../../../hooks";

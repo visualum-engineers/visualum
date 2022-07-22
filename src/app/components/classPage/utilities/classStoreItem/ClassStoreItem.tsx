@@ -1,5 +1,5 @@
 import { RewardStoreItem } from "../../../../../types/RewardSchema";
-import ClampLines from "react-clamp-lines";
+import ClampLines from "../../../utilities/clampLines/ClampLines";
 const ClassStoreItem = ({ data }: { data: RewardStoreItem }) => {
   return (
     <div className="reward-store-item">

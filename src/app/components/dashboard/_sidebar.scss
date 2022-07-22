@@ -8,6 +8,11 @@
     -webkit-box-shadow: 4px 0px 7px -8px #000000;
     -ms-box-shadow: 4px 0px 7px -8px #000000;
     box-shadow: 4px 0px 7px -8px #000000;
+    &.selected {
+        background-color: rgba(0, 0, 0, 0.1);
+        width: 100%;
+        font-weight: 700;
+    }
 }
 
 .sidebar-item {
@@ -32,11 +37,12 @@
     }
 }
 
-.selected {
-    background-color: rgba(0, 0, 0, 0.1);
-    width: 100%;
-    font-weight: 700;
-}
+//  .selected {
+//         background-color: rgba(0, 0, 0, 0.1);
+//         width: 100%;
+//         font-weight: 700;
+//     }
+
 
 .icon-selected {
     color: $highlight-color !important;

@@ -1,4 +1,4 @@
-import ClampLines from "react-clamp-lines";
+import ClampLines from "../../../utilities/clampLines/ClampLines";
 
 const AssignmentGroupWrapper = ({
   id,
@@ -24,4 +24,4 @@ const AssignmentGroupWrapper = ({
     </div>
   );
 };
-export default AssignmentGroupWrapper
+export default AssignmentGroupWrapper;

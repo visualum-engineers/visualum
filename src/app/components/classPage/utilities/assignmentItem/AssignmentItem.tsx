@@ -1,6 +1,6 @@
 import { Assigment } from "../../../../../types/AssignmentSchema";
 import { useWindowWidth } from "../../../../hooks";
-import ClampLines from "react-clamp-lines";
+import ClampLines from "../../../utilities/clampLines/ClampLines";
 
 const AssignmentItem = ({ assignmentData }: { assignmentData: Assigment }) => {
   const mediumWidth = useWindowWidth(576);
