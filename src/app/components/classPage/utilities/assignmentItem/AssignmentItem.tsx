@@ -4,7 +4,6 @@ import ClampLines from "../../../utilities/clampLines/ClampLines";
 
 const AssignmentItem = ({ assignmentData }: { assignmentData: Assigment }) => {
   const mediumWidth = useWindowWidth(576);
-
   return (
     <div className="assignment-item-container">
       <div className="assignment-item-image-container">
