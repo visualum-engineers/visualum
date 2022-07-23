@@ -33,7 +33,6 @@ const About = React.lazy(() => import("./components/about/About"));
 function App() {
   return (
     <Router>
-      <div className="App">
         <Suspense fallback={<LoadingIcon entireViewport={true} />}>
           <Routes>
             <Route
@@ -73,7 +72,6 @@ function App() {
             </Route>
           </Routes>
         </Suspense>
-      </div>
     </Router>
   );
 }
