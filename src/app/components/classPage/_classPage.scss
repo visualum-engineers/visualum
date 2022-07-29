@@ -8,3 +8,18 @@
 .class-page-overall-header-nav-link{
     height: 3rem;
 }
+
+.classes-nav {
+    height: 70px;
+    width: 100%;
+
+    .navbar-brand {
+        font-size: 1.2rem;
+        letter-spacing: 2px;
+        font-weight: 600;
+    }
+}
+
+.classes-page {
+    padding-top: 65px;
+}

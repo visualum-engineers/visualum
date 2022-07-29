@@ -4,30 +4,35 @@ import { useAuthModal } from "../../../../hooks";
 import { createContext, useContext } from 'react';
 import Footer from "../../footer/Footer"
 const NavWrapperContext = createContext<any>(null)
-const NavWrapper= ({
-    children
-}: {children: JSX.Element}) => {
-    const windowWidth = useWindowWidth(992);
-    const { toggleSignUp, toggleSignIn, authModal } = useAuthModal();
-    return (
-      <>
-        <NavWrapperContext.Provider
-          value={{
-            toggleSignUp: toggleSignUp,
-            toggleSignIn: toggleSignIn,
-            authModal: authModal,
-            windowWidth: windowWidth
-          }}
-        >
-          <Navbar openSignUp={toggleSignUp} openSignIn={toggleSignIn} />
-          {authModal}
-          {children}
-          <Footer />
-        </NavWrapperContext.Provider>
-      </>
-    );
+const NavWrapper = (props: any) => {
+  const { children }: { children: JSX.Element } = props;
+  const windowWidth = useWindowWidth(992);
+  const { toggleSignUp, toggleSignIn, authModal } = useAuthModal();
+  return (
+    <>
+      <NavWrapperContext.Provider
+        value={{
+          toggleSignUp: toggleSignUp,
+          toggleSignIn: toggleSignIn,
+          authModal: authModal,
+          windowWidth: windowWidth
+        }}
+      >
+        <Navbar
+          openSignUp={toggleSignUp}
+          openSignIn={toggleSignIn}
+          showLogo={props.showLogo}
+          textColor={props.textColor || 'white'}
+          backgroundColor={props.backgroundColor || "transparent"}
+        />
+        {authModal}
+        {children}
+        <Footer />
+      </NavWrapperContext.Provider>
+    </>
+  );
 }
 export default NavWrapper
 export function useNavWrapperContext() {
-    return useContext(NavWrapperContext)
+  return useContext(NavWrapperContext)
 }

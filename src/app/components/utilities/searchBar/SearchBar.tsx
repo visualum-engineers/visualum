@@ -7,11 +7,13 @@ const SearchBar = ({
   onChange,
   placeholder,
   onSearch,
+  style,
 }: {
   placeholder?: string;
   className?: string;
   onChange?: (e: string) => void;
   onSearch?: (e: string) => void;
+  style?: object;
 }) => {
   const [toggled, setToggle] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -21,9 +23,9 @@ const SearchBar = ({
   const namespace = "search-bar";
   return (
     <div
-      className={`${namespace}-container ${className ? className : ""} ${
-        toggled ? "selected" : ""
-      }`}
+      className={`${namespace}-container ${className ? className : ""} ${toggled ? "selected" : ""
+        }`}
+      style={style}
     >
       <button
         className={`${namespace}-icon ${toggled ? "selected" : ""}`}
@@ -41,9 +43,8 @@ const SearchBar = ({
         <FontAwesomeIcon icon={faSearch} />
       </button>
       <input
-        className={`${namespace}-input ${
-          inputValue.length > 0 ? "selected" : ""
-        }`}
+        className={`${namespace}-input ${inputValue.length > 0 ? "selected" : ""
+          }`}
         onFocus={() => setToggle(true)}
         onBlur={() => setToggle(false)}
         value={inputValue}

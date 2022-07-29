@@ -11,6 +11,7 @@ export interface LinkData {
   icon?: JSX.Element;
   text: string;
   idForRoute: string;
+  selected?: boolean;
 }
 const ClassPageHeader = ({
   links,
@@ -35,18 +36,17 @@ const ClassPageHeader = ({
         return (
           <SwiperSlide
             key={item.text}
-            style={{ width: "auto", height: "100%"}}
+            style={{ width: "auto", height: "100%" }}
             className={"carousel-items"}
           >
-              <Link
-                to={`${item.link}`}
-                className={`class-page-header-links ${linkClassName ? linkClassName : ''} ${
-                  routeIds.includes(item.idForRoute) ? "selected" : ""
+            <Link
+              to={`${item.link}`}
+              className={`class-page-header-links ${linkClassName ? linkClassName : ''} ${(routeIds.includes(item.idForRoute) || item.selected) ? "selected" : ""
                 }`}
-              >
-                {item.icon}
-                {item.text}
-              </Link>
+            >
+              {item.icon}
+              {item.text}
+            </Link>
           </SwiperSlide>
         );
       })}

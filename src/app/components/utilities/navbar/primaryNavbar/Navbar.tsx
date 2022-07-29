@@ -8,7 +8,7 @@ export default function Navbar(props: any) {
 
   const windowScrollY = useScrollPos()
 
-  const { openSignIn } = props;
+  const { openSignIn, showLogo, textColor, backgroundColor } = props;
 
   //REPLACE THIS WITH AUTH LOGIC LATER
   const isSignedIn = false;
@@ -29,13 +29,15 @@ export default function Navbar(props: any) {
       <div
         id="filter-navbar-container"
         className="navbar-expand-lg fixed-top"
+        style={{ backgroundColor: backgroundColor }}
       >
         <nav
           id="navbar"
           className={`navbar home-page-nav navbar-expand-lg ${windowScrollY ? "scroll-active" : ""
             }`}
         >
-          <Link to="/" className="nav-brand">
+          <Link to="/" className="nav-brand" style={{ color: textColor }}>
+            {showLogo && <img src="./images/VisualumLogo.png" style={{ height: 40, marginRight: 20 }} />}
             visualum
           </Link>
           {props.windowWidth ? null : <NavToggler />}
@@ -46,7 +48,7 @@ export default function Navbar(props: any) {
             <div className="navbar-nav w-100 justify-content-end">
               <div className="about-us-nav-item">
                 <Link to="/about" className="link-about-us">
-                  <span>About Us</span>
+                  <span style={{ color: textColor }}>About Us</span>
                 </Link>
               </div>
 

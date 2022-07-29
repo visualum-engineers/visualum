@@ -8,6 +8,7 @@ import ClassPageHeader, { LinkData } from "./utilities/classHeader/ClassHeader";
 import { faBook, faStore } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams } from "react-router-dom";
+import NavWrapper from "../utilities/navbar/primaryNavbar/NavWrapper";
 
 const ClassPage = () => {
   const params = useParams();
@@ -32,20 +33,24 @@ const ClassPage = () => {
     },
   ];
   return (
-    <>
-      <ClassPageHeader
-        className={"class-page-overall-header-carousel"}
-        links={linkData}
-        linkClassName={"class-page-overall-header-nav-link"}
-      />
-      <ClassBanner styles={{backgroundColor: "#041C54", color: "white"}} />
-      <Routes>
-        <Route index element={<Navigate to="classwork"/>} />
-        <Route path={"classwork"} element={<ClassworkPage />} />
-        <Route path={"store"} element={<StorePage />} />
-        <Route path={"people"} element={<PeoplePage />} />
-      </Routes>
-    </>
+    <NavWrapper showLogo textColor="#041C54" backgroundColor="#F9F9F9">
+      <div className="classes-page">
+        <div className="container">
+          <ClassPageHeader
+            className={"class-page-overall-header-carousel"}
+            links={linkData}
+            linkClassName={"class-page-overall-header-nav-link"}
+          />
+          <ClassBanner styles={{ backgroundColor: "#041C54", color: "white" }} />
+          <Routes>
+            <Route index element={<Navigate to="classwork" />} />
+            <Route path={"classwork"} element={<ClassworkPage />} />
+            <Route path={"store"} element={<StorePage />} />
+            <Route path={"people"} element={<PeoplePage />} />
+          </Routes>
+        </div>
+      </div>
+    </NavWrapper>
   );
 };
 export default ClassPage;
