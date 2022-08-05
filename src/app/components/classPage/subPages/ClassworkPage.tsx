@@ -1,13 +1,9 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { string } from "prop-types";
 import { useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import SearchBar from "../../utilities/searchBar/SearchBar";
 import AssignmentGroupWrapper from "../utilities/assignmentGroupWrapper/AssignmentGroupWrapper";
 import AssignmentItem from "../utilities/assignmentItem/AssignmentItem";
 import ClassPageHeader from "../utilities/classHeader/ClassHeader";
-import ClassStoreItem from "../utilities/classStoreItem/ClassStoreItem";
-import FilterList from "../utilities/filterList/FilterList";
 
 const ClassworkPage = () => {
 
@@ -19,7 +15,7 @@ const ClassworkPage = () => {
     return useMemo(() => new URLSearchParams(search), [search]);
   }
 
-  const filterString = useQuery().get("filter");
+  const filterString = useQuery().get("filter") || "upcoming";
 
   const assignmentData = {
     title:
@@ -80,7 +76,7 @@ const ClassworkPage = () => {
       </div>,
   }
 
-  const currentPage = pages[filterString as keyof Pages || "viewAll" as keyof Pages];
+  const currentPage = pages[filterString as keyof Pages || "upcoming" as keyof Pages];
 
   return (
     <>
@@ -96,7 +92,7 @@ const ClassworkPage = () => {
             onSearch={(e) => { console.log(e) }}
             style={{ width: "100%" }}
           />
-          <div className="btn btn-primary add-assignment-button">+ New Assignment</div>
+          <div className="btn btn-primary classes-add-button">+ New Assignment</div>
         </div>
         {currentPage}
       </div>

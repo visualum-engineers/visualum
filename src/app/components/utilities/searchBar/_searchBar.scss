@@ -1,16 +1,21 @@
 $namespace: "search-bar";
+
 .#{$namespace}-container {
   display: flex;
   justify-content: space-between;
   border: 2px solid $dark-gray;
-  border-radius: 0.3rem;
+  border-radius: 12px;
   padding: 0.1rem 0.5rem;
   padding-left: 0;
+  height: 36px;
+  transition: all 200ms ease-in-out;
+
   &.selected {
     border: 2px solid $dark-purple;
     color: $dark-purple;
   }
 }
+
 .#{$namespace}-icon {
   @include remove-btn-default;
   display: flex;
@@ -20,10 +25,13 @@ $namespace: "search-bar";
   aspect-ratio: 1/1;
   color: $darkest-gray;
   font-size: 0.85rem;
+  transition: color 200ms ease-in-out;
+
   &.selected {
     color: $dark-purple;
   }
 }
+
 .#{$namespace}-input {
   border: none;
   width: auto;
@@ -32,13 +40,16 @@ $namespace: "search-bar";
   font-family: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 300;
   font-size: 0.8rem;
+
   &:focus {
     border: none;
     outline: none;
   }
+
   &::placeholder {
     color: $darker-gray;
   }
+
   &.selected {
     font-style: normal;
   }

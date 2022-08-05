@@ -1,11 +1,13 @@
 @import "./utilities/assignmentItem/assignmentItem";
+@import "./utilities/peopleItem/peopleItem";
 @import "./utilities/classBanner/classBanner";
 @import "./utilities/classHeader/classHeader";
 @import "./utilities/assignmentGroupWrapper/assignmentGroupWrapper";
 @import "./utilities/classStoreItem/classStoreItem";
 @import "./utilities/filterList/filterList";
+
 // @import "./utilities/listItemWrapper/listItem";
-.class-page-overall-header-nav-link{
+.class-page-overall-header-nav-link {
     height: 3rem;
 }
 
@@ -22,4 +24,18 @@
 
 .classes-page {
     padding-top: 65px;
+}
+
+.classes-add-button {
+    background-color: $dark-purple;
+    border: none;
+    width: 180px;
+    min-width: 180px;
+    margin-left: 10px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.25);
+
+    &:hover {
+        background-color: darken($color: $dark-purple, $amount: 5);
+    }
 }
