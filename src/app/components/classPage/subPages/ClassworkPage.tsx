@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { string } from "prop-types";
 import { useMemo } from "react";
 import { useLocation } from "react-router-dom";
@@ -84,10 +85,10 @@ const ClassworkPage = () => {
   return (
     <>
       <div className="row">
-        <div className="col-12 col-md-7">
+        <div className="col-12 col-lg-7">
           <ClassPageHeader links={subheaderLinks} linkClassName={"class-page-subheader-nav-link"} className={"subheader"} />
         </div>
-        <div className="col-12 col-md-5 d-flex align-items-center">
+        <div className="col-12 col-lg-5 d-flex align-items-center assignment-search-and-button">
           <SearchBar
             onChange={(e) => {
               //console.log(e);
@@ -95,6 +96,7 @@ const ClassworkPage = () => {
             onSearch={(e) => { console.log(e) }}
             style={{ width: "100%" }}
           />
+          <div className="btn btn-primary add-assignment-button">+ New Assignment</div>
         </div>
         {currentPage}
       </div>
