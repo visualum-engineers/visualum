@@ -7,8 +7,8 @@ on:
 jobs:
   build:
     environment: 
-      name: production
-      url: https://www.archiveofrussianaggression.org
+      name: prd
+      url: https://www.visualum.com
     runs-on: ubuntu-latest
     strategy: 
       matrix: 
