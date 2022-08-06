@@ -1,0 +1,46 @@
+
+name: Deploy React App to S3
+on: 
+  push:
+    branches:
+      - production #here we choose to deploy only when a push is on production
+jobs:
+  build:
+    environment: 
+      name: production
+      url: https://www.archiveofrussianaggression.org
+    runs-on: ubuntu-latest
+    strategy: 
+      matrix: 
+        node-version: [16.x]
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup Node
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Create env file
+      run: |
+        npm install mv
+        npm install dotenv
+        cd node_scripts
+        cd workflows
+        node createEnvFile.js
+        cd ..
+        cd ..
+      env: 
+        REACT_APP_SECRETS: ${{toJson(secrets)}}
+
+    #Here you could add some building steps if you were dealing with some angular/react/Vue...
+    - name: Build static site
+      run: |
+        npm install
+        npm run build
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_S3_DEPLOY_USER_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_S3_DEPLOY_USER_SECERT_KEY }}
+        aws-region: us-east-1 # Use your bucket region here
+    - name: Deploy static site to S3 bucket
+      run: aws s3 sync ./build s3://archive-of-russian-aggression-client --delete

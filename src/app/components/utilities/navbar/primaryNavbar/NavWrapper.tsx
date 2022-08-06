@@ -22,8 +22,8 @@ const NavWrapper = (props: any) => {
           openSignUp={toggleSignUp}
           openSignIn={toggleSignIn}
           showLogo={props.showLogo}
-          textColor={props.textColor || 'white'}
-          backgroundColor={props.backgroundColor || "transparent"}
+          textColor={props.textColor}
+          //backgroundColor={props.backgroundColor}
         />
         {authModal}
         {children}
