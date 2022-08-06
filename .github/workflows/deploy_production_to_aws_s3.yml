@@ -43,4 +43,4 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_S3_DEPLOY_USER_SECERT_KEY }}
         aws-region: us-east-1 # Use your bucket region here
     - name: Deploy static site to S3 bucket
-      run: aws s3 sync ./build s3://archive-of-russian-aggression-client --delete
+      run: aws s3 sync ./build s3://visualum-client-app --delete
