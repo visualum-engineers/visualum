@@ -50,9 +50,8 @@
   "scripts": {
     "secrets": "doppler secrets download --no-file --format env > .env",
     "start": "npm run secrets & npm run scss & react-scripts start",
-    "build": "npm run scss && react-scripts build & npm install -g serve",
+    "build": "npm run scss && react-scripts build",
     "scss": "dart-sass public/main.scss public/main.css",
-    "deploy": "serve -s build",
     "test": "npm run scss & react-scripts test",
     "eject": "react-scripts eject"
   },
