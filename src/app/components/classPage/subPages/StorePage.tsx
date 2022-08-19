@@ -1,7 +1,12 @@
 import SearchBar from "../../utilities/searchBar/SearchBar";
 import ClassStoreItem from "../utilities/classStoreItem/ClassStoreItem";
+import useModal from "../../../hooks/useModal";
+import StoreItemModal from "../utilities/storeItemModal/StoreItemModal";
 
 const StorePage = () => {
+
+    const { isShowing, toggle } = useModal();
+    console.log(isShowing)
 
     const storeItems = [
         { name: "Test Item", price: 10, _id: 'abs', num_available: 10, creation_date: 'Jan 1st, 2022' },
@@ -22,6 +27,9 @@ const StorePage = () => {
                         onSearch={(e) => { console.log(e) }}
                         style={{ width: "100%" }}
                     />
+                    <div className="btn btn-primary" onClick={toggle}>
+                        Toggle
+                    </div>
                 </div>
             </div>
             <div className="row">
@@ -33,6 +41,7 @@ const StorePage = () => {
                     )
                 })}
             </div>
+            {isShowing && <StoreItemModal close={toggle} buttons={[<button className="submit">Submit</button>]} />}
         </div>
     )
 };

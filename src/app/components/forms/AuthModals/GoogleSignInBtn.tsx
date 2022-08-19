@@ -18,8 +18,8 @@ const GoogleBtn = ({
   customErrorFunc,
   customData,
 }
-//: GoogleLogin | GoogleSignUp
-:any
+  //: GoogleLogin | GoogleSignUp
+  : any
 ) => {
   const app = useRealmApp();
   const googleCallBack = async (res: GoogleCredientals) => {
@@ -92,7 +92,7 @@ const GoogleBtn = ({
 
   return (
     <div>
-      <button id="googleAuthBtn" tabIndex={1} />
+      <button id="googleAuthBtn" tabIndex={1} style={{ background: 'none', border: 'none' }} />
     </div>
   );
 };
