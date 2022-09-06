@@ -1,20 +1,23 @@
 .reward-store-item {
   display: flex;
   justify-content: space-between;
-  width: 49%;
   border-radius: 1rem;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.25);
 }
+
 .reward-store-item-image {
   align-self: stretch;
   background-color: $light-purple;
   border-radius: 1rem 0 0 1rem;
   height: 5.7rem;
   aspect-ratio: 1/1;
+  overflow: hidden;
+
   img {
     @include image-fill-container;
   }
 }
+
 .reward-store-item-data {
   position: relative;
   flex-grow: 1;
@@ -23,22 +26,26 @@
   padding: 1rem;
   justify-content: center;
 }
+
 .reward-store-item-title {
   h5 {
     color: $dark-purple;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-family: "Lato", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: 700;
+    font-weight: 500;
     margin: 0;
   }
-  margin-bottom: 0.4rem;
+
+  margin-bottom: 0;
 }
+
 .reward-store-item-value {
   font-size: 0.8rem;
   color: $darker-gray;
   font-family: "Lato", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 400;
 }
+
 .reward-store-item-btn-container {
   position: absolute;
   display: flex;
@@ -48,13 +55,20 @@
   padding-right: 0.8rem;
   bottom: 0;
   right: 0;
+
   button {
     @include remove-btn-default;
     font-family: "Lato", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 400;
     font-size: 0.85rem;
-    border-radius: 2rem;
-    padding: 0.4rem 1rem;
+    border-radius: 10px;
+    padding: 6px 20px;
     background-color: $light-purple;
+    transition: all 200ms ease-in-out;
+
+    &:hover {
+      background-color: lighten($color: $light-purple, $amount: 20);
+      box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+    }
   }
 }

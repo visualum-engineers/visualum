@@ -2,6 +2,15 @@ import React from "react";
 import PopUpBg from "../popUp/PopUpBackground";
 import ExitIcon from "../exitIcon/ExitIcon";
 
+interface ModalProps {
+  zIndex?: number,
+  extraClasses?: Array<string>,
+  toggle: any,
+  title: string,
+  buttons?: Array<any>,
+  children: any
+}
+
 export default function ModalContainer({
   children,
   zIndex = 10000,
@@ -9,13 +18,12 @@ export default function ModalContainer({
   title,
   buttons,
   extraClasses,
-}: any) {
+}: ModalProps) {
   return (
     <PopUpBg zIndex={zIndex} onClick={toggle}>
       <div
-        className={`modal-container ${
-          extraClasses ? extraClasses.join(" ") : ""
-        }`}
+        className={`modal-container ${extraClasses ? extraClasses.join(" ") : ""
+          }`}
         style={{ zIndex: zIndex + 1 }}
       >
         <div className="modal-close">

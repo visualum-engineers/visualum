@@ -39,3 +39,76 @@
         background-color: darken($color: $dark-purple, $amount: 5);
     }
 }
+
+.store-item-modal {
+    max-width: 1200px;
+
+    .form-control {
+        background-color: #EEEFF3;
+        border: none;
+        border-radius: 10px;
+        color: black;
+
+        &:focus {
+            box-shadow: 0 0 0px 2px #b4b4c6;
+        }
+    }
+
+    .pic-container {
+        border-radius: 7px;
+        height: 171px;
+        width: 171px;
+        background-color: #EEEFF3;
+    }
+
+    .select-picture {
+        display: flex;
+
+        @media (max-width: 992px) {
+            flex-direction: column;
+
+            .other-choices {
+                margin-left: 0 !important;
+            }
+        }
+
+        .main-pic-display {
+            button {
+                background-color: #EEEFF3;
+                color: black;
+                border: none;
+                padding: 5px 10px;
+                border-radius: 7px;
+                font-family: 'Poppins', 'Lato', sans-serif;
+                font-weight: 600;
+                width: 171px;
+            }
+
+            .pic-container {
+                margin-bottom: 15px;
+            }
+        }
+
+        .other-choices {
+            margin-left: 50px;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            flex-grow: 1;
+            margin-top: calc(24px + 0.5rem);
+            grid-row-gap: 20px;
+
+            @media (max-width: 992px) {
+                .pic-container {
+                    width: 75px !important;
+                    height: 75px !important;
+                }
+            }
+
+            .pic-container {
+                cursor: pointer;
+                width: 100px;
+                height: 100px;
+            }
+        }
+    }
+}

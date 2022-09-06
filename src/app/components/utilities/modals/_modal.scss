@@ -29,6 +29,20 @@
 		justify-content: end;
 		align-items: center;
 		padding: 10px;
+
+		button {
+			background-color: $light-gray;
+			border: none;
+			padding: 5px 40px;
+			border-radius: 7px;
+			font-family: 'Poppins', 'Lato', sans-serif;
+			font-weight: 600;
+
+			&.submit {
+				background-color: $dark-purple;
+				color: white;
+			}
+		}
 	}
 
 	.modal-close {
